@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="RACE 1 · Intro til Node.js og Express.js · WU-E26A · 28. august 2026" />
     <title>Intro til Node.js og Express.js · WU-E26A</title>
-    <script type="module" crossorigin src="../assets/nodeExpress-C-aFUs7b.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/nodeExpress-BGISp7MP.css">
+    <script type="module" crossorigin src="../assets/nodeExpress-Bmqoad5O.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/nodeExpress-UoZ-b70I.css">
   </head>
   <body>
     <div class="reveal">
@@ -67,10 +67,10 @@
             <article><span>Editor</span><strong>VS Code</strong><small>kan åbne projekt og terminal</small></article>
             <article><span>Extension</span><strong>Thunder Client</strong><small>er installeret i VS Code</small></article>
           </div>
-          <p class="bottom-line">Mangler noget? <b>Sig til nu</b> — så fikser vi det før første øvelse.</p>
+          <p class="bottom-line setup-help">Ikke helt klar? <a href="https://race.notion.site/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274" target="_blank" rel="noreferrer"><b>Åbn Dev Setup Guide ↗</b></a> — eller sig til nu.</p>
           <aside class="notes">
-            Ja, lav dette check-in. Det fanger installationer og terminalproblemer, før de bliver blandet sammen med dagens nye Node-koncepter. Bed alle køre de to kommandoer og vise en tommelfinger, når de er klar.
-            [Sources] - Node.js download: https://nodejs.org/en/download - Thunder Client docs: https://docs.thunderclient.com/get-started [/Sources]
+            Ja, lav dette check-in. Det fanger installationer og terminalproblemer, før de bliver blandet sammen med dagens nye Node-koncepter. Bed alle køre de to kommandoer og vise en tommelfinger, når de er klar. Hvis nogen ikke er oppe at køre, åbner de Dev Setup Guide, som dækker VS Code, extensions, Git/GitHub Desktop, browserens DevTools samt Node.js og npm.
+            [Sources] - Dev Setup Guide: https://race.notion.site/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274 - Node.js download: https://nodejs.org/en/download - Thunder Client docs: https://docs.thunderclient.com/get-started [/Sources]
           </aside>
         </section>
 
@@ -182,6 +182,19 @@
           </aside>
         </section>
 
+        <section class="firebase-memory-slide" data-accent="orange">
+          <figure class="firebase-model">
+            <img src="../assets/firebase-rest-api-C_Lm80hG.png" alt="Firebase vist som client, REST API og database" />
+          </figure>
+          <figure class="firebase-meme">
+            <img src="../assets/rasmus-firebase-meme-CKJM-cjh.jpg" alt="Elmo-meme hvor Rasmus falder om i Firebase" />
+          </figure>
+          <aside class="notes">
+            Spørg hvem der kan genkende modellen fra Firebase. Pointen er, at de allerede har arbejdet med client/server, HTTP-lignende operationer og en database — Firebase skjulte bare meget af serverlaget. I dag bygger vi selv den del, som tidligere lå bag servicen.
+            [Sources] - Firebase-arkitekturtegning og Rasmus/Firebase-meme fra den brugerleverede Keynote/PPTX [/Sources]
+          </aside>
+        </section>
+
         <section class="reality-check-slide" data-accent="orange">
           <figure><img src="../assets/reality-check-DdenkQJq.gif" alt="Reality check reaction meme" /></figure>
           <div class="reality-copy">
@@ -216,24 +229,24 @@
         <section id="client-server" class="chapter" data-accent="cyan">
           <span class="chapter-number">01</span>
           <span class="eyebrow">Client/server</span>
-          <h2>To roller med<br />hver sit ansvar</h2>
-          <p>Clienten starter samtalen. Serveren behandler og svarer.</p>
+          <h2>To systemer<br />kommunikerer</h2>
+          <p>Clienten initierer med en request. Serveren behandler og svarer med en response.</p>
           <aside class="notes">
-            Overgang til første faglige del. Lad de studerende nævne clients ud over browsere: mobilapps, Thunder Client, andre servere, IoT-enheder.
+            Overgang til første faglige del. Client/server beskriver først og fremmest, hvordan to systemer kommunikerer og fordeler ansvar. Det er ikke begrænset til browser og webserver. Lad de studerende nævne clients som mobilapps, Thunder Client, andre servere og IoT-enheder.
             [Sources] - MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction [/Sources]
           </aside>
         </section>
 
         <section class="definition-slide">
           <span class="eyebrow">Definition · Client/server</span>
-          <h2>Client/server er en model for at fordele arbejde</h2>
+          <h2>Client/server er en model for kommunikation mellem systemer</h2>
           <div class="definition-pair">
-            <article><span>Hvad?</span><p>En <strong>client</strong> sender en request efter data eller en handling. En <strong>server</strong> lytter, behandler og sender et response.</p></article>
-            <article><span>Hvorfor?</span><p>Mange clients kan bruge den samme server, mens UI, logik og data kan udvikles hver for sig.</p></article>
+            <article><span>Hvad?</span><p>To systemer har hver sin rolle: En <strong>client</strong> initierer kommunikationen med en request. En <strong>server</strong> modtager, behandler og sender et response.</p></article>
+            <article><span>Hvorfor?</span><p>Modellen gør kommunikationen forudsigelig og fordeler ansvar: Clienten bruger data eller funktioner, som serveren stiller til rådighed.</p></article>
           </div>
-          <p class="bottom-line">Client og server er <b>roller</b> — ikke bestemte slags enheder.</p>
+          <p class="bottom-line">Client og server er <b>roller</b> i kommunikationen — ikke bestemte slags enheder.</p>
           <aside class="notes">
-            Introducér først rollerne uden at binde dem til bestemte maskiner. En browser, mobilapp, Thunder Client eller en anden server kan være client. En server kan køre lokalt eller i skyen.
+            Introducér først modellen som kommunikation mellem to systemer. Roller beskriver, hvem der initierer requesten, og hvem der leverer responset. En browser, mobilapp, Thunder Client eller en anden server kan være client. Det samme system kan være server i én relation og client i en anden. I denne undervisning anvender vi modellen på webkommunikation via HTTP.
             [Sources] - MDN Client-server overview: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview [/Sources]
           </aside>
         </section>
@@ -618,14 +631,9 @@ console.log(add(2, 3)); // 5</code></pre>
         </section>
 
         <section class="god-meme-slide" data-accent="green">
-          <div class="god-meme-copy">
-            <span class="eyebrow">Når terminalen endelig siger det rigtige</span>
-            <h2>Jeg kørte JavaScript<br />uden en browser.</h2>
-            <p>Først: “I have no idea.”<br />Fem minutter senere:</p>
-          </div>
           <img src="../assets/i-am-a-god-Bqnl6aMH.png" alt="I am a god Atari-meme" />
           <aside class="notes">
-            Brug memet som en kort fejring efter Hello Node. De har netop flyttet JavaScript ud af browseren og fået deres første Node-program til at køre.
+            Lad memet stå alene som en kort fejring efter Hello Node: De har netop kørt JavaScript uden en browser og fået deres første Node-program til at virke.
             [Sources] - Meme fra den brugerleverede Keynote/PPTX [/Sources]
           </aside>
         </section>
