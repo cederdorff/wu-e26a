@@ -4,10 +4,17 @@
   "type": "module",
   "scripts": {
     "canvas:pull": "node scripts/pull-canvas.js",
-    "canvas:pull:force": "node scripts/pull-canvas.js --force"
+    "canvas:pull:force": "node scripts/pull-canvas.js --force",
+    "slides:dev": "vite --config slides/vite.config.js",
+    "slides:build": "vite build --config slides/vite.config.js",
+    "slides:preview": "vite preview --config slides/vite.config.js"
   },
   "dependencies": {
+    "reveal.js": "^5.2.1",
     "turndown": "^7.2.1",
     "turndown-plugin-gfm": "^1.0.2"
+  },
+  "devDependencies": {
+    "vite": "^7.1.3"
   }
 }

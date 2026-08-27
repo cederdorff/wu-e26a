@@ -37,7 +37,7 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 
 ### Opgaver
 
-- [1. Hello Node](https://race.notion.site/Hello-Node-js-19d6a15b55e94ad1815fb78b43ee8583?source=copy_link)
+- [1. Hello Node](../opgaver/hello-node.md)
 - [2. Hello HTTP Module](https://race.notion.site/Hello-HTTP-Module-e3d690d655c14cfeb6ac3ab2cb603b5c?source=copy_link)
 - [3. Getting Started with Express.js (Hello Express)](https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link)
 - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
