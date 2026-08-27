@@ -365,22 +365,18 @@
           <span class="eyebrow">Anatomi · request</span>
           <h2>Clienten fortæller, hvad den vil have</h2>
           <div class="message-layout">
-            <pre><code class="language-http">POST /api/jokes HTTP/1.1
+            <pre><code class="language-http">GET /users HTTP/1.1
 Host: localhost:3000
-Content-Type: application/json
-
-{
-  "text": "Hvorfor krydsede Node vejen?"
-}</code></pre>
+Accept: application/json</code></pre>
             <dl>
-              <div><dt>Metode</dt><dd>POST</dd></div>
-              <div><dt>Path</dt><dd>/api/jokes</dd></div>
+              <div><dt>Metode</dt><dd>GET</dd></div>
+              <div><dt>Path</dt><dd>/users</dd></div>
               <div><dt>Headers</dt><dd>metadata om beskeden</dd></div>
-              <div><dt>Body</dt><dd>data, der sendes med</dd></div>
+              <div><dt>Body</dt><dd>ingen body i dette request</dd></div>
             </dl>
           </div>
           <aside class="notes">
-            GET-requests har typisk ikke en body. POST bruges her til at sende ny data. Undgå at gøre metoderne til moralske regler; de er semantiske konventioner.
+            Dette er den request, de senere tester i HTTP-moduløvelsen. GET-requests har typisk ikke en body. POST og JSON-body kommer i Express-øvelsen.
             [Sources] - MDN HTTP Overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
           </aside>
         </section>
@@ -389,15 +385,14 @@ Content-Type: application/json
           <span class="eyebrow">Anatomi · response</span>
           <h2>Serveren svarer med status, headers og indhold</h2>
           <div class="message-layout">
-            <pre><code class="language-http">HTTP/1.1 201 Created
+            <pre><code class="language-http">HTTP/1.1 200 OK
 Content-Type: application/json
 
-{
-  "id": 42,
-  "text": "Hvorfor krydsede Node vejen?"
-}</code></pre>
+[
+  { "id": 1, "name": "Rasmus Cederdorff" }
+]</code></pre>
             <dl>
-              <div><dt>Status</dt><dd>201 Created</dd></div>
+              <div><dt>Status</dt><dd>200 OK</dd></div>
               <div><dt>Headers</dt><dd>hvordan svaret skal tolkes</dd></div>
               <div><dt>Body</dt><dd>HTML, JSON, tekst eller andet</dd></div>
             </dl>
@@ -499,11 +494,11 @@ Content-Type: application/json
           <span class="eyebrow">Hello Node.js</span>
           <h2>Første program: gem, kør, se output</h2>
           <div class="code-and-terminal">
-            <pre><code class="language-javascript">// index.js
+            <pre><code class="language-javascript">// server.js
 const course = "Webudvikling";
 
 console.log(`Hej ${course}!`);</code></pre>
-            <pre class="terminal"><code class="language-bash">$ node index.js
+            <pre class="terminal"><code class="language-bash">$ node server.js
 Hej Webudvikling!</code></pre>
           </div>
           <p class="bottom-line">Ingen HTML. Ingen browser. Kun JavaScript og et runtime.</p>
@@ -521,7 +516,7 @@ Hej Webudvikling!</code></pre>
 export function add(a, b) {
   return a + b;
 }</code></pre>
-            <pre><code class="language-javascript">// index.js
+            <pre><code class="language-javascript">// server.js
 import { add } from "./math.js";
 
 console.log(add(2, 3)); // 5</code></pre>
@@ -579,7 +574,7 @@ console.log(add(2, 3)); // 5</code></pre>
             <pre><code class="language-text">my-server/
 ├── node_modules/      # installerede pakker
 ├── public/            # statiske filer
-├── index.js           # vores serverkode
+├── server.js          # vores serverkode
 ├── package.json       # scripts + dependencies
 └── package-lock.json  # låste versioner</code></pre>
             <div class="project-rules">
@@ -611,7 +606,7 @@ console.log(add(2, 3)); // 5</code></pre>
               <li>Opret en ny projektmappe</li>
               <li>Kør <code>npm init -y</code></li>
               <li>Tilføj <code>"type": "module"</code></li>
-              <li>Opret <code>index.js</code> og kør den med Node</li>
+              <li>Opret <code>server.js</code> og kør den med Node</li>
             </ol>
             <a class="exercise-link" href="https://race.notion.site/Hello-Node-js-19d6a15b55e94ad1815fb78b43ee8583?source=copy_link" target="_blank" rel="noreferrer">Åbn opgaven ↗</a>
           </div>
@@ -671,7 +666,7 @@ server.listen(3000, () => {
           <h2>Hvad bad clienten om?</h2>
           <div class="object-map">
             <pre><code class="language-javascript">console.log(request.method);  // "GET"
-console.log(request.url);     // "/about"
+console.log(request.url);     // "/users"
 console.log(request.headers); // { ... }</code></pre>
             <div class="object-questions"><span>Hvilken metode?</span><span>Hvilken URL?</span><span>Hvilke headers?</span><span>Er der en body?</span></div>
           </div>
@@ -701,8 +696,8 @@ response.end(JSON.stringify({ message: "Hej" }));</code></pre>
           <h2>Uden framework matcher vi selv metode og URL</h2>
           <pre><code class="language-javascript">if (request.method === "GET" && request.url === "/") {
   response.end("Forside");
-} else if (request.method === "GET" && request.url === "/about") {
-  response.end("Om AMAbot");
+} else if (request.method === "GET" && request.url === "/users") {
+  response.end(JSON.stringify(users));
 } else {
   response.statusCode = 404;
   response.end("Ikke fundet");
@@ -720,13 +715,13 @@ response.end(JSON.stringify({ message: "Hej" }));</code></pre>
             <ol>
               <li>Start en server på port 3000</li>
               <li>Send tekst fra <code>/</code></li>
-              <li>Tilføj mindst én ekstra URL</li>
-              <li>Returnér 404 fra ukendte URLs</li>
+              <li>Returnér JSON fra <code>/users</code></li>
+              <li>Byg selv <code>/posts</code> og en 404</li>
             </ol>
             <a class="exercise-link" href="https://race.notion.site/Hello-HTTP-Module-e3d690d655c14cfeb6ac3ab2cb603b5c?source=copy_link" target="_blank" rel="noreferrer">Åbn opgaven ↗</a>
           </div>
           <aside class="notes">
-            Stop efter den simple version. De skal opleve den manuelle routing, ikke bygge et helt framework.
+            Dette er samme progression som den lokale øvelse: tekst, users som JSON, posts som en selvstændig route og til sidst 404.
             [Sources] - Kursusopgave: https://race.notion.site/Hello-HTTP-Module-e3d690d655c14cfeb6ac3ab2cb603b5c?source=copy_link [/Sources]
           </aside>
         </section>
@@ -764,12 +759,12 @@ response.end(JSON.stringify({ message: "Hej" }));</code></pre>
           <p class="concept-intro"><b>Hvad?</b> Et routing- og middleware-framework. <b>Hvorfor?</b> Det organiserer request-flowet og fjerner gentaget kode.</p>
           <div class="before-after">
             <article><span>Node HTTP</span><pre><code class="language-javascript">if (request.method === "GET" &&
-    request.url === "/about") {
-  response.end("Om AMAbot");
+    request.url === "/todos") {
+  response.end(JSON.stringify(todos));
 }</code></pre></article>
             <b aria-hidden="true">→</b>
-            <article><span>Express</span><pre><code class="language-javascript">app.get("/about", (req, res) => {
-  res.send("Om AMAbot");
+            <article><span>Express</span><pre><code class="language-javascript">server.get("/todos", (request, response) => {
+  response.json(todos);
 });</code></pre></article>
           </div>
           <aside class="notes">
@@ -789,13 +784,13 @@ npm install express</code></pre>
             <pre><code class="language-json">{
   "type": "module",
   "scripts": {
-    "dev": "node --watch index.js"
+    "start": "node --watch server.js"
   }
 }</code></pre>
           </div>
           <p class="bottom-line"><code>node --watch</code> genstarter processen, når filerne ændres.</p>
           <aside class="notes">
-            Vis package.json efter install. Express står under dependencies. node --watch er indbygget i moderne Node-versioner; de kan også starte med node index.js.
+            Vis package.json efter install. Express står under dependencies. Dette matcher øvelsens server.js og npm start.
             [Sources] - Express install guide: https://expressjs.com/en/starter/installing.html - Node CLI: https://nodejs.org/api/cli.html [/Sources]
           </aside>
         </section>
@@ -805,17 +800,17 @@ npm install express</code></pre>
           <h2>Fem linjer etablerer serverens grundform</h2>
           <pre><code class="language-javascript">import express from "express";
 
-const app = express();
+const server = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello Express!");
+server.get("/", (request, response) => {
+  response.send("Hello Express.js 🎉");
 });
 
-app.listen(3000, () => {
-  console.log("Serveren kører på http://localhost:3000");
+server.listen(3333, () => {
+  console.log("Serveren kører på http://localhost:3333");
 });</code></pre>
           <aside class="notes">
-            Gennemgå import, app, route og listen. Forklar at callbacken til app.get er en route handler.
+            Gennemgå import, server, route og listen. Navne, port og response matcher den lokale Express-øvelse.
             [Sources] - Express basic routing: https://expressjs.com/en/starter/basic-routing.html [/Sources]
           </aside>
         </section>
@@ -824,11 +819,11 @@ app.listen(3000, () => {
           <span class="eyebrow">Express request/response</span>
           <h2>Express gør cyklussen konkret i koden</h2>
           <div class="express-cycle">
-            <span class="request-chip">GET /about</span><b>→</b><span class="code-chip">app.get("/about", handler)</span><b>→</b><span class="response-chip">res.send("Om AMAbot")</span>
+            <span class="request-chip">GET /todos</span><b>→</b><span class="code-chip">server.get("/todos", handler)</span><b>→</b><span class="response-chip">response.json(todos)</span>
           </div>
-          <div class="req-res"><article><strong>req</strong><span>det, clienten sendte</span></article><article><strong>res</strong><span>det, serveren sender tilbage</span></article></div>
+          <div class="req-res"><article><strong>request</strong><span>det, clienten sendte</span></article><article><strong>response</strong><span>det, serveren sender tilbage</span></article></div>
           <aside class="notes">
-            Peg på sammenhængen mellem den konkrete HTTP-request og route-definitionen. req og res er Express’ abstraherede request/response-objekter.
+            Peg på sammenhængen mellem den konkrete HTTP-request og route-definitionen. request og response er de samme objekter, øvelsen navngiver eksplicit.
             [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
@@ -853,12 +848,12 @@ app.listen(3000, () => {
           <span class="eyebrow">Definition · Route</span>
           <h2>En route kobler en request til den kode, der skal køre</h2>
           <p class="concept-intro"><b>Hvad?</b> Metode + path + handler. <b>Hvorfor?</b> Serveren skal kunne vælge forskellig adfærd for forskellige requests.</p>
-          <div class="route-formula"><span class="method">GET</span><b>+</b><span class="path">/api/jokes</span><b>+</b><span class="handler">handler</span><b>=</b><strong>route</strong></div>
-          <pre><code class="language-javascript">app.get("/api/jokes", (req, res) => {
-  res.json(jokes);
+          <div class="route-formula"><span class="method">GET</span><b>+</b><span class="path">/todos</span><b>+</b><span class="handler">handler</span><b>=</b><strong>route</strong></div>
+          <pre><code class="language-javascript">server.get("/todos", (request, response) => {
+  response.json(todos);
 });</code></pre>
           <aside class="notes">
-            To routes kan dele path, hvis metoden er forskellig. GET /api/jokes og POST /api/jokes er forskellige routes.
+            To routes kan dele path, hvis metoden er forskellig. GET /todos og POST /todos er forskellige routes — præcis som i øvelsen.
             [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
@@ -868,16 +863,14 @@ app.listen(3000, () => {
           <h2>Forskellige URLs kan give forskellige svar</h2>
           <div class="route-list">
             <article><code>GET /</code><span>forside</span></article>
-            <article><code>GET /about</code><span>om projektet</span></article>
-            <article><code>GET /api/jokes</code><span>alle jokes som JSON</span></article>
+            <article><code>GET /test</code><span>test HTTP-metoden</span></article>
+            <article><code>GET /todos</code><span>alle todos som JSON</span></article>
           </div>
-          <pre><code class="language-javascript">app.get("/api/jokes", (req, res) => {
-  res.status(200).json([
-    { id: 1, text: "404: Joke not found" }
-  ]);
+          <pre><code class="language-javascript">server.get("/todos", (request, response) => {
+  response.status(200).json(todos);
 });</code></pre>
           <aside class="notes">
-            res.json sætter korrekt JSON-response. Status 200 er standard her, men den eksplicitte status gør intentionen tydelig i undervisningseksemplet.
+            response.json sætter korrekt JSON-response. Todos importeres fra data.js i øvelsen.
             [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
@@ -886,15 +879,15 @@ app.listen(3000, () => {
           <span class="eyebrow">Data ind i en route</span>
           <h2>Path params og query params løser forskellige opgaver</h2>
           <div class="input-paths">
-            <article><code>/api/jokes/<mark>42</mark></code><strong>req.params.id</strong><span>identificér en bestemt resource</span></article>
-            <article><code>/api/jokes<mark>?limit=5</mark></code><strong>req.query.limit</strong><span>filtrér eller tilpas resultatet</span></article>
+            <article><code>/todos/<mark>3</mark></code><strong>request.params.todoId</strong><span>identificér en bestemt todo</span></article>
+            <article><code>/todos<mark>?completed=true</mark></code><strong>request.query.completed</strong><span>filtrér resultatet</span></article>
           </div>
-          <pre><code class="language-javascript">app.get("/api/jokes/:id", (req, res) => {
-  const jokeId = Number(req.params.id);
-  // find og returnér den valgte joke
+          <pre><code class="language-javascript">server.get("/todos/:todoId", (request, response) => {
+  const todoId = Number(request.params.todoId);
+  // find og returnér den valgte todo
 });</code></pre>
           <aside class="notes">
-            Dette er en introduktion, ikke en fuld gennemgang. req.body behandles på næste slide. Parametre kommer ind som tekst og skal ofte konverteres og valideres.
+            Dette matcher øvelsens todo-routes. request.body behandles på næste slide. Parametre kommer ind som tekst og skal ofte konverteres og valideres.
             [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
@@ -902,19 +895,20 @@ app.listen(3000, () => {
         <section class="post-slide">
           <span class="eyebrow">POST + JSON</span>
           <h2>Middleware gør request-body tilgængelig som JavaScript</h2>
-          <pre><code class="language-javascript">app.use(express.json());
+          <pre><code class="language-javascript">server.use(express.json());
 
-app.post("/api/jokes", (req, res) => {
-  const newJoke = {
-    id: crypto.randomUUID(),
-    text: req.body.text
+server.post("/todos", (request, response) => {
+  const newTodo = {
+    id: todos.length + 1,
+    ...request.body
   };
 
-  res.status(201).json(newJoke);
+  todos.push(newTodo);
+  response.status(201).json(newTodo);
 });</code></pre>
-          <p class="bottom-line"><code>express.json()</code> skal registreres <b>før</b> routes, der bruger <code>req.body</code>.</p>
+          <p class="bottom-line"><code>express.json()</code> skal registreres <b>før</b> routes, der bruger <code>request.body</code>.</p>
           <aside class="notes">
-            express.json er built-in middleware. Den parser indkommende JSON og udfylder req.body. Senere skal input valideres; her fokuserer vi på flowet.
+            Dette er den samlede POST /todos-route fra øvelsen. express.json parser indkommende JSON og udfylder request.body.
             [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
           </aside>
         </section>
@@ -926,13 +920,13 @@ app.post("/api/jokes", (req, res) => {
           <div class="middleware-pipeline" aria-label="Request passerer logging og JSON parsing før route handler">
             <span>request</span><b>→</b><span>logging</span><b>→</b><span>JSON parsing</span><b>→</b><span>route handler</span><b>→</b><span>response</span>
           </div>
-          <pre><code class="language-javascript">app.use((req, res, next) => {
-  console.log(req.method, req.url);
+          <pre><code class="language-javascript">server.use((request, response, next) => {
+  console.log(request.method, request.url);
   next();
 });</code></pre>
           <p class="bottom-line">Middleware skal sende et response eller kalde <code>next()</code>.</p>
           <aside class="notes">
-            Rækkefølgen betyder noget. En middleware kan køre kode, ændre req/res, afslutte cyklussen eller sende kontrollen videre med next.
+            Rækkefølgen betyder noget. En middleware kan køre kode, ændre request/response, afslutte cyklussen eller sende kontrollen videre med next.
             [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
           </aside>
         </section>
@@ -941,7 +935,7 @@ app.post("/api/jokes", (req, res) => {
           <span class="eyebrow">Statiske filer</span>
           <h2>Express kan servere HTML, CSS, JavaScript og billeder direkte</h2>
           <div class="static-layout">
-            <pre><code class="language-javascript">app.use(express.static("public"));</code></pre>
+            <pre><code class="language-javascript">server.use(express.static("public"));</code></pre>
             <pre><code class="language-text">public/
 ├── index.html
 ├── styles.css
@@ -959,14 +953,14 @@ app.post("/api/jokes", (req, res) => {
         <section class="not-found-slide">
           <span class="eyebrow">Fallback route</span>
           <h2>Hvis intet matcher, skal serveren stadig svare</h2>
-          <pre><code class="language-javascript">app.use((req, res) => {
-  res.status(404).json({
+          <pre><code class="language-javascript">server.use((request, response) => {
+  response.status(404).json({
     error: "Route not found"
   });
 });</code></pre>
           <div class="order-rule"><strong>Placér den sidst</strong><span>Express gennemgår middleware og routes i den rækkefølge, de registreres.</span></div>
           <aside class="notes">
-            app.use uden path matcher alle requests, der når hertil. Derfor skal fallbacken stå efter de rigtige routes.
+            server.use uden path matcher alle requests, der når hertil. Derfor skal fallbacken stå efter de rigtige routes.
             [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
           </aside>
         </section>
@@ -977,30 +971,31 @@ app.post("/api/jokes", (req, res) => {
           <div class="activity-layout">
             <ol>
               <li>Installér Express og start serveren</li>
-              <li>Lav routes til <code>/</code> og <code>/about</code></li>
-              <li>Returnér JSON fra <code>/api/jokes</code></li>
-              <li>Tilføj en 404-fallback</li>
+              <li>Test HTTP-metoder på <code>/test</code></li>
+              <li>Returnér todos fra <code>GET /todos</code></li>
+              <li>Byg <code>POST /todos</code> med JSON-body</li>
             </ol>
             <a class="exercise-link" href="https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link" target="_blank" rel="noreferrer">Åbn opgaven ↗</a>
           </div>
           <aside class="notes">
-            Brug opgaven som trin-for-trin støtte. Bed de hurtige om at ændre svarformater, statuskoder og tilføje en ekstra route.
+            Punkterne matcher den lokale Express-øvelse. De fortsætter derefter med params og de øvrige CRUD-routes i eget tempo.
             [Sources] - Kursusopgave: https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link [/Sources]
           </aside>
         </section>
 
         <section id="byg-selv" class="challenge-slide">
           <span class="eyebrow">Hands-on · byg selv</span>
-          <h2>Lav en lille AMAbot-server med mindst fire routes</h2>
+          <h2>Gør jeres todos-API færdigt og forklar én request</h2>
           <div class="challenge-routes">
-            <article><code>GET /</code><span>intro til jeres bot</span></article>
-            <article><code>GET /api/questions</code><span>returnér alle spørgsmål</span></article>
-            <article><code>GET /api/questions/:id</code><span>returnér ét spørgsmål</span></article>
-            <article><code>POST /api/questions</code><span>modtag et nyt spørgsmål</span></article>
+            <article><code>GET /todos</code><span>returnér alle todos</span></article>
+            <article><code>GET /todos/:todoId</code><span>returnér én todo</span></article>
+            <article><code>POST /todos</code><span>opret en ny todo</span></article>
+            <article><code>PUT /todos/:todoId</code><span>opdatér en todo</span></article>
+            <article><code>DELETE /todos/:todoId</code><span>slet en todo</span></article>
           </div>
           <p class="bottom-line">Test alle routes i browser eller Thunder Client. Dokumentér metode, URL, status og response.</p>
           <aside class="notes">
-            Dette er den samlede anvendelse. Hvis POST er for meget, prioriter GET-routes og et tydeligt 404-response. Lad grupperne forklare én request hele vejen gennem deres kode.
+            Dette er den samlede anvendelse fra Express-øvelsen. Lad grupperne forklare én request hele vejen gennem middleware, route handler og response.
           </aside>
         </section>
 
