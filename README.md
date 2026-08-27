@@ -2,6 +2,10 @@
 
 Velkommen til det lokale spejl af Canvas-kurset [WU-E26A](https://eaaa.instructure.com/courses/32059). Her finder du undervisningsplaner, forberedelse, slides, opgaver og øvrige materialer i samme rækkefølge som i Canvas.
 
+## Slides
+
+- [RACE 1 · Intro til Node.js og Express.js](slides/node-express/)
+
 ## Undervisningsforløbet
 
 Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerende i Canvas. Indhold og rækkefølge kan derfor stadig ændre sig.
