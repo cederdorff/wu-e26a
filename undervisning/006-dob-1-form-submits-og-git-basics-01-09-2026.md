@@ -1,19 +1,3 @@
----
-canvas_course_id: 32059
-canvas_module_id: 178029
-canvas_module_position: 6
-canvas_module_published: true
-canvas_module_item_id: 1018685
-canvas_module_item_position: 1
-canvas_page_id: 200708
-canvas_page_slug: "plan-for-dob-1-form-submits-og-git-basics"
-canvas_page_title: "Plan for DOB 1 - Form submits og Git basics"
-canvas_page_published: true
-canvas_updated_at: "2026-08-25T10:20:38Z"
-canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018685"
-local_status: mirrored
----
-
 # DOB 1 - Form submits og Git basics - 01-09-2026
 
 ## Dagens fokus
@@ -59,3 +43,26 @@ Nu har I eksperimenteret med JavaScript på serveren og snust til Node og Expres
 ### Præsentationer
 
 ### Opgaver
+
+---
+
+<details>
+<summary>Canvas-metadata</summary>
+
+```yaml
+canvas_course_id: 32059
+canvas_module_id: 178029
+canvas_module_position: 6
+canvas_module_published: true
+canvas_module_item_id: 1018685
+canvas_module_item_position: 1
+canvas_page_id: 200708
+canvas_page_slug: "plan-for-dob-1-form-submits-og-git-basics"
+canvas_page_title: "Plan for DOB 1 - Form submits og Git basics"
+canvas_page_published: true
+canvas_updated_at: "2026-08-25T10:20:38Z"
+canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018685"
+local_status: mirrored
+```
+
+</details>

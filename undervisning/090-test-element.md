@@ -1,4 +1,11 @@
+# Test element
+
 ---
+
+<details>
+<summary>Canvas-metadata</summary>
+
+```yaml
 canvas_course_id: 32059
 canvas_module_id: null
 canvas_module_position: null
@@ -12,6 +19,6 @@ canvas_page_published: false
 canvas_updated_at: "2026-05-18T22:50:55Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/pages/test-element"
 local_status: mirrored
----
+```
 
-# Test element
+</details>

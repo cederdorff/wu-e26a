@@ -137,8 +137,7 @@ if (conflicts.length) {
 function renderDocument(document, pageDocumentByUrl, localFileById) {
   const { module, page, pageItem } = document;
   const title = module?.name ?? page.title;
-  const lines = [
-    "---",
+  const metadata = [
     `canvas_course_id: ${Number(courseId)}`,
     `canvas_module_id: ${yamlValue(module?.id)}`,
     `canvas_module_position: ${yamlValue(module?.position)}`,
@@ -152,10 +151,8 @@ function renderDocument(document, pageDocumentByUrl, localFileById) {
     `canvas_updated_at: ${yamlValue(page?.updated_at)}`,
     `canvas_source_url: ${yamlValue(sourceUrl(module, page, pageItem))}`,
     "local_status: mirrored",
-    "---",
-    "",
-    `# ${title}`,
   ];
+  const lines = [`# ${title}`];
 
   if (page?.body) {
     const body = htmlToMarkdown(page.body, document.path, pageDocumentByUrl, localFileById);
@@ -171,6 +168,20 @@ function renderDocument(document, pageDocumentByUrl, localFileById) {
       lines.push("", "*Modulet har endnu ikke indhold i Canvas.*");
     }
   }
+
+  lines.push(
+    "",
+    "---",
+    "",
+    "<details>",
+    "<summary>Canvas-metadata</summary>",
+    "",
+    "```yaml",
+    ...metadata,
+    "```",
+    "",
+    "</details>",
+  );
 
   return `${lines.join("\n").replace(/\n{3,}/g, "\n\n").trim()}\n`;
 }

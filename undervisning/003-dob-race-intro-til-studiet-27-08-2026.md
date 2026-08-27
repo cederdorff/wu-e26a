@@ -1,19 +1,3 @@
----
-canvas_course_id: 32059
-canvas_module_id: 178026
-canvas_module_position: 3
-canvas_module_published: true
-canvas_module_item_id: 1018679
-canvas_module_item_position: 1
-canvas_page_id: 200706
-canvas_page_slug: "plan-for-dob-+-race-intro-til-studiet"
-canvas_page_title: "Plan for DOB + RACE - Intro til studiet"
-canvas_page_published: true
-canvas_updated_at: "2026-08-24T08:38:16Z"
-canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018679"
-local_status: mirrored
----
-
 # DOB + RACE - Intro til studiet - 27-08-2026
 
 *Torsdag, 27. august 2026 12:00–15:15 i lokale 3.01 ("The Edge") i [bygning 7G](https://www.eaaa.dk/kontakt/sadan-finder-du-os/sonderhoj-7g/).*
@@ -46,3 +30,26 @@ Velkomst og introduktion til akademiet, til uddannelsen og til underviserne og h
 ### Præsentationer
 
 ### Opgaver
+
+---
+
+<details>
+<summary>Canvas-metadata</summary>
+
+```yaml
+canvas_course_id: 32059
+canvas_module_id: 178026
+canvas_module_position: 3
+canvas_module_published: true
+canvas_module_item_id: 1018679
+canvas_module_item_position: 1
+canvas_page_id: 200706
+canvas_page_slug: "plan-for-dob-+-race-intro-til-studiet"
+canvas_page_title: "Plan for DOB + RACE - Intro til studiet"
+canvas_page_published: true
+canvas_updated_at: "2026-08-24T08:38:16Z"
+canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018679"
+local_status: mirrored
+```
+
+</details>

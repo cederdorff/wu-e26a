@@ -1,19 +1,3 @@
----
-canvas_course_id: 32059
-canvas_module_id: 178030
-canvas_module_position: 7
-canvas_module_published: true
-canvas_module_item_id: 1018688
-canvas_module_item_position: 1
-canvas_page_id: 200709
-canvas_page_slug: "plan-for-dob-2-teambuilding-+-git-branching-and-devtools"
-canvas_page_title: "Plan for DOB 2 - Teambuilding + Git branching & DevTools"
-canvas_page_published: true
-canvas_updated_at: "2026-08-25T11:02:40Z"
-canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018688"
-local_status: mirrored
----
-
 # DOB 2 - Teambuilding + Git branching & DevTools - 02-09-2026
 
 ## Dagens fokus
@@ -58,3 +42,26 @@ Eftermiddag: Vi kigger grundigt på hvad der foregår i browseren når vi loader
 ### Præsentationer
 
 ### Opgaver
+
+---
+
+<details>
+<summary>Canvas-metadata</summary>
+
+```yaml
+canvas_course_id: 32059
+canvas_module_id: 178030
+canvas_module_position: 7
+canvas_module_published: true
+canvas_module_item_id: 1018688
+canvas_module_item_position: 1
+canvas_page_id: 200709
+canvas_page_slug: "plan-for-dob-2-teambuilding-+-git-branching-and-devtools"
+canvas_page_title: "Plan for DOB 2 - Teambuilding + Git branching & DevTools"
+canvas_page_published: true
+canvas_updated_at: "2026-08-25T11:02:40Z"
+canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018688"
+local_status: mirrored
+```
+
+</details>

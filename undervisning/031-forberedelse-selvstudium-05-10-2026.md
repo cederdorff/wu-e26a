@@ -1,4 +1,13 @@
+# Forberedelse - Selvstudium - 05-10-2026
+
+*Modulet har endnu ikke indhold i Canvas.*
+
 ---
+
+<details>
+<summary>Canvas-metadata</summary>
+
+```yaml
 canvas_course_id: 32059
 canvas_module_id: 178054
 canvas_module_position: 31
@@ -12,8 +21,6 @@ canvas_page_published: null
 canvas_updated_at: null
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/178054"
 local_status: mirrored
----
+```
 
-# Forberedelse - Selvstudium - 05-10-2026
-
-*Modulet har endnu ikke indhold i Canvas.*
+</details>

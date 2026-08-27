@@ -1,19 +1,3 @@
----
-canvas_course_id: 32059
-canvas_module_id: 178031
-canvas_module_position: 8
-canvas_module_published: true
-canvas_module_item_id: 1018691
-canvas_module_item_position: 1
-canvas_page_id: 200710
-canvas_page_slug: "plan-for-race-2-ejs-templating-form-handling-og-svar-logik"
-canvas_page_title: "Plan for RACE 2 - EJS templating, form handling og svar logik"
-canvas_page_published: true
-canvas_updated_at: "2026-08-25T09:11:54Z"
-canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018691"
-local_status: mirrored
----
-
 # RACE 2 - EJS templating, form handling og svar logik - 03-09-2026
 
 ## Dagens fokus
@@ -65,3 +49,26 @@ Vi arbejder videre med Node.js og Express.js, request og responsen. Derudover sk
 ### Præsentationer
 
 ### Opgaver
+
+---
+
+<details>
+<summary>Canvas-metadata</summary>
+
+```yaml
+canvas_course_id: 32059
+canvas_module_id: 178031
+canvas_module_position: 8
+canvas_module_published: true
+canvas_module_item_id: 1018691
+canvas_module_item_position: 1
+canvas_page_id: 200710
+canvas_page_slug: "plan-for-race-2-ejs-templating-form-handling-og-svar-logik"
+canvas_page_title: "Plan for RACE 2 - EJS templating, form handling og svar logik"
+canvas_page_published: true
+canvas_updated_at: "2026-08-25T09:11:54Z"
+canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018691"
+local_status: mirrored
+```
+
+</details>

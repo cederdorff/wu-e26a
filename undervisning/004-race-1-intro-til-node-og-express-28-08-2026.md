@@ -1,19 +1,3 @@
----
-canvas_course_id: 32059
-canvas_module_id: 178027
-canvas_module_position: 4
-canvas_module_published: true
-canvas_module_item_id: 1018682
-canvas_module_item_position: 1
-canvas_page_id: 200707
-canvas_page_slug: "plan-for-race-1-intro-til-node-og-express"
-canvas_page_title: "Plan for RACE 1 - Intro til Node og Express"
-canvas_page_published: true
-canvas_updated_at: "2026-08-25T08:34:34Z"
-canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018682"
-local_status: mirrored
----
-
 # RACE 1 - Intro til Node og Express - 28-08-2026
 
 ## Dagens fokus
@@ -59,3 +43,26 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
 - [4. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
 - [5. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)
+
+---
+
+<details>
+<summary>Canvas-metadata</summary>
+
+```yaml
+canvas_course_id: 32059
+canvas_module_id: 178027
+canvas_module_position: 4
+canvas_module_published: true
+canvas_module_item_id: 1018682
+canvas_module_item_position: 1
+canvas_page_id: 200707
+canvas_page_slug: "plan-for-race-1-intro-til-node-og-express"
+canvas_page_title: "Plan for RACE 1 - Intro til Node og Express"
+canvas_page_published: true
+canvas_updated_at: "2026-08-25T08:34:34Z"
+canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018682"
+local_status: mirrored
+```
+
+</details>
