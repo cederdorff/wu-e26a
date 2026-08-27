@@ -121,6 +121,7 @@ await writeGeneratedFile(
   resolve(projectRoot, "canvas/moduler.md"),
   renderModuleIndex(course, modules, documents, pageDocumentByUrl, localFileById),
 );
+await updateReadmeOverview(course, modules, documents);
 
 await removeObsoleteMirrorFiles(previousManifest, currentManifest);
 await writeGeneratedJson(manifestPath, currentManifest);
@@ -262,6 +263,59 @@ function renderModuleIndex(course, modules, documents, pageDocumentByUrl, localF
   }
 
   return `${lines.join("\n").replace(/\n{3,}/g, "\n\n").trim()}\n`;
+}
+
+async function updateReadmeOverview(course, modules, documents) {
+  const readmePath = resolve(projectRoot, "README.md");
+  const startMarker = "<!-- CANVAS_OVERSIGT_START -->";
+  const endMarker = "<!-- CANVAS_OVERSIGT_SLUT -->";
+  const readme = await readFile(readmePath, "utf8");
+  const start = readme.indexOf(startMarker);
+  const end = readme.indexOf(endMarker);
+  if (start === -1 || end === -1 || end < start) {
+    throw new Error("README.md mangler markørerne til den genererede Canvas-oversigt.");
+  }
+
+  const documentByModuleId = new Map(
+    documents.filter((document) => document.module).map((document) => [document.module.id, document]),
+  );
+  const orphanDocuments = documents.filter((document) => document.kind === "orphan-page");
+  const sections = [{ title: "Generelt", entries: [] }];
+  let currentSection = sections[0];
+
+  for (const module of modules) {
+    const document = documentByModuleId.get(module.id);
+    if (module.name.trim().startsWith("➡️")) {
+      currentSection = { title: module.name.replace(/^➡️\s*/, ""), entries: [] };
+      sections.push(currentSection);
+      currentSection.entries.push(moduleOverviewLine(module, document, "Forløbsoversigt og fælles materialer"));
+      continue;
+    }
+    currentSection.entries.push(moduleOverviewLine(module, document));
+  }
+
+  const lines = [];
+  for (const section of sections) {
+    lines.push(`### ${section.title}`, "", ...section.entries, "");
+  }
+  if (orphanDocuments.length) {
+    lines.push("### Øvrige Canvas-sider", "");
+    for (const document of orphanDocuments) {
+      const status = document.page.published ? "" : " — *kladde i Canvas*";
+      lines.push(`- [${document.path.match(/\/(\d{3})-/)?.[1]} · ${document.page.title}](${markdownRelative(readmePath, document.path)})${status}`);
+    }
+    lines.push("");
+  }
+
+  const overview = lines.join("\n").trim();
+  const updated = `${readme.slice(0, start + startMarker.length)}\n${overview}\n${readme.slice(end)}`;
+  await atomicWrite(readmePath, updated);
+}
+
+function moduleOverviewLine(module, document, label = module.name) {
+  const number = pad(module.position);
+  const status = module.published ? "" : " — *kladde i Canvas*";
+  return `- [${number} · ${label}](${markdownRelative(resolve(projectRoot, "README.md"), document.path)})${status}`;
 }
 
 async function downloadFiles(canvasFiles, folderById) {
