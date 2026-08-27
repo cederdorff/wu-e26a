@@ -23,6 +23,7 @@ Husk - der er fredagsbar i Basement efter undervisningen 🎉
 ## Forberedelse
 
 - Installer [Node.js](https://nodejs.org/en/download) på jeres maskine (vælg seneste LTS-version)
+- Installer [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) som extension i Visual Studio Code
 - Læs ["Introduction to the server side"](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction) på MDN for at forstå server-side udvikling
 - Skim igennem ["Express/Node introduction"](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction) på MDN
 - Se Scrimba-video [Fullstack > Node.js >Welcome to Node](https://scrimba.com/fullstack-path-c0fullstack/~04lp) + De 7 første videoer af [Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack) (stop før Aside: JSON and APIs)
@@ -40,7 +41,7 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 
 - [1. Hello Node](../opgaver/hello-node.md)
 - [2. Hello HTTP Module](../opgaver/hello-http-module.md)
-- [3. Getting Started with Express.js (Hello Express)](https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link)
+- [3. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md)
 - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
 - [4. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
 - [5. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)

@@ -16,5 +16,19 @@
   },
   "devDependencies": {
     "vite": "^7.1.3"
-  }
+  },
+  "version": "1.0.0",
+  "description": "Velkommen til det lokale spejl af Canvas-kurset [WU-E26A](https://eaaa.instructure.com/courses/32059). Her finder du undervisningsplaner, forberedelse, slides, opgaver og øvrige materialer i samme rækkefølge som i Canvas.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cederdorff/wu-e26a.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cederdorff/wu-e26a/issues"
+  },
+  "homepage": "https://github.com/cederdorff/wu-e26a#readme"
 }

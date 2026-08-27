@@ -481,7 +481,7 @@ Dette er selve indholdet i responset.
 
 ### Undersøg responset
 
-Test serveren i browseren og gerne i Postman.
+Test serveren i browseren og gerne i Thunder Client.
 
 Undersøg:
 
@@ -621,7 +621,7 @@ response.setHeader("Content-Type", "application/json");
 response.end(JSON.stringify(users));
 ```
 
-Test igen i browseren og Postman.
+Test igen i browseren og Thunder Client.
 
 Undersøg især headeren:
 
@@ -905,7 +905,7 @@ Test igen:
 http://localhost:3000/bananas
 ```
 
-Undersøg også responset i Postman.
+Undersøg også responset i Thunder Client.
 
 Du bør nu få:
 
@@ -977,7 +977,7 @@ Du kan fx:
 - tilføje flere users
 - tilføje flere posts
 - prøve andre URL'er og undersøge `request.url`
-- teste alle routes i Postman
+- teste alle routes i Thunder Client
 
 Du kan også prøve at lave en route:
 
