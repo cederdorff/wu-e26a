@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="RACE 1 · Intro til Node.js og Express.js · WU-E26A · 28. august 2026" />
     <title>Intro til Node.js og Express.js · WU-E26A</title>
-    <script type="module" crossorigin src="../assets/nodeExpress-Bmqoad5O.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/nodeExpress-UoZ-b70I.css">
+    <script type="module" crossorigin src="../assets/nodeExpress-ChrGxA-O.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/nodeExpress-4b1SZxVg.css">
   </head>
   <body>
     <div class="reveal">
@@ -21,7 +21,8 @@
             <img src="../assets/node-express-mark-DOFeZflC.png" alt="" />
           </div>
           <aside class="notes">
-            Velkommen. I dag flytter vi JavaScript ud af browseren og ind på serveren. Målet er ikke at forstå hele backend-verdenen, men at kunne følge én request hele vejen gennem systemet og selv bygge de første routes.
+            Velkommen. I dag flytter vi JavaScript ud af browseren og ind på serveren. Målet er ikke at forstå hele
+            backend-verdenen, men at kunne følge én request hele vejen gennem systemet og selv bygge de første routes.
             [Sources] - Lokal lektionsside: undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
           </aside>
         </section>
@@ -36,8 +37,10 @@
             <article><b>04</b><strong>Route &amp; teste</strong><span>i Node, Express og Thunder Client</span></article>
           </div>
           <aside class="notes">
-            Brug dette som dagens konkrete succeskriterium. De studerende skal kunne starte et projekt, aflæse method og url, sende et korrekt response og forklare, hvordan en route forbinder request med kode. De behøver ikke kunne huske al syntaks udenad.
-            [Sources] - Lokal lektionsside: undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
+            Brug dette som dagens konkrete succeskriterium. De studerende skal kunne starte et projekt, aflæse method og
+            url, sende et korrekt response og forklare, hvordan en route forbinder request med kode. De behøver ikke
+            kunne huske al syntaks udenad. [Sources] - Lokal lektionsside:
+            undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
           </aside>
         </section>
 
@@ -45,12 +48,24 @@
           <span class="eyebrow">Agenda</span>
           <h2>Fra browserens request til jeres egen server</h2>
           <ol class="agenda-grid">
-            <li><a href="#/client-server"><b>Client/server</b><small>Hvem spørger — og hvem svarer?</small></a></li>
-            <li><a href="#/http"><b>HTTP</b><small>Request, response og statuskoder</small></a></li>
-            <li><a href="#/node"><b>Node.js</b><small>JavaScript uden for browseren</small></a></li>
-            <li><a href="#/http-module"><b>HTTP-modulet</b><small>Byg serveren uden framework</small></a></li>
-            <li><a href="#/express"><b>Express.js</b><small>Routing, middleware og statiske filer</small></a></li>
-            <li><a href="#/byg-selv"><b>Hands-on</b><small>Byg og test jeres første routes</small></a></li>
+            <li>
+              <a href="#/client-server"><b>Client/server</b><small>Hvem spørger — og hvem svarer?</small></a>
+            </li>
+            <li>
+              <a href="#/http"><b>HTTP</b><small>Request, response og statuskoder</small></a>
+            </li>
+            <li>
+              <a href="#/node"><b>Node.js</b><small>JavaScript uden for browseren</small></a>
+            </li>
+            <li>
+              <a href="#/http-module"><b>HTTP-modulet</b><small>Byg serveren uden framework</small></a>
+            </li>
+            <li>
+              <a href="#/express"><b>Express.js</b><small>Routing, middleware og statiske filer</small></a>
+            </li>
+            <li>
+              <a href="#/byg-selv"><b>Hands-on</b><small>Byg og test jeres første routes</small></a>
+            </li>
           </ol>
           <aside class="notes">
             Dagen veksler mellem korte faglige oplæg og kodeøvelser. Henvis tilbage til agendaen ved hvert kapitel.
@@ -62,15 +77,37 @@
           <span class="eyebrow">Tool check · 3 min.</span>
           <h2>Kan jeres maskine være med?</h2>
           <div class="tools-check">
-            <article><span>Terminal</span><strong><code>node --version</code></strong><small>giver et versionsnummer</small></article>
-            <article><span>Terminal</span><strong><code>npm --version</code></strong><small>giver et versionsnummer</small></article>
+            <article>
+              <span>Terminal</span><strong><code>node --version</code></strong
+              ><small>giver et versionsnummer</small>
+            </article>
+            <article>
+              <span>Terminal</span><strong><code>npm --version</code></strong
+              ><small>giver et versionsnummer</small>
+            </article>
             <article><span>Editor</span><strong>VS Code</strong><small>kan åbne projekt og terminal</small></article>
-            <article><span>Extension</span><strong>Thunder Client</strong><small>er installeret i VS Code</small></article>
+            <article>
+              <span>Extension</span><strong>Thunder Client</strong><small>er installeret i VS Code</small>
+            </article>
           </div>
-          <p class="bottom-line setup-help">Ikke helt klar? <a href="https://race.notion.site/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274" target="_blank" rel="noreferrer"><b>Åbn Dev Setup Guide ↗</b></a> — eller sig til nu.</p>
+          <p class="bottom-line setup-help">
+            Ikke helt klar?
+            <a
+              href="https://race.notion.site/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274"
+              target="_blank"
+              rel="noreferrer"
+              ><b>Åbn Dev Setup Guide ↗</b></a
+            >
+            — eller sig til nu.
+          </p>
           <aside class="notes">
-            Ja, lav dette check-in. Det fanger installationer og terminalproblemer, før de bliver blandet sammen med dagens nye Node-koncepter. Bed alle køre de to kommandoer og vise en tommelfinger, når de er klar. Hvis nogen ikke er oppe at køre, åbner de Dev Setup Guide, som dækker VS Code, extensions, Git/GitHub Desktop, browserens DevTools samt Node.js og npm.
-            [Sources] - Dev Setup Guide: https://race.notion.site/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274 - Node.js download: https://nodejs.org/en/download - Thunder Client docs: https://docs.thunderclient.com/get-started [/Sources]
+            Ja, lav dette check-in. Det fanger installationer og terminalproblemer, før de bliver blandet sammen med
+            dagens nye Node-koncepter. Bed alle køre de to kommandoer og vise en tommelfinger, når de er klar. Hvis
+            nogen ikke er oppe at køre, åbner de Dev Setup Guide, som dækker VS Code, extensions, Git/GitHub Desktop,
+            browserens DevTools samt Node.js og npm. [Sources] - Dev Setup Guide:
+            https://race.notion.site/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274
+            - Node.js download: https://nodejs.org/en/download - Thunder Client docs:
+            https://docs.thunderclient.com/get-started [/Sources]
           </aside>
         </section>
 
@@ -96,48 +133,84 @@
               <code>GET /todos → JSON</code>
             </article>
           </div>
-          <p class="bottom-line">Først bygger I <b>/users</b> og <b>/posts</b>. I Express bygger I videre med et <b>/todos</b>-API.</p>
+          <p class="bottom-line">
+            Først bygger I <b>/users</b> og <b>/posts</b>. I Express bygger I videre med et <b>/todos</b>-API.
+          </p>
           <aside class="notes">
-            Vis dagens faktiske progression. Hello Node etablerer projekt og npm-script. Hello HTTP Module bygger server, JSON-routes og 404 uden framework. Hello Express viser, hvordan et framework gør samme request-response-idé mere læsbar.
-            [Sources] - Lokale opgaver: opgaver/hello-node.md og opgaver/hello-http-module.md; lokal lektionsside: undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
+            Vis dagens faktiske progression. Hello Node etablerer projekt og npm-script. Hello HTTP Module bygger
+            server, JSON-routes og 404 uden framework. Hello Express viser, hvordan et framework gør samme
+            request-response-idé mere læsbar. [Sources] - Lokale opgaver: opgaver/hello-node.md og
+            opgaver/hello-http-module.md; lokal lektionsside:
+            undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
           </aside>
         </section>
 
         <section class="career-slide">
           <h2>Lidt om RACE</h2>
-          <p class="career-intro">Min baggrund bevæger sig gennem uddannelse, udvikling og undervisning — og på tværs af backend og frontend.</p>
+          <p class="career-intro">
+            Min baggrund bevæger sig gennem uddannelse, udvikling og undervisning — og på tværs af backend og frontend.
+          </p>
           <div class="career-timeline" aria-label="Rasmus Cederdorffs uddannelses- og karrieretidslinje">
             <div class="career-line"></div>
             <div class="career-grid">
-              <article><div class="career-card top"><b>2011</b><strong>Datamatiker</strong><span>EAAA</span></div></article>
-              <article><div class="career-card bottom"><b>2013</b><strong>App Developer</strong><span>Visiolink</span></div></article>
-              <article><div class="career-card top"><b>2013</b><strong>Webudvikling (PBA)</strong><span>EAAA</span></div></article>
-              <article><div class="career-card bottom"><b>2014</b><strong>Freelance Web App Developer</strong><span>Cederdorff</span></div></article>
-              <article><div class="career-card top"><b>2015</b><strong>Master of Science in IT</strong><span>SDU</span></div></article>
-              <article><div class="career-card bottom"><b>2018</b><strong>Underviser</strong><span>EAAA</span></div></article>
-              <article><div class="career-card bottom"><b>2021</b><strong>Lektor</strong><span>EAAA</span></div></article>
-              <article><div class="career-card bottom"><b>2022–2023</b><strong>Lektor</strong><span>KEA → EAAA</span></div></article>
+              <article>
+                <div class="career-card top"><b>2011</b><strong>Datamatiker</strong><span>EAAA</span></div>
+              </article>
+              <article>
+                <div class="career-card bottom"><b>2013</b><strong>App Developer</strong><span>Visiolink</span></div>
+              </article>
+              <article>
+                <div class="career-card top"><b>2013</b><strong>Webudvikling (PBA)</strong><span>EAAA</span></div>
+              </article>
+              <article>
+                <div class="career-card bottom">
+                  <b>2014</b><strong>Freelance Web App Developer</strong><span>Cederdorff</span>
+                </div>
+              </article>
+              <article>
+                <div class="career-card top"><b>2015</b><strong>Master of Science in IT</strong><span>SDU</span></div>
+              </article>
+              <article>
+                <div class="career-card bottom"><b>2018</b><strong>Underviser</strong><span>EAAA</span></div>
+              </article>
+              <article>
+                <div class="career-card bottom"><b>2021</b><strong>Lektor</strong><span>EAAA</span></div>
+              </article>
+              <article>
+                <div class="career-card bottom"><b>2022–2023</b><strong>Lektor</strong><span>KEA → EAAA</span></div>
+              </article>
             </div>
             <div class="career-range"><span>Backend</span><i></i><span>Frontend</span></div>
           </div>
           <aside class="notes">
-            Brug tidslinjen til kort at etablere faglig baggrund: fra backend og appudvikling til frontend, webapps og undervisning. Pointen er ikke CV'et i sig selv, men at dagens client/server-perspektiv binder hele rejsen sammen.
-            [Sources] - Profil og tidslinje fra den brugerleverede Keynote-præsentation og reference-slides [/Sources]
+            Brug tidslinjen til kort at etablere faglig baggrund: fra backend og appudvikling til frontend, webapps og
+            undervisning. Pointen er ikke CV'et i sig selv, men at dagens client/server-perspektiv binder hele rejsen
+            sammen. [Sources] - Profil og tidslinje fra den brugerleverede Keynote-præsentation og reference-slides
+            [/Sources]
           </aside>
         </section>
 
         <section class="profile-slide profile-slide-personal">
           <div class="profile-copy">
             <span class="eyebrow">Lektor &amp; Web App Developer</span>
-            <h2>Jeg er Rasmus Vase Cederdorff</h2>
+            <h2>Rasmus Vase Cederdorff</h2>
+            <p class="profile-intro">Jeg underviser og bygger webapps med JavaScript i centrum.</p>
             <div class="about-panels">
               <div>
-                <strong>Jeg taler JavaScript</strong>
-                <p>React, Node.js og BaaS — altid med blik for UI og UX.</p>
+                <strong>I speak JavaScript</strong>
+                <ul>
+                  <li>Bygger websites, webshops, webapps og server-apps</li>
+                  <li>Arbejder på tværs af React, Node.js og BaaS-løsninger</li>
+                  <li>Holder altid UI og UX i fokus</li>
+                </ul>
               </div>
               <div>
                 <strong>Når jeg ikke koder</strong>
-                <p>Matias, Alicia &amp; Ida · sport · gadgets · foto · indretning.</p>
+                <ul>
+                  <li>Bor i vores Nybyggerne-hus med min mand, Matias</li>
+                  <li>Har to piger: Alicia og Ida</li>
+                  <li>Sport, gadgets, foto og indretningsprojekter</li>
+                </ul>
               </div>
             </div>
             <p class="arm-comment">“Hvad sker der med min arm?” — spørg bare. Jeg er helt cool med det.</p>
@@ -157,41 +230,65 @@
             ></video>
           </div>
           <aside class="notes">
-            Personlig introduktion i samme ånd som de to reference-slides. Videoen er det personlige, visuelle element; hold resten kort. Fortæl om JavaScript som fælles værktøj på tværs af frontend og backend. Hvis armen nævnes: muligheder frem for begrænsninger — spørgsmål er velkomne.
-            [Sources] - Profiltekst og video fra den brugerleverede Keynote- og Reveal-reference; original video: https://github.com/cederdorff/race/raw/refs/heads/master/reels/red-office.mp4; posterfoto leveret af brugeren som race_2024.jpg [/Sources]
+            Personlig introduktion i samme ånd som de to reference-slides. Videoen er det personlige, visuelle element;
+            hold resten kort. Fortæl om JavaScript som fælles værktøj på tværs af frontend og backend. Hvis armen
+            nævnes: muligheder frem for begrænsninger — spørgsmål er velkomne. [Sources] - Profiltekst og video fra den
+            brugerleverede Keynote- og Reveal-reference; original video:
+            https://github.com/cederdorff/race/raw/refs/heads/master/reels/red-office.mp4; posterfoto leveret af
+            brugeren som race_2024.jpg [/Sources]
           </aside>
         </section>
 
         <section class="quote-slide" data-accent="cyan">
           <span class="quote-mark" aria-hidden="true">“</span>
-          <blockquote>The cool thing about JavaScript is that you can create stuff that will put a smile on your face, as a developer.</blockquote>
+          <blockquote>
+            The cool thing about JavaScript is that you can create stuff that will put a smile on your face, as a
+            developer.
+          </blockquote>
           <div class="quote-credit"><strong>Lex Fridman</strong><span>Computer Scientist</span></div>
           <p class="quote-comment">Det kan se ud som noget. Det kan gøre noget. Og det er ret fedt.</p>
           <aside class="notes">
-            Brug citatet som overgang fra introduktionen til dagens faglige indhold. JavaScript er motiverende, fordi resultatet kan opleves — også når det nu flytter fra browseren til serveren.
-            [Sources] - Citat og attribution fra den brugerleverede Keynote-præsentation: https://www.youtube.com/watch?v=GLhyjVZp0cw&amp;t=252s [/Sources]
+            Brug citatet som overgang fra introduktionen til dagens faglige indhold. JavaScript er motiverende, fordi
+            resultatet kan opleves — også når det nu flytter fra browseren til serveren. [Sources] - Citat og
+            attribution fra den brugerleverede Keynote-præsentation:
+            https://www.youtube.com/watch?v=GLhyjVZp0cw&amp;t=252s [/Sources]
           </aside>
         </section>
 
         <section class="database-meme-slide" data-accent="orange">
-          <img src="../assets/javascript-database-meme-BkraYwEt.jpg" alt="When someone asks how to get data from a database in JavaScript code" />
-          <p>Det virkede næsten som ét JavaScript-kald. I dag åbner vi boksen og ser, hvad der faktisk ligger imellem app og data.</p>
+          <img
+            src="../assets/javascript-database-meme-BkraYwEt.jpg"
+            alt="When someone asks how to get data from a database in JavaScript code"
+          />
+          <p>
+            Det virkede næsten som ét JavaScript-kald. I dag åbner vi boksen og ser, hvad der faktisk ligger imellem app
+            og data.
+          </p>
           <aside class="notes">
-            Dette er den ønskede meme fra starten af originaldecket. Brug den som bro fra deres Firebase-erfaring til client/server: JavaScript-koden taler ikke direkte med databasen; den taler med en server eller en service, som kontrollerer dataadgangen.
-            [Sources] - Meme fra den brugerleverede Keynote/PPTX [/Sources]
+            Dette er den ønskede meme fra starten af originaldecket. Brug den som bro fra deres Firebase-erfaring til
+            client/server: JavaScript-koden taler ikke direkte med databasen; den taler med en server eller en service,
+            som kontrollerer dataadgangen. [Sources] - Meme fra den brugerleverede Keynote/PPTX [/Sources]
           </aside>
         </section>
 
         <section class="firebase-memory-slide" data-accent="orange">
           <figure class="firebase-model">
-            <img src="../assets/firebase-rest-api-C_Lm80hG.png" alt="Firebase vist som client, REST API og database" />
+            <img
+              src="../assets/firebase-rest-api-C_Lm80hG.png"
+              alt="Firebase vist som client, REST API og database"
+            />
           </figure>
           <figure class="firebase-meme">
-            <img src="../assets/rasmus-firebase-meme-CKJM-cjh.jpg" alt="Elmo-meme hvor Rasmus falder om i Firebase" />
+            <img
+              src="../assets/rasmus-firebase-meme-CKJM-cjh.jpg"
+              alt="Elmo-meme hvor Rasmus falder om i Firebase"
+            />
           </figure>
           <aside class="notes">
-            Spørg hvem der kan genkende modellen fra Firebase. Pointen er, at de allerede har arbejdet med client/server, HTTP-lignende operationer og en database — Firebase skjulte bare meget af serverlaget. I dag bygger vi selv den del, som tidligere lå bag servicen.
-            [Sources] - Firebase-arkitekturtegning og Rasmus/Firebase-meme fra den brugerleverede Keynote/PPTX [/Sources]
+            Spørg hvem der kan genkende modellen fra Firebase. Pointen er, at de allerede har arbejdet med
+            client/server, HTTP-lignende operationer og en database — Firebase skjulte bare meget af serverlaget. I dag
+            bygger vi selv den del, som tidligere lå bag servicen. [Sources] - Firebase-arkitekturtegning og
+            Rasmus/Firebase-meme fra den brugerleverede Keynote/PPTX [/Sources]
           </aside>
         </section>
 
@@ -202,14 +299,28 @@
             <h2>Reality check</h2>
             <p>JavaScript stopper ikke ved frontend — og backend kræver mere end ét værktøj.</p>
             <nav class="survey-links" aria-label="Stack Overflow Developer Survey 2025">
-              <a href="https://survey.stackoverflow.co/2025/technology#1-programming-scripting-and-markup-languages" target="_blank" rel="noreferrer"><b>JavaScript</b><small>Programming languages ↗</small></a>
-              <a href="https://survey.stackoverflow.co/2025/technology#1-web-frameworks-and-technologies" target="_blank" rel="noreferrer"><b>Node &amp; Express</b><small>Web technologies ↗</small></a>
-              <a href="https://survey.stackoverflow.co/2025/technology#1-databases" target="_blank" rel="noreferrer"><b>Databaser</b><small>Database technologies ↗</small></a>
+              <a
+                href="https://survey.stackoverflow.co/2025/technology#1-programming-scripting-and-markup-languages"
+                target="_blank"
+                rel="noreferrer"
+                ><b>JavaScript</b><small>Programming languages ↗</small></a
+              >
+              <a
+                href="https://survey.stackoverflow.co/2025/technology#1-web-frameworks-and-technologies"
+                target="_blank"
+                rel="noreferrer"
+                ><b>Node &amp; Express</b><small>Web technologies ↗</small></a
+              >
+              <a href="https://survey.stackoverflow.co/2025/technology#1-databases" target="_blank" rel="noreferrer"
+                ><b>Databaser</b><small>Database technologies ↗</small></a
+              >
             </nav>
           </div>
           <aside class="notes">
-            Brug humoren som et kort reality check: De skal ikke vælge én teknologi for evigt, men forstå hvordan lagene hænger sammen. Åbn eventuelt survey-linkene og kig efter JavaScript, Node.js, Express og de databaser, de allerede kender.
-            [Sources] - Reality Check-GIF fra den brugerleverede Keynote/PPTX; Stack Overflow Developer Survey 2025: https://survey.stackoverflow.co/2025/technology [/Sources]
+            Brug humoren som et kort reality check: De skal ikke vælge én teknologi for evigt, men forstå hvordan lagene
+            hænger sammen. Åbn eventuelt survey-linkene og kig efter JavaScript, Node.js, Express og de databaser, de
+            allerede kender. [Sources] - Reality Check-GIF fra den brugerleverede Keynote/PPTX; Stack Overflow Developer
+            Survey 2025: https://survey.stackoverflow.co/2025/technology [/Sources]
           </aside>
         </section>
 
@@ -219,10 +330,14 @@
             <h2>Hvad er verdens mest populære sprog?</h2>
             <p>Plot twist: I kan genbruge jeres JavaScript-erfaring på serveren — men data skal stadig bo et sted.</p>
           </div>
-          <img src="../assets/javascript-millionaire-BkV-3bhR.png" alt="Hvem vil være millionær-meme med JavaScript som svar" />
+          <img
+            src="../assets/javascript-millionaire-BkV-3bhR.png"
+            alt="Hvem vil være millionær-meme med JavaScript som svar"
+          />
           <aside class="notes">
-            Memet lå mellem survey-slidene i originalen. Brug det som et let øjeblik og som overgang: sproget kan være det samme, men browser, server og database har forskellige roller.
-            [Sources] - Meme fra den brugerleverede Keynote/PPTX; survey-link: https://survey.stackoverflow.co/2025/technology#1-databases [/Sources]
+            Memet lå mellem survey-slidene i originalen. Brug det som et let øjeblik og som overgang: sproget kan være
+            det samme, men browser, server og database har forskellige roller. [Sources] - Meme fra den brugerleverede
+            Keynote/PPTX; survey-link: https://survey.stackoverflow.co/2025/technology#1-databases [/Sources]
           </aside>
         </section>
 
@@ -232,8 +347,11 @@
           <h2>To systemer<br />kommunikerer</h2>
           <p>Clienten initierer med en request. Serveren behandler og svarer med en response.</p>
           <aside class="notes">
-            Overgang til første faglige del. Client/server beskriver først og fremmest, hvordan to systemer kommunikerer og fordeler ansvar. Det er ikke begrænset til browser og webserver. Lad de studerende nævne clients som mobilapps, Thunder Client, andre servere og IoT-enheder.
-            [Sources] - MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction [/Sources]
+            Overgang til første faglige del. Client/server beskriver først og fremmest, hvordan to systemer kommunikerer
+            og fordeler ansvar. Det er ikke begrænset til browser og webserver. Lad de studerende nævne clients som
+            mobilapps, Thunder Client, andre servere og IoT-enheder. [Sources] - MDN:
+            https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction
+            [/Sources]
           </aside>
         </section>
 
@@ -241,13 +359,29 @@
           <span class="eyebrow">Definition · Client/server</span>
           <h2>Client/server er en model for kommunikation mellem systemer</h2>
           <div class="definition-pair">
-            <article><span>Hvad?</span><p>To systemer har hver sin rolle: En <strong>client</strong> initierer kommunikationen med en request. En <strong>server</strong> modtager, behandler og sender et response.</p></article>
-            <article><span>Hvorfor?</span><p>Modellen gør kommunikationen forudsigelig og fordeler ansvar: Clienten bruger data eller funktioner, som serveren stiller til rådighed.</p></article>
+            <article>
+              <span>Hvad?</span>
+              <p>
+                To systemer har hver sin rolle: En <strong>client</strong> initierer kommunikationen med en request. En
+                <strong>server</strong> modtager, behandler og sender et response.
+              </p>
+            </article>
+            <article>
+              <span>Hvorfor?</span>
+              <p>
+                Modellen gør kommunikationen forudsigelig og fordeler ansvar: Clienten bruger data eller funktioner, som
+                serveren stiller til rådighed.
+              </p>
+            </article>
           </div>
           <p class="bottom-line">Client og server er <b>roller</b> i kommunikationen — ikke bestemte slags enheder.</p>
           <aside class="notes">
-            Introducér først modellen som kommunikation mellem to systemer. Roller beskriver, hvem der initierer requesten, og hvem der leverer responset. En browser, mobilapp, Thunder Client eller en anden server kan være client. Det samme system kan være server i én relation og client i en anden. I denne undervisning anvender vi modellen på webkommunikation via HTTP.
-            [Sources] - MDN Client-server overview: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview [/Sources]
+            Introducér først modellen som kommunikation mellem to systemer. Roller beskriver, hvem der initierer
+            requesten, og hvem der leverer responset. En browser, mobilapp, Thunder Client eller en anden server kan
+            være client. Det samme system kan være server i én relation og client i en anden. I denne undervisning
+            anvender vi modellen på webkommunikation via HTTP. [Sources] - MDN Client-server overview:
+            https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview
+            [/Sources]
           </aside>
         </section>
 
@@ -255,33 +389,54 @@
           <span class="eyebrow">Model 1 · Samtalen</span>
           <h2>Clienten spørger — serveren svarer</h2>
           <div class="request-diagram" aria-label="Browser sender request til server, som sender response tilbage">
-            <article class="endpoint client"><span>Client</span><strong>Browser / app</strong><small>Starter requesten</small></article>
+            <article class="endpoint client">
+              <span>Client</span><strong>Browser / app</strong><small>Starter requesten</small>
+            </article>
             <div class="exchange">
               <div class="request-arrow"><b>HTTP request</b><span>GET /users</span></div>
               <div class="response-arrow"><b>HTTP response</b><span>200 OK + users som JSON</span></div>
             </div>
-            <article class="endpoint server"><span>Server</span><strong>Node.js</strong><small>Lytter, behandler og svarer</small></article>
+            <article class="endpoint server">
+              <span>Server</span><strong>Node.js</strong><small>Lytter, behandler og svarer</small>
+            </article>
           </div>
           <aside class="notes">
-            En client initierer normalt samtalen. Serveren venter på requests, behandler dem og svarer. Client og server er roller — ikke nødvendigvis bestemte slags computere.
-            [Sources] - MDN HTTP Overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
+            En client initierer normalt samtalen. Serveren venter på requests, behandler dem og svarer. Client og server
+            er roller — ikke nødvendigvis bestemte slags computere. [Sources] - MDN HTTP Overview:
+            https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
           </aside>
         </section>
 
         <section class="architecture-slide architecture-expanded-slide">
           <span class="eyebrow">Model 2 · Web Dev Architecture · udvidet</span>
           <h2>Tre lag — med tydelige teknologier og ansvar</h2>
-          <div class="architecture-flow architecture-expanded" aria-label="Browser med frontend kommunikerer via HTTP med Node og Express, som kommunikerer med en database">
-            <article><span>Client</span><strong>Browser</strong><div class="architecture-layer"><b>Frontend</b><small>HTML · CSS · JavaScript</small></div></article>
+          <div
+            class="architecture-flow architecture-expanded"
+            aria-label="Browser med frontend kommunikerer via HTTP med Node og Express, som kommunikerer med en database"
+          >
+            <article>
+              <span>Client</span><strong>Browser</strong>
+              <div class="architecture-layer"><b>Frontend</b><small>HTML · CSS · JavaScript</small></div>
+            </article>
             <div class="architecture-link"><b>HTTP</b><small>request ↔ response</small></div>
-            <article class="server-app"><span>Server</span><strong>Server-app</strong><div class="architecture-layer"><b>Backend</b><small>Node.js runtime</small></div><div class="architecture-layer api-layer"><b>REST API</b><small>Express routes + middleware</small></div></article>
+            <article class="server-app">
+              <span>Server</span><strong>Server-app</strong>
+              <div class="architecture-layer"><b>Backend</b><small>Node.js runtime</small></div>
+              <div class="architecture-layer api-layer"><b>REST API</b><small>Express routes + middleware</small></div>
+            </article>
             <div class="architecture-link"><b>Queries</b><small>læs ↔ gem</small></div>
-            <article class="data-source"><span>Data source</span><strong>Database</strong><div class="architecture-layer"><b>Data</b><small>SQL senere i forløbet</small></div></article>
+            <article class="data-source">
+              <span>Data source</span><strong>Database</strong>
+              <div class="architecture-layer"><b>Data</b><small>SQL senere i forløbet</small></div>
+            </article>
           </div>
           <p class="bottom-line">I dag bygger vi <b>server-appen og REST API’et</b>. Databasen kommer senere.</p>
           <aside class="notes">
-            Dette svarer til den mere detaljerede client/server-model fra originalmaterialet: browser, server-app og datakilde. Datakilden er ikke direkte tilgængelig for browseren; serveren bestemmer, hvad der må læses og ændres.
-            [Sources] - MDN Client-server overview: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview [/Sources]
+            Dette svarer til den mere detaljerede client/server-model fra originalmaterialet: browser, server-app og
+            datakilde. Datakilden er ikke direkte tilgængelig for browseren; serveren bestemmer, hvad der må læses og
+            ændres. [Sources] - MDN Client-server overview:
+            https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview
+            [/Sources]
           </aside>
         </section>
 
@@ -290,32 +445,57 @@
           <h2>Et API gør serverens funktioner til adresser</h2>
           <div class="api-model" aria-label="Frontend kommunikerer med et REST API, som kommunikerer med en datakilde">
             <article><span>Frontend</span><strong>App</strong><small>viser JSON som UI</small></article>
-            <div class="api-contract"><div><b>Request</b><code>GET · POST · PUT · DELETE</code></div><div><b>Response</b><code>status + JSON</code></div></div>
-            <article class="api-server"><span>Server</span><strong>HTTP API</strong><small>routes til data og handlinger</small></article>
+            <div class="api-contract">
+              <div><b>Request</b><code>GET · POST · PUT · DELETE</code></div>
+              <div><b>Response</b><code>status + JSON</code></div>
+            </div>
+            <article class="api-server">
+              <span>Server</span><strong>HTTP API</strong><small>routes til data og handlinger</small>
+            </article>
             <div class="data-connector"><b>↔</b><small>læser / gemmer</small></div>
-            <article class="api-data"><span>Data source</span><strong>users + posts</strong><small>data fra HTTP-moduløvelsen</small></article>
+            <article class="api-data">
+              <span>Data source</span><strong>users + posts</strong><small>data fra HTTP-moduløvelsen</small>
+            </article>
           </div>
           <p class="bottom-line">API’et er kontrakten mellem frontend og backend.</p>
           <aside class="notes">
-            Denne model ligger tæt på originalens Client Server Architecture- og REST API-slides. API betyder her de endpoints, som clienten kan kalde. Hold fokus på idéen om en kontrakt; REST uddybes senere.
-            [Sources] - MDN HTTP overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview - Express routing: https://expressjs.com/en/starter/basic-routing/ [/Sources]
+            Denne model ligger tæt på originalens Client Server Architecture- og REST API-slides. API betyder her de
+            endpoints, som clienten kan kalde. Hold fokus på idéen om en kontrakt; REST uddybes senere. [Sources] - MDN
+            HTTP overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview - Express routing:
+            https://expressjs.com/en/starter/basic-routing/ [/Sources]
           </aside>
         </section>
 
         <section class="firebase-model-slide" data-accent="orange">
           <span class="eyebrow">Kendt model · Firebase</span>
           <h2>Firebase var også client/server — serveren var bare pakket væk</h2>
-          <div class="firebase-flow" aria-label="En frontend-app kommunikerer med Firebase REST API og Firebase Realtime Database">
-            <article><span>Client</span><strong>Jeres app</strong><small><code>fetch()</code> og JavaScript</small></article>
-            <div class="firebase-exchange"><b>request →</b><small>GET · POST · PUT · DELETE</small><b>← response</b><small>status + JSON</small></div>
-            <article class="firebase-service"><span>Server</span><strong>Firebase</strong><small>REST API + serverlogik</small></article>
+          <div
+            class="firebase-flow"
+            aria-label="En frontend-app kommunikerer med Firebase REST API og Firebase Realtime Database"
+          >
+            <article>
+              <span>Client</span><strong>Jeres app</strong><small><code>fetch()</code> og JavaScript</small>
+            </article>
+            <div class="firebase-exchange">
+              <b>request →</b><small>GET · POST · PUT · DELETE</small><b>← response</b><small>status + JSON</small>
+            </div>
+            <article class="firebase-service">
+              <span>Server</span><strong>Firebase</strong><small>REST API + serverlogik</small>
+            </article>
             <div class="firebase-data-link"><b>↔</b></div>
-            <article class="firebase-database"><span>Data source</span><strong>Realtime Database</strong><small>users · posts · data</small></article>
+            <article class="firebase-database">
+              <span>Data source</span><strong>Realtime Database</strong><small>users · posts · data</small>
+            </article>
           </div>
-          <div class="race-dialogue"><strong>“Men RACE… vi skrev jo ikke serveren?”</strong><span>Præcis. Firebase skrev og drev serverleddet. Nu bygger I selv det led med Node og Express.</span></div>
+          <div class="race-dialogue">
+            <strong>“Men RACE… vi skrev jo ikke serveren?”</strong
+            ><span>Præcis. Firebase skrev og drev serverleddet. Nu bygger I selv det led med Node og Express.</span>
+          </div>
           <aside class="notes">
-            Knyt det nye til deres erfaring med Firebase. Arkitekturen var allerede client/server: deres app sendte HTTP-requests til en server og modtog JSON. Forskellen er, at Firebase leverede serveren og databasen som en tjeneste.
-            [Sources] - Firebase-modellen fra den brugerleverede Keynote/PPTX; Firebase Realtime Database REST API: https://firebase.google.com/docs/database/rest/start [/Sources]
+            Knyt det nye til deres erfaring med Firebase. Arkitekturen var allerede client/server: deres app sendte
+            HTTP-requests til en server og modtog JSON. Forskellen er, at Firebase leverede serveren og databasen som en
+            tjeneste. [Sources] - Firebase-modellen fra den brugerleverede Keynote/PPTX; Firebase Realtime Database REST
+            API: https://firebase.google.com/docs/database/rest/start [/Sources]
           </aside>
         </section>
 
@@ -332,8 +512,9 @@
           </ol>
           <p class="cycle-loop">↺ Næste handling starter en ny cyklus</p>
           <aside class="notes">
-            Gentag denne cyklus senere med Express-begreber. Hvis serverkoden aldrig sender et response eller kalder next(), vil requesten hænge.
-            [Sources] - Express routing: https://expressjs.com/en/guide/routing/ - Express middleware: https://expressjs.com/en/guide/using-middleware/ [/Sources]
+            Gentag denne cyklus senere med Express-begreber. Hvis serverkoden aldrig sender et response eller kalder
+            next(), vil requesten hænge. [Sources] - Express routing: https://expressjs.com/en/guide/routing/ - Express
+            middleware: https://expressjs.com/en/guide/using-middleware/ [/Sources]
           </aside>
         </section>
 
@@ -343,8 +524,9 @@
           <h2>Reglerne for request<br />og response</h2>
           <p>HTTP gør beskeder forståelige på tværs af clients og servere.</p>
           <aside class="notes">
-            HTTP er en protokol for udveksling af resources mellem client og server. Requests kommer fra clienten; responses er serverens svar.
-            [Sources] - MDN HTTP Overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
+            HTTP er en protokol for udveksling af resources mellem client og server. Requests kommer fra clienten;
+            responses er serverens svar. [Sources] - MDN HTTP Overview:
+            https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
           </aside>
         </section>
 
@@ -352,13 +534,23 @@
           <span class="eyebrow">Definition · HTTP</span>
           <h2>HTTP er protokollen for beskeder mellem client og server</h2>
           <div class="definition-pair">
-            <article><span>Hvad?</span><p><strong>Hypertext Transfer Protocol</strong> er fælles regler for, hvordan requests og responses er bygget op og forstås.</p></article>
-            <article><span>Hvorfor?</span><p>En browser, Thunder Client og en Node-server kan kommunikere, fordi de følger den samme protokol.</p></article>
+            <article>
+              <span>Hvad?</span>
+              <p>
+                <strong>Hypertext Transfer Protocol</strong> er fælles regler for, hvordan requests og responses er
+                bygget op og forstås.
+              </p>
+            </article>
+            <article>
+              <span>Hvorfor?</span>
+              <p>En browser, Thunder Client og en Node-server kan kommunikere, fordi de følger den samme protokol.</p>
+            </article>
           </div>
           <p class="bottom-line">HTTP beskriver <b>beskederne</b> — appens kode bestemmer, hvad der sker.</p>
           <aside class="notes">
-            Protokol betyder et aftalt sæt regler. HTTP er client-server-baseret: clienten åbner samtalen med en request, og serveren svarer med et response.
-            [Sources] - MDN HTTP Overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
+            Protokol betyder et aftalt sæt regler. HTTP er client-server-baseret: clienten åbner samtalen med en
+            request, og serveren svarer med et response. [Sources] - MDN HTTP Overview:
+            https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
           </aside>
         </section>
 
@@ -366,7 +558,8 @@
           <span class="eyebrow">Resources</span>
           <h2>HTTP flytter mere end HTML</h2>
           <div class="resource-row" aria-label="Eksempler på resources">
-            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>JSON</span><span>billeder</span><span>video</span>
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>JSON</span><span>billeder</span
+            ><span>video</span>
           </div>
           <p class="lead">Browseren samler ofte én side fra mange separate requests.</p>
           <aside class="notes">
@@ -383,15 +576,28 @@
 Host: localhost:3000
 Accept: application/json</code></pre>
             <dl>
-              <div><dt>Metode</dt><dd>GET</dd></div>
-              <div><dt>Path</dt><dd>/users</dd></div>
-              <div><dt>Headers</dt><dd>metadata om beskeden</dd></div>
-              <div><dt>Body</dt><dd>ingen body i dette request</dd></div>
+              <div>
+                <dt>Metode</dt>
+                <dd>GET</dd>
+              </div>
+              <div>
+                <dt>Path</dt>
+                <dd>/users</dd>
+              </div>
+              <div>
+                <dt>Headers</dt>
+                <dd>metadata om beskeden</dd>
+              </div>
+              <div>
+                <dt>Body</dt>
+                <dd>ingen body i dette request</dd>
+              </div>
             </dl>
           </div>
           <aside class="notes">
-            Dette er den request, de senere tester i HTTP-moduløvelsen. GET-requests har typisk ikke en body. POST og JSON-body kommer i Express-øvelsen.
-            [Sources] - MDN HTTP Overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
+            Dette er den request, de senere tester i HTTP-moduløvelsen. GET-requests har typisk ikke en body. POST og
+            JSON-body kommer i Express-øvelsen. [Sources] - MDN HTTP Overview:
+            https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
           </aside>
         </section>
 
@@ -406,14 +612,23 @@ Content-Type: application/json
   { "id": 1, "name": "Rasmus Cederdorff" }
 ]</code></pre>
             <dl>
-              <div><dt>Status</dt><dd>200 OK</dd></div>
-              <div><dt>Headers</dt><dd>hvordan svaret skal tolkes</dd></div>
-              <div><dt>Body</dt><dd>HTML, JSON, tekst eller andet</dd></div>
+              <div>
+                <dt>Status</dt>
+                <dd>200 OK</dd>
+              </div>
+              <div>
+                <dt>Headers</dt>
+                <dd>hvordan svaret skal tolkes</dd>
+              </div>
+              <div>
+                <dt>Body</dt>
+                <dd>HTML, JSON, tekst eller andet</dd>
+              </div>
             </dl>
           </div>
           <aside class="notes">
-            Statuskoden beskriver udfaldet. Content-Type fortæller clienten, hvordan body skal tolkes.
-            [Sources] - MDN HTTP Overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
+            Statuskoden beskriver udfaldet. Content-Type fortæller clienten, hvordan body skal tolkes. [Sources] - MDN
+            HTTP Overview: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview [/Sources]
           </aside>
         </section>
 
@@ -422,12 +637,15 @@ Content-Type: application/json
           <h2>Statuskoden er serverens korte konklusion</h2>
           <div class="status-list">
             <article><strong>2xx</strong><span>Det lykkedes</span><small>200 OK · 201 Created</small></article>
-            <article><strong>4xx</strong><span>Requesten kan ikke opfyldes</span><small>400 Bad Request · 404 Not Found</small></article>
+            <article>
+              <strong>4xx</strong><span>Requesten kan ikke opfyldes</span><small>400 Bad Request · 404 Not Found</small>
+            </article>
             <article><strong>5xx</strong><span>Serveren fejlede</span><small>500 Internal Server Error</small></article>
           </div>
           <aside class="notes">
-            Hold første introduktion til de mest almindelige grupper. Statuskoder bliver vigtige for frontendens UI-states senere.
-            [Sources] - MDN HTTP response status codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status [/Sources]
+            Hold første introduktion til de mest almindelige grupper. Statuskoder bliver vigtige for frontendens
+            UI-states senere. [Sources] - MDN HTTP response status codes:
+            https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status [/Sources]
           </aside>
         </section>
 
@@ -441,11 +659,14 @@ Content-Type: application/json
               <li>Vælg dokument-requesten</li>
               <li>Find metode, URL, status og Content-Type</li>
             </ol>
-            <div class="deliverable"><span>Fortæl din sidemakker</span><strong>Hvad bad browseren om — og hvad fik den tilbage?</strong></div>
+            <div class="deliverable">
+              <span>Fortæl din sidemakker</span><strong>Hvad bad browseren om — og hvad fik den tilbage?</strong>
+            </div>
           </div>
           <aside class="notes">
-            Lad dem arbejde to og to. Saml op med én konkret request på projektoren. Brug gerne en simpel side uden alt for meget støj.
-            [Sources] - Chrome DevTools Network guide: https://developer.chrome.com/docs/devtools/network/ [/Sources]
+            Lad dem arbejde to og to. Saml op med én konkret request på projektoren. Brug gerne en simpel side uden alt
+            for meget støj. [Sources] - Chrome DevTools Network guide:
+            https://developer.chrome.com/docs/devtools/network/ [/Sources]
           </aside>
         </section>
 
@@ -457,8 +678,9 @@ Content-Type: application/json
             <small>… endnu.</small>
           </div>
           <aside class="notes">
-            Et lille åndehul efter Network-øvelsen. Det er helt forventeligt, at client/server og HTTP stadig føles abstrakt. Nu gør vi det konkret ved at bygge serveren selv.
-            [Sources] - Meme-billede og formulering fra den brugerleverede Keynote-præsentation [/Sources]
+            Et lille åndehul efter Network-øvelsen. Det er helt forventeligt, at client/server og HTTP stadig føles
+            abstrakt. Nu gør vi det konkret ved at bygge serveren selv. [Sources] - Meme-billede og formulering fra den
+            brugerleverede Keynote-præsentation [/Sources]
           </aside>
         </section>
 
@@ -467,8 +689,8 @@ Content-Type: application/json
           <span class="eyebrow">Node.js</span>
           <h2>JavaScript uden<br />for browseren</h2>
           <aside class="notes">
-            Node.js er et open source, cross-platform JavaScript runtime environment. Det kører V8-motoren uden for browseren.
-            [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
+            Node.js er et open source, cross-platform JavaScript runtime environment. Det kører V8-motoren uden for
+            browseren. [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
           </aside>
         </section>
 
@@ -476,13 +698,22 @@ Content-Type: application/json
           <span class="eyebrow">Definition · Node.js</span>
           <h2>Node.js er et miljø, der kører JavaScript uden for browseren</h2>
           <div class="definition-pair">
-            <article><span>Hvad?</span><p>Et <strong>JavaScript runtime environment</strong> bygget på V8 med API’er til fx filer, netværk og processer.</p></article>
-            <article><span>Hvorfor?</span><p>Vi kan bruge JavaScript til servere, værktøjer og scripts — og modtage HTTP-requests.</p></article>
+            <article>
+              <span>Hvad?</span>
+              <p>
+                Et <strong>JavaScript runtime environment</strong> bygget på V8 med API’er til fx filer, netværk og
+                processer.
+              </p>
+            </article>
+            <article>
+              <span>Hvorfor?</span>
+              <p>Vi kan bruge JavaScript til servere, værktøjer og scripts — og modtage HTTP-requests.</p>
+            </article>
           </div>
           <p class="bottom-line">Node.js er hverken et nyt sprog eller et framework.</p>
           <aside class="notes">
-            Adskil runtime fra library/framework. Node giver miljøet og standardbiblioteket; Express installeres ovenpå som et framework.
-            [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
+            Adskil runtime fra library/framework. Node giver miljøet og standardbiblioteket; Express installeres ovenpå
+            som et framework. [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
           </aside>
         </section>
 
@@ -490,17 +721,34 @@ Content-Type: application/json
           <span class="eyebrow">Samme sprog · forskellige miljøer</span>
           <h2>JavaScript får forskellige superkræfter</h2>
           <table>
-            <thead><tr><th>Browser</th><th>Node.js</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Browser</th>
+                <th>Node.js</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>document</code> og DOM</td><td><code>process</code> og operativsystem</td></tr>
-              <tr><td>events fra UI</td><td>events fra netværk og filer</td></tr>
-              <tr><td>Web APIs</td><td>Node standardbibliotek</td></tr>
-              <tr><td>sandbox hos brugeren</td><td>kører på computer/server</td></tr>
+              <tr>
+                <td><code>document</code> og DOM</td>
+                <td><code>process</code> og operativsystem</td>
+              </tr>
+              <tr>
+                <td>events fra UI</td>
+                <td>events fra netværk og filer</td>
+              </tr>
+              <tr>
+                <td>Web APIs</td>
+                <td>Node standardbibliotek</td>
+              </tr>
+              <tr>
+                <td>sandbox hos brugeren</td>
+                <td>kører på computer/server</td>
+              </tr>
             </tbody>
           </table>
           <aside class="notes">
-            JavaScript-sproget er det samme, men de globale API’er afhænger af miljøet. document findes ikke automatisk i Node.
-            [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
+            JavaScript-sproget er det samme, men de globale API’er afhænger af miljøet. document findes ikke automatisk
+            i Node. [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
           </aside>
         </section>
 
@@ -517,8 +765,8 @@ Hej Webudvikling!</code></pre>
           </div>
           <p class="bottom-line">Ingen HTML. Ingen browser. Kun JavaScript og et runtime.</p>
           <aside class="notes">
-            Live-code dette i en tom mappe. Vis både filen og terminalen. Fremhæv forskellen på at skrive kode og at starte en proces, der kører koden.
-            [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
+            Live-code dette i en tom mappe. Vis både filen og terminalen. Fremhæv forskellen på at skrive kode og at
+            starte en proces, der kører koden. [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
           </aside>
         </section>
 
@@ -537,20 +785,26 @@ console.log(add(2, 3)); // 5</code></pre>
           </div>
           <p class="bottom-line">ES modules kræver typisk <code>"type": "module"</code> i <code>package.json</code>.</p>
           <aside class="notes">
-            Kurset bruger ESM. Forklar relative imports og hvorfor filendelsen er med. package.json introduceres på næste slides.
+            Kurset bruger ESM. Forklar relative imports og hvorfor filendelsen er med. package.json introduceres på
+            næste slides.
           </aside>
         </section>
 
         <section class="event-loop-slide">
           <span class="eyebrow">Asynkron I/O</span>
           <h2>Node kan vente på I/O uden at sætte alt andet på pause</h2>
-          <div class="event-loop" aria-label="Node starter en I/O-opgave, arbejder videre og håndterer resultatet senere">
-            <span>Start opgave</span><b>→</b><span>Vent på fil/netværk</span><b>↘</b><span>Arbejd videre</span><b>↗</b><span>Håndtér resultat</span>
+          <div
+            class="event-loop"
+            aria-label="Node starter en I/O-opgave, arbejder videre og håndterer resultatet senere"
+          >
+            <span>Start opgave</span><b>→</b><span>Vent på fil/netværk</span><b>↘</b><span>Arbejd videre</span><b>↗</b
+            ><span>Håndtér resultat</span>
           </div>
           <p class="lead">Det passer godt til apps med mange samtidige netværks- og databaseoperationer.</p>
           <aside class="notes">
-            Hold modellen enkel. JavaScript-koden kører i én proces, mens Node tilbyder asynkrone I/O-primitiver. Undgå formuleringen “Node gør alt parallelt”.
-            [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
+            Hold modellen enkel. JavaScript-koden kører i én proces, mens Node tilbyder asynkrone I/O-primitiver. Undgå
+            formuleringen “Node gør alt parallelt”. [Sources] - Node.js introduction: https://nodejs.org/learn
+            [/Sources]
           </aside>
         </section>
 
@@ -562,8 +816,8 @@ console.log(add(2, 3)); // 5</code></pre>
           </div>
           <img src="../assets/dont-understand-eSf_UQ-x.gif" alt="Reaktion: I don't understand" />
           <aside class="notes">
-            Normalisér, at runtime, event loop, npm og serverkode er mange nye lag på én gang. Fokus er en arbejdsmodel, de kan udvikle senere.
-            [Sources] - GIF fra den brugerleverede Keynote-præsentation [/Sources]
+            Normalisér, at runtime, event loop, npm og serverkode er mange nye lag på én gang. Fokus er en arbejdsmodel,
+            de kan udvikle senere. [Sources] - GIF fra den brugerleverede Keynote-præsentation [/Sources]
           </aside>
         </section>
 
@@ -572,12 +826,14 @@ console.log(add(2, 3)); // 5</code></pre>
           <h2>npm forbinder projektet med JavaScript-økosystemet</h2>
           <div class="npm-parts">
             <article><b>1</b><strong>Registry</strong><span>pakker, andre har udgivet</span></article>
-            <article><b>2</b><strong>CLI</strong><span><code>npm install</code> og scripts</span></article>
+            <article>
+              <b>2</b><strong>CLI</strong><span><code>npm install</code> og scripts</span>
+            </article>
             <article><b>3</b><strong>package.json</strong><span>projektets metadata og dependencies</span></article>
           </div>
           <aside class="notes">
-            npm kommer normalt sammen med Node-installationen. Forklar registry, CLI og package.json som tre beslægtede dele.
-            [Sources] - npm documentation: https://docs.npmjs.com/about-npm/ [/Sources]
+            npm kommer normalt sammen med Node-installationen. Forklar registry, CLI og package.json som tre beslægtede
+            dele. [Sources] - npm documentation: https://docs.npmjs.com/about-npm/ [/Sources]
           </aside>
         </section>
 
@@ -598,7 +854,8 @@ console.log(add(2, 3)); // 5</code></pre>
             </div>
           </div>
           <aside class="notes">
-            Vis evt. mappen i VS Code. Forklar at node_modules kan genskabes fra package.json og lockfilen og derfor normalt ikke committes.
+            Vis evt. mappen i VS Code. Forklar at node_modules kan genskabes fra package.json og lockfilen og derfor
+            normalt ikke committes.
           </aside>
         </section>
 
@@ -607,8 +864,8 @@ console.log(add(2, 3)); // 5</code></pre>
           <div class="code-every-day-copy"><span>CODE</span><span>EVERY</span><span>DAY</span><b>🤷🏼‍♂️</b></div>
           <p class="meme-footer">Den irriterende hemmelighed: Man lærer at kode ved at kode.</p>
           <aside class="notes">
-            Brug som kort overgang til Hello Node-opgaven. Pointen er praksis og gentagelse — ikke perfektion i første forsøg.
-            [Sources] - Billede og “Code Every Day”-motiv fra den brugerleverede Keynote-præsentation [/Sources]
+            Brug som kort overgang til Hello Node-opgaven. Pointen er praksis og gentagelse — ikke perfektion i første
+            forsøg. [Sources] - Billede og “Code Every Day”-motiv fra den brugerleverede Keynote-præsentation [/Sources]
           </aside>
         </section>
 
@@ -622,19 +879,26 @@ console.log(add(2, 3)); // 5</code></pre>
               <li>Tilføj <code>"type": "module"</code></li>
               <li>Opret <code>server.js</code> og kør den med Node</li>
             </ol>
-            <a class="exercise-link" href="https://race.notion.site/Hello-Node-js-19d6a15b55e94ad1815fb78b43ee8583?source=copy_link" target="_blank" rel="noreferrer">Åbn opgaven ↗</a>
+            <a
+              class="exercise-link"
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-node.md"
+              target="_blank"
+              rel="noreferrer"
+              >Åbn Hello Node ↗</a
+            >
           </div>
           <aside class="notes">
-            Lad dem først få en helt enkel fil til at køre. Hjælp med terminalens aktuelle mappe og stavefejl før I går videre.
-            [Sources] - Kursusopgave: https://race.notion.site/Hello-Node-js-19d6a15b55e94ad1815fb78b43ee8583?source=copy_link [/Sources]
+            Lad dem først få en helt enkel fil til at køre. Hjælp med terminalens aktuelle mappe og stavefejl før I går
+            videre. [Sources] - Lokal kursusopgave: opgaver/hello-node.md -
+            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-node.md [/Sources]
           </aside>
         </section>
 
         <section class="god-meme-slide" data-accent="green">
           <img src="../assets/i-am-a-god-Bqnl6aMH.png" alt="I am a god Atari-meme" />
           <aside class="notes">
-            Lad memet stå alene som en kort fejring efter Hello Node: De har netop kørt JavaScript uden en browser og fået deres første Node-program til at virke.
-            [Sources] - Meme fra den brugerleverede Keynote/PPTX [/Sources]
+            Lad memet stå alene som en kort fejring efter Hello Node: De har netop kørt JavaScript uden en browser og
+            fået deres første Node-program til at virke. [Sources] - Meme fra den brugerleverede Keynote/PPTX [/Sources]
           </aside>
         </section>
 
@@ -644,15 +908,18 @@ console.log(add(2, 3)); // 5</code></pre>
           <h2>Node kan selv<br />være webserveren</h2>
           <p><code>node:http</code> giver os de grundlæggende værktøjer — uden framework.</p>
           <aside class="notes">
-            Dette kapitel gør Express’ værdi konkret. Vi starter en server med Nodes indbyggede HTTP-modul.
-            [Sources] - Node.js introduction: https://nodejs.org/learn [/Sources]
+            Dette kapitel gør Express’ værdi konkret. Vi starter en server med Nodes indbyggede HTTP-modul. [Sources] -
+            Node.js introduction: https://nodejs.org/learn [/Sources]
           </aside>
         </section>
 
         <section class="code-focus-slide http-server-code">
           <span class="eyebrow">Definition · HTTP-modulet</span>
           <h2><code>node:http</code> forbinder vores JavaScript med HTTP</h2>
-          <p class="concept-intro"><b>Hvad?</b> Nodes indbyggede modul til HTTP-servere. <b>Hvorfor?</b> Det lader os modtage requests og bygge responses uden ekstra pakker.</p>
+          <p class="concept-intro">
+            <b>Hvad?</b> Nodes indbyggede modul til HTTP-servere. <b>Hvorfor?</b> Det lader os modtage requests og bygge
+            responses uden ekstra pakker.
+          </p>
           <pre><code class="language-javascript">import { createServer } from "node:http";
 
 const server = createServer((request, response) => {
@@ -665,8 +932,9 @@ server.listen(3000, () => {
   console.log("Serveren kører på http://localhost:3000");
 });</code></pre>
           <aside class="notes">
-            Live-code. Peg på callbacken: den kører for hver request. Request beskriver det indkommende kald; response bruges til at sende svaret.
-            [Sources] - Node.js introduction and HTTP server example: https://nodejs.org/learn [/Sources]
+            Live-code. Peg på callbacken: den kører for hver request. Request beskriver det indkommende kald; response
+            bruges til at sende svaret. [Sources] - Node.js introduction and HTTP server example:
+            https://nodejs.org/learn [/Sources]
           </aside>
         </section>
 
@@ -677,7 +945,10 @@ server.listen(3000, () => {
             <pre><code class="language-javascript">console.log(request.method);  // "GET"
 console.log(request.url);     // "/users"
 console.log(request.headers); // { ... }</code></pre>
-            <div class="object-questions"><span>Hvilken metode?</span><span>Hvilken URL?</span><span>Hvilke headers?</span><span>Er der en body?</span></div>
+            <div class="object-questions">
+              <span>Hvilken metode?</span><span>Hvilken URL?</span><span>Hvilke headers?</span
+              ><span>Er der en body?</span>
+            </div>
           </div>
           <aside class="notes">
             I det native HTTP-modul skal vi selv undersøge method og url for at afgøre, hvilken kode der skal køre.
@@ -692,11 +963,14 @@ console.log(request.headers); // { ... }</code></pre>
             <pre><code class="language-javascript">response.statusCode = 200;
 response.setHeader("Content-Type", "application/json");
 response.end(JSON.stringify({ message: "Hej" }));</code></pre>
-            <div class="object-questions"><span>Hvilken status?</span><span>Hvilken content type?</span><span>Hvilken body?</span><span>Hvornår afsluttes svaret?</span></div>
+            <div class="object-questions">
+              <span>Hvilken status?</span><span>Hvilken content type?</span><span>Hvilken body?</span
+              ><span>Hvornår afsluttes svaret?</span>
+            </div>
           </div>
           <aside class="notes">
-            response.end afslutter svaret. Hvis koden ikke afslutter request-response-cyklussen, bliver browseren ved med at vente.
-            [Sources] - Node HTTP API: https://nodejs.org/api/http.html [/Sources]
+            response.end afslutter svaret. Hvis koden ikke afslutter request-response-cyklussen, bliver browseren ved
+            med at vente. [Sources] - Node HTTP API: https://nodejs.org/api/http.html [/Sources]
           </aside>
         </section>
 
@@ -713,7 +987,8 @@ response.end(JSON.stringify({ message: "Hej" }));</code></pre>
 }</code></pre>
           <p class="bottom-line">Det virker — men bliver hurtigt svært at læse og udvide.</p>
           <aside class="notes">
-            Dette er spændingen, Express løser. Lad dem selv pege på gentagelser og kommende problemer med mange routes og body parsing.
+            Dette er spændingen, Express løser. Lad dem selv pege på gentagelser og kommende problemer med mange routes
+            og body parsing.
           </aside>
         </section>
 
@@ -727,11 +1002,18 @@ response.end(JSON.stringify({ message: "Hej" }));</code></pre>
               <li>Returnér JSON fra <code>/users</code></li>
               <li>Byg selv <code>/posts</code> og en 404</li>
             </ol>
-            <a class="exercise-link" href="https://race.notion.site/Hello-HTTP-Module-e3d690d655c14cfeb6ac3ab2cb603b5c?source=copy_link" target="_blank" rel="noreferrer">Åbn opgaven ↗</a>
+            <a
+              class="exercise-link"
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-http-module.md"
+              target="_blank"
+              rel="noreferrer"
+              >Åbn Hello HTTP Module ↗</a
+            >
           </div>
           <aside class="notes">
-            Dette er samme progression som den lokale øvelse: tekst, users som JSON, posts som en selvstændig route og til sidst 404.
-            [Sources] - Kursusopgave: https://race.notion.site/Hello-HTTP-Module-e3d690d655c14cfeb6ac3ab2cb603b5c?source=copy_link [/Sources]
+            Dette er samme progression som den lokale øvelse: tekst, users som JSON, posts som en selvstændig route og
+            til sidst 404. [Sources] - Lokal kursusopgave: opgaver/hello-http-module.md -
+            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-http-module.md [/Sources]
           </aside>
         </section>
 
@@ -739,15 +1021,24 @@ response.end(JSON.stringify({ message: "Hej" }));</code></pre>
           <div class="thunder-copy">
             <span class="eyebrow">API-client i VS Code</span>
             <h2>Thunder Client tester API’et dér, hvor vi skriver koden</h2>
-            <ul><li>vælg HTTP-metode</li><li>skriv URL</li><li>send headers og JSON-body</li><li>inspicér status og response</li></ul>
+            <ul>
+              <li>vælg HTTP-metode</li>
+              <li>skriv URL</li>
+              <li>send headers og JSON-body</li>
+              <li>inspicér status og response</li>
+            </ul>
           </div>
           <figure>
             <img src="../assets/thunder-client-BsZKiMPu.png" alt="Thunder Client åbnet i Visual Studio Code" />
             <figcaption>Installér extensionen → New Request → Send</figcaption>
           </figure>
           <aside class="notes">
-            Browserens adresselinje er fin til GET. Thunder Client er en API-client integreret i VS Code og gør metode, headers, JSON-body, status og response synlige, før vi har en frontend. Vis: installér extensionen, vælg New Request, skriv http://localhost:3000, vælg metode og tryk Send.
-            [Sources] - Thunder Client docs: https://docs.thunderclient.com/get-started - Visual Studio Marketplace: https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client - Produktbillede: https://www.thunderclient.com/images/thunder-screenshot-v8.png [/Sources]
+            Browserens adresselinje er fin til GET. Thunder Client er en API-client integreret i VS Code og gør metode,
+            headers, JSON-body, status og response synlige, før vi har en frontend. Vis: installér extensionen, vælg New
+            Request, skriv http://localhost:3000, vælg metode og tryk Send. [Sources] - Thunder Client docs:
+            https://docs.thunderclient.com/get-started - Visual Studio Marketplace:
+            https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client - Produktbillede:
+            https://www.thunderclient.com/images/thunder-screenshot-v8.png [/Sources]
           </aside>
         </section>
 
@@ -757,28 +1048,37 @@ response.end(JSON.stringify({ message: "Hej" }));</code></pre>
           <h2>Organisér serverens<br />request-flow</h2>
           <p>Express lægger routing og middleware oven på Node.js.</p>
           <aside class="notes">
-            Express er et minimalistisk routing- og middleware-framework. Det erstatter ikke Node; det kører oven på Node.
-            [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
+            Express er et minimalistisk routing- og middleware-framework. Det erstatter ikke Node; det kører oven på
+            Node. [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
           </aside>
         </section>
 
         <section class="why-express-slide">
           <span class="eyebrow">Definition · Express.js</span>
           <h2>Express er et tyndt framework oven på Node.js</h2>
-          <p class="concept-intro"><b>Hvad?</b> Et routing- og middleware-framework. <b>Hvorfor?</b> Det organiserer request-flowet og fjerner gentaget kode.</p>
+          <p class="concept-intro">
+            <b>Hvad?</b> Et routing- og middleware-framework. <b>Hvorfor?</b> Det organiserer request-flowet og fjerner
+            gentaget kode.
+          </p>
           <div class="before-after">
-            <article><span>Node HTTP</span><pre><code class="language-javascript">if (request.method === "GET" &&
+            <article>
+              <span>Node HTTP</span>
+              <pre><code class="language-javascript">if (request.method === "GET" &&
     request.url === "/todos") {
   response.end(JSON.stringify(todos));
-}</code></pre></article>
+}</code></pre>
+            </article>
             <b aria-hidden="true">→</b>
-            <article><span>Express</span><pre><code class="language-javascript">server.get("/todos", (request, response) => {
+            <article>
+              <span>Express</span>
+              <pre><code class="language-javascript">server.get("/todos", (request, response) => {
   response.json(todos);
-});</code></pre></article>
+});</code></pre>
+            </article>
           </div>
           <aside class="notes">
-            Express matcher metode og path og kalder den tilhørende handler. Det giver mere deklarativ og læsbar routing.
-            [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
+            Express matcher metode og path og kalder den tilhørende handler. Det giver mere deklarativ og læsbar
+            routing. [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
 
@@ -799,8 +1099,9 @@ npm install express</code></pre>
           </div>
           <p class="bottom-line"><code>node --watch</code> genstarter processen, når filerne ændres.</p>
           <aside class="notes">
-            Vis package.json efter install. Express står under dependencies. Dette matcher øvelsens server.js og npm start.
-            [Sources] - Express install guide: https://expressjs.com/en/starter/installing.html - Node CLI: https://nodejs.org/api/cli.html [/Sources]
+            Vis package.json efter install. Express står under dependencies. Dette matcher øvelsens server.js og npm
+            start. [Sources] - Express install guide: https://expressjs.com/en/starter/installing.html - Node CLI:
+            https://nodejs.org/api/cli.html [/Sources]
           </aside>
         </section>
 
@@ -828,12 +1129,18 @@ server.listen(3333, () => {
           <span class="eyebrow">Express request/response</span>
           <h2>Express gør cyklussen konkret i koden</h2>
           <div class="express-cycle">
-            <span class="request-chip">GET /todos</span><b>→</b><span class="code-chip">server.get("/todos", handler)</span><b>→</b><span class="response-chip">response.json(todos)</span>
+            <span class="request-chip">GET /todos</span><b>→</b
+            ><span class="code-chip">server.get("/todos", handler)</span><b>→</b
+            ><span class="response-chip">response.json(todos)</span>
           </div>
-          <div class="req-res"><article><strong>request</strong><span>det, clienten sendte</span></article><article><strong>response</strong><span>det, serveren sender tilbage</span></article></div>
+          <div class="req-res">
+            <article><strong>request</strong><span>det, clienten sendte</span></article>
+            <article><strong>response</strong><span>det, serveren sender tilbage</span></article>
+          </div>
           <aside class="notes">
-            Peg på sammenhængen mellem den konkrete HTTP-request og route-definitionen. request og response er de samme objekter, øvelsen navngiver eksplicit.
-            [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
+            Peg på sammenhængen mellem den konkrete HTTP-request og route-definitionen. request og response er de samme
+            objekter, øvelsen navngiver eksplicit. [Sources] - Express routing guide:
+            https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
 
@@ -844,26 +1151,35 @@ server.listen(3333, () => {
             <p>Plot twist: Jeg slår også ting op.</p>
           </div>
           <figure>
-            <img src="../assets/read-the-docs-j5uOpGTq.jpg" alt="Friends-meme om at læse dokumentationen eller spørge Rasmus" />
+            <img
+              src="../assets/read-the-docs-j5uOpGTq.jpg"
+              alt="Friends-meme om at læse dokumentationen eller spørge Rasmus"
+            />
             <figcaption>Læs docs. Prøv koden. Spørg bagefter.</figcaption>
           </figure>
           <aside class="notes">
-            Normalisér dokumentationen som en del af programmering. Vis gerne expressjs.com og find routing-eksemplet sammen med holdet, før næste slide.
-            [Sources] - Meme fra den brugerleverede Keynote-præsentation [/Sources]
+            Normalisér dokumentationen som en del af programmering. Vis gerne expressjs.com og find routing-eksemplet
+            sammen med holdet, før næste slide. [Sources] - Meme fra den brugerleverede Keynote-præsentation [/Sources]
           </aside>
         </section>
 
         <section class="routing-slide">
           <span class="eyebrow">Definition · Route</span>
           <h2>En route kobler en request til den kode, der skal køre</h2>
-          <p class="concept-intro"><b>Hvad?</b> Metode + path + handler. <b>Hvorfor?</b> Serveren skal kunne vælge forskellig adfærd for forskellige requests.</p>
-          <div class="route-formula"><span class="method">GET</span><b>+</b><span class="path">/todos</span><b>+</b><span class="handler">handler</span><b>=</b><strong>route</strong></div>
+          <p class="concept-intro">
+            <b>Hvad?</b> Metode + path + handler. <b>Hvorfor?</b> Serveren skal kunne vælge forskellig adfærd for
+            forskellige requests.
+          </p>
+          <div class="route-formula">
+            <span class="method">GET</span><b>+</b><span class="path">/todos</span><b>+</b
+            ><span class="handler">handler</span><b>=</b><strong>route</strong>
+          </div>
           <pre><code class="language-javascript">server.get("/todos", (request, response) => {
   response.json(todos);
 });</code></pre>
           <aside class="notes">
-            To routes kan dele path, hvis metoden er forskellig. GET /todos og POST /todos er forskellige routes — præcis som i øvelsen.
-            [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
+            To routes kan dele path, hvis metoden er forskellig. GET /todos og POST /todos er forskellige routes —
+            præcis som i øvelsen. [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
 
@@ -879,8 +1195,8 @@ server.listen(3333, () => {
   response.status(200).json(todos);
 });</code></pre>
           <aside class="notes">
-            response.json sætter korrekt JSON-response. Todos importeres fra data.js i øvelsen.
-            [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
+            response.json sætter korrekt JSON-response. Todos importeres fra data.js i øvelsen. [Sources] - Express
+            routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
 
@@ -888,16 +1204,23 @@ server.listen(3333, () => {
           <span class="eyebrow">Data ind i en route</span>
           <h2>Path params og query params løser forskellige opgaver</h2>
           <div class="input-paths">
-            <article><code>/todos/<mark>3</mark></code><strong>request.params.todoId</strong><span>identificér en bestemt todo</span></article>
-            <article><code>/todos<mark>?completed=true</mark></code><strong>request.query.completed</strong><span>filtrér resultatet</span></article>
+            <article>
+              <code>/todos/<mark>3</mark></code
+              ><strong>request.params.todoId</strong><span>identificér en bestemt todo</span>
+            </article>
+            <article>
+              <code>/todos<mark>?completed=true</mark></code
+              ><strong>request.query.completed</strong><span>filtrér resultatet</span>
+            </article>
           </div>
           <pre><code class="language-javascript">server.get("/todos/:todoId", (request, response) => {
   const todoId = Number(request.params.todoId);
   // find og returnér den valgte todo
 });</code></pre>
           <aside class="notes">
-            Dette matcher øvelsens todo-routes. request.body behandles på næste slide. Parametre kommer ind som tekst og skal ofte konverteres og valideres.
-            [Sources] - Express routing guide: https://expressjs.com/en/guide/routing/ [/Sources]
+            Dette matcher øvelsens todo-routes. request.body behandles på næste slide. Parametre kommer ind som tekst og
+            skal ofte konverteres og valideres. [Sources] - Express routing guide:
+            https://expressjs.com/en/guide/routing/ [/Sources]
           </aside>
         </section>
 
@@ -915,19 +1238,26 @@ server.post("/todos", (request, response) => {
   todos.push(newTodo);
   response.status(201).json(newTodo);
 });</code></pre>
-          <p class="bottom-line"><code>express.json()</code> skal registreres <b>før</b> routes, der bruger <code>request.body</code>.</p>
+          <p class="bottom-line">
+            <code>express.json()</code> skal registreres <b>før</b> routes, der bruger <code>request.body</code>.
+          </p>
           <aside class="notes">
-            Dette er den samlede POST /todos-route fra øvelsen. express.json parser indkommende JSON og udfylder request.body.
-            [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
+            Dette er den samlede POST /todos-route fra øvelsen. express.json parser indkommende JSON og udfylder
+            request.body. [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/
+            [/Sources]
           </aside>
         </section>
 
         <section class="middleware-slide">
           <span class="eyebrow">Definition · Middleware</span>
           <h2>Middleware er funktioner på requestens vej</h2>
-          <p class="concept-intro"><b>Hvad?</b> Kode, der kører før eller mellem routes. <b>Hvorfor?</b> Fælles opgaver som logging og JSON-parsing kan genbruges.</p>
+          <p class="concept-intro">
+            <b>Hvad?</b> Kode, der kører før eller mellem routes. <b>Hvorfor?</b> Fælles opgaver som logging og
+            JSON-parsing kan genbruges.
+          </p>
           <div class="middleware-pipeline" aria-label="Request passerer logging og JSON parsing før route handler">
-            <span>request</span><b>→</b><span>logging</span><b>→</b><span>JSON parsing</span><b>→</b><span>route handler</span><b>→</b><span>response</span>
+            <span>request</span><b>→</b><span>logging</span><b>→</b><span>JSON parsing</span><b>→</b
+            ><span>route handler</span><b>→</b><span>response</span>
           </div>
           <pre><code class="language-javascript">server.use((request, response, next) => {
   console.log(request.method, request.url);
@@ -935,8 +1265,9 @@ server.post("/todos", (request, response) => {
 });</code></pre>
           <p class="bottom-line">Middleware skal sende et response eller kalde <code>next()</code>.</p>
           <aside class="notes">
-            Rækkefølgen betyder noget. En middleware kan køre kode, ændre request/response, afslutte cyklussen eller sende kontrollen videre med next.
-            [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
+            Rækkefølgen betyder noget. En middleware kan køre kode, ændre request/response, afslutte cyklussen eller
+            sende kontrollen videre med next. [Sources] - Express middleware guide:
+            https://expressjs.com/en/guide/using-middleware/ [/Sources]
           </aside>
         </section>
 
@@ -954,8 +1285,9 @@ server.post("/todos", (request, response) => {
           </div>
           <p class="bottom-line"><code>public</code> er filesystem-mappen — men er ikke en del af URL’en.</p>
           <aside class="notes">
-            Med public/index.html kan localhost:3000/ vise en rigtig side. Express finder filerne relativt til den angivne static root.
-            [Sources] - Express static files guide: https://expressjs.com/en/5x/starter/static-files/ [/Sources]
+            Med public/index.html kan localhost:3000/ vise en rigtig side. Express finder filerne relativt til den
+            angivne static root. [Sources] - Express static files guide:
+            https://expressjs.com/en/5x/starter/static-files/ [/Sources]
           </aside>
         </section>
 
@@ -967,10 +1299,13 @@ server.post("/todos", (request, response) => {
     error: "Route not found"
   });
 });</code></pre>
-          <div class="order-rule"><strong>Placér den sidst</strong><span>Express gennemgår middleware og routes i den rækkefølge, de registreres.</span></div>
+          <div class="order-rule">
+            <strong>Placér den sidst</strong
+            ><span>Express gennemgår middleware og routes i den rækkefølge, de registreres.</span>
+          </div>
           <aside class="notes">
-            server.use uden path matcher alle requests, der når hertil. Derfor skal fallbacken stå efter de rigtige routes.
-            [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
+            server.use uden path matcher alle requests, der når hertil. Derfor skal fallbacken stå efter de rigtige
+            routes. [Sources] - Express middleware guide: https://expressjs.com/en/guide/using-middleware/ [/Sources]
           </aside>
         </section>
 
@@ -984,11 +1319,18 @@ server.post("/todos", (request, response) => {
               <li>Returnér todos fra <code>GET /todos</code></li>
               <li>Byg <code>POST /todos</code> med JSON-body</li>
             </ol>
-            <a class="exercise-link" href="https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link" target="_blank" rel="noreferrer">Åbn opgaven ↗</a>
+            <a
+              class="exercise-link"
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-express.md"
+              target="_blank"
+              rel="noreferrer"
+              >Åbn Hello Express ↗</a
+            >
           </div>
           <aside class="notes">
-            Punkterne matcher den lokale Express-øvelse. De fortsætter derefter med params og de øvrige CRUD-routes i eget tempo.
-            [Sources] - Kursusopgave: https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link [/Sources]
+            Punkterne matcher den lokale Express-øvelse. De fortsætter derefter med params og de øvrige CRUD-routes i
+            eget tempo. [Sources] - Lokal kursusopgave: opgaver/hello-express.md -
+            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-express.md [/Sources]
           </aside>
         </section>
 
@@ -1002,9 +1344,12 @@ server.post("/todos", (request, response) => {
             <article><code>PUT /todos/:todoId</code><span>opdatér en todo</span></article>
             <article><code>DELETE /todos/:todoId</code><span>slet en todo</span></article>
           </div>
-          <p class="bottom-line">Test alle routes i browser eller Thunder Client. Dokumentér metode, URL, status og response.</p>
+          <p class="bottom-line">
+            Test alle routes i browser eller Thunder Client. Dokumentér metode, URL, status og response.
+          </p>
           <aside class="notes">
-            Dette er den samlede anvendelse fra Express-øvelsen. Lad grupperne forklare én request hele vejen gennem middleware, route handler og response.
+            Dette er den samlede anvendelse fra Express-øvelsen. Lad grupperne forklare én request hele vejen gennem
+            middleware, route handler og response.
           </aside>
         </section>
 
@@ -1019,7 +1364,8 @@ server.post("/todos", (request, response) => {
             <li>En anden gruppe kan teste løsningen ud fra jeres instruktion</li>
           </ul>
           <aside class="notes">
-            Brug som afsluttende kontrol. Det sidste punkt introducerer dokumentation og reproducerbarhed uden at gøre øvelsen tung.
+            Brug som afsluttende kontrol. Det sidste punkt introducerer dokumentation og reproducerbarhed uden at gøre
+            øvelsen tung.
           </aside>
         </section>
 
@@ -1027,26 +1373,42 @@ server.post("/todos", (request, response) => {
           <span class="eyebrow">Arbejd videre</span>
           <h2>Materialerne følger samme progression</h2>
           <div class="material-links">
-            <a href="https://scrimba.com/fullstack-path-c0fullstack/~04lp" target="_blank" rel="noreferrer"><strong>Welcome to Node</strong><span>Scrimba ↗</span></a>
-            <a href="https://scrimba.com/fullstack-path-c0fullstack" target="_blank" rel="noreferrer"><strong>Build a Node API</strong><span>Scrimba ↗</span></a>
-            <a href="https://scrimba.com/fullstack-path-c0fullstack" target="_blank" rel="noreferrer"><strong>Express.js</strong><span>Scrimba ↗</span></a>
-            <a href="https://github.com/cederdorff/node-express-todos-rest-api" target="_blank" rel="noreferrer"><strong>Løsningsforslag</strong><span>GitHub ↗</span></a>
+            <a href="https://scrimba.com/fullstack-path-c0fullstack/~04lp" target="_blank" rel="noreferrer"
+              ><strong>Welcome to Node</strong><span>Scrimba ↗</span></a
+            >
+            <a href="https://scrimba.com/fullstack-path-c0fullstack" target="_blank" rel="noreferrer"
+              ><strong>Build a Node API</strong><span>Scrimba ↗</span></a
+            >
+            <a href="https://scrimba.com/fullstack-path-c0fullstack" target="_blank" rel="noreferrer"
+              ><strong>Express.js</strong><span>Scrimba ↗</span></a
+            >
+            <a href="https://github.com/cederdorff/node-express-todos-rest-api" target="_blank" rel="noreferrer"
+              ><strong>Løsningsforslag</strong><span>GitHub ↗</span></a
+            >
           </div>
           <aside class="notes">
-            Vis hvor de kan fortsætte. Løsningsforslaget er reference, ikke noget de skal kopiere før de har kæmpet med opgaven.
-            [Sources] - Lokal lektionsside: undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
+            Vis hvor de kan fortsætte. Løsningsforslaget er reference, ikke noget de skal kopiere før de har kæmpet med
+            opgaven. [Sources] - Lokal lektionsside: undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md
+            [/Sources]
           </aside>
         </section>
 
         <section class="recap-slide">
           <span class="eyebrow">Opsamling</span>
           <h2>Kan I forklare de fem led med jeres egne ord?</h2>
-          <div class="recap-chain"><span>client</span><b>→</b><span>request</span><b>→</b><span>route + middleware</span><b>→</b><span>response</span><b>→</b><span>client</span></div>
+          <div class="recap-chain">
+            <span>client</span><b>→</b><span>request</span><b>→</b><span>route + middleware</span><b>→</b
+            ><span>response</span><b>→</b><span>client</span>
+          </div>
           <div class="recap-questions">
-            <p>Hvad er Node.js?</p><p>Hvad tilføjer Express?</p><p>Hvordan matches en route?</p><p>Hvorfor betyder rækkefølgen noget?</p>
+            <p>Hvad er Node.js?</p>
+            <p>Hvad tilføjer Express?</p>
+            <p>Hvordan matches en route?</p>
+            <p>Hvorfor betyder rækkefølgen noget?</p>
           </div>
           <aside class="notes">
-            Brug think-pair-share. Bed dem formulere uden først at kigge tilbage. Afklar derefter forskellen på Node runtime og Express framework.
+            Brug think-pair-share. Bed dem formulere uden først at kigge tilbage. Afklar derefter forskellen på Node
+            runtime og Express framework.
           </aside>
         </section>
 
@@ -1056,8 +1418,8 @@ server.post("/todos", (request, response) => {
           <p class="lead">Kør · test · læs fejlen · ændr · kør igen</p>
           <div class="closing-note">Og ja — der er fredagsbar i Basement efter undervisningen 🎉</div>
           <aside class="notes">
-            Slut med arbejdsmetoden. Næste undervisningsgang bygger videre med EJS, forms og request-data.
-            [Sources] - Lokal lektionsside: undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
+            Slut med arbejdsmetoden. Næste undervisningsgang bygger videre med EJS, forms og request-data. [Sources] -
+            Lokal lektionsside: undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md [/Sources]
           </aside>
         </section>
       </div>
