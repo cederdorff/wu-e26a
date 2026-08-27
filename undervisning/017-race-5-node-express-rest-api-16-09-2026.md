@@ -22,6 +22,8 @@ TBA
 
 ### Opgaver
 
+- [Ekstraopgave: Express Users & Posts API](../opgaver/express-users-posts-api.md)
+
 ---
 
 <details>

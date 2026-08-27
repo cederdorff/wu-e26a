@@ -42,9 +42,10 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 - [1. Hello Node](../opgaver/hello-node.md)
 - [2. Hello HTTP Module](../opgaver/hello-http-module.md)
 - [3. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md)
-- [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
+  - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
 - [4. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
 - [5. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)
+- [Ekstraopgave: Express Users & Posts API](../opgaver/express-users-posts-api.md)
 
 ---
 
