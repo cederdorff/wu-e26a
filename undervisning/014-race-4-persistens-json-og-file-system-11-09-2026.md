@@ -22,6 +22,8 @@ TBA
 
 ### Opgaver
 
+- [Ekstraøvelse: Node.js File System](../opgaver/node-file-system.md)
+
 ---
 
 <details>
