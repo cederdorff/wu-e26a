@@ -1,0 +1,39 @@
+---
+canvas_course_id: 32059
+canvas_module_id: 178035
+canvas_module_position: 12
+canvas_module_published: false
+canvas_module_item_id: 1018697
+canvas_module_item_position: 1
+canvas_page_id: 200712
+canvas_page_slug: "plan-for-dob-3-string-parsing-metoder-og-funktioner"
+canvas_page_title: "Plan for DOB 3 - String parsing, metoder og funktioner"
+canvas_page_published: false
+canvas_updated_at: "2026-08-10T12:34:01Z"
+canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018697"
+local_status: mirrored
+---
+
+# DOB 3 - String parsing, metoder og funktioner - 09-09-2026
+
+## Dagens fokus
+
+TBA
+
+---
+
+## Agenda
+
+- TBA
+
+---
+
+## Forberedelse
+
+- TBA
+
+## Materialer og Canvas-elementer
+
+### Præsentationer
+
+### Opgaver

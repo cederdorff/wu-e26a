@@ -1,0 +1,11 @@
+{
+  "id": 32059,
+  "name": "WU-E26A",
+  "course_code": "WU-E26A",
+  "workflow_state": "available",
+  "start_at": "2026-08-13T00:00:00Z",
+  "end_at": "2028-01-31T00:00:00Z",
+  "time_zone": "Europe/Copenhagen",
+  "default_view": "modules",
+  "is_public": false
+}
