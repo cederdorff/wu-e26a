@@ -271,18 +271,27 @@
         </section>
 
         <section class="firebase-memory-slide" data-accent="orange">
-          <figure class="firebase-model">
-            <img
-              src="../assets/node-express/firebase-rest-api.png"
-              alt="Firebase vist som client, REST API og database"
-            />
-          </figure>
-          <figure class="firebase-meme">
-            <img
-              src="../assets/node-express/rasmus-firebase-meme.jpg"
-              alt="Elmo-meme hvor Rasmus falder om i Firebase"
-            />
-          </figure>
+          <div class="firebase-memory-copy">
+            <span class="eyebrow">Kendt fra Firebase</span>
+            <h2>Serverlaget var der hele tiden</h2>
+            <p>Firebase skjulte bare det meste af arbejdet mellem jeres JavaScript og databasen.</p>
+          </div>
+          <div class="firebase-memory-grid">
+            <figure class="firebase-model">
+              <span>Modellen, I allerede kender</span>
+              <img
+                src="../assets/node-express/firebase-rest-api.png"
+                alt="Firebase vist som client, REST API og database"
+              />
+            </figure>
+            <figure class="firebase-meme">
+              <span>Og sådan kunne det føles</span>
+              <img
+                src="../assets/node-express/rasmus-firebase-meme.jpg"
+                alt="Elmo-meme hvor Rasmus falder om i Firebase"
+              />
+            </figure>
+          </div>
           <aside class="notes">
             Spørg hvem der kan genkende modellen fra Firebase. Pointen er, at de allerede har arbejdet med
             client/server, HTTP-lignende operationer og en database — Firebase skjulte bare meget af serverlaget. I dag
@@ -385,19 +394,15 @@
         </section>
 
         <section class="client-server-slide">
-          <span class="eyebrow">Model 1 · Samtalen</span>
-          <h2>Clienten spørger — serveren svarer</h2>
-          <div class="request-diagram" aria-label="Browser sender request til server, som sender response tilbage">
-            <article class="endpoint client">
-              <span>Client</span><strong>Browser / app</strong><small>Starter requesten</small>
-            </article>
+          <span class="eyebrow">Grundmodel · Client/server</span>
+          <h2>To roller i én samtale</h2>
+          <div class="request-diagram" aria-label="En client sender en request, og en server sender et response">
+            <article class="endpoint client"><strong>Client</strong></article>
             <div class="exchange">
-              <div class="request-arrow"><b>HTTP request</b><span>GET /users</span></div>
-              <div class="response-arrow"><b>HTTP response</b><span>200 OK + users som JSON</span></div>
+              <div class="request-arrow"><b>Request</b></div>
+              <div class="response-arrow"><b>Response</b></div>
             </div>
-            <article class="endpoint server">
-              <span>Server</span><strong>Node.js</strong><small>Lytter, behandler og svarer</small>
-            </article>
+            <article class="endpoint server"><strong>Server</strong></article>
           </div>
           <aside class="notes">
             En client initierer normalt samtalen. Serveren venter på requests, behandler dem og svarer. Client og server
@@ -407,29 +412,35 @@
         </section>
 
         <section class="architecture-slide architecture-expanded-slide">
-          <span class="eyebrow">Model 2 · Web Dev Architecture · udvidet</span>
-          <h2>Tre lag — med tydelige teknologier og ansvar</h2>
+          <span class="eyebrow">Grundmodellen · med konkrete lag</span>
+          <h2>Samme samtale — nu med teknologier og begreber</h2>
           <div
             class="architecture-flow architecture-expanded"
             aria-label="Browser med frontend kommunikerer via HTTP med Node og Express, som kommunikerer med en database"
           >
             <article>
-              <span>Client</span><strong>Browser</strong>
+              <span>Client</span><strong>Browser / app</strong>
               <div class="architecture-layer"><b>Frontend</b><small>HTML · CSS · JavaScript</small></div>
+              <div class="architecture-layer"><b>Client-kode</b><small>fetch() · DOM · UI</small></div>
             </article>
-            <div class="architecture-link"><b>HTTP</b><small>request ↔ response</small></div>
+            <div class="architecture-link">
+              <b>HTTP</b>
+              <small><strong>Request</strong><br />metode · URL<br />headers · body</small>
+              <small><strong>Response</strong><br />status · headers<br />JSON</small>
+            </div>
             <article class="server-app">
-              <span>Server</span><strong>Server-app</strong>
-              <div class="architecture-layer"><b>Backend</b><small>Node.js runtime</small></div>
-              <div class="architecture-layer api-layer"><b>REST API</b><small>Express routes + middleware</small></div>
+              <span>Server</span><strong>Node.js + Express</strong>
+              <div class="architecture-layer"><b>Runtime</b><small>Node.js · server.js</small></div>
+              <div class="architecture-layer api-layer"><b>HTTP API</b><small>routes · middleware · request · response</small></div>
             </article>
-            <div class="architecture-link"><b>Queries</b><small>læs ↔ gem</small></div>
+            <div class="architecture-link"><b>Data-adgang</b><small>read · create<br />update · delete</small></div>
             <article class="data-source">
-              <span>Data source</span><strong>Database</strong>
-              <div class="architecture-layer"><b>Data</b><small>SQL senere i forløbet</small></div>
+              <span>Data source</span><strong>Data</strong>
+              <div class="architecture-layer"><b>I dag</b><small>arrays i hukommelsen<br />users · posts</small></div>
+              <div class="architecture-layer"><b>Senere</b><small>database · SQL</small></div>
             </article>
           </div>
-          <p class="bottom-line">I dag bygger vi <b>server-appen og REST API’et</b>. Databasen kommer senere.</p>
+          <p class="bottom-line">Rollerne er de samme — nu har vi bare sat <b>konkrete teknologier</b> på dem.</p>
           <aside class="notes">
             Dette svarer til den mere detaljerede client/server-model fra originalmaterialet: browser, server-app og
             datakilde. Datakilden er ikke direkte tilgængelig for browseren; serveren bestemmer, hvad der må læses og
@@ -531,13 +542,13 @@
 
         <section class="definition-slide http-definition">
           <span class="eyebrow">Definition · HTTP</span>
-          <h2>HTTP er protokollen for beskeder mellem client og server</h2>
+          <h2>HTTP er fundamentet for datakommunikation på World Wide Web</h2>
           <div class="definition-pair">
             <article>
               <span>Hvad?</span>
               <p>
-                <strong>Hypertext Transfer Protocol</strong> er fælles regler for, hvordan requests og responses er
-                bygget op og forstås.
+                <strong>HTTP</strong> står for <strong>Hypertext Transfer Protocol</strong> og er en protokol — en fælles
+                standard for, hvordan vi udveksler data på webbet.
               </p>
             </article>
             <article>
@@ -842,7 +853,6 @@ console.log(add(2, 3)); // 5</code></pre>
           <div class="project-tree">
             <pre><code class="language-text">my-server/
 ├── node_modules/      # installerede pakker
-├── public/            # statiske filer
 ├── server.js          # vores serverkode
 ├── package.json       # scripts + dependencies
 └── package-lock.json  # låste versioner</code></pre>

@@ -34,8 +34,7 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 
 ### Præsentationer
 
-- [Reveal.js: Intro til Node.js og Express.js](../slides/node-express/)
-- [Slides: Node.js & Express.js](https://cederdorff.com/race/slides/node-express.pdf)
+- [Intro til Node.js og Express.js](../slides/node-express/)
 
 ### Opgaver
 
