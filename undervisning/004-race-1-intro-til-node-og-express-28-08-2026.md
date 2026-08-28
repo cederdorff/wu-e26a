@@ -40,6 +40,7 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 
 - [1. Hello Node](../opgaver/hello-node.md)
 - [2. Hello HTTP Module](../opgaver/hello-http-module.md)
+  - [Løsningsforslag - hello-http-module](https://github.com/cederdorff/hello-http-module)
 - [3. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md)
   - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
 - [Ekstraøvelse: Node.js File System](../opgaver/node-file-system.md)
