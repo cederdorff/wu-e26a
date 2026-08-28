@@ -11,7 +11,7 @@ Husk - der er fredagsbar i Basement efter undervisningen 🎉
 ## Agenda
 
 - Introduktion til Node.js og Express
-- Express.js grundlæggende: routing, middleware, statiske filer
+- Express.js grundlæggende: routing og middleware
 - Forstå request/response cyklussen — hvad sker der når en browser "snakker" med en server?
 - Client-Server-modellen
 - Oprettelse af en simpel Express server der kan svare på forskellige URLs

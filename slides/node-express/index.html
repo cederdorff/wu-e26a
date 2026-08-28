@@ -60,7 +60,7 @@
               <a href="#/http-module"><b>HTTP-modulet</b><small>Byg serveren uden framework</small></a>
             </li>
             <li>
-              <a href="#/express"><b>Express.js</b><small>Routing, middleware og statiske filer</small></a>
+              <a href="#/express"><b>Express.js</b><small>Routing og middleware</small></a>
             </li>
             <li>
               <a href="#/byg-selv"><b>Hands-on</b><small>Byg og test jeres første routes</small></a>
@@ -780,23 +780,68 @@ Hej Webudvikling!</code></pre>
           </aside>
         </section>
 
+        <section class="meme-slide code-every-day-slide" data-accent="green">
+          <img src="../assets/node-express/code-every-day.jpg" alt="Kode på en computerskærm" />
+          <div class="code-every-day-copy"><span>CODE</span><span>EVERY</span><span>DAY</span><b>🤷🏼‍♂️</b></div>
+          <p class="meme-footer">Den irriterende hemmelighed: Man lærer at kode ved at kode.</p>
+          <aside class="notes">
+            Brug som kort overgang til Hello Node-opgaven. Pointen er praksis og gentagelse — ikke perfektion i første
+            forsøg. [Sources] - Billede og “Code Every Day”-motiv fra den brugerleverede Keynote-præsentation [/Sources]
+          </aside>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 1</span>
+          <h2>Hello Node.js</h2>
+          <div class="activity-layout">
+            <ol>
+              <li>Opret en ny projektmappe</li>
+              <li>Kør <code>npm init -y</code></li>
+              <li>Tilføj <code>"type": "module"</code></li>
+              <li>Opret <code>server.js</code> og kør den med Node</li>
+            </ol>
+            <a
+              class="exercise-link"
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-node.md"
+              target="_blank"
+              rel="noreferrer"
+              >Åbn Hello Node ↗</a
+            >
+          </div>
+          <aside class="notes">
+            Lad dem først få en helt enkel fil til at køre. Hjælp med terminalens aktuelle mappe og stavefejl før I går
+            videre. [Sources] - Lokal kursusopgave: opgaver/hello-node.md -
+            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-node.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="god-meme-slide" data-accent="green">
+          <img src="../assets/node-express/i-am-a-god.png" alt="I am a god Atari-meme" />
+          <aside class="notes">
+            Lad memet stå alene som en kort fejring efter Hello Node: De har netop kørt JavaScript uden en browser og
+            fået deres første Node-program til at virke. [Sources] - Meme fra den brugerleverede Keynote/PPTX [/Sources]
+          </aside>
+        </section>
+
         <section class="modules-slide">
           <span class="eyebrow">Moduler</span>
           <h2>Del kode op — og importér det, I har brug for</h2>
           <div class="code-and-result">
-            <pre><code class="language-javascript">// math.js
-export function add(a, b) {
-  return a + b;
-}</code></pre>
+            <pre><code class="language-javascript">// data.js
+export const users = [
+  { id: 1, name: "Ada" },
+  { id: 2, name: "Linus" }
+];</code></pre>
             <pre><code class="language-javascript">// server.js
-import { add } from "./math.js";
+import { users } from "./data.js";
 
-console.log(add(2, 3)); // 5</code></pre>
+console.log(`Antal users: ${users.length}`);
+// Antal users: 2</code></pre>
           </div>
           <p class="bottom-line">ES modules kræver typisk <code>"type": "module"</code> i <code>package.json</code>.</p>
           <aside class="notes">
-            Kurset bruger ESM. Forklar relative imports og hvorfor filendelsen er med. package.json introduceres på
-            næste slides.
+            Kurset bruger ESM. Knyt eksemplet til de users, de senere returnerer fra API’et. Forklar relative imports,
+            hvorfor filendelsen er med, og at data dermed kan ligge uden for server.js.
           </aside>
         </section>
 
@@ -820,7 +865,7 @@ console.log(add(2, 3)); // 5</code></pre>
 
         <section class="warning-slide">
           <div class="warning-copy">
-            <span class="eyebrow">En vigtig tilladelse</span>
+            <span class="eyebrow">En vigtig pointe</span>
             <h2>Please, do not try to understand everything!</h2>
             <p>Følg requesten. Kør koden. Ændr én ting. Kør igen.</p>
           </div>
@@ -865,49 +910,6 @@ console.log(add(2, 3)); // 5</code></pre>
           <aside class="notes">
             Vis evt. mappen i VS Code. Forklar at node_modules kan genskabes fra package.json og lockfilen og derfor
             normalt ikke committes.
-          </aside>
-        </section>
-
-        <section class="meme-slide code-every-day-slide" data-accent="green">
-          <img src="../assets/node-express/code-every-day.jpg" alt="Kode på en computerskærm" />
-          <div class="code-every-day-copy"><span>CODE</span><span>EVERY</span><span>DAY</span><b>🤷🏼‍♂️</b></div>
-          <p class="meme-footer">Den irriterende hemmelighed: Man lærer at kode ved at kode.</p>
-          <aside class="notes">
-            Brug som kort overgang til Hello Node-opgaven. Pointen er praksis og gentagelse — ikke perfektion i første
-            forsøg. [Sources] - Billede og “Code Every Day”-motiv fra den brugerleverede Keynote-præsentation [/Sources]
-          </aside>
-        </section>
-
-        <section class="activity-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 1</span>
-          <h2>Hello Node.js</h2>
-          <div class="activity-layout">
-            <ol>
-              <li>Opret en ny projektmappe</li>
-              <li>Kør <code>npm init -y</code></li>
-              <li>Tilføj <code>"type": "module"</code></li>
-              <li>Opret <code>server.js</code> og kør den med Node</li>
-            </ol>
-            <a
-              class="exercise-link"
-              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-node.md"
-              target="_blank"
-              rel="noreferrer"
-              >Åbn Hello Node ↗</a
-            >
-          </div>
-          <aside class="notes">
-            Lad dem først få en helt enkel fil til at køre. Hjælp med terminalens aktuelle mappe og stavefejl før I går
-            videre. [Sources] - Lokal kursusopgave: opgaver/hello-node.md -
-            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/hello-node.md [/Sources]
-          </aside>
-        </section>
-
-        <section class="god-meme-slide" data-accent="green">
-          <img src="../assets/node-express/i-am-a-god.png" alt="I am a god Atari-meme" />
-          <aside class="notes">
-            Lad memet stå alene som en kort fejring efter Hello Node: De har netop kørt JavaScript uden en browser og
-            fået deres første Node-program til at virke. [Sources] - Meme fra den brugerleverede Keynote/PPTX [/Sources]
           </aside>
         </section>
 
@@ -1280,26 +1282,6 @@ server.post("/todos", (request, response) => {
           </aside>
         </section>
 
-        <section class="static-slide">
-          <span class="eyebrow">Statiske filer</span>
-          <h2>Express kan servere HTML, CSS, JavaScript og billeder direkte</h2>
-          <div class="static-layout">
-            <pre><code class="language-javascript">server.use(express.static("public"));</code></pre>
-            <pre><code class="language-text">public/
-├── index.html
-├── styles.css
-├── app.js
-└── images/
-    └── logo.svg</code></pre>
-          </div>
-          <p class="bottom-line"><code>public</code> er filesystem-mappen — men er ikke en del af URL’en.</p>
-          <aside class="notes">
-            Med public/index.html kan localhost:3000/ vise en rigtig side. Express finder filerne relativt til den
-            angivne static root. [Sources] - Express static files guide:
-            https://expressjs.com/en/5x/starter/static-files/ [/Sources]
-          </aside>
-        </section>
-
         <section class="not-found-slide">
           <span class="eyebrow">Fallback route</span>
           <h2>Hvis intet matcher, skal serveren stadig svare</h2>
@@ -1358,7 +1340,7 @@ server.post("/todos", (request, response) => {
           </p>
           <aside class="notes">
             Dette er den samlede anvendelse fra Express-øvelsen. Lad grupperne forklare én request hele vejen gennem
-            middleware, route handler og response.
+            route handleren og frem til responset.
           </aside>
         </section>
 
@@ -1406,14 +1388,14 @@ server.post("/todos", (request, response) => {
           <span class="eyebrow">Opsamling</span>
           <h2>Kan I forklare de fem led med jeres egne ord?</h2>
           <div class="recap-chain">
-            <span>client</span><b>→</b><span>request</span><b>→</b><span>route + middleware</span><b>→</b
+            <span>client</span><b>→</b><span>request</span><b>→</b><span>route handler</span><b>→</b
             ><span>response</span><b>→</b><span>client</span>
           </div>
           <div class="recap-questions">
             <p>Hvad er Node.js?</p>
             <p>Hvad tilføjer Express?</p>
             <p>Hvordan matches en route?</p>
-            <p>Hvorfor betyder rækkefølgen noget?</p>
+            <p>Hvad består et HTTP-response af?</p>
           </div>
           <aside class="notes">
             Brug think-pair-share. Bed dem formulere uden først at kigge tilbage. Afklar derefter forskellen på Node
