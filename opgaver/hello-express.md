@@ -328,16 +328,24 @@ route
 
 ## 13. Tilføj den nye todo
 
+En todo skal have et `id`, en `task` og en `completed`-værdi. De to
+sidste værdier kommer fra JSON-body'en og kan læses gennem
+`request.body`.
+
 Tilføj følgende inde i callback-funktionen for `POST /todos`:
 
 ``` js
 const newTodo = {
   id: todos.length + 1,
-  ...request.body
+  task: request.body.task,
+  completed: request.body.completed
 };
 
 todos.push(newTodo);
 ```
+
+Her oprettes først et nyt todo-objekt. Derefter tilføjer `push()` det
+til `todos`-arrayet.
 
 > 💡 Denne id-løsning er kun til øvelsen. En database vil typisk
 > håndtere id på en anden måde.
@@ -350,7 +358,8 @@ Erstat nu den midlertidige `POST /todos`-route med den samlede route:
 server.post("/todos", (request, response) => {
   const newTodo = {
     id: todos.length + 1,
-    ...request.body
+    task: request.body.task,
+    completed: request.body.completed
   };
 
   todos.push(newTodo);
@@ -485,10 +494,14 @@ server.put("/todos/:todoId", (request, response) => {
     });
   }
 
-  Object.assign(todo, request.body);
+  todo.task = request.body.task;
+  todo.completed = request.body.completed;
+
   response.json(todo);
 });
 ```
+
+Her ændres kun `task` og `completed`. Todo'ens `id` forbliver det samme.
 
 Test med PUT og kontrollér bagefter med GET.
 
