@@ -153,16 +153,18 @@ function renderDocument(document, pageDocumentByUrl, localFileById) {
     "local_status: mirrored",
   ];
   const lines = [`# ${title}`];
+  let pageBody = "";
 
   if (page?.body) {
-    const body = htmlToMarkdown(page.body, document.path, pageDocumentByUrl, localFileById);
-    if (body) lines.push("", body);
+    pageBody = htmlToMarkdown(page.body, document.path, pageDocumentByUrl, localFileById);
+    if (pageBody) lines.push("", pageBody);
   }
 
   if (module) {
     const nonPageItems = module.items.filter((item) => item !== pageItem);
-    if (nonPageItems.length) {
-      lines.push("", "## Materialer og Canvas-elementer", "");
+    const pageContainsMaterials = /^## Materialer\s*$/m.test(pageBody);
+    if (nonPageItems.length && !pageContainsMaterials) {
+      lines.push("", "## Materialer", "");
       for (const item of nonPageItems) renderModuleItem(lines, item, document.path, pageDocumentByUrl, localFileById);
     } else if (!page) {
       lines.push("", "*Modulet har endnu ikke indhold i Canvas.*");
@@ -230,6 +232,15 @@ function htmlToMarkdown(html, currentPath, pageDocumentByUrl, localFileById) {
       .replace(new RegExp(`href="${courseFilePattern}"`, "g"), `href="${localHref}"`)
       .replace(new RegExp(`src="${courseFilePattern}"`, "g"), `src="${localHref}"`);
   }
+  prepared = prepared
+    .replace(
+      /href="https:\/\/github\.com\/cederdorff\/wu-e26a\/(?:blob|tree)\/main\/([^"?#]+)"/g,
+      (_match, repoPath) => `href="${markdownRelative(currentPath, resolve(projectRoot, decodeURIComponent(repoPath)))}"`,
+    )
+    .replace(
+      'href="https://raw.githack.com/cederdorff/wu-e26a/main/slides/node-express/index.html"',
+      `href="${markdownRelative(currentPath, resolve(projectRoot, "slides/node-express"))}/"`,
+    );
 
   const turndown = new TurndownService({
     bulletListMarker: "-",
