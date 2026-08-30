@@ -45,9 +45,9 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
   - [Løsningsforslag - hello-http-module](https://github.com/cederdorff/hello-http-module)
 - [3. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md)
   - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
-- [Ekstraøvelse: Node.js File System](../opgaver/node-file-system.md)
 - [4. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
 - [5. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)
+- [Ekstraopgave: Node.js File System](../opgaver/node-file-system.md)
 - [Ekstraopgave: Express Users & Posts API](../opgaver/express-users-posts-api.md)
 
 ---
