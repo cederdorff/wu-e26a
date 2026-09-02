@@ -202,18 +202,36 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 6,
+    "items_count": 7,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178025/items",
     "items": [
       {
-        "id": 1037529,
+        "id": 1043525,
         "position": 1,
+        "title": "AMAbot projektbeskrivelse",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178025,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1043525",
+        "page_url": "amabot-projektbeskrivelse",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/amabot-projektbeskrivelse",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1037529,
+        "position": 2,
         "title": "Bordgrupper",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178025,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -221,7 +239,7 @@
       },
       {
         "id": 1037530,
-        "position": 2,
+        "position": 3,
         "title": "Bordgrupper uge 35-36.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -230,10 +248,9 @@
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1037530",
         "content_id": 1677508,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1677508",
-        "published": false,
-        "unpublishable": false,
+        "published": true,
+        "unpublishable": true,
         "content_details": {
-          "locked": true,
           "display_name": "Bordgrupper uge 35-36.pdf",
           "thumbnail_url": null,
           "locked_for_user": false
@@ -241,7 +258,7 @@
       },
       {
         "id": 1037531,
-        "position": 3,
+        "position": 4,
         "title": "Bordgrupper uge 37.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -261,7 +278,7 @@
       },
       {
         "id": 1037534,
-        "position": 4,
+        "position": 5,
         "title": "Bordgrupper uge 38.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -281,7 +298,7 @@
       },
       {
         "id": 1037533,
-        "position": 5,
+        "position": 6,
         "title": "Bordgrupper uge 39.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -301,7 +318,7 @@
       },
       {
         "id": 1037532,
-        "position": 6,
+        "position": 7,
         "title": "Bordgrupper uge 40.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -331,7 +348,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 6,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178026/items",
     "items": [
       {
@@ -360,23 +377,80 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178026,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018681,
+        "id": 1038210,
         "position": 3,
+        "title": "INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178026,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1038210",
+        "content_id": 1678484,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1678484",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1038208,
+        "position": 4,
+        "title": "Intro - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178026,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1038208",
+        "content_id": 1678469,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1678469",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Intro - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018681,
+        "position": 5,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178026,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1038209,
+        "position": 6,
+        "title": "Intro - worksheet.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178026,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1038209",
+        "content_id": 1678470,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1678470",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Intro - worksheet.pdf",
+          "thumbnail_url": null,
           "locked_for_user": false
         }
       }
@@ -392,7 +466,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 10,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178027/items",
     "items": [
       {
@@ -408,153 +482,6 @@
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-1-intro-til-node-og-express",
         "published": true,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018683,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178027,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1036205,
-        "position": 3,
-        "title": "Slides: Node.js & Express.js",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 178027,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1036205",
-        "external_url": "https://cederdorff.com/race/slides/node-express.pdf",
-        "new_tab": true,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018684,
-        "position": 4,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178027,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1036179,
-        "position": 5,
-        "title": "1. Hello Node",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 178027,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1036179",
-        "external_url": "https://race.notion.site/Hello-Node-js-19d6a15b55e94ad1815fb78b43ee8583?source=copy_link",
-        "new_tab": true,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1036184,
-        "position": 6,
-        "title": "2. Hello HTTP Module",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 178027,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1036184",
-        "external_url": "https://race.notion.site/Hello-HTTP-Module-e3d690d655c14cfeb6ac3ab2cb603b5c?source=copy_link",
-        "new_tab": true,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1036191,
-        "position": 7,
-        "title": "3. Getting Started with Express.js (Hello Express)",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 178027,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1036191",
-        "external_url": "https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link",
-        "new_tab": true,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1036192,
-        "position": 8,
-        "title": "Løsningsforslag - node-express-todos-rest-api",
-        "indent": 2,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 178027,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1036192",
-        "external_url": "https://github.com/cederdorff/node-express-todos-rest-api",
-        "new_tab": true,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1036194,
-        "position": 9,
-        "title": "4. Fortsæt på Fullstack > Node.js > Build a Node API ",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 178027,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1036194",
-        "external_url": "https://scrimba.com/fullstack-path-c0fullstack",
-        "new_tab": true,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1036197,
-        "position": 10,
-        "title": "5. Begynd på Fullstack > Express.js",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 178027,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1036197",
-        "external_url": "https://scrimba.com/fullstack-path-c0fullstack",
-        "new_tab": true,
-        "published": false,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -586,7 +513,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178029/items",
     "items": [
       {
@@ -615,15 +542,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178029,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018687,
+        "id": 1047095,
         "position": 3,
+        "title": "DOB 1 - AMAbot & Git basics - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178029,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1047095",
+        "content_id": 1687923,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1687923",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 1 - AMAbot & Git basics - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018687,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,

@@ -16,7 +16,7 @@ TBA
 
 - TBA
 
-## Materialer og Canvas-elementer
+## Materialer
 
 ### Præsentationer
 

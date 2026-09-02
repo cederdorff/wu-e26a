@@ -37,7 +37,7 @@ Eftermiddag: Vi kigger grundigt på hvad der foregår i browseren når vi loader
     - ["Choose the correct level of compression"](https://web.dev/articles/compress-images)
     - ["Optimize the encoding and transfer size of text-based assets"](https://web.dev/articles/optimizing-content-efficiency-optimize-encoding-and-transfer)
 
-## Materialer og Canvas-elementer
+## Materialer
 
 ### Præsentationer
 

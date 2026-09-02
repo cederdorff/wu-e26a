@@ -1,6 +1,6 @@
 # ··· ••• 1. SEMESTER - WEBUDVIKLING ••• ···
 
-## Materialer og Canvas-elementer
+## Materialer
 
 ### Generelt
 

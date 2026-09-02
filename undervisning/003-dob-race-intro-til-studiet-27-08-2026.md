@@ -25,11 +25,16 @@ Velkomst og introduktion til akademiet, til uddannelsen og til underviserne og h
 - Opret en [Scrimba profil](https://scrimba.com/home) med din `@students.eaaa.dk` email og afprøv platformen, hvis ikke du kender den. Vi kommer til at bruge deres kurser som "grundbog" og supplerende øvelser gennem semestret. Når du har indbetalt deltagergebyret (jvf tidligere udsendt information) får du "Pro" adgang — til halv pris 🤘
 - Derudover intet — medbring dig selv, din bærbare og dit gode humør 🥳
 
-## Materialer og Canvas-elementer
+## Materialer
 
 ### Præsentationer
 
+- [INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx](../materialer/canvas-filer/AMAbot/INTRO%20STUDIEVEJLEDNINGEN%20WU%202026%201.0.pptx)
+- [Intro - slides.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20slides.pdf)
+
 ### Opgaver
+
+- [Intro - worksheet.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20worksheet.pdf)
 
 ---
 

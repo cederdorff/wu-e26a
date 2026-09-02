@@ -44,7 +44,7 @@ Vi arbejder videre med Node.js og Express.js, request og responsen. Derudover sk
     - [Færdiggør Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
     - [Se Fullstack > Express.js > Welcome to Express](https://scrimba.com/fullstack-path-c0fullstack)
 
-## Materialer og Canvas-elementer
+## Materialer
 
 ### Præsentationer
 

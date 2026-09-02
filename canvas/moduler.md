@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-08-27T09:11:36.219Z
+Senest hentet: 2026-09-02T08:40:18.216Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -29,6 +29,8 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/002-amabot-uge-35-40.md) · publiceret
 
+- [AMAbot projektbeskrivelse](../undervisning/002-amabot-uge-35-40.md)
+
 ### Bordgrupper
 
 - [Bordgrupper uge 35-36.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2035-36.pdf)
@@ -45,26 +47,18 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
+- [INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx](../materialer/canvas-filer/AMAbot/INTRO%20STUDIEVEJLEDNINGEN%20WU%202026%201.0.pptx)
+- [Intro - slides.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20slides.pdf)
+
 ### Opgaver
+
+- [Intro - worksheet.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20worksheet.pdf)
 
 ## 004 · RACE 1 - Intro til Node og Express - 28-08-2026
 
 [Lokal fil](../undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md) · publiceret
 
 - [Plan for RACE 1 - Intro til Node og Express](../undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md)
-
-### Præsentationer
-
-- [Slides: Node.js & Express.js](https://cederdorff.com/race/slides/node-express.pdf)
-
-### Opgaver
-
-- [1. Hello Node](https://race.notion.site/Hello-Node-js-19d6a15b55e94ad1815fb78b43ee8583?source=copy_link)
-- [2. Hello HTTP Module](https://race.notion.site/Hello-HTTP-Module-e3d690d655c14cfeb6ac3ab2cb603b5c?source=copy_link)
-- [3. Getting Started with Express.js (Hello Express)](https://race.notion.site/Getting-Started-with-Express-js-Hello-Express-54d7dd9bf33a4ae99512ce3a2aa58d4b?source=copy_link)
-- [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
-- [4. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
-- [5. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)
 
 ## 005 · Forberedelse - Selvstudium - 31-08-2026
 
@@ -79,6 +73,8 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 - [Plan for DOB 1 - Form submits og Git basics](../undervisning/006-dob-1-form-submits-og-git-basics-01-09-2026.md)
 
 ### Præsentationer
+
+- [DOB 1 - AMAbot & Git basics - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%201%20-%20AMAbot%20%26%20Git%20basics%20-%20slides.pdf)
 
 ### Opgaver
 

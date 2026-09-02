@@ -38,9 +38,11 @@ Nu har I eksperimenteret med JavaScript på serveren og snust til Node og Expres
     - [Using Git source control in VS Code](https://code.visualstudio.com/docs/sourcecontrol/overview)
     - [Introduction to Git in VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git)
 
-## Materialer og Canvas-elementer
+## Materialer
 
 ### Præsentationer
+
+- [DOB 1 - AMAbot & Git basics - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%201%20-%20AMAbot%20%26%20Git%20basics%20-%20slides.pdf)
 
 ### Opgaver
 
