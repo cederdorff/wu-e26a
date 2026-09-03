@@ -27,7 +27,6 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run slides:build
-      - run: echo "wu-e26a.cederdorff.com" > dist/slides/CNAME
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
