@@ -2,7 +2,7 @@
 
 ## Dagens fokus
 
-I dag bygger vi videre på jeres Express-server og gør den til en lille server-renderet webapp. I skal bruge EJS til at generere HTML på serveren, modtage input fra en formular og sende et svar tilbage til brugeren.
+I dag bygger vi først en lille server-renderet Express-app og udvider den gennem øvelse 1 og 2. I øvelse 3 bruger I samme request/response-flow til at gøre gårsdagens separate AMAbot-repository med `index.html` til et Express- og EJS-projekt.
 
 Den centrale arbejdsgang er:
 
@@ -17,6 +17,7 @@ Vi bruger denne arbejdsgang til først at lave en personlig hilsen og derefter e
 
 - forklare forskellen på server-side rendering (SSR) og client-side rendering (CSR)
 - konfigurere Express til at bruge EJS som template engine
+- gøre lokale CSS-, JavaScript- og billedfiler tilgængelige med `express.static()`
 - sende data fra en Express-route til en EJS-template med `response.render()`
 - forbinde en HTML-formular med en `POST`-route via `method`, `action` og inputfeltets `name`
 - modtage formularens data med `express.urlencoded()` og `request.body`
@@ -108,8 +109,9 @@ Anden milepæl er nået, når appen:
 Dagens slutprodukt skal som minimum kunne:
 
 - tage udgangspunkt i gårsdagens HTML-formular og have den gemt i Git
+- gøre eksisterende CSS, JavaScript og billeder tilgængelige fra `public/` med `express.static()`
 - vise en formular og en samtalehistorik
-- modtage et spørgsmål med `POST`
+- modtage et spørgsmål på `POST /ask`
 - vælge et svar om den studerende ud fra spørgsmålets indhold
 - rendere brugerens spørgsmål og AMAbottens svar med EJS
 - håndtere tomt input uden at crashe

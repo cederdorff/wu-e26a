@@ -9,17 +9,17 @@ Skriv og test ét trin ad gangen. I får små kodeudsnit, der bygges oven på hi
 ## Det bygger du
 
 ```text
-Browser -> POST /ask -> request.body.question -> validation -> findAnswer()
-        -> conversation array -> response.render() -> EJS -> HTML
+Browser -> POST /ask -> request.body.question -> validering -> findAnswer()
+        -> messages array -> response.render() -> EJS -> HTML
 ```
 
-Når øvelsen er færdig, kan din AMAbot:
+Når øvelsen er færdig, kan jeres AMAbot:
 
 - beholde sit eksisterende visuelle udtryk
 - modtage et spørgsmål på `POST /ask`
 - vise samtalen med EJS
 - vælge et regelbaseret, personligt svar
-- afvise et tomt eller for langt spørgsmål
+- afvise et tomt spørgsmål
 
 ---
 
@@ -53,17 +53,22 @@ npm init -y
 npm install express ejs
 ```
 
-Åbn derefter `package.json`, og tilføj de samme felter som i øvelse 2:
+Åbn derefter `package.json`. Find det eksisterende `scripts`-felt, og erstat kun det felt med:
 
 ```json
-"type": "module",
 "scripts": {
   "dev": "node --watch server.js",
   "start": "node server.js"
 }
 ```
 
-> Tilføj felterne i den eksisterende JSON-fil. Du skal ikke erstatte hele `package.json`, og der må kun være ét `scripts`-felt.
+Tilføj også denne linje på øverste niveau i objektet, fx lige efter `"version"`:
+
+```json
+"type": "module",
+```
+
+Behold resten af filen, herunder `dependencies`, som `npm install` netop har tilføjet. Husk kommaet efter en property, når der kommer en ny linje efter den.
 
 ### Test trin 2
 
@@ -73,7 +78,7 @@ Kontrollér, at `express` og `ejs` står under `dependencies`, og at både `npm 
 
 ## 3. Adskil template og statiske filer
 
-Express bruger som standard `views/` til EJS-templates. Vi bruger `public/` til filer, serveren blot skal sende videre uændret: CSS, browser-JavaScript, billeder og favicon.
+Express bruger som standard `views/` til EJS-templates. Vi bruger `public/` til lokale filer, serveren blot skal sende videre uændret: CSS, browser-JavaScript, billeder og favicon.
 
 Opret mapperne og flyt jeres filer. Strukturen afhænger af jeres oprindelige projekt. Her er to typiske eksempler:
 
@@ -90,7 +95,7 @@ assets/styles/style.css    ->  public/assets/styles/style.css
 assets/images/             ->  public/assets/images/
 ```
 
-Opdatér derefter stierne i `views/index.ejs`, så de starter med `/`:
+Opdatér derefter stierne til **lokale filer** i `views/index.ejs`, så de starter med `/`:
 
 ```html
 <link rel="stylesheet" href="/assets/styles/style.css" />
@@ -98,6 +103,8 @@ Opdatér derefter stierne i `views/index.ejs`, så de starter med `/`:
 ```
 
 Et link som `./assets/styles/style.css` tager udgangspunkt i templaten/URL'en. Et link som `/assets/styles/style.css` tager udgangspunkt i `public/`, når vi aktiverer `express.static()` i næste trin.
+
+Eksterne links, fx til Google Fonts eller Font Awesome, skal ikke flyttes til `public/` og skal beholde deres fulde `https://...`-adresse.
 
 Hvis jeres gamle `index.js` selv indsætter spørgsmål og svar i browseren, så fjern script-tagget eller den del af koden. I denne øvelse skal serveren og EJS opdatere samtalen.
 
@@ -107,9 +114,11 @@ I skal nu have `views/index.ejs` og mindst én fil i `public/` — men serveren 
 
 ---
 
-## 4. Start med en server, der renderer jeres template
+## 4. Lad Express servere jeres statiske filer
 
-Opret `server.js` i repositoryets rodmappe. Start med kun denne grundstruktur:
+`express.static()` er nyt i denne øvelse. Det er middleware, som giver browseren adgang til filerne i `public/`. Uden det kan Express godt rendere en EJS-template, men browseren kan ikke hente dens CSS, billeder eller favicon.
+
+Opret `server.js` i repositoryets rodmappe med denne mindste server:
 
 ```js
 import express from "express";
@@ -117,19 +126,14 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-app.set("view engine", "ejs");
 app.use(express.static("public"));
-
-app.get("/", (request, response) => {
-  response.render("index");
-});
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
 ```
 
-`express.static("public")` betyder, at browseren kan hente fx `/styles.css` og `/assets/images/...`. `response.render("index")` finder `views/index.ejs`, behandler eventuelle EJS-tags og sender resultatet som HTML.
+`express.static("public")` betyder: Når browseren beder om en fil, leder Express i `public/`. Filen `public/styles.css` kan derfor hentes på URL'en `/styles.css`, og `public/assets/images/me.jpg` kan hentes på `/assets/images/me.jpg`.
 
 Start serveren:
 
@@ -139,11 +143,31 @@ npm run dev
 
 ### Test trin 4
 
-Åbn `http://localhost:3000`. Siden skal ligne jeres gamle version, og CSS samt billeder skal stadig indlæses. Kig i browserens Network-panel: En CSS-fil skal fx have status `200`.
+Åbn URL'en til en af jeres flyttede filer, fx `http://localhost:3000/styles.css` eller `http://localhost:3000/assets/styles/style.css`. Browseren skal vise CSS-filen. I Network-panelet skal requesten have status `200`.
 
 ---
 
-## 5. Gør den eksisterende formular til en POST-formular
+## 5. Render jeres EJS-template
+
+Nu kan browseren allerede hente jeres assets. Tilføj EJS-konfigurationen og GET-routen **over** `app.listen()` i den server, I lige har lavet:
+
+```js
+app.set("view engine", "ejs");
+
+app.get("/", (request, response) => {
+  response.render("index");
+});
+```
+
+`response.render("index")` finder `views/index.ejs`, behandler eventuelle EJS-tags og sender resultatet som HTML. CSS og billeder hentes derefter i separate requests, som `express.static("public")` tager sig af.
+
+### Test trin 5
+
+Åbn `http://localhost:3000`. Siden skal ligne jeres gamle version, og CSS samt billeder skal stadig indlæses. Kig i Network-panelet: både HTML-siden og en CSS-fil skal have status `200`.
+
+---
+
+## 6. Gør den eksisterende formular til en POST-formular
 
 Behold jeres layout og klasser, men ret formularens vigtige attributter. Kode- og route-navne er på engelsk:
 
@@ -162,13 +186,13 @@ Behold jeres layout og klasser, men ret formularens vigtige attributter. Kode- o
 
 > `type="textarea"` er ikke en gyldig inputtype. Hvis I vil have et felt med flere linjer, så brug `<textarea id="question" name="question"></textarea>` i stedet.
 
-### Test trin 5
+### Test trin 6
 
 Send formularen. I får sandsynligvis `Cannot POST /ask`. Det er forventet: Browseren sender nu rigtigt, men serveren har endnu ingen route til at modtage requesten.
 
 ---
 
-## 6. Modtag et spørgsmål og vis det igen
+## 7. Modtag et spørgsmål og vis det igen med EJS
 
 Før Express kan læse formularens data, skal I aktivere middleware. Sæt denne linje **før** jeres routes i `server.js`:
 
@@ -176,131 +200,141 @@ Før Express kan læse formularens data, skal I aktivere middleware. Sæt denne 
 app.use(express.urlencoded({ extended: true }));
 ```
 
-Tilføj derefter en foreløbig POST-route. Den viser det indsendte spørgsmål som tekst, så I kan kontrollere hele formularflowet uden svarlogik endnu:
+Tilføj derefter en foreløbig POST-route. Den renderer jeres EJS-template igen med det indsendte spørgsmål:
 
 ```js
 app.post("/ask", (request, response) => {
   const question = request.body.question;
-  response.send(`You asked: ${question}`);
+  response.render("index", { question });
 });
 ```
 
-### Test trin 6
+EJS-koden skal have adgang til `question`, hver gang templaten renderes. Ret derfor også GET-routen midlertidigt:
 
-Indsend et spørgsmål. Browseren skal vise `You asked: ...`. Find `POST /ask` i Network-panelet og kontrollér, at `question` findes under Payload.
+```js
+app.get("/", (request, response) => {
+  response.render("index", { question: "" });
+});
+```
+
+Indsæt dette under formularen i `views/index.ejs`:
+
+```ejs
+<% if (question) { %>
+  <article class="question">
+    <p><%= question %></p>
+  </article>
+<% } %>
+```
+
+`{ question }` i `response.render()` gør variablen `question` tilgængelig i EJS. `<% if (question) { %>` viser kun HTML-stykket, når brugeren faktisk har sendt et spørgsmål. `<%= question %>` skriver spørgsmålet som escaped tekst i den færdige HTML.
+
+### Test trin 7
+
+Indsend et spørgsmål. Det skal vises på siden med jeres `question`-styling. Find `POST /ask` i Network-panelet og kontrollér, at `question` findes under Payload.
 
 ---
 
-## 7. Giv EJS de data, templaten skal bruge
+## 8. Gem og vis simple beskeder
 
-Nu skal serveren ikke længere sende en tekst direkte. Den skal sende data til den samme EJS-template hver gang.
+Nu skal vi gøre ét spørgsmål til en lille historik. Først er hver besked kun en tekst i et array. Vi venter med svar, typer, styling og validering, så I kan følge den ene nye idé: `push()` gemmer tekst i `messages`, og EJS viser alle teksterne igen.
 
 Opret arrayet **over** routes i `server.js`:
 
 ```js
-const conversation = [];
+const messages = [];
 ```
 
-Lav en hjælpefunktion under arrayet. Den forhindrer, at GET- og POST-routen senere sender forskellige data til templaten:
-
-```js
-function renderAmabot(response, { error = "" } = {}) {
-  response.render("index", { conversation, error });
-}
-```
+`messages` er AMAbottens samtalehistorik, mens serveren kører. I dette trin indeholder arrayet kun spørgsmål som tekst.
 
 Erstat GET-routen med:
 
 ```js
 app.get("/", (request, response) => {
-  renderAmabot(response);
+  response.render("index", { messages });
 });
 ```
 
-I `views/index.ejs` skal I indsætte dette i det område, hvor jeres design allerede har spørgsmål og svar. Det er en tom samtale nu, så I ser kun introduktionsteksten:
+I `views/index.ejs` skal I **erstatte den midlertidige `question`-blok fra trin 7** med dette:
 
 ```ejs
-<% if (conversation.length === 0) { %>
-  <p>No questions yet. Type something below.</p>
+<% for (const message of messages) { %>
+  <p><%= message %></p>
 <% } %>
-
-<% conversation.forEach((entry) => { %>
-  <article class="<%= entry.sender %>">
-    <p><%= entry.text %></p>
-  </article>
-<% }); %>
 ```
 
-Tilpas `article` og klasserne til jeres eget design. Hvis I vil bruge klasser som `question` og `answer`, er det bedre at gemme dem som data senere end at bruge `sender` direkte som CSS-klasse.
-
-### Test trin 7
-
-Genindlæs `/`. I skal se jeres tomme tilstand, og templaten må ikke fejle med `conversation is not defined`.
-
----
-
-## 8. Validér spørgsmålet og gem en foreløbig samtale
-
-Erstat den foreløbige POST-route fra trin 6. Denne version afviser tomt input og lægger både spørgsmål og et midlertidigt svar i arrayet:
+Erstat også POST-routen fra trin 7 med:
 
 ```js
 app.post("/ask", (request, response) => {
-  const question = typeof request.body.question === "string"
-    ? request.body.question.trim()
-    : "";
+  const question = request.body.question;
 
-  if (!question) {
-    return renderAmabot(response, { error: "Skriv et spørgsmål, før du sender." });
-  }
+  messages.push(question);
 
-  conversation.push({ sender: "question", text: question });
-  conversation.push({ sender: "answer", text: "Jeg leder efter et svar ..." });
-
-  renderAmabot(response);
+  response.render("index", { messages });
 });
 ```
 
-I `views/index.ejs` kan I nu vælge CSS-klasse ud fra `entry.sender`:
-
-```ejs
-<article class="<%= entry.sender %>">
-  <p><%= entry.text %></p>
-</article>
-```
-
-Vis også fejlbeskeden tæt ved formularen:
-
-```ejs
-<% if (error) { %>
-  <p role="alert"><%= error %></p>
-<% } %>
-```
-
-`<%= ... %>` er escaped output. Det betyder, at indsendt HTML vises som tekst i stedet for at blive fortolket af browseren.
+`messages.push(question)` lægger det nyeste spørgsmål sidst i arrayet. EJS-looppet laver ét `<p>` for hver tekst i arrayet. `<%= message %>` skriver teksten som escaped HTML.
 
 ### Test trin 8
 
-Prøv først et tomt spørgsmål og derefter et almindeligt spørgsmål. Forklar, hvorfor `return` efter fejlbeskeden er vigtigt.
+Indsend to forskellige spørgsmål. Begge skal vises på siden i den rækkefølge, de blev sendt. Genindlæs derefter siden: Hvorfor er de stadig synlige?
 
 ---
 
-## 9. Tilføj AMAbottens svarregler
+## 9. Giv hver besked en type
 
-Erstat det midlertidige svar med regler, der handler om jer. Opret dette **over** `renderAmabot`:
+Nu skal AMAbotten også vise et foreløbigt svar. For at jeres CSS kan kende forskel på et spørgsmål og et svar, ændrer vi hver besked fra en tekst til et objekt med to egenskaber:
 
 ```js
-const responseRules = [
+{ type: "question", text: question }
+```
+
+Først erstatter I EJS-looppet fra trin 8 med:
+
+```ejs
+<% for (const message of messages) { %>
+  <article class="<%= message.type %>">
+    <p><%= message.text %></p>
+  </article>
+<% } %>
+```
+
+Ret derefter kun `messages.push(question)` i POST-routen til disse to linjer:
+
+```js
+messages.push({ type: "question", text: question });
+messages.push({ type: "answer", text: "Jeg leder efter et svar ..." });
+```
+
+Nu bliver `question` og `answer` både data og CSS-klasser. Brug eller tilpas derfor jeres eksisterende styling til fx `.question` og `.answer`.
+
+> Stop og start serveren igen med `npm run dev`, før I tester dette trin. `messages` indeholder stadig tekstværdierne fra trin 8, men nu forventer EJS objekter med `type` og `text`. En genstart tømmer arrayet, så alle nye beskeder får den samme struktur.
+
+### Test trin 9
+
+Indsend et spørgsmål. I skal se både spørgsmålet og det foreløbige svar. Brug DevTools' Elements-panel til at kontrollere, at de to `article`-elementer har klasserne `question` og `answer`.
+
+---
+
+## 10. Tilføj AMAbottens svarregler
+
+Erstat det midlertidige svar med regler, der handler om jer. Opret dette over jeres routes:
+
+```js
+const answers = [
   {
     keywords: ["navn", "hedder", "hvem er du"],
-    answers: ["Jeg hedder Ada. Hvad vil du ellers vide om mig?"]
+    answer: "Jeg hedder Ada. Hvad vil du ellers vide om mig?"
   },
   {
     keywords: ["bor", "by", "fra"],
-    answers: ["Jeg bor i Aarhus."]
+    answer: "Jeg bor i Aarhus."
   },
   {
     keywords: ["fritid", "hobby", "kan lide"],
-    answers: ["I min fritid kan jeg godt lide at læse og gå ture."]
+    answer: "I min fritid kan jeg godt lide at læse og gå ture."
   }
 ];
 ```
@@ -311,14 +345,13 @@ Tilpas mindst navn, emner og svar, så botten beskriver jer. Tilføj derefter de
 function findAnswer(question) {
   const normalizedQuestion = question.toLowerCase();
 
-  for (const rule of responseRules) {
-    const hasMatch = rule.keywords.some((keyword) =>
+  for (const answerGroup of answers) {
+    const hasMatch = answerGroup.keywords.some((keyword) =>
       normalizedQuestion.includes(keyword)
     );
 
     if (hasMatch) {
-      const index = Math.floor(Math.random() * rule.answers.length);
-      return rule.answers[index];
+      return answerGroup.answer;
     }
   }
 
@@ -328,28 +361,92 @@ function findAnswer(question) {
 
 `some()` stopper, så snart ét nøgleord matcher. Det passer godt her, fordi vi kun skal vide, om den aktuelle regel skal bruges.
 
-Til sidst erstatter I kun den midlertidige `answer`-linje i POST-routen:
+Til sidst erstatter I linjen, der tilføjer det foreløbige svar, i POST-routen:
 
 ```js
 const answer = findAnswer(question);
-conversation.push({ sender: "answer", text: answer });
+messages.push({ type: "answer", text: answer });
 ```
 
 Lad linjen, der gemmer brugerens spørgsmål, blive stående.
 
-### Test trin 9
+### Test trin 10
 
 Test ét spørgsmål for hver regel og et spørgsmål, der ikke matcher noget. Genindlæs siden: Hvorfor ligger samtalen stadig der? Genstart derefter serveren: Hvorfor forsvinder den?
 
 ---
 
-## 10. Tilføj en grænse for lange spørgsmål
+## 11. Vis en fejl ved et tomt spørgsmål
 
-Sæt denne kontrol efter tjekket for et tomt spørgsmål og før `conversation.push()`:
+Indtil nu gemmer appen alt, også en tom tekst. Nu tilføjer vi den første valideringsregel.
+
+GET-routen skal også sende en tom fejltekst, fordi EJS snart skal kunne vise `error` både efter GET- og POST-requests:
+
+```js
+app.get("/", (request, response) => {
+  response.render("index", { messages, error: "" });
+});
+```
+
+I POST-routen skal I ændre den første linje til:
+
+```js
+const question = request.body.question.trim();
+```
+
+Sæt derefter dette **før** den første `messages.push(...)`:
+
+```js
+if (!question) {
+  return response.render("index", {
+    messages,
+    error: "Skriv et spørgsmål, før du sender."
+  });
+}
+```
+
+Ret også POST-routens sidste render til:
+
+```js
+response.render("index", { messages, error: "" });
+```
+
+Vis fejlbeskeden tæt ved formularen i `views/index.ejs`:
+
+```ejs
+<% if (error) { %>
+  <p role="alert"><%= error %></p>
+<% } %>
+```
+
+`return` stopper POST-routen, så den tomme besked ikke bliver lagt i `messages`.
+
+### Test trin 11
+
+Indsend først et tomt spørgsmål og derefter et almindeligt spørgsmål. Kun det almindelige spørgsmål og svaret skal tilføjes til historikken.
+
+---
+
+## Tjekpunkt
+
+Jeres AMAbot har nu den grundlæggende funktionalitet. Den er færdig, når den beholder jeres design, viser samtalehistorik, modtager et spørgsmål på `POST /ask`, vælger et regelbaseret svar om jer og håndterer et tomt spørgsmål.
+
+I skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor EJS genererer HTML.
+
+---
+
+## Ekstra opgaver
+
+Vælg én opgave ad gangen. De bygger oven på den fungerende AMAbot, så I altid kan gå tilbage til et klart udgangspunkt.
+
+### 12. Tilføj en grænse for lange spørgsmål
+
+Sæt denne kontrol efter tjekket for et tomt spørgsmål og før `messages.push()`:
 
 ```js
 if (question.length > 280) {
-  return renderAmabot(response, {
+  return response.render("index", {
+    messages,
     error: "Spørgsmålet må højst være 280 tegn."
   });
 }
@@ -357,19 +454,48 @@ if (question.length > 280) {
 
 Validering afgør, om data må bruges. Normalisering med `trim()` fjerner yderste mellemrum. EJS-escaping med `<%= ... %>` gør output sikkert i HTML-kontekst. Det er tre forskellige opgaver.
 
-### Test trin 10
+### Test trin 12
 
 Test tomt input, et gyldigt spørgsmål, et ukendt spørgsmål og et spørgsmål på mere end 280 tegn. Kontrollér, at ingen af de ugyldige spørgsmål tilføjes til samtalen.
 
 ---
 
-## Ekstra udfordringer
+### 13. Sanitér uønskede kontroltegn
 
-- Giv en regel flere svar, så `Math.random()` får en effekt.
-- Tilføj en `POST /clear-conversation`-route og en “Ryd samtale”-knap.
-- Gem et tidspunkt sammen med hvert `conversation`-objekt og vis det i EJS.
+Valideringen afgør, om spørgsmålet må bruges. Sanitering ændrer selve inputtet. Som et enkelt eksempel kan I fjerne usynlige kontroltegn, der ikke hører hjemme i et almindeligt spørgsmål.
+
+Tilføj funktionen over routes:
+
+```js
+function sanitizeQuestion(input) {
+  return input.replace(/[\u0000-\u001F\u007F]/g, "");
+}
+```
+
+Ret derefter begyndelsen af POST-routen, så sanitering og `trim()` sker i den rækkefølge:
+
+```js
+const rawQuestion = request.body.question;
+const question = sanitizeQuestion(rawQuestion).trim();
+```
+
+Her antager vi, at formularen sender feltet `question`, fordi den selv er bygget med `name="question"`. Det er den samme aftale mellem formular og server, som I har brugt gennem hele øvelsen.
+
+- **Validering** afgør, om input må bruges, fx om spørgsmålet er tomt eller for langt.
+- **Sanitering** ændrer input ved at fjerne bestemte uønskede tegn.
+- **EJS-escaping** med `<%= ... %>` gør værdien sikker at skrive i HTML-kontekst.
+
+De tre begreber løser forskellige problemer. Forsøg ikke at lave et hjemmelavet “XSS-filter” ved at fjerne ord som `script` eller tegnet `<`; brug fortsat EJS' escaped output til brugerdata.
+
+### Test trin 13
+
+Kontrollér igen, at almindelige spørgsmål og fejlbeskeder virker. Prøv også teksten `<strong>Hej</strong>`: Den skal vises som tekst og må ikke blive til fed HTML.
+
+---
+
+### Flere udvidelser
+
+- Giv en regel flere mulige svar. Skift fx dens `answer`-tekst til et array, og vælg ét element med `Math.random()`.
+- Tilføj en `POST /clear-messages`-route og en “Ryd beskeder”-knap.
+- Gem et tidspunkt på hvert objekt i `messages`, og vis det i EJS.
 - Undersøg `request.query` med `/debug?name=Ada` og `request.params` med `/debug/:name`. Sammenlign dem med `request.body` fra formularen.
-
-## Tjekpunkt
-
-Din AMAbot er færdig, når den beholder jeres design, viser samtalehistorik, modtager et spørgsmål på `POST /ask`, vælger et regelbaseret svar om dig og håndterer ugyldigt input. Du skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor EJS genererer HTML.

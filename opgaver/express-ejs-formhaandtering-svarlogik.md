@@ -220,6 +220,8 @@ response.render("index", { name, age, error, names });
 
 > `Number(age)` forsøger at lave teksten om til et tal. `Number.isNaN(...)` undersøger, om resultatet *ikke* er et tal. Vi gemmer ikke et ekstra tal i en ny variabel endnu — fokus er først på at få kontrollen til at virke.
 
+> Browseren vil normalt forhindre bogstaver i et felt med `type="number"`. Hvis du vil afprøve serverens kontrol med værdien `hej`, kan du midlertidigt ændre feltet til `type="text"`, teste og derefter ændre det tilbage. Pointen er, at serveren stadig skal validere data og ikke kun stole på browseren.
+
 ### Test trin 6
 
 Prøv disse inputs:
@@ -333,7 +335,7 @@ Gør derefter det samme for aldersfeltet:
 
 ### Test trin 10
 
-Skriv et navn og en ugyldig alder, for eksempel `Ada` og `hej`. Når siden renderer igen, skal både `Ada` og `hej` stadig stå i felterne sammen med fejlbeskeden.
+Skriv et navn og en ugyldig alder, for eksempel `Ada` og `121`. Når siden renderer igen, skal både `Ada` og `121` stadig stå i felterne sammen med fejlbeskeden.
 
 ---
 
@@ -409,4 +411,4 @@ Du er færdig, når din app kan:
 
 ## Videre til øvelse 3
 
-I [øvelse 3: EJS-AMAbot](express-ejs-amabot.md) bruger du det samme POST-, validerings- og render-flow til at lade serveren vælge et svar om dig ud fra brugerens spørgsmål.
+I [øvelse 3: Server-renderet AMAbot med regelbaseret svarlogik](express-ejs-amabot.md) bruger du det samme POST-, validerings- og render-flow til at lade serveren vælge et svar om dig ud fra brugerens spørgsmål.
