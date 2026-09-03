@@ -593,7 +593,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 5,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178030/items",
     "items": [
       {
@@ -622,23 +622,60 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178030,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018690,
+        "id": 1047496,
         "position": 3,
+        "title": "DOB 2 - Git branching & DevTools - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178030,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1047496",
+        "content_id": 1688488,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1688488",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 2 - Git branching & DevTools - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018690,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178030,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1047445,
+        "position": 5,
+        "title": "Aflever link til det AMAbot repository",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178030,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1047445",
+        "content_id": 59744,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/59744",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "points_possible": 0,
           "locked_for_user": false
         }
       }

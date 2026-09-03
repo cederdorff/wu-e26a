@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-02T08:40:18.216Z
+Senest hentet: 2026-09-03T08:34:47.475Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -86,7 +86,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
+- [DOB 2 - Git branching & DevTools - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%202%20-%20Git%20branching%20%26%20DevTools%20-%20slides.pdf)
+
 ### Opgaver
+
+- Aflever link til det AMAbot repository — Assignment
 
 ## 008 · RACE 2 - EJS templating, form handling og svar logik - 03-09-2026
 

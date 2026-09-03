@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-02T08:40:18.216Z",
+  "pulled_at": "2026-09-03T08:34:47.475Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -27,8 +27,8 @@
       "canvas_hash": "3c883eb6ad60ef9338c12f9c28395ec6eb5397ad08f099e0d7c47cb4d4f80b5b"
     },
     "undervisning/007-dob-2-teambuilding-git-branching-devtools-02-09-2026.md": {
-      "local_hash": "9045f6036f7964309b33f3b0c98eb407f6c09e9ad05beba9c4687953b5455454",
-      "canvas_hash": "9045f6036f7964309b33f3b0c98eb407f6c09e9ad05beba9c4687953b5455454"
+      "local_hash": "4a74fc06f0f669f1ef021236686db9402afd66995418412c89a5cd4562dfd087",
+      "canvas_hash": "4a74fc06f0f669f1ef021236686db9402afd66995418412c89a5cd4562dfd087"
     },
     "undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md": {
       "local_hash": "582267b312d38b42e723237db9b83be26ed7db3869f06caf236b9ed7121b4d7f",

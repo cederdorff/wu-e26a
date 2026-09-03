@@ -41,7 +41,11 @@ Eftermiddag: Vi kigger grundigt på hvad der foregår i browseren når vi loader
 
 ### Præsentationer
 
+- [DOB 2 - Git branching & DevTools - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%202%20-%20Git%20branching%20%26%20DevTools%20-%20slides.pdf)
+
 ### Opgaver
+
+- Aflever link til det AMAbot repository — Assignment
 
 ---
 

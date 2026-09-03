@@ -78,6 +78,19 @@
     "local_path": "materialer/canvas-filer/AMAbot/DOB 1 - AMAbot & Git basics - slides.pdf"
   },
   {
+    "id": 1688488,
+    "folder_id": 417309,
+    "display_name": "DOB 2 - Git branching & DevTools - slides.pdf",
+    "filename": "DOB+2+-+Git+branching+%26+DevTools+-+slides.pdf",
+    "content_type": "application/pdf",
+    "size": 594651,
+    "created_at": "2026-09-02T09:29:23Z",
+    "updated_at": "2026-09-02T09:38:47Z",
+    "locked": false,
+    "hidden": false,
+    "local_path": "materialer/canvas-filer/AMAbot/DOB 2 - Git branching & DevTools - slides.pdf"
+  },
+  {
     "id": 1678469,
     "folder_id": 417309,
     "display_name": "Intro - slides.pdf",

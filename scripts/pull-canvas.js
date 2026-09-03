@@ -1,10 +1,21 @@
 #!/usr/bin/env node
 
-import { createHash } from "node:crypto";
-import { access, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
+import {
+  atomicWrite,
+  authHeaders,
+  canvasList,
+  canvasRequest,
+  fileExists,
+  hash,
+  loadLocalEnv,
+  mapLimit,
+  readJsonIfPresent,
+  requiredEnv,
+} from "./canvas-lib.js";
 
 const projectRoot = resolve(import.meta.dirname, "..");
 const force = process.argv.includes("--force");
@@ -22,27 +33,27 @@ const incomingRoot = resolve(projectRoot, ".canvas-incoming");
 
 const previousManifest = await readJsonIfPresent(manifestPath) ?? { files: {} };
 
-const course = await canvasRequest(apiRoot);
+const course = await canvasRequest(apiRoot, token);
 const [modules, pageSummaries, assignments, discussions, quizzes, files, folders] = await Promise.all([
-  canvasList(`${apiRoot}/modules?include[]=items&include[]=content_details&per_page=100`),
-  canvasList(`${apiRoot}/pages?per_page=100`),
-  canvasList(`${apiRoot}/assignments?per_page=100`),
-  canvasList(`${apiRoot}/discussion_topics?per_page=100`),
-  canvasList(`${apiRoot}/quizzes?per_page=100`),
-  canvasList(`${apiRoot}/files?per_page=100`),
-  canvasList(`${apiRoot}/folders?per_page=100`),
+  canvasList(`${apiRoot}/modules?include[]=items&include[]=content_details&per_page=100`, token),
+  canvasList(`${apiRoot}/pages?per_page=100`, token),
+  canvasList(`${apiRoot}/assignments?per_page=100`, token),
+  canvasList(`${apiRoot}/discussion_topics?per_page=100`, token),
+  canvasList(`${apiRoot}/quizzes?per_page=100`, token),
+  canvasList(`${apiRoot}/files?per_page=100`, token),
+  canvasList(`${apiRoot}/folders?per_page=100`, token),
 ]);
 
 for (const module of modules) {
   if (!Array.isArray(module.items)) {
-    module.items = await canvasList(`${apiRoot}/modules/${encodeURIComponent(module.id)}/items?include[]=content_details&per_page=100`);
+    module.items = await canvasList(`${apiRoot}/modules/${encodeURIComponent(module.id)}/items?include[]=content_details&per_page=100`, token);
   }
   module.items.sort(byPosition);
 }
 modules.sort(byPosition);
 
 const pages = await mapLimit(pageSummaries, 8, (page) =>
-  canvasRequest(`${apiRoot}/pages/page_id:${encodeURIComponent(page.page_id)}`),
+  canvasRequest(`${apiRoot}/pages/page_id:${encodeURIComponent(page.page_id)}`, token),
 );
 const pageByUrl = new Map(pages.map((page) => [page.url, page]));
 const modulePageUrls = new Set();
@@ -362,7 +373,7 @@ async function downloadFiles(canvasFiles, folderById) {
     await mkdir(dirname(localPath), { recursive: true });
     const shouldDownload = !(await fileExists(localPath)) || (await readFile(localPath)).byteLength !== file.size;
     if (shouldDownload) {
-      const response = await fetch(file.url, { headers: authHeaders(), redirect: "follow" });
+      const response = await fetch(file.url, { headers: authHeaders(token), redirect: "follow" });
       if (!response.ok) throw new Error(`Kunne ikke hente Canvas-fil ${file.id}: ${response.status} ${response.statusText}`);
       await atomicWrite(localPath, new Uint8Array(await response.arrayBuffer()));
     }
@@ -441,54 +452,6 @@ async function writeGeneratedJson(path, value) {
   await writeGeneratedFile(path, `${JSON.stringify(value, null, 2)}\n`);
 }
 
-async function atomicWrite(path, contents) {
-  const tempPath = `${path}.tmp-${process.pid}`;
-  await writeFile(tempPath, contents);
-  await rename(tempPath, path);
-}
-
-async function canvasRequest(url) {
-  const response = await fetch(url, { headers: authHeaders() });
-  if (!response.ok) throw new Error(`Canvas API ${response.status} ${response.statusText}: ${await response.text()}`);
-  return response.json();
-}
-
-async function canvasList(initialUrl) {
-  const values = [];
-  let url = initialUrl;
-  while (url) {
-    const response = await fetch(url, { headers: authHeaders() });
-    if (!response.ok) throw new Error(`Canvas API ${response.status} ${response.statusText}: ${await response.text()}`);
-    values.push(...await response.json());
-    url = nextPage(response.headers.get("link"));
-  }
-  return values;
-}
-
-function authHeaders() {
-  return { Accept: "application/json", Authorization: `Bearer ${token}` };
-}
-
-function nextPage(linkHeader) {
-  if (!linkHeader) return null;
-  const next = linkHeader.split(",").map((value) => value.trim()).find((value) => /rel="next"/.test(value));
-  return next?.match(/<([^>]+)>/)?.[1] ?? null;
-}
-
-async function mapLimit(values, limit, mapper) {
-  const results = new Array(values.length);
-  let nextIndex = 0;
-  async function worker() {
-    while (nextIndex < values.length) {
-      const index = nextIndex;
-      nextIndex += 1;
-      results[index] = await mapper(values[index], index);
-    }
-  }
-  await Promise.all(Array.from({ length: Math.min(limit, values.length) }, () => worker()));
-  return results;
-}
-
 function selectCourse(course) {
   return {
     id: course.id,
@@ -557,40 +520,3 @@ function yamlValue(value) {
   return JSON.stringify(value);
 }
 
-function hash(value) {
-  return createHash("sha256").update(value).digest("hex");
-}
-
-function requiredEnv(name) {
-  const value = process.env[name]?.trim();
-  if (!value) throw new Error(`${name} mangler i .env.`);
-  return value;
-}
-
-async function loadLocalEnv(path) {
-  const source = await readFile(path, "utf8");
-  for (const line of source.split(/\r?\n/)) {
-    const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
-    if (!match || line.trimStart().startsWith("#")) continue;
-    const [, name, rawValue] = match;
-    if (process.env[name] === undefined) process.env[name] = rawValue.replace(/^(['"])(.*)\1$/, "$2");
-  }
-}
-
-async function fileExists(path) {
-  try {
-    await access(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-async function readJsonIfPresent(path) {
-  try {
-    return JSON.parse(await readFile(path, "utf8"));
-  } catch (error) {
-    if (error.code === "ENOENT") return null;
-    throw error;
-  }
-}

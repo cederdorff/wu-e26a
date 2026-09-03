@@ -15,7 +15,7 @@
     "all_url": "https://eaaa.instructure.com/api/v1/folders/417309/all",
     "folders_url": "https://eaaa.instructure.com/api/v1/folders/417309/folders",
     "files_url": "https://eaaa.instructure.com/api/v1/folders/417309/files",
-    "files_count": 4,
+    "files_count": 5,
     "folders_count": 0,
     "hidden": null,
     "locked_for_user": false,
