@@ -1,0 +1,56 @@
+name: Sync teaching pages to Canvas
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "undervisning/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: canvas-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Write Canvas credentials
+        run: |
+          cat <<EOF > .env
+          CANVAS_BASE_URL=${{ secrets.CANVAS_BASE_URL }}
+          CANVAS_COURSE_ID=${{ secrets.CANVAS_COURSE_ID }}
+          CANVAS_ACCESS_TOKEN=${{ secrets.CANVAS_ACCESS_TOKEN }}
+          EOF
+
+      - name: Push changed lesson pages to Canvas
+        run: node scripts/push-canvas.js --apply
+
+      - name: Refresh local mirror from Canvas
+        run: node scripts/pull-canvas.js --force
+
+      - name: Remove credentials
+        if: always()
+        run: rm -f .env
+
+      - name: Commit mirror refresh
+        run: |
+          git config user.name "canvas-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: sync Canvas mirror after auto-push [skip ci]"
+            git push
+          else
+            echo "Nothing to commit."
+          fi
