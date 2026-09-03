@@ -45,11 +45,11 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
 ## Materialer
 
 - Slides:
-  - [JavaScript Concepts](https://cederdorff.com/race/slides/js-concepts.pdf)
+    - [JavaScript Concepts](https://cederdorff.com/race/slides/js-concepts.pdf)
 - Opgaver:
-  - [3. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
-  - [4. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
-  - [Padlet - Node.js & Express.js Concepts](https://padlet.com/race7/node-js-express-js-concepts-mp9x38w14ndr3sug)
+    - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
+    - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
+    - [Padlet - Node.js & Express.js Concepts](https://padlet.com/race7/node-js-express-js-concepts-mp9x38w14ndr3sug)
 
 ---
 
@@ -67,7 +67,7 @@ canvas_page_id: 200711
 canvas_page_slug: "plan-for-race-3-data-logik-arrays-og-objekter"
 canvas_page_title: "Plan for RACE 3 - Data logik, arrays og objekter"
 canvas_page_published: false
-canvas_updated_at: "2026-09-03T08:41:14Z"
+canvas_updated_at: "2026-09-03T09:08:50Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018694"
 local_status: mirrored
 ```
