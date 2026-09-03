@@ -1,140 +1,413 @@
 # Øvelse 2: Formhåndtering, validering og svarlogik
 
-Byg videre på [øvelse 1: Din første server-renderede EJS-app](express-ejs-formular.md). I udvider hilsenen med flere felter, validerer input og gemmer gyldige indsendelser i et array af objekter.
+I [øvelse 1](express-ejs-formular.md) modtog serveren ét navn og sendte en hilsen tilbage. Nu bygger du langsomt videre: først validerer du navnet, derefter gemmer du navne i et array, og til sidst tilføjer du alder og svarlogik.
 
-Målet er ikke at lave en perfekt profilformular. Målet er at kunne forklare, hvordan data går fra en formular til `request.body`, videre gennem JavaScript-logik og tilbage til en EJS-template.
+Fortsæt i samme projekt, og brug fortsat `npm run dev`. Skriv selv koden og test efter hvert trin.
 
-## 1. Gør dataene ens hver gang
+## Det ender du med at bygge
 
-En template bør altid få de variabler, den bruger. Lav derfor et array og en funktion, der samler dataene til templaten. Tilføj øverst i `server.js`, efter `app` er oprettet:
+Formularen får felter til navn og alder:
 
-```js
-const greetings = [];
+![En formular med felter til navn og alder](assets/express-ejs-name-age-form-browser.png)
 
-function renderIndex(response, { name = "", topic = "", error = "", reply = "" } = {}) {
-  response.render("index", { name, topic, error, reply, greetings });
-}
-```
+Efter et gyldigt submit viser serveren en personlig hilsen og en historik:
 
-Ret din GET-route:
+![En personlig hilsen med navn og alder samt en liste med tidligere navne](assets/express-ejs-name-age-response-browser.png)
 
-```js
-app.get("/", (request, response) => {
-  renderIndex(response);
-});
-```
+> Skærmbillederne er en enkel reference. Det vigtige er dataflowet og funktionaliteten — ikke at din side ligner dem præcist.
 
-Her gemmes data kun i serverens hukommelse. Genstarter I serveren, bliver arrayet tomt. Det er forventet på nuværende tidspunkt.
+## Før du går i gang
 
-## 2. Udvid formularen
+Kontrollér, at øvelse 1 stadig virker:
 
-Erstat formularen i `views/index.ejs` med denne:
+- `GET /` viser formularen.
+- Formularen sender `POST /submit`.
+- `request.body.name` indeholder det indtastede navn.
+- EJS viser en personlig hilsen.
 
-```html
-<form method="POST" action="/submit">
-  <p>
-    <label for="name">Hvad hedder du?</label>
-    <input id="name" name="name" type="text" />
-  </p>
+---
 
-  <p>
-    <label for="topic">Hvad vil du tale om?</label>
-    <select id="topic" name="topic">
-      <option value="">Vælg et emne</option>
-      <option value="studie">Studiet</option>
-      <option value="weekend">Weekenden</option>
-      <option value="andet">Noget andet</option>
-    </select>
-  </p>
+## 1. Undersøg tomt input
 
-  <button type="submit">Send</button>
-</form>
-```
+Indsend formularen uden et navn. Prøv derefter et navn, der kun består af mellemrum.
 
-Bemærk, at browseren sender `name` og `topic`, fordi det er felternes `name`-attributter. `label` og `id` forbedrer tilgængeligheden, men bestemmer ikke navnet i `request.body`.
+### Test trin 1
 
-## 3. Validér og vælg et svar
+Overvej:
 
-Erstat din POST-route med følgende. Læs den først: Hvilken kode kører kun ved ugyldigt input, og hvilken kode kører kun ved gyldigt input?
+- Får brugeren en forklaring?
+- Bør `"   "` tælle som et navn?
+- Bør et navn gemmes med mellemrum før og efter?
+
+Det første problem er, at appen ikke kan skelne et brugbart navn fra tomt input.
+
+---
+
+## 2. Normalisér og validér navnet
+
+Ret POST-routen, så den fjerner ydre mellemrum og afviser et tomt navn:
 
 ```js
 app.post("/submit", (request, response) => {
-  const name = typeof request.body.name === "string" ? request.body.name.trim() : "";
-  const topic = typeof request.body.topic === "string" ? request.body.topic : "";
+  const rawName = request.body.name;
+  const name = rawName.trim();
 
   if (!name) {
-    return renderIndex(response, {
-      topic,
+    return response.render("index", {
+      name: "",
       error: "Skriv dit navn, før du sender formularen."
     });
   }
 
-  const replies = {
-    studie: `Hej ${name}! Hvad arbejder du på i dag?`,
-    weekend: `Hej ${name}! Hvad håber du at lave i weekenden?`,
-    andet: `Hej ${name}! Fortæl mig mere.`
-  };
-
-  if (!replies[topic]) {
-    return renderIndex(response, {
-      name,
-      error: "Vælg et emne, før du sender formularen."
-    });
-  }
-
-  const greeting = { name, topic, createdAt: new Date().toLocaleTimeString("da-DK") };
-  greetings.push(greeting);
-
-  renderIndex(response, { name, topic, reply: replies[topic] });
+  response.render("index", { name, error: "" });
 });
 ```
 
-`replies` er et objekt: emnenavnet er en nøgle, og teksten er værdien. `greetings` er et array af objekter. I får dermed både en opslagstabel til svarlogik og strukturerede data til historikken.
+Din GET-route skal også sende `error`, fordi den samme template nu bruger variablen:
 
-## 4. Vis fejl, svar og historik
+```js
+app.get("/", (request, response) => {
+  response.render("index", { name: "", error: "" });
+});
+```
 
-Tilføj dette efter formularen i `index.ejs`:
+Tilføj dette efter formularen i `views/index.ejs`:
 
 ```html
 <% if (error) { %>
   <p role="alert"><%= error %></p>
 <% } %>
+```
 
-<% if (reply) { %>
-  <h2>Serverens svar</h2>
-  <p><%= reply %></p>
-<% } %>
+> **Normalisering og validering:** `trim()` gør input ensartet ved at fjerne ydre mellemrum. Derefter afgør `if (!name)`, om værdien må bruges. `return` stopper POST-routen, når der er en fejl.
 
-<h2>Tidligere indsendelser</h2>
-<% if (greetings.length === 0) { %>
+### Test trin 2
+
+1. Indsend et tomt navn og et navn med kun mellemrum. Begge skal vise fejlbeskeden.
+2. Indsend `  Ada  `. Hilsenen skal bruge `Ada` uden yderste mellemrum.
+3. Genindlæs siden. Den skal ikke vise en fejl.
+
+> **Templatens datakontrakt:** Når EJS bruger `error`, skal både GET- og POST-routen sende en værdi til `error`.
+
+---
+
+## 3. Gem først bare navne i et array
+
+Før vi tilføjer flere felter, gemmer vi hver gyldig indsendelse på den enkleste måde: et navn i et array.
+
+Tilføj dette før dine routes i `server.js`:
+
+```js
+const names = [];
+```
+
+Ret GET-routen, så den sender arrayet til templaten:
+
+```js
+app.get("/", (request, response) => {
+  response.render("index", { name: "", error: "", names });
+});
+```
+
+Ret derefter POST-routen. Tilføj kun navnet, når det er gyldigt:
+
+```js
+app.post("/submit", (request, response) => {
+  const rawName = request.body.name;
+  const name = rawName.trim();
+
+  if (!name) {
+    return response.render("index", {
+      name: "",
+      error: "Skriv dit navn, før du sender formularen.",
+      names
+    });
+  }
+
+  names.push(name);
+  console.log(names);
+
+  response.render("index", { name, error: "", names });
+});
+```
+
+> **Array:** Et array kan gemme flere værdier i rækkefølge. `names.push(name)` lægger det nye navn bagerst i arrayet. Arrayet ligger foreløbig kun i serverens hukommelse.
+
+### Test trin 3
+
+Indsend `Ada` og derefter `Dan`. Terminalen skal vise noget i stil med:
+
+```text
+[ 'Ada' ]
+[ 'Ada', 'Dan' ]
+```
+
+Indsend derefter et tomt navn. Arrayet må ikke ændre sig.
+
+---
+
+## 4. Render arrayet med EJS
+
+Tilføj dette efter fejlbeskeden i `index.ejs`:
+
+```html
+<h2>Tidligere navne</h2>
+
+<% if (names.length === 0) { %>
   <p>Der er endnu ingen indsendelser.</p>
 <% } else { %>
   <ul>
-    <% greetings.forEach((greeting) => { %>
-      <li>
-        <%= greeting.name %> valgte <%= greeting.topic %> kl. <%= greeting.createdAt %>
-      </li>
+    <% names.forEach((name) => { %>
+      <li><%= name %></li>
     <% }); %>
   </ul>
 <% } %>
 ```
 
-## 5. Test systematisk
+> **EJS-loop:** `<% ... %>` bruges til JavaScript-logik som `if` og `forEach()`. `<%= ... %>` skriver en værdi i HTML'en og escaper den.
+
+### Test trin 4
+
+1. Genstart serveren. Listen skal være tom.
+2. Indsend flere gyldige navne. De skal vises i rækkefølge.
+3. Indsend et tomt navn. Listen må ikke vokse.
+
+Du har nu en komplet lille løsning: valideret input → array → EJS-loop → HTML.
+
+---
+
+## 5. Tilføj et aldersfelt
+
+Tilføj dette mellem navnefeltet og knappen i `index.ejs`:
+
+```html
+<label for="age">Hvor gammel er du?</label>
+<input id="age" name="age" type="number" step="any" />
+```
+
+Formularens `method="POST"` og `action="/submit"` ændres ikke. Det nye felt sendes med, fordi det har `name="age"`.
+
+Tilføj midlertidigt denne log i starten af POST-routen:
+
+```js
+console.log(request.body);
+```
+
+### Test trin 5
+
+Indsend `Ada` og `41`. Terminalen skal vise:
+
+```text
+{ name: 'Ada', age: '41' }
+```
+
+> **Formulardata er strings:** Selvom feltet har `type="number"`, ankommer `age` som en string i `request.body`. HTML-typen hjælper browseren, men serveren skal selv konvertere og validere værdien.
+
+---
+
+## 6. Konvertér og validér alderen
+
+Læs og konvertér alderen i POST-routen, lige efter du har læst navnet:
+
+```js
+const rawAge = request.body.age;
+const age = Number(rawAge);
+```
+
+Tilføj denne kontrol efter valideringen af navnet:
+
+```js
+if (!Number.isInteger(age) || age < 1 || age > 120) {
+  return response.render("index", {
+    name,
+    error: "Skriv en alder som et helt tal mellem 1 og 120.",
+    names
+  });
+}
+```
+
+> **Konvertering og validering:** `Number(rawAge)` forsøger at lave en string om til et number. `Number.isInteger(age)` kontrollerer, at resultatet er et helt tal. Grænserne er appens regler for en rimelig alder.
+
+### Test trin 6
+
+| Alder | Forventet resultat |
+| --- | --- |
+| Tomt felt | Fejl |
+| `12.5` | Fejl |
+| `0` | Fejl |
+| `121` | Fejl |
+| `41` | Godkendt |
+
+Vigtigt: Ved en ugyldig alder må du ikke nå ned til `names.push(name)`. Flyt derfor `names.push(name)` til **efter** begge valideringer.
+
+---
+
+## 7. Brug begge felter i svaret
+
+Ret den gyldige vej gennem POST-routen, så den først laver et svar og derefter renderer templaten:
+
+```js
+const reply = `Hello ${name} (${age} år) 👋`;
+
+names.push(name);
+response.render("index", { name, error: "", names, reply });
+```
+
+GET-routen og begge fejlgrene renderer den samme template. Tilføj derfor en tom `reply`-værdi dér:
+
+```js
+response.render("index", { name: "", error: "", names, reply: "" });
+```
+
+I fejlgrenene tilføjer du også `reply: ""` til objektet, fx:
+
+```js
+return response.render("index", {
+  name,
+  error: "Skriv en alder som et helt tal mellem 1 og 120.",
+  names,
+  reply: ""
+});
+```
+
+Erstat den gamle hilsen fra øvelse 1 — hele `<% if (name) { %>`-blokken — med dette i `index.ejs`:
+
+```html
+<% if (reply) { %>
+  <h2><%= reply %></h2>
+<% } %>
+```
+
+> **Svarlogik:** Serveren bruger både `name` og `age` til at bygge en tekst. EJS indsætter den færdige tekst i HTML'en. Browseren modtager fortsat et færdigt HTML-response, ikke et JavaScript-svar.
+
+### Test trin 7
+
+Indsend forskellige navne og aldre. Begge værdier skal ændre serverens svar, og kun navnet skal føjes til listen.
+
+---
+
+## 8. Bevar værdierne ved en fejl
+
+Når serveren renderer siden efter en fejl, kan den sende brugerens værdier tilbage, så de ikke skal indtastes igen.
+
+Opdatér inputfelterne:
+
+```html
+<input id="name" name="name" type="text" value="<%= name %>" />
+
+<input id="age" name="age" type="number" step="any" value="<%= age %>" />
+```
+
+Det betyder, at hver `response.render("index", ...)` også skal have en `age`-værdi. Brug `age: ""` i GET-routen og efter et gyldigt submit. I fejlgrenen for alder skal du sende `age: rawAge`. I fejlgrenen for navn skal du sende `age: rawAge`.
+
+Eksempel på aldersfejlen:
+
+```js
+return response.render("index", {
+  name,
+  age: rawAge,
+  error: "Skriv en alder som et helt tal mellem 1 og 120.",
+  names,
+  reply: ""
+});
+```
+
+### Test trin 8
+
+1. Indtast et navn og en ugyldig alder. Begge værdier skal blive stående.
+2. Indtast en alder uden et navn. Alderen skal blive stående.
+3. Indsend gyldige værdier. Svaret skal vises.
+
+> **Templatens datakontrakt:** Nu bruger templaten `name`, `age`, `error`, `names` og `reply`. Alle routes og fejlgrene skal sende alle fem værdier, hver gang de renderer `index.ejs`.
+
+---
+
+## 9. Sammenlign din færdige POST-route
+
+Din route bør nu ligne denne. Brug den til at kontrollere din kode, når du selv har arbejdet gennem trinene:
+
+```js
+app.post("/submit", (request, response) => {
+  const rawName = request.body.name;
+  const name = rawName.trim();
+  const rawAge = request.body.age;
+  const age = Number(rawAge);
+
+  if (!name) {
+    return response.render("index", {
+      name: "",
+      age: rawAge,
+      error: "Skriv dit navn, før du sender formularen.",
+      names,
+      reply: ""
+    });
+  }
+
+  if (!Number.isInteger(age) || age < 1 || age > 120) {
+    return response.render("index", {
+      name,
+      age: rawAge,
+      error: "Skriv en alder som et helt tal mellem 1 og 120.",
+      names,
+      reply: ""
+    });
+  }
+
+  const reply = `Hello ${name} (${age} år) 👋`;
+
+  names.push(name);
+  response.render("index", {
+    name,
+    age: "",
+    error: "",
+    names,
+    reply
+  });
+});
+```
+
+## 10. Test hele flowet
 
 | Input | Forventet resultat |
 | --- | --- |
-| Tomt navn | Fejl, ingen ny post i historikken |
-| Navn uden emne | Fejl, ingen ny post i historikken |
-| Gyldigt navn + `studie` | Relevant svar og én ny post |
-| Flere gyldige indsendelser | Historikken indeholder flere objekter |
-| Genstart af serveren | Historikken nulstilles |
+| Tomt navn + gyldig alder | Fejl; alderen bevares; listen ændres ikke |
+| Gyldigt navn + tom alder | Fejl; navnet bevares; listen ændres ikke |
+| `  Ada  ` + `41` | Navnet normaliseres; svaret vises; listen vokser med én |
+| Ada + `12.5` | Fejl; listen ændres ikke |
+| Ada + `121` | Fejl; listen ændres ikke |
+| Genstart af serveren | Navnelisten nulstilles |
 
-## Videre, hvis du når det
-
-- Tilføj et fjerde emne og et svar i `replies`.
-- Bevar det indtastede navn og valgte emne, når der opstår en fejl, ved at sætte `value="<%= name %>"` og bruge betinget `selected` på options.
-- Tilføj en `POST /ryd-historik`-route og en separat formular, der tømmer arrayet.
+Åbn også DevTools → **Network**. Alle submits skal fortsat være `POST /submit`, og response skal være færdig HTML fra serveren.
 
 ## Tjekpunkt
 
-Du er færdig, når appen afviser begge manglende felter, bruger flere felter i sin svarlogik, og viser en historik baseret på et array af objekter. Alle værdier (`name`, `topic`, `error`, `reply` og `greetings`) skal være tilgængelige, hver gang `index.ejs` renderes.
+Du er færdig, når appen:
+
+- normaliserer og validerer navnet
+- tilføjer hvert gyldigt navn til `names` med `names.push(name)`
+- renderer navnelisten med EJS
+- konverterer og validerer alderen
+- bruger begge formularfelter i serverens svar
+- giver templaten alle forventede variabler ved hver rendering
+
+## Fejlfinding
+
+### `names`, `error`, `age` eller `reply` er ikke defineret
+
+Kontrollér, at den route eller fejlgren, der renderer `index.ejs`, sender variablen med.
+
+### Navne kommer med i listen ved ugyldig alder
+
+Kontrollér, at `names.push(name)` står efter begge valideringer.
+
+### Historikken forsvinder
+
+Det er forventet ved genstart. `names` ligger kun i serverens hukommelse.
+
+## Videre, hvis du når det
+
+- Skift fra `names` til et array af objekter, fx `{ name, age }`, så listen også kan vise alder.
+- Tilføj en `POST /clear-history`-route og en formular, der tømmer `names`.
+- Generér forskellige svar afhængigt af alderen.
+
+> I øvelse 3 bygger du videre med arrays af objekter og regelbaseret svarlogik i en chatbot.

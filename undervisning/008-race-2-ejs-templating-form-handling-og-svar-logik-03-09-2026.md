@@ -8,7 +8,7 @@ Den centrale arbejdsgang er:
 
 ```text
 Browser -> GET request -> Express-route -> EJS-template -> HTML-response
-Browser -> POST-formular -> Express-route -> req.body -> svarlogik -> EJS -> ny HTML-response
+Browser -> POST-formular -> express.urlencoded() -> request.body -> Express-route -> svarlogik -> EJS -> ny HTML-response
 ```
 
 Vi bruger denne arbejdsgang til først at lave en personlig hilsen og derefter en enkel chatbot. Chatbotten er regelbaseret og bruger almindelig JavaScript-logik — ikke kunstig intelligens.
@@ -17,9 +17,9 @@ Vi bruger denne arbejdsgang til først at lave en personlig hilsen og derefter e
 
 - forklare forskellen på server-side rendering (SSR) og client-side rendering (CSR)
 - konfigurere Express til at bruge EJS som template engine
-- sende data fra en Express-route til en EJS-template med `res.render()`
+- sende data fra en Express-route til en EJS-template med `response.render()`
 - forbinde en HTML-formular med en `POST`-route via `method`, `action` og inputfeltets `name`
-- modtage formularens data med `express.urlencoded()` og `req.body`
+- modtage formularens data med `express.urlencoded()` og `request.body`
 - validere brugerinput og generere et relevant svar med almindelig JavaScript-logik
 - følge hele request/response-forløbet i browserens Network-panel
 
@@ -50,7 +50,7 @@ Fælles introduktion og live-kodning:
 
 - **SSR:** Serveren kombinerer data og en template og sender færdig HTML til browseren.
 - **CSR:** Serveren sender typisk data, mens JavaScript i browseren bygger eller opdaterer brugerfladen.
-- I dagens løsning bruger vi **SSR**: Express kalder `res.render()`, og EJS genererer HTML på serveren.
+- I dagens løsning bruger vi **SSR**: Express kalder `response.render()`, og EJS genererer HTML på serveren.
 - EJS-tags: `<% %>` til JavaScript-logik og `<%= %>` til escaped output.
 
 </details>
@@ -64,7 +64,7 @@ Første milepæl er nået, når:
 
 - `GET /` renderer en EJS-template med en formular
 - formularen sender et `POST`-request til den rigtige route
-- `express.urlencoded()` gør formularens data tilgængelige i `req.body`
+- `express.urlencoded()` gør formularens data tilgængelige i `request.body`
 - serveren sender navnet til templaten, som viser en personlig hilsen
 - I kan finde både `GET`- og `POST`-requestet i Network-panelet
 
@@ -79,10 +79,10 @@ Vi tegner flowet fra browser til server og tilbage igen. Vær klar til at pege p
 method + action + name
           |
           v
-POST-route -> express.urlencoded() -> req.body -> res.render() -> EJS -> HTML
+POST-request -> express.urlencoded() -> request.body -> matchende POST-route -> response.render() -> EJS -> HTML
 ```
 
-Vi samler også op på typiske fejl som `Cannot GET /`, manglende templates og `req.body === undefined`.
+Vi samler også op på typiske fejl som `Cannot GET /`, manglende templates og `request.body === undefined`.
 
 </details>
 
@@ -115,7 +115,7 @@ Dagens slutprodukt skal som minimum kunne:
 
 Arbejd derefter med simpel sanitering af input. Hold validering, sanitering og EJS' output escaping adskilt: De løser forskellige problemer.
 
-Hvis I når længere, kan I tilføje flere svarregler og undersøge forskellen på `req.body`, `req.query` og `req.params`.
+Hvis I når længere, kan I tilføje flere svarregler og undersøge forskellen på `request.body`, `request.query` og `request.params`.
 
 </details>
 
