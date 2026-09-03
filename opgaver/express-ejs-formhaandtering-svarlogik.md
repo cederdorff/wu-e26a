@@ -409,4 +409,4 @@ Du er færdig, når din app kan:
 
 ## Videre til øvelse 3
 
-I [øvelse 3: EJS-chatbot](express-ejs-chatbot.md) bruger du det samme POST-, validerings- og render-flow til at lade serveren vælge et svar ud fra brugerens input.
+I [øvelse 3: EJS-AMAbot](express-ejs-amabot.md) bruger du det samme POST-, validerings- og render-flow til at lade serveren vælge et svar om dig ud fra brugerens spørgsmål.

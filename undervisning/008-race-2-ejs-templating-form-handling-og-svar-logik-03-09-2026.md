@@ -11,7 +11,7 @@ Browser -> GET request -> Express-route -> EJS-template -> HTML-response
 Browser -> POST-formular -> express.urlencoded() -> request.body -> Express-route -> svarlogik -> EJS -> ny HTML-response
 ```
 
-Vi bruger denne arbejdsgang til først at lave en personlig hilsen og derefter en enkel chatbot. Chatbotten er regelbaseret og bruger almindelig JavaScript-logik — ikke kunstig intelligens.
+Vi bruger denne arbejdsgang til først at lave en personlig hilsen og derefter en enkel AMAbot (Ask Me Anything-bot). AMAbotten er regelbaseret og bruger almindelig JavaScript-logik — ikke kunstig intelligens.
 
 ### Når dagen er slut, kan I
 
@@ -101,16 +101,17 @@ Anden milepæl er nået, når appen:
 </details>
 
 <details>
-<summary><strong>6. Server-renderet chatbot med regelbaseret svarlogik</strong></summary>
+<summary><strong>6. Server-renderet AMAbot med regelbaseret svarlogik</strong></summary>
 
-**Øvelse 3:** Brug det, I har lært, i [Server-renderet chatbot med regelbaseret svarlogik](../opgaver/express-ejs-chatbot.md).
+**Øvelse 3:** Byg videre på gårsdagens GitHub-repository med den simple HTML-formular. Før I ændrer noget, gemmer I udgangspunktet i et commit. Derefter flytter I `index.html` til `views/index.ejs` og følger [Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md).
 
 Dagens slutprodukt skal som minimum kunne:
 
+- tage udgangspunkt i gårsdagens HTML-formular og have den gemt i Git
 - vise en formular og en samtalehistorik
-- modtage en besked med `POST`
-- vælge et svar ud fra beskedens indhold
-- rendere brugerens besked og bottens svar med EJS
+- modtage et spørgsmål med `POST`
+- vælge et svar om den studerende ud fra spørgsmålets indhold
+- rendere brugerens spørgsmål og AMAbottens svar med EJS
 - håndtere tomt input uden at crashe
 
 Arbejd derefter med simpel sanitering af input. Hold validering, sanitering og EJS' output escaping adskilt: De løser forskellige problemer.
@@ -122,7 +123,7 @@ Hvis I når længere, kan I tilføje flere svarregler og undersøge forskellen p
 <details>
 <summary><strong>7. Faglig opsamling og refleksion</strong></summary>
 
-Vis jeres chatbot til en makker, og forklar request/response-forløbet uden at læse op fra koden.
+Vis jeres AMAbot til en makker, og forklar request/response-forløbet uden at læse op fra koden.
 
 **Exit ticket:** Hvilken kode kører i browseren, hvilken kode kører på serveren, og på hvilket tidspunkt bliver HTML'en genereret?
 
@@ -151,7 +152,7 @@ Vis jeres chatbot til en makker, og forklar request/response-forløbet uden at l
 
 1. [Din første server-renderede EJS-app](../opgaver/express-ejs-formular.md)
 2. [Formhåndtering, validering og svarlogik](../opgaver/express-ejs-formhaandtering-svarlogik.md)
-3. [Server-renderet chatbot med regelbaseret svarlogik](../opgaver/express-ejs-chatbot.md)
+3. [Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md)
 
 ---
 
