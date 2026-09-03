@@ -765,7 +765,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178033/items",
     "items": [
@@ -781,7 +781,7 @@
         "page_url": "plan-for-race-3-data-logik-arrays-og-objekter",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-3-data-logik-arrays-og-objekter",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false

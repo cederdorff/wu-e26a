@@ -1,5 +1,7 @@
 # RACE 1 - Intro til Node og Express - 28-08-2026
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 ## Dagens fokus
 
 Vi tager de første skridt ind i server-side udvikling med Node.js og Express.js. I dag handler det om at forstå, hvad der sker bag kulisserne, når I besøger en hjemmeside — nemlig hvordan serveren fungerer og hvordan den kommunikerer med jeres browser. Vi skal have sat et solidt fundament op, så I kan begynde at bygge jeres egne webapplikationer.
@@ -34,19 +36,19 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
-- [Intro til Node.js og Express.js](https://cederdorff.github.io/wu-e26a/slides/node-express/)
+- [Intro til Node.js og Express.js](https://wu-e26a.cederdorff.com/node-express/)
 
-### Opgaver
+## Opgaver
 
-- [1. Hello Node](../opgaver/hello-node.md)
-- [2. Hello HTTP Module](../opgaver/hello-http-module.md)
-  - [Løsningsforslag - hello-http-module](https://github.com/cederdorff/hello-http-module)
-- [3. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md)
-  - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
-- [4. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
-- [5. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)
+- [1\. Hello Node](../opgaver/hello-node.md)
+- [2\. Hello HTTP Module](../opgaver/hello-http-module.md)
+    - [Løsningsforslag - hello-http-module](https://github.com/cederdorff/hello-http-module)
+- [3\. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md)
+    - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
+- [4\. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
+- [5\. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)
 - [Ekstraopgave: Node.js File System](../opgaver/node-file-system.md)
 - [Ekstraopgave: Express Users & Posts API](../opgaver/express-users-posts-api.md)
 
@@ -66,7 +68,7 @@ canvas_page_id: 200707
 canvas_page_slug: "plan-for-race-1-intro-til-node-og-express"
 canvas_page_title: "Plan for RACE 1 - Intro til Node og Express"
 canvas_page_published: true
-canvas_updated_at: "2026-08-30T20:34:29Z"
+canvas_updated_at: "2026-09-03T10:02:42Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018682"
 local_status: mirrored
 ```

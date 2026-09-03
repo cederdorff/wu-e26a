@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-03T09:09:00.396Z
+Senest hentet: 2026-09-03T10:02:53.982Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -110,7 +110,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 010 · RACE 3 - Data logik, arrays og objekter - 07-09-2026
 
-[Lokal fil](../undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md) · publiceret
 
 - [Plan for RACE 3 - Data logik, arrays og objekter](../undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md)
 

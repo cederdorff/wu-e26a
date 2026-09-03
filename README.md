@@ -4,8 +4,8 @@ Velkommen til det lokale spejl af Canvas-kurset [WU-E26A](https://eaaa.instructu
 
 ## Slides
 
-- [RACE 1 · Intro til Node.js og Express.js](https://cederdorff.github.io/wu-e26a/slides/node-express/)
-- [RACE 2 · EJS templating, form handling og svar logik](https://cederdorff.github.io/wu-e26a/slides/express-ejs/)
+- [RACE 1 · Intro til Node.js og Express.js](https://wu-e26a.cederdorff.com/node-express/)
+- [RACE 2 · EJS templating, form handling og svar logik](https://wu-e26a.cederdorff.com/express-ejs/)
 
 ## Undervisningsforløbet
 
@@ -28,7 +28,7 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [007 · DOB 2 - Teambuilding + Git branching & DevTools - 02-09-2026](./undervisning/007-dob-2-teambuilding-git-branching-devtools-02-09-2026.md)
 - [008 · RACE 2 - EJS templating, form handling og svar logik - 03-09-2026](./undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md)
 - [009 · Forberedelse - Selvstudium - 04-09-2026](./undervisning/009-forberedelse-selvstudium-04-09-2026.md) — *kladde i Canvas*
-- [010 · RACE 3 - Data logik, arrays og objekter - 07-09-2026](./undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md) — *kladde i Canvas*
+- [010 · RACE 3 - Data logik, arrays og objekter - 07-09-2026](./undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md)
 - [011 · Forberedelse - Selvstudium - 08-09-2026](./undervisning/011-forberedelse-selvstudium-08-09-2026.md) — *kladde i Canvas*
 - [012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026](./undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) — *kladde i Canvas*
 - [013 · Forberedelse - Selvstudium - 10-09-2026](./undervisning/013-forberedelse-selvstudium-10-09-2026.md) — *kladde i Canvas*
