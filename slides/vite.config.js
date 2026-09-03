@@ -10,7 +10,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve("slides/index.html"),
-        nodeExpress: resolve("slides/node-express/index.html")
+        nodeExpress: resolve("slides/node-express/index.html"),
+        expressEjs: resolve("slides/express-ejs/index.html")
       }
     }
   }
