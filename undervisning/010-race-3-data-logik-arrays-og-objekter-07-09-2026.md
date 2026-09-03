@@ -60,14 +60,14 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
 canvas_course_id: 32059
 canvas_module_id: 178033
 canvas_module_position: 10
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: 1018694
 canvas_module_item_position: 1
 canvas_page_id: 200711
 canvas_page_slug: "plan-for-race-3-data-logik-arrays-og-objekter"
 canvas_page_title: "Plan for RACE 3 - Data logik, arrays og objekter"
-canvas_page_published: false
-canvas_updated_at: "2026-09-03T09:08:50Z"
+canvas_page_published: true
+canvas_updated_at: "2026-09-03T09:09:26Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018694"
 local_status: mirrored
 ```

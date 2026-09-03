@@ -23,7 +23,6 @@ Vælg konkrete steder i koden, og forklar:
 - hvordan I har testet jeres routes
 
 Sammenlign derefter med [løsningsforslaget](https://github.com/cederdorff/node-express-todos-rest-api). Fokus er ikke på, om løsningerne er identiske, men på om I kan forklare de valg, I har truffet.
-
 </details>
 <details>
 <summary><strong>2. SSR og CSR</strong></summary>
@@ -61,7 +60,6 @@ POST-request -> express.urlencoded() -> request.body -> matchende POST-route -> 
 ```
 
 Vi samler også op på typiske fejl som `Cannot GET /`, manglende templates og `request.body === undefined`.
-
 </details>
 <details>
 <summary><strong>5. Inputvalidering, datastrukturer og svarlogik</strong></summary>
@@ -93,7 +91,6 @@ Dagens slutprodukt skal som minimum kunne:
 Arbejd derefter med simpel sanitering af input. Hold validering, sanitering og EJS' output escaping adskilt: De løser forskellige problemer.
 
 Hvis I når længere, kan I tilføje flere svarregler og undersøge forskellen på `request.body`, `request.query` og `request.params`.
-
 </details>
 
 ---
@@ -102,22 +99,22 @@ Hvis I når længere, kan I tilføje flere svarregler og undersøge forskellen p
 
 - Sørg for, at du er nået igennem [3\. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md), og vær klar til at vise og forklare din løsning.
 - Skim følgende som opslagsværker. Vælg ESM i kodeeksemplerne, når det er muligt:
-  - [Routing](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen
-  - [Request object](https://expressjs.com/en/5x/api/request/) i Express.js API-reference
-  - [Working with forms](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/forms) på MDN
+    - [Routing](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen
+    - [Request object](https://expressjs.com/en/5x/api/request/) i Express.js API-reference
+    - [Working with forms](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/forms) på MDN
 - På Scrimba:
-  - [Færdiggør Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
-  - [Se Fullstack > Express.js > Welcome to Express](https://scrimba.com/fullstack-path-c0fullstack)
+    - [Færdiggør Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
+    - [Se Fullstack > Express.js > Welcome to Express](https://scrimba.com/fullstack-path-c0fullstack)
 
 ---
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
 - [EJS templating, form handling og svar logik](https://cederdorff.com/wu-e26a/express-ejs/)
 
-### Opgaver
+## Opgaver
 
 1.  [Din første server-renderede EJS-app](../opgaver/express-ejs-formular.md)
 2.  [Formhåndtering, validering og svarlogik](../opgaver/express-ejs-formhaandtering-svarlogik.md)
@@ -139,7 +136,7 @@ canvas_page_id: 200710
 canvas_page_slug: "plan-for-race-2-ejs-templating-form-handling-og-svar-logik"
 canvas_page_title: "Plan for RACE 2 - EJS templating, form handling og svar logik"
 canvas_page_published: true
-canvas_updated_at: "2026-09-03T11:00:26Z"
+canvas_updated_at: "2026-09-03T11:23:34Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018691"
 local_status: mirrored
 ```
