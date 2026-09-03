@@ -455,20 +455,24 @@ response.render("index", { name, age, error, names });</code></pre>
           <h2>Spørgsmål ind — svar ud, gemt i samtalehistorikken</h2>
           <div
             class="api-model"
-            aria-label="Brugeren stiller et spørgsmål, serveren gemmer og vælger et svar, EJS viser samtalen"
+            aria-label="Brugeren stiller et spørgsmål, serveren validerer og vælger et svar ud fra regler, gemmer det i samtalehistorikken, og sender EJS-siden tilbage, som viser hele samtalen i browseren"
           >
             <article><span>Bruger</span><strong>Spørgsmål</strong><small><code>POST /ask</code></small></article>
             <div class="api-contract">
-              <div><b>Gemmer</b><code>messages.push(...)</code></div>
-              <div><b>Vælger</b><code>svar ud fra regler</code></div>
+              <div><b>Validerer</b><code>input ikke tomt</code></div>
             </div>
             <article class="api-server">
-              <span>Server</span><strong>Regelbaseret logik</strong><small>selve matchingen kommer næste gang</small>
+              <span>Server</span><strong>Regelbaseret logik</strong><small>vælger svar ud fra regler</small>
             </article>
             <div class="data-connector"><b>→</b><small>gemmer</small></div>
             <article class="api-data"><span>Data</span><strong>messages[]</strong><small>spørgsmål + svar</small></article>
+            <div class="data-connector"><b>→</b><small>render</small></div>
+            <article><span>Browser</span><strong>EJS</strong><small>viser hele samtalen</small></article>
           </div>
-          <p class="bottom-line">Samme mønster som øvelse 2: læs input → validér → gem/vælg → <code>response.render()</code> én gang.</p>
+          <p class="bottom-line">
+            Samme mønster som øvelse 2: læs input → validér → vælg svar (regler) → gem →
+            <code>response.render()</code> én gang, der sender hele samtalen tilbage til browseren.
+          </p>
           <aside class="notes">
             Vi venter bevidst med at vise findAnswer()-koden til næste undervisningsgang, hvor arrays af objekter og
             funktioner er det faglige fokus. I dag er det nok, at de forstår flowet: spørgsmålet valideres, gemmes i
@@ -498,7 +502,7 @@ response.render("index", { name, age, error, names });</code></pre>
 
         <section class="recap-slide">
           <span class="eyebrow">Opsamling</span>
-          <h2>Kan I forklare de fire begreber med jeres egne ord?</h2>
+          <h2>Kan I forklare de fem led med jeres egne ord?</h2>
           <div class="recap-chain">
             <span>formular</span><b>→</b><span>request.body</span><b>→</b><span>validering</span><b>→</b
             ><span>response.render()</span><b>→</b><span>EJS</span>
