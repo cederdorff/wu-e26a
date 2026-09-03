@@ -326,13 +326,13 @@ messages.push({ type: "question", text: question });
 messages.push({ type: "answer", text: "Jeg leder efter et svar ..." });
 ```
 
-Nu bliver `question` og `answer` både data og CSS-klasser. Brug eller tilpas derfor jeres eksisterende styling til fx `.question` og `.answer`.
+Nu bliver `question` og `answer` både data og CSS-klasser. Brug tid på at style `.question` og `.answer`, så de to typer faktisk ser forskellige ud — fx forskellig baggrundsfarve, eller spørgsmål og svar justeret til hver sin side. Det er det samme skel, jeres kode allerede laver med `message.type`; nu skal øjet kunne se det samme.
 
 > Stop og start serveren igen med `npm run dev`, før I tester dette trin. `messages` indeholder stadig tekstværdierne fra trin 8, men nu forventer EJS objekter med `type` og `text`. En genstart tømmer arrayet, så alle nye beskeder får den samme struktur.
 
 ### Test trin 9
 
-Indsend et spørgsmål. I skal se både spørgsmålet og det foreløbige svar. Brug DevTools' Elements-panel til at kontrollere, at de to `article`-elementer har klasserne `question` og `answer`.
+Indsend et spørgsmål. I skal se både spørgsmålet og det foreløbige svar. Brug DevTools' Elements-panel til at kontrollere, at de to `article`-elementer har klasserne `question` og `answer` — og med det blotte øje kunne se, hvilken besked der er hvilken, uden at kigge i koden.
 
 ---
 
@@ -387,9 +387,7 @@ function findAnswer(question) {
 }
 ```
 
-> **`.some()`:** `.some()` gennemgår et array og returnerer `true`, så snart ét element opfylder betingelsen — ellers `false`. Her stopper den, så snart ét nøgleord findes i spørgsmålet. Det passer godt her, fordi vi kun skal vide, om reglen skal bruges, ikke hvor mange nøgleord der matcher.
-
-`findAnswer()` gennemgår objekterne i `answers` ét ad gangen. For hvert objekt undersøger `.some()`, om mindst ét af dets `keywords` findes i spørgsmålet, efter `toLowerCase()` har gjort store og små bogstaver ligegyldige. Ved det første match returnerer funktionen `answerGroup.answer`. Hvis intet matcher, returnerer den en standardtekst til sidst.
+> **`.some()`:** `.some()` gennemgår et array og returnerer `true`, så snart ét element opfylder betingelsen — ellers `false`. `findAnswer()` bruger den til at spørge: matcher mindst ét af reglens `keywords` spørgsmålet (efter `toLowerCase()`, så store/små bogstaver ikke tæller)? Ved første match returnerer funktionen `answerGroup.answer` med det samme; ellers fortsætter `for`-loopet til næste regel, og returnerer standardteksten, hvis ingen regler matcher.
 
 ### Test trin 11
 
@@ -534,9 +532,138 @@ Kontrollér igen, at almindelige spørgsmål og fejlbeskeder virker. Prøv også
 
 ---
 
-### Flere udvidelser
+### 16. Style samtalen som en chat
 
-- Giv en regel flere mulige svar. Skift fx dens `answer`-tekst til et array, og vælg ét element med `Math.random()`.
-- Tilføj en `POST /clear-messages`-route og en “Ryd beskeder”-knap.
-- Gem et tidspunkt på hvert objekt i `messages`, og vis det i EJS.
-- Undersøg `request.query` med `/debug?name=Ada` og `request.params` med `/debug/:name`. Sammenlign dem med `request.body` fra formularen.
+I trin 9 fik `.question` og `.answer` hver deres udseende. Nu skal I gøre det til et rigtigt chat-layout, hvor spørgsmål og svar sidder hver sin side.
+
+Find (eller opret) det element, der wrapper jeres beskeder — fx en `<section>` uden om EJS-loopet — og gør det til en flex-container:
+
+```css
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.question {
+  align-self: flex-end;
+  background-color: #dbeafe;
+}
+
+.answer {
+  align-self: flex-start;
+  background-color: #f1f5f9;
+}
+```
+
+`flex-direction: column` stabler beskederne under hinanden i den rækkefølge, de kommer i `messages`-arrayet. `align-self` flytter kun den enkelte besked til højre eller venstre — det er derfor, reglen står på `.question` og `.answer` og ikke på `.messages`.
+
+### Test trin 16
+
+Indsend flere spørgsmål. Spørgsmål og svar skal nu sidde i hver sin side af samtalen, med tydeligt forskellig baggrundsfarve, uden at I har ændret noget i `server.js` eller `index.ejs`.
+
+---
+
+### 17. Giv en regel flere mulige svar
+
+Lige nu har hver regel præcis ét svar. Skift `answer`-egenskaben ud med et array af svar, `answers`, i mindst én af jeres regler:
+
+```js
+{
+  keywords: ["fritid", "hobby", "kan lide"],
+  answers: [
+    "I min fritid kan jeg godt lide at læse.",
+    "Jeg elsker at gå ture, når vejret tillader det."
+  ]
+}
+```
+
+I `findAnswer()` skal I derefter vælge ét tilfældigt element fra arrayet, i stedet for at returnere `answerGroup.answer` direkte:
+
+```js
+const randomIndex = Math.floor(Math.random() * answerGroup.answers.length);
+return answerGroup.answers[randomIndex];
+```
+
+> `Math.random()` giver et decimaltal mellem 0 (inklusiv) og 1 (eksklusiv). Ganget med `answerGroup.answers.length` og afrundet ned med `Math.floor()` får I et helt indeks, der altid rammer et gyldigt element i arrayet.
+
+Husk at ændre `answer` til `answers` (som array) i **alle** jeres regler, så `findAnswer()` fungerer ens for dem alle.
+
+### Test trin 17
+
+Stil det samme spørgsmål flere gange. Svaret skal variere mellem de tekster, I har skrevet i arrayet.
+
+---
+
+### 18. Tilføj en "Ryd beskeder"-knap
+
+Tilføj en ny route, der tømmer samtalehistorikken:
+
+```js
+app.post("/clear-messages", (request, response) => {
+  messages.length = 0;
+  response.redirect("/");
+});
+```
+
+> `messages` er erklæret med `const`, så I kan ikke skrive `messages = []`. `messages.length = 0` tømmer i stedet det eksisterende array, uden at oprette et nyt. `response.redirect("/")` sender browseren videre til en ny `GET /`, som renderer siden med det nu tomme array — det er en anden slags respons end `response.render()`, som I har brugt indtil nu.
+
+Tilføj derefter en formular i `views/index.ejs`, fx ved siden af spørgsmålsformularen:
+
+```html
+<form method="POST" action="/clear-messages">
+  <button type="submit">Ryd beskeder</button>
+</form>
+```
+
+### Test trin 18
+
+Indsend et par spørgsmål, og klik derefter på “Ryd beskeder”. Samtalen skal forsvinde, og I skal lande tilbage på en tom side.
+
+---
+
+### 19. Gem et tidspunkt på hver besked
+
+Udvid message-objekterne med et tidspunkt, når de bliver oprettet:
+
+```js
+messages.push({ type: "question", text: question, createdAt: new Date() });
+```
+
+Gør det samme for svaret. Vis derefter tidspunktet i `views/index.ejs`, inde i jeres eksisterende `<article>`:
+
+```ejs
+<time><%= message.createdAt.toLocaleTimeString("da-DK") %></time>
+```
+
+> `new Date()` gemmer tidspunktet, som beskeden blev oprettet. `.toLocaleTimeString("da-DK")` formaterer det til en læsbar tid i stedet for det fulde dato-objekt.
+
+### Test trin 19
+
+Indsend et par spørgsmål med lidt tid imellem. Hver besked skal have sit eget, forskellige tidspunkt.
+
+---
+
+### 20. Undersøg request.query og request.params
+
+Tilføj disse to midlertidige debug-routes:
+
+```js
+app.get("/debug", (request, response) => {
+  console.log(request.query);
+  response.send(request.query);
+});
+
+app.get("/debug/:name", (request, response) => {
+  console.log(request.params);
+  response.send(request.params);
+});
+```
+
+Besøg `http://localhost:3000/debug?name=Ada&age=41` og `http://localhost:3000/debug/Ada`, og sammenlign, hvad terminalen og browseren viser.
+
+> `request.query` læser feltnavne fra URL'ens query string (delen efter `?`). `request.params` læser navngivne dele af selve stien, markeret med `:` i routen (her `:name`). `request.body`, som I har brugt gennem hele øvelsen, læser i stedet formularens data fra requestets body via `express.urlencoded()`. De tre bruges til forskellige situationer, selvom de alle ender som almindelige JavaScript-objekter.
+
+### Test trin 20
+
+Prøv begge URL'er, og forklar for en makker, hvilken af de tre — `request.query`, `request.params` eller `request.body` — I ville bruge til AMAbottens spørgsmål, og hvorfor. Fjern derefter de to debug-routes igen, så de ikke bliver en del af jeres endelige app.
