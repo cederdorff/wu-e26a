@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-03T11:00:38.960Z",
+  "pulled_at": "2026-09-03T11:06:10.530Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -15,8 +15,8 @@
       "canvas_hash": "dbfe2b39e6fb8c570ea1f840cabd116855f63c55789113532c2a7c2e723e1220"
     },
     "undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md": {
-      "local_hash": "1f9a395925d67eddd1885d6974a6ae997dd17a63d234d4458d7363a81bc21953",
-      "canvas_hash": "1f9a395925d67eddd1885d6974a6ae997dd17a63d234d4458d7363a81bc21953"
+      "local_hash": "1ea2d6b452cfb234a2deac59c05b22a1f404c5544e7a93c9b344ddb1a0167473",
+      "canvas_hash": "1ea2d6b452cfb234a2deac59c05b22a1f404c5544e7a93c9b344ddb1a0167473"
     },
     "undervisning/005-forberedelse-selvstudium-31-08-2026.md": {
       "local_hash": "081ba56f8f2e5edde0af329cdf954b634aa1b9503ffeba25ff99963614d9ca76",

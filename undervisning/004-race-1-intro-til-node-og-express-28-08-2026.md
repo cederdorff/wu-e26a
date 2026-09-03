@@ -68,7 +68,7 @@ canvas_page_id: 200707
 canvas_page_slug: "plan-for-race-1-intro-til-node-og-express"
 canvas_page_title: "Plan for RACE 1 - Intro til Node og Express"
 canvas_page_published: true
-canvas_updated_at: "2026-09-03T11:00:25Z"
+canvas_updated_at: "2026-09-03T11:06:04Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018682"
 local_status: mirrored
 ```
