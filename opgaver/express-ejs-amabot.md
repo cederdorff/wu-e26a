@@ -477,29 +477,9 @@ I skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor
 
 ## Ekstra opgaver
 
-Vælg én opgave ad gangen. De bygger oven på den fungerende AMAbot, så I altid kan gå tilbage til et klart udgangspunkt.
+Trin 14, sanitering, er en del af dagens forventede produkt — lav den først. Opgave 15–20 er bonusopgaver: Vælg frit imellem dem, hvis I når længere, og de bygger ikke nødvendigvis på hinanden i rækkefølge.
 
-### 14. Tilføj en grænse for lange spørgsmål
-
-I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en `else if` i den `if`/`else`-kæde, I skrev i trin 13 — **efter** kontrollen for et tomt spørgsmål og **før** `else` med de to `push`-linjer:
-
-```js
-} else if (question.length > 280) {
-  error = "Spørgsmålet må højst være 280 tegn.";
-} else {
-```
-
-> Rækkefølgen er den samme idé som alderskontrollen i øvelse 2: I spørger først “mangler input helt?”, derefter “er input for langt?”, og kun hvis begge svarer nej, må spørgsmålet gemmes.
-
-Validering afgør, om data må bruges. Normalisering med `trim()` fjerner yderste mellemrum. EJS-escaping med `<%= ... %>` gør output sikkert i HTML-kontekst. Det er tre forskellige opgaver.
-
-### Test trin 14
-
-Test tomt input, et gyldigt spørgsmål, et ukendt spørgsmål og et spørgsmål på mere end 280 tegn. Kontrollér, at ingen af de ugyldige spørgsmål tilføjes til samtalen.
-
----
-
-### 15. Sanitér uønskede kontroltegn
+### 14. Sanitér uønskede kontroltegn
 
 Valideringen afgør, om spørgsmålet må bruges. Sanitering ændrer selve inputtet. Som et enkelt eksempel kan I fjerne usynlige kontroltegn, der ikke hører hjemme i et almindeligt spørgsmål.
 
@@ -526,9 +506,29 @@ Her antager vi, at formularen sender feltet `question`, fordi den selv er bygget
 
 De tre begreber løser forskellige problemer. Forsøg ikke at lave et hjemmelavet “XSS-filter” ved at fjerne ord som `script` eller tegnet `<`; brug fortsat EJS' escaped output til brugerdata.
 
-### Test trin 15
+### Test trin 14
 
 Kontrollér igen, at almindelige spørgsmål og fejlbeskeder virker. Prøv også teksten `<strong>Hej</strong>`: Den skal vises som tekst og må ikke blive til fed HTML.
+
+---
+
+### 15. Tilføj en grænse for lange spørgsmål
+
+I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en `else if` i den `if`/`else`-kæde, I skrev i trin 13 — **efter** kontrollen for et tomt spørgsmål og **før** `else` med de to `push`-linjer:
+
+```js
+} else if (question.length > 280) {
+  error = "Spørgsmålet må højst være 280 tegn.";
+} else {
+```
+
+> Rækkefølgen er den samme idé som alderskontrollen i øvelse 2: I spørger først “mangler input helt?”, derefter “er input for langt?”, og kun hvis begge svarer nej, må spørgsmålet gemmes.
+
+Validering afgør, om data må bruges. Normalisering med `trim()` fjerner yderste mellemrum. EJS-escaping med `<%= ... %>` gør output sikkert i HTML-kontekst. Det er tre forskellige opgaver.
+
+### Test trin 15
+
+Test tomt input, et gyldigt spørgsmål, et ukendt spørgsmål og et spørgsmål på mere end 280 tegn. Kontrollér, at ingen af de ugyldige spørgsmål tilføjes til samtalen.
 
 ---
 

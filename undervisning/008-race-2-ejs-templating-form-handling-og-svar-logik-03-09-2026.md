@@ -4,28 +4,6 @@
 
 I dag bygger vi først en lille server-renderet Express-app og udvider den gennem øvelse 1 og 2. I øvelse 3 bruger I samme request/response-flow til at gøre gårsdagens separate AMAbot-repository med `index.html` til et Express- og EJS-projekt.
 
-Den centrale arbejdsgang er:
-
-```text
-Browser -> GET request -> Express-route -> EJS-template -> HTML-response
-Browser -> POST-formular -> express.urlencoded() -> request.body -> Express-route -> svarlogik -> EJS -> ny HTML-response
-```
-
-Vi bruger denne arbejdsgang til først at lave en personlig hilsen og derefter en enkel AMAbot (Ask Me Anything-bot). AMAbotten er regelbaseret og bruger almindelig JavaScript-logik — ikke kunstig intelligens.
-
-### Når dagen er slut, kan I
-
-- forklare forskellen på server-side rendering (SSR) og client-side rendering (CSR)
-- konfigurere Express til at bruge EJS som template engine
-- gøre lokale CSS-, JavaScript- og billedfiler tilgængelige med `express.static()`
-- sende data fra en Express-route til en EJS-template med `response.render()`
-- forbinde en HTML-formular med en `POST`-route via `method`, `action` og inputfeltets `name`
-- modtage formularens data med `express.urlencoded()` og `request.body`
-- validere brugerinput og generere et relevant svar med almindelig JavaScript-logik
-- følge hele request/response-forløbet i browserens Network-panel
-
----
-
 ## Agenda
 
 <details>
