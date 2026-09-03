@@ -136,7 +136,7 @@ canvas_page_id: 200710
 canvas_page_slug: "plan-for-race-2-ejs-templating-form-handling-og-svar-logik"
 canvas_page_title: "Plan for RACE 2 - EJS templating, form handling og svar logik"
 canvas_page_published: true
-canvas_updated_at: "2026-09-03T08:55:55Z"
+canvas_updated_at: "2026-09-03T08:56:49Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018691"
 local_status: mirrored
 ```

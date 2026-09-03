@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-03T08:56:05.186Z",
+  "pulled_at": "2026-09-03T08:56:59.304Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -31,8 +31,8 @@
       "canvas_hash": "47a96c86efb2223cad009bb5fdc602672fbba536ed568db571d51e2ca66e1364"
     },
     "undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md": {
-      "local_hash": "83ca0beb6afc31fe2a74b93be063a06d5f7ad6b34460840c79b3861ee0fc8dba",
-      "canvas_hash": "83ca0beb6afc31fe2a74b93be063a06d5f7ad6b34460840c79b3861ee0fc8dba"
+      "local_hash": "640f8d4e47974cec1c8c95b9ffd8bb3a60de9d5c2ddbd24d3beb4c2ee0450501",
+      "canvas_hash": "640f8d4e47974cec1c8c95b9ffd8bb3a60de9d5c2ddbd24d3beb4c2ee0450501"
     },
     "undervisning/009-forberedelse-selvstudium-04-09-2026.md": {
       "local_hash": "b2ad0cca2d9b9b2dfee977cfa1339973c34a5b53da875c4ba64499639b177ba5",
