@@ -4,8 +4,8 @@ Velkommen til det lokale spejl af Canvas-kurset [WU-E26A](https://eaaa.instructu
 
 ## Slides
 
-- [RACE 1 · Intro til Node.js og Express.js](slides/node-express/)
-- [RACE 2 · EJS templating, form handling og svar logik](slides/express-ejs/)
+- [RACE 1 · Intro til Node.js og Express.js](https://cederdorff.github.io/wu-e26a/slides/node-express/)
+- [RACE 2 · EJS templating, form handling og svar logik](https://cederdorff.github.io/wu-e26a/slides/express-ejs/)
 
 ## Undervisningsforløbet
 

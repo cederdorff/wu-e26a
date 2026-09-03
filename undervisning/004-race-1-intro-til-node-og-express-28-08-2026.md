@@ -36,7 +36,7 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 
 ### Præsentationer
 
-- [Intro til Node.js og Express.js](../slides/node-express/)
+- [Intro til Node.js og Express.js](https://cederdorff.github.io/wu-e26a/slides/node-express/)
 
 ### Opgaver
 
