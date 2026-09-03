@@ -110,11 +110,11 @@ Hvis I når længere, kan I tilføje flere svarregler og undersøge forskellen p
 
 ## Materialer
 
-## Præsentationer
+### Præsentationer
 
-- Fælles introduktion til SSR, CSR og EJS
+- [EJS templating, form handling og svar logik](../slides/express-ejs/)
 
-## Opgaver
+### Opgaver
 
 1.  [Din første server-renderede EJS-app](../opgaver/express-ejs-formular.md)
 2.  [Formhåndtering, validering og svarlogik](../opgaver/express-ejs-formhaandtering-svarlogik.md)
