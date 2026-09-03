@@ -130,8 +130,6 @@ I skal nu have `views/index.ejs` og mindst én fil i `public/` — men serveren 
 
 ## 4. Lad Express servere jeres statiske filer
 
-`express.static()` er nyt i denne øvelse. Det er middleware, som giver browseren adgang til filerne i `public/`. Uden det kan Express godt rendere en EJS-template, men browseren kan ikke hente dens CSS, billeder eller favicon.
-
 Opret `server.js` i repositoryets rodmappe med denne mindste server:
 
 ```js
@@ -147,7 +145,7 @@ app.listen(port, () => {
 });
 ```
 
-`express.static("public")` betyder: Når browseren beder om en fil, leder Express i `public/`. Filen `public/styles.css` kan derfor hentes på URL'en `/styles.css`, og `public/assets/images/me.jpg` kan hentes på `/assets/images/me.jpg`.
+> **`express.static()`:** `express.static()` er middleware, som giver browseren adgang til filerne i en mappe. Uden det kan Express godt rendere en EJS-template, men browseren kan ikke hente dens CSS, billeder eller favicon. `app.use(express.static("public"))` betyder: Når browseren beder om en fil, leder Express i `public/`. Filen `public/styles.css` kan derfor hentes på URL'en `/styles.css`, og `public/assets/images/me.jpg` kan hentes på `/assets/images/me.jpg`.
 
 Start serveren:
 
@@ -253,7 +251,7 @@ Indsend et spørgsmål. Det skal vises på siden med jeres `question`-styling. F
 
 ## 8. Gem og vis simple beskeder
 
-Nu skal vi gøre ét spørgsmål til en lille historik. Først er hver besked kun en tekst i et array (lidt som vi gjorde med `names`i foregående øvelse). Vi venter med svar, typer, styling og validering, så I kan følge den ene nye idé: `push()` gemmer tekst i `messages`, og EJS viser alle teksterne igen.
+Nu skal vi gøre ét spørgsmål til en lille historik. Først er hver besked kun en tekst i et array (lidt som vi gjorde med `names` i foregående øvelse). Vi venter med svar, typer, styling og validering, så I kan følge den ene nye idé: `push()` gemmer tekst i `messages`, og EJS viser alle teksterne igen.
 
 Opret arrayet **over** routes i `server.js`:
 
@@ -336,9 +334,9 @@ Indsend et spørgsmål. I skal se både spørgsmålet og det foreløbige svar. B
 
 ---
 
-## 10. Tilføj AMAbottens svarregler
+## 10. Definér AMAbottens svarregler (data)
 
-Erstat det midlertidige svar med regler, der handler om jer. Opret dette over jeres routes:
+Nu skal du erstatte de midlertidige svar med svar fra et foruddeffineret array. Start med data alene (arrayet), før I rører routen eller nogen logik. Opret dette over jeres routes:
 
 ```js
 const answers = [
@@ -357,7 +355,19 @@ const answers = [
 ];
 ```
 
-Tilpas mindst navn, emner og svar, så botten beskriver jer. Tilføj derefter denne funktion under reglerne:
+Tilpas mindst navn, emner og svar, så botten beskriver jer.
+
+> **Array af objekter:** `answers` er et array, ligesom `messages`. Men hvert element er selv et objekt med to egenskaber: `keywords` er et array af ord, der kan udløse svaret, og `answer` er teksten, AMAbotten skal sende. Det er den samme objekt-notation, I brugte til `{ type: "question", text: question }` i forrige trin — bare med andre egenskaber.
+
+### Test trin 10
+
+Sæt midlertidigt `console.log(answers.length);` lige under arrayet, og genstart serveren med `npm run dev`. Terminalen skal vise antallet af regler, I har skrevet. Det bekræfter, at objektet er skrevet korrekt, før I bruger det i næste trin. Fjern loggen igen.
+
+---
+
+## 11. Skriv findAnswer() og brug den i routen
+
+Nu skal I bruge dataene fra forrige trin. Tilføj denne funktion under `answers`:
 
 ```js
 function findAnswer(question) {
@@ -375,11 +385,11 @@ function findAnswer(question) {
 }
 ```
 
-`some()` stopper, så snart ét nøgleord matcher. Det passer godt her, fordi vi kun skal vide, om den aktuelle regel skal bruges.
+> **`.some()`:** `.some()` gennemgår et array og returnerer `true`, så snart ét element opfylder betingelsen — ellers `false`. Her stopper den, så snart ét nøgleord findes i spørgsmålet. Det passer godt her, fordi vi kun skal vide, om reglen skal bruges, ikke hvor mange nøgleord der matcher.
 
-Hvert element i `answers` er et objekt: `keywords` fortæller, hvilke ord der kan udløse svaret, og `answer` er teksten, AMAbotten skal sende tilbage. `findAnswer()` gennemgår objekterne ét ad gangen og returnerer det første match.
+`findAnswer()` gennemgår objekterne i `answers` ét ad gangen. For hvert objekt undersøger `.some()`, om mindst ét af dets `keywords` findes i spørgsmålet, efter `toLowerCase()` har gjort store og små bogstaver ligegyldige. Ved det første match returnerer funktionen `answerGroup.answer`. Hvis intet matcher, returnerer den en standardtekst til sidst.
 
-Til sidst erstatter I linjen, der tilføjer det foreløbige svar, i POST-routen:
+Erstat til sidst linjen, der tilføjer det foreløbige svar, i POST-routen:
 
 ```js
 const answer = findAnswer(question);
@@ -388,15 +398,15 @@ messages.push({ type: "answer", text: answer });
 
 Lad linjen, der gemmer brugerens spørgsmål, blive stående.
 
-### Test trin 10
+### Test trin 11
 
 Test ét spørgsmål for hver regel og et spørgsmål, der ikke matcher noget. Genindlæs siden: Hvorfor ligger samtalen stadig der? Genstart derefter serveren: Hvorfor forsvinder den?
 
 ---
 
-## 11. Vis en fejl ved et tomt spørgsmål
+## 12. Vis en fejl ved et tomt spørgsmål
 
-Indtil nu gemmer appen alt, også en tom tekst. Nu tilføjer vi den første valideringsregel.
+Indtil nu gemmer appen alt, også en tom tekst. Nu tilføjer vi den første valideringsregel — med samme mønster, som I brugte til navn og alder i [øvelse 2](express-ejs-formhaandtering-svarlogik.md): saml reglerne i én `if`/`else`-kæde, og render til sidst én gang.
 
 Selv hvis I senere tilføjer `required` til HTML-feltet, skal serveren stadig validere. En browser kan omgås, men serveren bestemmer altid, hvilke data der må gemmes i `messages`.
 
@@ -408,28 +418,26 @@ app.get("/", (request, response) => {
 });
 ```
 
-I POST-routen skal I ændre den første linje til:
+Byg derefter POST-routen om til dette:
 
 ```js
-const question = request.body.question.trim();
+app.post("/ask", (request, response) => {
+  const question = request.body.question.trim();
+  let error = "";
+
+  if (!question) {
+    error = "Skriv et spørgsmål, før du sender.";
+  } else {
+    messages.push({ type: "question", text: question });
+    const answer = findAnswer(question);
+    messages.push({ type: "answer", text: answer });
+  }
+
+  response.render("index", { messages, error });
+});
 ```
 
-Sæt derefter dette **før** den første `messages.push(...)`:
-
-```js
-if (!question) {
-  return response.render("index", {
-    messages,
-    error: "Skriv et spørgsmål, før du sender."
-  });
-}
-```
-
-Ret også POST-routens sidste render til:
-
-```js
-response.render("index", { messages, error: "" });
-```
+> `let error = ""` starter uden fejl, ligesom i øvelse 2. `if`-sætningen sætter kun en fejltekst, når spørgsmålet mangler. De to `push`-linjer flytter ind i `else`, så et tomt spørgsmål aldrig når frem til `messages`. Routen renderer til sidst kun én gang, med de aktuelle `messages` og `error` — uanset om der var en fejl eller ej.
 
 Vis fejlbeskeden tæt ved formularen i `views/index.ejs`:
 
@@ -439,9 +447,7 @@ Vis fejlbeskeden tæt ved formularen i `views/index.ejs`:
 <% } %>
 ```
 
-`return` stopper POST-routen, så den tomme besked ikke bliver lagt i `messages`.
-
-### Test trin 11
+### Test trin 12
 
 Indsend først et tomt spørgsmål og derefter et almindeligt spørgsmål. Kun det almindelige spørgsmål og svaret skal tilføjes til historikken.
 
@@ -459,28 +465,27 @@ I skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor
 
 Vælg én opgave ad gangen. De bygger oven på den fungerende AMAbot, så I altid kan gå tilbage til et klart udgangspunkt.
 
-### 12. Tilføj en grænse for lange spørgsmål
+### 13. Tilføj en grænse for lange spørgsmål
 
-Sæt denne kontrol efter tjekket for et tomt spørgsmål og før `messages.push()`:
+I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en `else if` i den `if`/`else`-kæde, I skrev i trin 12 — **efter** kontrollen for et tomt spørgsmål og **før** `else` med de to `push`-linjer:
 
 ```js
-if (question.length > 280) {
-  return response.render("index", {
-    messages,
-    error: "Spørgsmålet må højst være 280 tegn."
-  });
-}
+} else if (question.length > 280) {
+  error = "Spørgsmålet må højst være 280 tegn.";
+} else {
 ```
+
+> Rækkefølgen er den samme idé som alderskontrollen i øvelse 2: I spørger først “mangler input helt?”, derefter “er input for langt?”, og kun hvis begge svarer nej, må spørgsmålet gemmes.
 
 Validering afgør, om data må bruges. Normalisering med `trim()` fjerner yderste mellemrum. EJS-escaping med `<%= ... %>` gør output sikkert i HTML-kontekst. Det er tre forskellige opgaver.
 
-### Test trin 12
+### Test trin 13
 
 Test tomt input, et gyldigt spørgsmål, et ukendt spørgsmål og et spørgsmål på mere end 280 tegn. Kontrollér, at ingen af de ugyldige spørgsmål tilføjes til samtalen.
 
 ---
 
-### 13. Sanitér uønskede kontroltegn
+### 14. Sanitér uønskede kontroltegn
 
 Valideringen afgør, om spørgsmålet må bruges. Sanitering ændrer selve inputtet. Som et enkelt eksempel kan I fjerne usynlige kontroltegn, der ikke hører hjemme i et almindeligt spørgsmål.
 
@@ -507,7 +512,7 @@ Her antager vi, at formularen sender feltet `question`, fordi den selv er bygget
 
 De tre begreber løser forskellige problemer. Forsøg ikke at lave et hjemmelavet “XSS-filter” ved at fjerne ord som `script` eller tegnet `<`; brug fortsat EJS' escaped output til brugerdata.
 
-### Test trin 13
+### Test trin 14
 
 Kontrollér igen, at almindelige spørgsmål og fejlbeskeder virker. Prøv også teksten `<strong>Hej</strong>`: Den skal vises som tekst og må ikke blive til fed HTML.
 
