@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-03T11:06:10.530Z",
+  "pulled_at": "2026-09-03T11:23:42.173Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -15,8 +15,8 @@
       "canvas_hash": "dbfe2b39e6fb8c570ea1f840cabd116855f63c55789113532c2a7c2e723e1220"
     },
     "undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md": {
-      "local_hash": "1ea2d6b452cfb234a2deac59c05b22a1f404c5544e7a93c9b344ddb1a0167473",
-      "canvas_hash": "1ea2d6b452cfb234a2deac59c05b22a1f404c5544e7a93c9b344ddb1a0167473"
+      "local_hash": "56e100371fd0d672dbf2d552b83c77d81bf857accee84018460f27b66d241285",
+      "canvas_hash": "56e100371fd0d672dbf2d552b83c77d81bf857accee84018460f27b66d241285"
     },
     "undervisning/005-forberedelse-selvstudium-31-08-2026.md": {
       "local_hash": "081ba56f8f2e5edde0af329cdf954b634aa1b9503ffeba25ff99963614d9ca76",
@@ -31,16 +31,16 @@
       "canvas_hash": "47a96c86efb2223cad009bb5fdc602672fbba536ed568db571d51e2ca66e1364"
     },
     "undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md": {
-      "local_hash": "4dc8b250af7b70c9a8fc548799fdd2a1e9055ddc6c0397bd8c771bd82c4d3b41",
-      "canvas_hash": "4dc8b250af7b70c9a8fc548799fdd2a1e9055ddc6c0397bd8c771bd82c4d3b41"
+      "local_hash": "a6cd6d7e88535e165e1db28e4777bb5c4d18e03bbae65e67a66abe41c7dd28e4",
+      "canvas_hash": "a6cd6d7e88535e165e1db28e4777bb5c4d18e03bbae65e67a66abe41c7dd28e4"
     },
     "undervisning/009-forberedelse-selvstudium-04-09-2026.md": {
       "local_hash": "b2ad0cca2d9b9b2dfee977cfa1339973c34a5b53da875c4ba64499639b177ba5",
       "canvas_hash": "b2ad0cca2d9b9b2dfee977cfa1339973c34a5b53da875c4ba64499639b177ba5"
     },
     "undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md": {
-      "local_hash": "5d2e928c48a2fa714cafe1c436a4e881572b33498eeff1f9230370950d7b40ca",
-      "canvas_hash": "5d2e928c48a2fa714cafe1c436a4e881572b33498eeff1f9230370950d7b40ca"
+      "local_hash": "ac8016830f3196467c468573febb9c43f77ad550574bf3d27d9ee992523569ee",
+      "canvas_hash": "ac8016830f3196467c468573febb9c43f77ad550574bf3d27d9ee992523569ee"
     },
     "undervisning/011-forberedelse-selvstudium-08-09-2026.md": {
       "local_hash": "b861175a146776d7e7cbe123bd16e66f9933b853e2232b731f15971f1d41dc90",
@@ -55,8 +55,8 @@
       "canvas_hash": "9d894f09417d8c3e4ace48fb84a8c6a85665d992caaa2bbdcd9da4f9bb5a4a6a"
     },
     "undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md": {
-      "local_hash": "5debe731405387d2651b62d7ae3480a503677b7ce8cd92a804b048e66ce735d5",
-      "canvas_hash": "5debe731405387d2651b62d7ae3480a503677b7ce8cd92a804b048e66ce735d5"
+      "local_hash": "29bd34140b34dc15b78024d0f50605674d3f9a45cdfce1778422a92741b6e798",
+      "canvas_hash": "29bd34140b34dc15b78024d0f50605674d3f9a45cdfce1778422a92741b6e798"
     },
     "undervisning/015-forberedelse-selvstudium-14-09-2026.md": {
       "local_hash": "ec918bbe51239ca3425c6c7f6dca21fd6f57dad1886192720b869ff2b08d432e",
@@ -67,8 +67,8 @@
       "canvas_hash": "303a1347d101e58a0cf1a8cc6eeee24f7a5f8c2b85ae87c76ebea4e879a8a952"
     },
     "undervisning/017-race-5-node-express-rest-api-16-09-2026.md": {
-      "local_hash": "0a24e804f2538af9197d4fe5fb7b903668a70c028576fb6007fc77d4dc9f2b3d",
-      "canvas_hash": "0a24e804f2538af9197d4fe5fb7b903668a70c028576fb6007fc77d4dc9f2b3d"
+      "local_hash": "42762a237806340129044c70d69960607fb30fe32030e96beb1677d503f0f11e",
+      "canvas_hash": "42762a237806340129044c70d69960607fb30fe32030e96beb1677d503f0f11e"
     },
     "undervisning/018-forberedelse-selvstudium-17-09-2026.md": {
       "local_hash": "e37daea6e7270a3cfbcfea845b30886ed64714c7740a9f4791c7f8df0ccb75d3",

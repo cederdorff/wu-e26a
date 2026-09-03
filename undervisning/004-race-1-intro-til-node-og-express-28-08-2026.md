@@ -36,17 +36,17 @@ NB: Jeg er med på, at du muligvis ikke har haft så lang tid til at forberede. 
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
 - [Intro til Node.js og Express.js](https://cederdorff.com/wu-e26a/node-express/)
 
-### Opgaver
+## Opgaver
 
 - [1\. Hello Node](../opgaver/hello-node.md)
 - [2\. Hello HTTP Module](../opgaver/hello-http-module.md)
-  - [Løsningsforslag - hello-http-module](https://github.com/cederdorff/hello-http-module)
+    - [Løsningsforslag - hello-http-module](https://github.com/cederdorff/hello-http-module)
 - [3\. Getting Started with Express.js (Hello Express)](../opgaver/hello-express.md)
-  - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
+    - [Løsningsforslag - node-express-todos-rest-api](https://github.com/cederdorff/node-express-todos-rest-api)
 - [4\. Fortsæt på Fullstack > Node.js > Build a Node API](https://scrimba.com/fullstack-path-c0fullstack)
 - [5\. Begynd på Fullstack > Express.js](https://scrimba.com/fullstack-path-c0fullstack)
 - [Ekstraopgave: Node.js File System](../opgaver/node-file-system.md)
@@ -68,7 +68,7 @@ canvas_page_id: 200707
 canvas_page_slug: "plan-for-race-1-intro-til-node-og-express"
 canvas_page_title: "Plan for RACE 1 - Intro til Node og Express"
 canvas_page_published: true
-canvas_updated_at: "2026-09-03T11:06:04Z"
+canvas_updated_at: "2026-09-03T11:23:33Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018682"
 local_status: mirrored
 ```
