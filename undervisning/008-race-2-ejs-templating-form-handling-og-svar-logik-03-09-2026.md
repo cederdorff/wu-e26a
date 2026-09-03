@@ -100,15 +100,6 @@ Hvis I når længere, kan I tilføje flere svarregler og undersøge forskellen p
 
 </details>
 
-<details>
-<summary><strong>7. Faglig opsamling og refleksion</strong></summary>
-
-Vis jeres AMAbot til en makker, og forklar request/response-forløbet uden at læse op fra koden.
-
-**Exit ticket:** Hvilken kode kører i browseren, hvilken kode kører på serveren, og på hvilket tidspunkt bliver HTML'en genereret?
-
-</details>
-
 ---
 
 ## Forberedelse
