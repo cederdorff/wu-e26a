@@ -1,69 +1,56 @@
 # Øvelse 2: Formhåndtering, validering og svarlogik
 
-I [øvelse 1](express-ejs-formular.md) modtog serveren ét navn og sendte en hilsen tilbage. Nu bygger du langsomt videre: først validerer du navnet, derefter gemmer du navne i et array, og til sidst tilføjer du alder og svarlogik.
+I [øvelse 1](express-ejs-formular.md) byggede du en EJS-app, der modtager et navn og renderer en hilsen. Nu bygger du videre i **det samme projekt**. Du udvider formularen med alder, viser fejlbeskeder og gemmer gyldige navne i et array.
 
-Fortsæt i samme projekt, og brug fortsat `npm run dev`. Skriv selv koden og test efter hvert trin.
+Skriv koden selv, og test efter hvert trin. Målet er ikke at kende den færdige løsning på forhånd, men at kunne følge data hele vejen fra formularen til serveren og tilbage til EJS.
 
-## Det ender du med at bygge
+Når øvelsen er færdig, har du både en formular og et svar på samme side:
 
-Formularen får felter til navn og alder:
+![Formular med felter til navn og alder](assets/express-ejs-name-age-form-browser.png)
 
-![En formular med felter til navn og alder](assets/express-ejs-name-age-form-browser.png)
+![Formularen med en personlig hilsen og en liste over indsendte navne](assets/express-ejs-name-age-response-browser.png)
 
-Efter et gyldigt submit viser serveren en personlig hilsen og en historik:
+## Det bygger du
 
-![En personlig hilsen med navn og alder samt en liste med tidligere navne](assets/express-ejs-name-age-response-browser.png)
+```text
+Browser -> POST /submit -> request.body -> validering -> response.render() -> EJS -> HTML
+```
 
-> Skærmbillederne er en enkel reference. Det vigtige er dataflowet og funktionaliteten — ikke at din side ligner dem præcist.
+Du bruger disse fire værdier i templaten:
 
-## Før du går i gang
+- `name`: navnet fra formularen
+- `age`: alderen fra formularen
+- `error`: en fejlbesked eller en tom tekst
+- `names`: arrayet med de gyldige navne
 
-Kontrollér, at øvelse 1 stadig virker:
-
-- `GET /` viser formularen.
-- Formularen sender `POST /submit`.
-- `request.body.name` indeholder det indtastede navn.
-- EJS viser en personlig hilsen.
+> **Validering** betyder, at serveren kontrollerer data, før den bruger dem. Browserens `required`-attribut er nyttig, men serveren skal stadig selv kontrollere dataene.
 
 ---
 
-## 1. Undersøg tomt input
+## 1. Start fra øvelse 1
 
-Indsend formularen uden et navn. Prøv derefter et navn, der kun består af mellemrum.
+Åbn projektet fra øvelse 1, og start serveren:
+
+```bash
+npm run dev
+```
+
+Kontrollér, at du stadig har:
+
+- `app.use(express.urlencoded({ extended: true }))`
+- en GET-route til `/`
+- en POST-route til `/submit`
+- `views/index.ejs`
 
 ### Test trin 1
 
-Overvej:
-
-- Får brugeren en forklaring?
-- Bør `"   "` tælle som et navn?
-- Bør et navn gemmes med mellemrum før og efter?
-
-Det første problem er, at appen ikke kan skelne et brugbart navn fra tomt input.
+Indsend et navn. Kig i terminalen, hvis du stadig har `console.log(request.body)` fra øvelse 1. Du bør se et objekt med feltet `name`.
 
 ---
 
-## 2. Normalisér og validér navnet
+## 2. Vis en fejl, hvis navnet mangler
 
-Ret POST-routen, så den fjerner ydre mellemrum og afviser et tomt navn:
-
-```js
-app.post("/submit", (request, response) => {
-  const rawName = request.body.name;
-  const name = rawName.trim();
-
-  if (!name) {
-    return response.render("index", {
-      name: "",
-      error: "Skriv dit navn, før du sender formularen."
-    });
-  }
-
-  response.render("index", { name, error: "" });
-});
-```
-
-Din GET-route skal også sende `error`, fordi den samme template nu bruger variablen:
+Vi begynder kun med navnet. I `server.js` skal GET-routen altid sende en tom fejlbesked og et tomt navn til EJS:
 
 ```js
 app.get("/", (request, response) => {
@@ -71,123 +58,115 @@ app.get("/", (request, response) => {
 });
 ```
 
-Tilføj dette efter formularen i `views/index.ejs`:
+Opdatér derefter POST-routen. Først læser du navnet, derefter vælger du en fejlbesked, og til sidst renderer du den samme side igen:
 
-```html
+```js
+app.post("/submit", (request, response) => {
+  const name = request.body.name;
+  let error = "";
+
+  if (!name || name.trim() === "") {
+    error = "Skriv dit navn, før du sender formularen.";
+  }
+
+  response.render("index", { name, error });
+});
+```
+
+I `views/index.ejs` skal du vise fejlen, men kun når der er en:
+
+```ejs
 <% if (error) { %>
-  <p role="alert"><%= error %></p>
+  <p><%= error %></p>
 <% } %>
 ```
 
-> **Normalisering og validering:** `trim()` gør input ensartet ved at fjerne ydre mellemrum. Derefter afgør `if (!name)`, om værdien må bruges. `return` stopper POST-routen, når der er en fejl.
+Sæt koden lige under formularen eller lige over den — vælg det sted, hvor en bruger naturligt vil opdage fejlen.
+
+> `let error = ""` opretter en tom fejlbesked. Hvis navnet mangler, ændrer `if`-sætningen teksten. `<% if (...) { %>` i EJS bestemmer, om HTML-stykket skal være med i den færdige side.
 
 ### Test trin 2
 
-1. Indsend et tomt navn og et navn med kun mellemrum. Begge skal vise fejlbeskeden.
-2. Indsend `  Ada  `. Hilsenen skal bruge `Ada` uden yderste mellemrum.
-3. Genindlæs siden. Den skal ikke vise en fejl.
-
-> **Templatens datakontrakt:** Når EJS bruger `error`, skal både GET- og POST-routen sende en værdi til `error`.
+Send formularen med et tomt navnefelt. Fejlbeskeden skal vises. Send derefter et rigtigt navn. Fejlbeskeden skal forsvinde.
 
 ---
 
-## 3. Gem først bare navne i et array
+## 3. Gem gyldige navne i et array
 
-Før vi tilføjer flere felter, gemmer vi hver gyldig indsendelse på den enkleste måde: et navn i et array.
-
-Tilføj dette før dine routes i `server.js`:
+Nu skal et gyldigt navn blive liggende på serveren, mens appen kører. Opret arrayet **over** dine routes:
 
 ```js
 const names = [];
 ```
 
-Ret GET-routen, så den sender arrayet til templaten:
+Tilføj `names` til dataene i GET-routen:
 
 ```js
-app.get("/", (request, response) => {
-  response.render("index", { name: "", error: "", names });
-});
+response.render("index", { name: "", error: "", names });
 ```
 
-Ret derefter POST-routen. Tilføj kun navnet, når det er gyldigt:
+I POST-routen tilføjer du kun navnet, når der ikke er fejl. Sæt derfor dette ind som `else` efter din `if`-sætning:
 
 ```js
-app.post("/submit", (request, response) => {
-  const rawName = request.body.name;
-  const name = rawName.trim();
-
-  if (!name) {
-    return response.render("index", {
-      name: "",
-      error: "Skriv dit navn, før du sender formularen.",
-      names
-    });
-  }
-
+else {
   names.push(name);
-  console.log(names);
-
-  response.render("index", { name, error: "", names });
-});
+}
 ```
 
-> **Array:** Et array kan gemme flere værdier i rækkefølge. `names.push(name)` lægger det nye navn bagerst i arrayet. Arrayet ligger foreløbig kun i serverens hukommelse.
+POST-routen skal nu også sende `names` til EJS:
+
+```js
+response.render("index", { name, error, names });
+```
+
+> **Array og `push()`:** `names` er en liste. `names.push(name)` lægger det aktuelle navn ind sidst i listen. Fordi arrayet er oprettet uden for routes, findes det stadig ved næste request, så længe serveren kører.
 
 ### Test trin 3
 
-Indsend `Ada` og derefter `Dan`. Terminalen skal vise noget i stil med:
+Indsend to forskellige navne. Læg midlertidigt denne linje ind i POST-routen efter `names.push(name)`:
 
-```text
-[ 'Ada' ]
-[ 'Ada', 'Dan' ]
+```js
+console.log(names);
 ```
 
-Indsend derefter et tomt navn. Arrayet må ikke ændre sig.
+Terminalen bør først vise ét navn og derefter begge navne. Fjern gerne loggen igen, når du har set det.
 
 ---
 
-## 4. Render arrayet med EJS
+## 4. Render listen i EJS
 
-Tilføj dette efter fejlbeskeden i `index.ejs`:
+Serveren har nu dataene, men browseren viser dem ikke endnu. Tilføj dette i `views/index.ejs` under formularen:
 
-```html
-<h2>Tidligere navne</h2>
+```ejs
+<h2>Indsendte navne</h2>
 
-<% if (names.length === 0) { %>
-  <p>Der er endnu ingen indsendelser.</p>
-<% } else { %>
-  <ul>
-    <% names.forEach((name) => { %>
-      <li><%= name %></li>
-    <% }); %>
-  </ul>
-<% } %>
+<ul>
+  <% for (const name of names) { %>
+    <li><%= name %></li>
+  <% } %>
+</ul>
 ```
 
-> **EJS-loop:** `<% ... %>` bruges til JavaScript-logik som `if` og `forEach()`. `<%= ... %>` skriver en værdi i HTML'en og escaper den.
+> **Loop i EJS:** Koden mellem `<%` og `%>` kører på serveren, mens EJS bygger HTML. For hvert navn i arrayet bliver der lavet ét `<li>`-element. `<%= name %>` indsætter og HTML-escaper værdien sikkert.
 
 ### Test trin 4
 
-1. Genstart serveren. Listen skal være tom.
-2. Indsend flere gyldige navne. De skal vises i rækkefølge.
-3. Indsend et tomt navn. Listen må ikke vokse.
-
-Du har nu en komplet lille løsning: valideret input → array → EJS-loop → HTML.
+Indsend et nyt navn. Det skal både ses i terminalen og som et punkt på siden. Genindlæs derefter siden: Listen skal stadig vises, mens serveren fortsat kører.
 
 ---
 
-## 5. Tilføj et aldersfelt
+## 5. Tilføj et felt til alder
 
-Tilføj dette mellem navnefeltet og knappen i `index.ejs`:
+Udvid formularen i `views/index.ejs` med et aldersfelt. `name="age"` er vigtigt: Det bliver nøglen på `request.body`.
 
 ```html
 <label for="age">Hvor gammel er du?</label>
 <input id="age" name="age" type="number" step="any" />
 ```
 
-Formularens `method="POST"` og `action="/submit"` ændres ikke. Det nye felt sendes med, fordi det har `name="age"`.
+Placer feltet inde i den eksisterende `<form>` og før submit-knappen. Indsend derefter formularen med både navn og alder.
 
-Tilføj midlertidigt denne log i starten af POST-routen:
+Sæt eller behold denne log i starten af POST-routen:
 
 ```js
 console.log(request.body);
@@ -195,256 +174,239 @@ console.log(request.body);
 
 ### Test trin 5
 
-Indsend `Ada` og `41`. Terminalen skal vise:
+Indsend for eksempel `Ada` og `41`. Terminalen skal nu vise noget i stil med:
 
-```text
-{ name: 'Ada', age: '41' }
+```js
+{ name: "Ada", age: "41" }
 ```
 
-> **Formulardata er strings:** Selvom feltet har `type="number"`, ankommer `age` som en string i `request.body`. HTML-typen hjælper browseren, men serveren skal selv konvertere og validere værdien.
+Selv om input-feltet har `type="number"`, modtager Express værdien som tekst. Derfor skal serveren kontrollere den.
 
 ---
 
-## 6. Konvertér alderen og tjek, om den er et tal
+## 6. Kontrollér først, at alder er et tal
 
-Læs og konvertér alderen i POST-routen, lige efter du har læst navnet:
+Læs alder fra `request.body` lige efter navnet:
 
 ```js
-const rawAge = request.body.age;
-const age = Number(rawAge);
+const age = request.body.age;
 ```
 
-Log værdierne midlertidigt:
+Nu skal alle renders sende de samme fire værdier. Ret GET-routen til:
 
 ```js
-console.log({ rawAge, age });
-```
-
-Tilføj derefter denne første validering efter navnevalideringen:
-
-```js
-if (!rawAge || Number.isNaN(age)) {
-  return response.render("index", {
-    name,
-    error: "Skriv en alder som et tal.",
-    names
-  });
-}
-```
-
-> **Konvertering:** `Number(rawAge)` forsøger at lave en string om til et number. Hvis det ikke kan lade sig gøre, bliver resultatet `NaN` — *Not a Number*. En tom string skal vi tjekke særskilt, fordi `Number("")` giver `0`.
-
-### Test trin 6
-
-| Alder | Forventet resultat |
-| --- | --- |
-| Tomt felt | Fejl |
-| `abc` sendt via et ændret request | Fejl |
-| `12.5` | Godkendt foreløbig |
-| `0` | Godkendt foreløbig |
-| `121` | Godkendt foreløbig |
-| `41` | Godkendt |
-
-Du har nu kun undersøgt, om alderen er et tal. `0`, `12.5` og `121` er alle tal, men de passer sandsynligvis ikke til vores regler endnu.
-
-### 6b. Tilføj regler for alderens størrelse
-
-Tilføj denne ekstra kontrol **efter** den første aldersvalidering:
-
-```js
-if (!Number.isInteger(age) || age < 1 || age > 120) {
-  return response.render("index", {
-    name,
-    error: "Skriv en alder som et helt tal mellem 1 og 120.",
-    names
-  });
-}
-```
-
-> **Forretningsregler:** Nu ved vi, at `age` er et tal. Den næste `if`-blok afgør, om tallet er et helt tal og ligger inden for det interval, appen accepterer. Reglerne kommer efter konverteringen, fordi sammenligninger som `<` og `>` giver mening for tal.
-
-#### Test trin 6b
-
-| Alder | Forventet resultat |
-| --- | --- |
-| `12.5` | Fejl: ikke et helt tal |
-| `0` | Fejl: for lav alder |
-| `121` | Fejl: for høj alder |
-| `41` | Godkendt |
-
-Vigtigt: Ved en ugyldig alder må du ikke nå ned til `names.push(name)`. Flyt derfor `names.push(name)` til **efter** begge aldersvalideringer.
-
----
-
-## 7. Vis begge felter i hilsenen
-
-På den gyldige vej sender serveren begge værdier til templaten:
-
-```js
-names.push(name);
-response.render("index", { name, age, error: "", names });
-```
-
-GET-routen og fejlgrenene renderer den samme template. Tilføj derfor en tom `age`-værdi i GET-routen:
-
-```js
-response.render("index", { name: "", age: "", error: "", names });
-```
-
-I fejlgrenene tilføjer du også `age`. Ved en aldersfejl skal du bevare den rå værdi:
-
-```js
-return response.render("index", {
-  name,
-  age: rawAge,
-  error: "Skriv en alder som et helt tal mellem 1 og 120.",
-  names
+app.get("/", (request, response) => {
+  response.render("index", { name: "", age: "", error: "", names });
 });
 ```
 
-Erstat den gamle hilsen fra øvelse 1 — hele `<% if (name) { %>`-blokken — med dette i `index.ejs`:
+Erstat derefter `if`-delen i POST-routen med denne rækkefølge:
 
-```html
+```js
+if (!name || name.trim() === "") {
+  error = "Skriv dit navn, før du sender formularen.";
+} else if (!age || Number.isNaN(Number(age))) {
+  error = "Skriv en alder som et tal.";
+} else {
+  names.push(name);
+}
+```
+
+Til sidst skal POST-routen rendere med `age` også:
+
+```js
+response.render("index", { name, age, error, names });
+```
+
+> `Number(age)` forsøger at lave teksten om til et tal. `Number.isNaN(...)` undersøger, om resultatet *ikke* er et tal. Vi gemmer ikke et ekstra tal i en ny variabel endnu — fokus er først på at få kontrollen til at virke.
+
+### Test trin 6
+
+Prøv disse inputs:
+
+| Navn | Alder | Forventet resultat |
+| --- | --- | --- |
+| tomt felt | `25` | Fejl om navn |
+| `Ada` | tomt felt | Fejl om alder |
+| `Ada` | `hej` | Fejl om alder |
+| `Ada` | `41` | Navnet tilføjes til listen |
+
+Lige nu er `12.5`, `0` og `121` stadig tal og bliver accepteret. Det gør vi mere præcist i næste trin.
+
+---
+
+## 7. Gør aldersreglen mere præcis
+
+Vi vil kun acceptere hele aldre fra 1 til 120. Indsæt endnu en `else if` **efter** kontrollen for, om alder er et tal, og **før** `else` med `names.push(name)`:
+
+```js
+else if (!Number.isInteger(Number(age)) || Number(age) < 1 || Number(age) > 120) {
+  error = "Skriv en alder som et helt tal mellem 1 og 120.";
+}
+```
+
+> Den første alderskontrol svarer på: “Er det overhovedet et tal?” Denne nye kontrol svarer på: “Er det et helt tal inden for vores regler?” Rækkefølgen er vigtig, fordi vi først vil afvise manglende eller ugyldige tal.
+
+### Test trin 7
+
+Prøv `12.5`, `0`, `121` og `41`. Kun `41` skal tilføje et navn til listen.
+
+---
+
+## 8. Byg hilsenen af værdierne i EJS
+
+Serveren sender allerede `name`, `age` og `error`, så EJS kan sætte dem sammen til hilsenen.
+
+Tilføj dette i `views/index.ejs`, for eksempel under fejlbeskeden:
+
+```ejs
 <% if (name && age && !error) { %>
   <h2>Hello <%= name %> (<%= age %> år) 👋</h2>
 <% } %>
 ```
 
-> **EJS med flere værdier:** Serveren sender `name` og `age` til templaten. EJS sammensætter hilsenen, mens serveren renderer HTML'en. Browseren modtager fortsat et færdigt HTML-response, ikke et JavaScript-svar.
-
-### Test trin 7
-
-Indsend forskellige navne og aldre. Begge værdier skal ændre hilsenen, og kun navnet skal føjes til listen.
-
----
-
-## 8. Bevar værdierne ved en fejl
-
-Når serveren renderer siden efter en fejl, kan den sende brugerens værdier tilbage, så de ikke skal indtastes igen.
-
-`age` bruges både til aldersfeltet og til hilsenen. Det er den samme værdi, som serveren har godkendt eller skal vise tilbage efter en fejl.
-
-Opdatér inputfelterne:
-
-```html
-<input id="name" name="name" type="text" value="<%= name %>" />
-
-<input id="age" name="age" type="number" step="any" value="<%= age %>" />
-```
-
-Det betyder, at hver `response.render("index", ...)` også skal have en `age`-værdi. Brug `age: ""` i GET-routen. I fejlgrenene skal du sende `age: rawAge`.
-
-Eksempel på aldersfejlen:
-
-```js
-return response.render("index", {
-  name,
-  age: rawAge,
-  error: "Skriv en alder som et helt tal mellem 1 og 120.",
-  names
-});
-```
+Hilsenen bliver kun vist, når formularen er sendt uden fejl. Ved en fejl renderer serveren stadig den samme template, men betingelsen gør, at hilsenen ikke kommer med i HTML'en.
 
 ### Test trin 8
 
-1. Indtast et navn og en ugyldig alder. Begge værdier skal blive stående.
-2. Indtast en alder uden et navn. Alderen skal blive stående.
-3. Indsend gyldige værdier. Svaret skal vises.
-
-> **Templatens datakontrakt:** Nu bruger templaten `name`, `age`, `error` og `names`. Alle routes og fejlgrene skal sende alle fire værdier, hver gang de renderer `index.ejs`.
+Indsend `Ada` og `41`. Du skal se både hilsenen og `Ada` i listen. Indsend derefter en ugyldig alder: Du skal kun se fejlbeskeden.
 
 ---
 
-## 9. Sammenlign din færdige POST-route
+## 9. Saml og gennemgå POST-routen
 
-Din route bør nu ligne denne. Brug den til at kontrollere din kode, når du selv har arbejdet gennem trinene:
+Din færdige POST-route kan nu se sådan ud. Sammenlign den med din egen, før du retter noget:
 
 ```js
 app.post("/submit", (request, response) => {
-  const rawName = request.body.name;
-  const name = rawName.trim();
-  const rawAge = request.body.age;
-  const age = Number(rawAge);
+  const name = request.body.name;
+  const age = request.body.age;
+  let error = "";
 
-  if (!name) {
-    return response.render("index", {
-      name: "",
-      age: rawAge,
-      error: "Skriv dit navn, før du sender formularen.",
-      names
-    });
+  if (!name || name.trim() === "") {
+    error = "Skriv dit navn, før du sender formularen.";
+  } else if (!age || Number.isNaN(Number(age))) {
+    error = "Skriv en alder som et tal.";
+  } else if (!Number.isInteger(Number(age)) || Number(age) < 1 || Number(age) > 120) {
+    error = "Skriv en alder som et helt tal mellem 1 og 120.";
+  } else {
+    names.push(name);
   }
 
-  if (!rawAge || Number.isNaN(age)) {
-    return response.render("index", {
-      name,
-      age: rawAge,
-      error: "Skriv en alder som et tal.",
-      names
-    });
-  }
-
-  if (!Number.isInteger(age) || age < 1 || age > 120) {
-    return response.render("index", {
-      name,
-      age: rawAge,
-      error: "Skriv en alder som et helt tal mellem 1 og 120.",
-      names
-    });
-  }
-
-  names.push(name);
-  response.render("index", {
-    name,
-    age,
-    error: "",
-    names
-  });
+  response.render("index", { name, age, error, names });
 });
 ```
 
-## 10. Test hele flowet
+Læg mærke til flowet:
 
-| Input | Forventet resultat |
-| --- | --- |
-| Tomt navn + gyldig alder | Fejl; alderen bevares; listen ændres ikke |
-| Gyldigt navn + tom alder | Fejl; navnet bevares; listen ændres ikke |
-| `  Ada  ` + `41` | Navnet normaliseres; svaret vises; listen vokser med én |
-| Ada + `12.5` | Fejl; listen ændres ikke |
-| Ada + `121` | Fejl; listen ændres ikke |
-| Genstart af serveren | Navnelisten nulstilles |
+1. Læs data fra `request.body`.
+2. Start med ingen fejl.
+3. Kontrollér én regel ad gangen.
+4. Tilføj kun et gyldigt navn til `names`.
+5. Render den samme EJS-side med alle dataene.
 
-Åbn også DevTools → **Network**. Alle submits skal fortsat være `POST /submit`, og response skal være færdig HTML fra serveren.
+### Test trin 9
+
+Åbn DevTools → **Network**, indsend formularen og vælg requestet til `/submit`. Bekræft, at det er en `POST`, og at response er en ny HTML-side. Det er server-side rendering: serveren validerer dataene og sender færdig HTML tilbage.
+
+---
+
+## Ekstra opgaver
+
+De næste opgaver er små udvidelser af den færdige app. Tag dem i rækkefølge. De bruger kun de værdier, du allerede sender til EJS.
+
+### 10. Behold det indtastede ved en fejl
+
+Når der er en fejl, skal brugeren ikke behøve at skrive alt igen. Tilføj `value` til navnefeltet i `views/index.ejs`:
+
+```html
+<input id="name" name="name" type="text" value="<%= name %>" />
+```
+
+Gør derefter det samme for aldersfeltet:
+
+```html
+<input id="age" name="age" type="number" step="any" value="<%= age %>" />
+```
+
+> `value` bestemmer den tekst, der står i et inputfelt. EJS indsætter værdien fra `response.render(...)`. Da du allerede sender `name` og `age` med til templaten, behøver serveren ikke ny logik.
+
+### Test trin 10
+
+Skriv et navn og en ugyldig alder, for eksempel `Ada` og `hej`. Når siden renderer igen, skal både `Ada` og `hej` stadig stå i felterne sammen med fejlbeskeden.
+
+---
+
+### 11. Vis hvor mange navne der er gemt
+
+Du har allerede arrayet `names`. EJS kan også vise, hvor mange elementer der er i det. Ret overskriften til listen:
+
+```ejs
+<h2>Indsendte navne (<%= names.length %>)</h2>
+```
+
+> **`.length`:** Et array har en `length`-værdi. `names.length` er antallet af navne i listen. Det er den samme liste, som dit loop i EJS allerede gennemgår.
+
+### Test trin 11
+
+Indsend et gyldigt navn. Tallet i overskriften skal stige med én. Genindlæs siden, og kontrollér at tallet ikke ændrer sig, så længe serveren kører.
+
+---
+
+### 12. Vis en besked, når listen er tom
+
+Lige efter en genstart er `names` tomt. Gør det tydeligt for brugeren i stedet for kun at vise en tom liste.
+
+Erstat din nuværende `<ul>` med denne EJS-betingelse og liste:
+
+```ejs
+<% if (names.length === 0) { %>
+  <p>Der er endnu ikke indsendt nogen navne.</p>
+<% } else { %>
+  <ul>
+    <% for (const name of names) { %>
+      <li><%= name %></li>
+    <% } %>
+  </ul>
+<% } %>
+```
+
+> Her bruger du den samme slags `if`-sætning som ved fejlbeskeden. Forskellen er blot, at spørgsmålet nu handler om arrayets længde.
+
+### Test trin 12
+
+Stop serveren med `Ctrl + C`, og start den igen med `npm run dev`. Du skal se beskeden om den tomme liste. Indsend derefter et gyldigt navn: Beskeden skal forsvinde, og listen skal vises.
+
+---
+
+### 13. Lav én ekstra regel selv
+
+Vælg én af disse små udvidelser. Tilføj kun én regel ad gangen, og test den før du går videre.
+
+- Giv en særlig fejlbesked, hvis navnet har færre end to tegn.
+- Begræns listen til højst tre navne. Når listen er fuld, skal brugeren se en fejlbesked i stedet for at få sit navn tilføjet.
+- Skift hilsenen, så den bruger dit eget sprog og din egen tekst.
+
+Start med at beslutte, om reglen hører hjemme i serverens validering eller i EJS-visningen. Regler, som bestemmer om input må gemmes, hører i POST-routen. Tekst og HTML, der kun bestemmer hvordan resultatet ser ud, hører i `index.ejs`.
+
+### Test trin 13
+
+Vis din udvidelse til en makker. Forklar hvilken `if`-sætning der styrer den, og prøv både et input, der skal godkendes, og et input, der skal afvises.
+
+---
 
 ## Tjekpunkt
 
-Du er færdig, når appen:
+Du er færdig, når din app kan:
 
-- normaliserer og validerer navnet
-- tilføjer hvert gyldigt navn til `names` med `names.push(name)`
-- renderer navnelisten med EJS
-- konverterer og validerer alderen
-- sender begge formularfelter til EJS, som viser hilsenen
-- giver templaten alle forventede variabler ved hver rendering
+- vise en fejl, hvis navnet mangler
+- vise en fejl, hvis alder mangler eller ikke er et tal
+- afvise decimaler og aldre uden for intervallet 1–120
+- tilføje et gyldigt navn til et array
+- rendere både hilsen, fejlbesked og listen med EJS
 
-## Fejlfinding
+> Arrayet findes kun i serverens hukommelse. Det bliver tomt, når du stopper eller genstarter serveren. Senere kan data gemmes i en database.
 
-### `names`, `error` eller `age` er ikke defineret
+## Videre til øvelse 3
 
-Kontrollér, at den route eller fejlgren, der renderer `index.ejs`, sender variablen med.
-
-### Navne kommer med i listen ved ugyldig alder
-
-Kontrollér, at `names.push(name)` står efter begge valideringer.
-
-### Historikken forsvinder
-
-Det er forventet ved genstart. `names` ligger kun i serverens hukommelse.
-
-## Videre, hvis du når det
-
-- Skift fra `names` til et array af objekter, fx `{ name, age }`, så listen også kan vise alder.
-- Tilføj en `POST /clear-history`-route og en formular, der tømmer `names`.
-- Generér forskellige svar afhængigt af alderen.
-
-> I øvelse 3 bygger du videre med arrays af objekter og regelbaseret svarlogik i en chatbot.
+I [øvelse 3: EJS-chatbot](express-ejs-chatbot.md) bruger du det samme POST-, validerings- og render-flow til at lade serveren vælge et svar ud fra brugerens input.
