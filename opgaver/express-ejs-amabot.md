@@ -2,9 +2,21 @@
 
 I har allerede et GitHub-repository med en simpel AMAbot-formular i `index.html` fra i går. Nu bygger I videre på **det samme repository** og gør det til en server-renderet Express-app med EJS.
 
-AMAbot betyder *Ask Me Anything-bot*. Den svarer på spørgsmål om jer selv ud fra regler, arrays og objekter — ikke kunstig intelligens. I beholder jeres eget design, CSS og billeder. Det nye er, at Express modtager spørgsmålet, vælger et svar og lader EJS generere den næste HTML-side.
+AMAbot betyder _Ask Me Anything-bot_. Den svarer på spørgsmål om jer selv ud fra regler, arrays og objekter — ikke kunstig intelligens. I beholder jeres eget design, CSS og billeder. Det nye er, at Express modtager spørgsmålet, vælger et svar og lader EJS generere den næste HTML-side.
 
 Skriv og test ét trin ad gangen. I får små kodeudsnit, der bygges oven på hinanden, frem for en færdig løsning fra begyndelsen.
+
+## Sådan arbejder I med koden
+
+Skriv koden selv — kopier ikke bare et helt uddrag ind. Før I ændrer noget, skal I finde det relevante sted i **jeres egen** kode: Er det GET-routen, POST-routen, `views/index.ejs` eller CSS-filen?
+
+Når der står “ret” eller “erstat” i øvelsen, skal I først kunne svare på:
+
+1. Hvilken værdi eller linje har vi allerede?
+2. Hvad skal den nye kode ændre eller tilføje?
+3. Hvilke variabelnavne skal passe med resten af vores kode?
+
+Skriv derefter ændringen, gem filen og udfør testpunktet. Hvis noget ikke virker, så læs fejlbeskeden og sammenlign `method`, `action`, `name`, route og EJS-variabler. Kodeudsnittene viser mønsteret; I skal tilpasse dem til jeres egen struktur og design.
 
 ## Det bygger du
 
@@ -12,6 +24,8 @@ Skriv og test ét trin ad gangen. I får små kodeudsnit, der bygges oven på hi
 Browser -> POST /ask -> request.body.question -> validering -> findAnswer()
         -> messages array -> response.render() -> EJS -> HTML
 ```
+
+Det er **server-side rendering (SSR)**: Browseren sender spørgsmålet til serveren, og serveren sender en helt ny HTML-side tilbage. Det er altså ikke JavaScript i browseren, der selv tilføjer en besked til siden.
 
 Når øvelsen er færdig, kan jeres AMAbot:
 
@@ -200,6 +214,8 @@ Før Express kan læse formularens data, skal I aktivere middleware. Sæt denne 
 app.use(express.urlencoded({ extended: true }));
 ```
 
+Middleware er kode, Express kører før en route. Her læser den formularens POST-data og gør dem tilgængelige i `request.body`. Uden denne linje kan POST-routen ikke finde `request.body.question`.
+
 Tilføj derefter en foreløbig POST-route. Den renderer jeres EJS-template igen med det indsendte spørgsmål:
 
 ```js
@@ -237,7 +253,7 @@ Indsend et spørgsmål. Det skal vises på siden med jeres `question`-styling. F
 
 ## 8. Gem og vis simple beskeder
 
-Nu skal vi gøre ét spørgsmål til en lille historik. Først er hver besked kun en tekst i et array. Vi venter med svar, typer, styling og validering, så I kan følge den ene nye idé: `push()` gemmer tekst i `messages`, og EJS viser alle teksterne igen.
+Nu skal vi gøre ét spørgsmål til en lille historik. Først er hver besked kun en tekst i et array (lidt som vi gjorde med `names`i foregående øvelse). Vi venter med svar, typer, styling og validering, så I kan følge den ene nye idé: `push()` gemmer tekst i `messages`, og EJS viser alle teksterne igen.
 
 Opret arrayet **over** routes i `server.js`:
 
@@ -247,7 +263,9 @@ const messages = [];
 
 `messages` er AMAbottens samtalehistorik, mens serveren kører. I dette trin indeholder arrayet kun spørgsmål som tekst.
 
-Erstat GET-routen med:
+Arrayet ligger på serveren — ikke i browseren. Derfor er beskederne stadig der ved en genindlæsning, men forsvinder, når serveren genstarter. Senere kan en database gemme data permanent.
+
+Tilpas GET-routen med:
 
 ```js
 app.get("/", (request, response) => {
@@ -263,7 +281,7 @@ I `views/index.ejs` skal I **erstatte den midlertidige `question`-blok fra trin 
 <% } %>
 ```
 
-Erstat også POST-routen fra trin 7 med:
+Tilpas også POST-routen fra trin 7 med:
 
 ```js
 app.post("/ask", (request, response) => {
@@ -346,9 +364,7 @@ function findAnswer(question) {
   const normalizedQuestion = question.toLowerCase();
 
   for (const answerGroup of answers) {
-    const hasMatch = answerGroup.keywords.some((keyword) =>
-      normalizedQuestion.includes(keyword)
-    );
+    const hasMatch = answerGroup.keywords.some((keyword) => normalizedQuestion.includes(keyword));
 
     if (hasMatch) {
       return answerGroup.answer;
@@ -360,6 +376,8 @@ function findAnswer(question) {
 ```
 
 `some()` stopper, så snart ét nøgleord matcher. Det passer godt her, fordi vi kun skal vide, om den aktuelle regel skal bruges.
+
+Hvert element i `answers` er et objekt: `keywords` fortæller, hvilke ord der kan udløse svaret, og `answer` er teksten, AMAbotten skal sende tilbage. `findAnswer()` gennemgår objekterne ét ad gangen og returnerer det første match.
 
 Til sidst erstatter I linjen, der tilføjer det foreløbige svar, i POST-routen:
 
@@ -379,6 +397,8 @@ Test ét spørgsmål for hver regel og et spørgsmål, der ikke matcher noget. G
 ## 11. Vis en fejl ved et tomt spørgsmål
 
 Indtil nu gemmer appen alt, også en tom tekst. Nu tilføjer vi den første valideringsregel.
+
+Selv hvis I senere tilføjer `required` til HTML-feltet, skal serveren stadig validere. En browser kan omgås, men serveren bestemmer altid, hvilke data der må gemmes i `messages`.
 
 GET-routen skal også sende en tom fejltekst, fordi EJS snart skal kunne vise `error` både efter GET- og POST-requests:
 
