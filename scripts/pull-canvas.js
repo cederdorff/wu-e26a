@@ -19,6 +19,14 @@ import {
 
 const projectRoot = resolve(import.meta.dirname, "..");
 const force = process.argv.includes("--force");
+// --only begrænser hvilke undervisning/*.md-filer denne kørsel må SKRIVE til.
+// Bruges til at teste eller genskabe én bestemt fil uden risiko for at røre andre
+// filer med lokale rettelser — det var netop det, en tidligere --force-kørsel uden
+// afgrænsning gik galt med.
+const onlyArg = process.argv.find((arg) => arg.startsWith("--only="));
+const only = onlyArg
+  ? new Set(onlyArg.slice("--only=".length).split(",").map((entry) => resolve(projectRoot, entry.trim())))
+  : null;
 await loadLocalEnv(resolve(projectRoot, ".env"));
 
 const baseUrl = requiredEnv("CANVAS_BASE_URL").replace(/\/$/, "");
@@ -109,6 +117,7 @@ const conflicts = [];
 let created = 0;
 let updated = 0;
 let unchanged = 0;
+let outOfScope = 0;
 
 await mkdir(teachingRoot, { recursive: true });
 for (const document of documents) {
@@ -138,6 +147,7 @@ await removeObsoleteMirrorFiles(previousManifest, currentManifest);
 await writeGeneratedJson(manifestPath, currentManifest);
 
 console.log(`Canvas-spejl: ${documents.length} Markdown-filer (${created} oprettet, ${updated} opdateret, ${unchanged} uændret).`);
+if (only) console.log(`--only aktiv: ${outOfScope} fil(er) uden for scope blev ikke rørt.`);
 console.log(`Moduler: ${modules.length}; sider: ${pages.length} (${pages.filter((page) => !page.published).length} upublicerede).`);
 console.log(`Filer: ${fileRecords.length}; assignments: ${assignments.length}; discussions: ${discussions.length}; quizzes: ${quizzes.length}.`);
 if (conflicts.length) {
@@ -262,6 +272,23 @@ function htmlToMarkdown(html, currentPath, pageDocumentByUrl, localFileById) {
   });
   turndown.use(gfm);
   turndown.remove(["script", "style"]);
+  // Canvas-sider kan linke et eksternt stylesheet (fx til toggle-styling af <details>).
+  // Turndown har ingen standardregel for <link>, så uden dette ryger den stille og roligt
+  // ud af den lokale markdown-fil, og siden mister sin styling ved næste push.
+  turndown.addRule("preserveStylesheetLink", {
+    filter: (node) => node.nodeName === "LINK" && node.getAttribute("rel") === "stylesheet",
+    replacement: (content, node) => `\n\n${node.outerHTML}\n\n`,
+  });
+  // Turndown har heller ingen standardregel for <details>/<summary> (fx toggle-sektioner
+  // i Agenda-afsnit). Uden disse to regler bliver de stille fladet ud til fed tekst.
+  turndown.addRule("summary", {
+    filter: "summary",
+    replacement: (content, node) => `<summary>${node.innerHTML.trim()}</summary>\n`,
+  });
+  turndown.addRule("details", {
+    filter: "details",
+    replacement: (content) => `\n<details>\n${content.trim()}\n</details>\n`,
+  });
   return turndown.turndown(prepared)
     .replace(/^# /gm, "## ")
     .replace(/^### /gm, "## ")
@@ -400,6 +427,12 @@ async function writeMirroredFile(path, contents) {
   const nextHash = hash(contents);
   const previous = previousManifest.files?.[relativePath];
   const exists = await fileExists(path);
+
+  if (only && !only.has(path)) {
+    if (previous) currentManifest.files[relativePath] = previous;
+    outOfScope += 1;
+    return "unchanged";
+  }
 
   if (exists) {
     const current = await readFile(path, "utf8");

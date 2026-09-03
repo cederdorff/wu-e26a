@@ -1,5 +1,7 @@
 # RACE 3 - Data logik, arrays og objekter - 07-09-2026
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 ## Dagens fokus
 
 Nu bygger vi videre på jeres chatbot og gør den intelligent! I dag lærer I at organisere og matche data med arrays og objekter, så chatbotten kan genkende nøgleord og svare varieret og relevant.

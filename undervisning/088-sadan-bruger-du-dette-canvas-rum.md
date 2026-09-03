@@ -1,5 +1,7 @@
 # Sådan bruger du dette Canvas-rum
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 ## Beskeder
 
 Tjek "Beskeder" og hold dig orienteret om alt det, der er aktuelt for netop dig og din årgang.

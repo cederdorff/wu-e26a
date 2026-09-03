@@ -1,5 +1,7 @@
 # DOB 2 - Teambuilding + Git branching & DevTools - 02-09-2026
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 ## Dagens fokus
 
 **Bemærk: Dagens program varer fra 8:15-15:15, og foregår i ["Guldbygningen" på Ringvej Syd 104](https://www.eaaa.dk/kontakt/sadan-finder-du-os/ringvej-syd-104/) (over for Mega Syd), i lokale 1.42 på første sal.**

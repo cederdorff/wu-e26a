@@ -1,5 +1,7 @@
 # DOB 1 - Form submits og Git basics - 01-09-2026
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 ## Dagens fokus
 
 Nu har I eksperimenteret med JavaScript på serveren og snust til Node og Express. I dag påbegynder vi en "AMAbot" frontend i browseren og opbygger et statisk UI i HTML, CSS og forms — som (historisk set) er fundamentet for alle interaktive web-oplevelser. Vi (gen-)introducerer også Git, som er det vigtigste værktøj til at holde styr på jeres kode og samarbejde med andre udviklere.

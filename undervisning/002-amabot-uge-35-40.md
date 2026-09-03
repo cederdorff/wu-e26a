@@ -1,5 +1,7 @@
 # ➡️ AMAbot (Uge 35-40)
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 I løbet af dette projekt, som løber over den første måned af semestret, skal I (individuelt) bygge en komplet "AMAbot", altså en "Ask Me Anything" chatbot-inspireret web app, som kan svare på spørgsmål om jer selv. Ikke i den forstand at I skal udvikle machine learning algoritmer, men vi bruger arrays, objekter, kontrolstrukturer som if/else og switch statements og string parsing for at gøre chat-samtalerne så naturlige som mulige.
 
 Og det virkelige fokus i opgaven er grundigt at forstå den client/server arkitektur, som al webudvikling bygger på. I starter med traditionel server-side rendering (SSR) og udvikler jer gradvist mod moderne client-side arkitekturer (CSR), så I får afprøvet alle de måder, browser og server kan kommunikere på.

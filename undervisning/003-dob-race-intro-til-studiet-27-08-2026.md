@@ -1,5 +1,7 @@
 # DOB + RACE - Intro til studiet - 27-08-2026
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 *Torsdag, 27. august 2026 12:00–15:15 i lokale 3.01 ("The Edge") i [bygning 7G](https://www.eaaa.dk/kontakt/sadan-finder-du-os/sonderhoj-7g/).*
 
 ---

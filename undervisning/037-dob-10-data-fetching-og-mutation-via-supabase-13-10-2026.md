@@ -1,5 +1,7 @@
 # DOB 10 - Data fetching og mutation via Supabase - 13-10-2026
 
+<link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
+
 ## Dagens fokus
 
 TBA
