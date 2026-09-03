@@ -31,7 +31,7 @@ Her gemmes data kun i serverens hukommelse. Genstarter I serveren, bliver arraye
 Erstat formularen i `views/index.ejs` med denne:
 
 ```html
-<form method="POST" action="/hilsen">
+<form method="POST" action="/submit">
   <p>
     <label for="name">Hvad hedder du?</label>
     <input id="name" name="name" type="text" />
@@ -58,7 +58,7 @@ Bemærk, at browseren sender `name` og `topic`, fordi det er felternes `name`-at
 Erstat din POST-route med følgende. Læs den først: Hvilken kode kører kun ved ugyldigt input, og hvilken kode kører kun ved gyldigt input?
 
 ```js
-app.post("/hilsen", (request, response) => {
+app.post("/submit", (request, response) => {
   const name = typeof request.body.name === "string" ? request.body.name.trim() : "";
   const topic = typeof request.body.topic === "string" ? request.body.topic : "";
 

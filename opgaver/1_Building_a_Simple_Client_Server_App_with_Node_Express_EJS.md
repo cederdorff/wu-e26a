@@ -7,8 +7,8 @@ I denne øvelse bygger du en lille Express-app, som viser en formular, modtager 
 Når du er færdig, ser forløbet sådan ud:
 
 ```text
-Browser -> GET / -> Express -> EJS -> HTML
-Browser -> POST /hilsen -> request.body -> Express -> EJS -> ny HTML
+Browser -> GET / -> Express-route -> EJS -> HTML-response
+Browser -> POST /submit -> express.urlencoded() -> request.body -> POST-route -> EJS -> ny HTML-response
 ```
 
 ## Det ender du med at bygge
@@ -25,7 +25,7 @@ Når brugeren har indsendt sit navn, skal serveren rendere en personlig hilsen:
 
 *Hilsenen vises som resultat af formularens POST-request.*
 
-> Skærmbillederne er fra en tidligere variant, som bruger routen `/submit` og engelske tekster. I denne øvelse bruger du `/hilsen` og danske tekster. Request/response-forløbet er det samme.
+> Skærmbillederne viser engelske tekster, mens teksten i din version godt kan være på dansk. Routen `/submit` og request/response-forløbet er det samme.
 
 ## Det skal du bruge
 
@@ -129,6 +129,8 @@ Find `express` og `ejs` under `dependencies` i `package.json`.
 ---
 
 ## 5. Start en tom Express-server
+
+Projektet er nu sat op. I de næste trin genbesøger du først det kendte request/response-flow fra *Hello Express*, før du udvider serveren med EJS.
 
 Opret filen `server.js` i projektets rod. Skriv selv koden nedenfor, én linje ad gangen:
 
@@ -263,35 +265,81 @@ Genindlæs browseren. Du skal nu se overskriften “Velkommen til min server!”
 
 ## 10. Tilføj formularen
 
+Indtil nu har browseren kun bedt serveren om en side. Nu tilføjer du en formular, så browseren også kan sende data tilbage til serveren.
+
+### 10a. Start med en almindelig formular
+
 Erstat indholdet inde i `<main>` med:
 
 ```html
 <h1>Sig hej</h1>
 
-<form method="POST" action="/hilsen">
+<form>
   <label for="name">Hvad hedder du?</label>
   <input id="name" name="name" type="text" />
   <button type="submit">Send</button>
 </form>
 ```
 
-Formularens vigtigste dele er:
+`label` beskriver feltet for brugeren, og `for="name"` forbinder den med inputfeltets `id="name"`. Attributten `name="name"` bestemmer nøglen, som feltets værdi sendes med.
 
-- `method="POST"`: Browseren skal sende et POST-request.
-- `action="/hilsen"`: Requestet skal sendes til `/hilsen`.
-- `name="name"`: Feltets værdi skal sendes med nøglen `name`.
+#### Test trin 10a
 
-### Test trin 10
+Genindlæs browseren. Formularen skal være synlig. Skriv et navn og tryk på **Send**.
 
-Genindlæs browseren. Formularen skal være synlig.
+Se på adresselinjen og Network-panelet. Browseren sender som standard et **GET-request** til den aktuelle adresse. Du vil derfor typisk se noget i stil med `/?name=Ada`. Delen efter `?` kaldes en query string.
 
-Skriv et navn, og tryk på **Send**. Du skal få `Cannot POST /hilsen`. Formularen sender altså et request, men serveren har endnu ingen route, som kan håndtere det.
+> **Fagligt kort:** En formular uden `method` bruger `GET` som standard. En formular uden `action` sender til den aktuelle URL. Det er praktisk ved søgninger, men ikke det flow vi vil bruge til chat- eller formularinput i denne øvelse.
 
-Find `POST /hilsen` i Network-panelet. Under **Payload** eller **Form Data** kan du se feltet `name` og den indtastede værdi.
+### 10b. Vælg HTTP-metoden `POST`
+
+Ret kun formens åbnende tag til:
+
+```html
+<form method="POST">
+```
+
+#### Test trin 10b
+
+Indsend et navn igen. Nu skal du få `Cannot POST /`, fordi browseren sender et POST-request til den aktuelle adresse, men serveren endnu ikke har en POST-route til `/`.
+
+I Network-panelet kan du se, at feltet `name` nu ligger under requestets **Payload** eller **Form Data** i stedet for i adresselinjen.
+
+### 10c. Vælg routen med `action`
+
+Ret formens åbnende tag en sidste gang:
+
+```html
+<form method="POST" action="/submit">
+```
+
+`action="/submit"` fortæller browseren, hvilken route formularen skal sende sit POST-request til.
+
+#### Test trin 10c
+
+Indsend formularen. Du skal få `Cannot POST /submit`. Det er forventet: Formularen sender nu præcis det request, vi ønsker, men serveren har endnu ingen route, som kan håndtere det.
+
+Find `POST /submit` i Network-panelet. Under **Payload** eller **Form Data** kan du se feltet `name` og den indtastede værdi.
 
 ---
 
 ## 11. Gør formulardata tilgængelige på serveren
+
+I trin 10 endte formularens åbningstag sådan her:
+
+```html
+<form method="POST" action="/submit">
+```
+
+Nu skal serveren have en route, der matcher **både** HTTP-metoden og stien:
+
+| I formularen | På serveren | Betydning |
+| --- | --- | --- |
+| `method="POST"` | `app.post(...)` | Begge siger, at det er et POST-request. |
+| `action="/submit"` | `app.post("/submit", ...)` | Begge peger på den samme route. |
+| `name="name"` | `request.body.name` | Samme navn bruges til at hente feltets værdi. |
+
+Hvis `method` og `app.post(...)` ikke matcher, eller hvis `action` og routens sti er forskellige, finder Express ikke den rigtige route. Det er netop derfor, du så `Cannot POST /submit` i trin 10c.
 
 Tilføj denne middleware efter EJS-konfigurationen og **før dine routes**:
 
@@ -301,12 +349,12 @@ app.use(express.urlencoded({ extended: true }));
 
 Middleware-funktionen læser data fra HTML-formularer og lægger dem i `request.body`.
 
-> **Fagligt kort:** En HTML-formular sender normalt sine felter som tekst i HTTP-requestets body. `express.urlencoded(...)` er middleware: kode som Express kører før din route, så den tekst bliver omdannet til et JavaScript-objekt som `request.body`.
+> **Fagligt kort:** En HTML-formular med `method="POST"` sender sine felter i HTTP-requestets body. `express.urlencoded(...)` er middleware: kode som Express kører før din route, så formularens data bliver omdannet til et JavaScript-objekt som `request.body`.
 
-Tilføj derefter denne route før `app.listen()`:
+Tilføj derefter den matchende route før `app.listen()`:
 
 ```js
-app.post("/hilsen", (request, response) => {
+app.post("/submit", (request, response) => {
   console.log(request.body);
   response.send("Serveren har modtaget formularen.");
 });
@@ -325,21 +373,27 @@ Prøv midlertidigt at udkommentere `express.urlencoded(...)`, og indsend igen. H
 
 ## 12. Send navnet til EJS
 
+Serveren kan nu modtage og læse formularens data. I stedet for at sende en simpel tekst tilbage skal POST-routen nu rendere den samme EJS-template med de modtagne data.
+
 Ret POST-routen, så den renderer templaten og sender navnet med:
 
 ```js
-app.post("/hilsen", (request, response) => {
+app.post("/submit", (request, response) => {
+  console.log("request.body:", request.body);
+
   const name = request.body.name;
 
   response.render("index", { name });
 });
 ```
 
-Objektet `{ name }` indeholder de data, som bliver tilgængelige i `index.ejs`.
+Objektet `{ name }` er en kort skrivemåde for `{ name: name }`. Objektets property `name` bliver tilgængelig som variablen `name` i `index.ejs`.
 
 > **Fagligt kort:** `response.render("index", { name })` gør to ting: Den finder templaten `views/index.ejs`, og den giver templaten adgang til variablen `name`. I EJS svarer det til, at du kan skrive `name` direkte i templaten.
 
-Din GET-route skal også sende en `name`-værdi, fordi den samme template bruges før formularen er indsendt:
+Vi logger ikke hele `request`-objektet, fordi det indeholder meget teknisk information. `request.body` er den del, der indeholder formularens data.
+
+I næste trin kommer templaten til at bruge variablen `name`. Derfor skal GET-routen også sende en `name`-værdi, når siden vises, før formularen er indsendt:
 
 ```js
 app.get("/", (request, response) => {
@@ -349,7 +403,15 @@ app.get("/", (request, response) => {
 
 ### Test trin 12
 
-Indsend formularen. Siden vises igen, men navnet kan endnu ikke ses. Dataene er nået frem til templaten; næste trin bruger dem i HTML'en.
+Indsend formularen med navnet `Ada`, og undersøg terminalen. Du skal se noget i stil med:
+
+```text
+request.body: { name: 'Ada' }
+```
+
+Find derefter sammenhængen i koden: `request.body.name` læses ind i variablen `name`, og `{ name }` sendes til `index.ejs`.
+
+Siden vises igen, men navnet kan endnu ikke ses. Dataene er nået frem til templaten; næste trin bruger dem i HTML'en.
 
 ---
 
@@ -386,7 +448,7 @@ En tom indsendelse viser endnu ingen fejlbesked. Det løser du i næste øvelse 
 Åbn DevTools → **Network**, ryd listen, og udfør derefter disse handlinger:
 
 1. Genindlæs siden, og find `GET /`.
-2. Indsend formularen, og find `POST /hilsen`.
+2. Indsend formularen, og find `POST /submit`.
 3. Undersøg requestets **Form Data**.
 4. Undersøg POST-requestets **Response**.
 
@@ -396,7 +458,10 @@ Find derefter de konkrete steder i din kode, som svarer til dette flow:
 method + action + name
           |
           v
-POST-route -> express.urlencoded() -> request.body -> response.render() -> EJS -> HTML
+POST /submit -> express.urlencoded() -> request.body
+                                            |
+                                            v
+matchende POST-route -> response.render() -> EJS -> HTML-response
 ```
 
 Forklar for en makker:
@@ -413,7 +478,7 @@ Forklar for en makker:
 Du er færdig, når:
 
 - `GET /` renderer `views/index.ejs`.
-- Formularen sender et POST-request til `/hilsen`.
+- Formularen sender et POST-request til `/submit`.
 - `express.urlencoded()` gør formularens data tilgængelige i `request.body`.
 - POST-routen sender navnet til templaten med `response.render()`.
 - EJS viser hilsenen med `<%= name %>`.
@@ -437,7 +502,7 @@ min-ejs-app/
 
 Kontrollér, at du har en `app.get("/", ...)`-route, og at den står før `app.listen()`.
 
-### `Cannot POST /hilsen`
+### `Cannot POST /submit`
 
 Kontrollér, at formularens `action` og POST-routens path er ens, og at begge bruger POST.
 
