@@ -58,7 +58,7 @@ Fælles introduktion og live-kodning:
 <details>
 <summary><strong>3. EJS</strong></summary>
 
-**Øvelse 1:** Arbejd med [Building a Simple Client-Server App with Node.js, Express and EJS](https://github.com/cederdorff/node-express-ejs-client-server-app/blob/main/_exercises/1_Building_a_Simple_Client_Server_App_with_Node_Express_EJS.md).
+**Øvelse 1:** Arbejd med [Din første server-renderede EJS-app](../opgaver/express-ejs-formular.md).
 
 Første milepæl er nået, når:
 
@@ -89,7 +89,7 @@ Vi samler også op på typiske fejl som `Cannot GET /`, manglende templates og `
 <details>
 <summary><strong>5. Inputvalidering, datastrukturer og svarlogik</strong></summary>
 
-**Øvelse 2:** Arbejd videre med [EJS, formhåndtering og svarlogik](https://github.com/cederdorff/node-express-ejs-client-server-app/blob/main/_exercises/2_Form_haandtering_og_svar_logik.md).
+**Øvelse 2:** Arbejd videre med [Formhåndtering, validering og svarlogik](../opgaver/express-ejs-formhaandtering-svarlogik.md).
 
 Anden milepæl er nået, når appen:
 
@@ -103,7 +103,7 @@ Anden milepæl er nået, når appen:
 <details>
 <summary><strong>6. Server-renderet chatbot med regelbaseret svarlogik</strong></summary>
 
-**Øvelse 3:** Brug det, I har lært, i [Chatbot med Express og EJS](https://github.com/cederdorff/node-express-ejs-client-server-app/blob/main/_exercises/3_Chatbot_med_Express_og_EJS.md).
+**Øvelse 3:** Brug det, I har lært, i [Server-renderet chatbot med regelbaseret svarlogik](../opgaver/express-ejs-chatbot.md).
 
 Dagens slutprodukt skal som minimum kunne:
 
@@ -149,9 +149,9 @@ Vis jeres chatbot til en makker, og forklar request/response-forløbet uden at l
 
 ### Opgaver
 
-1. [Building a Simple Client-Server App with Node.js, Express and EJS](https://github.com/cederdorff/node-express-ejs-client-server-app/blob/main/_exercises/1_Building_a_Simple_Client_Server_App_with_Node_Express_EJS.md)
-2. [EJS, formhåndtering og svarlogik](https://github.com/cederdorff/node-express-ejs-client-server-app/blob/main/_exercises/2_Form_haandtering_og_svar_logik.md)
-3. [Chatbot med Express og EJS](https://github.com/cederdorff/node-express-ejs-client-server-app/blob/main/_exercises/3_Chatbot_med_Express_og_EJS.md)
+1. [Din første server-renderede EJS-app](../opgaver/express-ejs-formular.md)
+2. [Formhåndtering, validering og svarlogik](../opgaver/express-ejs-formhaandtering-svarlogik.md)
+3. [Server-renderet chatbot med regelbaseret svarlogik](../opgaver/express-ejs-chatbot.md)
 
 ---
 

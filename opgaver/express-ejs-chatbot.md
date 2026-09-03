@@ -1,6 +1,6 @@
 # Øvelse 3: Server-renderet chatbot med regelbaseret svarlogik
 
-Nu bruger I dagens byggesten til en lille chatbot. Den er ikke AI: den vælger svar ud fra regler, arrays og objekter. Hver gang brugeren sender formularen, returnerer serveren en ny færdig HTML-side med samtalehistorikken.
+Nu bruger I byggestenene fra [øvelse 1](express-ejs-formular.md) og [øvelse 2](express-ejs-formhaandtering-svarlogik.md) til en lille chatbot. Den er ikke AI: den vælger svar ud fra regler, arrays og objekter. Hver gang brugeren sender formularen, returnerer serveren en ny færdig HTML-side med samtalehistorikken.
 
 ## 1. Start med en ren chattilstand
 

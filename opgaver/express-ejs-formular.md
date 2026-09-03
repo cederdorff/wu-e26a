@@ -15,17 +15,17 @@ Browser -> POST /submit -> express.urlencoded() -> request.body -> POST-route ->
 
 Først skal serveren rendere en side med en formular:
 
-![En formular med et navnefelt og en Send-knap i browseren](assets/Screenshot%202026-09-03%20at%2007.14.13.png)
+![En formular med et navnefelt og en Send-knap i browseren](assets/express-ejs-form-browser.png)
 
 *Formularen vises, når browseren sender `GET /`.*
 
 Når brugeren har indsendt sit navn, skal serveren rendere en personlig hilsen:
 
-![En personlig hilsen med teksten Hello Dan i browseren](assets/Screenshot%202026-09-03%20at%2007.14.25.png)
+![En personlig hilsen med teksten Hello Dan i browseren](assets/express-ejs-greeting-browser.png)
 
 *Hilsenen vises som resultat af formularens POST-request.*
 
-> Skærmbillederne viser engelske tekster, mens teksten i din version godt kan være på dansk. Routen `/submit` og request/response-forløbet er det samme.
+> Skærmbillederne er en forenklet reference fra en tidligere version. Din side må gerne have danske tekster og vil fortsat vise formularen sammen med hilsenen efter et submit. Routen `/submit` og request/response-forløbet er det samme.
 
 ## Det skal du bruge
 
@@ -120,7 +120,7 @@ min-ejs-app/
 
 Express bliver vores webserver-framework. EJS bliver vores template engine og kan kombinere HTML med data fra serveren.
 
-> **Fagligt kort:** Et framework er kode, der løser almindelige opgaver for os. Express hjælper blandt andet med at modtage HTTP-requests og sende HTTP-responses. En template engine kan sætte data ind i en HTML-skabelon, før HTML'en sendes til browseren.
+> **Framework og template engine:** Et framework er kode, der løser almindelige opgaver for os. Express hjælper blandt andet med at modtage HTTP-requests og sende HTTP-responses. En template engine kan sætte data ind i en HTML-skabelon, før HTML'en sendes til browseren.
 
 ### Test trin 4
 
@@ -179,7 +179,7 @@ app.get("/", (request, response) => {
 
 `response.send()` sender teksten direkte tilbage til browseren. Der er endnu ingen template og ingen EJS involveret.
 
-> **Fagligt kort:** `request` beskriver det, browseren har sendt til serveren — her blandt andet metoden `GET` og stien `/`. `response` er serverens svar tilbage. En route kobler et bestemt request, fx `GET /`, til den kode der skal køre.
+> **Request, response og route:** `request` beskriver det, browseren har sendt til serveren — her blandt andet metoden `GET` og stien `/`. `response` er serverens svar tilbage. En route kobler et bestemt request, fx `GET /`, til den kode der skal køre.
 
 ### Test trin 6
 
@@ -203,7 +203,7 @@ app.set("view engine", "ejs");
 
 Express vil nu som standard lede efter `.ejs`-filer i en mappe med navnet `views`.
 
-> **Hvad er EJS?** EJS står for *Embedded JavaScript*. Det er en template engine, hvor du kan skrive HTML og indsætte små stykker JavaScript. Serveren kombinerer templaten med data og sender først derefter den færdige HTML til browseren. Det kaldes **server-side rendering (SSR)**.
+> **EJS:** EJS står for *Embedded JavaScript*. Det er en template engine, hvor du kan skrive HTML og indsætte små stykker JavaScript. Serveren kombinerer templaten med data og sender først derefter den færdige HTML til browseren. Det kaldes **server-side rendering (SSR)**.
 >
 > I denne øvelse er det Express-serveren, der genererer HTML'en med EJS. Ved **client-side rendering (CSR)** ville browseren i stedet modtage data — ofte JSON — og JavaScript i browseren ville bygge eller opdatere HTML'en. Her behøver vi endnu ikke JavaScript i browseren for at vise en hilsen.
 
@@ -289,7 +289,7 @@ Genindlæs browseren. Formularen skal være synlig. Skriv et navn og tryk på **
 
 Se på adresselinjen og Network-panelet. Browseren sender som standard et **GET-request** til den aktuelle adresse. Du vil derfor typisk se noget i stil med `/?name=Ada`. Delen efter `?` kaldes en query string.
 
-> **Fagligt kort:** En formular uden `method` bruger `GET` som standard. En formular uden `action` sender til den aktuelle URL. Det er praktisk ved søgninger, men ikke det flow vi vil bruge til chat- eller formularinput i denne øvelse.
+> **Formularens standarder:** En formular uden `method` bruger `GET` som standard. En formular uden `action` sender til den aktuelle URL. Det er praktisk ved søgninger, men ikke det flow vi vil bruge til chat- eller formularinput i denne øvelse.
 
 ### 10b. Vælg HTTP-metoden `POST`
 
@@ -349,7 +349,7 @@ app.use(express.urlencoded({ extended: true }));
 
 Middleware-funktionen læser data fra HTML-formularer og lægger dem i `request.body`.
 
-> **Fagligt kort:** En HTML-formular med `method="POST"` sender sine felter i HTTP-requestets body. `express.urlencoded(...)` er middleware: kode som Express kører før din route, så formularens data bliver omdannet til et JavaScript-objekt som `request.body`.
+> **Middleware:** En HTML-formular med `method="POST"` sender sine felter i HTTP-requestets body. `express.urlencoded(...)` er middleware: kode som Express kører før din route, så formularens data bliver omdannet til et JavaScript-objekt som `request.body`.
 
 Tilføj derefter den matchende route før `app.listen()`:
 
@@ -389,7 +389,7 @@ app.post("/submit", (request, response) => {
 
 Objektet `{ name }` er en kort skrivemåde for `{ name: name }`. Objektets property `name` bliver tilgængelig som variablen `name` i `index.ejs`.
 
-> **Fagligt kort:** `response.render("index", { name })` gør to ting: Den finder templaten `views/index.ejs`, og den giver templaten adgang til variablen `name`. I EJS svarer det til, at du kan skrive `name` direkte i templaten.
+> **`response.render()`:** `response.render("index", { name })` gør to ting: Den finder templaten `views/index.ejs`, og den giver templaten adgang til variablen `name`. I EJS svarer det til, at du kan skrive `name` direkte i templaten.
 
 Vi logger ikke hele `request`-objektet, fordi det indeholder meget teknisk information. `request.body` er den del, der indeholder formularens data.
 
@@ -430,7 +430,7 @@ EJS bruger forskellige tags:
 - `<% ... %>` kører JavaScript-logik uden at skrive noget til HTML.
 - `<%= ... %>` skriver en værdi i HTML'en og escaper værdien.
 
-> **Fagligt kort:** Escaping betyder, at EJS behandler brugerens input som tekst i stedet for HTML. Derfor bliver `<strong>Ada</strong>` vist med vinklerne, frem for at browseren gør “Ada” fed. Brug som udgangspunkt altid `<%= ... %>` til data fra brugeren.
+> **Escaping:** EJS behandler brugerens input som tekst i stedet for HTML. Derfor bliver `<strong>Ada</strong>` vist med vinklerne, frem for at browseren gør “Ada” fed. Brug som udgangspunkt altid `<%= ... %>` til data fra brugeren.
 
 ### Test trin 13
 
@@ -518,4 +518,4 @@ Kontrollér, at filen hedder `views/index.ejs`, og at `app.set("view engine", "e
 
 Kontrollér, at både GET- og POST-routen sender en `name`-værdi, hver gang de renderer `index.ejs`.
 
-> Fortsæt derefter med øvelse 2, hvor du tilføjer validering, flere formularfelter og historik.
+> Fortsæt derefter med [øvelse 2: Formhåndtering, validering og svarlogik](express-ejs-formhaandtering-svarlogik.md).

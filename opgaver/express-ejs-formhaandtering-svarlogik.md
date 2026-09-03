@@ -1,6 +1,6 @@
 # Øvelse 2: Formhåndtering, validering og svarlogik
 
-Byg videre på øvelse 1. I udvider hilsenen med flere felter, validerer input og gemmer gyldige indsendelser i et array af objekter.
+Byg videre på [øvelse 1: Din første server-renderede EJS-app](express-ejs-formular.md). I udvider hilsenen med flere felter, validerer input og gemmer gyldige indsendelser i et array af objekter.
 
 Målet er ikke at lave en perfekt profilformular. Målet er at kunne forklare, hvordan data går fra en formular til `request.body`, videre gennem JavaScript-logik og tilbage til en EJS-template.
 
