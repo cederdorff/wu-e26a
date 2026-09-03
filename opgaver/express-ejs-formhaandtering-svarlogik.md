@@ -205,7 +205,7 @@ Indsend `Ada` og `41`. Terminalen skal vise:
 
 ---
 
-## 6. Konvertér og validér alderen
+## 6. Konvertér alderen og tjek, om den er et tal
 
 Læs og konvertér alderen i POST-routen, lige efter du har læst navnet:
 
@@ -214,7 +214,42 @@ const rawAge = request.body.age;
 const age = Number(rawAge);
 ```
 
-Tilføj denne kontrol efter valideringen af navnet:
+Log værdierne midlertidigt:
+
+```js
+console.log({ rawAge, age });
+```
+
+Tilføj derefter denne første validering efter navnevalideringen:
+
+```js
+if (!rawAge || Number.isNaN(age)) {
+  return response.render("index", {
+    name,
+    error: "Skriv en alder som et tal.",
+    names
+  });
+}
+```
+
+> **Konvertering:** `Number(rawAge)` forsøger at lave en string om til et number. Hvis det ikke kan lade sig gøre, bliver resultatet `NaN` — *Not a Number*. En tom string skal vi tjekke særskilt, fordi `Number("")` giver `0`.
+
+### Test trin 6
+
+| Alder | Forventet resultat |
+| --- | --- |
+| Tomt felt | Fejl |
+| `abc` sendt via et ændret request | Fejl |
+| `12.5` | Godkendt foreløbig |
+| `0` | Godkendt foreløbig |
+| `121` | Godkendt foreløbig |
+| `41` | Godkendt |
+
+Du har nu kun undersøgt, om alderen er et tal. `0`, `12.5` og `121` er alle tal, men de passer sandsynligvis ikke til vores regler endnu.
+
+### 6b. Tilføj regler for alderens størrelse
+
+Tilføj denne ekstra kontrol **efter** den første aldersvalidering:
 
 ```js
 if (!Number.isInteger(age) || age < 1 || age > 120) {
@@ -226,69 +261,68 @@ if (!Number.isInteger(age) || age < 1 || age > 120) {
 }
 ```
 
-> **Konvertering og validering:** `Number(rawAge)` forsøger at lave en string om til et number. `Number.isInteger(age)` kontrollerer, at resultatet er et helt tal. Grænserne er appens regler for en rimelig alder.
+> **Forretningsregler:** Nu ved vi, at `age` er et tal. Den næste `if`-blok afgør, om tallet er et helt tal og ligger inden for det interval, appen accepterer. Reglerne kommer efter konverteringen, fordi sammenligninger som `<` og `>` giver mening for tal.
 
-### Test trin 6
+#### Test trin 6b
 
 | Alder | Forventet resultat |
 | --- | --- |
-| Tomt felt | Fejl |
-| `12.5` | Fejl |
-| `0` | Fejl |
-| `121` | Fejl |
+| `12.5` | Fejl: ikke et helt tal |
+| `0` | Fejl: for lav alder |
+| `121` | Fejl: for høj alder |
 | `41` | Godkendt |
 
-Vigtigt: Ved en ugyldig alder må du ikke nå ned til `names.push(name)`. Flyt derfor `names.push(name)` til **efter** begge valideringer.
+Vigtigt: Ved en ugyldig alder må du ikke nå ned til `names.push(name)`. Flyt derfor `names.push(name)` til **efter** begge aldersvalideringer.
 
 ---
 
-## 7. Brug begge felter i svaret
+## 7. Vis begge felter i hilsenen
 
-Ret den gyldige vej gennem POST-routen, så den først laver et svar og derefter renderer templaten:
+På den gyldige vej sender serveren begge værdier til templaten:
 
 ```js
-const reply = `Hello ${name} (${age} år) 👋`;
-
 names.push(name);
-response.render("index", { name, error: "", names, reply });
+response.render("index", { name, age, error: "", names });
 ```
 
-GET-routen og begge fejlgrene renderer den samme template. Tilføj derfor en tom `reply`-værdi dér:
+GET-routen og fejlgrenene renderer den samme template. Tilføj derfor en tom `age`-værdi i GET-routen:
 
 ```js
-response.render("index", { name: "", error: "", names, reply: "" });
+response.render("index", { name: "", age: "", error: "", names });
 ```
 
-I fejlgrenene tilføjer du også `reply: ""` til objektet, fx:
+I fejlgrenene tilføjer du også `age`. Ved en aldersfejl skal du bevare den rå værdi:
 
 ```js
 return response.render("index", {
   name,
+  age: rawAge,
   error: "Skriv en alder som et helt tal mellem 1 og 120.",
-  names,
-  reply: ""
+  names
 });
 ```
 
 Erstat den gamle hilsen fra øvelse 1 — hele `<% if (name) { %>`-blokken — med dette i `index.ejs`:
 
 ```html
-<% if (reply) { %>
-  <h2><%= reply %></h2>
+<% if (name && age && !error) { %>
+  <h2>Hello <%= name %> (<%= age %> år) 👋</h2>
 <% } %>
 ```
 
-> **Svarlogik:** Serveren bruger både `name` og `age` til at bygge en tekst. EJS indsætter den færdige tekst i HTML'en. Browseren modtager fortsat et færdigt HTML-response, ikke et JavaScript-svar.
+> **EJS med flere værdier:** Serveren sender `name` og `age` til templaten. EJS sammensætter hilsenen, mens serveren renderer HTML'en. Browseren modtager fortsat et færdigt HTML-response, ikke et JavaScript-svar.
 
 ### Test trin 7
 
-Indsend forskellige navne og aldre. Begge værdier skal ændre serverens svar, og kun navnet skal føjes til listen.
+Indsend forskellige navne og aldre. Begge værdier skal ændre hilsenen, og kun navnet skal føjes til listen.
 
 ---
 
 ## 8. Bevar værdierne ved en fejl
 
 Når serveren renderer siden efter en fejl, kan den sende brugerens værdier tilbage, så de ikke skal indtastes igen.
+
+`age` bruges både til aldersfeltet og til hilsenen. Det er den samme værdi, som serveren har godkendt eller skal vise tilbage efter en fejl.
 
 Opdatér inputfelterne:
 
@@ -298,7 +332,7 @@ Opdatér inputfelterne:
 <input id="age" name="age" type="number" step="any" value="<%= age %>" />
 ```
 
-Det betyder, at hver `response.render("index", ...)` også skal have en `age`-værdi. Brug `age: ""` i GET-routen og efter et gyldigt submit. I fejlgrenen for alder skal du sende `age: rawAge`. I fejlgrenen for navn skal du sende `age: rawAge`.
+Det betyder, at hver `response.render("index", ...)` også skal have en `age`-værdi. Brug `age: ""` i GET-routen. I fejlgrenene skal du sende `age: rawAge`.
 
 Eksempel på aldersfejlen:
 
@@ -307,8 +341,7 @@ return response.render("index", {
   name,
   age: rawAge,
   error: "Skriv en alder som et helt tal mellem 1 og 120.",
-  names,
-  reply: ""
+  names
 });
 ```
 
@@ -318,7 +351,7 @@ return response.render("index", {
 2. Indtast en alder uden et navn. Alderen skal blive stående.
 3. Indsend gyldige værdier. Svaret skal vises.
 
-> **Templatens datakontrakt:** Nu bruger templaten `name`, `age`, `error`, `names` og `reply`. Alle routes og fejlgrene skal sende alle fem værdier, hver gang de renderer `index.ejs`.
+> **Templatens datakontrakt:** Nu bruger templaten `name`, `age`, `error` og `names`. Alle routes og fejlgrene skal sende alle fire værdier, hver gang de renderer `index.ejs`.
 
 ---
 
@@ -338,8 +371,16 @@ app.post("/submit", (request, response) => {
       name: "",
       age: rawAge,
       error: "Skriv dit navn, før du sender formularen.",
-      names,
-      reply: ""
+      names
+    });
+  }
+
+  if (!rawAge || Number.isNaN(age)) {
+    return response.render("index", {
+      name,
+      age: rawAge,
+      error: "Skriv en alder som et tal.",
+      names
     });
   }
 
@@ -348,20 +389,16 @@ app.post("/submit", (request, response) => {
       name,
       age: rawAge,
       error: "Skriv en alder som et helt tal mellem 1 og 120.",
-      names,
-      reply: ""
+      names
     });
   }
-
-  const reply = `Hello ${name} (${age} år) 👋`;
 
   names.push(name);
   response.render("index", {
     name,
-    age: "",
+    age,
     error: "",
-    names,
-    reply
+    names
   });
 });
 ```
@@ -387,12 +424,12 @@ Du er færdig, når appen:
 - tilføjer hvert gyldigt navn til `names` med `names.push(name)`
 - renderer navnelisten med EJS
 - konverterer og validerer alderen
-- bruger begge formularfelter i serverens svar
+- sender begge formularfelter til EJS, som viser hilsenen
 - giver templaten alle forventede variabler ved hver rendering
 
 ## Fejlfinding
 
-### `names`, `error`, `age` eller `reply` er ikke defineret
+### `names`, `error` eller `age` er ikke defineret
 
 Kontrollér, at den route eller fejlgren, der renderer `index.ejs`, sender variablen med.
 

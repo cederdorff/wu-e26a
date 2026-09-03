@@ -94,8 +94,8 @@ Vi samler også op på typiske fejl som `Cannot GET /`, manglende templates og `
 Anden milepæl er nået, når appen:
 
 - afviser tomt eller ugyldigt input med en forståelig fejlbesked
-- bruger arrays og objekter til at gemme og vise tidligere input
-- bruger flere formularfelter i sin svarlogik
+- bruger arrays til at gemme og vise tidligere input
+- sender flere formularfelter til EJS, som renderer et relevant svar
 - altid sender de data til templaten, som templaten forventer
 
 </details>
