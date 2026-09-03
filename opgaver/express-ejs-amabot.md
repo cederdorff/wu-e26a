@@ -301,11 +301,13 @@ Indsend to forskellige spørgsmål. Begge skal vises på siden i den rækkefølg
 
 ## 9. Giv hver besked en type
 
-Nu skal AMAbotten også vise et foreløbigt svar. For at jeres CSS kan kende forskel på et spørgsmål og et svar, ændrer vi hver besked fra en tekst til et objekt med to egenskaber:
+Nu skal AMAbotten også vise et foreløbigt svar. For at jeres CSS kan kende forskel på et spørgsmål og et svar, ændrer vi hver besked fra en tekst til et objekt med to faste egenskaber:
 
 ```js
 { type: "question", text: question }
 ```
+
+> Brug præcis egenskabsnavnene `type` og `text` — ikke jeres egne navne. EJS-loopet nedenfor slår direkte op på `message.type` og `message.text`, så alle beskeder skal have samme struktur for at kunne vises.
 
 Først erstatter I EJS-looppet fra trin 8 med:
 
@@ -365,9 +367,9 @@ Sæt midlertidigt `console.log(answers.length);` lige under arrayet, og genstart
 
 ---
 
-## 11. Skriv findAnswer() og brug den i routen
+## 11. Skriv findAnswer()
 
-Nu skal I bruge dataene fra forrige trin. Tilføj denne funktion under `answers`:
+Nu skal I bruge dataene fra forrige trin — men endnu ikke røre POST-routen. Tilføj denne funktion under `answers`:
 
 ```js
 function findAnswer(question) {
@@ -389,7 +391,21 @@ function findAnswer(question) {
 
 `findAnswer()` gennemgår objekterne i `answers` ét ad gangen. For hvert objekt undersøger `.some()`, om mindst ét af dets `keywords` findes i spørgsmålet, efter `toLowerCase()` har gjort store og små bogstaver ligegyldige. Ved det første match returnerer funktionen `answerGroup.answer`. Hvis intet matcher, returnerer den en standardtekst til sidst.
 
-Erstat til sidst linjen, der tilføjer det foreløbige svar, i POST-routen:
+### Test trin 11
+
+Sæt midlertidigt denne linje ind lige under funktionen:
+
+```js
+console.log(findAnswer("Hvad hedder du?"));
+```
+
+Genstart serveren, og kontrollér i terminalen, at I får det rigtige svar tilbage — uden at have rørt formularen eller routen. Prøv også et spørgsmål, der ikke matcher noget. Fjern loggen igen, når begge dele virker.
+
+---
+
+## 12. Brug findAnswer() i routen
+
+Nu ved I, at `findAnswer()` virker for sig selv. Erstat linjen, der tilføjer det foreløbige svar, i POST-routen:
 
 ```js
 const answer = findAnswer(question);
@@ -398,13 +414,13 @@ messages.push({ type: "answer", text: answer });
 
 Lad linjen, der gemmer brugerens spørgsmål, blive stående.
 
-### Test trin 11
+### Test trin 12
 
-Test ét spørgsmål for hver regel og et spørgsmål, der ikke matcher noget. Genindlæs siden: Hvorfor ligger samtalen stadig der? Genstart derefter serveren: Hvorfor forsvinder den?
+Test ét spørgsmål for hver regel og et spørgsmål, der ikke matcher noget — nu gennem formularen. Genindlæs siden: Hvorfor ligger samtalen stadig der? Genstart derefter serveren: Hvorfor forsvinder den?
 
 ---
 
-## 12. Vis en fejl ved et tomt spørgsmål
+## 13. Vis en fejl ved et tomt spørgsmål
 
 Indtil nu gemmer appen alt, også en tom tekst. Nu tilføjer vi den første valideringsregel — med samme mønster, som I brugte til navn og alder i [øvelse 2](express-ejs-formhaandtering-svarlogik.md): saml reglerne i én `if`/`else`-kæde, og render til sidst én gang.
 
@@ -447,7 +463,7 @@ Vis fejlbeskeden tæt ved formularen i `views/index.ejs`:
 <% } %>
 ```
 
-### Test trin 12
+### Test trin 13
 
 Indsend først et tomt spørgsmål og derefter et almindeligt spørgsmål. Kun det almindelige spørgsmål og svaret skal tilføjes til historikken.
 
@@ -465,9 +481,9 @@ I skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor
 
 Vælg én opgave ad gangen. De bygger oven på den fungerende AMAbot, så I altid kan gå tilbage til et klart udgangspunkt.
 
-### 13. Tilføj en grænse for lange spørgsmål
+### 14. Tilføj en grænse for lange spørgsmål
 
-I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en `else if` i den `if`/`else`-kæde, I skrev i trin 12 — **efter** kontrollen for et tomt spørgsmål og **før** `else` med de to `push`-linjer:
+I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en `else if` i den `if`/`else`-kæde, I skrev i trin 13 — **efter** kontrollen for et tomt spørgsmål og **før** `else` med de to `push`-linjer:
 
 ```js
 } else if (question.length > 280) {
@@ -479,13 +495,13 @@ I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en 
 
 Validering afgør, om data må bruges. Normalisering med `trim()` fjerner yderste mellemrum. EJS-escaping med `<%= ... %>` gør output sikkert i HTML-kontekst. Det er tre forskellige opgaver.
 
-### Test trin 13
+### Test trin 14
 
 Test tomt input, et gyldigt spørgsmål, et ukendt spørgsmål og et spørgsmål på mere end 280 tegn. Kontrollér, at ingen af de ugyldige spørgsmål tilføjes til samtalen.
 
 ---
 
-### 14. Sanitér uønskede kontroltegn
+### 15. Sanitér uønskede kontroltegn
 
 Valideringen afgør, om spørgsmålet må bruges. Sanitering ændrer selve inputtet. Som et enkelt eksempel kan I fjerne usynlige kontroltegn, der ikke hører hjemme i et almindeligt spørgsmål.
 
@@ -512,7 +528,7 @@ Her antager vi, at formularen sender feltet `question`, fordi den selv er bygget
 
 De tre begreber løser forskellige problemer. Forsøg ikke at lave et hjemmelavet “XSS-filter” ved at fjerne ord som `script` eller tegnet `<`; brug fortsat EJS' escaped output til brugerdata.
 
-### Test trin 14
+### Test trin 15
 
 Kontrollér igen, at almindelige spørgsmål og fejlbeskeder virker. Prøv også teksten `<strong>Hej</strong>`: Den skal vises som tekst og må ikke blive til fed HTML.
 
