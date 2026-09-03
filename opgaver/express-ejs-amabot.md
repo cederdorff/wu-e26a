@@ -667,3 +667,7 @@ Besøg `http://localhost:3000/debug?name=Ada&age=41` og `http://localhost:3000/d
 ### Test trin 20
 
 Prøv begge URL'er, og forklar for en makker, hvilken af de tre — `request.query`, `request.params` eller `request.body` — I ville bruge til AMAbottens spørgsmål, og hvorfor. Fjern derefter de to debug-routes igen, så de ikke bliver en del af jeres endelige app.
+
+## Videre til øvelse 4
+
+I [øvelse 4: Gør AMAbotten klogere med scoring og statistik](express-ejs-amabot-statistik.md) bygger I videre på det samme projekt: I retter `findAnswer()`, så den vælger den bedst matchende regel i stedet for bare den første, og I tilføjer en statistik over, hvilke emner brugerne spørger mest til.

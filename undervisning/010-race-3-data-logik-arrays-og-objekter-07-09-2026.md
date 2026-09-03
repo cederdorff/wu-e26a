@@ -4,44 +4,41 @@
 
 ## Dagens fokus
 
-Nu bygger vi videre på jeres chatbot og gør den intelligent! I dag lærer I at organisere og matche data med arrays og objekter, så chatbotten kan genkende nøgleord og svare varieret og relevant.
+I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med rigtig svarlogik — arrays og objekter som "svar-database", og string-metoder til at finde nøgleord i brugerens spørgsmål. Derefter skærper vi logikken yderligere: AMAbotten skal vælge den bedst matchende regel i stedet for bare den første, og vi tilføjer en simpel statistik, der viser, hvilke emner brugerne spørger mest til.
 
 ---
 
 ## Agenda
 
 1.  **Opsamling:**
-    - Hvordan håndterede vi data og svar i sidste undervisningsgang?  
-    - Hvorfor er arrays og objekter nyttige til chatlogik?
-    - Er der sammengæng mellem det I talte med Dan om?
-    - Client/Server, SSR, GET & POST i Node/Express-kontekst
+    - Hvor langt kom I med øvelse 1 og 2 sidste gang?
+    - Hvad skal AMAbotten fra øvelse 3 kunne, og hvordan hænger den sammen med det, I allerede har bygget?
 2.  **JavaScript arrays & objekter i Node.js:**
-    - Forskelle og typiske anvendelser  
-    - Eksempler på opbygning af svar-databaser
-    - Gennemløb med loops, fx for-of eller forEach
+    - Byg svar-databasen som et array af objekter (`answers`)
+    - Gennemløb med `for...of`
 3.  **String-metoder & pattern matching:**
-    - Find nøgleord i brugerens besked med fx `includes()`, `toLowerCase()` og `some()`
-    - Brug arrays af keywords til at matche beskeder
+    - Find nøgleord i brugerens besked med `includes()`, `toLowerCase()` og `.some()`
+    - Byg `findAnswer()` færdig fra øvelse 3
 4.  **Kontrolstrukturer:**
-    - Brug `if/else` og `switch` til at vælge svar  
-    - Eksempler på logik for intelligent svarudvælgelse
-5.  **Tilfældig svargenerering:**
-    - Brug `Math.random()` til at vælge et svar fra et array  
-    - Gør chatbotten mere naturlig og uforudsigelig
-6.  **Hands-on:**
-    - Byg videre på AMAbot, der matcher nøgleord og kan give flere forskellige svar  
-    - Udvid evt. med flere kategorier og randomisering
+    - `if`/`else` til validering af tomt input
+    - `switch` som alternativ, når I vælger ud fra én fast værdi
+5.  **Skærp svarlogikken med scoring:**
+    - Tæl nøgleords-matches med `.filter()`, og vælg den bedst matchende regel med `findBestAnswer()`
+6.  **Objekter som tæller — statistik:**
+    - Tæl emner i et almindeligt objekt (`topicStats`), og vis det i EJS med `Object.entries()`
+7.  **Hands-on:**
+    - Færdiggør AMAbot fra øvelse 3
+    - Skærp den med scoring og statistik fra øvelse 4
 
 ---
 
 ## Forberedelse
 
-- Færdiggør Øvelse 1 og Øvelse 2 fra sidste undervisningsgang.
+- Færdiggør [øvelse 1](../opgaver/express-ejs-formular.md) og [øvelse 2](../opgaver/express-ejs-formhaandtering-svarlogik.md) fra sidste undervisningsgang. [Øvelse 3](../opgaver/express-ejs-amabot.md) (AMAbot) blev kun påbegyndt — den bygger I videre på og færdiggør i dag.
 - Genopfrisk ["JavaScript object basics"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics) på MDN
-- Læs op på ["Arrays"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Arrays) på MDN
+- Læs op på ["Array iteration methods"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Arrays#array_methods) på MDN, særligt `.filter()`
 - Gennemgå ["Working with strings"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Useful_string_methods) på MDN for string manipulation
-- Læs ["Making decisions in your code — conditionals"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals) på MDN
-- Valgfrit: Eksperimentér med [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) i jeres browser konsol
+- Læs ["Making decisions in your code — conditionals"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals) på MDN, inkl. afsnittet om `switch`
 
 ---
 
@@ -50,7 +47,8 @@ Nu bygger vi videre på jeres chatbot og gør den intelligent! I dag lærer I at
 - Slides:
   - [JavaScript Concepts](https://cederdorff.com/race/slides/js-concepts.pdf)
 - Opgaver:
-  - [Chat logik med arrays & objekter](https://github.com/cederdorff/node-express-ejs-client-server-app/blob/main/_exercises/4_Chat_logik_med_arrays_objekter.md "Chat logik med arrays & objekter")
+  - [3. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
+  - [4. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
   - [Padlet - Node.js & Express.js Concepts](https://padlet.com/race7/node-js-express-js-concepts-mp9x38w14ndr3sug)
 
 ---
