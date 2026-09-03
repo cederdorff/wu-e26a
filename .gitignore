@@ -4,3 +4,5 @@ node_modules/
 .canvas-incoming/
 .canvas-push-preview/
 .DS_Store
+.tmp/
+dist/
