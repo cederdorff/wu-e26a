@@ -86,136 +86,21 @@ Express-serveren behøver ikke køre, mens I arbejder med filen. Lav de små øv
 5. Forklar resultatet, og lav ændringen i kommentaren.
 6. Kør filen igen, og undersøg forskellen.
 
-Kodeudsnittene nedenfor er de samme som i øvelsesfilen. Lav ændringerne i `find-answer-oevelser.js` — ikke i `server.js`.
+Alle kodeændringer og spørgsmål står i træningsfilen. Brug denne oversigt til at holde styr på progressionen:
 
-### 2a. Funktion, parameter og `return`
+| Del | Fagligt fokus | Ændring, I skal afprøve |
+| --- | --- | --- |
+| 1 | Funktion, parameter, argument og `return` | Skift argumentet i funktionskaldet |
+| 2 | `toLowerCase()` | Afprøv en ny tekst med store bogstaver |
+| 3 | `.includes()` og boolean | Søg efter både kendte og ukendte ord |
+| 4 | Array, callback og `.some()` | Få resultatet til at skifte mellem `true` og `false` |
+| 5 | Array, objekt og `for...of` | Tilføj en regel, og se løkken tage en ekstra tur |
+| 6 | `if`/`else` | Få begge kodeveje til at køre |
+| 7 | Den samlede `findAnswer()` | Test en kendt, en anden kendt og en ukendt kategori |
 
-En funktion samler kode, som kan kaldes flere gange. `name` i funktionsdefinitionen er en **parameter**. `"Ada"` i funktionskaldet er et **argument** — den konkrete værdi, parameteren modtager:
+> Standardresultaterne forudsætter den oprindelige fil. Hvis jeres ændringer gør det svært at følge næste del, kan I hente en frisk kopi af `find-answer-oevelser.js`.
 
-```js
-function makeGreeting(name) {
-  return `Hej ${name}`;
-}
-
-const greeting = makeGreeting("Ada");
-console.log(greeting);
-```
-
-Inden I kører koden:
-
-1. Hvilken værdi får parameteren `name`?
-2. Hvilken værdi sender `return` tilbage?
-3. Hvad forventer I, at terminalen viser?
-
-Skift `"Ada"` til jeres eget navn, og kør koden igen.
-
-> `findAnswer(question)` er også en funktion. `question` er parameteren, og `return` sender det valgte svar tilbage til POST-routen.
-
-### 2b. `toLowerCase()`
-
-JavaScript skelner mellem store og små bogstaver. Undersøg derfor denne tekst:
-
-```js
-const exampleQuestion = "Hvad HEDDER du?";
-const normalizedExample = exampleQuestion.toLowerCase();
-
-console.log(exampleQuestion);
-console.log(normalizedExample);
-```
-
-Inden I kører koden:
-
-1. Hvad forventer I, at de to logs viser?
-2. Bliver værdien i `exampleQuestion` ændret?
-
-`toLowerCase()` laver en **ny tekst** med små bogstaver. Den oprindelige tekst bliver ikke ændret.
-
-### 2c. `.includes()` og boolean
-
-`.includes()` undersøger, om én tekst findes inde i en anden. Resultatet er en **boolean**: enten `true` eller `false`.
-
-```js
-console.log(normalizedExample.includes("hedder"));
-console.log(normalizedExample.includes("bor"));
-```
-
-Inden I kører koden, skal I skrive det forventede resultat ud for hver linje. Prøv derefter selv med nøgleordene `"du"` og `"navn"`.
-
-Forklar bagefter:
-
-- Hvilken værdi er teksten, vi leder i?
-- Hvilken værdi er teksten, vi leder efter?
-- Hvorfor får de to oprindelige eksempler forskellige resultater?
-
-### 2d. Array og `.some()`
-
-Et array kan indeholde flere nøgleord. `.some()` undersøger, om **mindst ét** element opfylder en betingelse:
-
-```js
-const exampleKeywords = ["navn", "hedder", "hvem er du"];
-
-const hasExampleMatch = exampleKeywords.some((keyword) =>
-  normalizedExample.includes(keyword)
-);
-
-console.log(hasExampleMatch);
-```
-
-Inden I kører koden:
-
-1. Hvilke tre værdier gennemgår `.some()`?
-2. Hvad er `keyword` første gang testen kører?
-3. Hvilket nøgleord får testen til at blive `true`?
-4. Hvilken datatype får `hasExampleMatch`?
-
-Skift spørgsmålet til `"Hvor bor du?"`. Hvad viser terminalen nu, og hvorfor?
-
-> Funktionen `(keyword) => ...` kaldes en callback-funktion. `.some()` kalder den med ét element fra arrayet ad gangen, indtil den finder et `true`-resultat.
-
-### 2e. `for...of`, array og objekt
-
-`answers` er et array. Hvert element i arrayet er et objekt. Brug `for...of` til at se ét objekt ad gangen:
-
-```js
-for (const answerGroup of answers) {
-  console.log(answerGroup);
-  console.log(answerGroup.keywords);
-  console.log(answerGroup.answer);
-}
-```
-
-Undersøg outputtet i terminalen, og forklar:
-
-1. Hvor mange gange kører løkken?
-2. Hvad indeholder `answerGroup` på én tur gennem løkken?
-3. Hvorfor kan vi skrive `answerGroup.keywords`?
-4. Hvilken datatype er `answerGroup.keywords`?
-
-Tilføj midlertidigt endnu en regel til `answers`. Kør koden igen, og kontrollér, at løkken nu tager en ekstra tur. Fjern den midlertidige regel bagefter.
-
-### 2f. `if`/`else`
-
-En `if`/`else` vælger mellem to kodeveje ud fra en betingelse:
-
-```js
-if (hasExampleMatch) {
-  console.log("Mindst ét nøgleord matcher");
-} else {
-  console.log("Ingen nøgleord matcher");
-}
-```
-
-Kør først koden med spørgsmålet `"Hvad hedder du?"` og derefter med `"Hvor bor du?"`.
-
-Forklar bagefter:
-
-- Hvilken værdi undersøger `if`?
-- Hvornår kører blokken efter `if`?
-- Hvornår kører blokken efter `else`?
-
-> I den færdige `findAnswer()` er `else` ikke skrevet direkte. Hvis et match ikke findes, fortsætter `for...of` automatisk til næste regel. Standardsvaret efter løkken fungerer som den sidste mulighed.
-
-### 2g. Saml delene i `findAnswer()`
+### Sammenlign med AMAbottens `findAnswer()`
 
 Find nu `findAnswer()` i din egen `server.js`:
 
@@ -256,7 +141,7 @@ Det betyder, at den første regel med et match vinder. De næste regler bliver i
 I øvelsesfilens `findAnswer()` står disse to logs allerede i `for...of`-løkken:
 
 ```js
-console.log("Regel:", answerGroup.keywords);
+console.log("Undersøger:", answerGroup.keywords);
 console.log("Matcher:", hasMatch);
 ```
 
@@ -264,9 +149,9 @@ Kør først filen som den er, og se, hvilke regler det kendte og det ukendte sp�
 
 Sammenlign til sidst øvelsesfilens `findAnswer()` med funktionen i jeres egen `server.js`. De to logs er kun hjælp til undersøgelsen og behøver ikke flyttes med ind i AMAbotten.
 
-### Stop og forklar helheden
+### Klar til næste fase?
 
-Forklar med egne ord:
+Gå først videre, når I med egne ord kan forklare:
 
 - Hvordan bevæger et spørgsmål sig gennem funktionen?
 - Hvilke dele arbejder med arrays?
@@ -336,44 +221,27 @@ node scoring-oevelser.js
 
 Begynd med del 1 og 2 i filen. Forudsig outputtet, kør filen, og løs opgaverne i kommentarerne.
 
-I `findAnswer()` bruger I `.some()`:
+> De viste scores forudsætter den oprindelige fil. Hent en frisk kopi, hvis jeres ændringer gør det svært at følge næste del.
 
-```js
-const hasMatch = answerGroup.keywords.some((keyword) =>
-  normalizedQuestion.includes(keyword)
-);
-```
+Forskellen, I skal undersøge, er:
 
-`.some()` giver enten `true` eller `false`. Det er nok, når vi kun vil vide, **om** reglen matcher.
+| Metode | Resultat | Spørgsmål, metoden besvarer |
+| --- | --- | --- |
+| `.some()` | `true` eller `false` | Matcher mindst ét nøgleord? |
+| `.filter()` | Et nyt array | Hvilke nøgleord matcher? |
+| `.filter().length` | Et tal | Hvor mange nøgleord matcher? |
 
-Nu vil vi vide, **hvor mange** nøgleord der matcher. Her kan vi bruge `.filter()`:
-
-```js
-function countMatches(keywords, normalizedQuestion) {
-  const matchingKeywords = keywords.filter((keyword) =>
-    normalizedQuestion.includes(keyword)
-  );
-
-  return matchingKeywords.length;
-}
-```
-
-`.filter()` laver et nyt array med de nøgleord, der passer. `.length` fortæller, hvor mange elementer det nye array indeholder.
-
-### Kontrollér del 1 og 2
-
-I træningsfilen bliver funktionen blandt andet testet med:
-
-```js
-const testKeywords = ["navn", "hedder", "hvem er du"];
-const testQuestion = "hvad hedder du, og hvad er dit navn?";
-
-console.log(countMatches(testKeywords, testQuestion));
-```
-
-Terminalen skal vise `2`, fordi `"hedder"` og `"navn"` findes i spørgsmålet. Gennemfør også ændringerne, der står som `OPGAVE` i filen.
+Med spørgsmålet `"hvad hedder du, og hvad er dit navn?"` skal `countMatches()` give `2`, fordi `"hedder"` og `"navn"` matcher.
 
 > Funktionen tæller matchende nøgleord — ikke hvor mange gange det samme nøgleord står i spørgsmålet.
+
+### Klar til næste del?
+
+Gå videre, når I kan:
+
+- forklare forskellen på resultatet fra `.some()` og `.filter()`
+- ændre spørgsmålet og forudsige den nye score
+- pege på, hvorfor `.length` bliver funktionens resultat
 
 ---
 
@@ -381,24 +249,7 @@ Terminalen skal vise `2`, fordi `"hedder"` og `"navn"` findes i spørgsmålet. G
 
 > **Arbejdssted:** Fortsæt i `scoring-oevelser.js`.
 
-Før AMAbotten skal vælge noget, skal I se scoren for hver regel. Find del 3 i træningsfilen:
-
-```js
-function showScores(question) {
-  const normalizedQuestion = question.toLowerCase();
-
-  for (const answerGroup of answers) {
-    const score = countMatches(answerGroup.keywords, normalizedQuestion);
-    console.log(answerGroup.category, score);
-  }
-}
-```
-
-Test funktionen:
-
-```js
-showScores("Hvad hedder du, hvad er dit navn, og hvor bor du?");
-```
+Før AMAbotten skal vælge noget, skal I se scoren for hver regel. Find del 3 i træningsfilen, og brug spørgsmålet `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`.
 
 Med eksempelreglerne skal terminalen vise:
 
@@ -411,6 +262,14 @@ fritid 0
 Her træner I det samme `for...of` som i `findAnswer()`. Forskellen er, at løkken ikke stopper ved det første match. Den beregner en score for alle regler.
 
 Løs opgaverne under del 3. Ret blandt andet spørgsmålet, så henholdsvis bostedsreglen og ingen af reglerne får den højeste score.
+
+### Klar til næste del?
+
+Gå videre, når I kan:
+
+- forklare, hvorfor `for...of` kører én gang pr. regel
+- finde den højeste score i terminalens output
+- ændre spørgsmålet, så en anden regel vinder
 
 ---
 
@@ -503,7 +362,18 @@ node statistik-oevelser.js
 
 Gennemfør del 1–5 i filen. Her træner I punktnotation, bracket notation, opdatering af en tæller og forbindelsen mellem resultatet fra `findBestAnswer()` og statistikken.
 
+> Alle dele bruger det samme `topicStats`-objekt. Tællerne bygger derfor videre på de tidligere dele. Det er meningen, at værdierne ændrer sig, mens filen kører.
+
 Når I kan forklare, hvorfor `topicStats[result.category]` finder den rigtige tæller, skal I gå tilbage til AMAbotten.
+
+### Klar til integration?
+
+Gå videre, når I kan:
+
+- læse en property med både punktnotation og bracket notation
+- forklare, hvordan en tæller bliver forhøjet med `1`
+- bruge en kategori-variabel til at finde den rigtige tæller
+- forklare, hvorfor en tom kategori ikke bliver talt
 
 > **Skift arbejdssted:** Gå nu til AMAbottens `server.js`.
 

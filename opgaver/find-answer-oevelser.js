@@ -6,6 +6,9 @@
 // 2. Kør filen.
 // 3. Forklar resultatet med egne ord.
 // 4. Lav den lille ændring, der står i kommentaren, og kør igen.
+//
+// Standardresultaterne forudsætter den oprindelige kode. Hent en frisk kopi,
+// hvis dine ændringer gør det svært at følge den næste del.
 
 console.log("\n--- 1. Funktion, parameter, argument og return ---");
 
@@ -134,3 +137,11 @@ console.log("Ukendt spørgsmål:", unknownAnswer);
 // Hvorfor undersøger det ukendte spørgsmål alle regler?
 // Skriv et spørgsmål, der matcher bostedsreglen.
 // Flyt bostedsreglen øverst i answers. Hvad ændrer det?
+
+console.log("\n--- KLAR TIL AT GÅ VIDERE? ---");
+
+// Du er klar, når du kan:
+// - forklare forskellen på parameter og argument
+// - forudsige resultatet af toLowerCase(), includes() og some()
+// - forklare, hvad answerGroup og keyword indeholder
+// - forklare, hvorfor return stopper findAnswer()

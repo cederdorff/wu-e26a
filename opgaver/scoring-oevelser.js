@@ -6,6 +6,9 @@
 // 2. Kør filen.
 // 3. Forklar resultatet med egne ord.
 // 4. Lav ændringen i kommentaren, og kør igen.
+//
+// Standardresultaterne forudsætter den oprindelige kode. Hent en frisk kopi,
+// hvis dine ændringer gør det svært at følge den næste del.
 
 const answers = [
   {
@@ -140,3 +143,11 @@ console.log("\n--- 5. Din egen regel ---");
 // Kald showScores() med et spørgsmål, der matcher den nye regel.
 // Kald findBestAnswer() med det samme spørgsmål.
 // Kontrollér både score, svar og kategori i terminalen.
+
+console.log("\n--- KLAR TIL INTEGRATION? ---");
+
+// Du er klar, når du kan:
+// - forklare forskellen på some() og filter()
+// - ændre et spørgsmål og forudsige reglernes scores
+// - forklare, hvordan if gemmer den højeste score
+// - forklare objektet, som findBestAnswer() returnerer

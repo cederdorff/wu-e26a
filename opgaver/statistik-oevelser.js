@@ -6,6 +6,10 @@
 // 2. Kør filen.
 // 3. Forklar resultatet med egne ord.
 // 4. Lav ændringen i kommentaren, og kør igen.
+//
+// Alle dele bruger det samme topicStats-objekt. Tællerne bygger derfor videre
+// på de tidligere dele. Standardresultaterne forudsætter den oprindelige kode.
+// Hent en frisk kopi, hvis dine ændringer gør outputtet svært at følge.
 
 const topicStats = {
   navn: 0,
@@ -128,3 +132,11 @@ console.log("Ukendt:", reactionFor("ukendt"));
 // Hvilken case passer til hvert funktionskald?
 // Hvornår bruges default?
 // Tilføj en case til den nye kategori, du selv har oprettet.
+
+console.log("\n--- KLAR TIL INTEGRATION? ---");
+
+// Du er klar, når du kan:
+// - læse en property med både punktnotation og bracket notation
+// - forklare, hvordan en tæller bliver forhøjet med 1
+// - bruge en category-variabel til at vælge den rigtige tæller
+// - forklare, hvorfor en tom kategori ikke bliver talt
