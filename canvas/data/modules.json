@@ -498,7 +498,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 0,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178028/items",
     "items": []
@@ -664,7 +664,7 @@
       {
         "id": 1047445,
         "position": 5,
-        "title": "Aflever link til det AMAbot repository",
+        "title": "Aflever link til dit AMAbot repository",
         "indent": 0,
         "quiz_lti": false,
         "type": "Assignment",
@@ -751,7 +751,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 0,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178032/items",
     "items": []
@@ -826,7 +826,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 0,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178034/items",
     "items": []
@@ -840,7 +840,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178035/items",
     "items": [
@@ -856,7 +856,7 @@
         "page_url": "plan-for-dob-3-string-parsing-metoder-og-funktioner",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-3-string-parsing-metoder-og-funktioner",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false

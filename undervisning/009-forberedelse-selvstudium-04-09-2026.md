@@ -11,7 +11,7 @@
 canvas_course_id: 32059
 canvas_module_id: 178032
 canvas_module_position: 9
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: null
 canvas_module_item_position: null
 canvas_page_id: null

@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-03T11:23:42.173Z
+Senest hentet: 2026-09-06T17:21:09.958Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -62,7 +62,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 005 · Forberedelse - Selvstudium - 31-08-2026
 
-[Lokal fil](../undervisning/005-forberedelse-selvstudium-31-08-2026.md) · upubliceret
+[Lokal fil](../undervisning/005-forberedelse-selvstudium-31-08-2026.md) · publiceret
 
 *Ingen Canvas-elementer.*
 
@@ -90,7 +90,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Opgaver
 
-- Aflever link til det AMAbot repository — Assignment
+- Aflever link til dit AMAbot repository — Assignment
 
 ## 008 · RACE 2 - EJS templating, form handling og svar logik - 03-09-2026
 
@@ -104,7 +104,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 009 · Forberedelse - Selvstudium - 04-09-2026
 
-[Lokal fil](../undervisning/009-forberedelse-selvstudium-04-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/009-forberedelse-selvstudium-04-09-2026.md) · publiceret
 
 *Ingen Canvas-elementer.*
 
@@ -120,13 +120,13 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 011 · Forberedelse - Selvstudium - 08-09-2026
 
-[Lokal fil](../undervisning/011-forberedelse-selvstudium-08-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/011-forberedelse-selvstudium-08-09-2026.md) · publiceret
 
 *Ingen Canvas-elementer.*
 
 ## 012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026
 
-[Lokal fil](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) · publiceret
 
 - [Plan for DOB 3 - String parsing, metoder og funktioner](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md)
 
