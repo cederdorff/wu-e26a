@@ -1,42 +1,61 @@
 # Øvelse 4: Gør AMAbotten klogere med scoring og statistik
 
-I denne øvelse bygger I videre på **det samme projekt** fra [øvelse 3](express-ejs-amabot.md). Nogle af jer har allerede gjort den grundlæggende AMAbot færdig, mens andre først skal færdiggøre svarlogikken. Derfor begynder øvelsen med et fælles tjekpunkt og en gennemgang af den `findAnswer()`-funktion, I skal bygge videre på.
+I denne øvelse bygger I videre på **det samme projekt** fra [øvelse 3](express-ejs-amabot.md). Øvelsen genbesøger den svarlogik, I allerede har arbejdet med, og udvider den i små trin.
 
-I ændrer ikke projektets struktur — kun `server.js` og `views/index.ejs`.
+I skal ikke bygge en ny app eller lære en helt ny måde at programmere på. I skal bruge de samme arrays, objekter, løkker, funktioner og `if`-sætninger igen — men forstå dem bedre og bruge dem til lidt mere.
 
-Lige nu vinder den **første** regel, der matcher et nøgleord, selvom en senere regel måske passer bedre. I dag retter I det, så AMAbotten vælger den regel, der matcher **flest** nøgleord. I tilføjer også en simpel statistik, der viser, hvilke emner brugerne spørger mest til.
+Skriv og test ét trin ad gangen. Hvis I ikke er færdige med den grundlæggende AMAbot fra øvelse 3, skal I færdiggøre den først.
 
-Skriv og test ét trin ad gangen, ligesom i de foregående øvelser.
+## Det træner du
 
-## Før du begynder: Kom frem til samme startpunkt
+Når du arbejder med øvelsen, træner du at:
 
-Øvelse 4 forudsætter, at du har gennemført **trin 1–13 i øvelse 3**. De vigtigste dele er, at appen:
+- læse og forklare en funktion, du allerede har skrevet
+- finde værdier i arrays og objekter
+- gennemløbe et array med `for...of`
+- bruge `toLowerCase()`, `includes()` og `.some()` igen
+- sammenligne `.some()` med `.filter()`
+- bruge `if` til at sammenligne scores
+- bruge et objekt som en simpel tæller
+- sende data fra Express til EJS
 
-- har et `answers`-array med regler
-- har en `findAnswer(question)`-funktion
-- modtager spørgsmålet i `POST /ask`
-- gemmer både spørgsmålet og svaret i `messages`
-- viser en fejl ved et tomt spørgsmål
+## Det bygger du
 
-Er du ikke nået dertil endnu, så fortsæt først i [øvelse 3](express-ejs-amabot.md). Du behøver ikke lave ekstraopgaverne i øvelse 3 for at gå videre.
+Den nuværende `findAnswer()` stopper ved den **første** regel, der matcher. I udvider den, så AMAbotten undersøger alle regler og vælger den regel, der matcher flest nøgleord.
 
-> Har du lavet ekstraopgave 17 med flere tilfældige svar pr. regel, ser dine data anderledes ud end eksemplerne her. Gem gerne den version i Git, og brug derefter igen én `answer`-tekst pr. regel, mens du arbejder med denne øvelse. Så har alle samme udgangspunkt for den nye logik.
+Til sidst viser appen en enkel statistik over tre emner:
 
-### Kontrollér startpunktet
-
-Start serveren, og prøv disse tre ting:
-
-1. Stil et spørgsmål, der matcher en regel.
-2. Stil et spørgsmål, der ikke matcher nogen regel.
-3. Send et tomt spørgsmål.
-
-Du skal henholdsvis få et kendt svar, standardsvaret og en fejlbesked. Først derefter er du klar til at ændre måden, svaret bliver fundet på.
+```text
+Browser -> POST /ask -> findBestAnswer() -> messages -> EJS -> HTML
+                              |
+                              -> topicStats
+```
 
 ---
 
-## Genbesøg: Hvordan finder `findAnswer()` et svar?
+## 1. Kontrollér AMAbotten fra øvelse 3
 
-Find denne funktion fra øvelse 3 i din egen `server.js`, og læs den fra toppen og ned:
+Start serveren:
+
+```bash
+npm run dev
+```
+
+Prøv derefter tre slags input:
+
+| Input | Forventet resultat |
+| --- | --- |
+| Et spørgsmål, der matcher et nøgleord | Et svar fra `answers` |
+| Et spørgsmål uden et kendt nøgleord | Standardsvaret |
+| Et tomt spørgsmål | En fejlbesked |
+
+Hvis de tre tests ikke virker, så find først fejlen i øvelse 3. Øvelse 4 ændrer svarlogikken og er derfor nemmere at arbejde med, når udgangspunktet virker.
+
+---
+
+## 2. Genbesøg `findAnswer()`
+
+Find `findAnswer()` i din egen `server.js`:
 
 ```js
 function findAnswer(question) {
@@ -56,46 +75,41 @@ function findAnswer(question) {
 }
 ```
 
-Følg værdierne i denne rækkefølge:
+Læs funktionen fra toppen og ned:
 
-1. `question.toLowerCase()` laver en ny tekst med små bogstaver. Så kan `"Hvad HEDDER du?"` stadig matche nøgleordet `"hedder"`.
-2. `for...of` tager ét objekt ad gangen fra `answers`. Variablen `answerGroup` er altså først navnereglen, derefter bostedsreglen og så videre.
-3. `.some()` tager ét nøgleord ad gangen fra den aktuelle regels `keywords`. Den giver `true`, så snart ét nøgleord matcher, og ellers `false`.
-4. `.includes(keyword)` undersøger, om nøgleordets tekst findes inde i det normaliserede spørgsmål.
-5. Hvis `hasMatch` er `true`, stopper `return` hele funktionen med det samme. Derfor vinder den **første** regel med et match.
-6. Hvis løkken slutter uden et match, når funktionen frem til standardsvaret.
+1. `toLowerCase()` laver spørgsmålet om til små bogstaver.
+2. `for...of` tager ét objekt ad gangen fra `answers`.
+3. `.some()` undersøger, om mindst ét nøgleord passer.
+4. `.includes()` undersøger, om det enkelte nøgleord findes i spørgsmålet.
+5. `return` sender svaret tilbage og stopper funktionen.
 
-> Metoderne har forskellige opgaver: `toLowerCase()` normaliserer teksten, `includes()` undersøger ét nøgleord, `.some()` samler undersøgelsen til et ja/nej for én regel, og `for...of` gennemgår alle reglerne indtil et `return` stopper funktionen.
+Det betyder, at den første regel med et match vinder. De næste regler bliver ikke undersøgt.
 
-### Spor funktionen med et konkret spørgsmål
+### Se værdierne i terminalen
 
-Brug spørgsmålet `"Hvad hedder du, og hvor bor du?"`, og udfyld gerne tabellen på papir eller sammen:
+Sæt midlertidigt disse logs ind i `for...of`-løkken lige efter `hasMatch`:
 
-| `answerGroup` | Matchende nøgleord | `hasMatch` | Hvad sker der? |
-| --- | --- | --- | --- |
-| `navn` | `"hedder"` | `true` | Funktionen returnerer navnesvaret |
-| `bosted` | `"bor"` | ville også være `true` | Reglen bliver aldrig undersøgt |
-
-Det er præcis den begrænsning, I skal ændre: Vi skal ikke længere stoppe ved det første match. Vi skal undersøge alle regler og huske den højeste score.
-
-## Det bygger du
-
-```text
-Browser -> POST /ask -> findBestAnswer() -> topicStats -> messages array -> response.render() -> EJS -> HTML
+```js
+console.log("Regel:", answerGroup.keywords);
+console.log("Matcher:", hasMatch);
 ```
 
-Når øvelsen er færdig, kan jeres AMAbot:
+Stil et spørgsmål, der matcher en af reglerne. Se i terminalen, hvilke regler funktionen når at undersøge. Fjern derefter de to logs igen.
 
-- vælge den regel, der matcher flest nøgleord, i stedet for bare den første
-- holde styr på, hvor mange gange hvert emne er blevet spurgt om
-- vise den statistik i EJS
-- vise en lille reaktion (emoji), der afhænger af emnet
+### Stop og forklar
+
+Forklar med egne ord:
+
+- Hvad er `answerGroup` i løkken?
+- Hvad er `keyword` inde i `.some()`?
+- Hvilken datatype får `hasMatch`?
+- Hvorfor bliver reglerne efter det første match ikke undersøgt?
 
 ---
 
-## 1. Giv hver regel en kategori
+## 3. Udvid objekterne med en kategori
 
-`answers`-arrayet fra øvelse 3 har allerede `keywords` og `answer`. Tilføj en tredje egenskab, `category`, til hver regel:
+Hver regel i `answers` er et objekt med `keywords` og `answer`. Tilføj nu en `category`:
 
 ```js
 const answers = [
@@ -117,169 +131,291 @@ const answers = [
 ];
 ```
 
-`category` er en kort, ensartet betegnelse for emnet — brug den samme slags ord, uanset hvor mange regler I har. I skal bruge den til statistikken i de næste trin.
-
-### Test trin 1
-
-Læs jeres opdaterede `answers` igennem. Kontrollér, at alle regler nu har `category`, `keywords` og `answer`. Appen opfører sig endnu ikke anderledes.
-
----
-
-## 2. Gå fra ja/nej til antal med `.filter()`
-
-I øvelse 3 brugte `findAnswer()` `.some()`, som kun svarer ja/nej på, om en regel matcher. Et ja fortæller ikke, om reglen matchede ét, to eller tre nøgleord. Nu skal I i stedet **tælle** matchene.
-
-Sammenlign først de to udtryk:
+Tilpas reglerne til jeres egen AMAbot. Behold den samme struktur i alle objekter:
 
 ```js
-// Ja eller nej: Matcher mindst ét nøgleord?
-keywords.some((keyword) => normalizedQuestion.includes(keyword));
-
-// Nyt array: Hvilke nøgleord matcher?
-keywords.filter((keyword) => normalizedQuestion.includes(keyword));
-```
-
-Begge bruger den samme test med `.includes()`. Forskellen er resultatet: `.some()` giver en boolean, mens `.filter()` giver et nyt array. Derfor kan vi bruge `.length` til at tælle det nye array.
-
-Tilføj denne funktion over `findAnswer()`:
-
-```js
-function countMatches(keywords, normalizedQuestion) {
-  return keywords.filter((keyword) => normalizedQuestion.includes(keyword)).length;
+{
+  category: "...",
+  keywords: ["...", "..."],
+  answer: "..."
 }
 ```
 
-> **`.filter()`:** `.filter()` gennemgår et array og returnerer et **nyt** array med kun de elementer, der opfylder betingelsen — her de nøgleord, som findes i spørgsmålet. Det oprindelige `keywords`-array bliver ikke ændret. `.length` på det nye array fortæller, hvor mange nøgleord der matchede. Modsat `.some()`, som stopper ved det første match, gennemgår `.filter()` alle nøgleordene.
+### Test trin 3
 
-### Test trin 2
-
-Sæt midlertidigt denne linje ind lige under funktionen, genstart serveren, og kontrollér resultatet i terminalen:
+Sæt midlertidigt denne log efter `answers`:
 
 ```js
-console.log(countMatches(["navn", "hedder", "hvem er du"], "hvad hedder du, og hvad er dit navn?"));
+console.log(answers[0].category);
 ```
 
-Spørgsmålet indeholder to af de tre nøgleord, så terminalen skal vise `2`. Fjern loggen igen.
+Terminalen skal vise kategorien fra det første objekt. Skift derefter `0` til `1`, og se kategorien fra det næste objekt. Fjern loggen igen.
+
+> `answers[0]` finder det første element i arrayet. `.category` finder en egenskab på objektet. På den måde træner I både array og objekt i det samme udtryk.
 
 ---
 
-## 3. Vælg den bedst matchende regel
+## 4. Sammenlign `.some()` og `.filter()`
 
-Erstat `findAnswer()` fra øvelse 3 med denne nye funktion:
+I `findAnswer()` bruger I `.some()`:
+
+```js
+const hasMatch = answerGroup.keywords.some((keyword) =>
+  normalizedQuestion.includes(keyword)
+);
+```
+
+`.some()` giver enten `true` eller `false`. Det er nok, når vi kun vil vide, **om** reglen matcher.
+
+Nu vil vi vide, **hvor mange** nøgleord der matcher. Her kan vi bruge `.filter()`:
+
+```js
+function countMatches(keywords, normalizedQuestion) {
+  const matchingKeywords = keywords.filter((keyword) =>
+    normalizedQuestion.includes(keyword)
+  );
+
+  return matchingKeywords.length;
+}
+```
+
+`.filter()` laver et nyt array med de nøgleord, der passer. `.length` fortæller, hvor mange elementer det nye array indeholder.
+
+### Test trin 4
+
+Sæt midlertidigt denne test under funktionen:
+
+```js
+const testKeywords = ["navn", "hedder", "hvem er du"];
+const testQuestion = "hvad hedder du, og hvad er dit navn?";
+
+console.log(countMatches(testKeywords, testQuestion));
+```
+
+Terminalen skal vise `2`, fordi `"hedder"` og `"navn"` findes i spørgsmålet. Fjern testkoden igen.
+
+> Funktionen tæller matchende nøgleord — ikke hvor mange gange det samme nøgleord står i spørgsmålet.
+
+---
+
+## 5. Undersøg scoren for alle regler
+
+Før AMAbotten skal vælge noget, skal I se scoren for hver regel. Tilføj midlertidigt denne funktion:
+
+```js
+function showScores(question) {
+  const normalizedQuestion = question.toLowerCase();
+
+  for (const answerGroup of answers) {
+    const score = countMatches(answerGroup.keywords, normalizedQuestion);
+    console.log(answerGroup.category, score);
+  }
+}
+```
+
+Test funktionen:
+
+```js
+showScores("Hvad hedder du, hvad er dit navn, og hvor bor du?");
+```
+
+Med eksempelreglerne skal terminalen vise:
+
+```text
+navn 2
+bosted 1
+fritid 0
+```
+
+Her træner I det samme `for...of` som i `findAnswer()`. Forskellen er, at løkken ikke stopper ved det første match. Den beregner en score for alle regler.
+
+Fjern `showScores()` og testen igen, når I har set resultatet.
+
+---
+
+## 6. Vælg svaret med den højeste score
+
+Erstat nu `findAnswer()` med `findBestAnswer()`:
 
 ```js
 function findBestAnswer(question) {
   const normalizedQuestion = question.toLowerCase();
-  let bestMatch = null;
+  let bestScore = 0;
+  let bestAnswer = "Det kender jeg ikke svaret på endnu.";
+  let bestCategory = "";
 
   for (const answerGroup of answers) {
     const score = countMatches(answerGroup.keywords, normalizedQuestion);
 
-    if (score > 0 && (!bestMatch || score > bestMatch.score)) {
-      bestMatch = { ...answerGroup, score };
+    if (score > bestScore) {
+      bestScore = score;
+      bestAnswer = answerGroup.answer;
+      bestCategory = answerGroup.category;
     }
   }
 
-  return bestMatch;
+  return { answer: bestAnswer, category: bestCategory };
 }
 ```
 
-`bestMatch` starter som `null`, fordi ingen regel er fundet endnu. Denne gang må løkken ikke `return`-ere ved første match. For hver regel beregner I dens `score` og sammenligner den med den bedste score indtil nu. Kun hvis scoren er større end nul, **og** højere end den bedste, vi har set, gemmer vi reglen som den nye `bestMatch`. Først efter hele `for...of`-løkken returnerer funktionen resultatet.
+Funktionen bruger tre enkle værdier til at huske det bedste resultat indtil videre:
 
-`{ ...answerGroup, score }` kopierer reglens egenskaber ind i et nyt objekt og tilføjer `score`, så I stadig har `category`, `keywords`, `answer` og `score` samlet ét sted.
+- `bestScore` er det højeste antal match.
+- `bestAnswer` er svaret fra reglen med den højeste score.
+- `bestCategory` er kategorien fra den samme regel.
 
-Spor fx spørgsmålet `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`:
+`if (score > bestScore)` betyder, at værdierne kun bliver ændret, når funktionen finder en bedre regel. Hvis ingen regel matcher, bliver standardsvaret og den tomme kategori returneret.
 
-| Regel | Matchende nøgleord | `score` | `bestMatch` bagefter |
-| --- | --- | ---: | --- |
-| `navn` | `"navn"`, `"hedder"` | 2 | `navn` |
-| `bosted` | `"bor"` | 1 | stadig `navn` |
-| `fritid` | ingen | 0 | stadig `navn` |
-
-I POST-routen skal I nu bruge `findBestAnswer()` i stedet for `findAnswer()`. Ret linjerne, der vælger og gemmer svaret, til:
+### Test funktionen alene
 
 ```js
-const bestMatch = findBestAnswer(question);
-const answer = bestMatch ? bestMatch.answer : "Det kender jeg ikke svaret på endnu.";
+console.log(findBestAnswer("Hvad hedder du, og hvad er dit navn?"));
+console.log(findBestAnswer("Kan du bage en kage?"));
+```
+
+Den første test skal give et objekt med navnesvaret og kategorien `"navn"`. Den anden skal give standardsvaret og en tom kategori. Fjern de to logs igen.
+
+### Brug funktionen i POST-routen
+
+Find denne del af `POST /ask` fra øvelse 3:
+
+```js
+const answer = findAnswer(question);
 messages.push({ type: "answer", text: answer });
 ```
 
-`bestMatch` er enten et regel-objekt eller `null`. `bestMatch ? bestMatch.answer : "..."` vælger svaret, hvis der er et match, og ellers standardteksten I kender fra øvelse 3.
+Erstat den med:
 
-### Test trin 3
+```js
+const result = findBestAnswer(question);
+messages.push({ type: "answer", text: result.answer });
+```
 
-Stil spørgsmålet `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`. Det rammer navnereglen to gange og bostedsreglen én gang, så navnesvaret skal vinde.
+### Test trin 6
 
-Stil derefter `"Hvad er dit navn, og hvilken by bor du i?"`. Her får bostedsreglen to match (`"by"` og `"bor"`), mens navnereglen får ét. Svaret skal nu komme fra bostedsreglen. Det er antallet af matchende nøgleord — ikke ordenes placering i spørgsmålet — der afgør svaret.
+Stil disse to spørgsmål:
 
-> Ved samme score vinder den regel, der står først i `answers`, fordi betingelsen bruger `score > bestMatch.score` og ikke `>=`. Det er en bevidst og enkel regel til uafgjorte resultater.
+1. `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`
+2. `"Hvad er dit navn, og hvilken by bor du i?"`
+
+I det første spørgsmål får navnereglen den højeste score. I det andet får bostedsreglen den højeste score.
+
+> Hvis to regler har samme score, vinder den regel, der står først i `answers`. Det er fint i denne version.
 
 ---
 
-## 4. Tæl emner i en statistik-oversigt
+## 7. Brug et objekt som tæller
 
-Opret et tomt objekt til statistikken **over** jeres routes, sammen med `messages` og `answers`:
+Nu vil vi tælle, hvor mange spørgsmål der matcher hver kategori. Opret et objekt over jeres routes:
 
 ```js
-const topicStats = {};
+const topicStats = {
+  navn: 0,
+  bosted: 0,
+  fritid: 0
+};
 ```
 
-I POST-routen skal I opdatere statistikken, hver gang der er et match. Sæt dette lige efter linjen med `const bestMatch = findBestAnswer(question);`:
+Egenskaberne skal passe til jeres egne `category`-værdier. Alle tællere starter på `0`.
+
+I POST-routen har I allerede variablen `result`. Tilføj dette lige efter svaret er gemt:
 
 ```js
-if (bestMatch) {
-  topicStats[bestMatch.category] = (topicStats[bestMatch.category] ?? 0) + 1;
+if (result.category) {
+  topicStats[result.category] = topicStats[result.category] + 1;
 }
 ```
 
-> **Objekt som tæller:** `topicStats` er ikke et array, men et objekt, hvor hver egenskab er et emne, fx `topicStats.navn`. `topicStats[bestMatch.category]` slår emnet op med firkantede parenteser, fordi emnet er en variabel og ikke et fast navn. `?? 0` betyder: brug den eksisterende værdi, eller `0`, hvis emnet ikke er talt før. `+ 1` lægger én til, hver gang emnet bliver spurgt om igen.
+`result.category` indeholder fx teksten `"navn"`. Derfor svarer:
 
-### Test trin 4
+```js
+topicStats[result.category]
+```
 
-Sæt midlertidigt `console.log(topicStats);` ind efter opdateringen. Stil tre forskellige spørgsmål, hvor to rammer det samme emne. Terminalen skal vise et objekt, hvor det emne har tallet `2`, og de andre har `1`. Fjern loggen igen.
+til:
+
+```js
+topicStats["navn"]
+```
+
+Vi bruger firkantede parenteser, fordi navnet på egenskaben ligger i en variabel. `if`-sætningen sørger for, at ukendte spørgsmål med en tom kategori ikke bliver talt.
+
+### Test trin 7
+
+Tilføj midlertidigt denne log efter `if`-sætningen:
+
+```js
+console.log(topicStats);
+```
+
+Stil to spørgsmål om navn og ét om bosted. Objektet i terminalen skal ende med at ligne:
+
+```js
+{ navn: 2, bosted: 1, fritid: 0 }
+```
+
+Fjern loggen igen.
 
 ---
 
-## 5. Vis statistikken i EJS
+## 8. Vis statistikken i EJS
 
-Send `topicStats` med til templaten i begge routes, sammen med `messages` og `error`. GET-routen har fortsat en tom fejltekst:
+Send `topicStats` med til `views/index.ejs`. GET-routen skal rendere med:
 
 ```js
 response.render("index", { messages, error: "", topicStats });
 ```
 
-I POST-routen skal I derimod beholde den `error`-variabel, som valideringen kan have ændret:
+POST-routen skal rendere med:
 
 ```js
 response.render("index", { messages, error, topicStats });
 ```
 
-Variablen `topicStats` skal altså med i **både** GET- og POST-routen, så den altid findes i templaten. Hvis I skriver `error: ""` i POST-routen, forsvinder fejlbeskeden for et tomt spørgsmål.
-
-Tilføj derefter dette et passende sted i `views/index.ejs`, fx under samtalehistorikken:
+Tilføj derefter statistikken i `views/index.ejs`:
 
 ```ejs
-<% if (Object.keys(topicStats).length > 0) { %>
-  <h2>Mest spurgte emner</h2>
-  <ul>
-    <% for (const [category, count] of Object.entries(topicStats)) { %>
-      <li><%= category %>: <%= count %></li>
-    <% } %>
-  </ul>
-<% } %>
+<h2>Spørgsmål fordelt på emner</h2>
+<ul>
+  <li>Navn: <%= topicStats.navn %></li>
+  <li>Bosted: <%= topicStats.bosted %></li>
+  <li>Fritid: <%= topicStats.fritid %></li>
+</ul>
 ```
 
-> **`Object.entries()`:** Et objekt har ikke en indbygget `for...of`-løkke, som et array har. `Object.entries(topicStats)` laver objektet om til et array af `[emne, antal]`-par, som `for...of` kan gennemgå. `const [category, count]` trækker de to værdier ud af hvert par i én linje.
+Tilpas egenskabsnavnene, hvis jeres kategorier hedder noget andet. Her bruger EJS den samme punktnotation, som I tidligere brugte med fx `message.text`.
 
-### Test trin 5
+### Test trin 8
 
-Stil et par spørgsmål. Overskriften "Mest spurgte emner" og en liste med emner og antal skal nu vises på siden. Genindlæs siden: Tallene skal stadig stå der, ligesom `messages` gør.
+Stil spørgsmål om forskellige emner, og kontrollér, at tallene ændrer sig. Genindlæs siden: Tallene skal stadig stå der. Genstart serveren: Tallene starter igen på `0`, fordi objektet kun ligger i serverens hukommelse.
 
 ---
 
-## 6. Vælg en reaktion med switch
+## Tjekpunkt
 
-Indtil nu har I kun brugt `if`/`else`. Tilføj denne funktion, som bruger `switch` til at vælge en emoji ud fra emnet:
+AMAbotten er færdig med kerneøvelsen, når den:
+
+- stadig kan svare og validere som i øvelse 3
+- undersøger alle regler med `for...of`
+- tæller matchende nøgleord med `.filter()` og `.length`
+- vælger reglen med den højeste score
+- tæller tre emner i et objekt
+- viser tællerne i EJS
+
+Du skal kunne forklare forskellen på disse to spørgsmål:
+
+- `.some()`: Matcher mindst ét nøgleord?
+- `.filter().length`: Hvor mange nøgleord matcher?
+
+---
+
+## Ekstraopgaver
+
+Lav kun ekstraopgaverne, hvis kerneøvelsen virker, og du kan forklare koden.
+
+### 9. Vælg en reaktion med `switch`
+
+Lav en funktion, der vælger en emoji ud fra kategorien:
 
 ```js
 function reactionFor(category) {
@@ -296,72 +432,37 @@ function reactionFor(category) {
 }
 ```
 
-> **`switch`:** `switch` sammenligner `category` med hver `case` ét ad gangen og returnerer, så snart der er et match. `default` fanger alle de tilfælde, ingen `case` passer på — her enhver kategori, I ikke selv har tilføjet en emoji til. `switch` er et alternativ til en lang `if`/`else if`-kæde, når I sammenligner den samme værdi med flere faste muligheder.
-
-Brug funktionen i POST-routen, når I gemmer svaret:
+Prøv først funktionen alene med `console.log()`:
 
 ```js
-const answer = bestMatch ? bestMatch.answer : "Det kender jeg ikke svaret på endnu.";
-const reaction = bestMatch ? reactionFor(bestMatch.category) : "🤔";
-messages.push({ type: "answer", text: `${reaction} ${answer}` });
+console.log(reactionFor("navn"));
+console.log(reactionFor("ukendt"));
 ```
 
-Tilpas selv emoji og `case`-værdier, så de passer til jeres egne kategorier.
+Tilføj derefter reaktionen foran svaret i POST-routen:
 
-### Test trin 6
+```js
+const reaction = reactionFor(result.category);
+messages.push({ type: "answer", text: `${reaction} ${result.answer}` });
+```
 
-Stil spørgsmål, der rammer forskellige kategorier. Hvert svar skal starte med en emoji, der passer til emnet. Stil et spørgsmål, der ikke matcher noget: Svaret skal starte med 🤔.
+Husk at erstatte den tidligere `messages.push()` for svaret — ellers viser AMAbotten svaret to gange.
 
----
+### 10. Gennemløb statistikken med `Object.entries()`
 
-## Tjekpunkt
+I kerneøvelsen skrev I selv de tre emner i EJS. Hvis statistikken også skal virke, når I tilføjer nye kategorier, kan I gennemløbe objektet.
 
-Din AMAbot er færdig med denne øvelse, når den:
-
-- vælger den regel, der matcher flest nøgleord, ikke bare den første
-- tæller, hvor mange gange hvert emne er blevet spurgt om
-- viser statistikken i EJS
-- viser en emoji-reaktion, der afhænger af emnet
-
-Du skal kunne pege på, hvor scoren beregnes, hvor statistikken opdateres, og hvor EJS bruger `Object.entries()`.
-
-> Statistikken ligger kun i serverens hukommelse, ligesom `messages`. Den forsvinder, når serveren genstarter. Senere lærer I at gemme data permanent i en fil, så den overlever en genstart.
-
----
-
-## Ekstra opgaver
-
-### 7. Sortér statistikken efter antal
-
-Lige nu vises emnerne i den rækkefølge, de første gang blev talt. Sortér dem i stedet efter antal, med det mest spurgte emne øverst. Ret EJS-loopet til:
+Erstat de tre `<li>`-elementer med:
 
 ```ejs
-<% const sortedTopics = Object.entries(topicStats).sort((a, b) => b[1] - a[1]); %>
-<ul>
-  <% for (const [category, count] of sortedTopics) { %>
-    <li><%= category %>: <%= count %></li>
-  <% } %>
-</ul>
+<% for (const stat of Object.entries(topicStats)) { %>
+  <li><%= stat[0] %>: <%= stat[1] %></li>
+<% } %>
 ```
 
-`Object.entries(topicStats)` giver et array af `[emne, antal]`-par. `.sort((a, b) => b[1] - a[1])` sorterer parrene efter `antal` (parrets andet element, indeks `1`) i faldende rækkefølge.
+`Object.entries(topicStats)` laver objektet om til et array. Hvert element i arrayet indeholder to værdier:
 
-### Test trin 7
+- `stat[0]` er navnet på kategorien.
+- `stat[1]` er kategoriens tæller.
 
-Spørg flere gange til det samme emne, indtil det ikke længere er det først-spurgte. Emnet med højest antal skal nu stå øverst på listen.
-
----
-
-### 8. Nulstil statistikken sammen med beskederne
-
-Har I lavet "Ryd beskeder"-knappen fra øvelse 3's ekstra opgave 18, skal statistikken ryddes på samme tid. Tilføj denne linje i `POST /clear-messages`, lige efter `messages.length = 0;`:
-
-```js
-for (const category of Object.keys(topicStats)) delete topicStats[category];
-```
-
-> `topicStats` er erklæret med `const`, ligesom `messages`, så I kan ikke erstatte det med et nyt, tomt objekt. `Object.keys(topicStats)` giver et array af emnenavnene, og `delete topicStats[category]` fjerner hvert emne fra det eksisterende objekt.
-
-### Test trin 8
-
-Stil et par spørgsmål, tjek at statistikken vises, og klik derefter "Ryd beskeder". Både samtalen og statistikken skal være tomme igen.
+Tilføj en ny kategori til både `answers` og `topicStats`. Den skal nu automatisk komme med i listen.

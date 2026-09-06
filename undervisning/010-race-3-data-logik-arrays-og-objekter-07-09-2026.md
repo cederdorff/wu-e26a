@@ -18,22 +18,24 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
     - Følg et spørgsmål gennem `toLowerCase()`, `for...of`, `.some()` og `.includes()`
     - Se, hvordan `return` gør, at den første matchende regel vinder
 3.  **JavaScript arrays & objekter i Node.js:**
-    - Byg svar-databasen som et array af objekter (`answers`)
-    - Gennemløb med `for...of`
+    - Genbesøg svar-databasen som et array af objekter (`answers`)
+    - Tilføj properties, og tilgå værdier med indeks- og punktnotation
 4.  **String-metoder & pattern matching:**
-    - Find nøgleord i brugerens besked med `includes()`, `toLowerCase()` og `.some()`
-    - Byg `findAnswer()` færdig fra øvelse 3
+    - Find nøgleord med `includes()`, `toLowerCase()` og `.some()`
+    - Sammenlign `.some()` med `.filter()` og `.length`
 5.  **Kontrolstrukturer:**
     - `if`/`else` til validering af tomt input
-    - `switch` som alternativ, når I vælger ud fra én fast værdi
+    - `if` til at sammenligne og gemme den højeste score
 6.  **Scoring og sammenligning:**
-    - Sammenlign `.some()` med `.filter()` og `.length`
-    - Undersøg alle regler, og vælg den bedst matchende med `findBestAnswer()`
+    - Gennemløb alle regler med `for...of`
+    - Vælg den bedst matchende regel med `findBestAnswer()`
 7.  **Objekter som tæller — statistik:**
-    - Tæl emner i et almindeligt objekt (`topicStats`), og vis det i EJS med `Object.entries()`
+    - Læs og opdatér properties i `topicStats`
+    - Vis objektets værdier i EJS
 8.  **Hands-on:**
     - Færdiggør AMAbot fra øvelse 3
-    - Skærp den med scoring og statistik fra øvelse 4
+    - Udvid den med scoring og enkel statistik fra øvelse 4
+    - Arbejd eventuelt videre med `switch` og `Object.entries()`
 
 ---
 
