@@ -56,6 +56,10 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
 - Opgaver:
     - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
     - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
+    - Træningsfiler til øvelse 4:
+        - [`findAnswer()` — grundbegreber](../opgaver/find-answer-oevelser.js)
+        - [Scoring og sammenligning](../opgaver/scoring-oevelser.js)
+        - [Objekter som tællere](../opgaver/statistik-oevelser.js)
     - [Padlet - Node.js & Express.js Concepts](https://padlet.com/race7/node-js-express-js-concepts-mp9x38w14ndr3sug)
 
 ---
