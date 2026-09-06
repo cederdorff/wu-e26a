@@ -1,10 +1,82 @@
 # Øvelse 4: Gør AMAbotten klogere med scoring og statistik
 
-I har allerede en AMAbot, der matcher nøgleord og svarer regelbaseret. I denne øvelse bygger I videre på **det samme projekt** fra [øvelse 3](express-ejs-amabot.md). I ændrer ikke projektets struktur — kun `server.js` og `views/index.ejs`.
+I denne øvelse bygger I videre på **det samme projekt** fra [øvelse 3](express-ejs-amabot.md). Nogle af jer har allerede gjort den grundlæggende AMAbot færdig, mens andre først skal færdiggøre svarlogikken. Derfor begynder øvelsen med et fælles tjekpunkt og en gennemgang af den `findAnswer()`-funktion, I skal bygge videre på.
+
+I ændrer ikke projektets struktur — kun `server.js` og `views/index.ejs`.
 
 Lige nu vinder den **første** regel, der matcher et nøgleord, selvom en senere regel måske passer bedre. I dag retter I det, så AMAbotten vælger den regel, der matcher **flest** nøgleord. I tilføjer også en simpel statistik, der viser, hvilke emner brugerne spørger mest til.
 
 Skriv og test ét trin ad gangen, ligesom i de foregående øvelser.
+
+## Før du begynder: Kom frem til samme startpunkt
+
+Øvelse 4 forudsætter, at du har gennemført **trin 1–13 i øvelse 3**. De vigtigste dele er, at appen:
+
+- har et `answers`-array med regler
+- har en `findAnswer(question)`-funktion
+- modtager spørgsmålet i `POST /ask`
+- gemmer både spørgsmålet og svaret i `messages`
+- viser en fejl ved et tomt spørgsmål
+
+Er du ikke nået dertil endnu, så fortsæt først i [øvelse 3](express-ejs-amabot.md). Du behøver ikke lave ekstraopgaverne i øvelse 3 for at gå videre.
+
+> Har du lavet ekstraopgave 17 med flere tilfældige svar pr. regel, ser dine data anderledes ud end eksemplerne her. Gem gerne den version i Git, og brug derefter igen én `answer`-tekst pr. regel, mens du arbejder med denne øvelse. Så har alle samme udgangspunkt for den nye logik.
+
+### Kontrollér startpunktet
+
+Start serveren, og prøv disse tre ting:
+
+1. Stil et spørgsmål, der matcher en regel.
+2. Stil et spørgsmål, der ikke matcher nogen regel.
+3. Send et tomt spørgsmål.
+
+Du skal henholdsvis få et kendt svar, standardsvaret og en fejlbesked. Først derefter er du klar til at ændre måden, svaret bliver fundet på.
+
+---
+
+## Genbesøg: Hvordan finder `findAnswer()` et svar?
+
+Find denne funktion fra øvelse 3 i din egen `server.js`, og læs den fra toppen og ned:
+
+```js
+function findAnswer(question) {
+  const normalizedQuestion = question.toLowerCase();
+
+  for (const answerGroup of answers) {
+    const hasMatch = answerGroup.keywords.some((keyword) =>
+      normalizedQuestion.includes(keyword)
+    );
+
+    if (hasMatch) {
+      return answerGroup.answer;
+    }
+  }
+
+  return "Det kender jeg ikke svaret på endnu.";
+}
+```
+
+Følg værdierne i denne rækkefølge:
+
+1. `question.toLowerCase()` laver en ny tekst med små bogstaver. Så kan `"Hvad HEDDER du?"` stadig matche nøgleordet `"hedder"`.
+2. `for...of` tager ét objekt ad gangen fra `answers`. Variablen `answerGroup` er altså først navnereglen, derefter bostedsreglen og så videre.
+3. `.some()` tager ét nøgleord ad gangen fra den aktuelle regels `keywords`. Den giver `true`, så snart ét nøgleord matcher, og ellers `false`.
+4. `.includes(keyword)` undersøger, om nøgleordets tekst findes inde i det normaliserede spørgsmål.
+5. Hvis `hasMatch` er `true`, stopper `return` hele funktionen med det samme. Derfor vinder den **første** regel med et match.
+6. Hvis løkken slutter uden et match, når funktionen frem til standardsvaret.
+
+> Metoderne har forskellige opgaver: `toLowerCase()` normaliserer teksten, `includes()` undersøger ét nøgleord, `.some()` samler undersøgelsen til et ja/nej for én regel, og `for...of` gennemgår alle reglerne indtil et `return` stopper funktionen.
+
+### Spor funktionen med et konkret spørgsmål
+
+Brug spørgsmålet `"Hvad hedder du, og hvor bor du?"`, og udfyld gerne tabellen på papir eller sammen:
+
+| `answerGroup` | Matchende nøgleord | `hasMatch` | Hvad sker der? |
+| --- | --- | --- | --- |
+| `navn` | `"hedder"` | `true` | Funktionen returnerer navnesvaret |
+| `bosted` | `"bor"` | ville også være `true` | Reglen bliver aldrig undersøgt |
+
+Det er præcis den begrænsning, I skal ændre: Vi skal ikke længere stoppe ved det første match. Vi skal undersøge alle regler og huske den højeste score.
 
 ## Det bygger du
 
@@ -53,9 +125,23 @@ Læs jeres opdaterede `answers` igennem. Kontrollér, at alle regler nu har `cat
 
 ---
 
-## 2. Tæl nøgleords-matches med filter()
+## 2. Gå fra ja/nej til antal med `.filter()`
 
-I øvelse 3 brugte `findAnswer()` `.some()`, som kun svarer ja/nej på, om en regel matcher. Nu skal I i stedet **tælle**, hvor mange nøgleord der matcher. Tilføj denne funktion over `findAnswer()`:
+I øvelse 3 brugte `findAnswer()` `.some()`, som kun svarer ja/nej på, om en regel matcher. Et ja fortæller ikke, om reglen matchede ét, to eller tre nøgleord. Nu skal I i stedet **tælle** matchene.
+
+Sammenlign først de to udtryk:
+
+```js
+// Ja eller nej: Matcher mindst ét nøgleord?
+keywords.some((keyword) => normalizedQuestion.includes(keyword));
+
+// Nyt array: Hvilke nøgleord matcher?
+keywords.filter((keyword) => normalizedQuestion.includes(keyword));
+```
+
+Begge bruger den samme test med `.includes()`. Forskellen er resultatet: `.some()` giver en boolean, mens `.filter()` giver et nyt array. Derfor kan vi bruge `.length` til at tælle det nye array.
+
+Tilføj denne funktion over `findAnswer()`:
 
 ```js
 function countMatches(keywords, normalizedQuestion) {
@@ -63,7 +149,7 @@ function countMatches(keywords, normalizedQuestion) {
 }
 ```
 
-> **`.filter()`:** `.filter()` gennemgår et array og returnerer et **nyt** array med kun de elementer, der opfylder betingelsen — her de nøgleord, som findes i spørgsmålet. `.length` på det array fortæller derefter, hvor mange nøgleord der matchede. Modsat `.some()`, som stopper ved det første match, gennemgår `.filter()` alle nøgleordene.
+> **`.filter()`:** `.filter()` gennemgår et array og returnerer et **nyt** array med kun de elementer, der opfylder betingelsen — her de nøgleord, som findes i spørgsmålet. Det oprindelige `keywords`-array bliver ikke ændret. `.length` på det nye array fortæller, hvor mange nøgleord der matchede. Modsat `.some()`, som stopper ved det første match, gennemgår `.filter()` alle nøgleordene.
 
 ### Test trin 2
 
@@ -98,7 +184,17 @@ function findBestAnswer(question) {
 }
 ```
 
-`bestMatch` starter som `null`, fordi ingen regel er fundet endnu. For hver regel beregner I dens `score`. Kun hvis scoren er større end nul, **og** højere end den bedste, vi har set indtil nu, gemmer vi reglen som den nye `bestMatch`. `{ ...answerGroup, score }` kopierer reglens egenskaber ind i et nyt objekt og tilføjer `score`, så I stadig har `category`, `keywords`, `answer` og `score` samlet ét sted.
+`bestMatch` starter som `null`, fordi ingen regel er fundet endnu. Denne gang må løkken ikke `return`-ere ved første match. For hver regel beregner I dens `score` og sammenligner den med den bedste score indtil nu. Kun hvis scoren er større end nul, **og** højere end den bedste, vi har set, gemmer vi reglen som den nye `bestMatch`. Først efter hele `for...of`-løkken returnerer funktionen resultatet.
+
+`{ ...answerGroup, score }` kopierer reglens egenskaber ind i et nyt objekt og tilføjer `score`, så I stadig har `category`, `keywords`, `answer` og `score` samlet ét sted.
+
+Spor fx spørgsmålet `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`:
+
+| Regel | Matchende nøgleord | `score` | `bestMatch` bagefter |
+| --- | --- | ---: | --- |
+| `navn` | `"navn"`, `"hedder"` | 2 | `navn` |
+| `bosted` | `"bor"` | 1 | stadig `navn` |
+| `fritid` | ingen | 0 | stadig `navn` |
 
 I POST-routen skal I nu bruge `findBestAnswer()` i stedet for `findAnswer()`. Ret linjerne, der vælger og gemmer svaret, til:
 
@@ -112,7 +208,11 @@ messages.push({ type: "answer", text: answer });
 
 ### Test trin 3
 
-Stil et spørgsmål, der rammer to regler på én gang, fx et der nævner både `"navn"` og `"bor"`. Ryd samtalen eller genstart serveren mellem forsøgene, og prøv at bytte om på, hvilket nøgleord der optræder først i spørgsmålet. Svaret skal komme fra reglen med **flest** matchende nøgleord — ikke nødvendigvis den første regel i arrayet.
+Stil spørgsmålet `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`. Det rammer navnereglen to gange og bostedsreglen én gang, så navnesvaret skal vinde.
+
+Stil derefter `"Hvad er dit navn, og hvilken by bor du i?"`. Her får bostedsreglen to match (`"by"` og `"bor"`), mens navnereglen får ét. Svaret skal nu komme fra bostedsreglen. Det er antallet af matchende nøgleord — ikke ordenes placering i spørgsmålet — der afgør svaret.
+
+> Ved samme score vinder den regel, der står først i `answers`, fordi betingelsen bruger `score > bestMatch.score` og ikke `>=`. Det er en bevidst og enkel regel til uafgjorte resultater.
 
 ---
 
@@ -142,13 +242,19 @@ Sæt midlertidigt `console.log(topicStats);` ind efter opdateringen. Stil tre fo
 
 ## 5. Vis statistikken i EJS
 
-Send `topicStats` med til templaten i begge routes, sammen med `messages` og `error`:
+Send `topicStats` med til templaten i begge routes, sammen med `messages` og `error`. GET-routen har fortsat en tom fejltekst:
 
 ```js
 response.render("index", { messages, error: "", topicStats });
 ```
 
-Gør det i **både** GET- og POST-routen, så variablen altid findes, uanset hvilken route der renderer siden.
+I POST-routen skal I derimod beholde den `error`-variabel, som valideringen kan have ændret:
+
+```js
+response.render("index", { messages, error, topicStats });
+```
+
+Variablen `topicStats` skal altså med i **både** GET- og POST-routen, så den altid findes i templaten. Hvis I skriver `error: ""` i POST-routen, forsvinder fejlbeskeden for et tomt spørgsmål.
 
 Tilføj derefter dette et passende sted i `views/index.ejs`, fx under samtalehistorikken:
 

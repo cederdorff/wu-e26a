@@ -11,22 +11,27 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
 ## Agenda
 
 1.  **Opsamling:**
-    - Hvor langt kom I med øvelse 1 og 2 sidste gang?
-    - Hvad skal AMAbotten fra øvelse 3 kunne, og hvordan hænger den sammen med det, I allerede har bygget?
-2.  **JavaScript arrays & objekter i Node.js:**
+    - Hvor langt er I kommet i øvelse 3?
+    - Test kendt spørgsmål, ukendt spørgsmål og tomt input
+    - Færdiggør svarlogikken fra øvelse 3, før I går til øvelse 4
+2.  **Funktioner og kontrolflow:**
+    - Følg et spørgsmål gennem `toLowerCase()`, `for...of`, `.some()` og `.includes()`
+    - Se, hvordan `return` gør, at den første matchende regel vinder
+3.  **JavaScript arrays & objekter i Node.js:**
     - Byg svar-databasen som et array af objekter (`answers`)
     - Gennemløb med `for...of`
-3.  **String-metoder & pattern matching:**
+4.  **String-metoder & pattern matching:**
     - Find nøgleord i brugerens besked med `includes()`, `toLowerCase()` og `.some()`
     - Byg `findAnswer()` færdig fra øvelse 3
-4.  **Kontrolstrukturer:**
+5.  **Kontrolstrukturer:**
     - `if`/`else` til validering af tomt input
     - `switch` som alternativ, når I vælger ud fra én fast værdi
-5.  **Skærp svarlogikken med scoring:**
-    - Tæl nøgleords-matches med `.filter()`, og vælg den bedst matchende regel med `findBestAnswer()`
-6.  **Objekter som tæller — statistik:**
+6.  **Scoring og sammenligning:**
+    - Sammenlign `.some()` med `.filter()` og `.length`
+    - Undersøg alle regler, og vælg den bedst matchende med `findBestAnswer()`
+7.  **Objekter som tæller — statistik:**
     - Tæl emner i et almindeligt objekt (`topicStats`), og vis det i EJS med `Object.entries()`
-7.  **Hands-on:**
+8.  **Hands-on:**
     - Færdiggør AMAbot fra øvelse 3
     - Skærp den med scoring og statistik fra øvelse 4
 
