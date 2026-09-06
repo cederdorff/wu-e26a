@@ -23,14 +23,14 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [002 · Forløbsoversigt og fælles materialer](./undervisning/002-amabot-uge-35-40.md)
 - [003 · DOB + RACE - Intro til studiet - 27-08-2026](./undervisning/003-dob-race-intro-til-studiet-27-08-2026.md)
 - [004 · RACE 1 - Intro til Node og Express - 28-08-2026](./undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md)
-- [005 · Forberedelse - Selvstudium - 31-08-2026](./undervisning/005-forberedelse-selvstudium-31-08-2026.md) — *kladde i Canvas*
+- [005 · Forberedelse - Selvstudium - 31-08-2026](./undervisning/005-forberedelse-selvstudium-31-08-2026.md)
 - [006 · DOB 1 - Form submits og Git basics - 01-09-2026](./undervisning/006-dob-1-form-submits-og-git-basics-01-09-2026.md)
 - [007 · DOB 2 - Teambuilding + Git branching & DevTools - 02-09-2026](./undervisning/007-dob-2-teambuilding-git-branching-devtools-02-09-2026.md)
 - [008 · RACE 2 - EJS templating, form handling og svar logik - 03-09-2026](./undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md)
-- [009 · Forberedelse - Selvstudium - 04-09-2026](./undervisning/009-forberedelse-selvstudium-04-09-2026.md) — *kladde i Canvas*
+- [009 · Forberedelse - Selvstudium - 04-09-2026](./undervisning/009-forberedelse-selvstudium-04-09-2026.md)
 - [010 · RACE 3 - Data logik, arrays og objekter - 07-09-2026](./undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md)
-- [011 · Forberedelse - Selvstudium - 08-09-2026](./undervisning/011-forberedelse-selvstudium-08-09-2026.md) — *kladde i Canvas*
-- [012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026](./undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) — *kladde i Canvas*
+- [011 · Forberedelse - Selvstudium - 08-09-2026](./undervisning/011-forberedelse-selvstudium-08-09-2026.md)
+- [012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026](./undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md)
 - [013 · Forberedelse - Selvstudium - 10-09-2026](./undervisning/013-forberedelse-selvstudium-10-09-2026.md) — *kladde i Canvas*
 - [014 · RACE 4 - Persistens, JSON og File System - 11-09-2026](./undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md) — *kladde i Canvas*
 - [015 · Forberedelse - Selvstudium - 14-09-2026](./undervisning/015-forberedelse-selvstudium-14-09-2026.md) — *kladde i Canvas*

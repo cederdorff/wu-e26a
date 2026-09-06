@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-03T11:23:42.173Z",
+  "pulled_at": "2026-09-06T17:21:09.958Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -19,36 +19,36 @@
       "canvas_hash": "56e100371fd0d672dbf2d552b83c77d81bf857accee84018460f27b66d241285"
     },
     "undervisning/005-forberedelse-selvstudium-31-08-2026.md": {
-      "local_hash": "081ba56f8f2e5edde0af329cdf954b634aa1b9503ffeba25ff99963614d9ca76",
-      "canvas_hash": "081ba56f8f2e5edde0af329cdf954b634aa1b9503ffeba25ff99963614d9ca76"
+      "local_hash": "c7750e959987df78ad1bdfd88179cb8dfe57de9d0812ca4e8c050ec82f3ff430",
+      "canvas_hash": "c7750e959987df78ad1bdfd88179cb8dfe57de9d0812ca4e8c050ec82f3ff430"
     },
     "undervisning/006-dob-1-form-submits-og-git-basics-01-09-2026.md": {
       "local_hash": "df3bef9e5b6386cb649839a9b8cb652bd2c754400d3ff73ccc43deb8659b8441",
       "canvas_hash": "df3bef9e5b6386cb649839a9b8cb652bd2c754400d3ff73ccc43deb8659b8441"
     },
     "undervisning/007-dob-2-teambuilding-git-branching-devtools-02-09-2026.md": {
-      "local_hash": "47a96c86efb2223cad009bb5fdc602672fbba536ed568db571d51e2ca66e1364",
-      "canvas_hash": "47a96c86efb2223cad009bb5fdc602672fbba536ed568db571d51e2ca66e1364"
+      "local_hash": "9dc3c821bb1acfd05745a62cd507ddf1515ceca4dfdba23fe63fb8dc8fad0cce",
+      "canvas_hash": "9dc3c821bb1acfd05745a62cd507ddf1515ceca4dfdba23fe63fb8dc8fad0cce"
     },
     "undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md": {
       "local_hash": "a6cd6d7e88535e165e1db28e4777bb5c4d18e03bbae65e67a66abe41c7dd28e4",
       "canvas_hash": "a6cd6d7e88535e165e1db28e4777bb5c4d18e03bbae65e67a66abe41c7dd28e4"
     },
     "undervisning/009-forberedelse-selvstudium-04-09-2026.md": {
-      "local_hash": "b2ad0cca2d9b9b2dfee977cfa1339973c34a5b53da875c4ba64499639b177ba5",
-      "canvas_hash": "b2ad0cca2d9b9b2dfee977cfa1339973c34a5b53da875c4ba64499639b177ba5"
+      "local_hash": "a53f35ff722b9e300ff1441c677fe75e23b6de9a66bfcd79e87212146f6d1927",
+      "canvas_hash": "a53f35ff722b9e300ff1441c677fe75e23b6de9a66bfcd79e87212146f6d1927"
     },
     "undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md": {
-      "local_hash": "ac8016830f3196467c468573febb9c43f77ad550574bf3d27d9ee992523569ee",
-      "canvas_hash": "ac8016830f3196467c468573febb9c43f77ad550574bf3d27d9ee992523569ee"
+      "local_hash": "f27660ba9edf0cb694eee7dc7482f94cfd9bf7b2d92a33cf0c4650c677f0653a",
+      "canvas_hash": "f27660ba9edf0cb694eee7dc7482f94cfd9bf7b2d92a33cf0c4650c677f0653a"
     },
     "undervisning/011-forberedelse-selvstudium-08-09-2026.md": {
-      "local_hash": "b861175a146776d7e7cbe123bd16e66f9933b853e2232b731f15971f1d41dc90",
-      "canvas_hash": "b861175a146776d7e7cbe123bd16e66f9933b853e2232b731f15971f1d41dc90"
+      "local_hash": "ae9c7a7824626f23000b630fa4b12fa5600f248445c015cb9cc420a5951c132a",
+      "canvas_hash": "ae9c7a7824626f23000b630fa4b12fa5600f248445c015cb9cc420a5951c132a"
     },
     "undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md": {
-      "local_hash": "988764fa964642e2c72cd762b5cb294ead982f15ff588642bd45660d6e5754a4",
-      "canvas_hash": "988764fa964642e2c72cd762b5cb294ead982f15ff588642bd45660d6e5754a4"
+      "local_hash": "ab1d8904c32a931fa3ca8e4cc6395048b56344b9a7d8a9c0c2100913df7e2df6",
+      "canvas_hash": "ab1d8904c32a931fa3ca8e4cc6395048b56344b9a7d8a9c0c2100913df7e2df6"
     },
     "undervisning/013-forberedelse-selvstudium-10-09-2026.md": {
       "local_hash": "9d894f09417d8c3e4ace48fb84a8c6a85665d992caaa2bbdcd9da4f9bb5a4a6a",

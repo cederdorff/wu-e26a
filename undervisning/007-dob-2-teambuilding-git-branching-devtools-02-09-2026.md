@@ -47,7 +47,7 @@ Eftermiddag: Vi kigger grundigt på hvad der foregår i browseren når vi loader
 
 ### Opgaver
 
-- Aflever link til det AMAbot repository — Assignment
+- Aflever link til dit AMAbot repository — Assignment
 
 ---
 
