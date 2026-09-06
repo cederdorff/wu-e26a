@@ -35,7 +35,7 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
 8.  **Hands-on:**
     - Færdiggør AMAbot fra øvelse 3
     - Udvid den med scoring og enkel statistik fra øvelse 4
-    - Arbejd eventuelt videre med `switch` og `Object.entries()`
+    - Arbejd eventuelt videre med `switch`, `Object.entries()` og JavaScript-moduler med `export`/`import`
 
 ---
 

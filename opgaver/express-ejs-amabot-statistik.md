@@ -616,6 +616,16 @@ Du skal kunne forklare forskellen på disse to spørgsmål:
 
 Lav kun ekstraopgaverne, hvis kerneøvelsen virker, og du kan forklare koden.
 
+| Ekstraopgave | Fokus | Forudsætning |
+| --- | --- | --- |
+| 9. Reaktion med `switch` | Kontrolstrukturer | Ingen |
+| 10. `Object.entries()` | Gennemløb af et objekt | Ingen |
+| 11. Eget emne | Arrays og objekter | Ingen; tilpas også 9 og 10, hvis de er lavet |
+| 12. Ukendte spørgsmål | `if`/`else` og tællere | Ingen |
+| 13. Mest spurgte emne | `for...of` og sammenligning | Ekstraopgave 10 |
+| 14. Nulstil statistik | Route, `Object.keys()` og bracket notation | Ingen |
+| 15. JavaScript-modul | `export`, `import` og filstruktur | Lav den gerne til sidst |
+
 ### 9. Vælg en reaktion med `switch`
 
 Begynd med del 7 i `statistik-oevelser.js`. Når funktionen virker dér, kan I flytte den til `server.js`.
@@ -673,3 +683,200 @@ Erstat de tre `<li>`-elementer med:
 - `stat[1]` er kategoriens tæller.
 
 Tilføj en ny kategori til både `answers` og `topicStats`. Den skal nu automatisk komme med i listen.
+
+### 11. Tilføj dit eget emne
+
+Tilføj en ny regel til `answers`. Den skal have sin egen kategori, mindst tre nøgleord og et personligt svar:
+
+```js
+{
+  category: "mad",
+  keywords: ["mad", "spise", "livret"],
+  answer: "Min livret er ..."
+}
+```
+
+Tilføj også kategorien til `topicStats`:
+
+```js
+const topicStats = {
+  navn: 0,
+  bosted: 0,
+  fritid: 0,
+  mad: 0
+};
+```
+
+Hvis I ikke har lavet ekstraopgave 10, skal I også tilføje emnet som et nyt `<li>` i EJS. Har I lavet ekstraopgave 9, kan I give emnet sin egen emoji med en ny `case`.
+
+Test med:
+
+1. Et spørgsmål, der matcher ét af de nye nøgleord
+2. Et spørgsmål, der matcher to af de nye nøgleord
+3. Et spørgsmål, hvor det nye emne konkurrerer med en eksisterende kategori
+
+### 12. Tæl ukendte spørgsmål
+
+Lige nu bliver et spørgsmål uden match ikke talt. Tilføj en tæller til `topicStats`:
+
+```js
+ukendt: 0
+```
+
+Udvid derefter `if`-sætningen i POST-routen med en `else`:
+
+```js
+if (result.category) {
+  topicStats[result.category] = topicStats[result.category] + 1;
+} else {
+  topicStats.ukendt = topicStats.ukendt + 1;
+}
+```
+
+Vis også tælleren i EJS, hvis I ikke allerede gennemløber objektet med `Object.entries()`.
+
+#### Test ekstraopgave 12
+
+Stil to kendte og to ukendte spørgsmål. De kendte spørgsmål skal tælles under deres kategorier, mens `ukendt` skal ende på `2`.
+
+### 13. Find det mest spurgte emne
+
+Denne ekstraopgave genbruger idéen fra `findBestAnswer()`: Gennemløb flere værdier, sammenlign dem, og husk den højeste.
+
+Lav denne funktion i `server.js`:
+
+```js
+function findMostAskedTopic(stats) {
+  let highestCount = 0;
+  let mostAskedTopic = "";
+
+  for (const stat of Object.entries(stats)) {
+    const category = stat[0];
+    const count = stat[1];
+
+    if (count > highestCount) {
+      highestCount = count;
+      mostAskedTopic = category;
+    }
+  }
+
+  return mostAskedTopic;
+}
+```
+
+Sammenlign funktionen med `findBestAnswer()`:
+
+- Hvad svarer `count` til i svarlogikken?
+- Hvad svarer `highestCount` til?
+- Hvorfor starter `mostAskedTopic` som en tom tekst?
+
+Kald funktionen lige før hver `response.render()`:
+
+```js
+const mostAskedTopic = findMostAskedTopic(topicStats);
+```
+
+Send derefter værdien med til EJS. GET-routen skal fx rendere med:
+
+```js
+response.render("index", {
+  messages,
+  error: "",
+  topicStats,
+  mostAskedTopic
+});
+```
+
+Husk også `mostAskedTopic` i POST-routens render. Vis resultatet i EJS:
+
+```ejs
+<% if (mostAskedTopic) { %>
+  <p>Mest spurgte emne: <%= mostAskedTopic %></p>
+<% } %>
+```
+
+#### Test ekstraopgave 13
+
+Stil spørgsmål, indtil en anden kategori overtager førstepladsen. Teksten i EJS skal følge med.
+
+### 14. Lav en knap, der nulstiller statistikken
+
+Tilføj en ny route i `server.js`:
+
+```js
+app.post("/clear-stats", (request, response) => {
+  for (const category of Object.keys(topicStats)) {
+    topicStats[category] = 0;
+  }
+
+  response.redirect("/");
+});
+```
+
+`Object.keys(topicStats)` giver et array med kategoriernes navne. `for...of` gennemløber navnene, og bracket notation finder den tæller, der skal sættes til `0`.
+
+Tilføj en formular i `views/index.ejs`:
+
+```html
+<form method="POST" action="/clear-stats">
+  <button type="submit">Nulstil statistik</button>
+</form>
+```
+
+#### Test ekstraopgave 14
+
+Stil flere spørgsmål, kontrollér tællerne, og nulstil statistikken. Beskederne skal blive stående, mens alle tællere bliver `0`.
+
+### 15. Flyt `answers` til sit eget JavaScript-modul
+
+Efterhånden som `server.js` vokser, bliver den nemmere at læse, hvis svarreglerne ligger i deres egen fil. I øvelse 3 aktiverede I allerede ES Modules med `"type": "module"` i `package.json`. Derfor kan I bruge `export` og `import`.
+
+Opret først denne struktur:
+
+```text
+jeres-amabot/
+├── data/
+│   └── answers.js
+├── public/
+├── views/
+├── package.json
+└── server.js
+```
+
+Flyt hele `answers`-arrayet fra `server.js` til `data/answers.js`, og skriv `export` foran variablen:
+
+```js
+export const answers = [
+  {
+    category: "navn",
+    keywords: ["navn", "hedder", "hvem er du"],
+    answer: "Jeg hedder Ada."
+  },
+  // resten af jeres regler
+];
+```
+
+Slet det gamle `answers`-array fra `server.js`. Importér det i stedet øverst i filen, lige under importen af Express:
+
+```js
+import express from "express";
+import { answers } from "./data/answers.js";
+```
+
+De krøllede parenteser passer til den **named export**, I skrev med `export const answers`. Stien begynder med `./`, fordi `data/` ligger relativt til `server.js`, og filendelsen `.js` skal med.
+
+#### Test ekstraopgave 15
+
+1. Start AMAbotten med `npm run dev`.
+2. Stil et spørgsmål til mindst to forskellige kategorier.
+3. Ret et svar i `data/answers.js`, gem filen, og stil spørgsmålet igen.
+4. Kontrollér, at `server.js` ikke længere indeholder selve svarreglerne.
+
+Forklar til sidst:
+
+- Hvilken fil eksporterer data?
+- Hvilken fil importerer data?
+- Hvor findes variablen `answers`, når `findBestAnswer()` kører?
+- Hvad er blevet lettere at finde i `server.js`?
+
+> Det er kun AMAbottens eget `answers`-array, I flytter. De tre træningsfiler skal fortsat kunne køres selvstændigt og skal derfor beholde deres egne eksempeldata.
