@@ -18,7 +18,7 @@ Når der står “ret” eller “erstat” i øvelsen, skal I først kunne svar
 
 Skriv derefter ændringen, gem filen og udfør testpunktet. Hvis noget ikke virker, så læs fejlbeskeden og sammenlign `method`, `action`, `name`, route og EJS-variabler. Kodeudsnittene viser mønsteret; I skal tilpasse dem til jeres egen struktur og design.
 
-Hvis JavaScript-logikken i `findAnswer()` er svær at følge, kan I tage et kort stop i [del A af JavaScript-øvelser til AMAbot](javascript-oevelser-amabot.md). Her opretter I selv en tom JavaScript-fil og træner den grundlæggende svarlogik. Vend derefter tilbage til jeres egen AMAbot.
+Hvis `if`/`else`, objekter, arrays, `for...of` eller `toLowerCase()`/`includes()`/`.some()` er svære at følge i `findAnswer()`, kan I tage et kort stop i [JavaScript-øvelser til AMAbot](javascript-oevelser-amabot.md). Her træner I hvert begreb for sig med simple eksempler. Vend derefter tilbage til jeres egen AMAbot.
 
 ## Det bygger du
 

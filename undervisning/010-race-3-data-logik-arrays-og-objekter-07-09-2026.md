@@ -56,7 +56,7 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først 
 - Opgaver:
     - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
     - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
-    - [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — opret én øvelsesfil, og vælg den relevante del efter behov
+    - [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — opret én øvelsesfil, og træn de begreber, I har brug for
 
 ---
 
