@@ -4,44 +4,59 @@
 
 ## Dagens fokus
 
-I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først den grundlæggende svarlogik og undersøger, hvordan arrays, objekter, funktioner og kontrolflow arbejder sammen. Derefter lader vi AMAbotten vælge den bedst matchende regel og bruger kategorier til at vise statistik over spørgsmålene.
+I sidste undervisningsgang påbegyndte du AMAbotten. I dag færdiggør vi først den grundlæggende svarlogik og undersøger, hvordan arrays, objekter, funktioner og kontrolflow arbejder sammen. Derefter lader vi AMAbotten vælge den bedst matchende regel og bruger kategorier til at vise statistik over spørgsmålene.
 
 ---
 
 ## Agenda
 
-1.  **Opsamling:**
-    - Forklar koden fra øvelse 2 to og to
-    - Notér, hvad I forstod godt, hvad der var svært, og hvad der stadig er uklart
-    - Saml op på validering og svarlogik fra øvelse 2
-    - Test kendt spørgsmål, ukendt spørgsmål og tomt input i AMAbotten
-2.  **Kontrolstrukturer:**
-    - Genbesøg `if`/`else` fra valideringen i øvelse 2
-    - Brug booleans som betingelser
-    - Følg de forskellige kodeveje ved gyldigt og ugyldigt input
-3.  **Objekter og arrays:**
-    - Brug `answers` som et array af objekter
-    - Find og opdatér værdier med punktnotation og bracket notation
-    - Gennemløb arrays med `for...of`
-    - Brug objekter til at samle data og som tællere
-4.  **String-metoder og pattern matching:**
-    - Normalisér tekst med `toLowerCase()`
-    - Find nøgleord med `includes()`
-    - Brug `.some()` til at undersøge, om mindst ét nøgleord matcher
-    - Brug `.filter()` og `.length` til at tælle matches
-5.  **Funktioner og kontrolflow:**
-    - Genbesøg funktion, parameter, argument og `return`
-    - Følg et spørgsmål gennem `findAnswer()` fra input til svar
-    - Se, hvordan `return` gør, at den første matchende regel vinder
-    - Udvid logikken, så `findBestAnswer()` undersøger alle regler
-    - Færdiggør øvelse 3, og arbejd derefter med scoring og statistik i øvelse 4
-    - Vælg en kort JavaScript-øvelse, hvis et bestemt begreb er uklart
+<details>
+<summary><strong>1. Opsamling</strong></summary>
+
+- Forklar koden fra øvelse 2 to og to
+- Notér, hvad du forstod godt, hvad der var svært, og hvad der stadig er uklart
+- Saml op på validering og svarlogik fra øvelse 2
+- Test kendt spørgsmål, ukendt spørgsmål og tomt input i AMAbotten
+</details>
+<details>
+<summary><strong>2. Kontrolstrukturer</strong></summary>
+
+- Genbesøg `if`/`else` fra valideringen i øvelse 2
+- Brug booleans som betingelser
+- Følg de forskellige kodeveje ved gyldigt og ugyldigt input
+</details>
+<details>
+<summary><strong>3. Objekter og arrays</strong></summary>
+
+- Brug `answers` som et array af objekter
+- Find og opdatér værdier med punktnotation og bracket notation
+- Gennemløb arrays med `for...of`
+- Brug objekter til at samle data og som tællere
+</details>
+<details>
+<summary><strong>4. String-metoder og pattern matching</strong></summary>
+
+- Normalisér tekst med `toLowerCase()`
+- Find nøgleord med `includes()`
+- Brug `.some()` til at undersøge, om mindst ét nøgleord matcher
+- Brug `.filter()` og `.length` til at tælle matches
+</details>
+<details>
+<summary><strong>5. Funktioner og kontrolflow</strong></summary>
+
+- Genbesøg funktion, parameter, argument og `return`
+- Følg et spørgsmål gennem `findAnswer()` fra input til svar
+- Se, hvordan `return` gør, at den første matchende regel vinder
+- Udvid logikken, så `findBestAnswer()` undersøger alle regler
+- Færdiggør øvelse 3, og arbejd derefter med scoring og statistik i øvelse 4
+- Vælg en kort JavaScript-øvelse, hvis et bestemt begreb er uklart
+</details>
 
 ---
 
 ## Forberedelse
 
-- Færdiggør [øvelse 1](../opgaver/express-ejs-formular.md) og [øvelse 2](../opgaver/express-ejs-formhaandtering-svarlogik.md) fra sidste undervisningsgang. [Øvelse 3](../opgaver/express-ejs-amabot.md) (AMAbot) blev kun påbegyndt — den bygger I videre på og færdiggør i dag.
+- Færdiggør [øvelse 1](../opgaver/express-ejs-formular.md) og [øvelse 2](../opgaver/express-ejs-formhaandtering-svarlogik.md) fra sidste undervisningsgang. [Øvelse 3](../opgaver/express-ejs-amabot.md) (AMAbot) blev kun påbegyndt — den bygger du videre på og færdiggør i dag.
 - Genopfrisk ["JavaScript object basics"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics) på MDN
 - Læs op på ["Array iteration methods"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Arrays#array_methods) på MDN, særligt `.filter()`
 - Gennemgå ["Working with strings"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Useful_string_methods) på MDN for string manipulation
@@ -56,7 +71,7 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først 
 - Opgaver:
     - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
     - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
-    - [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — opret én øvelsesfil, og træn de begreber, I har brug for
+    - [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — opret én øvelsesfil, og træn de begreber, du har brug for
 
 ---
 

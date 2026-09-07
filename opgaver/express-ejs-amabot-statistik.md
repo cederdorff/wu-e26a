@@ -2,9 +2,9 @@
 
 ## Kort fortalt
 
-Jeres nuværende AMAbot vælger den **første** svarregel, der matcher et spørgsmål. I denne øvelse ændrer I svarlogikken, så botten undersøger alle regler og vælger den regel, der matcher flest nøgleord.
+Din nuværende AMAbot vælger den **første** svarregel, der matcher et spørgsmål. I denne øvelse ændrer du svarlogikken, så botten undersøger alle regler og vælger den regel, der matcher flest nøgleord.
 
-I bygger videre på jeres egen AMAbot fra [øvelse 3](express-ejs-amabot.md). I skal ikke oprette et nyt projekt.
+Du bygger videre på din egen AMAbot fra [øvelse 3](express-ejs-amabot.md). Du skal ikke oprette et nyt projekt.
 
 ## Opgaven
 
@@ -13,15 +13,15 @@ I bygger videre på jeres egen AMAbot fra [øvelse 3](express-ejs-amabot.md). I 
 1. **Scoring i afsnit 1–4:** AMAbotten undersøger alle regler og vælger den regel, der matcher flest nøgleord.
 2. **Statistik i afsnit 5–6:** AMAbotten registrerer den valgte kategori og viser, hvilke emner der bliver spurgt til.
 
-Til sidst gemmer I den færdige øvelse med Git og pusher den til GitHub.
+Til sidst gemmer du den færdige øvelse med Git og pusher den til GitHub.
 
-Arbejd med ét afsnit ad gangen. Brug de sammenklappede løsningsforslag, hvis I går i stå. Ekstraopgaverne nederst er valgfrie.
+Arbejd med ét afsnit ad gangen. Brug de sammenklappede løsningsforslag, hvis du går i stå. Ekstraopgaverne nederst er valgfrie.
 
-## Hvor arbejder I?
+## Hvor arbejder du?
 
-I arbejder i jeres eksisterende `server.js`. Først ved statistikdelen skal I også arbejde i `views/index.ejs`.
+Du arbejder i din eksisterende `server.js`. Først ved statistikdelen skal du også arbejde i `views/index.ejs`.
 
-Hvis et bestemt JavaScript-begreb er svært, fx `.filter()` og `.length`, kan I arbejde videre med [JavaScript-øvelser til AMAbot](javascript-oevelser-amabot.md), hvor hvert begreb trænes for sig, før I bruger idéerne i `server.js`.
+> **Sidder du fast et sted?** Hvis et bestemt JavaScript-begreb er svært, fx `.filter()` og `.length`, kan du arbejde videre med [JavaScript-øvelser til AMAbot](javascript-oevelser-amabot.md), hvor hvert begreb trænes for sig, før du bruger idéerne i `server.js`.
 
 ```text
 spørgsmål -> findBestAnswer() -> svar og kategori -> POST-route -> EJS
@@ -47,7 +47,7 @@ Test tre forskellige situationer:
 | Et spørgsmål uden et kendt nøgleord | Standardsvaret |
 | Et tomt spørgsmål | En fejlbesked |
 
-Find derefter `findAnswer()` i `server.js`, og forklar den for en medstuderende. I skal kunne udpege:
+Find derefter `findAnswer()` i `server.js`, og forklar den for en medstuderende. Du skal kunne udpege:
 
 - parameter og argument
 - `toLowerCase()`
@@ -56,7 +56,7 @@ Find derefter `findAnswer()` i `server.js`, og forklar den for en medstuderende.
 - `.includes()`
 - `if` og de to mulige `return`-steder
 
-Hvis appen ikke består de tre tests, eller hvis I ikke kan følge spørgsmålet gennem funktionen, skal I arbejde videre med øvelse 3 først.
+Hvis appen ikke består de tre tests, eller hvis du ikke kan følge spørgsmålet gennem funktionen, skal du arbejde videre med øvelse 3 først.
 
 ---
 
@@ -95,7 +95,7 @@ Test funktionen midlertidigt med mindst disse situationer:
 2. Ét nøgleord matcher.
 3. To nøgleord matcher.
 
-I kan begynde med disse kald under funktionen:
+Du kan begynde med disse kald under funktionen:
 
 ```js
 console.log(
@@ -116,7 +116,7 @@ console.log(
 
 Fjern de midlertidige tests igen, når funktionen virker.
 
-I skal kunne forklare forskellen på:
+Du skal kunne forklare forskellen på:
 
 - `.some()`: Matcher mindst ét nøgleord?
 - `.filter().length`: Hvor mange nøgleord matcher?
@@ -124,7 +124,7 @@ I skal kunne forklare forskellen på:
 <details>
 <summary>Se et løsningsforslag til <code>countMatches()</code></summary>
 
-Åbn først løsningsforslaget, når I selv har forsøgt og testet funktionen.
+Åbn først løsningsforslaget, når du selv har forsøgt og testet funktionen.
 
 ```js
 function countMatches(keywords, normalizedQuestion) {
@@ -212,7 +212,7 @@ function findBestAnswer(question) {
 }
 ```
 
-Sammenlign linje for linje med jeres egen funktion. Ret kun det, I kan forklare.
+Sammenlign linje for linje med din egen funktion. Ret kun det, du kan forklare.
 
 </details>
 
@@ -225,7 +225,7 @@ Skriv spørgsmål, der giver disse fire situationer:
 3. Ingen regler matcher.
 4. To regler får samme score.
 
-Kald funktionen direkte med `console.log()`, før I ændrer POST-routen:
+Kald funktionen direkte med `console.log()`, før du ændrer POST-routen:
 
 ```js
 console.log(
@@ -237,7 +237,7 @@ console.log(findBestAnswer("Kan du bage en kage?"));
 
 Tilføj selv testene af en anden vinder og samme score.
 
-Ved samme score må den regel, der står først i `answers`, gerne vinde. Forklar, hvordan sammenligningen i jeres `if`-sætning bestemmer det.
+Ved samme score må den regel, der står først i `answers`, gerne vinde. Forklar, hvordan sammenligningen i din `if`-sætning bestemmer det.
 
 ### Forklar løsningen
 
@@ -282,13 +282,13 @@ Forklar derefter for en medstuderende:
 2. Hvad returnerer funktionen?
 3. Hvordan bliver den returnerede tekst gemt i `messages`?
 
-Når svarlogikken virker, er I klar til øvelsens statistikdel.
+Når svarlogikken virker, er du klar til øvelsens statistikdel.
 
 ---
 
 ## 5. Tilføj kategorier og tæl dem
 
-Scoringen krævede kun nøgleord og svar. Statistikken kræver også et kort navn for hvert emne. Derfor tilføjer I nu en kategori til hver regel.
+Scoringen krævede kun nøgleord og svar. Statistikken kræver også et kort navn for hvert emne. Derfor tilføjer du nu en kategori til hver regel.
 
 ### 5a. Giv hver regel en kategori
 
@@ -302,7 +302,7 @@ Tilføj en unik `category`-property til hvert objekt i `answers`. Brug korte tek
 }
 ```
 
-Kategorien bliver ikke vist som en del af svaret. Serveren bruger den som navn på den tæller, der skal opdateres. Hvis I senere ændrer svarteksten, kan kategorien stadig hedde det samme.
+Kategorien bliver ikke vist som en del af svaret. Serveren bruger den som navn på den tæller, der skal opdateres. Hvis du senere ændrer svarteksten, kan kategorien stadig hedde det samme.
 
 ### 5b. Returnér både svar og kategori
 
@@ -385,7 +385,7 @@ function findBestAnswer(question) {
 
 ### 5c. Tæl kategorierne
 
-Opret et `topicStats`-objekt over jeres routes. Det skal have én property pr. kategori, og alle tællere skal begynde på `0`.
+Opret et `topicStats`-objekt over dine routes. Det skal have én property pr. kategori, og alle tællere skal begynde på `0`.
 
 ```js
 const topicStats = {
@@ -395,15 +395,15 @@ const topicStats = {
 };
 ```
 
-Tilpas navnene, så de passer præcist til jeres egne `category`-værdier.
+Tilpas navnene, så de passer præcist til dine egne `category`-værdier.
 
-Når `findBestAnswer()` har fundet et resultat i POST-routen, skal I:
+Når `findBestAnswer()` har fundet et resultat i POST-routen, skal du:
 
 1. undersøge, om resultatet har en kategori
 2. bruge kategorien til at vælge den rigtige property i `topicStats`
 3. forhøje denne tæller med `1`
 
-I skal bruge bracket notation, fordi property-navnet ligger i `result.category`.
+Du skal bruge bracket notation, fordi property-navnet ligger i `result.category`.
 
 Tilføj opdateringen i POST-routen, efter resultatet og svarbeskeden er oprettet:
 
@@ -428,12 +428,12 @@ Log midlertidigt hele `topicStats` efter opdateringen. Stil:
 - ét spørgsmål om en anden kategori
 - ét ukendt spørgsmål
 
-Forudsig objektets værdier, før I ser i terminalen. Det ukendte spørgsmål skal ikke ændre nogen tæller.
+Forudsig objektets værdier, før du ser i terminalen. Det ukendte spørgsmål skal ikke ændre nogen tæller.
 
 <details>
 <summary>Se scoring og statistik samlet i POST-routen</summary>
 
-Brug eksemplet til at kontrollere placeringen af den nye kode. Behold jeres egen validering og jeres egne variabelnavne.
+Brug eksemplet til at kontrollere placeringen af den nye kode. Behold din egen validering og dine egne variabelnavne.
 
 ```js
 app.post("/ask", (request, response) => {
@@ -463,7 +463,7 @@ app.post("/ask", (request, response) => {
 
 ## 6. Vis statistikken i EJS
 
-Send `topicStats` med til `views/index.ejs` fra både GET- og POST-routen. Vis derefter hver kategori og dens tæller i jeres eksisterende design.
+Send `topicStats` med til `views/index.ejs` fra både GET- og POST-routen. Vis derefter hver kategori og dens tæller i dit eksisterende design.
 
 GET-routen skal sende en tom fejltekst sammen med de øvrige data:
 
@@ -489,7 +489,7 @@ response.render("index", { messages, error, topicStats });
 </ul>
 ```
 
-Tilpas HTML og property-navne til jeres kategorier og eksisterende design.
+Tilpas HTML og property-navne til dine kategorier og dit eksisterende design.
 
 </details>
 
@@ -516,13 +516,13 @@ Forklar, hvorfor en genindlæsning og en genstart giver forskellige resultater.
 - vælger en property med bracket notation
 - viser tællerne med EJS
 
-I skal kunne forklare koden med fagbegreber. At appen virker, er ikke i sig selv nok.
+Du skal kunne forklare koden med fagbegreber. At appen virker, er ikke i sig selv nok.
 
 ---
 
 ## 7. Commit og push til GitHub
 
-Når AMAbotten består testene i tjekpunktet, skal I gemme den færdige øvelse i jeres repository:
+Når AMAbotten består testene i tjekpunktet, skal du gemme den færdige øvelse i dit repository:
 
 ```bash
 git status
@@ -531,13 +531,13 @@ git commit -m "Add scoring and topic statistics to AMAbot"
 git push
 ```
 
-Kør `git status` igen, og kontrollér på GitHub, at den nye commit er blevet pushet. Hvis `git status` viser filer, som ikke skal med, skal I undersøge dem, før I bruger `git add`.
+Kør `git status` igen, og kontrollér på GitHub, at den nye commit er blevet pushet. Hvis `git status` viser filer, som ikke skal med, skal du undersøge dem, før du bruger `git add`.
 
 ---
 
 ## Ekstraopgaver
 
-Vælg kun en ekstraopgave, når den del, ekstraopgaven bygger på, virker, og I kan forklare jeres kode.
+Vælg kun en ekstraopgave, når den del, ekstraopgaven bygger på, virker, og du kan forklare din kode.
 
 | Ekstraopgave | Fokus |
 | --- | --- |
@@ -613,7 +613,7 @@ Tilføj en midlertidig kategori til `topicStats`. Kontrollér, at den vises uden
 </details>
 
 <details>
-<summary><strong>9. Tilføj jeres eget emne</strong></summary>
+<summary><strong>9. Tilføj dit eget emne</strong></summary>
 
 Tilføj en ny regel til `answers`. Den skal have mindst tre nøgleord og et personligt svar:
 
@@ -625,7 +625,7 @@ Tilføj en ny regel til `answers`. Den skal have mindst tre nøgleord og et pers
 }
 ```
 
-Tilføj også `mad: 0` til `topicStats`. Hvis I ikke har lavet ekstraopgave 8, skal kategorien desuden have sit eget `<li>` i EJS.
+Tilføj også `mad: 0` til `topicStats`. Hvis du ikke har lavet ekstraopgave 8, skal kategorien desuden have sit eget `<li>` i EJS.
 
 Test med:
 
@@ -743,7 +743,7 @@ Stil flere spørgsmål, nulstil statistikken, og kontrollér, at alle tællere b
 Når `server.js` vokser, kan svarreglerne flyttes til deres egen fil:
 
 ```text
-jeres-amabot/
+din-amabot/
 ├── data/
 │   └── answers.js
 ├── public/
@@ -756,7 +756,7 @@ Flyt hele `answers`-arrayet til `data/answers.js`, og eksportér det:
 
 ```js
 export const answers = [
-  // jeres svarregler
+  // dine svarregler
 ];
 ```
 

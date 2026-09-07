@@ -1,24 +1,24 @@
 # Øvelse 3: Server-renderet AMAbot med regelbaseret svarlogik
 
-I har allerede et GitHub-repository med en simpel AMAbot-formular i `index.html` fra i går. Nu bygger I videre på **det samme repository** og gør det til en server-renderet Express-app med EJS.
+Du har allerede et GitHub-repository med en simpel AMAbot-formular i `index.html` fra i går. Nu bygger du videre på **det samme repository** og gør det til en server-renderet Express-app med EJS.
 
-AMAbot betyder _Ask Me Anything-bot_. Den svarer på spørgsmål om jer selv ud fra regler, arrays og objekter — ikke kunstig intelligens. I beholder jeres eget design, CSS og billeder. Det nye er, at Express modtager spørgsmålet, vælger et svar og lader EJS generere den næste HTML-side.
+AMAbot betyder _Ask Me Anything-bot_. Den svarer på spørgsmål om dig selv ud fra regler, arrays og objekter — ikke kunstig intelligens. Du beholder dit eget design, CSS og billeder. Det nye er, at Express modtager spørgsmålet, vælger et svar og lader EJS generere den næste HTML-side.
 
-Skriv og test ét trin ad gangen. I får små kodeudsnit, der bygges oven på hinanden, frem for en færdig løsning fra begyndelsen.
+Skriv og test ét trin ad gangen. Du får små kodeudsnit, der bygges oven på hinanden, frem for en færdig løsning fra begyndelsen.
 
-## Sådan arbejder I med koden
+## Sådan arbejder du med koden
 
-Skriv koden selv — kopier ikke bare et helt uddrag ind. Før I ændrer noget, skal I finde det relevante sted i **jeres egen** kode: Er det GET-routen, POST-routen, `views/index.ejs` eller CSS-filen?
+Skriv koden selv — kopier ikke bare et helt uddrag ind. Før du ændrer noget, skal du finde det relevante sted i **din egen** kode: Er det GET-routen, POST-routen, `views/index.ejs` eller CSS-filen?
 
-Når der står “ret” eller “erstat” i øvelsen, skal I først kunne svare på:
+Når der står “ret” eller “erstat” i øvelsen, skal du først kunne svare på:
 
 1. Hvilken værdi eller linje har vi allerede?
 2. Hvad skal den nye kode ændre eller tilføje?
 3. Hvilke variabelnavne skal passe med resten af vores kode?
 
-Skriv derefter ændringen, gem filen og udfør testpunktet. Hvis noget ikke virker, så læs fejlbeskeden og sammenlign `method`, `action`, `name`, route og EJS-variabler. Kodeudsnittene viser mønsteret; I skal tilpasse dem til jeres egen struktur og design.
+Skriv derefter ændringen, gem filen og udfør testpunktet. Hvis noget ikke virker, så læs fejlbeskeden og sammenlign `method`, `action`, `name`, route og EJS-variabler. Kodeudsnittene viser mønsteret; du skal tilpasse dem til din egen struktur og design.
 
-Hvis `if`/`else`, objekter, arrays, `for...of` eller `toLowerCase()`/`includes()`/`.some()` er svære at følge i `findAnswer()`, kan I tage et kort stop i [JavaScript-øvelser til AMAbot](javascript-oevelser-amabot.md). Her træner I hvert begreb for sig med simple eksempler. Vend derefter tilbage til jeres egen AMAbot.
+> **Sidder du fast et sted?** Hvis `if`/`else`, objekter, arrays, `for...of` eller `toLowerCase()`/`includes()`/`.some()` er svære at følge i `findAnswer()`, kan du tage et kort stop i [JavaScript-øvelser til AMAbot](javascript-oevelser-amabot.md). Her træner du hvert begreb for sig med simple eksempler. Vend derefter tilbage til din egen AMAbot.
 
 ## Det bygger du
 
@@ -29,7 +29,7 @@ Browser -> POST /ask -> request.body.question -> validering -> findAnswer()
 
 Det er **server-side rendering (SSR)**: Browseren sender spørgsmålet til serveren, og serveren sender en helt ny HTML-side tilbage. Det er altså ikke JavaScript i browseren, der selv tilføjer en besked til siden.
 
-Når øvelsen er færdig, kan jeres AMAbot:
+Når øvelsen er færdig, kan din AMAbot:
 
 - beholde sit eksisterende visuelle udtryk
 - modtage et spørgsmål på `POST /ask`
@@ -41,7 +41,7 @@ Når øvelsen er færdig, kan jeres AMAbot:
 
 ## 1. Gem HTML-udgangspunktet i Git
 
-Før I ændrer noget, skal I gemme gårsdagens fungerende løsning. Det gør det let at sammenligne før og efter — eller vende tilbage, hvis noget går galt.
+Før du ændrer noget, skal du gemme gårsdagens fungerende løsning. Det gør det let at sammenligne før og efter — eller vende tilbage, hvis noget går galt.
 
 ```bash
 git status
@@ -50,17 +50,17 @@ git commit -m "Save HTML AMAbot before Express and EJS"
 git push
 ```
 
-Hvis jeres CSS, billeder eller JavaScript også er en del af gårsdagens løsning, skal de med i committet. Brug `git status` til at kontrollere præcis, hvad I gemmer.
+Hvis din CSS, billeder eller JavaScript også er en del af gårsdagens løsning, skal de med i committet. Brug `git status` til at kontrollere præcis, hvad du gemmer.
 
 ### Test trin 1
 
-Kør `git status` igen. Arbejdsmappen skal være ren, eller I skal kunne forklare de filer, der stadig vises.
+Kør `git status` igen. Arbejdsmappen skal være ren, eller du skal kunne forklare de filer, der stadig vises.
 
 ---
 
 ## 2. Opret Node-projektet
 
-I skal bruge den samme opsætning som i [øvelse 2](express-ejs-formhaandtering-svarlogik.md): ES Modules, et `start`-script og et `dev`-script med watch mode. I arbejder normalt med `npm run dev`; `npm start` bruges til at starte én gang uden automatisk genstart.
+Du skal bruge den samme opsætning som i [øvelse 2](express-ejs-formhaandtering-svarlogik.md): ES Modules, et `start`-script og et `dev`-script med watch mode. Du arbejder normalt med `npm run dev`; `npm start` bruges til at starte én gang uden automatisk genstart.
 
 Kør i repositoryets rodmappe:
 
@@ -96,7 +96,7 @@ Kontrollér, at `express` og `ejs` står under `dependencies`, og at både `npm 
 
 Express bruger som standard `views/` til EJS-templates. Vi bruger `public/` til lokale filer, serveren blot skal sende videre uændret: CSS, browser-JavaScript, billeder og favicon.
 
-Opret mapperne og flyt jeres filer. Strukturen afhænger af jeres oprindelige projekt. Her er to typiske eksempler:
+Opret mapperne og flyt dine filer. Strukturen afhænger af dit oprindelige projekt. Her er to typiske eksempler:
 
 ```text
 index.html                 ->  views/index.ejs
@@ -122,15 +122,15 @@ Et link som `./assets/styles/style.css` tager udgangspunkt i templaten/URL'en. E
 
 Eksterne links, fx til Google Fonts eller Font Awesome, skal ikke flyttes til `public/` og skal beholde deres fulde `https://...`-adresse.
 
-Hvis jeres gamle `index.js` selv indsætter spørgsmål og svar i browseren, så fjern script-tagget eller den del af koden. I denne øvelse skal serveren og EJS opdatere samtalen.
+Hvis din gamle `index.js` selv indsætter spørgsmål og svar i browseren, så fjern script-tagget eller den del af koden. I denne øvelse skal serveren og EJS opdatere samtalen.
 
 ### Test trin 3
 
-I skal nu have `views/index.ejs` og mindst én fil i `public/` — men serveren kan ikke vise dem endnu.
+Du skal nu have `views/index.ejs` og mindst én fil i `public/` — men serveren kan ikke vise dem endnu.
 
 ---
 
-## 4. Lad Express servere jeres statiske filer
+## 4. Lad Express servere dine statiske filer
 
 Opret `server.js` i repositoryets rodmappe med denne mindste server:
 
@@ -157,13 +157,13 @@ npm run dev
 
 ### Test trin 4
 
-Åbn URL'en til en af jeres flyttede filer, fx `http://localhost:3000/styles.css` eller `http://localhost:3000/assets/styles/style.css`. Browseren skal vise CSS-filen. I Network-panelet skal requesten have status `200`.
+Åbn URL'en til en af dine flyttede filer, fx `http://localhost:3000/styles.css` eller `http://localhost:3000/assets/styles/style.css`. Browseren skal vise CSS-filen. I Network-panelet skal requesten have status `200`.
 
 ---
 
-## 5. Render jeres EJS-template
+## 5. Render din EJS-template
 
-Nu kan browseren allerede hente jeres assets. Tilføj EJS-konfigurationen og GET-routen **over** `app.listen()` i den server, I lige har lavet:
+Nu kan browseren allerede hente dine assets. Tilføj EJS-konfigurationen og GET-routen **over** `app.listen()` i den server, du lige har lavet:
 
 ```js
 app.set("view engine", "ejs");
@@ -177,13 +177,13 @@ app.get("/", (request, response) => {
 
 ### Test trin 5
 
-Åbn `http://localhost:3000`. Siden skal ligne jeres gamle version, og CSS samt billeder skal stadig indlæses. Kig i Network-panelet: både HTML-siden og en CSS-fil skal have status `200`.
+Åbn `http://localhost:3000`. Siden skal ligne din gamle version, og CSS samt billeder skal stadig indlæses. Kig i Network-panelet: både HTML-siden og en CSS-fil skal have status `200`.
 
 ---
 
 ## 6. Gør den eksisterende formular til en POST-formular
 
-Behold jeres layout og klasser, men ret formularens vigtige attributter. Kode- og route-navne er på engelsk:
+Behold dit layout og klasser, men ret formularens vigtige attributter. Kode- og route-navne er på engelsk:
 
 ```html
 <form method="POST" action="/ask">
@@ -198,17 +198,17 @@ Behold jeres layout og klasser, men ret formularens vigtige attributter. Kode- o
 - `name="question"` bliver til `request.body.question` på serveren.
 - `for="question"` og `id="question"` forbinder label og felt.
 
-> `type="textarea"` er ikke en gyldig inputtype. Hvis I vil have et felt med flere linjer, så brug `<textarea id="question" name="question"></textarea>` i stedet.
+> `type="textarea"` er ikke en gyldig inputtype. Hvis du vil have et felt med flere linjer, så brug `<textarea id="question" name="question"></textarea>` i stedet.
 
 ### Test trin 6
 
-Send formularen. I får sandsynligvis `Cannot POST /ask`. Det er forventet: Browseren sender nu rigtigt, men serveren har endnu ingen route til at modtage requesten.
+Send formularen. Du får sandsynligvis `Cannot POST /ask`. Det er forventet: Browseren sender nu rigtigt, men serveren har endnu ingen route til at modtage requesten.
 
 ---
 
 ## 7. Modtag et spørgsmål og vis det igen med EJS
 
-Før Express kan læse formularens data, skal I aktivere middleware. Sæt denne linje **før** jeres routes i `server.js`:
+Før Express kan læse formularens data, skal du aktivere middleware. Sæt denne linje **før** dine routes i `server.js`:
 
 ```js
 app.use(express.urlencoded({ extended: true }));
@@ -216,7 +216,7 @@ app.use(express.urlencoded({ extended: true }));
 
 Middleware er kode, Express kører før en route. Her læser den formularens POST-data og gør dem tilgængelige i `request.body`. Uden denne linje kan POST-routen ikke finde `request.body.question`.
 
-Tilføj derefter en foreløbig POST-route. Den renderer jeres EJS-template igen med det indsendte spørgsmål:
+Tilføj derefter en foreløbig POST-route. Den renderer din EJS-template igen med det indsendte spørgsmål:
 
 ```js
 app.post("/ask", (request, response) => {
@@ -247,13 +247,13 @@ Indsæt dette under formularen i `views/index.ejs`:
 
 ### Test trin 7
 
-Indsend et spørgsmål. Det skal vises på siden med jeres `question`-styling. Find `POST /ask` i Network-panelet og kontrollér, at `question` findes under Payload.
+Indsend et spørgsmål. Det skal vises på siden med din `question`-styling. Find `POST /ask` i Network-panelet og kontrollér, at `question` findes under Payload.
 
 ---
 
 ## 8. Gem og vis simple beskeder
 
-Nu skal vi gøre ét spørgsmål til en lille historik. Først er hver besked kun en tekst i et array (lidt som vi gjorde med `names` i foregående øvelse). Vi venter med svar, typer, styling og validering, så I kan følge den ene nye idé: `push()` gemmer tekst i `messages`, og EJS viser alle teksterne igen.
+Nu skal vi gøre ét spørgsmål til en lille historik. Først er hver besked kun en tekst i et array (lidt som vi gjorde med `names` i foregående øvelse). Vi venter med svar, typer, styling og validering, så du kan følge den ene nye idé: `push()` gemmer tekst i `messages`, og EJS viser alle teksterne igen.
 
 Opret arrayet **over** routes i `server.js`:
 
@@ -273,7 +273,7 @@ app.get("/", (request, response) => {
 });
 ```
 
-I `views/index.ejs` skal I **erstatte den midlertidige `question`-blok fra trin 7** med dette:
+I `views/index.ejs` skal du **erstatte den midlertidige `question`-blok fra trin 7** med dette:
 
 ```ejs
 <% for (const message of messages) { %>
@@ -303,15 +303,15 @@ Indsend to forskellige spørgsmål. Begge skal vises på siden i den rækkefølg
 
 ## 9. Giv hver besked en type
 
-Nu skal AMAbotten også vise et foreløbigt svar. For at jeres CSS kan kende forskel på et spørgsmål og et svar, ændrer vi hver besked fra en tekst til et objekt med to faste egenskaber:
+Nu skal AMAbotten også vise et foreløbigt svar. For at din CSS kan kende forskel på et spørgsmål og et svar, ændrer vi hver besked fra en tekst til et objekt med to faste egenskaber:
 
 ```js
 { type: "question", text: question }
 ```
 
-> Brug præcis egenskabsnavnene `type` og `text` — ikke jeres egne navne. EJS-loopet nedenfor slår direkte op på `message.type` og `message.text`, så alle beskeder skal have samme struktur for at kunne vises.
+> Brug præcis egenskabsnavnene `type` og `text` — ikke dine egne navne. EJS-loopet nedenfor slår direkte op på `message.type` og `message.text`, så alle beskeder skal have samme struktur for at kunne vises.
 
-Først erstatter I EJS-looppet fra trin 8 med:
+Først erstatter du EJS-looppet fra trin 8 med:
 
 ```ejs
 <% for (const message of messages) { %>
@@ -328,19 +328,19 @@ messages.push({ type: "question", text: question });
 messages.push({ type: "answer", text: "Jeg leder efter et svar ..." });
 ```
 
-Nu bliver `question` og `answer` både data og CSS-klasser. Brug tid på at style `.question` og `.answer`, så de to typer faktisk ser forskellige ud — fx forskellig baggrundsfarve, eller spørgsmål og svar justeret til hver sin side. Det er det samme skel, jeres kode allerede laver med `message.type`; nu skal øjet kunne se det samme.
+Nu bliver `question` og `answer` både data og CSS-klasser. Brug tid på at style `.question` og `.answer`, så de to typer faktisk ser forskellige ud — fx forskellig baggrundsfarve, eller spørgsmål og svar justeret til hver sin side. Det er det samme skel, din kode allerede laver med `message.type`; nu skal øjet kunne se det samme.
 
-> Stop og start serveren igen med `npm run dev`, før I tester dette trin. `messages` indeholder stadig tekstværdierne fra trin 8, men nu forventer EJS objekter med `type` og `text`. En genstart tømmer arrayet, så alle nye beskeder får den samme struktur.
+> Stop og start serveren igen med `npm run dev`, før du tester dette trin. `messages` indeholder stadig tekstværdierne fra trin 8, men nu forventer EJS objekter med `type` og `text`. En genstart tømmer arrayet, så alle nye beskeder får den samme struktur.
 
 ### Test trin 9
 
-Indsend et spørgsmål. I skal se både spørgsmålet og det foreløbige svar. Brug DevTools' Elements-panel til at kontrollere, at de to `article`-elementer har klasserne `question` og `answer` — og med det blotte øje kunne se, hvilken besked der er hvilken, uden at kigge i koden.
+Indsend et spørgsmål. Du skal se både spørgsmålet og det foreløbige svar. Brug DevTools' Elements-panel til at kontrollere, at de to `article`-elementer har klasserne `question` og `answer` — og med det blotte øje kunne se, hvilken besked der er hvilken, uden at kigge i koden.
 
 ---
 
 ## 10. Definér AMAbottens svarregler (data)
 
-Nu skal du erstatte de midlertidige svar med svar fra et foruddeffineret array. Start med data alene (arrayet), før I rører routen eller nogen logik. Opret dette over jeres routes:
+Nu skal du erstatte de midlertidige svar med svar fra et foruddeffineret array. Start med data alene (arrayet), før du rører routen eller nogen logik. Opret dette over dine routes:
 
 ```js
 const answers = [
@@ -359,19 +359,19 @@ const answers = [
 ];
 ```
 
-Tilpas mindst navn, emner og svar, så botten beskriver jer.
+Tilpas mindst navn, emner og svar, så botten beskriver dig.
 
-> **Array af objekter:** `answers` er et array, ligesom `messages`. Men hvert element er selv et objekt med to egenskaber: `keywords` er et array af ord, der kan udløse svaret, og `answer` er teksten, AMAbotten skal sende. Det er den samme objekt-notation, I brugte til `{ type: "question", text: question }` i forrige trin — bare med andre egenskaber.
+> **Array af objekter:** `answers` er et array, ligesom `messages`. Men hvert element er selv et objekt med to egenskaber: `keywords` er et array af ord, der kan udløse svaret, og `answer` er teksten, AMAbotten skal sende. Det er den samme objekt-notation, du brugte til `{ type: "question", text: question }` i forrige trin — bare med andre egenskaber.
 
 ### Test trin 10
 
-Sæt midlertidigt `console.log(answers.length);` lige under arrayet, og genstart serveren med `npm run dev`. Terminalen skal vise antallet af regler, I har skrevet. Det bekræfter, at objektet er skrevet korrekt, før I bruger det i næste trin. Fjern loggen igen.
+Sæt midlertidigt `console.log(answers.length);` lige under arrayet, og genstart serveren med `npm run dev`. Terminalen skal vise antallet af regler, du har skrevet. Det bekræfter, at objektet er skrevet korrekt, før du bruger det i næste trin. Fjern loggen igen.
 
 ---
 
 ## 11. Skriv findAnswer()
 
-Nu skal I bruge dataene fra forrige trin — men endnu ikke røre POST-routen. Tilføj denne funktion under `answers`:
+Nu skal du bruge dataene fra forrige trin — men endnu ikke røre POST-routen. Tilføj denne funktion under `answers`:
 
 ```js
 function findAnswer(question) {
@@ -399,13 +399,13 @@ Sæt midlertidigt denne linje ind lige under funktionen:
 console.log(findAnswer("Hvad hedder du?"));
 ```
 
-Genstart serveren, og kontrollér i terminalen, at I får det rigtige svar tilbage — uden at have rørt formularen eller routen. Prøv også et spørgsmål, der ikke matcher noget. Fjern loggen igen, når begge dele virker.
+Genstart serveren, og kontrollér i terminalen, at du får det rigtige svar tilbage — uden at have rørt formularen eller routen. Prøv også et spørgsmål, der ikke matcher noget. Fjern loggen igen, når begge dele virker.
 
 ---
 
 ## 12. Brug findAnswer() i routen
 
-Nu ved I, at `findAnswer()` virker for sig selv. Erstat linjen, der tilføjer det foreløbige svar, i POST-routen:
+Nu ved du, at `findAnswer()` virker for sig selv. Erstat linjen, der tilføjer det foreløbige svar, i POST-routen:
 
 ```js
 const answer = findAnswer(question);
@@ -422,9 +422,9 @@ Test ét spørgsmål for hver regel og et spørgsmål, der ikke matcher noget �
 
 ## 13. Vis en fejl ved et tomt spørgsmål
 
-Indtil nu gemmer appen alt, også en tom tekst. Nu tilføjer vi den første valideringsregel — med samme mønster, som I brugte til navn og alder i [øvelse 2](express-ejs-formhaandtering-svarlogik.md): saml reglerne i én `if`/`else`-kæde, og render til sidst én gang.
+Indtil nu gemmer appen alt, også en tom tekst. Nu tilføjer vi den første valideringsregel — med samme mønster, som du brugte til navn og alder i [øvelse 2](express-ejs-formhaandtering-svarlogik.md): saml reglerne i én `if`/`else`-kæde, og render til sidst én gang.
 
-Selv hvis I senere tilføjer `required` til HTML-feltet, skal serveren stadig validere. En browser kan omgås, men serveren bestemmer altid, hvilke data der må gemmes i `messages`.
+Selv hvis du senere tilføjer `required` til HTML-feltet, skal serveren stadig validere. En browser kan omgås, men serveren bestemmer altid, hvilke data der må gemmes i `messages`.
 
 GET-routen skal også sende en tom fejltekst, fordi EJS snart skal kunne vise `error` både efter GET- og POST-requests:
 
@@ -471,15 +471,15 @@ Indsend først et tomt spørgsmål og derefter et almindeligt spørgsmål. Kun d
 
 ## Tjekpunkt
 
-Jeres AMAbot har nu den grundlæggende funktionalitet. Den er færdig, når den beholder jeres design, viser samtalehistorik, modtager et spørgsmål på `POST /ask`, vælger et regelbaseret svar om jer og håndterer et tomt spørgsmål.
+Din AMAbot har nu den grundlæggende funktionalitet. Den er færdig, når den beholder dit design, viser samtalehistorik, modtager et spørgsmål på `POST /ask`, vælger et regelbaseret svar om dig og håndterer et tomt spørgsmål.
 
-I skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor EJS genererer HTML.
+Du skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor EJS genererer HTML.
 
 ---
 
 ## Gem øvelse 3 på GitHub
 
-Når AMAbotten består testene i tjekpunktet, skal I gemme den færdige øvelse i jeres repository:
+Når AMAbotten består testene i tjekpunktet, skal du gemme den færdige øvelse i dit repository:
 
 ```bash
 git status
@@ -488,17 +488,17 @@ git commit -m "Build server-rendered AMAbot with Express and EJS"
 git push
 ```
 
-Kør `git status` igen, og kontrollér på GitHub, at den nye commit er blevet pushet. Hvis `git status` viser filer, som ikke skal med, skal I undersøge dem, før I bruger `git add`.
+Kør `git status` igen, og kontrollér på GitHub, at den nye commit er blevet pushet. Hvis `git status` viser filer, som ikke skal med, skal du undersøge dem, før du bruger `git add`.
 
 ---
 
 ## Ekstra opgaver
 
-Trin 14 er en anbefalet ekstraopgave om sanitering. Opgave 15–20 er øvrige bonusopgaver: Vælg frit imellem dem, hvis I når længere, og de bygger ikke nødvendigvis på hinanden i rækkefølge.
+Trin 14 er en anbefalet ekstraopgave om sanitering. Opgave 15–20 er øvrige bonusopgaver: Vælg frit imellem dem, hvis du når længere, og de bygger ikke nødvendigvis på hinanden i rækkefølge.
 
 ### 14. Sanitér uønskede kontroltegn
 
-Valideringen afgør, om spørgsmålet må bruges. Sanitering ændrer selve inputtet. Som et enkelt eksempel kan I fjerne usynlige kontroltegn, der ikke hører hjemme i et almindeligt spørgsmål.
+Valideringen afgør, om spørgsmålet må bruges. Sanitering ændrer selve inputtet. Som et enkelt eksempel kan du fjerne usynlige kontroltegn, der ikke hører hjemme i et almindeligt spørgsmål.
 
 Tilføj funktionen over routes:
 
@@ -515,7 +515,7 @@ const rawQuestion = request.body.question;
 const question = sanitizeQuestion(rawQuestion).trim();
 ```
 
-Her antager vi, at formularen sender feltet `question`, fordi den selv er bygget med `name="question"`. Det er den samme aftale mellem formular og server, som I har brugt gennem hele øvelsen.
+Her antager vi, at formularen sender feltet `question`, fordi den selv er bygget med `name="question"`. Det er den samme aftale mellem formular og server, som du har brugt gennem hele øvelsen.
 
 - **Validering** afgør, om input må bruges, fx om spørgsmålet er tomt eller for langt.
 - **Sanitering** ændrer input ved at fjerne bestemte uønskede tegn.
@@ -531,7 +531,7 @@ Kontrollér igen, at almindelige spørgsmål og fejlbeskeder virker. Prøv også
 
 ### 15. Tilføj en grænse for lange spørgsmål
 
-I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en `else if` i den `if`/`else`-kæde, I skrev i trin 13 — **efter** kontrollen for et tomt spørgsmål og **før** `else` med de to `push`-linjer:
+Du skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en `else if` i den `if`/`else`-kæde, du skrev i trin 13 — **efter** kontrollen for et tomt spørgsmål og **før** `else` med de to `push`-linjer:
 
 ```js
 } else if (question.length > 280) {
@@ -539,7 +539,7 @@ I skal tilføje endnu en regel, uden at ændre resten af mønsteret. Indsæt en 
 } else {
 ```
 
-> Rækkefølgen er den samme idé som alderskontrollen i øvelse 2: I spørger først “mangler input helt?”, derefter “er input for langt?”, og kun hvis begge svarer nej, må spørgsmålet gemmes.
+> Rækkefølgen er den samme idé som alderskontrollen i øvelse 2: Du spørger først “mangler input helt?”, derefter “er input for langt?”, og kun hvis begge svarer nej, må spørgsmålet gemmes.
 
 Validering afgør, om data må bruges. Normalisering med `trim()` fjerner yderste mellemrum. EJS-escaping med `<%= ... %>` gør output sikkert i HTML-kontekst. Det er tre forskellige opgaver.
 
@@ -551,9 +551,9 @@ Test tomt input, et gyldigt spørgsmål, et ukendt spørgsmål og et spørgsmål
 
 ### 16. Style samtalen som en chat
 
-I trin 9 fik `.question` og `.answer` hver deres udseende. Nu skal I gøre det til et rigtigt chat-layout, hvor spørgsmål og svar sidder hver sin side.
+I trin 9 fik `.question` og `.answer` hver deres udseende. Nu skal du gøre det til et rigtigt chat-layout, hvor spørgsmål og svar sidder hver sin side.
 
-Find (eller opret) det element, der wrapper jeres beskeder — fx en `<section>` uden om EJS-loopet — og gør det til en flex-container:
+Find (eller opret) det element, der wrapper dine beskeder — fx en `<section>` uden om EJS-loopet — og gør det til en flex-container:
 
 ```css
 .messages {
@@ -577,13 +577,13 @@ Find (eller opret) det element, der wrapper jeres beskeder — fx en `<section>`
 
 ### Test trin 16
 
-Indsend flere spørgsmål. Spørgsmål og svar skal nu sidde i hver sin side af samtalen, med tydeligt forskellig baggrundsfarve, uden at I har ændret noget i `server.js` eller `index.ejs`.
+Indsend flere spørgsmål. Spørgsmål og svar skal nu sidde i hver sin side af samtalen, med tydeligt forskellig baggrundsfarve, uden at du har ændret noget i `server.js` eller `index.ejs`.
 
 ---
 
 ### 17. Giv en regel flere mulige svar
 
-Lige nu har hver regel præcis ét svar. Skift `answer`-egenskaben ud med et array af svar, `answers`, i mindst én af jeres regler:
+Lige nu har hver regel præcis ét svar. Skift `answer`-egenskaben ud med et array af svar, `answers`, i mindst én af dine regler:
 
 ```js
 {
@@ -595,20 +595,20 @@ Lige nu har hver regel præcis ét svar. Skift `answer`-egenskaben ud med et arr
 }
 ```
 
-I `findAnswer()` skal I derefter vælge ét tilfældigt element fra arrayet, i stedet for at returnere `answerGroup.answer` direkte:
+I `findAnswer()` skal du derefter vælge ét tilfældigt element fra arrayet, i stedet for at returnere `answerGroup.answer` direkte:
 
 ```js
 const randomIndex = Math.floor(Math.random() * answerGroup.answers.length);
 return answerGroup.answers[randomIndex];
 ```
 
-> `Math.random()` giver et decimaltal mellem 0 (inklusiv) og 1 (eksklusiv). Ganget med `answerGroup.answers.length` og afrundet ned med `Math.floor()` får I et helt indeks, der altid rammer et gyldigt element i arrayet.
+> `Math.random()` giver et decimaltal mellem 0 (inklusiv) og 1 (eksklusiv). Ganget med `answerGroup.answers.length` og afrundet ned med `Math.floor()` får du et helt indeks, der altid rammer et gyldigt element i arrayet.
 
-Husk at ændre `answer` til `answers` (som array) i **alle** jeres regler, så `findAnswer()` fungerer ens for dem alle.
+Husk at ændre `answer` til `answers` (som array) i **alle** dine regler, så `findAnswer()` fungerer ens for dem alle.
 
 ### Test trin 17
 
-Stil det samme spørgsmål flere gange. Svaret skal variere mellem de tekster, I har skrevet i arrayet.
+Stil det samme spørgsmål flere gange. Svaret skal variere mellem de tekster, du har skrevet i arrayet.
 
 ---
 
@@ -623,7 +623,7 @@ app.post("/clear-messages", (request, response) => {
 });
 ```
 
-> `messages` er erklæret med `const`, så I kan ikke skrive `messages = []`. `messages.length = 0` tømmer i stedet det eksisterende array, uden at oprette et nyt. `response.redirect("/")` sender browseren videre til en ny `GET /`, som renderer siden med det nu tomme array — det er en anden slags respons end `response.render()`, som I har brugt indtil nu.
+> `messages` er erklæret med `const`, så du kan ikke skrive `messages = []`. `messages.length = 0` tømmer i stedet det eksisterende array, uden at oprette et nyt. `response.redirect("/")` sender browseren videre til en ny `GET /`, som renderer siden med det nu tomme array — det er en anden slags respons end `response.render()`, som du har brugt indtil nu.
 
 Tilføj derefter en formular i `views/index.ejs`, fx ved siden af spørgsmålsformularen:
 
@@ -635,7 +635,7 @@ Tilføj derefter en formular i `views/index.ejs`, fx ved siden af spørgsmålsfo
 
 ### Test trin 18
 
-Indsend et par spørgsmål, og klik derefter på “Ryd beskeder”. Samtalen skal forsvinde, og I skal lande tilbage på en tom side.
+Indsend et par spørgsmål, og klik derefter på “Ryd beskeder”. Samtalen skal forsvinde, og du skal lande tilbage på en tom side.
 
 ---
 
@@ -647,7 +647,7 @@ Udvid message-objekterne med et tidspunkt, når de bliver oprettet:
 messages.push({ type: "question", text: question, createdAt: new Date() });
 ```
 
-Gør det samme for svaret. Vis derefter tidspunktet i `views/index.ejs`, inde i jeres eksisterende `<article>`:
+Gør det samme for svaret. Vis derefter tidspunktet i `views/index.ejs`, inde i dit eksisterende `<article>`:
 
 ```ejs
 <time><%= message.createdAt.toLocaleTimeString("da-DK") %></time>
@@ -679,12 +679,12 @@ app.get("/debug/:name", (request, response) => {
 
 Besøg `http://localhost:3000/debug?name=Ada&age=41` og `http://localhost:3000/debug/Ada`, og sammenlign, hvad terminalen og browseren viser.
 
-> `request.query` læser feltnavne fra URL'ens query string (delen efter `?`). `request.params` læser navngivne dele af selve stien, markeret med `:` i routen (her `:name`). `request.body`, som I har brugt gennem hele øvelsen, læser i stedet formularens data fra requestets body via `express.urlencoded()`. De tre bruges til forskellige situationer, selvom de alle ender som almindelige JavaScript-objekter.
+> `request.query` læser feltnavne fra URL'ens query string (delen efter `?`). `request.params` læser navngivne dele af selve stien, markeret med `:` i routen (her `:name`). `request.body`, som du har brugt gennem hele øvelsen, læser i stedet formularens data fra requestets body via `express.urlencoded()`. De tre bruges til forskellige situationer, selvom de alle ender som almindelige JavaScript-objekter.
 
 ### Test trin 20
 
-Prøv begge URL'er, og forklar for en makker, hvilken af de tre — `request.query`, `request.params` eller `request.body` — I ville bruge til AMAbottens spørgsmål, og hvorfor. Fjern derefter de to debug-routes igen, så de ikke bliver en del af jeres endelige app.
+Prøv begge URL'er, og forklar for en makker, hvilken af de tre — `request.query`, `request.params` eller `request.body` — du ville bruge til AMAbottens spørgsmål, og hvorfor. Fjern derefter de to debug-routes igen, så de ikke bliver en del af din endelige app.
 
 ## Videre til øvelse 4
 
-I [øvelse 4: Gør AMAbotten klogere med scoring og statistik](express-ejs-amabot-statistik.md) bygger I videre på det samme projekt: I retter `findAnswer()`, så den vælger den bedst matchende regel i stedet for bare den første, og I tilføjer en statistik over, hvilke emner brugerne spørger mest til.
+I [øvelse 4: Gør AMAbotten klogere med scoring og statistik](express-ejs-amabot-statistik.md) bygger du videre på det samme projekt: Du retter `findAnswer()`, så den vælger den bedst matchende regel i stedet for bare den første, og du tilføjer en statistik over, hvilke emner brugerne spørger mest til.
