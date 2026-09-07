@@ -29,12 +29,12 @@ Hop direkte til det kapitel, der matcher dit blokerende begreb:
 
 Kan du forklare alle fem uden at læse op i koden?
 
-| Situation | Forventet resultat |
-| --- | --- |
-| Kendt spørgsmål | Rigtigt svar (og rigtig kategori i øvelse 4) |
-| Ukendt spørgsmål | Standardsvar, ingen tæller opdateres |
-| Tomt input | Fejlbesked, ingen ny besked i historikken |
-| Flere regler matcher | Reglen med højeste score vinder (øvelse 4) |
+| Situation                 | Forventet resultat                            |
+| ------------------------- | --------------------------------------------- |
+| Kendt spørgsmål           | Rigtigt svar (og rigtig kategori i øvelse 4)  |
+| Ukendt spørgsmål          | Standardsvar, ingen tæller opdateres          |
+| Tomt input                | Fejlbesked, ingen ny besked i historikken     |
+| Flere regler matcher      | Reglen med højeste score vinder (øvelse 4)    |
 | To regler får samme score | Den regel, der står først i `answers`, vinder |
 
 Husk `git add` / `commit` / `push` undervejs.
