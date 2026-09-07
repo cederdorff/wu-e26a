@@ -1,0 +1,20 @@
+@import "../data-logik/theme.css";
+
+/* RACE 4 deck additions */
+.flow-pair {
+  display: grid;
+  gap: 46px;
+  margin-top: 64px;
+}
+.flow-pair-row .flow-label {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.flow-pair-row .recap-flow {
+  margin-top: 0;
+}

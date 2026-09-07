@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RACE 4 · Persistens, JSON og File System · WU-E26A · 11. september 2026" />
+    <title>Persistens, JSON og File System · WU-E26A</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide solo" data-accent="yellow">
+          <div class="title-copy">
+            <span class="eyebrow">WU-E26A · RACE 4 · 11. september 2026</span>
+            <h1>Fra memory<br /><span>til fil</span></h1>
+            <p class="lead">Persistens · JSON · Node.js File System API</p>
+          </div>
+          <aside class="notes">
+            Velkommen tilbage. I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i
+            AMAbottens svarlogik. I dag flytter vi den samme viden over i en ny opgave: data, der overlever en
+            genstart af serveren. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="statement-slide" data-accent="orange">
+          <span class="eyebrow">Lige nu, i jeres AMAbot</span>
+          <h2>Samtalen forsvinder, hver gang du genstarter serveren</h2>
+          <div class="statement-support">
+            <span><code>messages</code> er en almindelig array-variabel</span>
+            <span>den lever kun, mens Node-processen kører</span>
+            <span>genstart = tom historik, igen og igen</span>
+          </div>
+          <aside class="notes">
+            Dette er dagens slutmål vendt om til et problem: vis gerne live, at en genstart af serveren nulstiller
+            samtalen. Hele dagens undervisning handler om at rette præcis dette. Vend tilbage til denne sætning til
+            sidst, når det er løst. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="outcome-slide" data-accent="green">
+          <span class="eyebrow">Dagens mål</span>
+          <h2>I dag flytter I AMAbottens hukommelse fra memory til en fil</h2>
+          <div class="outcome-path" aria-label="Dagens progression">
+            <article><b>01</b><strong>Forstå</strong><span>hvorfor data i variabler forsvinder ved en genstart</span></article>
+            <article><b>02</b><strong>Læs</strong><span><code>fs.readFile()</code> + <code>JSON.parse()</code> henter data fra en fil</span></article>
+            <article><b>03</b><strong>Skriv</strong><span><code>JSON.stringify()</code> + <code>fs.writeFile()</code> gemmer ændringer</span></article>
+            <article><b>04</b><strong>Test</strong><span>samtalen overlever en genstart af serveren</span></article>
+          </div>
+          <aside class="notes">
+            De fire mål følger read → modify → write-mønstret, som går igen i både JSON-øvelsen og øvelse 5. Test er
+            det vigtigste punkt — persistens er kun bevist, når data overlever en faktisk genstart. [Sources] - Lokal
+            lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="agenda" class="agenda-slide" data-accent="cyan">
+          <span class="eyebrow">Agenda</span>
+          <h2>Fra flygtig memory til en fil, der husker</h2>
+          <ol class="agenda-grid">
+            <li><a href="#/opsamling"><b>Opsamling</b><small>Øvelse 3 og 4 — findBestAnswer() og topicStats</small></a></li>
+            <li><a href="#/objekter-arrays"><b>Objekter og arrays</b><small>Samme struktur går igen som JSON</small></a></li>
+            <li><a href="#/persistens"><b>Hvad er persistens?</b><small>Memory vs. persistent storage</small></a></li>
+            <li><a href="#/json"><b>Hvad er JSON?</b><small>JavaScript-data skrevet som tekst</small></a></li>
+            <li><a href="#/filesystem"><b>File System i Node.js</b><small>Læs og skriv med <code>fs</code></small></a></li>
+            <li><a href="#/gem"><b>Gem chathistorikken</b><small>Øvelse 5: <code>messages.json</code> overlever en genstart</small></a></li>
+          </ol>
+          <aside class="notes">
+            Dagen bevæger sig fra en kort opsamling, over begreberne persistens og JSON, til den konkrete File
+            System-kode og til sidst den samlede AMAbot-øvelse. Brug agenda-linket til at vende tilbage mellem
+            kapitlerne. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="opsamling" class="chapter" data-accent="green">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Opsamling</span>
+          <h2>Find den bedste<br />regel — igen</h2>
+          <p>To og to: forklar <code>findBestAnswer()</code> og <code>topicStats</code> fra jeres egen kode.</p>
+          <aside class="notes">
+            Kort opsamling på øvelse 3 og 4, før vi går videre til dagens nye stof. Formålet er, at alle kan pege på
+            og forklare egen kode — ikke at nå til identiske løsninger. [Sources] - Lokal opsamlingsside:
+            undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="question-slide" data-accent="green">
+          <span class="eyebrow">Opsamlingsaktivitet · øvelse 3 og 4</span>
+          <h2>Forklar koden for din sidemakker</h2>
+          <ol class="question-grid">
+            <li>Kan I forklare, hvordan <code>findBestAnswer()</code> vælger den bedst matchende regel ud fra antal matchende nøgleord?</li>
+            <li>Kan I gennemgå, hvordan <code>topicStats</code> tæller emner/kategorier i et objekt?</li>
+            <li>Hvad sker der, når et spørgsmål matcher flere regler samtidig — vinder den rigtige?</li>
+            <li>Hvad er stadig uklart omkring scoring, tælling eller objekter/arrays?</li>
+          </ol>
+          <aside class="notes">
+            Lad par teste med et spørgsmål, der rammer flere regler, og sammenligne resultatet med deres forventning.
+            Notér uklarheder, så I kan samle op i plenum. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="objekter-arrays" class="chapter" data-accent="cyan">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Objekter og arrays</span>
+          <h2>Samme struktur<br />overalt</h2>
+          <p>Punktnotation, bracket notation og arrays af objekter — den viden bruger I resten af kurset.</p>
+          <aside class="notes">
+            Kort genbesøg af objekter og arrays, før pointen om JSON gøres eksplicit på næste slide. [Sources] - Lokal
+            lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="build-preview" data-accent="cyan">
+          <span class="eyebrow">Genkend mønsteret</span>
+          <h2>Det samme objekt/array-mønster går igen tre steder</h2>
+          <div class="build-stages" aria-label="Objekter og arrays går igen i JavaScript, JSON over HTTP og senere i en database">
+            <article>
+              <b>01</b><span>JavaScript</span>
+              <strong>Objekter og arrays i jeres kode</strong>
+              <code>{ keywords: [...], answer: "..." }</code>
+            </article>
+            <i>→</i>
+            <article>
+              <b>02</b><span>JSON over HTTP</span>
+              <strong>Samme struktur sendt som tekst</strong>
+              <code>{"keywords":[...],"answer":"..."}</code>
+            </article>
+            <i>→</i>
+            <article>
+              <b>03</b><span>En database (senere)</span>
+              <strong>Rækker/dokumenter med samme form</strong>
+              <code>{ keywords: [...], answer: "..." }</code>
+            </article>
+          </div>
+          <p class="bottom-line">Det er ikke tilfældigt — JSON <b>ER</b> JavaScript-objekter og -arrays skrevet som tekst.</p>
+          <aside class="notes">
+            Denne pointe binder dagens tre begreber sammen: objekter/arrays, JSON og persistens er ikke tre separate
+            emner, men tre steder samme datastruktur dukker op. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="persistens" class="chapter" data-accent="orange">
+          <span class="chapter-number">03</span>
+          <span class="eyebrow">Hvad er persistens?</span>
+          <h2>Data, der<br />overlever</h2>
+          <p>Hvad sker der med <code>messages</code> og <code>answers</code>, når serveren genstartes?</p>
+          <aside class="notes">
+            Overgang fra hook-sliden til selve begrebet persistens. Lad de studerende svare, før definitionen vises
+            på næste slide: det forsvinder — det lever kun i memory. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="definition-slide" data-accent="orange">
+          <span class="eyebrow">Definition · Memory vs. persistent storage</span>
+          <h2>To steder at gemme data — med meget forskellig levetid</h2>
+          <div class="definition-pair">
+            <article>
+              <span>I memory · variabler</span>
+              <p>
+                Data findes kun, mens Node-processen kører. En almindelig array- eller objekt-variabel forsvinder
+                helt ved en genstart, <code>Ctrl</code>+<code>C</code>, eller et crash.
+              </p>
+            </article>
+            <article>
+              <span>Persistent storage · fil eller database</span>
+              <p>
+                Persistens betyder, at data overlever, selvom programmet stopper. En fil på disken og en database er
+                begge former for persistent storage — forskellen er bare hvor og hvordan data gemmes.
+              </p>
+            </article>
+          </div>
+          <p class="bottom-line">I dag bruger vi en JSON-fil — den simpleste form for persistens.</p>
+          <aside class="notes">
+            Byg definitionen direkte oven på hook-sliden: messages og answers findes kun i memory, mens processen
+            kører. Persistens er det modsatte af det, de allerede har oplevet virker forkert. [Sources] - Lokal
+            lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="tradeoff-slide" data-accent="orange">
+          <span class="eyebrow">I dag og senere i forløbet</span>
+          <h2>Samme idé — to forskellige værktøjer</h2>
+          <div class="two-sides">
+            <article>
+              <h3>JSON-fil · i dag</h3>
+              <ul>
+                <li>Simpel: læs hele filen, ret, skriv hele filen igen</li>
+                <li>Ingen opsætning — bare <code>node:fs/promises</code></li>
+                <li>Fin til én bruger og et lille datasæt</li>
+              </ul>
+            </article>
+            <article>
+              <h3>Database · senere</h3>
+              <ul>
+                <li>Lavet til mange samtidige læsninger og skrivninger</li>
+                <li>Forespørgsler i stedet for at læse hele filen</li>
+                <li>Samme grundidé: hent aktuel tilstand, gem ændringer igen</li>
+              </ul>
+            </article>
+          </div>
+          <p class="bottom-line">Selve idéen — gem data et sted, der ikke forsvinder — er den samme.</p>
+          <aside class="notes">
+            Understreg, at JSON-filen ikke er en useriøs løsning, men et bevidst simpelt første skridt. Senere i
+            forløbet erstattes filen med en rigtig database, men mønstret read → modify → write genbruges direkte.
+            [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="json" class="chapter" data-accent="yellow">
+          <span class="chapter-number">04</span>
+          <span class="eyebrow">Hvad er JSON?</span>
+          <h2>Data skrevet<br />som tekst</h2>
+          <p>JavaScript Object Notation — et tekstformat, der ligner jeres egne objekter og arrays.</p>
+          <aside class="notes">
+            JSON introduceres som en genkendelig venn, ikke et nyt sprog: det er den samme struktur, bare skrevet som
+            tekst. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="json-syntax-slide" data-accent="yellow">
+          <span class="eyebrow">JSON ligner JavaScript — men er ikke det samme</span>
+          <h2>Nøgler og strings i dobbelte citationstegn</h2>
+          <div class="before-after">
+            <article>
+              <span>JavaScript-objekt</span>
+              <pre><code class="language-javascript">const student = {
+  name: "Aisha",
+  // et JS-objekt
+  education: "Multimediedesign"
+};</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>JSON-tekst</span>
+              <pre><code class="language-json">{
+  "name": "Aisha",
+  "education": "Multimediedesign"
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">JSON tillader ingen funktioner, ingen kommentarer og ingen trailing comma.</p>
+          <aside class="notes">
+            Peg konkret på forskellene: nøgler i dobbelte citationstegn, ingen kommentar-linje, og ingen komma efter
+            det sidste felt. Dette er præcis de fejl, der giver JSON.parse()-fejl i øvelserne. [Sources] - Lokal
+            øvelse: opgaver/express-ejs-json-students.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="normalize-slide" data-accent="yellow">
+          <span class="eyebrow">JSON.stringify() og JSON.parse()</span>
+          <h2>Fra JavaScript-data til tekst — og tilbage igen</h2>
+          <div class="normalize-flow">
+            <article><span>JavaScript</span><code>{ id: 1, name: "Aisha" }</code></article>
+            <i>→</i>
+            <article><span><code>JSON.stringify()</code></span><code>'{"id":1,"name":"Aisha"}'</code></article>
+            <i>→</i>
+            <article><span><code>JSON.parse()</code></span><code>{ id: 1, name: "Aisha" }</code></article>
+          </div>
+          <p class="bottom-line">
+            JSON er sprog-uafhængigt — næsten alle programmeringssprog kan læse og skrive det. Derfor er det webbets
+            de facto-standard.
+          </p>
+          <aside class="notes">
+            stringify() omdanner JavaScript-data til JSON-tekst, klar til at skrives i en fil eller sendes over HTTP.
+            parse() gør det modsatte. Begge runder trippen tilbage til den samme datastruktur. [Sources] - MDN:
+            https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON [/Sources]
+          </aside>
+        </section>
+
+        <section id="filesystem" class="chapter" data-accent="green">
+          <span class="chapter-number">05</span>
+          <span class="eyebrow">File System i Node.js</span>
+          <h2>Læs og skriv<br />filer fra serveren</h2>
+          <p><code>node:fs/promises</code> — indbygget i Node.js, intet at installere.</p>
+          <aside class="notes">
+            Overgang fra JSON som format til de konkrete Node.js-funktioner, der læser og skriver JSON-filer.
+            [Sources] - Lokal lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="code-focus-slide" data-accent="green">
+          <span class="eyebrow">Import og de to metoder</span>
+          <h2><code>fs.readFile()</code> og <code>fs.writeFile()</code> er asynchronous</h2>
+          <div class="code-and-result">
+            <pre><code class="language-javascript">import fs from "node:fs/promises";
+
+const data = await fs.readFile(
+  "./data/students.json",
+  "utf8"
+);</code></pre>
+            <pre><code class="language-javascript">const json = JSON.stringify(
+  students,
+  null,
+  2
+);
+
+await fs.writeFile(
+  "./data/students.json",
+  json
+);</code></pre>
+          </div>
+          <p class="bottom-line">Begge metoder returnerer et Promise — derfor <code>async</code>/<code>await</code>, ligesom I kender det.</p>
+          <aside class="notes">
+            Peg på "utf8" som nødvendigt, for at readFile returnerer tekst i stedet for en buffer. null og 2 i
+            stringify() giver formateret, læsbar JSON i filen. [Sources] - W3Schools:
+            https://www.w3schools.com/nodejs/nodejs_filesystem.asp [/Sources]
+          </aside>
+        </section>
+
+        <section class="build-preview" data-accent="green">
+          <span class="eyebrow">Mønstret bag alt i dag</span>
+          <h2>Read → modify → write</h2>
+          <div class="build-stages" aria-label="Læs filen, ret data i memory, og skriv filen igen">
+            <article>
+              <b>01</b><span>Læs</span>
+              <strong><code>fs.readFile()</code> + <code>JSON.parse()</code></strong>
+              <code>hent filens nuværende data</code>
+            </article>
+            <i>→</i>
+            <article>
+              <b>02</b><span>Ret</span>
+              <strong>ændr det almindelige JS-array/-objekt</strong>
+              <code>push(), filter(), tildel felter</code>
+            </article>
+            <i>→</i>
+            <article>
+              <b>03</b><span>Skriv</span>
+              <strong><code>JSON.stringify()</code> + <code>fs.writeFile()</code></strong>
+              <code>gem hele resultatet i filen</code>
+            </article>
+          </div>
+          <p class="bottom-line">Hvorfor er <code>push()</code> på et array alene ikke nok? Data ændres kun i memory, ikke i filen.</p>
+          <aside class="notes">
+            Dette er dagens vigtigste mønster og går igen uændret i både JSON-øvelsen og øvelse 5. Brug det som
+            tjekliste, når de studerende sidder fast. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-json-students.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">JSON-øvelse · gør det først på et enkelt eksempel</span>
+          <h2>Studerende i en JSON-fil</h2>
+          <ul class="checklist">
+            <li><code>GET /</code> læser <code>data/students.json</code> og viser studerende med EJS</li>
+            <li><code>POST /students</code> opretter en ny studerende: læs → <code>push()</code> → skriv</li>
+            <li>Filen er hele tiden den eneste sandhed — ingen <code>students</code>-variabel lever mellem requests</li>
+            <li>Test persistens: opret studerende, genstart serveren, og tjek at de stadig er der</li>
+          </ul>
+          <p class="bottom-line">Træn mønstret her først — I skal bruge nøjagtig samme idé i øvelse 5.</p>
+          <aside class="notes">
+            Dette er en obligatorisk, selvstændig øvelse, adskilt fra AMAbotten. Den isolerer read → modify → write på
+            et enklere eksempel, før det samme mønster bruges på chathistorikken. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-json-students.md -
+            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-json-students.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="gem" class="chapter express-chapter" data-accent="yellow">
+          <span class="chapter-number">06</span>
+          <span class="eyebrow">AMAbot</span>
+          <h2>Gem samtalen<br />i en JSON-fil</h2>
+          <p>Øvelse 5: <code>data/messages.json</code> bliver den eneste sandhed om samtalen.</p>
+          <aside class="notes">
+            Nu bruges dagens mønster på den rigtige AMAbot fra øvelse 4. Ingen ny app skal oprettes — der bygges
+            videre på den eksisterende. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="cycle-slide" data-accent="yellow">
+          <span class="eyebrow">To routes, samme mønster</span>
+          <h2><code>GET /</code> læser — <code>POST /ask</code> læser, ændrer og skriver</h2>
+          <div class="flow-pair">
+            <div class="flow-pair-row">
+              <span class="flow-label">GET /</span>
+              <div class="recap-flow" aria-label="GET / henter historikken fra filen og renderer den">
+                <span><code>loadMessages()</code></span><b>→</b><span><code>fs.readFile()</code></span><b>→</b
+                ><span><code>JSON.parse()</code></span><b>→</b><span><code>response.render()</code></span>
+              </div>
+            </div>
+            <div class="flow-pair-row">
+              <span class="flow-label">POST /ask</span>
+              <div class="recap-flow" aria-label="POST /ask henter, opdaterer og gemmer historikken, før den renderer">
+                <span><code>loadMessages()</code></span><b>→</b><span><code>messages.push()</code></span><b>→</b
+                ><span><code>findBestAnswer()</code></span><b>→</b><span><code>saveMessages()</code></span><b>→</b
+                ><span><code>response.render()</code></span>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Begge routes er nu <code>async</code> — de venter på filen, før de renderer.</p>
+          <aside class="notes">
+            Der er ikke længere en messages-variabel uden for disse to routes. Hver route henter den aktuelle
+            historik i starten og — ved ændringer — gemmer den igen, før response.render() kaldes. [Sources] - Lokal
+            øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="code-focus-slide" data-accent="yellow">
+          <span class="eyebrow">To hjælpefunktioner: læs og gem</span>
+          <h2><code>loadMessages()</code> og <code>saveMessages()</code> er den eneste vej til filen</h2>
+          <div class="code-and-result">
+            <pre><code class="language-javascript">async function loadMessages() {
+  const data = await fs.readFile(
+    "./data/messages.json",
+    "utf8"
+  );
+  return JSON.parse(data);
+}</code></pre>
+            <pre><code class="language-javascript">async function saveMessages(messages) {
+  const json = JSON.stringify(
+    messages, null, 2
+  );
+  await fs.writeFile(
+    "./data/messages.json",
+    json
+  );
+}</code></pre>
+          </div>
+          <p class="bottom-line">Ingen af funktionerne gemmer noget i en variabel uden for sig selv.</p>
+          <aside class="notes">
+            Disse to funktioner er nøjagtig samme mønster som loadStudents()/saveStudents() fra JSON-øvelsen, bare med
+            et andet filnavn. GET / og POST /ask kalder dem, i stedet for at røre filen direkte. [Sources] - Lokal
+            øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="activity-slide express-activity" data-accent="yellow">
+          <span class="eyebrow">Øvelse 5 · dagens slutprodukt</span>
+          <h2>AMAbot med en chathistorik, der overlever en genstart</h2>
+          <ul class="checklist">
+            <li><code>data/messages.json</code> indeholder <code>[]</code> fra start</li>
+            <li><code>GET /</code> henter historikken med <code>loadMessages()</code>, i stedet for en tom liste</li>
+            <li><code>POST /ask</code> henter, opdaterer og gemmer med <code>loadMessages()</code> og <code>saveMessages()</code></li>
+            <li>Ingen <code>messages</code>-variabel lever uden for én enkelt route</li>
+            <li>Testet: spørgsmål stillet, server genstartet, historikken er der stadig</li>
+          </ul>
+          <p class="bottom-line">Husk: samme mønster som JSON-øvelsen — bare på jeres egen AMAbot.</p>
+          <aside class="notes">
+            Dette er dagens definition of done, taget direkte fra øvelse 5. Ekstraopgaverne (statistik og "ryd
+            historik" i filen) er valgfrie. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-persistens.md -
+            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="statement-slide" data-accent="green">
+          <span class="eyebrow">Test det</span>
+          <h2>Samtalen overlever nu en genstart af serveren</h2>
+          <div class="statement-support">
+            <span><code>data/messages.json</code> er den eneste sandhed</span>
+            <span><code>GET /</code> og <code>POST /ask</code> læser og skriver filen hver gang</span>
+            <span>ingen mellemstation i memory kan komme ud af sync med filen</span>
+          </div>
+          <aside class="notes">
+            Luk cirklen tilbage til dagens åbning: stil spørgsmål, genstart serveren med Ctrl+C og npm run dev, og
+            genindlæs siden i browseren live for holdet. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="recap-slide">
+          <span class="eyebrow">Opsamling</span>
+          <h2>Kan I forklare de fire led med jeres egne ord?</h2>
+          <div class="recap-chain">
+            <span>fil</span><b>→</b><span><code>JSON.parse()</code></span><b>→</b><span>ret data</span><b>→</b
+            ><span><code>JSON.stringify()</code></span><b>→</b><span>fil</span>
+          </div>
+          <div class="recap-questions">
+            <p>Hvorfor forsvandt samtalen ved en genstart, før I lavede øvelse 5?</p>
+            <p>Hvorfor skal <code>data/messages.json</code> indeholde <code>[]</code>, allerede før serveren skriver noget?</p>
+            <p>Hvad gør <code>JSON.stringify(messages, null, 2)</code> anderledes end uden de sidste to argumenter?</p>
+            <p>Hvad er forskellen på at gemme <code>messages</code> i en JSON-fil og i en database?</p>
+          </div>
+          <aside class="notes">
+            Brug think-pair-share. Spørgsmålene er taget direkte fra "Reflektér over din læring" i øvelse 5.
+            [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="materials-slide">
+          <span class="eyebrow">Arbejd videre</span>
+          <h2>Opslagsværker og øvelser</h2>
+          <div class="material-links">
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON" target="_blank" rel="noreferrer"
+              ><strong>Working with JSON</strong><span>MDN ↗</span></a
+            >
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" target="_blank" rel="noreferrer"
+              ><strong>JSON.parse()</strong><span>MDN ↗</span></a
+            >
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" target="_blank" rel="noreferrer"
+              ><strong>JSON.stringify()</strong><span>MDN ↗</span></a
+            >
+            <a href="https://www.w3schools.com/nodejs/nodejs_filesystem.asp" target="_blank" rel="noreferrer"
+              ><strong>Node.js File System</strong><span>W3Schools ↗</span></a
+            >
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-json-students.md" target="_blank" rel="noreferrer"
+              ><strong>JSON-øvelse · Studerende i en JSON-fil</strong><span>GitHub ↗</span></a
+            >
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-amabot-persistens.md" target="_blank" rel="noreferrer"
+              ><strong>Øvelse 5 · Gem AMAbottens chathistorik</strong><span>GitHub ↗</span></a
+            >
+          </div>
+          <aside class="notes">
+            Materialerne matcher forberedelsesafsnittet på lektionssiden. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="closing-slide" data-accent="green">
+          <span class="eyebrow">Næste skridt</span>
+          <h2>Læs · ret ·<br /><span>skriv · test</span></h2>
+          <p class="lead">Ét trin ad gangen — genstart serveren, og bekræft at data stadig er der.</p>
+          <div class="closing-note">Persistens med en JSON-fil er første skridt mod en rigtig database senere i forløbet.</div>
+          <aside class="notes">
+            Slut med arbejdsmetoden fra dagens øvelser: test persistens efter hvert trin, ikke kun til allersidst.
+            [Sources] - Lokal lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md
+            [/Sources]
+          </aside>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="../shared/deck.js"></script>
+  </body>
+</html>

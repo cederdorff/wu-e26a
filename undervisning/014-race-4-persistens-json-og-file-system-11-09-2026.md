@@ -74,7 +74,8 @@ I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i A
 
 ## Materialer
 
-- Slides: TBA
+- Slides:
+    - [RACE 4 · Persistens, JSON og File System](https://cederdorff.com/wu-e26a/persistens-json/)
 - Opgaver:
     - [JSON-øvelse: Students i en JSON-fil](../opgaver/express-ejs-json-students.md) — obligatorisk, laves først: en lille CRUD-app, der læser og skriver `students` til en JSON-fil, før I bruger samme mønster i øvelse 5
     - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
