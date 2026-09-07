@@ -96,7 +96,7 @@ canvas_page_id: 200713
 canvas_page_slug: "plan-for-race-4-persistens-json-og-file-system"
 canvas_page_title: "Plan for RACE 4 - Persistens, JSON og File System"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T15:35:01Z"
+canvas_updated_at: "2026-09-07T19:34:08Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018700"
 local_status: mirrored
 ```
