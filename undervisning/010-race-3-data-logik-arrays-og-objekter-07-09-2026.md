@@ -19,10 +19,9 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først 
     - Genbesøg `if`/`else` fra valideringen i øvelse 2
     - Brug booleans som betingelser
     - Følg de forskellige kodeveje ved gyldigt og ugyldigt input
-    - Sammenlign `if`/`else` med `switch`
 3. **Objekter og arrays:**
     - Brug `answers` som et array af objekter
-    - Find værdier med indeks, punktnotation og bracket notation
+    - Find og opdatér værdier med punktnotation og bracket notation
     - Gennemløb arrays med `for...of`
     - Brug objekter til at samle data og som tællere
 4. **String-metoder og pattern matching:**
@@ -46,7 +45,7 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først 
 - Genopfrisk ["JavaScript object basics"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics) på MDN
 - Læs op på ["Array iteration methods"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Arrays#array_methods) på MDN, særligt `.filter()`
 - Gennemgå ["Working with strings"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Useful_string_methods) på MDN for string manipulation
-- Læs ["Making decisions in your code — conditionals"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals) på MDN, inkl. afsnittet om `switch`
+- Læs ["Making decisions in your code — conditionals"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals) på MDN med fokus på `if`/`else`
 
 ---
 

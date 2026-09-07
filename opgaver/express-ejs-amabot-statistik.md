@@ -13,6 +13,8 @@ I bygger videre på jeres egen AMAbot fra [øvelse 3](express-ejs-amabot.md). I 
 1. **Scoring i afsnit 1–4:** AMAbotten undersøger alle regler og vælger den regel, der matcher flest nøgleord.
 2. **Statistik i afsnit 5–6:** AMAbotten registrerer den valgte kategori og viser, hvilke emner der bliver spurgt til.
 
+Til sidst gemmer I den færdige øvelse med Git og pusher den til GitHub.
+
 Arbejd med ét afsnit ad gangen. Brug de sammenklappede løsningsforslag, hvis I går i stå. Ekstraopgaverne nederst er valgfrie.
 
 ## Hvor arbejder I?
@@ -515,6 +517,21 @@ Forklar, hvorfor en genindlæsning og en genstart giver forskellige resultater.
 - viser tællerne med EJS
 
 I skal kunne forklare koden med fagbegreber. At appen virker, er ikke i sig selv nok.
+
+---
+
+## 7. Commit og push til GitHub
+
+Når AMAbotten består testene i tjekpunktet, skal I gemme den færdige øvelse i jeres repository:
+
+```bash
+git status
+git add .
+git commit -m "Add scoring and topic statistics to AMAbot"
+git push
+```
+
+Kør `git status` igen, og kontrollér på GitHub, at den nye commit er blevet pushet. Hvis `git status` viser filer, som ikke skal med, skal I undersøge dem, før I bruger `git add`.
 
 ---
 

@@ -475,9 +475,24 @@ I skal kunne pege på, hvor spørgsmålet modtages, hvor svaret vælges, og hvor
 
 ---
 
+## Gem øvelse 3 på GitHub
+
+Når AMAbotten består testene i tjekpunktet, skal I gemme den færdige øvelse i jeres repository:
+
+```bash
+git status
+git add .
+git commit -m "Build server-rendered AMAbot with Express and EJS"
+git push
+```
+
+Kør `git status` igen, og kontrollér på GitHub, at den nye commit er blevet pushet. Hvis `git status` viser filer, som ikke skal med, skal I undersøge dem, før I bruger `git add`.
+
+---
+
 ## Ekstra opgaver
 
-Trin 14, sanitering, er en del af dagens forventede produkt — lav den først. Opgave 15–20 er bonusopgaver: Vælg frit imellem dem, hvis I når længere, og de bygger ikke nødvendigvis på hinanden i rækkefølge.
+Trin 14 er en anbefalet ekstraopgave om sanitering. Opgave 15–20 er øvrige bonusopgaver: Vælg frit imellem dem, hvis I når længere, og de bygger ikke nødvendigvis på hinanden i rækkefølge.
 
 ### 14. Sanitér uønskede kontroltegn
 
