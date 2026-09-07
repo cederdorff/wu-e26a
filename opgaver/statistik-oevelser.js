@@ -1,79 +1,92 @@
-// Små øvelser om objekter som tællere
+// JavaScript-øvelse 3: Byg et objekt som tæller
 // Kør filen med: node statistik-oevelser.js
 //
-// Arbejd med én del ad gangen:
-// 1. Forudsig resultatet.
-// 2. Kør filen.
-// 3. Forklar resultatet med egne ord.
-// 4. Lav ændringen i kommentaren, og kør igen.
-//
-// Alle dele bruger det samme topicStats-objekt. Tællerne bygger derfor videre
-// på de tidligere dele. Standardresultaterne forudsætter den oprindelige kode.
-// Hent en frisk kopi, hvis dine ændringer gør outputtet svært at følge.
+// Arbejd oppefra og ned. Ret én TODO ad gangen, indtil dens tests viser ✅.
+// Funktionerne modtager stats-objektet som argument, så hver test kan begynde
+// med friske tællere og ikke afhænger af tidligere tests.
+// check() er et givet testværktøj. Du skal bruge det, men ikke ændre det.
 
-const topicStats = {
-  navn: 0,
-  bosted: 0,
-  fritid: 0
-};
+function check(label, actual, expected) {
+  const passed = JSON.stringify(actual) === JSON.stringify(expected);
+  console.log(passed ? "✅" : "❌", label);
 
-console.log("\n--- 1. Læs properties med punktnotation ---");
-
-console.log("Hele objektet:", topicStats);
-console.log("Navn:", topicStats.navn);
-console.log("Bosted:", topicStats.bosted);
-
-// OPGAVE:
-// Hvad forventer du, at de tre logs viser?
-// Skriv en log, der viser fritid.
-// Tilføj en ny property med værdien 0, og vis den i terminalen.
-
-console.log("\n--- 2. Læs en property med bracket notation ---");
-
-const selectedCategory = "navn";
-
-console.log("Valgt kategori:", selectedCategory);
-console.log("Valgt tæller:", topicStats[selectedCategory]);
-
-// OPGAVE:
-// Hvorfor kan vi ikke skrive topicStats.selectedCategory her?
-// Skift værdien til "bosted" og derefter "fritid".
-// Hvad sker der, hvis værdien ikke findes som property i objektet?
-
-console.log("\n--- 3. Opdatér en tæller ---");
-
-topicStats.navn = topicStats.navn + 1;
-console.log("Efter ét spørgsmål om navn:", topicStats);
-
-topicStats.navn = topicStats.navn + 1;
-console.log("Efter endnu et spørgsmål om navn:", topicStats);
-
-// OPGAVE:
-// Hvilken værdi står der på højre side ved hver opdatering?
-// Hvorfor ender navn på 2?
-// Opdatér bosted én gang og fritid tre gange.
-
-console.log("\n--- 4. Opdatér den kategori, en variabel peger på ---");
-
-function countTopic(category) {
-  if (category) {
-    topicStats[category] = topicStats[category] + 1;
+  if (!passed) {
+    console.log("   Forventet:", expected);
+    console.log("   Modtog:   ", actual);
   }
 }
 
-countTopic("bosted");
-countTopic("fritid");
-countTopic("fritid");
-countTopic("");
+function createTopicStats() {
+  return {
+    navn: 0,
+    bosted: 0,
+    fritid: 0
+  };
+}
 
-console.log("Efter countTopic():", topicStats);
+console.log("\n--- 1. Læs properties ---");
+
+const exampleStats = createTopicStats();
 
 // OPGAVE:
-// Hvilke tre funktionskald ændrer objektet?
-// Hvorfor ændrer countTopic("") ikke objektet?
-// Tilføj to kald med kategorien "navn".
+// Erstat startværdierne. Brug punktnotation til nameCount og bracket notation
+// med selectedCategory til selectedCount.
+const nameCount = -1;
+const selectedCategory = "bosted";
+const selectedCount = -1;
 
-console.log("\n--- 5. Fra et resultat til statistik ---");
+check("punktnotation læser navn", nameCount, 0);
+check("bracket notation læser den valgte kategori", selectedCount, 0);
+
+// FORKLAR:
+// Hvorfor virker exampleStats.selectedCategory ikke i den anden opgave?
+
+console.log("\n--- 2. Forhøj en bestemt tæller ---");
+
+// OPGAVE:
+// Forhøj stats.navn med 1. Funktionen skal ændre objektet, den modtager.
+function incrementName(stats) {
+  // TODO: Skriv din kode her.
+}
+
+const nameStats = createTopicStats();
+incrementName(nameStats);
+incrementName(nameStats);
+
+check("navn bliver forhøjet to gange", nameStats, {
+  navn: 2,
+  bosted: 0,
+  fritid: 0
+});
+
+// FORKLAR:
+// Hvilken værdi står på højre side ved første og andet funktionskald?
+
+console.log("\n--- 3. Vælg tælleren med en variabel ---");
+
+// OPGAVE:
+// Brug category og bracket notation til at vælge den rigtige property.
+// En tom kategori skal ikke ændre objektet.
+function countTopic(stats, category) {
+  // TODO: Skriv en if-sætning og opdatér tælleren.
+}
+
+const selectedStats = createTopicStats();
+countTopic(selectedStats, "bosted");
+countTopic(selectedStats, "fritid");
+countTopic(selectedStats, "fritid");
+countTopic(selectedStats, "");
+
+check("variablen vælger de rigtige tællere", selectedStats, {
+  navn: 0,
+  bosted: 1,
+  fritid: 2
+});
+
+// FORKLAR:
+// Hvilke tre kald ændrer objektet? Hvorfor ændrer det tomme kald ingenting?
+
+console.log("\n--- 4. Forbind et resultat med statistikken ---");
 
 const matchedResult = {
   answer: "Jeg hedder Ada.",
@@ -85,58 +98,40 @@ const unknownResult = {
   category: ""
 };
 
-countTopic(matchedResult.category);
-countTopic(unknownResult.category);
+// OPGAVE:
+// Brug countTopic() til at tælle kategorien fra result.
+function countResult(stats, result) {
+  // TODO: Skriv din kode her.
+}
 
-console.log("Efter de to resultater:", topicStats);
+const resultStats = createTopicStats();
+countResult(resultStats, matchedResult);
+countResult(resultStats, unknownResult);
+
+check("kun resultatet med en kategori bliver talt", resultStats, {
+  navn: 1,
+  bosted: 0,
+  fritid: 0
+});
+
+// FORKLAR:
+// Hvordan ligner result objektet fra findBestAnswer()?
+// Hvorfor skal countResult() ikke kende kategoriernes navne på forhånd?
+
+console.log("\n--- 5. Skriv din egen test ---");
 
 // OPGAVE:
-// Hvilket resultat bliver talt med?
-// Hvordan ligner matchedResult det objekt, findBestAnswer() returnerer?
-// Lav et nyt resultat med kategorien "bosted", og tæl det med.
+// 1. Opret et nyt stats-objekt med createTopicStats().
+// 2. Opret selv et resultat med kategorien "bosted".
+// 3. Tæl resultatet to gange.
+// 4. Skriv en check(), der kontrollerer hele stats-objektet.
 
-console.log("\n--- 6. Ekstra: Object.entries() ---");
-
-const topicEntries = Object.entries(topicStats);
-console.log("Objektet som array:", topicEntries);
-
-for (const stat of topicEntries) {
-  console.log("Kategori:", stat[0], "Antal:", stat[1]);
-}
+console.log("\n--- EKSTRA: Gennemløb objektet ---");
 
 // EKSTRAOPGAVE:
-// Hvor mange elementer indeholder topicEntries?
-// Hvilke to værdier indeholder hvert element?
-// Tilføj en ny property til topicStats, og kør filen igen.
+// Brug Object.entries() og for...of til at vise fx "navn: 1" for hver
+// property i resultStats. Hvilke to værdier indeholder hvert element?
 
-console.log("\n--- 7. Ekstra: switch ---");
-
-function reactionFor(category) {
-  switch (category) {
-    case "navn":
-      return "👋";
-    case "bosted":
-      return "🏠";
-    case "fritid":
-      return "🎉";
-    default:
-      return "🤖";
-  }
-}
-
-console.log("Navn:", reactionFor("navn"));
-console.log("Bosted:", reactionFor("bosted"));
-console.log("Ukendt:", reactionFor("ukendt"));
-
-// EKSTRAOPGAVE:
-// Hvilken case passer til hvert funktionskald?
-// Hvornår bruges default?
-// Tilføj en case til den nye kategori, du selv har oprettet.
-
-console.log("\n--- KLAR TIL INTEGRATION? ---");
-
-// Du er klar, når du kan:
-// - læse en property med både punktnotation og bracket notation
-// - forklare, hvordan en tæller bliver forhøjet med 1
-// - bruge en category-variabel til at vælge den rigtige tæller
-// - forklare, hvorfor en tom kategori ikke bliver talt
+console.log("\n--- TJEK JER SELV ---");
+console.log("Kan du forklare punktnotation, bracket notation, property og tæller?");
+console.log("Kan du bruge result.category til at vælge en tæller i AMAbotten?");

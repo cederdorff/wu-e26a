@@ -1,69 +1,112 @@
-// Små øvelser til at forstå findAnswer()
+// JavaScript-øvelse 1: Byg findAnswer() af små dele
 // Kør filen med: node find-answer-oevelser.js
 //
-// Arbejd med én del ad gangen:
-// 1. Forudsig, hvad den viser.
-// 2. Kør filen.
-// 3. Forklar resultatet med egne ord.
-// 4. Lav den lille ændring, der står i kommentaren, og kør igen.
-//
-// Standardresultaterne forudsætter den oprindelige kode. Hent en frisk kopi,
-// hvis dine ændringer gør det svært at følge den næste del.
+// Arbejd oppefra og ned. Hver funktion indeholder en TODO og en startværdi,
+// så filen kan køre fra begyndelsen. En test med ❌ betyder, at der stadig
+// mangler kode. Ret kun én del ad gangen, indtil dens tests viser ✅.
+// check() er et givet testværktøj. Du skal bruge det, men ikke ændre det.
+
+function check(label, actual, expected) {
+  const passed = JSON.stringify(actual) === JSON.stringify(expected);
+  console.log(passed ? "✅" : "❌", label);
+
+  if (!passed) {
+    console.log("   Forventet:", expected);
+    console.log("   Modtog:   ", actual);
+  }
+}
 
 console.log("\n--- 1. Funktion, parameter, argument og return ---");
 
+// OPGAVE:
+// Skriv funktionens body, så den returnerer teksten "Hej Ada", når argumentet
+// er "Ada". Brug parameteren name — skriv ikke navnet direkte i teksten.
 function makeGreeting(name) {
-  return `Hej ${name}`;
+  // TODO: Skriv din kode her.
+  return undefined;
 }
 
-const greeting = makeGreeting("Ada");
-console.log(greeting);
+check("makeGreeting bruger argumentet", makeGreeting("Ada"), "Hej Ada");
+check("funktionen kan genbruges", makeGreeting("Sam"), "Hej Sam");
 
-// ØVELSE:
-// Hvad er funktionens parameter?
-// Hvad er argumentet i funktionskaldet?
-// Hvad sender return tilbage?
-// Skift "Ada" til dit eget navn.
+// FORKLAR:
+// Hvad er parameteren? Hvad er argumentet i det første kald?
+// Hvad sender return tilbage til check()?
 
-console.log("\n--- 2. toLowerCase() ---");
+console.log("\n--- 2. Normalisér tekst ---");
 
-const exampleQuestion = "Hvad HEDDER du?";
-const normalizedExample = exampleQuestion.toLowerCase();
+// OPGAVE:
+// Brug toLowerCase(), så funktionen returnerer spørgsmålet med små bogstaver.
+function normalizeQuestion(question) {
+  // TODO: Erstat startværdien.
+  return question;
+}
 
-console.log("Før:", exampleQuestion);
-console.log("Efter:", normalizedExample);
-
-// ØVELSE:
-// Forudsig de to tekster, inden du kører filen.
-// Bliver exampleQuestion ændret?
-// Prøv bagefter med teksten "HVOR BOR DU?".
-
-console.log("\n--- 3. includes() og boolean ---");
-
-console.log('Indeholder "hedder":', normalizedExample.includes("hedder"));
-console.log('Indeholder "bor":', normalizedExample.includes("bor"));
-
-// ØVELSE:
-// Hvilken linje giver true, og hvilken giver false?
-// Prøv selv med "du" og "navn".
-
-console.log("\n--- 4. Array, callback og some() ---");
-
-const exampleKeywords = ["navn", "hedder", "hvem er du"];
-
-const hasExampleMatch = exampleKeywords.some((keyword) =>
-  normalizedExample.includes(keyword)
+check(
+  "store bogstaver bliver små",
+  normalizeQuestion("Hvad HEDDER du?"),
+  "hvad hedder du?"
+);
+check(
+  "en anden tekst kan normaliseres",
+  normalizeQuestion("HVOR BOR DU?"),
+  "hvor bor du?"
 );
 
-console.log("Nøgleord:", exampleKeywords);
-console.log("Matcher mindst ét:", hasExampleMatch);
+// FORKLAR:
+// Bliver argumentet ændret, eller returnerer metoden en ny tekst?
 
-// ØVELSE:
-// Hvad er keyword første gang callback-funktionen kører?
-// Hvilket nøgleord giver et match?
-// Skift alle nøgleordene, så resultatet bliver false.
+console.log("\n--- 3. Undersøg ét nøgleord ---");
 
-console.log("\n--- 5. Array, objekter og for...of ---");
+// OPGAVE:
+// Funktionen skal være uafhængig af store og små bogstaver.
+// Normalisér spørgsmålet, og brug includes() til at returnere en boolean.
+function containsKeyword(question, keyword) {
+  // TODO: Skriv din kode her.
+  return undefined;
+}
+
+check(
+  "finder et kendt nøgleord",
+  containsKeyword("Hvad HEDDER du?", "hedder"),
+  true
+);
+check(
+  "afviser et ukendt nøgleord",
+  containsKeyword("Hvad HEDDER du?", "bor"),
+  false
+);
+
+// FORKLAR:
+// Hvilken datatype returnerer includes()?
+// Hvilke to argumenter modtager containsKeyword()?
+
+console.log("\n--- 4. Undersøg flere nøgleord ---");
+
+// OPGAVE:
+// Brug .some() og containsKeyword(). Funktionen skal returnere true, så snart
+// mindst ét element i keywords matcher spørgsmålet.
+function hasKeyword(question, keywords) {
+  // TODO: Erstat startværdien.
+  return undefined;
+}
+
+check(
+  "mindst ét nøgleord matcher",
+  hasKeyword("Hvad hedder du?", ["navn", "hedder", "hvem er du"]),
+  true
+);
+check(
+  "ingen nøgleord matcher",
+  hasKeyword("Kan du bage?", ["navn", "hedder", "hvem er du"]),
+  false
+);
+
+// FORKLAR:
+// Hvad indeholder callback-parameteren på én tur gennem arrayet?
+// Hvorfor behøver .some() ikke undersøge resten efter et match?
+
+console.log("\n--- 5. Byg findAnswer() ---");
 
 const answers = [
   {
@@ -80,68 +123,29 @@ const answers = [
   }
 ];
 
-for (const answerGroup of answers) {
-  console.log("Objekt:", answerGroup);
-  console.log("Keywords:", answerGroup.keywords);
-  console.log("Svar:", answerGroup.answer);
-}
-
-// ØVELSE:
-// Hvor mange gange kører løkken?
-// Hvad indeholder answerGroup på én tur gennem løkken?
-// Hvilken datatype er answerGroup.keywords?
-// Tilføj et nyt objekt til answers, og kør filen igen.
-
-console.log("\n--- 6. if/else ---");
-
-if (hasExampleMatch) {
-  console.log("Mindst ét nøgleord matcher");
-} else {
-  console.log("Ingen nøgleord matcher");
-}
-
-// ØVELSE:
-// Hvilken boolean undersøger if?
-// Hvornår kører if-blokken, og hvornår kører else-blokken?
-// Ret exampleQuestion eller exampleKeywords, så den anden blok kører.
-
-console.log("\n--- 7. Delene samlet i findAnswer() ---");
-
+// OPGAVE:
+// Byg funktionen med for...of, hasKeyword(), if og return.
+// Returnér svaret fra den første regel, der matcher.
+// Returnér standardsvaret efter løkken, hvis ingen regel matcher.
 function findAnswer(question) {
-  const normalizedQuestion = question.toLowerCase();
-
-  for (const answerGroup of answers) {
-    const hasMatch = answerGroup.keywords.some((keyword) =>
-      normalizedQuestion.includes(keyword)
-    );
-
-    console.log("Undersøger:", answerGroup.keywords);
-    console.log("Matcher:", hasMatch);
-
-    if (hasMatch) {
-      return answerGroup.answer;
-    }
-  }
-
-  return "Det kender jeg ikke svaret på endnu.";
+  // TODO: Skriv løkken og din if-sætning her.
+  return undefined;
 }
 
-const knownAnswer = findAnswer("Hvad hedder du?");
-console.log("Kendt spørgsmål:", knownAnswer);
+check("finder navnereglen", findAnswer("Hvad hedder du?"), "Jeg hedder Ada.");
+check("finder bostedsreglen", findAnswer("Hvor BOR du?"), "Jeg bor i Aarhus.");
+check(
+  "bruger standardsvaret",
+  findAnswer("Kan du bage en kage?"),
+  "Det kender jeg ikke svaret på endnu."
+);
 
-const unknownAnswer = findAnswer("Kan du bage en kage?");
-console.log("Ukendt spørgsmål:", unknownAnswer);
+// UNDERSØG EFTER TESTENE ER GRØNNE:
+// 1. Tilføj console.log(answerGroup.keywords) inde i løkken.
+// 2. Sammenlign et kendt og et ukendt spørgsmål.
+// 3. Flyt bostedsreglen øverst. Hvad sker der ved et spørgsmål, der matcher
+//    både navn og bosted?
 
-// ØVELSE:
-// Hvorfor stopper det kendte spørgsmål ved den første matchende regel?
-// Hvorfor undersøger det ukendte spørgsmål alle regler?
-// Skriv et spørgsmål, der matcher bostedsreglen.
-// Flyt bostedsreglen øverst i answers. Hvad ændrer det?
-
-console.log("\n--- KLAR TIL AT GÅ VIDERE? ---");
-
-// Du er klar, når du kan:
-// - forklare forskellen på parameter og argument
-// - forudsige resultatet af toLowerCase(), includes() og some()
-// - forklare, hvad answerGroup og keyword indeholder
-// - forklare, hvorfor return stopper findAnswer()
+console.log("\n--- TJEK JER SELV ---");
+console.log("Kan du forklare parameter, argument, callback, boolean og return?");
+console.log("Kan du forklare, hvorfor den første matchende regel vinder?");

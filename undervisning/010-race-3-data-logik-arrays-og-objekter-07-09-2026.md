@@ -4,40 +4,39 @@
 
 ## Dagens fokus
 
-I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med rigtig svarlogik — arrays og objekter som "svar-database", og string-metoder til at finde nøgleord i brugerens spørgsmål. Derefter skærper vi logikken yderligere: AMAbotten skal vælge den bedst matchende regel i stedet for bare den første, og vi tilføjer en simpel statistik, der viser, hvilke emner brugerne spørger mest til.
+I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først den grundlæggende svarlogik og undersøger, hvordan arrays, objekter, funktioner og kontrolflow arbejder sammen. Derefter lader vi AMAbotten vælge den bedst matchende regel og bruger kategorier til at vise statistik over spørgsmålene.
 
 ---
 
 ## Agenda
 
-1.  **Opsamling:**
+1. **Opsamling:**
     - Forklar koden fra øvelse 2 to og to
     - Notér, hvad I forstod godt, hvad der var svært, og hvad der stadig er uklart
-    - Hvor langt er I kommet i øvelse 3?
-    - Test kendt spørgsmål, ukendt spørgsmål og tomt input
-    - Færdiggør svarlogikken, før I går til øvelse 4
-2.  **Funktioner og kontrolflow:**
-    - Følg et spørgsmål gennem `toLowerCase()`, `for...of`, `.some()` og `.includes()`
+    - Saml op på validering og svarlogik fra øvelse 2
+    - Test kendt spørgsmål, ukendt spørgsmål og tomt input i AMAbotten
+2. **Kontrolstrukturer:**
+    - Genbesøg `if`/`else` fra valideringen i øvelse 2
+    - Brug booleans som betingelser
+    - Følg de forskellige kodeveje ved gyldigt og ugyldigt input
+    - Sammenlign `if`/`else` med `switch`
+3. **Objekter og arrays:**
+    - Brug `answers` som et array af objekter
+    - Find værdier med indeks, punktnotation og bracket notation
+    - Gennemløb arrays med `for...of`
+    - Brug objekter til at samle data og som tællere
+4. **String-metoder og pattern matching:**
+    - Normalisér tekst med `toLowerCase()`
+    - Find nøgleord med `includes()`
+    - Brug `.some()` til at undersøge, om mindst ét nøgleord matcher
+    - Brug `.filter()` og `.length` til at tælle matches
+5. **Funktioner og kontrolflow:**
+    - Genbesøg funktion, parameter, argument og `return`
+    - Følg et spørgsmål gennem `findAnswer()` fra input til svar
     - Se, hvordan `return` gør, at den første matchende regel vinder
-3.  **JavaScript arrays & objekter i Node.js:**
-    - Genbesøg svar-databasen som et array af objekter (`answers`)
-    - Tilføj properties, og tilgå værdier med indeks- og punktnotation
-4.  **String-metoder & pattern matching:**
-    - Find nøgleord med `includes()`, `toLowerCase()` og `.some()`
-    - Sammenlign `.some()` med `.filter()` og `.length`
-5.  **Kontrolstrukturer:**
-    - `if`/`else` til validering af tomt input
-    - `if` til at sammenligne og gemme den højeste score
-6.  **Scoring og sammenligning:**
-    - Gennemløb alle regler med `for...of`
-    - Vælg den bedst matchende regel med `findBestAnswer()`
-7.  **Objekter som tæller — statistik:**
-    - Læs og opdatér properties i `topicStats`
-    - Vis objektets værdier i EJS
-8.  **Hands-on:**
-    - Færdiggør AMAbot fra øvelse 3
-    - Udvid den med scoring og enkel statistik fra øvelse 4
-    - Arbejd eventuelt videre med `switch`, `Object.entries()` og JavaScript-moduler med `export`/`import`
+    - Udvid logikken, så `findBestAnswer()` undersøger alle regler
+    - Færdiggør øvelse 3, og arbejd derefter med scoring og statistik i øvelse 4
+    - Vælg en kort JavaScript-øvelse, hvis et bestemt begreb er uklart
 
 ---
 
@@ -58,11 +57,11 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
 - Opgaver:
     - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
     - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
-    - Træningsfiler til øvelse 4:
+    - [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — vælg øvelsesfil efter behov
+    - Øvelsesfiler:
         - [`findAnswer()` — grundbegreber](../opgaver/find-answer-oevelser.js)
         - [Scoring og sammenligning](../opgaver/scoring-oevelser.js)
         - [Objekter som tællere](../opgaver/statistik-oevelser.js)
-    - [Padlet - Node.js & Express.js Concepts](https://padlet.com/race7/node-js-express-js-concepts-mp9x38w14ndr3sug)
 
 ---
 

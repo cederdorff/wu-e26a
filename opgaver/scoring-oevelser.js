@@ -1,175 +1,139 @@
-// Små øvelser om scoring i AMAbotten
+// JavaScript-øvelse 2: Byg scoring og findBestAnswer()
 // Kør filen med: node scoring-oevelser.js
 //
-// Arbejd med én del ad gangen:
-// 1. Forudsig resultatet.
-// 2. Kør filen.
-// 3. Forklar resultatet med egne ord.
-// 4. Lav ændringen i kommentaren, og kør igen.
-//
-// Standardresultaterne forudsætter den oprindelige kode. Hent en frisk kopi,
-// hvis dine ændringer gør det svært at følge den næste del.
+// Begynd først på denne fil, når du kan forklare findAnswer(). Arbejd oppefra
+// og ned. Ret én TODO ad gangen, indtil de tilhørende tests viser ✅.
+// check() er et givet testværktøj. Du skal bruge det, men ikke ændre det.
+
+function check(label, actual, expected) {
+  const passed = JSON.stringify(actual) === JSON.stringify(expected);
+  console.log(passed ? "✅" : "❌", label);
+
+  if (!passed) {
+    console.log("   Forventet:", expected);
+    console.log("   Modtog:   ", actual);
+  }
+}
 
 const answers = [
   {
-    category: "navn",
     keywords: ["navn", "hedder", "hvem er du"],
     answer: "Jeg hedder Ada."
   },
   {
-    category: "bosted",
     keywords: ["bor", "by", "fra"],
     answer: "Jeg bor i Aarhus."
   },
   {
-    category: "fritid",
     keywords: ["fritid", "hobby", "kan lide"],
     answer: "I min fritid kan jeg godt lide at læse."
   }
 ];
 
-console.log("\n--- 1. filter() finder de matchende nøgleord ---");
-
-const exampleKeywords = ["navn", "hedder", "hvem er du"];
-const exampleQuestion = "hvad hedder du, og hvad er dit navn?";
-
-const matchingKeywords = exampleKeywords.filter((keyword) =>
-  exampleQuestion.includes(keyword)
-);
-
-console.log("Matchende nøgleord:", matchingKeywords);
-console.log("Antal match:", matchingKeywords.length);
+console.log("\n--- 1. Tæl matchende nøgleord ---");
 
 // OPGAVE:
-// Forudsig arrayet og antallet, inden du kører filen.
-// Tilføj nøgleordet "alder". Ændrer det antallet? Hvorfor/hvorfor ikke?
-// Tilføj derefter ordet "alder" til spørgsmålet, og kør igen.
-
-console.log("\n--- 2. countMatches() kan genbruges ---");
-
+// Brug filter() til at finde de nøgleord, som findes i normalizedQuestion.
+// Returnér antallet af elementer i det nye array.
 function countMatches(keywords, normalizedQuestion) {
-  const matches = keywords.filter((keyword) =>
-    normalizedQuestion.includes(keyword)
-  );
-
-  return matches.length;
+  // TODO: Skriv din kode her.
+  return undefined;
 }
 
-const nameScore = countMatches(
-  answers[0].keywords,
-  "hvad hedder du, og hvad er dit navn?"
+check(
+  "to nøgleord matcher",
+  countMatches(answers[0].keywords, "hvad hedder du, og hvad er dit navn?"),
+  2
+);
+check(
+  "ingen nøgleord matcher",
+  countMatches(answers[0].keywords, "kan du bage en kage?"),
+  0
+);
+check(
+  "bostedsreglen kan også bruges",
+  countMatches(answers[1].keywords, "hvilken by bor du i?"),
+  2
 );
 
-const unknownScore = countMatches(
-  answers[0].keywords,
-  "kan du bage en kage?"
-);
+// FORKLAR:
+// Hvad returnerer filter()? Hvorfor skal vi også bruge .length?
+// Hvordan er resultatet anderledes end resultatet fra some()?
 
-console.log("Score for kendt spørgsmål:", nameScore);
-console.log("Score for ukendt spørgsmål:", unknownScore);
+console.log("\n--- 2. Beregn score for alle regler ---");
 
 // OPGAVE:
-// Hvad er argumenterne i de to funktionskald?
-// Hvorfor bliver den ene score 2 og den anden 0?
-// Skriv et nyt funktionskald, der bruger bostedsreglens keywords.
-
-console.log("\n--- 3. for...of beregner score for alle regler ---");
-
-function showScores(question) {
+// Gennemløb answers med for...of. Beregn hver regels score, og tilføj tallet
+// til scores med push(). Funktionen skal returnere fx [2, 1, 0].
+function scoresFor(question) {
   const normalizedQuestion = question.toLowerCase();
+  const scores = [];
 
-  for (const answerGroup of answers) {
-    const score = countMatches(answerGroup.keywords, normalizedQuestion);
-    console.log(answerGroup.category, score);
-  }
+  // TODO: Skriv løkken her.
+
+  return scores;
 }
 
-showScores("Hvad hedder du, hvad er dit navn, og hvor bor du?");
+check(
+  "alle tre regler får en score",
+  scoresFor("Hvad hedder du, hvad er dit navn, og hvor bor du?"),
+  [2, 1, 0]
+);
+
+// FORKLAR:
+// Hvor mange gange kører løkken? Hvad indeholder answerGroup på én tur?
+// Hvorfor må funktionen ikke returnere inde i løkken?
+
+console.log("\n--- 3. Vælg reglen med den højeste score ---");
 
 // OPGAVE:
-// Hvilken regel får den højeste score?
-// Hvor mange gange kører for...of-løkken?
-// Ret spørgsmålet, så bostedsreglen får den højeste score.
-// Ret derefter spørgsmålet, så alle regler får scoren 0.
-
-console.log("\n--- 4. En funktion kan returnere et objekt ---");
-
-function createResult(answer, category) {
-  return {
-    answer: answer,
-    category: category
-  };
-}
-
-const exampleResult = createResult("Jeg hedder Ada.", "navn");
-
-console.log("Hele resultatet:", exampleResult);
-console.log("Kun svaret:", exampleResult.answer);
-console.log("Kun kategorien:", exampleResult.category);
-
-// OPGAVE:
-// Hvilke to argumenter modtager createResult()?
-// Hvilke to properties har objektet, som funktionen returnerer?
-// Hvorfor kan vi skrive exampleResult.answer?
-// Kald funktionen igen med et nyt svar og en ny kategori.
-
-console.log("\n--- 5. if gemmer den højeste score ---");
-
+// 1. Gennemløb alle regler.
+// 2. Beregn den aktuelle regels score.
+// 3. Opdatér bestScore og bestAnswer, når den nye score er højere.
+// 4. Returnér det bedste svar som en tekst efter løkken.
 function findBestAnswer(question) {
   const normalizedQuestion = question.toLowerCase();
   let bestScore = 0;
   let bestAnswer = "Det kender jeg ikke svaret på endnu.";
-  let bestCategory = "";
 
-  for (const answerGroup of answers) {
-    const score = countMatches(answerGroup.keywords, normalizedQuestion);
-
-    if (score > bestScore) {
-      bestScore = score;
-      bestAnswer = answerGroup.answer;
-      bestCategory = answerGroup.category;
-    }
-  }
-
-  return {
-    answer: bestAnswer,
-    category: bestCategory
-  };
+  // TODO: Skriv løkken og sammenligningen her.
+  // TODO: Erstat placeholderen med den værdi, funktionen skal returnere.
+  return undefined;
 }
 
-const nameResult = findBestAnswer(
-  "Hvad hedder du, hvad er dit navn, og hvor bor du?"
+check(
+  "navn vinder med flest match",
+  findBestAnswer("Hvad hedder du, hvad er dit navn, og hvor bor du?"),
+  "Jeg hedder Ada."
+);
+check(
+  "bosted vinder med flest match",
+  findBestAnswer("Hvad er dit navn, og hvilken by bor du i?"),
+  "Jeg bor i Aarhus."
+);
+check(
+  "standardsvaret bliver stående uden match",
+  findBestAnswer("Kan du bage en kage?"),
+  "Det kender jeg ikke svaret på endnu."
+);
+check(
+  "den første regel vinder ved samme score",
+  findBestAnswer("Hvad er dit navn, og hvor bor du?"),
+  "Jeg hedder Ada."
 );
 
-const homeResult = findBestAnswer(
-  "Hvad er dit navn, og hvilken by bor du i?"
-);
+// FORKLAR:
+// Følg bestScore og bestAnswer gennem én af testene.
+// Hvorfor bruger sammenligningen > og ikke >=?
+// Hvorfor bliver standardsvaret stående, når alle scores er 0?
 
-const unknownResult = findBestAnswer("Kan du bage en kage?");
-
-console.log("Navn vinder:", nameResult);
-console.log("Bosted vinder:", homeResult);
-console.log("Intet match:", unknownResult);
+console.log("\n--- 4. Skriv og test din egen regel ---");
 
 // OPGAVE:
-// Følg værdierne i bestScore, bestAnswer og bestCategory gennem løkken.
-// Hvorfor beholder et ukendt spørgsmål standardsvaret og den tomme kategori?
-// Skriv et spørgsmål, hvor to regler får samme score.
-// Hvilken regel vinder ved samme score, og hvorfor?
+// 1. Tilføj en fjerde regel til answers.
+// 2. Skriv selv en check(), hvor mindst to af dens nøgleord matcher.
+// 3. Kontrollér den returnerede svartekst.
 
-console.log("\n--- 6. Din egen regel ---");
-
-// OPGAVE:
-// Tilføj et nyt objekt til answers med category, keywords og answer.
-// Kald showScores() med et spørgsmål, der matcher den nye regel.
-// Kald findBestAnswer() med det samme spørgsmål.
-// Kontrollér både score, svar og kategori i terminalen.
-
-console.log("\n--- KLAR TIL INTEGRATION? ---");
-
-// Du er klar, når du kan:
-// - forklare forskellen på some() og filter()
-// - ændre et spørgsmål og forudsige reglernes scores
-// - forklare, hvordan en funktion returnerer et objekt
-// - forklare, hvordan if gemmer den højeste score
-// - forklare objektet, som findBestAnswer() returnerer
+console.log("\n--- TJEK JER SELV ---");
+console.log("Kan du forklare filter, score, løkke, sammenligning og return?");
+console.log("Kan du bygge algoritmen igen uden at kopiere den til AMAbotten?");
