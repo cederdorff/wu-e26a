@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-07T14:37:50.634Z
+Senest hentet: 2026-09-07T14:48:56.623Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -144,7 +144,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 014 · RACE 4 - Persistens, JSON og File System - 11-09-2026
 
-[Lokal fil](../undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md) · publiceret
 
 - [Plan for RACE 4 - Persistens, JSON og File System](../undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md)
 

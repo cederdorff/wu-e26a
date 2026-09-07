@@ -49,7 +49,7 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 - `node:fs/promises` — indbygget i Node.js, intet at installere
 - `fs.readFile()` og `fs.writeFile()` er asynchronous — derfor `async`/`await`
 - Mønstret: **read → modify → write**
-    - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
+  - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
 - Hvorfor er `push()` på et array alene ikke nok? Data ændres kun i memory, ikke i filen
 </details>
 <details>
@@ -89,14 +89,14 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 canvas_course_id: 32059
 canvas_module_id: 178037
 canvas_module_position: 14
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: 1018700
 canvas_module_item_position: 1
 canvas_page_id: 200713
 canvas_page_slug: "plan-for-race-4-persistens-json-og-file-system"
 canvas_page_title: "Plan for RACE 4 - Persistens, JSON og File System"
-canvas_page_published: false
-canvas_updated_at: "2026-09-07T14:37:46Z"
+canvas_page_published: true
+canvas_updated_at: "2026-09-07T14:48:13Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018700"
 local_status: mirrored
 ```

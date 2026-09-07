@@ -1026,7 +1026,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178037/items",
     "items": [
@@ -1042,7 +1042,7 @@
         "page_url": "plan-for-race-4-persistens-json-og-file-system",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-4-persistens-json-og-file-system",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false

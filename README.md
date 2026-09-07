@@ -32,7 +32,7 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [011 · Forberedelse - Selvstudium - 08-09-2026](./undervisning/011-forberedelse-selvstudium-08-09-2026.md)
 - [012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026](./undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md)
 - [013 · Forberedelse - Selvstudium - 10-09-2026](./undervisning/013-forberedelse-selvstudium-10-09-2026.md)
-- [014 · RACE 4 - Persistens, JSON og File System - 11-09-2026](./undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md) — *kladde i Canvas*
+- [014 · RACE 4 - Persistens, JSON og File System - 11-09-2026](./undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md)
 - [015 · Forberedelse - Selvstudium - 14-09-2026](./undervisning/015-forberedelse-selvstudium-14-09-2026.md)
 - [016 · DOB 4 - DOM manipulation med JS - 15-09-2026](./undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md)
 - [017 · RACE 5 - Node/Express REST API - 16-09-2026](./undervisning/017-race-5-node-express-rest-api-16-09-2026.md) — *kladde i Canvas*
