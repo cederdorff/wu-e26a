@@ -4,7 +4,7 @@
 
 ## Dagens fokus
 
-I sidste undervisningsgang arbejdede vi med objekter, arrays og kontrolstrukturer i AMAbottens svarlogik. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
+I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i AMAbottens svarlogik. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
 
 ---
 
@@ -24,7 +24,7 @@ I sidste undervisningsgang arbejdede vi med objekter, arrays og kontrolstrukture
 - Genbesøg punktnotation og bracket notation på objekter
 - Genbesøg arrays af objekter og `for...of`
 - Se, hvordan den samme struktur (arrays og objekter, indlejret i hinanden) går igen, når vi sender og modtager data over HTTP, og senere når data ligger i en database
-- Pointe: det er ikke tilfældigt — det er fordi JSON *er* JavaScript-objekter og -arrays skrevet som tekst
+- Pointe: det er ikke tilfældigt — det er fordi JSON _er_ JavaScript-objekter og -arrays skrevet som tekst
 </details>
 <details>
 <summary><strong>3. Hvad er persistens?</strong></summary>
@@ -49,7 +49,7 @@ I sidste undervisningsgang arbejdede vi med objekter, arrays og kontrolstrukture
 - `node:fs/promises` — indbygget i Node.js, intet at installere
 - `fs.readFile()` og `fs.writeFile()` er asynchronous — derfor `async`/`await`
 - Mønstret: **read → modify → write**
-    - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
+  - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
 - Hvorfor er `push()` på et array alene ikke nok? Data ændres kun i memory, ikke i filen
 </details>
 <details>
@@ -76,8 +76,8 @@ I sidste undervisningsgang arbejdede vi med objekter, arrays og kontrolstrukture
 
 - Slides: TBA
 - Opgaver:
-    - [JSON-øvelse: Students i en JSON-fil](../opgaver/express-ejs-json-students.md) — en lille CRUD-app, der læser og skriver `students` til en JSON-fil, før I bruger samme mønster i øvelse 5
-    - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
+  - [JSON-øvelse: Students i en JSON-fil](../opgaver/express-ejs-json-students.md) — en lille CRUD-app, der læser og skriver `students` til en JSON-fil, før I bruger samme mønster i øvelse 5
+  - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
 
 ---
 
