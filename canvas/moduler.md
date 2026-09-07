@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-07T14:01:43.323Z
+Senest hentet: 2026-09-07T14:03:08.541Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
