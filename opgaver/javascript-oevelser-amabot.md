@@ -1,23 +1,12 @@
 # JavaScript-øvelser til AMAbot
 
-I denne øvelse træner du de JavaScript-begreber, som `findAnswer()` og `findBestAnswer()` i [øvelse 3](express-ejs-amabot.md) og [øvelse 4](express-ejs-amabot-statistik.md) er bygget af — men med dine egne, simple eksempler.
-
-Det er **ikke** meningen, at du skal genopbygge AMAbottens kode her. Du skal selv skrive og teste hvert begreb, så du bagefter kan genkende det, læse det og bruge det i din `server.js`.
-
-Du opretter selv en tom JavaScript-fil og arbejder dig igennem begreberne i denne rækkefølge:
+Træn de JavaScript-begreber bag `findAnswer()` og `findBestAnswer()` fra [øvelse 3](express-ejs-amabot.md) og [øvelse 4](express-ejs-amabot-statistik.md) — hver for sig, med dine egne simple eksempler, ikke ved at genopbygge AMAbottens kode.
 
 ```text
 if/else -> objekter -> arrays -> for...of -> stringmetoder og pattern matching
 ```
 
-For hvert begreb får du:
-
-- en kort forklaring af, hvad begrebet er, og hvornår du bruger det
-- en beskrivelse af, hvad du selv skal skrive — **ikke** den færdige kode
-- tests med `console.log()`, som du bruger til at kontrollere din egen løsning
-- et par spørgsmål, der knytter begrebet til din egen AMAbot
-
-Skriv altid koden selv, ud fra beskrivelsen. Kodeudsnittene med `console.log()` er tests, ikke løsninger.
+Skriv koden selv ud fra beskrivelsen i hvert trin, og brug `console.log()`-testene til at tjekke resultatet. De små kodeeksempler under hver forklaring er kun til at vise begrebet — dem skal du ikke skrive ind i filen.
 
 ---
 
@@ -58,21 +47,33 @@ Nu genkører Node automatisk filen, hver gang du gemmer den. Terminalen bliver v
 
 ### Sådan arbejder du
 
-For hvert trin skal du:
+For hvert trin:
 
-1. skrive koden i `amabot-javascript-tests.js` ud fra beskrivelsen
-2. forudsige resultatet, før du gemmer filen
-3. gemme filen, og se resultatet i terminalen (eller køre `node amabot-javascript-tests.js` igen, hvis du ikke bruger `--watch`)
-4. rette koden, indtil resultatet matcher testen
-5. forklare, hvad koden modtager, undersøger og returnerer
+1. tilføj koden nederst i `amabot-javascript-tests.js` — slet ikke tidligere trin, de bliver genbrugt
+2. forudsig resultatet, før du gemmer
+3. gem, og tjek resultatet i terminalen
+4. ret koden, indtil resultatet matcher testen
+5. forklar, hvad koden modtager, undersøger og returnerer
 
 ---
 
 ## 2. Kontrolstrukturer: `if`, `else if` og `else`
 
-**I dette trin træner du:** at vælge mellem flere kodeveje ud fra en betingelse.
-
 `if` kører sin kodeblok, når betingelsen er sand. `else if` tilføjer flere betingelser, som kun bliver undersøgt, hvis de forrige var falske. `else` er det, der sker, når ingen af betingelserne holder.
+
+```js
+function describeTemperature(temperature) {
+  if (temperature < 0) {
+    return "Frost";
+  } else if (temperature < 20) {
+    return "Køligt";
+  } else {
+    return "Varmt";
+  }
+}
+
+console.log(describeTemperature(-5)); // Frost
+```
 
 Skriv en funktion med navnet `checkAge(age)`.
 
@@ -137,9 +138,16 @@ Det er samme mønster, du brugte til validering i øvelse 2 (er input tomt? for 
 
 ## 3. Objekter
 
-**I dette trin træner du:** at samle flere sammenhørende værdier i ét objekt.
-
 Et objekt grupperer data, der hører sammen, under navngivne egenskaber (properties). I stedet for flere løse variabler får du ét samlet "ting".
+
+```js
+const book = {
+  title: "Harry Potter",
+  pages: 320
+};
+
+console.log(book.title);
+```
 
 Opret et objekt med navnet `student`, der har disse tre properties og værdier:
 
@@ -189,9 +197,25 @@ AMAbotten samler på samme måde flere oplysninger om én svarregel i ét objekt
 
 ## 4. Arrays
 
-**I dette trin træner du:** at gemme en liste af værdier i rækkefølge.
-
 Et array holder flere værdier i en bestemt rækkefølge. Hvert element har et indeks, der starter ved `0`.
+
+```js
+const colors = ["red", "green", "blue"];
+
+console.log(colors[0]); // red
+console.log(colors.length); // 3
+```
+
+Et array kan indeholde alt — også objekter:
+
+```js
+const books = [
+  { title: "Harry Potter", pages: 320 },
+  { title: "Hobbitten", pages: 310 }
+];
+
+console.log(books[0].title); // Harry Potter
+```
 
 Opret et array med navnet `fruits`, der indeholder disse tre tekster i denne rækkefølge: `"banan"`, `"æble"`, `"pære"`.
 
@@ -259,7 +283,15 @@ AMAbotten gemmer alle sine svarregler i præcis sådan et array af objekter — 
 
 ## 5. Loop med fokus på `for...of`
 
-**I dette trin træner du:** at gennemløbe et array, ét element ad gangen.
+`for...of` gennemløber et array og giver dig ét element ad gangen. Du genbruger `fruits` og `students` fra forrige trin — de skal stadig stå i filen.
+
+```js
+const days = ["man", "tirs", "ons"];
+
+for (const day of days) {
+  console.log(day);
+}
+```
 
 Skriv en `for...of`-løkke, der logger hver frugt i `fruits` med `console.log()`. Forudsig outputtet, før du kører filen.
 
@@ -333,7 +365,14 @@ Præcis denne opskrift bruger `findAnswer()`: gennemløb reglerne med `for...of`
 
 ## 6. Stringmetoder og pattern matching
 
-**I dette trin træner du:** at normalisere og undersøge tekst med `toLowerCase()`, `includes()`, `.some()` og `.filter()`/`.length`.
+Stringmetoder undersøger og omformer tekst. Her bruger du dem til at matche nøgleord i en sætning.
+
+```js
+const message = "Hej med dig";
+
+console.log(message.toLowerCase()); // hej med dig
+console.log(message.toLowerCase().includes("hej")); // true
+```
 
 ### `toLowerCase()` og `includes()`
 
@@ -429,22 +468,9 @@ AMAbotten bruger `toLowerCase()` og `includes()` til at undersøge ét nøgleord
 
 ---
 
-## Tjekpunkt
+## Videre til din AMAbot
 
-Du er klar til at vende tilbage til AMAbotten, når du kan:
-
-- skrive og forklare, hvornår `if`, `else if` og `else` hver især kører
-- skrive et objekt og et array, og forklare forskellen på dem
-- læse og ændre en property med punktnotation
-- skrive en `for...of`-løkke og forklare, hvad løkkevariablen indeholder
-- forklare, hvordan `return` stopper en funktion, og hvorfor et standardsvar kan stå efter en løkke
-- skrive og forklare forskellen på `.some()` og `.filter().length`
-
----
-
-## Brug det i din AMAbot
-
-Vend tilbage til `server.js`, og genkend byggestenene, når du læser dine egne `findAnswer()` og `findBestAnswer()`:
+Du har nu skrevet og testet hver byggesten for sig. Vend tilbage til `server.js`, og genkend dem, når du læser dine egne `findAnswer()` og `findBestAnswer()`:
 
 - `if`/`else` vælger en kodevej
 - objekter og arrays gemmer svarreglerne
