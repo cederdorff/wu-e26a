@@ -267,10 +267,9 @@
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1037531",
         "content_id": 1677509,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1677509",
-        "published": false,
-        "unpublishable": false,
+        "published": true,
+        "unpublishable": true,
         "content_details": {
-          "locked": true,
           "display_name": "Bordgrupper uge 37.pdf",
           "thumbnail_url": null,
           "locked_for_user": false
