@@ -390,6 +390,180 @@ Test alle fire routes igen, én ad gangen, for at bekræfte at ingen af dem er g
 
 </details>
 
+<details>
+<summary><strong>11. Style siden</strong></summary>
+
+Indtil nu har appen ingen styling. Opret en stylesheet, og lad Express servere den som en statisk fil:
+
+```text
+students-json/
+├── data/
+├── public/
+│   └── style.css
+├── views/
+│   ├── index.ejs
+│   └── edit.ejs
+├── package.json
+└── server.js
+```
+
+Tilføj denne linje i `server.js`, ved siden af dine andre `app.use()`-kald:
+
+```js
+app.use(express.static("public"));
+```
+
+Link stylesheetet i **både** `views/index.ejs` og `views/edit.ejs`, og pak indholdet i en container:
+
+```html
+<head>
+  ...
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- resten af siden -->
+  </div>
+</body>
+```
+
+Byg derefter listen i `views/index.ejs` om til en tabel med en handlings-kolonne, og vis en besked, hvis der ingen studerende er:
+
+```ejs
+<% if (students.length === 0) { %>
+  <p class="empty">Der er endnu ingen studerende.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Navn</th>
+        <th>Uddannelse</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const student of students) { %>
+        <tr>
+          <td><%= student.name %></td>
+          <td><%= student.education %></td>
+          <td>
+            <div class="actions">
+              <a class="btn" href="/students/<%= student.id %>/edit">Redigér</a>
+              <form class="inline-form" method="POST" action="/students/<%= student.id %>/delete">
+                <button type="submit" class="link danger">Slet</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } %>
+```
+
+> `students.length === 0` afgør, om tabellen eller tomt-beskeden vises — samme mønster som `<% if (error) { %>` fra øvelse 2 og 3, bare på et array i stedet for en fejltekst.
+
+Pak hvert `<label>`/`<input>`-par ind i en `<div class="form-row">` — både i formularen til at oprette en studerende i `views/index.ejs`, og i redigér-formularen i `views/edit.ejs`:
+
+```html
+<div class="form-row">
+  <label for="name">Navn</label>
+  <input id="name" name="name" type="text" />
+</div>
+```
+
+Tilføj til sidst denne CSS i `public/style.css`:
+
+```css
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #faf9f6;
+  color: #262220;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #ddd6cf;
+}
+
+td:last-child, th:last-child {
+  text-align: right;
+}
+
+.empty {
+  color: #8a8079;
+  font-style: italic;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.inline-form {
+  display: inline;
+}
+
+.btn, .link {
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: #a2401f;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover, .link:hover {
+  text-decoration: underline;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+button[type="submit"]:not(.link) {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid #262220;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+button[type="submit"]:not(.link):hover {
+  background: #262220;
+  color: #faf9f6;
+}
+```
+
+> Læg mærke til `.btn, .link` og `button[type="submit"]:not(.link)`: de to selektorer deler ikke stil ved et tilfælde. "Redigér" og "Slet" er tekst-agtige handlinger inde i en tabelrække, mens "Opret studerende" og "Gem ændring" er de primære knapper i en formular — CSS'en gør den forskel synlig.
+
+Test i browseren: en tom `data/students.json` (`[]`) skal vise tomt-beskeden, mens en liste med studerende skal vise tabellen med fungerende Redigér- og Slet-knapper.
+
+</details>
+
 ---
 
 ## Videre til øvelse 5

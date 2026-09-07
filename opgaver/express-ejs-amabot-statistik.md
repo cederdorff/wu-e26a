@@ -548,6 +548,7 @@ Vælg kun en ekstraopgave, når den del, ekstraopgaven bygger på, virker, og du
 | 11. Mest spurgte emne | Løkke og sammenligning |
 | 12. Nulstil statistik | Route, `Object.keys()` og bracket notation |
 | 13. Flyt reglerne til et modul | `export`, `import` og filstruktur |
+| 14. Style statistikken (frit) | CSS og eget design |
 
 <details>
 <summary><strong>7. Vælg en reaktion med <code>switch</code></strong></summary>
@@ -778,6 +779,43 @@ Test modulet:
 5. Kontrollér, at `server.js` ikke længere indeholder selve reglerne.
 
 Forklar, hvilken fil der eksporterer data, hvilken fil der importerer dem, og hvor variablen `answers` findes, når `findBestAnswer()` kører.
+
+</details>
+
+<details>
+<summary><strong>14. Style statistikken (frit)</strong></summary>
+
+Lige nu er `topicStats` en almindelig, uformateret liste. Style den, som du har lyst — der er ikke én rigtig løsning her. Brug samme farver, fonte og designsprog, som du allerede har brugt til resten af din AMAbot i øvelse 3.
+
+Nogle retninger, du kan lade dig inspirere af:
+
+- **Badges**: hver kategori som en lille "pille" ved siden af hinanden i stedet for under hinanden (`display: flex` på `<ul>`, `border-radius` på `<li>`)
+- **Bjælker**: bredden af hver `<li>` afspejler antallet, så den mest spurgte kategori har den bredeste bjælke
+- **Kort**: hver kategori i sit eget lille kort med ikon eller emoji, i et grid
+- **Fremhævelse**: har du lavet ekstraopgave 11 (mest spurgte emne), kan den kategori få sin egen farve eller markering med en betinget CSS-klasse, fx `<li class="<%= stat[0] === mostAskedTopic ? 'leader' : '' %>">`
+
+Uanset hvilken retning du vælger, skal du sandsynligvis:
+
+1. Tilføje en klasse på `<ul>`'et eller de enkelte `<li>`'er i `views/index.ejs`, så du har noget at style på.
+2. Skrive CSS'en i din eksisterende stylesheet.
+3. Stille et par spørgsmål, så tallene ændrer sig, og kontrollere at dit layout stadig ser rigtigt ud, når en kategori når op på to cifre.
+
+<details>
+<summary>Hint, hvis du er i tvivl om, hvordan du får elementerne til at ligge på række</summary>
+
+```css
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+  padding: 0;
+}
+```
+
+`display: flex` lægger listens elementer på række i stedet for hver sin linje — samme grundidé som `flex-direction: column` gav dig i øvelse 3, bare uden at ændre retningen. `flex-wrap: wrap` sørger for, at elementerne rykker ned på en ny linje, hvis der bliver flere kategorier, end der er plads til. Resten — farver, afstand, runde hjørner, skygger — er dit eget valg.
+
+</details>
 
 </details>
 
