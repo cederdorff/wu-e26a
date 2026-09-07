@@ -6,7 +6,7 @@ Lige nu lever `messages` kun i memory. Samtalen forsvinder, hver gang du genstar
 
 Du bygger videre på din egen AMAbot fra [øvelse 4](express-ejs-amabot-statistik.md). Du skal ikke oprette et nyt projekt.
 
-> **Sidder du fast med selve JSON/fs-idéen?** Tag en afstikker til [JSON-øvelse: Studerende i en JSON-fil](express-ejs-json-students.md), hvor du træner `JSON.stringify()`, `JSON.parse()`, `fs.readFile()` og `fs.writeFile()` i en lille selvstændig app, før du bruger dem her. Øvelse 5 bruger nøjagtig samme mønster.
+> **Har du ikke allerede lavet den?** Lav først [JSON-øvelse: Studerende i en JSON-fil](express-ejs-json-students.md), hvor du træner `JSON.stringify()`, `JSON.parse()`, `fs.readFile()` og `fs.writeFile()` i en lille selvstændig app, før du bruger dem her. Øvelse 5 bruger nøjagtig samme mønster.
 
 ## Det bygger du
 

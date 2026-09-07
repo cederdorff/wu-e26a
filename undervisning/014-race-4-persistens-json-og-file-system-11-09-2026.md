@@ -56,7 +56,7 @@ I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i A
 <summary><strong>6. Gem AMAbottens chathistorik</strong></summary>
 
 - Lige nu lever `messages` kun i memory — historikken forsvinder, når serveren genstartes
-- Sidder et JSON/fs-begreb fast? Tag en kort afstikker til [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md)
+- Lav først [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — træn read → modify → write på et enkelt eksempel, før I rører AMAbotten
 - Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): læs og skriv `data/messages.json` direkte i `GET /` og `POST /ask`, så filen — ikke en variabel — er den eneste sandhed om samtalen
 - Test persistens: stil et spørgsmål, genstart serveren, og tjek om historikken stadig er der
 </details>
@@ -76,7 +76,7 @@ I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i A
 
 - Slides: TBA
 - Opgaver:
-    - [JSON-øvelse: Students i en JSON-fil](../opgaver/express-ejs-json-students.md) — en lille CRUD-app, der læser og skriver `students` til en JSON-fil, før I bruger samme mønster i øvelse 5
+    - [JSON-øvelse: Students i en JSON-fil](../opgaver/express-ejs-json-students.md) — obligatorisk, laves først: en lille CRUD-app, der læser og skriver `students` til en JSON-fil, før I bruger samme mønster i øvelse 5
     - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
 
 ---
