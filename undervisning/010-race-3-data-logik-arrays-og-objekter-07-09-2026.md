@@ -54,13 +54,9 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først 
 - Slides:
   - [JavaScript Concepts](https://cederdorff.com/race/slides/js-concepts.pdf)
 - Opgaver:
-  - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
-  - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
-  - [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — vælg øvelsesfil efter behov
-  - Øvelsesfiler:
-    - [`findAnswer()` — grundbegreber](../opgaver/find-answer-oevelser.js)
-    - [Scoring og sammenligning](../opgaver/scoring-oevelser.js)
-    - [Objekter som tællere](../opgaver/statistik-oevelser.js)
+    - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
+    - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
+    - [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — opret én øvelsesfil, og vælg den relevante del efter behov
 
 ---
 

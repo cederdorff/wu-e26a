@@ -21,7 +21,7 @@ Arbejd med ét afsnit ad gangen. Brug de sammenklappede løsningsforslag, hvis I
 
 I arbejder i jeres eksisterende `server.js`. Først ved statistikdelen skal I også arbejde i `views/index.ejs`.
 
-Hvis et bestemt JavaScript-begreb er svært, kan I arbejde med den relevante [JavaScript-øvelse](javascript-oevelser-amabot.md). I behøver ikke gennemføre alle tre øvelsesfiler.
+Hvis et bestemt JavaScript-begreb er svært, kan I arbejde med [del B af JavaScript-øvelser til AMAbot](javascript-oevelser-amabot.md). Her bygger I scoring og statistik i en separat JavaScript-fil, før I bruger idéerne i `server.js`.
 
 ```text
 spørgsmål -> findBestAnswer() -> svar og kategori -> POST-route -> EJS
