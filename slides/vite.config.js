@@ -11,7 +11,8 @@ export default defineConfig({
       input: {
         index: resolve("slides/index.html"),
         nodeExpress: resolve("slides/node-express/index.html"),
-        expressEjs: resolve("slides/express-ejs/index.html")
+        expressEjs: resolve("slides/express-ejs/index.html"),
+        dataLogik: resolve("slides/data-logik/index.html")
       }
     }
   }

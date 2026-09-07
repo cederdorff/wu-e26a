@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RACE 3 · Data, logik, arrays og objekter · WU-E26A · 7. september 2026" />
+    <title>Data, logik, arrays og objekter · WU-E26A</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide solo" data-accent="cyan">
+          <div class="title-copy">
+            <span class="eyebrow">WU-E26A · RACE 3 · 7. september 2026</span>
+            <h1>Data, logik,<br /><span>arrays og objekter</span></h1>
+            <p class="lead">Fra første match til det bedste svar</p>
+          </div>
+          <aside class="notes">
+            Start med en kort opsamling på øvelse 2, før vi går videre til AMAbottens svarlogik. [Sources] - Lokal
+            lektionsside: undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="activity-slide recap-pair" data-accent="green">
+          <span class="eyebrow">Opsamling på øvelse 2 · 10–15 min.</span>
+          <h2>To og to: forklar koden for hinanden</h2>
+          <div class="recap-pair-layout">
+            <div>
+              <p class="recap-instruction">
+                Åbn jeres løsning. Forklar på skift, og peg på de konkrete steder i <code>server.js</code> og
+                <code>views/index.ejs</code>.
+              </p>
+              <p class="recap-switch"><b>Byt efter halvdelen af tiden.</b> Begge skal forklare.</p>
+            </div>
+            <ol>
+              <li>Hvem er <b>client</b>, og hvem er <b>server</b>?</li>
+              <li>Hvad sker der i <code>server.js</code>?</li>
+              <li>Hvordan hænger serveren og <code>index.ejs</code> sammen?</li>
+              <li>Hvad kan EJS, som en almindelig HTML-fil ikke kan?</li>
+              <li>Hvad består en <b>request</b> og en <b>response</b> af?</li>
+              <li>Hvor bliver HTML'en bygget — og hvorfor er det SSR?</li>
+            </ol>
+          </div>
+          <aside class="notes">
+            Bed de studerende forklare med deres egen kode åben. De skal pege på method, action, name,
+            express.urlencoded(), POST-routen, request.body og response.render(). Stop efter cirka syv minutter, og
+            mind dem om at bytte rolle. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-formhaandtering-svarlogik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="question-slide" data-accent="green">
+          <span class="eyebrow">Find svarene i jeres egen kode</span>
+          <h2>Følg data fra formularen til serveren — og tilbage igen</h2>
+          <ol class="question-grid">
+            <li>Hvordan sender formularen <code>name</code> og <code>age</code> til serveren?</li>
+            <li>Hvilken betydning har <code>method</code>, <code>action</code> og inputfelternes <code>name</code>?</li>
+            <li>Hvor finder vi de indsendte værdier i <code>request.body</code>?</li>
+            <li>Hvordan bliver inputtet valideret — og hvad sker der, hvis det er ugyldigt?</li>
+            <li>Hvordan sender <code>response.render()</code> data tilbage til EJS?</li>
+            <li>Hvordan bliver arrayet <code>names</code> vist som HTML i browseren?</li>
+          </ol>
+          <aside class="notes">
+            Dette er de konkrete spørgsmål fra den oprindelige opsamlingsaktivitet. De studerende skal ikke nøjes
+            med at svare abstrakt; de skal pege på attributter, variabler, routes, if/else-logik og EJS-tags i deres
+            egen løsning. [Sources] - Lokal øvelse: opgaver/express-ejs-formhaandtering-svarlogik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="client-server-slide" data-accent="orange">
+          <span class="eyebrow">Client/server · request/response</span>
+          <h2>Browseren spørger — serveren svarer</h2>
+          <div class="client-server-flow" aria-label="Browseren sender en request til serveren, som sender en response tilbage">
+            <article>
+              <span>Client</span>
+              <strong>Browser</strong>
+              <small>viser siden og indsender formularen</small>
+            </article>
+            <div class="request-response">
+              <p><b>Request →</b><span>metode · URL · body</span></p>
+              <p><b>← Response</b><span>status · headers · HTML</span></p>
+            </div>
+            <article>
+              <span>Server</span>
+              <strong>Express + EJS</strong>
+              <small>modtager, validerer og renderer</small>
+            </article>
+          </div>
+          <div class="rendering-choice">
+            <p><b>SSR i øvelse 2</b><span>EJS bygger HTML'en på serveren. Browseren modtager en færdig side.</span></p>
+            <p><b>CSR</b><span>Browserens JavaScript modtager data og bygger eller opdaterer selv HTML'en.</span></p>
+          </div>
+          <p class="bottom-line"><b>Find beviset i jeres kode:</b> Hvor kan I se, at løsningen bruger SSR?</p>
+          <aside class="notes">
+            Lad parrene identificere browseren som client og Node/Express-applikationen som server. Bed dem udpege
+            formens method og action, request.body og response.render(). Svaret på bundspørgsmålet er blandt andet
+            response.render() og EJS-templaten: serveren sender færdig HTML. Ved CSR ville browser-JavaScript typisk
+            hente data og ændre DOM'en. [Sources] - Lokal øvelse: opgaver/express-ejs-formhaandtering-svarlogik.md -
+            Eksisterende kursusslides: slides/express-ejs/index.html [/Sources]
+          </aside>
+        </section>
+
+        <section class="recap-flow-slide" data-accent="cyan">
+          <span class="eyebrow">Følg én formularindsendelse</span>
+          <h2>Kan I forklare hele turen — uden at springe et led over?</h2>
+          <div class="recap-flow" aria-label="Formulardata sendes fra browseren til serveren og returneres som HTML">
+            <span>Browser</span><b>→</b><span><code>POST /submit</code></span><b>→</b><span><code>request.body</code></span
+            ><b>→</b><span>validering</span><b>→</b><span><code>response.render()</code></span><b>→</b><span>EJS</span
+            ><b>→</b><span>HTML</span>
+          </div>
+          <div class="flow-prompts">
+            <p>Hvad udløser requesten?</p>
+            <p>Hvad sker der, når input er ugyldigt?</p>
+            <p>Hvor bliver response-HTML'en bygget?</p>
+          </div>
+          <aside class="notes">
+            Tag kæden i plenum eller lad parrene pege på hvert led i deres kode. Fremhæv, at EJS kører på serveren,
+            og at browseren modtager færdig HTML. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-formhaandtering-svarlogik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="reflection-slide" data-accent="yellow">
+          <span class="eyebrow">Individuelle noter · 2 min.</span>
+          <h2>Hvad tager du med — og hvad mangler stadig at falde på plads?</h2>
+          <div class="reflection-list">
+            <p><b>1</b><span>Hvad var svært?</span></p>
+            <p><b>2</b><span>Hvad forstod du godt?</span></p>
+            <p><b>3</b><span>Hvad forstår du stadig ikke helt?</span></p>
+            <p><b>4</b><span>Hvad vil du gerne have forklaret i fællesskab?</span></p>
+          </div>
+          <p class="bottom-line"><b>Skriv korte noter.</b> Vi samler op i plenum med udgangspunkt i jeres spørgsmål.</p>
+          <aside class="notes">
+            Giv to minutters stilhed til noter. Bed derefter om konkrete spørgsmål eller steder i koden, som skal
+            forklares igen. [Sources] - Underviserens aktivitetstekst i denne samtale. [/Sources]
+          </aside>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="../shared/deck.js"></script>
+  </body>
+</html>

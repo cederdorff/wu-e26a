@@ -1,10 +1,15 @@
-# Øvelse 4: Gør AMAbotten klogere med scoring og statistik
+# Øvelse 4: Træn logikken — og gør derefter AMAbotten klogere
 
-I denne øvelse bygger I videre på **det samme projekt** fra [øvelse 3](express-ejs-amabot.md). Øvelsen genbesøger den svarlogik, I allerede har arbejdet med, og udvider den i små trin.
+I denne øvelse bygger I videre på **det samme projekt** fra [øvelse 3](express-ejs-amabot.md). Først træner I JavaScript-logikken i tre små filer. Derefter bruger I det, I har lært, i jeres egen AMAbot.
 
 I skal ikke bygge en ny app eller lære en helt ny måde at programmere på. I skal bruge de samme arrays, objekter, løkker, funktioner og `if`-sætninger igen — men forstå dem bedre og bruge dem til lidt mere.
 
-Skriv og test ét trin ad gangen. Hvis I ikke er færdige med den grundlæggende AMAbot fra øvelse 3, skal I færdiggøre den først.
+Træningsfilerne og AMAbotten har altså forskellige formål:
+
+- I **træningsfilerne** må I ændre eksempeldata, forudsige output og undersøge ét begreb ad gangen.
+- I **AMAbotten** skal I selv finde det rigtige sted i jeres eksisterende kode og overføre idéen.
+
+I skal ikke importere træningsfilerne eller kopiere dem samlet ind i `server.js`. Skriv og test ét trin ad gangen. Hvis den grundlæggende AMAbot fra øvelse 3 ikke virker endnu, skal I færdiggøre den først.
 
 ## Det træner du
 
@@ -31,23 +36,46 @@ Browser -> POST /ask -> findBestAnswer() -> messages -> EJS -> HTML
                               -> topicStats
 ```
 
-## Sådan er øvelsen opdelt
+## To arbejdsrum
 
 I bruger tre små JavaScript-filer til at undersøge logikken uden Express og EJS:
 
-| Fase | Træningsfil | Det træner I |
+| Træningsbane | Fil | Det undersøger I |
 | --- | --- | --- |
 | 1. Forstå den kendte funktion | [`find-answer-oevelser.js`](find-answer-oevelser.js) | Funktioner, tekst, arrays, objekter, `for...of`, `.some()` og `if`/`else` |
-| 2. Find det bedste svar | [`scoring-oevelser.js`](scoring-oevelser.js) | `.filter()`, `.length`, score og sammenligning med `if` |
+| 2. Find det bedste svar | [`scoring-oevelser.js`](scoring-oevelser.js) | `.filter()`, `.length`, returnerede objekter, score og sammenligning med `if` |
 | 3. Tæl emner | [`statistik-oevelser.js`](statistik-oevelser.js) | Properties, bracket notation og objekter som tællere |
 
-Hent én fil ad gangen, og gem den i samme mappe som jeres `server.js`. Træningsfilerne skal **ikke** importeres i AMAbotten. De er små, selvstændige programmer, som I kører direkte med Node.js.
+Hent én fil ad gangen, og gem den i samme mappe som jeres `server.js`. Træningsfilerne er små, selvstændige programmer, som I kører direkte med Node.js.
 
-Når en træningsfil virker, fortæller opgaven præcist, hvilken kode I skal bruge i den rigtige AMAbot.
+Efter hver træningsbane får I en **AmaBot-mission**. Her får I et mål og nogle krav, men ikke først en færdig løsning. Hvis I går i stå efter et reelt forsøg, kan I åbne et hint eller et kontrolpunkt.
+
+```text
+TRÆNINGSFIL                         AMABOT
+forudsig -> kør -> ændr -> forklar -> find sted -> skriv -> test -> forklar
+```
+
+### Arbejdsregel: Luk træningsfilen
+
+Når I starter en AmaBot-mission, skal I først lukke træningsfilen. Prøv at skrive løsningen ud fra det, I netop har forklaret. Åbn kun filen igen, hvis I har brug for at undersøge en bestemt detalje.
+
+En mission er ikke færdig, bare fordi appen virker. I skal også kunne pege på de relevante variabler, metoder og kodeveje og forklare, hvad de gør.
+
+## Mål for arbejdet
+
+I behøver ikke alle nå lige langt. Brug disse tre niveauer:
+
+| Niveau | Trin | Målet er, at I kan |
+| --- | --- | --- |
+| **Minimumsmål** | Træningsbane 1–2 og mission 1–2 | forklare `findAnswer()` og integrere scoring i AMAbotten |
+| **Dagens fulde mål** | Træningsbane 3 og mission 3 | bruge et objekt som tæller og vise statistik i EJS |
+| **Hvis I har tid** | 9–15 | vælge mellem ekstraopgaverne og udvide løsningen |
+
+Nå først minimumsmålet. Fortsæt derefter med statistik. Ekstraopgaverne er valgfrie og står sammenklappet nederst, så kerneøvelsen er nemmere at overskue.
 
 ---
 
-## 1. Kontrollér AMAbotten fra øvelse 3
+## Startpunkt: Kontrollér AMAbotten fra øvelse 3
 
 Start serveren:
 
@@ -67,7 +95,7 @@ Hvis de tre tests ikke virker, så find først fejlen i øvelse 3. Øvelse 4 æn
 
 ---
 
-## 2. Genbesøg `findAnswer()`
+## Træningsbane 1: Forstå `findAnswer()`
 
 Før I ændrer svarlogikken, skal I genbesøge de dele, den allerede består af. Det gør I i en særskilt øvelsesfil, så testkoden ikke bliver blandet sammen med Express-serveren.
 
@@ -100,27 +128,9 @@ Alle kodeændringer og spørgsmål står i træningsfilen. Brug denne oversigt t
 
 > Standardresultaterne forudsætter den oprindelige fil. Hvis jeres ændringer gør det svært at følge næste del, kan I hente en frisk kopi af `find-answer-oevelser.js`.
 
-### Sammenlign med AMAbottens `findAnswer()`
+### Sammenlign med jeres egen AMAbot
 
-Find nu `findAnswer()` i din egen `server.js`:
-
-```js
-function findAnswer(question) {
-  const normalizedQuestion = question.toLowerCase();
-
-  for (const answerGroup of answers) {
-    const hasMatch = answerGroup.keywords.some((keyword) =>
-      normalizedQuestion.includes(keyword)
-    );
-
-    if (hasMatch) {
-      return answerGroup.answer;
-    }
-  }
-
-  return "Det kender jeg ikke svaret på endnu.";
-}
-```
+Find nu `findAnswer()` i jeres egen `server.js`. Brug jeres egen funktion som udgangspunkt; indsæt ikke en ny version fra opgaven.
 
 Peg på disse dele i funktionen:
 
@@ -149,7 +159,7 @@ Kør først filen som den er, og se, hvilke regler det kendte og det ukendte sp�
 
 Sammenlign til sidst øvelsesfilens `findAnswer()` med funktionen i jeres egen `server.js`. De to logs er kun hjælp til undersøgelsen og behøver ikke flyttes med ind i AMAbotten.
 
-### Klar til næste fase?
+### Exit-ticket
 
 Gå først videre, når I med egne ord kan forklare:
 
@@ -159,11 +169,40 @@ Gå først videre, når I med egne ord kan forklare:
 - Hvilke dele styrer, hvilken kode der bliver kørt?
 - Hvorfor bliver reglerne efter det første match ikke undersøgt?
 
+Én person følger et kendt spørgsmål gennem funktionen. Den anden følger et ukendt spørgsmål. Byt derefter og ret hinandens forklaringer.
+
 ---
 
-## 3. Udvid objekterne med en kategori
+## AmaBot-mission 1: Giv reglerne en kategori
 
-Hver regel i `answers` er et objekt med `keywords` og `answer`. Tilføj nu en `category`:
+I skal senere kunne huske, hvilket emne det valgte svar tilhører. Udvid derfor hvert objekt i jeres eget `answers`-array med en `category`-property.
+
+Krav:
+
+- Alle regler har `category`, `keywords` og `answer`.
+- Kategorierne er korte tekster uden mellemrum, fx `"navn"` eller `"bosted"`.
+- I kan vise kategorien fra mindst to forskellige objekter med indeks- og punktnotation.
+- `findAnswer()` virker stadig som før.
+
+<details>
+<summary>Hint: formen på ét objekt</summary>
+
+```js
+{
+  category: "navn",
+  keywords: ["navn", "hedder", "hvem er du"],
+  answer: "Jeg hedder Ada."
+}
+```
+
+</details>
+
+---
+
+<details>
+<summary>Kontrolpunkt til mission 1: et helt <code>answers</code>-array</summary>
+
+Sammenlign først med dette eksempel, når I selv har udvidet alle jeres objekter:
 
 ```js
 const answers = [
@@ -195,7 +234,9 @@ Tilpas reglerne til jeres egen AMAbot. Behold den samme struktur i alle objekter
 }
 ```
 
-### Test trin 3
+</details>
+
+### Test mission 1
 
 Sæt midlertidigt denne log efter `answers`:
 
@@ -209,7 +250,7 @@ Terminalen skal vise kategorien fra det første objekt. Skift derefter `0` til `
 
 ---
 
-## 4. Sammenlign `.some()` og `.filter()`
+## Træningsbane 2: Fra match til score
 
 > **Arbejdssted:** [`scoring-oevelser.js`](scoring-oevelser.js) — ikke `server.js` endnu.
 
@@ -231,7 +272,14 @@ Forskellen, I skal undersøge, er:
 | `.filter()` | Et nyt array | Hvilke nøgleord matcher? |
 | `.filter().length` | Et tal | Hvor mange nøgleord matcher? |
 
-Med spørgsmålet `"hvad hedder du, og hvad er dit navn?"` skal `countMatches()` give `2`, fordi `"hedder"` og `"navn"` matcher.
+Brug spørgsmålet `"hvad hedder du, og hvad er dit navn?"`. Skriv jeres forventede score ned, før I kører filen.
+
+<details>
+<summary>Kontrollér den forventede score</summary>
+
+`countMatches()` giver `2`, fordi `"hedder"` og `"navn"` matcher.
+
+</details>
 
 > Funktionen tæller matchende nøgleord — ikke hvor mange gange det samme nøgleord står i spørgsmålet.
 
@@ -245,19 +293,24 @@ Gå videre, når I kan:
 
 ---
 
-## 5. Undersøg scoren for alle regler
+### Undersøg scoren for alle regler
 
 > **Arbejdssted:** Fortsæt i `scoring-oevelser.js`.
 
 Før AMAbotten skal vælge noget, skal I se scoren for hver regel. Find del 3 i træningsfilen, og brug spørgsmålet `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`.
 
-Med eksempelreglerne skal terminalen vise:
+Skriv først de tre forventede scores ned. Kør derefter filen, og sammenlign med terminalens output.
+
+<details>
+<summary>Kontrollér de tre scores</summary>
 
 ```text
 navn 2
 bosted 1
 fritid 0
 ```
+
+</details>
 
 Her træner I det samme `for...of` som i `findAnswer()`. Forskellen er, at løkken ikke stopper ved det første match. Den beregner en score for alle regler.
 
@@ -271,15 +324,55 @@ Gå videre, når I kan:
 - finde den højeste score i terminalens output
 - ændre spørgsmålet, så en anden regel vinder
 
+### Byg delene sammen i træningsfilen
+
+Arbejd nu med del 4–6 i `scoring-oevelser.js`:
+
+- Undersøg først, hvordan en funktion kan returnere et objekt.
+- Følg derefter `bestScore`, `bestAnswer` og `bestCategory` gennem løkken.
+- Tilføj til sidst en regel med jeres egne eksempeldata.
+
+Træningsbanens exit-ticket er, at I uden at læse koden op kan forklare:
+
+- hvorfor funktionen returnerer både et svar og en kategori
+- hvornår de tre `best...`-variabler bliver ændret
+- hvorfor standardsvaret overlever, når alle scores er `0`
+- hvilken regel der vinder ved samme score
+
 ---
 
-## 6. Vælg svaret med den højeste score
+## AmaBot-mission 2: Vælg det bedste svar
 
-> **Arbejdssted:** Begynd i `scoring-oevelser.js`. Flyt først derefter den færdige logik til `server.js`.
+> **Arbejdssted:** Luk `scoring-oevelser.js`, og arbejd nu i jeres egen `server.js`.
 
-Arbejd med del 4 og 5 i træningsfilen. Når I kan forklare `bestScore`, `bestAnswer` og `bestCategory`, skal I bruge funktionerne i AMAbotten.
+Skriv en ny `findBestAnswer()` ved at overføre idéerne fra træningsfilen. Funktionen skal:
 
-Kopiér først `countMatches()` fra træningsfilen til `server.js`. Erstat derefter `findAnswer()` med `findBestAnswer()`:
+1. normalisere spørgsmålet
+2. starte med score `0`, et standardsvar og en tom kategori
+3. gennemløbe **alle** regler
+4. beregne hver regels score
+5. gemme svaret og kategorien, når scoren er højere end den hidtil bedste
+6. returnere ét objekt med `answer` og `category`
+
+Ret derefter POST-routen, så den bruger det returnerede objekt.
+
+### Krav og test
+
+- Et spørgsmål med to navneord og ét bostedsord vælger navnereglen.
+- Et spørgsmål med ét navneord og to bostedsord vælger bostedsreglen.
+- Et ukendt spørgsmål giver standardsvaret og kategorien `""`.
+- Ved samme score vinder den regel, der står først.
+- I kan forklare, hvorfor sammenligningen bruger `>` og ikke `>=`.
+
+<details>
+<summary>Hint 1: værdier funktionen skal huske</summary>
+
+Brug tre variabler: `bestScore`, `bestAnswer` og `bestCategory`. Opdatér dem samlet inde i en `if`-sætning.
+
+</details>
+
+<details>
+<summary>Hint 2: kontrolpunkt for <code>findBestAnswer()</code></summary>
 
 ```js
 function findBestAnswer(question) {
@@ -302,6 +395,8 @@ function findBestAnswer(question) {
 }
 ```
 
+</details>
+
 Funktionen bruger tre enkle værdier til at huske det bedste resultat indtil videre:
 
 - `bestScore` er det højeste antal match.
@@ -310,16 +405,17 @@ Funktionen bruger tre enkle værdier til at huske det bedste resultat indtil vid
 
 `if (score > bestScore)` betyder, at værdierne kun bliver ændret, når funktionen finder en bedre regel. Hvis ingen regel matcher, bliver standardsvaret og den tomme kategori returneret.
 
-### Test først funktionen i træningsfilen
+### Undersøg resultatobjektet
 
 ```js
 console.log(findBestAnswer("Hvad hedder du, og hvad er dit navn?"));
 console.log(findBestAnswer("Kan du bage en kage?"));
 ```
 
-Den første test skal give et objekt med navnesvaret og kategorien `"navn"`. Den anden skal give standardsvaret og en tom kategori.
+Forudsig begge resultatobjekter, før I kører testene. Kontrollér bagefter både `answer` og `category` — ikke kun den tekst, brugeren ser.
 
-### Brug funktionen i POST-routen
+<details>
+<summary>Hint 3: brug resultatobjektet i POST-routen</summary>
 
 > **Skift arbejdssted:** Gå nu til AMAbottens `server.js`.
 
@@ -337,20 +433,11 @@ const result = findBestAnswer(question);
 messages.push({ type: "answer", text: result.answer });
 ```
 
-### Test trin 6
-
-Stil disse to spørgsmål:
-
-1. `"Hvad hedder du, hvad er dit navn, og hvor bor du?"`
-2. `"Hvad er dit navn, og hvilken by bor du i?"`
-
-I det første spørgsmål får navnereglen den højeste score. I det andet får bostedsreglen den højeste score.
-
-> Hvis to regler har samme score, vinder den regel, der står først i `answers`. Det er fint i denne version.
+</details>
 
 ---
 
-## 7. Brug et objekt som tæller
+## Træningsbane 3: Brug et objekt som tæller
 
 > **Arbejdssted:** Begynd i [`statistik-oevelser.js`](statistik-oevelser.js) — ikke i `server.js`.
 
@@ -366,7 +453,7 @@ Gennemfør del 1–5 i filen. Her træner I punktnotation, bracket notation, opd
 
 Når I kan forklare, hvorfor `topicStats[result.category]` finder den rigtige tæller, skal I gå tilbage til AMAbotten.
 
-### Klar til integration?
+### Exit-ticket
 
 Gå videre, når I kan:
 
@@ -375,7 +462,25 @@ Gå videre, når I kan:
 - bruge en kategori-variabel til at finde den rigtige tæller
 - forklare, hvorfor en tom kategori ikke bliver talt
 
-> **Skift arbejdssted:** Gå nu til AMAbottens `server.js`.
+---
+
+## AmaBot-mission 3: Tæl og vis emner
+
+> **Arbejdssted:** Luk `statistik-oevelser.js`. Arbejd nu i AMAbottens `server.js` og `views/index.ejs`.
+
+Først skal serveren tælle kategorierne. Derefter skal EJS vise tællerne.
+
+Krav:
+
+- `topicStats` har én property pr. kategori og starter med værdien `0`.
+- Kun spørgsmål med en kendt kategori bliver talt.
+- Kategorier vælges med bracket notation og `result.category`.
+- Både GET- og POST-routen sender `topicStats` til EJS.
+- Tallene ændrer sig i browseren, når I spørger om forskellige emner.
+- I kan forklare, hvorfor tallene nulstilles, når serveren genstartes.
+
+<details>
+<summary>Hint 1: opret og opdatér tællerne</summary>
 
 Nu vil vi tælle, hvor mange spørgsmål der matcher hver kategori. Opret et objekt over jeres routes:
 
@@ -411,7 +516,9 @@ topicStats["navn"]
 
 Vi bruger firkantede parenteser, fordi navnet på egenskaben ligger i en variabel. `if`-sætningen sørger for, at ukendte spørgsmål med en tom kategori ikke bliver talt.
 
-### Test trin 7
+</details>
+
+### Test tællerne
 
 Tilføj midlertidigt denne log efter `if`-sætningen:
 
@@ -419,21 +526,71 @@ Tilføj midlertidigt denne log efter `if`-sætningen:
 console.log(topicStats);
 ```
 
-Stil to spørgsmål om navn og ét om bosted. Objektet i terminalen skal ende med at ligne:
+Stil to spørgsmål om navn og ét om bosted. Forudsig objektets tre værdier, før I ser i terminalen.
+
+<details>
+<summary>Kontrollér tællernes værdier</summary>
+
+Objektet skal ende med at ligne:
 
 ```js
 { navn: 2, bosted: 1, fritid: 0 }
 ```
 
+</details>
+
 Fjern loggen igen.
+
+<details>
+<summary>Kontrolpunkt: en samlet POST-route</summary>
+
+Sammenlign nu jeres POST-route med denne samlede version. Brug den som kontrolpunkt — tilpas den til jeres egne navne og eventuelle ændringer fra øvelse 3:
+
+```js
+app.post("/ask", (request, response) => {
+  const question = request.body.question.trim();
+  let error = "";
+
+  if (!question) {
+    error = "Skriv et spørgsmål, før du sender.";
+  } else {
+    messages.push({ type: "question", text: question });
+
+    const result = findBestAnswer(question);
+    messages.push({ type: "answer", text: result.answer });
+
+    if (result.category) {
+      topicStats[result.category] = topicStats[result.category] + 1;
+    }
+  }
+
+  response.render("index", { messages, error, topicStats });
+});
+```
+
+Kontrollér især:
+
+- at `result` først bliver oprettet ved et gyldigt spørgsmål
+- at både spørgsmålet og svaret bliver gemt inde i `else`
+- at statistikken kun opdateres, når `result.category` har en værdi
+- at `response.render()` fortsat ligger efter `if`/`else`
+
+> Har I lavet sanitering eller en længdegrænse i øvelse 3, skal den kode bevares. Kontrolpunktet viser placeringen af den nye scoring og statistik — ikke en grund til at fjerne tidligere validering.
+
+</details>
 
 ---
 
-## 8. Vis statistikken i EJS
+### Vis statistikken i EJS
 
 > **Arbejdssted:** AMAbottens `server.js` og `views/index.ejs`.
 
-Send `topicStats` med til `views/index.ejs`. GET-routen skal rendere med:
+Send først `topicStats` med fra både GET- og POST-routen. Vis derefter hver tæller i `views/index.ejs` med EJS-output og punktnotation.
+
+<details>
+<summary>Hint 2: routes og EJS</summary>
+
+GET-routen skal rendere med:
 
 ```js
 response.render("index", { messages, error: "", topicStats });
@@ -458,7 +615,9 @@ Tilføj derefter statistikken i `views/index.ejs`:
 
 Tilpas egenskabsnavnene, hvis jeres kategorier hedder noget andet. Her bruger EJS den samme punktnotation, som I tidligere brugte med fx `message.text`.
 
-### Test trin 8
+</details>
+
+### Samlet test af mission 3
 
 Stil spørgsmål om forskellige emner, og kontrollér, at tallene ændrer sig. Genindlæs siden: Tallene skal stadig stå der. Genstart serveren: Tallene starter igen på `0`, fordi objektet kun ligger i serverens hukommelse.
 
@@ -496,7 +655,9 @@ Lav kun ekstraopgaverne, hvis kerneøvelsen virker, og du kan forklare koden.
 | 14. Nulstil statistik | Route, `Object.keys()` og bracket notation | Ingen |
 | 15. JavaScript-modul | `export`, `import` og filstruktur | Lav den gerne til sidst |
 
-### 9. Vælg en reaktion med `switch`
+<details>
+<summary><strong>9. Vælg en reaktion med <code>switch</code></strong></summary>
+
 
 Begynd med del 7 i `statistik-oevelser.js`. Når funktionen virker dér, kan I flytte den til `server.js`.
 
@@ -533,7 +694,11 @@ messages.push({ type: "answer", text: `${reaction} ${result.answer}` });
 
 Husk at erstatte den tidligere `messages.push()` for svaret — ellers viser AMAbotten svaret to gange.
 
-### 10. Gennemløb statistikken med `Object.entries()`
+</details>
+
+<details>
+<summary><strong>10. Gennemløb statistikken med <code>Object.entries()</code></strong></summary>
+
 
 Begynd med del 6 i `statistik-oevelser.js`. Når I kan forklare arrayet, som `Object.entries()` laver, kan I bruge samme idé i EJS.
 
@@ -554,7 +719,11 @@ Erstat de tre `<li>`-elementer med:
 
 Tilføj en ny kategori til både `answers` og `topicStats`. Den skal nu automatisk komme med i listen.
 
-### 11. Tilføj dit eget emne
+</details>
+
+<details>
+<summary><strong>11. Tilføj dit eget emne</strong></summary>
+
 
 Tilføj en ny regel til `answers`. Den skal have sin egen kategori, mindst tre nøgleord og et personligt svar:
 
@@ -585,7 +754,11 @@ Test med:
 2. Et spørgsmål, der matcher to af de nye nøgleord
 3. Et spørgsmål, hvor det nye emne konkurrerer med en eksisterende kategori
 
-### 12. Tæl ukendte spørgsmål
+</details>
+
+<details>
+<summary><strong>12. Tæl ukendte spørgsmål</strong></summary>
+
 
 Lige nu bliver et spørgsmål uden match ikke talt. Tilføj en tæller til `topicStats`:
 
@@ -609,7 +782,11 @@ Vis også tælleren i EJS, hvis I ikke allerede gennemløber objektet med `Objec
 
 Stil to kendte og to ukendte spørgsmål. De kendte spørgsmål skal tælles under deres kategorier, mens `ukendt` skal ende på `2`.
 
-### 13. Find det mest spurgte emne
+</details>
+
+<details>
+<summary><strong>13. Find det mest spurgte emne</strong></summary>
+
 
 Denne ekstraopgave genbruger idéen fra `findBestAnswer()`: Gennemløb flere værdier, sammenlign dem, og husk den højeste.
 
@@ -669,7 +846,11 @@ Husk også `mostAskedTopic` i POST-routens render. Vis resultatet i EJS:
 
 Stil spørgsmål, indtil en anden kategori overtager førstepladsen. Teksten i EJS skal følge med.
 
-### 14. Lav en knap, der nulstiller statistikken
+</details>
+
+<details>
+<summary><strong>14. Lav en knap, der nulstiller statistikken</strong></summary>
+
 
 Tilføj en ny route i `server.js`:
 
@@ -697,7 +878,11 @@ Tilføj en formular i `views/index.ejs`:
 
 Stil flere spørgsmål, kontrollér tællerne, og nulstil statistikken. Beskederne skal blive stående, mens alle tællere bliver `0`.
 
-### 15. Flyt `answers` til sit eget JavaScript-modul
+</details>
+
+<details>
+<summary><strong>15. Flyt <code>answers</code> til sit eget JavaScript-modul</strong></summary>
+
 
 Efterhånden som `server.js` vokser, bliver den nemmere at læse, hvis svarreglerne ligger i deres egen fil. I øvelse 3 aktiverede I allerede ES Modules med `"type": "module"` i `package.json`. Derfor kan I bruge `export` og `import`.
 
@@ -750,3 +935,5 @@ Forklar til sidst:
 - Hvad er blevet lettere at finde i `server.js`?
 
 > Det er kun AMAbottens eget `answers`-array, I flytter. De tre træningsfiler skal fortsat kunne køres selvstændigt og skal derfor beholde deres egne eksempeldata.
+
+</details>

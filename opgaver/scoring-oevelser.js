@@ -92,7 +92,28 @@ showScores("Hvad hedder du, hvad er dit navn, og hvor bor du?");
 // Ret spørgsmålet, så bostedsreglen får den højeste score.
 // Ret derefter spørgsmålet, så alle regler får scoren 0.
 
-console.log("\n--- 4. if gemmer den højeste score ---");
+console.log("\n--- 4. En funktion kan returnere et objekt ---");
+
+function createResult(answer, category) {
+  return {
+    answer: answer,
+    category: category
+  };
+}
+
+const exampleResult = createResult("Jeg hedder Ada.", "navn");
+
+console.log("Hele resultatet:", exampleResult);
+console.log("Kun svaret:", exampleResult.answer);
+console.log("Kun kategorien:", exampleResult.category);
+
+// OPGAVE:
+// Hvilke to argumenter modtager createResult()?
+// Hvilke to properties har objektet, som funktionen returnerer?
+// Hvorfor kan vi skrive exampleResult.answer?
+// Kald funktionen igen med et nyt svar og en ny kategori.
+
+console.log("\n--- 5. if gemmer den højeste score ---");
 
 function findBestAnswer(question) {
   const normalizedQuestion = question.toLowerCase();
@@ -136,7 +157,7 @@ console.log("Intet match:", unknownResult);
 // Skriv et spørgsmål, hvor to regler får samme score.
 // Hvilken regel vinder ved samme score, og hvorfor?
 
-console.log("\n--- 5. Din egen regel ---");
+console.log("\n--- 6. Din egen regel ---");
 
 // OPGAVE:
 // Tilføj et nyt objekt til answers med category, keywords og answer.
@@ -149,5 +170,6 @@ console.log("\n--- KLAR TIL INTEGRATION? ---");
 // Du er klar, når du kan:
 // - forklare forskellen på some() og filter()
 // - ændre et spørgsmål og forudsige reglernes scores
+// - forklare, hvordan en funktion returnerer et objekt
 // - forklare, hvordan if gemmer den højeste score
 // - forklare objektet, som findBestAnswer() returnerer

@@ -11,9 +11,11 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag bygger vi videre med r
 ## Agenda
 
 1.  **Opsamling:**
+    - Forklar koden fra øvelse 2 to og to
+    - Notér, hvad I forstod godt, hvad der var svært, og hvad der stadig er uklart
     - Hvor langt er I kommet i øvelse 3?
     - Test kendt spørgsmål, ukendt spørgsmål og tomt input
-    - Færdiggør svarlogikken fra øvelse 3, før I går til øvelse 4
+    - Færdiggør svarlogikken, før I går til øvelse 4
 2.  **Funktioner og kontrolflow:**
     - Følg et spørgsmål gennem `toLowerCase()`, `for...of`, `.some()` og `.includes()`
     - Se, hvordan `return` gør, at den første matchende regel vinder
