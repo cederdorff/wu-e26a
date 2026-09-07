@@ -52,7 +52,7 @@ I sidste undervisningsgang påbegyndte I AMAbotten. I dag færdiggør vi først 
 ## Materialer
 
 - Slides:
-  - [JavaScript Concepts](https://cederdorff.com/race/slides/js-concepts.pdf)
+    - [JavaScript Concepts](https://cederdorff.com/race/slides/js-concepts.pdf)
 - Opgaver:
     - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
     - [4\. Gør AMAbotten klogere med scoring og statistik](../opgaver/express-ejs-amabot-statistik.md)
@@ -74,7 +74,7 @@ canvas_page_id: 200711
 canvas_page_slug: "plan-for-race-3-data-logik-arrays-og-objekter"
 canvas_page_title: "Plan for RACE 3 - Data logik, arrays og objekter"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T06:04:59Z"
+canvas_updated_at: "2026-09-07T06:15:41Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018694"
 local_status: mirrored
 ```
