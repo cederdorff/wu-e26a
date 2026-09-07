@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-07T06:34:22.673Z",
+  "pulled_at": "2026-09-07T08:02:47.986Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -39,8 +39,8 @@
       "canvas_hash": "a53f35ff722b9e300ff1441c677fe75e23b6de9a66bfcd79e87212146f6d1927"
     },
     "undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md": {
-      "local_hash": "74f92bd5abdfde6ba3a2bfb90830ab7d28dc457571f2e696899ff8e009cb4887",
-      "canvas_hash": "74f92bd5abdfde6ba3a2bfb90830ab7d28dc457571f2e696899ff8e009cb4887"
+      "local_hash": "515e4a5e5a8828aa4f7c9c6edc6312660fd8f6f24291a4686b828d36e4c6ad15",
+      "canvas_hash": "515e4a5e5a8828aa4f7c9c6edc6312660fd8f6f24291a4686b828d36e4c6ad15"
     },
     "undervisning/011-forberedelse-selvstudium-08-09-2026.md": {
       "local_hash": "ae9c7a7824626f23000b630fa4b12fa5600f248445c015cb9cc420a5951c132a",
