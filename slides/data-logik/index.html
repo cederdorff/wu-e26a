@@ -216,6 +216,638 @@
             forklares igen. [Sources] - Underviserens aktivitetstekst i denne samtale. [/Sources]
           </aside>
         </section>
+
+        <section id="kontrol" class="chapter" data-accent="orange">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Kontrolstrukturer</span>
+          <h2>Koden vælger<br />en vej</h2>
+          <p>En boolean afgør, hvilken blok der kører — og hvilken der springes over.</p>
+          <aside class="notes">
+            Genbesøg if/else fra valideringen. Nu handler fokus om at kunne følge de mulige kodeveje, ikke kun om at
+            kunne skrive syntaksen. [Sources] - Lokal lektionsside:
+            undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="branch-slide" data-accent="orange">
+          <span class="eyebrow">If / else i POST-routen</span>
+          <h2>Ét spørgsmål — to mulige kodeveje</h2>
+          <div class="code-branch-layout">
+            <pre><code class="language-javascript">const question = request.body.question.trim();
+let error = "";
+
+if (!question) {
+  error = "Skriv et spørgsmål, før du sender.";
+} else {
+  messages.push({ type: "question", text: question });
+  const answer = findAnswer(question);
+  messages.push({ type: "answer", text: answer });
+}
+
+response.render("index", { messages, error });</code></pre>
+            <div class="branch-cases">
+              <article><b><code>!question</code> er true</b><span>Fejlteksten sættes. Ingen beskeder gemmes.</span></article>
+              <article><b><code>!question</code> er false</b><span>Spørgsmål og svar bliver tilføjet.</span></article>
+              <p><strong>Begge veje mødes igen</strong> ved <code>response.render()</code>.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Gå koden igennem med først et tomt input og derefter "Hvad hedder du?". Peg på, at kun én af blokkene
+            kører, mens render-kaldet altid nås. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="boolean-slide" data-accent="orange">
+          <span class="eyebrow">Booleans som betingelser</span>
+          <h2><code>if</code> spørger altid: er dette sandt eller falsk?</h2>
+          <div class="boolean-grid">
+            <article><code>question === ""</code><b>true / false</b><span>Er teksten præcis tom?</span></article>
+            <article><code>!question</code><b>true / false</b><span>Er værdien falsy — fx en tom tekst?</span></article>
+            <article><code>question.length &gt; 200</code><b>true / false</b><span>Er spørgsmålet for langt?</span></article>
+            <article><code>normalizedQuestion.includes("navn")</code><b>true / false</b><span>Findes nøgleordet i teksten?</span></article>
+          </div>
+          <p class="bottom-line"><b>Betingelsen skifter.</b> Mekanismen er den samme: <code>true</code> åbner kodeblokken.</p>
+          <aside class="notes">
+            Lad de studerende sige returtypen højt for hvert udtryk. includes() returnerer en boolean, og den kan
+            derfor bruges direkte som betingelse. [Sources] - Lokal øvelse: opgaver/javascript-oevelser-amabot.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="trace-activity-slide" data-accent="orange">
+          <span class="eyebrow">Makkerøvelse · 5 min.</span>
+          <h2>Forudsig kodevejen, før I kører programmet</h2>
+          <div class="trace-cases">
+            <article><span>Input A</span><strong><code>"   "</code></strong><p>Hvad er værdien efter <code>.trim()</code>? Hvilken blok kører?</p></article>
+            <article><span>Input B</span><strong><code>"Hvad hedder du?"</code></strong><p>Hvad gemmes i <code>messages</code>? Hvad renderes?</p></article>
+            <article><span>Input C</span><strong><code>"x".repeat(201)</code></strong><p>Hvor ville I indsætte en regel for maksimal længde?</p></article>
+          </div>
+          <p class="bottom-line"><b>Tegn med fingeren gennem koden.</b> Skriv værdierne ned ved hver variabel.</p>
+          <aside class="notes">
+            Aktiviteten træner manuel tracing. Input C kræver, at de overfører if/else-mønstret til en ny regel;
+            løsningen behøver ikke implementeres på sliden. [Sources] - Lokale øvelser:
+            opgaver/express-ejs-amabot.md og opgaver/javascript-oevelser-amabot.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="data" class="chapter" data-accent="cyan">
+          <span class="chapter-number">03</span>
+          <span class="eyebrow">Objekter og arrays</span>
+          <h2>Data får<br />en struktur</h2>
+          <p>Objekter samler egenskaber. Arrays holder flere værdier i rækkefølge.</p>
+          <aside class="notes">
+            Overgang fra kontrolflow til de datastrukturer, AMAbottens regler er bygget af. [Sources] - Lokal
+            lektionsside: undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="object-slide" data-accent="cyan">
+          <span class="eyebrow">Objekt · én ting med navngivne egenskaber</span>
+          <h2>En svarregel hænger sammen som ét objekt</h2>
+          <div class="object-anatomy">
+            <pre><code class="language-javascript">const answerGroup = {
+  category: "navn",
+  keywords: ["navn", "hedder", "hvem er du"],
+  answer: "Jeg hedder Ada."
+};</code></pre>
+            <dl>
+              <div><dt><code>category</code></dt><dd>kort navn til statistik</dd></div>
+              <div><dt><code>keywords</code></dt><dd>arrayet, der skal undersøges</dd></div>
+              <div><dt><code>answer</code></dt><dd>teksten, botten returnerer</dd></div>
+            </dl>
+          </div>
+          <p class="bottom-line">Et objekt gør relationen mellem reglens data <b>tydelig og samlet</b>.</p>
+          <aside class="notes">
+            Genbesøg ordene object, property og value. Et objekt er ikke "en række variabler"; det er én samlet
+            værdi med navngivne properties. [Sources] - Lokale øvelser: opgaver/express-ejs-amabot.md og
+            opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="notation-slide" data-accent="cyan">
+          <span class="eyebrow">Punktnotation og bracket notation</span>
+          <h2>Er property-navnet skrevet i koden — eller gemt i en variabel?</h2>
+          <div class="notation-pair">
+            <article>
+              <span>Kendt navn</span>
+              <pre><code class="language-javascript">answerGroup.answer
+answerGroup.keywords
+student.grade = 11;</code></pre>
+              <p>Brug punktnotation, når du kender property-navnet, mens du skriver koden.</p>
+            </article>
+            <article>
+              <span>Dynamisk navn</span>
+              <pre><code class="language-javascript">const key = result.category;
+
+topicStats[key] =
+  topicStats[key] + 1;</code></pre>
+              <p>Brug brackets, når property-navnet kommer fra en variabel.</p>
+            </article>
+          </div>
+          <aside class="notes">
+            Vis eventuelt, at topicStats.navn og topicStats["navn"] peger på samme property. Variabelværdien gør
+            bracket notation nødvendig i statistikdelen. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="array-rules-slide" data-accent="cyan">
+          <span class="eyebrow">Array · flere værdier i rækkefølge</span>
+          <h2><code>answers</code> er et array af objekter</h2>
+          <div class="array-layout">
+            <pre><code class="language-javascript">const answers = [
+  { keywords: ["navn", "hedder"], answer: "Jeg hedder Ada." },
+  { keywords: ["bor", "by"], answer: "Jeg bor i Aarhus." },
+  { keywords: ["hobby", "fritid"], answer: "Jeg læser." }
+];</code></pre>
+            <div class="index-strip" aria-label="Arrayets tre indeks">
+              <article><b>0</b><span>navn-reglen</span></article>
+              <article><b>1</b><span>bosted-reglen</span></article>
+              <article><b>2</b><span>fritid-reglen</span></article>
+            </div>
+          </div>
+          <p class="bottom-line"><code>answers[1].answer</code> → <b>"Jeg bor i Aarhus."</b></p>
+          <aside class="notes">
+            Peg på de tre niveauer: answers-arrayet, ét answerGroup-objekt og keywords-arrayet inde i objektet. Få de
+            studerende til at forudsige answers.length og answers[1].keywords[0]. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-amabot.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="loop-slide" data-accent="cyan">
+          <span class="eyebrow">For...of · ét element ad gangen</span>
+          <h2>Løkken giver hver regel den samme chance</h2>
+          <div class="loop-layout">
+            <pre><code class="language-javascript">for (const answerGroup of answers) {
+  console.log(answerGroup.keywords);
+}</code></pre>
+            <ol>
+              <li><b>Første tur:</b> <code>answerGroup</code> er objektet på indeks 0</li>
+              <li><b>Anden tur:</b> objektet på indeks 1</li>
+              <li><b>Tredje tur:</b> objektet på indeks 2</li>
+            </ol>
+          </div>
+          <p class="bottom-line"><b>Løkkevariablen er ikke et indeks.</b> Den er selve objektet på den aktuelle tur.</p>
+          <aside class="notes">
+            Sammenlign med students-øvelsen i JavaScript-træningen. for...of giver direkte adgang til værdien og er
+            derfor let at læse i findAnswer(). [Sources] - Lokal øvelse: opgaver/javascript-oevelser-amabot.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="activity-slide concept-practice" data-accent="cyan">
+          <span class="eyebrow">Kort JavaScript-stop · 10–15 min.</span>
+          <h2>Skriv byggestenene uden Express og EJS</h2>
+          <div class="concept-practice-layout">
+            <div>
+              <p>Åbn <code>amabot-javascript-tests.js</code>, og arbejd med:</p>
+              <ol><li>objektet <code>student</code></li><li>arrays med frugter og studerende</li><li><code>findStudent()</code> med <code>for...of</code></li></ol>
+            </div>
+            <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/javascript-oevelser-amabot.md" target="_blank" rel="noreferrer">Åbn JavaScript-øvelserne ↗</a>
+          </div>
+          <p class="bottom-line"><b>Forudsig → skriv → kør → forklar.</b> Vend tilbage til AMAbotten, når mønstret giver mening.</p>
+          <aside class="notes">
+            Dette er et fleksibelt træningsstop. Hurtige studerende kan fortsætte i AMAbotten; studerende, der mangler
+            begreberne, tager øvelse 3–5 i JavaScript-filen. [Sources] - Lokal øvelse:
+            opgaver/javascript-oevelser-amabot.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="matching" class="chapter" data-accent="yellow">
+          <span class="chapter-number">04</span>
+          <span class="eyebrow">String-metoder og pattern matching</span>
+          <h2>Tekst bliver<br />til et match</h2>
+          <p>Normalisér spørgsmålet, undersøg nøgleordene og vælg den information, du har brug for.</p>
+          <aside class="notes">
+            Pattern matching betyder her simpel regelbaseret søgning efter tekststumper, ikke kunstig intelligens.
+            [Sources] - Lokal lektionsside: undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="normalize-slide" data-accent="yellow">
+          <span class="eyebrow">toLowerCase() + includes()</span>
+          <h2>Normalisér først — sammenlign bagefter</h2>
+          <div class="normalize-flow">
+            <article><span>Input</span><code>"Hvad HEDDER du?"</code></article><i>→</i>
+            <article><span><code>.toLowerCase()</code></span><code>"hvad hedder du?"</code></article><i>→</i>
+            <article><span><code>.includes("hedder")</code></span><strong>true</strong></article>
+          </div>
+          <div class="method-facts">
+            <p><code>toLowerCase()</code><span>returnerer en ny string</span></p>
+            <p><code>includes()</code><span>returnerer en boolean</span></p>
+          </div>
+          <aside class="notes">
+            Vigtigt: toLowerCase() ændrer ikke den oprindelige string; funktionen gemmer den nye værdi i
+            normalizedQuestion. includes() er case-sensitive, så normaliseringen gør matchet mere robust.
+            [Sources] - Lokale øvelser: opgaver/javascript-oevelser-amabot.md og opgaver/express-ejs-amabot.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="some-slide" data-accent="yellow">
+          <span class="eyebrow">.some() · mindst ét match?</span>
+          <h2>Så snart ét nøgleord matcher, er svaret <code>true</code></h2>
+          <div class="method-layout">
+            <pre><code class="language-javascript">const hasMatch = answerGroup.keywords.some(
+  (keyword) => normalizedQuestion.includes(keyword)
+);</code></pre>
+            <div class="keyword-checks">
+              <p><code>"navn"</code><b>false</b></p>
+              <p><code>"hedder"</code><b class="is-true">true</b></p>
+              <p class="stopped"><code>"hvem er du"</code><b>ikke undersøgt</b></p>
+            </div>
+          </div>
+          <p class="bottom-line"><code>.some()</code> svarer på et <b>ja/nej-spørgsmål</b> og kan stoppe tidligt.</p>
+          <aside class="notes">
+            Callback-parameteren keyword indeholder ét element fra keywords-arrayet pr. tur. Når callbacken giver
+            true, returnerer some() true med det samme. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="filter-slide" data-accent="yellow">
+          <span class="eyebrow">.filter() + .length · hvor mange matches?</span>
+          <h2>Behold alle matches — og tæl dem</h2>
+          <div class="method-layout">
+            <pre><code class="language-javascript">const matches = keywords.filter((keyword) =>
+  normalizedQuestion.includes(keyword)
+);
+
+return matches.length;</code></pre>
+            <div class="filter-result">
+              <span>keywords</span><code>["navn", "hedder", "hvem er du"]</code>
+              <span>matches</span><code>["navn", "hedder"]</code>
+              <span>score</span><strong>2</strong>
+            </div>
+          </div>
+          <aside class="notes">
+            filter() undersøger hele arrayet og returnerer et nyt array. length omdanner resultatet til den score,
+            findBestAnswer() skal sammenligne. [Sources] - Lokale øvelser: opgaver/javascript-oevelser-amabot.md og
+            opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="compare-slide" data-accent="yellow">
+          <span class="eyebrow">Vælg metoden efter spørgsmålet</span>
+          <h2><code>.some()</code> og <code>.filter()</code> giver forskellige svar</h2>
+          <table>
+            <thead><tr><th></th><th><code>.some()</code></th><th><code>.filter().length</code></th></tr></thead>
+            <tbody>
+              <tr><td>Spørger</td><td>Matcher mindst ét?</td><td>Hvor mange matcher?</td></tr>
+              <tr><td>Returnerer</td><td><code>true</code> eller <code>false</code></td><td>et tal</td></tr>
+              <tr><td>Kan stoppe tidligt?</td><td>Ja</td><td>Nej, alle skal undersøges</td></tr>
+              <tr><td>Bruges i</td><td><code>findAnswer()</code></td><td><code>findBestAnswer()</code></td></tr>
+            </tbody>
+          </table>
+          <aside class="notes">
+            Bed de studerende formulere forskellen med deres egne ord. Det er skiftet fra første match til bedste
+            match. [Sources] - Lokale øvelser: opgaver/express-ejs-amabot.md og
+            opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="funktioner" class="chapter" data-accent="green">
+          <span class="chapter-number">05</span>
+          <span class="eyebrow">Funktioner og kontrolflow</span>
+          <h2>Byggestenene<br />arbejder sammen</h2>
+          <p>Følg spørgsmålet ind i funktionen, gennem reglerne og ud som et svar.</p>
+          <aside class="notes">
+            Nu samles dagens begreber i AMAbottens findAnswer() og derefter findBestAnswer(). [Sources] - Lokal
+            lektionsside: undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="function-vocab-slide" data-accent="green">
+          <span class="eyebrow">Funktion · parameter · argument · return</span>
+          <h2>Et navn til en afgrænset opgave</h2>
+          <div class="function-anatomy">
+            <pre><code class="language-javascript">function findAnswer(question) {
+  // undersøg question
+  return "Jeg hedder Ada.";
+}
+
+const answer = findAnswer("Hvad hedder du?");</code></pre>
+            <dl>
+              <div><dt>Funktion</dt><dd><code>findAnswer</code></dd></div>
+              <div><dt>Parameter</dt><dd><code>question</code></dd></div>
+              <div><dt>Argument</dt><dd><code>"Hvad hedder du?"</code></dd></div>
+              <div><dt>Returværdi</dt><dd><code>"Jeg hedder Ada."</code></dd></div>
+            </dl>
+          </div>
+          <aside class="notes">
+            Brug kaldet til at skelne mellem parameter og argument. Return sender en værdi tilbage til kaldestedet;
+            console.log viser kun en værdi og er ikke det samme som return. [Sources] - Lokal lektionsside og øvelse:
+            undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md og opgaver/express-ejs-amabot.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="find-answer-slide" data-accent="green">
+          <span class="eyebrow">Følg spørgsmålet gennem findAnswer()</span>
+          <h2>Første match returneres med det samme</h2>
+          <div class="find-answer-layout">
+            <pre><code class="language-javascript">function findAnswer(question) {
+  const normalizedQuestion = question.toLowerCase();
+
+  for (const answerGroup of answers) {
+    const hasMatch = answerGroup.keywords.some((keyword) =>
+      normalizedQuestion.includes(keyword)
+    );
+
+    if (hasMatch) return answerGroup.answer;
+  }
+
+  return "Det kender jeg ikke svaret på endnu.";
+}</code></pre>
+            <ol>
+              <li>normalisér input</li>
+              <li>hent én regel</li>
+              <li>undersøg dens nøgleord</li>
+              <li>returnér ved match</li>
+              <li>ellers: prøv næste regel</li>
+            </ol>
+          </div>
+          <aside class="notes">
+            Trace "Hvad hedder du?" linje for linje. Ved et ukendt spørgsmål afsluttes hele løkken, før
+            standardsvaret returneres. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="first-match-slide" data-accent="orange">
+          <span class="eyebrow">Begrænsningen i findAnswer()</span>
+          <h2>Den første matchende regel er ikke altid den bedste</h2>
+          <div class="rule-race">
+            <p class="question-example">“Hvad <b>hedder</b> du, hvad er dit <b>navn</b>, og hvor <b>bor</b> du?”</p>
+            <article><span>Regel 1 · navn</span><strong>2 matches</strong><b>returnerer her</b></article>
+            <article><span>Regel 2 · bosted</span><strong>1 match</strong><b>bliver ikke undersøgt</b></article>
+            <article><span>Regel 3 · fritid</span><strong>0 matches</strong><b>bliver ikke undersøgt</b></article>
+          </div>
+          <p class="bottom-line">Tidlig <code>return</code> er effektiv — men rækkefølgen kan bestemme vinderen.</p>
+          <aside class="notes">
+            I dette konkrete eksempel er første regel også bedst, men pointen er, at funktionen ikke ved det, fordi
+            den aldrig beregner alle scores. Byt eventuelt om på antallet i et mundtligt eksempel. [Sources] - Lokal
+            øvelse: opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="work-slide" data-accent="green">
+          <span class="eyebrow">Arbejd videre · Øvelse 3</span>
+          <h2>Færdiggør den grundlæggende AMAbot</h2>
+          <div class="work-checklist">
+            <ol>
+              <li><code>answers</code> er et array af personlige svarregler</li>
+              <li><code>findAnswer()</code> virker isoleret i terminalen</li>
+              <li><code>POST /ask</code> gemmer spørgsmål og svar</li>
+              <li>tomt input bliver afvist på serveren</li>
+              <li>kendt, ukendt og tomt spørgsmål er testet</li>
+            </ol>
+            <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-amabot.md" target="_blank" rel="noreferrer">Åbn øvelse 3 ↗</a>
+          </div>
+          <p class="bottom-line"><b>Checkpoint:</b> I kan pege på, hvor spørgsmålet modtages, svaret vælges og HTML'en bygges.</p>
+          <aside class="notes">
+            Stop fællesgennemgangen her, og lad de studerende færdiggøre trin 10–13 efter behov. De, der er færdige,
+            kan gå videre til scoring. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="score-question-slide" data-accent="yellow">
+          <span class="eyebrow">Næste udfordring · Øvelse 4</span>
+          <h2>Hvad hvis flere regler matcher?</h2>
+          <div class="score-question-layout">
+            <p>Vi skal skifte spørgsmål:</p>
+            <div><span>Før</span><strong>Matcher reglen?</strong><code>true / false</code></div>
+            <div><span>Nu</span><strong>Hvor godt matcher reglen?</strong><code>0, 1, 2, …</code></div>
+          </div>
+          <p class="bottom-line">For at finde den bedste regel må vi <b>undersøge dem alle</b>.</p>
+          <aside class="notes">
+            Dette er den konceptuelle overgang fra some() til filter().length og fra tidlig return til en variabel,
+            der husker bedste resultat. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="count-matches-slide" data-accent="yellow">
+          <span class="eyebrow">En lille funktion med ét ansvar</span>
+          <h2><code>countMatches()</code> omdanner matches til en score</h2>
+          <div class="code-and-result compact-code-result">
+            <pre><code class="language-javascript">function countMatches(keywords, normalizedQuestion) {
+  const matches = keywords.filter((keyword) =>
+    normalizedQuestion.includes(keyword)
+  );
+
+  return matches.length;
+}</code></pre>
+            <pre><code class="language-javascript">countMatches(
+  ["navn", "hedder", "hvem er du"],
+  "hvad hedder du, og hvad er dit navn?"
+);
+
+// 2</code></pre>
+          </div>
+          <aside class="notes">
+            Test først funktionen isoleret med 0, 1 og 2 matches. Det gør fejl lettere at lokalisere, før funktionen
+            bruges inde i findBestAnswer(). [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-statistik.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="best-answer-slide" data-accent="green">
+          <span class="eyebrow">findBestAnswer() · husk den bedste indtil videre</span>
+          <h2>Ingen tidlig return: sammenlign alle regler</h2>
+          <div class="best-answer-layout">
+            <pre><code class="language-javascript">function findBestAnswer(question) {
+  const normalizedQuestion = question.toLowerCase();
+  let bestScore = 0;
+  let bestAnswer = "Det kender jeg ikke svaret på endnu.";
+
+  for (const answerGroup of answers) {
+    const score = countMatches(answerGroup.keywords, normalizedQuestion);
+
+    if (score &gt; bestScore) {
+      bestScore = score;
+      bestAnswer = answerGroup.answer;
+    }
+  }
+
+  return bestAnswer;
+}</code></pre>
+            <div class="memory-model">
+              <p><span>Aktuel regel</span><code>answerGroup</code></p>
+              <p><span>Aktuel score</span><code>score</code></p>
+              <p><span>Bedst hidtil</span><code>bestScore</code></p>
+              <p><span>Vinderens svar</span><code>bestAnswer</code></p>
+            </div>
+          </div>
+          <aside class="notes">
+            Fremhæv let: Variablerne med let kan ændre sig gennem løkken. Return står efter løkken, fordi alle regler
+            skal have en score først. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="score-trace-slide" data-accent="green">
+          <span class="eyebrow">Trace · hvad husker funktionen?</span>
+          <h2>Den bedste score opdateres kun, når en regel er bedre</h2>
+          <table>
+            <thead><tr><th>Regel</th><th><code>score</code></th><th><code>bestScore</code> efter turen</th><th><code>bestAnswer</code></th></tr></thead>
+            <tbody>
+              <tr><td>navn</td><td>1</td><td>1</td><td>“Jeg hedder Ada.”</td></tr>
+              <tr><td>bosted</td><td>2</td><td>2</td><td>“Jeg bor i Aarhus.”</td></tr>
+              <tr><td>fritid</td><td>0</td><td>2</td><td>“Jeg bor i Aarhus.”</td></tr>
+            </tbody>
+          </table>
+          <p class="bottom-line"><b>Return efter løkken:</b> “Jeg bor i Aarhus.”</p>
+          <aside class="notes">
+            Lad de studerende udfylde bestScore og bestAnswer mundtligt række for række. Tabellen illustrerer en
+            mulig test, ikke faste data fra deres egne bots. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="tie-slide" data-accent="orange">
+          <span class="eyebrow">Detaljen i sammenligningen</span>
+          <h2>Ved samme score afgør operatoren, hvem der vinder</h2>
+          <div class="tie-pair">
+            <article><code>if (score &gt; bestScore)</code><strong>Den første beholder sejren</strong><span>En lige så god regel overskriver ikke resultatet.</span></article>
+            <article><code>if (score &gt;= bestScore)</code><strong>Den sidste overtager</strong><span>En regel med samme score overskriver resultatet.</span></article>
+          </div>
+          <p class="bottom-line">I øvelse 4 bruger vi <code>&gt;</code>: rækkefølgen i <code>answers</code> afgør en uafgjort.</p>
+          <aside class="notes">
+            Spørg: Hvad skal der ske ved 1 mod 1? Svaret er en designbeslutning. Opgavens foreslåede løsning lader den
+            første regel vinde. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="return-object-slide" data-accent="cyan">
+          <span class="eyebrow">Statistik kræver mere end svarteksten</span>
+          <h2>Returnér et objekt med både svar og kategori</h2>
+          <div class="return-change">
+            <article><span>Før</span><pre><code class="language-javascript">return bestAnswer;</code></pre><small>returtypen er en string</small></article>
+            <i>→</i>
+            <article><span>Efter</span><pre><code class="language-javascript">return {
+  answer: bestAnswer,
+  category: bestCategory
+};</code></pre><small>returtypen er et objekt</small></article>
+          </div>
+          <p class="bottom-line"><code>result.answer</code> vises i chatten · <code>result.category</code> vælger tælleren.</p>
+          <aside class="notes">
+            Når funktionens returtype ændres, skal kaldestedet også ændres. POST-routen skal nu læse result.answer i
+            stedet for at bruge hele result-objektet som tekst. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="stats-slide" data-accent="cyan">
+          <span class="eyebrow">Objektet som tæller</span>
+          <h2>Kategorien vælger dynamisk den property, der skal opdateres</h2>
+          <div class="stats-layout">
+            <pre><code class="language-javascript">const topicStats = {
+  navn: 0,
+  bosted: 0,
+  fritid: 0
+};
+
+if (result.category) {
+  topicStats[result.category] =
+    topicStats[result.category] + 1;
+}</code></pre>
+            <div class="stats-example">
+              <p><span><code>result.category</code></span><strong>"bosted"</strong></p>
+              <p><span>vælger</span><strong><code>topicStats["bosted"]</code></strong></p>
+              <p><span>opdaterer</span><strong>0 → 1</strong></p>
+            </div>
+          </div>
+          <aside class="notes">
+            Et ukendt spørgsmål har en tom kategori, så if-blokken springes over. Sammenlign bracket notation med
+            den tidligere slide om objekter. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-statistik.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="stats-flow-slide" data-accent="cyan">
+          <span class="eyebrow">Hele statistik-flowet</span>
+          <h2>Den samme kategori bevæger sig fra regel til HTML</h2>
+          <div class="stats-flow">
+            <span><code>answers[].category</code></span><b>→</b>
+            <span><code>findBestAnswer()</code></span><b>→</b>
+            <span><code>result.category</code></span><b>→</b>
+            <span><code>topicStats[key]</code></span><b>→</b>
+            <span><code>response.render()</code></span><b>→</b>
+            <span>EJS</span>
+          </div>
+          <div class="stats-questions">
+            <p>Hvor bliver kategorien defineret?</p><p>Hvor ændres tælleren?</p><p>Hvordan får templaten adgang til objektet?</p>
+          </div>
+          <aside class="notes">
+            Brug flowet som kontrolspørgsmål før arbejdsblokken. GET- og POST-routen skal begge sende topicStats til
+            EJS, hvis templaten forventer variablen. [Sources] - Lokal øvelse:
+            opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="work-slide" data-accent="yellow">
+          <span class="eyebrow">Arbejd videre · Øvelse 4</span>
+          <h2>Gør AMAbotten klogere — og synliggør resultatet</h2>
+          <div class="work-checklist">
+            <ol>
+              <li>implementér og test <code>countMatches()</code></li>
+              <li>byg <code>findBestAnswer()</code>, der undersøger alle regler</li>
+              <li>returnér <code>answer</code> og <code>category</code></li>
+              <li>opdatér <code>topicStats</code> med bracket notation</li>
+              <li>send statistikken til EJS og vis den i jeres design</li>
+            </ol>
+            <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-amabot-statistik.md" target="_blank" rel="noreferrer">Åbn øvelse 4 ↗</a>
+          </div>
+          <p class="bottom-line"><b>Arbejd ét trin ad gangen.</b> Test funktionen isoleret, før I kobler den på routen.</p>
+          <aside class="notes">
+            Arbejdsblok til øvelse 4. Bed de studerende bruge de fire tests: navne-vinder, bosted-vinder, intet match
+            og samme score. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="fallback-slide" data-accent="orange">
+          <span class="eyebrow">Når noget ikke giver mening endnu</span>
+          <h2>Isolér det ene begreb — og øv det i en lille fil</h2>
+          <div class="fallback-paths">
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/javascript-oevelser-amabot.md" target="_blank" rel="noreferrer"><b><code>if</code>/<code>else</code></b><span>øvelse 2</span></a>
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/javascript-oevelser-amabot.md" target="_blank" rel="noreferrer"><b>objekter + arrays</b><span>øvelse 3–4</span></a>
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/javascript-oevelser-amabot.md" target="_blank" rel="noreferrer"><b><code>for...of</code></b><span>øvelse 5</span></a>
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/javascript-oevelser-amabot.md" target="_blank" rel="noreferrer"><b>string + matching</b><span>øvelse 6</span></a>
+          </div>
+          <p class="bottom-line">Vend derefter tilbage til <code>server.js</code>, og find det samme mønster i AMAbotten.</p>
+          <aside class="notes">
+            Brug sliden til differentiering. Det er ikke en ny hovedopgave, men et kort sidespor til det begreb, der
+            blokerer den enkelte studerende. [Sources] - Lokal øvelse: opgaver/javascript-oevelser-amabot.md
+            [/Sources]
+          </aside>
+        </section>
+
+        <section class="test-slide" data-accent="green">
+          <span class="eyebrow">Dagens afsluttende test</span>
+          <h2>En løsning er først færdig, når I har prøvet at få den til at fejle</h2>
+          <div class="test-matrix">
+            <article><span>01</span><strong>Kendt spørgsmål</strong><small>rigtigt svar og rigtig kategori</small></article>
+            <article><span>02</span><strong>Ukendt spørgsmål</strong><small>standardsvar og ingen tæller</small></article>
+            <article><span>03</span><strong>Tomt input</strong><small>fejl — ingen ny besked</small></article>
+            <article><span>04</span><strong>Flere matches</strong><small>reglen med højeste score vinder</small></article>
+            <article><span>05</span><strong>Samme score</strong><small>den første regel vinder</small></article>
+          </div>
+          <p class="bottom-line"><b>Aflevering til din makker:</b> Forklar input, data, kontrolflow og returværdi uden at læse op.</p>
+          <aside class="notes">
+            Afslut med peer explanation. Testene samler tjekpunkterne fra øvelse 3 og 4. [Sources] - Lokale øvelser:
+            opgaver/express-ejs-amabot.md og opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="closing-slide" data-accent="cyan">
+          <span class="eyebrow">Tag det med videre</span>
+          <h2>Du lærer ikke kode ved at se på den.<br /><span>Du lærer kode ved at arbejde med den.</span></h2>
+          <p class="closing-note">Forudsig · skriv · kør · fejl · læs · ret · forklar · gentag</p>
+          <aside class="notes">
+            Luk cirklen tilbage til motivationsåbningen. Bed hver studerende nævne ét begreb, de nu kan forklare
+            bedre, og ét de vil øve videre på. [Sources] - Underviserens didaktiske opsummering baseret på dagens
+            lokale øvelser. [/Sources]
+          </aside>
+        </section>
       </div>
     </div>
     <script type="module" src="../shared/deck.js"></script>
