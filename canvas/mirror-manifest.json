@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-07T19:34:15.177Z",
+  "pulled_at": "2026-09-07T20:15:18.010Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -55,8 +55,8 @@
       "canvas_hash": "8509e4484c2963b3d234d91c4155aa45edb765acd0dc1bc5ab509d1c37633614"
     },
     "undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md": {
-      "local_hash": "a8381b0fc79fdccf30d3d7ce44c4489ece971b80a80e4aa2559f32d468e71d1e",
-      "canvas_hash": "a8381b0fc79fdccf30d3d7ce44c4489ece971b80a80e4aa2559f32d468e71d1e"
+      "local_hash": "936494347c02cfc2b9ff765de468476a65f22a3a9b905459659a10e2d39bca77",
+      "canvas_hash": "936494347c02cfc2b9ff765de468476a65f22a3a9b905459659a10e2d39bca77"
     },
     "undervisning/015-forberedelse-selvstudium-14-09-2026.md": {
       "local_hash": "bcbc7c3db1c033a295ebe336decd7f769b216506a5b8071ed65ba30657ceb071",
