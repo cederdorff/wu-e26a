@@ -498,9 +498,28 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 0,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178028/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050433,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178028,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050433",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178029,
@@ -751,9 +770,28 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 0,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178032/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050434,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178032,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050434",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178033,
@@ -826,9 +864,28 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 0,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178034/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050435,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178034,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050435",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178035,
@@ -900,10 +957,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178036/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050436,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178036,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050436",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178037,
@@ -975,10 +1051,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178038/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050438,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178038,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050438",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178039,
@@ -1111,10 +1206,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178041/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050442,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178041,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050442",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178042,
@@ -1186,10 +1300,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178043/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050443,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178043,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050443",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178044,
@@ -1322,10 +1455,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178046/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050444,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178046,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050444",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178047,
@@ -1458,10 +1610,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178049/items",
-    "items": []
+    "items": [
+      {
+        "id": 1050445,
+        "position": 1,
+        "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178049,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050445",
+        "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178050,
