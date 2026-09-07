@@ -803,7 +803,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 4,
+    "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178033/items",
     "items": [
       {
@@ -818,24 +818,6 @@
         "page_url": "plan-for-race-3-data-logik-arrays-og-objekter",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-3-data-logik-arrays-og-objekter",
-        "published": true,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1050630,
-        "position": 2,
-        "title": "Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "Page",
-        "module_id": 178033,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050630",
-        "page_url": "opsamling-byg-videre-pa-amabotten-ovelse-3-og-4",
-        "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opsamling-byg-videre-pa-amabotten-ovelse-3-og-4",
         "published": true,
         "unpublishable": true,
         "content_details": {
