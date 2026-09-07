@@ -24,7 +24,7 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 - Genbesøg punktnotation og bracket notation på objekter
 - Genbesøg arrays af objekter og `for...of`
 - Se, hvordan den samme struktur (arrays og objekter, indlejret i hinanden) går igen, når vi sender og modtager data over HTTP, og senere når data ligger i en database
-- Pointe: det er ikke tilfældigt — det er fordi JSON _er_ JavaScript-objekter og -arrays skrevet som tekst
+- Pointe: det er ikke tilfældigt — det er fordi JSON *er* JavaScript-objekter og -arrays skrevet som tekst
 </details>
 <details>
 <summary><strong>3. Hvad er persistens?</strong></summary>
@@ -49,7 +49,7 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 - `node:fs/promises` — indbygget i Node.js, intet at installere
 - `fs.readFile()` og `fs.writeFile()` er asynchronous — derfor `async`/`await`
 - Mønstret: **read → modify → write**
-  - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
+    - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
 - Hvorfor er `push()` på et array alene ikke nok? Data ændres kun i memory, ikke i filen
 </details>
 <details>
@@ -76,9 +76,9 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 
 - Slides: TBA
 - Opgaver:
-  - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — en lille selvstændig CRUD-app, der læser og skriver studerende til en JSON-fil, før I bruger samme mønster i øvelse 5
-  - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
-  - [Ekstraøvelse: Node.js File System](../opgaver/node-file-system.md) — for dem, der vil videre: `appendFile()`, `mkdir()`, `readdir()`, m.m. på `hello-http-module`
+    - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — en lille selvstændig CRUD-app, der læser og skriver studerende til en JSON-fil, før I bruger samme mønster i øvelse 5
+    - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
+    - [Ekstraøvelse: Node.js File System](../opgaver/node-file-system.md) — for dem, der vil videre: `appendFile()`, `mkdir()`, `readdir()`, m.m. på `hello-http-module`
 
 ---
 
@@ -96,7 +96,7 @@ canvas_page_id: 200713
 canvas_page_slug: "plan-for-race-4-persistens-json-og-file-system"
 canvas_page_title: "Plan for RACE 4 - Persistens, JSON og File System"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T14:48:13Z"
+canvas_updated_at: "2026-09-07T15:12:37Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018700"
 local_status: mirrored
 ```
