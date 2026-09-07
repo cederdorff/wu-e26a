@@ -67,6 +67,7 @@ I sidste undervisningsgang påbegyndte du AMAbotten. I dag færdiggør vi først
 ## Materialer
 
 - Slides:
+    - [RACE 3 · Data, logik, arrays og objekter](https://cederdorff.com/wu-e26a/data-logik/)
     - [JavaScript Concepts](https://cederdorff.com/race/slides/js-concepts.pdf)
 - Opgaver:
     - [3\. Server-renderet AMAbot med regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggøres i dag
