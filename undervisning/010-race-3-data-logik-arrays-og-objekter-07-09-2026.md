@@ -89,7 +89,7 @@ canvas_page_id: 200711
 canvas_page_slug: "plan-for-race-3-data-logik-arrays-og-objekter"
 canvas_page_title: "Plan for RACE 3 - Data logik, arrays og objekter"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T08:02:42Z"
+canvas_updated_at: "2026-09-07T08:40:32Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018694"
 local_status: mirrored
 ```
