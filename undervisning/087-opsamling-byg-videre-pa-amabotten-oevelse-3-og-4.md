@@ -29,12 +29,12 @@ Hop direkte til det kapitel, der matcher dit blokerende begreb:
 
 Kan du forklare alle fem uden at læse op i koden?
 
-| Situation                 | Forventet resultat                            |
-| ------------------------- | --------------------------------------------- |
-| Kendt spørgsmål           | Rigtigt svar (og rigtig kategori i øvelse 4)  |
-| Ukendt spørgsmål          | Standardsvar, ingen tæller opdateres          |
-| Tomt input                | Fejlbesked, ingen ny besked i historikken     |
-| Flere regler matcher      | Reglen med højeste score vinder (øvelse 4)    |
+| Situation | Forventet resultat |
+| --- | --- |
+| Kendt spørgsmål | Rigtigt svar (og rigtig kategori i øvelse 4) |
+| Ukendt spørgsmål | Standardsvar, ingen tæller opdateres |
+| Tomt input | Fejlbesked, ingen ny besked i historikken |
+| Flere regler matcher | Reglen med højeste score vinder (øvelse 4) |
 | To regler får samme score | Den regel, der står først i `answers`, vinder |
 
 Husk `git add` / `commit` / `push` undervejs.
@@ -55,7 +55,7 @@ canvas_page_id: 207081
 canvas_page_slug: "opsamling-byg-videre-pa-amabotten-ovelse-3-og-4"
 canvas_page_title: "Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T13:49:07Z"
+canvas_updated_at: "2026-09-07T13:57:32Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/pages/opsamling-byg-videre-pa-amabotten-ovelse-3-og-4"
 local_status: mirrored
 ```

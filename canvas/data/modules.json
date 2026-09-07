@@ -882,7 +882,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 1,
+    "items_count": 2,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178034/items",
     "items": [
       {
@@ -897,6 +897,24 @@
         "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1050631,
+        "position": 2,
+        "title": "Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178034,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050631",
+        "page_url": "opsamling-byg-videre-pa-amabotten-ovelse-3-og-4",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opsamling-byg-videre-pa-amabotten-ovelse-3-og-4",
         "published": true,
         "unpublishable": true,
         "content_details": {
@@ -976,7 +994,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 1,
+    "items_count": 2,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178036/items",
     "items": [
       {
@@ -991,6 +1009,24 @@
         "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1050632,
+        "position": 2,
+        "title": "Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178036,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1050632",
+        "page_url": "opsamling-byg-videre-pa-amabotten-ovelse-3-og-4",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opsamling-byg-videre-pa-amabotten-ovelse-3-og-4",
         "published": true,
         "unpublishable": true,
         "content_details": {

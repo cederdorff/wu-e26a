@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-07T13:55:49.875Z
+Senest hentet: 2026-09-07T13:57:37.151Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -124,6 +124,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/011-forberedelse-selvstudium-08-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026
 
@@ -140,6 +141,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/013-forberedelse-selvstudium-10-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 014 · RACE 4 - Persistens, JSON og File System - 11-09-2026
 
