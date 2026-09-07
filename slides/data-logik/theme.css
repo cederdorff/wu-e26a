@@ -503,14 +503,14 @@
   text-align: center;
 }
 .validation-steps strong,
-.validation-steps code,
+.validation-steps div > code,
 .validation-steps span {
   display: block;
 }
 .validation-steps strong {
   font-size: 22px;
 }
-.validation-steps code {
+.validation-steps div > code {
   width: fit-content;
   margin-top: 7px;
   font-size: 18px;
