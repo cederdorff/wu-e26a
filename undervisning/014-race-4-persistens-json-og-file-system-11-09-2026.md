@@ -4,7 +4,7 @@
 
 ## Dagens fokus
 
-I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMAbottens svarlogik. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet — i APIs, config-filer og (senere) databaser. Derefter introducerer vi Node.js' File System API, så I kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — I går fra data, der kun findes i memory, til rigtig persistens.
+I sidste undervisningsgang arbejdede vi med objekter, arrays og kontrolstrukturer i AMAbottens svarlogik. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
 
 ---
 
