@@ -2,7 +2,7 @@
 
 ## Kort fortalt
 
-I denne øvelse bygger du en lille, selvstændig server — adskilt fra din AMAbot. Serveren gemmer ikke sine data i en variabel, men i en JSON-fil. Du starter med at læse og vise nogle allerede oprettede studerende, og bygger derefter en formular, der opretter nye. Alt sker med Node.js' File System API.
+I denne øvelse bygger du en lille, selvstændig server — adskilt fra din AMAbot. Serveren gemmer ikke sine data i en variabel, men i en JSON-fil. Du starter med at læse og vise nogle allerede oprettede `students`, og bygger derefter en formular, der opretter nye. Alt sker med Node.js' File System API.
 
 > Det er den samme read → modify → write-idé, du skal bruge til at gemme AMAbottens chathistorik i [øvelse 5](express-ejs-amabot-persistens.md). Her træner du idéen på et enklere eksempel først.
 
@@ -272,9 +272,7 @@ app.post("/students/:id/delete", async (request, response) => {
   const data = await fs.readFile("./data/students.json", "utf8");
   const students = JSON.parse(data);
 
-  const remainingStudents = students.filter(
-    (student) => student.id !== Number(request.params.id)
-  );
+  const remainingStudents = students.filter((student) => student.id !== Number(request.params.id));
 
   const json = JSON.stringify(remainingStudents, null, 2);
   await fs.writeFile("./data/students.json", json);
@@ -307,9 +305,7 @@ app.get("/students/:id/edit", async (request, response) => {
   const data = await fs.readFile("./data/students.json", "utf8");
   const students = JSON.parse(data);
 
-  const student = students.find(
-    (student) => student.id === Number(request.params.id)
-  );
+  const student = students.find((student) => student.id === Number(request.params.id));
 
   response.render("edit", { student });
 });
@@ -345,9 +341,7 @@ app.post("/students/:id/edit", async (request, response) => {
   const data = await fs.readFile("./data/students.json", "utf8");
   const students = JSON.parse(data);
 
-  const student = students.find(
-    (student) => student.id === Number(request.params.id)
-  );
+  const student = students.find((student) => student.id === Number(request.params.id));
 
   student.name = request.body.name;
   student.education = request.body.education;
@@ -498,13 +492,15 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 0.7rem 0;
   border-bottom: 1px solid #ddd6cf;
 }
 
-td:last-child, th:last-child {
+td:last-child,
+th:last-child {
   text-align: right;
 }
 
@@ -523,7 +519,8 @@ td:last-child, th:last-child {
   display: inline;
 }
 
-.btn, .link {
+.btn,
+.link {
   border: none;
   background: none;
   font: inherit;
@@ -533,7 +530,8 @@ td:last-child, th:last-child {
   cursor: pointer;
 }
 
-.btn:hover, .link:hover {
+.btn:hover,
+.link:hover {
   text-decoration: underline;
 }
 
