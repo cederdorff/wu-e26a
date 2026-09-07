@@ -12,7 +12,7 @@ Byg videre på det, du startede i [RACE 3 - Data logik, arrays og objekter - 07-
 
 ---
 
-## Genbesøg slides fra RACE 3, hvis et begreb er uklart
+## Genbesøg slides, hvis et begreb er uklart
 
 Slides: [RACE 3 · Data, logik, arrays og objekter](https://cederdorff.com/wu-e26a/data-logik/)
 
