@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-07T15:18:18.934Z",
+  "pulled_at": "2026-09-07T15:35:06.288Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -55,8 +55,8 @@
       "canvas_hash": "8509e4484c2963b3d234d91c4155aa45edb765acd0dc1bc5ab509d1c37633614"
     },
     "undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md": {
-      "local_hash": "0669f210391fdfe1e8d485530927bf41c8687f3e7d06299d52408bf4e4196f83",
-      "canvas_hash": "0669f210391fdfe1e8d485530927bf41c8687f3e7d06299d52408bf4e4196f83"
+      "local_hash": "a7ad5ccf576f31d047380dcd9ca8114fe7e765f88189cb2f1a2c11b8b2e193e2",
+      "canvas_hash": "a7ad5ccf576f31d047380dcd9ca8114fe7e765f88189cb2f1a2c11b8b2e193e2"
     },
     "undervisning/015-forberedelse-selvstudium-14-09-2026.md": {
       "local_hash": "bcbc7c3db1c033a295ebe336decd7f769b216506a5b8071ed65ba30657ceb071",
@@ -67,8 +67,8 @@
       "canvas_hash": "aaed44db0ce0ae1eb8612920ff29bcb23d59d48268ea4c1fdbd70b9edfb62144"
     },
     "undervisning/017-race-5-node-express-rest-api-16-09-2026.md": {
-      "local_hash": "42762a237806340129044c70d69960607fb30fe32030e96beb1677d503f0f11e",
-      "canvas_hash": "42762a237806340129044c70d69960607fb30fe32030e96beb1677d503f0f11e"
+      "local_hash": "4bbc565fd914b4377c294dc91be180a7ade9daa1e56ca2123604180b4770bfce",
+      "canvas_hash": "4bbc565fd914b4377c294dc91be180a7ade9daa1e56ca2123604180b4770bfce"
     },
     "undervisning/018-forberedelse-selvstudium-17-09-2026.md": {
       "local_hash": "75a72430ed7799c455a6bdb2b167ad2ab49f66a02db4e8b524f152dad4610759",
@@ -87,16 +87,16 @@
       "canvas_hash": "badb95e5dd58b628817ba1f321fb5751ca7273c2b64447f41701223ed7208b68"
     },
     "undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md": {
-      "local_hash": "119235d99f0671bc2261bb0e89b53f1aa1cef394d3968db96823e2ed2e7ea4b4",
-      "canvas_hash": "119235d99f0671bc2261bb0e89b53f1aa1cef394d3968db96823e2ed2e7ea4b4"
+      "local_hash": "1a986f2b0e326568d495e0d582630021e7403ce86cff142424418826312e70c4",
+      "canvas_hash": "1a986f2b0e326568d495e0d582630021e7403ce86cff142424418826312e70c4"
     },
     "undervisning/023-forberedelse-selvstudium-24-09-2026.md": {
       "local_hash": "c29036a0b0a35d962469e89c47f2ffe7f7b1eaa45a7c828fea3fb40b2f6b30b6",
       "canvas_hash": "c29036a0b0a35d962469e89c47f2ffe7f7b1eaa45a7c828fea3fb40b2f6b30b6"
     },
     "undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md": {
-      "local_hash": "b99876dd1811a77e71ce9766d2fa03a76aac640e24dcd93e547265bf06a0103e",
-      "canvas_hash": "b99876dd1811a77e71ce9766d2fa03a76aac640e24dcd93e547265bf06a0103e"
+      "local_hash": "47ba25809a28c84d36a17508ded26aa71f883506225a4dcf60654e8604d58d29",
+      "canvas_hash": "47ba25809a28c84d36a17508ded26aa71f883506225a4dcf60654e8604d58d29"
     },
     "undervisning/025-dob-7-client-side-error-handling-28-09-2026.md": {
       "local_hash": "c1d887b9322a421535943f7d8c5a0a0fc25ef06318dfe4e0202d82af87f85297",

@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-07T15:18:18.934Z
+Senest hentet: 2026-09-07T15:35:06.288Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -170,7 +170,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 017 · RACE 5 - Node/Express REST API - 16-09-2026
 
-[Lokal fil](../undervisning/017-race-5-node-express-rest-api-16-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/017-race-5-node-express-rest-api-16-09-2026.md) · publiceret
 
 - [Plan for RACE 5 - Node/Express REST API](../undervisning/017-race-5-node-express-rest-api-16-09-2026.md)
 
@@ -212,7 +212,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 022 · RACE 6 - Arkitektur og REST API Best Practices - 23-09-2026
 
-[Lokal fil](../undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md) · publiceret
 
 - [Plan for RACE 6 - Arkitektur og REST API Best Practices](../undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md)
 
@@ -228,7 +228,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 024 · RACE 7 - Sikkerhed og Error Handling - 25-09-2026
 
-[Lokal fil](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) · publiceret
 
 - [Plan for RACE 7 - Sikkerhed og Error Handling](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md)
 

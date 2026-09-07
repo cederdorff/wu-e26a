@@ -41,7 +41,7 @@ TBA
 canvas_course_id: 32059
 canvas_module_id: 178040
 canvas_module_position: 17
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: 1018706
 canvas_module_item_position: 1
 canvas_page_id: 200715

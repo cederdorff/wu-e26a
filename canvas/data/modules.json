@@ -1181,7 +1181,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178040/items",
     "items": [
@@ -1430,7 +1430,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178045/items",
     "items": [
@@ -1524,7 +1524,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178047/items",
     "items": [
