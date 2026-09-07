@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
 
-Byg videre på det, du startede i [RACE 3 - Data logik, arrays og objekter - 07-09-2026](010-race-3-data-logik-arrays-og-objekter-07-09-2026.md). Skriv koden selv, og test hvert trin før du går videre.
+Byg videre på det, du startede i [RACE 3](./010-race-3-data-logik-arrays-og-objekter-07-09-2026.md) i dag. Skriv koden selv, og test hvert trin før du går videre.
 
 ## Sådan arbejder du videre
 
@@ -55,7 +55,7 @@ canvas_page_id: 207081
 canvas_page_slug: "opsamling-byg-videre-pa-amabotten-ovelse-3-og-4"
 canvas_page_title: "Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T13:43:38Z"
+canvas_updated_at: "2026-09-07T13:49:07Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/pages/opsamling-byg-videre-pa-amabotten-ovelse-3-og-4"
 local_status: mirrored
 ```
