@@ -6,9 +6,9 @@ Byg videre på det, du startede i [RACE 3 - Data logik, arrays og objekter - 07-
 
 ## Sådan arbejder du videre
 
-1.  [Øvelse 3 · Regelbaseret svarlogik](https://file+.vscode-resource.vscode-cdn.net/Users/race/Developer/wu-e26a/opgaver/express-ejs-amabot.md) — færdiggør, hvis du ikke helt er der endnu.
-2.  [Øvelse 4 · Scoring og statistik](https://file+.vscode-resource.vscode-cdn.net/Users/race/Developer/wu-e26a/opgaver/express-ejs-amabot-statistik.md) — `findBestAnswer()` vælger reglen med flest matchende nøgleord i stedet for den første, og `topicStats` tæller emner.
-3.  Sidder du fast et sted? Tag en kort afstikker til [JavaScript-øvelser til AMAbot](https://file+.vscode-resource.vscode-cdn.net/Users/race/Developer/wu-e26a/opgaver/javascript-oevelser-amabot.md) — træn det ene begreb isoleret, og vend så tilbage til din egen kode.
+1.  [Øvelse 3 · Regelbaseret svarlogik](../opgaver/express-ejs-amabot.md) — færdiggør, hvis du ikke helt er der endnu.
+2.  [Øvelse 4 · Scoring og statistik](../opgaver/express-ejs-amabot-statistik.md) — `findBestAnswer()` vælger reglen med flest matchende nøgleord i stedet for den første, og `topicStats` tæller emner.
+3.  Sidder du fast et sted? Tag en kort afstikker til [JavaScript-øvelser til AMAbot](../opgaver/javascript-oevelser-amabot.md) — træn det ene begreb isoleret, og vend så tilbage til din egen kode.
 
 ---
 
