@@ -780,3 +780,7 @@ Test modulet:
 Forklar, hvilken fil der eksporterer data, hvilken fil der importerer dem, og hvor variablen `answers` findes, når `findBestAnswer()` kører.
 
 </details>
+
+## Videre til øvelse 5
+
+Lige nu forsvinder `messages` og `topicStats`, hver gang du genstarter serveren — de findes kun i memory. I [øvelse 5: Gem AMAbottens chathistorik i en JSON-fil](express-ejs-amabot-persistens.md) gemmer du historikken i en fil med Node.js' File System API, så samtalen overlever en genstart.

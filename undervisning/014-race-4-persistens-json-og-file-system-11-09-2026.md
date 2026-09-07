@@ -24,7 +24,7 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 - Genbesøg punktnotation og bracket notation på objekter
 - Genbesøg arrays af objekter og `for...of`
 - Se, hvordan den samme struktur (arrays og objekter, indlejret i hinanden) går igen, når vi sender og modtager data over HTTP, og senere når data ligger i en database
-- Pointe: det er ikke tilfældigt — det er fordi JSON *er* JavaScript-objekter og -arrays skrevet som tekst
+- Pointe: det er ikke tilfældigt — det er fordi JSON _er_ JavaScript-objekter og -arrays skrevet som tekst
 </details>
 <details>
 <summary><strong>3. Hvad er persistens?</strong></summary>
@@ -56,9 +56,8 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 <summary><strong>6. Gem AMAbottens chathistorik</strong></summary>
 
 - Lige nu lever `messages` kun i memory — historikken forsvinder, når serveren genstartes
-- Flyt (eller gem en kopi af) `messages` til `data/messages.json`
-- Læs historikken fra filen, når serveren starter/siden vises
-- Skriv historikken til filen, hver gang der stilles et nyt spørgsmål
+- Sidder et JSON/fs-begreb fast? Tag en kort afstikker til [JSON- og File System-øvelser til AMAbot](../opgaver/json-fs-oevelser-amabot.md)
+- Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): læs `messages` fra `data/messages.json`, når serveren starter, og skriv til filen, hver gang der stilles et nyt spørgsmål
 - Test persistens: stil et spørgsmål, genstart serveren, og tjek om historikken stadig er der
 </details>
 
@@ -77,8 +76,8 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 
 - Slides: TBA
 - Opgaver:
-    - [Ekstraøvelse: Node.js File System](../opgaver/node-file-system.md) — `readFile()`, `writeFile()`, JSON og persistens på `hello-http-module`
-    - Byg videre på [øvelse 3 · AMAbot](../opgaver/express-ejs-amabot.md) — gem samtalehistorikken i en JSON-fil, så den overlever en genstart
+  - [JSON- og File System-øvelser til AMAbot](../opgaver/json-fs-oevelser-amabot.md) — træn `JSON.stringify()`/`JSON.parse()` og `fs.readFile()`/`fs.writeFile()` på et simpelt array, før I bruger dem i øvelse 5
+  - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
 
 ---
 
