@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-07T13:38:22.499Z",
+  "pulled_at": "2026-09-07T13:45:00.975Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "673898475dfd07ae84e2116f55b4306ff521b6edabc9d39fdbb2447fe0cbbbe0",
@@ -43,8 +43,8 @@
       "canvas_hash": "87ac933c1987ff2d4c46b0c4d71077ff051b302969224cc8db0c10b402d31fea"
     },
     "undervisning/011-forberedelse-selvstudium-08-09-2026.md": {
-      "local_hash": "3dc13544a184b11dfe855619618a37f0860c4461cc81b9cbede440cd2e3da655",
-      "canvas_hash": "3dc13544a184b11dfe855619618a37f0860c4461cc81b9cbede440cd2e3da655"
+      "local_hash": "bcb5f3a5fdacb7cd46eb4f60a68929465a5994c89cd999c32455097b8e2a0004",
+      "canvas_hash": "bcb5f3a5fdacb7cd46eb4f60a68929465a5994c89cd999c32455097b8e2a0004"
     },
     "undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md": {
       "local_hash": "ab1d8904c32a931fa3ca8e4cc6395048b56344b9a7d8a9c0c2100913df7e2df6",
@@ -346,19 +346,23 @@
       "local_hash": "5de694f3977b0f15dcb365629f4cf0aded93a10f828e302cf06525b3811a8f70",
       "canvas_hash": "5de694f3977b0f15dcb365629f4cf0aded93a10f828e302cf06525b3811a8f70"
     },
-    "undervisning/087-sadan-bruger-du-dette-canvas-rum.md": {
+    "undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md": {
+      "local_hash": "3e89bf6e61ad2f362cd63f35c76ee2f69d9c3b12f5af4686b8a4515a5c18c749",
+      "canvas_hash": "3e89bf6e61ad2f362cd63f35c76ee2f69d9c3b12f5af4686b8a4515a5c18c749"
+    },
+    "undervisning/088-sadan-bruger-du-dette-canvas-rum.md": {
       "local_hash": "4655fe403a201d96cdba47f4ba75dbb1f4e6392fcf80afa9321c276ab7cf8c5b",
       "canvas_hash": "4655fe403a201d96cdba47f4ba75dbb1f4e6392fcf80afa9321c276ab7cf8c5b"
     },
-    "undervisning/088-sadan-bruger-du-dette-canvas-rum.md": {
+    "undervisning/089-sadan-bruger-du-dette-canvas-rum.md": {
       "local_hash": "671bba3a0b1dfa97880c360a1524c190ab2f3adedcdabb9253a1f10e21827ff6",
       "canvas_hash": "671bba3a0b1dfa97880c360a1524c190ab2f3adedcdabb9253a1f10e21827ff6"
     },
-    "undervisning/089-test-element.md": {
+    "undervisning/090-test-element.md": {
       "local_hash": "641eee9f52e8fc395147c8e68e92facb4d8a39ed99c4fec7ee0e767fa273231e",
       "canvas_hash": "641eee9f52e8fc395147c8e68e92facb4d8a39ed99c4fec7ee0e767fa273231e"
     },
-    "undervisning/090-test-element.md": {
+    "undervisning/091-test-element.md": {
       "local_hash": "b190b7028d67892cf374c528a7a8797e2c0bcc4f4cb22bfa07bc9682cd12d960",
       "canvas_hash": "b190b7028d67892cf374c528a7a8797e2c0bcc4f4cb22bfa07bc9682cd12d960"
     }

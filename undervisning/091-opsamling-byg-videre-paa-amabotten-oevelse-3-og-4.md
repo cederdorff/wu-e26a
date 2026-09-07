@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
 
-Opsamling på [RACE 3](010-race-3-data-logik-arrays-og-objekter-07-09-2026.md) (07-09-2026) — din tjekliste til at arbejde videre med AMAbotten. Skriv koden selv, og test efter hvert trin.
+Opsamling på [RACE 3 - Data logik, arrays og objekter - 07-09-2026](010-race-3-data-logik-arrays-og-objekter-07-09-2026.md) — din tjekliste til at arbejde videre med AMAbotten. Skriv koden selv, og test efter hvert trin.
 
 ## Sådan arbejder du videre
 

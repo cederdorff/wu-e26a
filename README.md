@@ -114,10 +114,11 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 
 ### Øvrige Canvas-sider
 
-- [087 · Sådan bruger du dette Canvas-rum](./undervisning/087-sadan-bruger-du-dette-canvas-rum.md)
+- [087 · Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](./undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 - [088 · Sådan bruger du dette Canvas-rum](./undervisning/088-sadan-bruger-du-dette-canvas-rum.md)
-- [089 · Test element](./undervisning/089-test-element.md) — *kladde i Canvas*
+- [089 · Sådan bruger du dette Canvas-rum](./undervisning/089-sadan-bruger-du-dette-canvas-rum.md)
 - [090 · Test element](./undervisning/090-test-element.md) — *kladde i Canvas*
+- [091 · Test element](./undervisning/091-test-element.md) — *kladde i Canvas*
 <!-- CANVAS_OVERSIGT_SLUT -->
 
 ## Om spejlet
