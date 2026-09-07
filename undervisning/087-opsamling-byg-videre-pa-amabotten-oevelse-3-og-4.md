@@ -55,7 +55,7 @@ canvas_page_id: 207081
 canvas_page_slug: "opsamling-byg-videre-pa-amabotten-ovelse-3-og-4"
 canvas_page_title: "Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T13:57:32Z"
+canvas_updated_at: "2026-09-07T13:59:15Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/pages/opsamling-byg-videre-pa-amabotten-ovelse-3-og-4"
 local_status: mirrored
 ```
