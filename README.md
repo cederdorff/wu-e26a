@@ -34,16 +34,16 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [013 · Forberedelse - Selvstudium - 10-09-2026](./undervisning/013-forberedelse-selvstudium-10-09-2026.md) — *kladde i Canvas*
 - [014 · RACE 4 - Persistens, JSON og File System - 11-09-2026](./undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md) — *kladde i Canvas*
 - [015 · Forberedelse - Selvstudium - 14-09-2026](./undervisning/015-forberedelse-selvstudium-14-09-2026.md) — *kladde i Canvas*
-- [016 · DOB 4 - DOM manipulation med JS - 15-09-2026](./undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md) — *kladde i Canvas*
+- [016 · DOB 4 - DOM manipulation med JS - 15-09-2026](./undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md)
 - [017 · RACE 5 - Node/Express REST API - 16-09-2026](./undervisning/017-race-5-node-express-rest-api-16-09-2026.md) — *kladde i Canvas*
 - [018 · Forberedelse - Selvstudium - 17-09-2026](./undervisning/018-forberedelse-selvstudium-17-09-2026.md) — *kladde i Canvas*
-- [019 · DOB 5 - Fetch og async JavaScript - 18-09-2026](./undervisning/019-dob-5-fetch-og-async-javascript-18-09-2026.md) — *kladde i Canvas*
+- [019 · DOB 5 - Fetch og async JavaScript - 18-09-2026](./undervisning/019-dob-5-fetch-og-async-javascript-18-09-2026.md)
 - [020 · Forberedelse - Selvstudium - 21-09-2026](./undervisning/020-forberedelse-selvstudium-21-09-2026.md) — *kladde i Canvas*
-- [021 · DOB 6 - Promises og async/await - 22-09-2026](./undervisning/021-dob-6-promises-og-async-await-22-09-2026.md) — *kladde i Canvas*
+- [021 · DOB 6 - Promises og async/await - 22-09-2026](./undervisning/021-dob-6-promises-og-async-await-22-09-2026.md)
 - [022 · RACE 6 - Arkitektur og REST API Best Practices - 23-09-2026](./undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md) — *kladde i Canvas*
 - [023 · Forberedelse - Selvstudium - 24-09-2026](./undervisning/023-forberedelse-selvstudium-24-09-2026.md) — *kladde i Canvas*
 - [024 · RACE 7 - Sikkerhed og Error Handling - 25-09-2026](./undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) — *kladde i Canvas*
-- [025 · DOB 7 - Client-side error handling - 28-09-2026](./undervisning/025-dob-7-client-side-error-handling-28-09-2026.md) — *kladde i Canvas*
+- [025 · DOB 7 - Client-side error handling - 28-09-2026](./undervisning/025-dob-7-client-side-error-handling-28-09-2026.md)
 - [026 · Forberedelse - Selvstudium - 29-09-2026](./undervisning/026-forberedelse-selvstudium-29-09-2026.md) — *kladde i Canvas*
 - [027 · DOB 8 - Client/Server præsentationer - 30-09-2026](./undervisning/027-dob-8-client-server-praesentationer-30-09-2026.md) — *kladde i Canvas*
 

@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-07T08:40:36.667Z
+Senest hentet: 2026-09-07T09:51:44.264Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -158,7 +158,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 016 · DOB 4 - DOM manipulation med JS - 15-09-2026
 
-[Lokal fil](../undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md) · publiceret
 
 - [Plan for DOB 4 - DOM manipulation med JS](../undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md)
 
@@ -184,7 +184,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 019 · DOB 5 - Fetch og async JavaScript - 18-09-2026
 
-[Lokal fil](../undervisning/019-dob-5-fetch-og-async-javascript-18-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/019-dob-5-fetch-og-async-javascript-18-09-2026.md) · publiceret
 
 - [Plan for DOB 5 - Fetch og async JavaScript](../undervisning/019-dob-5-fetch-og-async-javascript-18-09-2026.md)
 
@@ -200,7 +200,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 021 · DOB 6 - Promises og async/await - 22-09-2026
 
-[Lokal fil](../undervisning/021-dob-6-promises-og-async-await-22-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/021-dob-6-promises-og-async-await-22-09-2026.md) · publiceret
 
 - [Plan for DOB 6 - Promises og async/await](../undervisning/021-dob-6-promises-og-async-await-22-09-2026.md)
 
@@ -236,7 +236,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 025 · DOB 7 - Client-side error handling - 28-09-2026
 
-[Lokal fil](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md) · publiceret
 
 - [Plan for DOB 7 - Client-side error handling](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md)
 
