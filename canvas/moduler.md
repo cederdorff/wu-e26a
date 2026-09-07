@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-07T09:53:38.397Z
+Senest hentet: 2026-09-07T13:33:45.246Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -64,7 +64,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/005-forberedelse-selvstudium-31-08-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 006 · DOB 1 - Form submits og Git basics - 01-09-2026
 
@@ -106,7 +106,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/009-forberedelse-selvstudium-04-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 010 · RACE 3 - Data logik, arrays og objekter - 07-09-2026
 
@@ -122,7 +122,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/011-forberedelse-selvstudium-08-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026
 
@@ -136,9 +136,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 013 · Forberedelse - Selvstudium - 10-09-2026
 
-[Lokal fil](../undervisning/013-forberedelse-selvstudium-10-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/013-forberedelse-selvstudium-10-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 014 · RACE 4 - Persistens, JSON og File System - 11-09-2026
 
@@ -152,9 +152,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 015 · Forberedelse - Selvstudium - 14-09-2026
 
-[Lokal fil](../undervisning/015-forberedelse-selvstudium-14-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/015-forberedelse-selvstudium-14-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 016 · DOB 4 - DOM manipulation med JS - 15-09-2026
 
@@ -178,9 +178,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 018 · Forberedelse - Selvstudium - 17-09-2026
 
-[Lokal fil](../undervisning/018-forberedelse-selvstudium-17-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/018-forberedelse-selvstudium-17-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 019 · DOB 5 - Fetch og async JavaScript - 18-09-2026
 
@@ -194,9 +194,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 020 · Forberedelse - Selvstudium - 21-09-2026
 
-[Lokal fil](../undervisning/020-forberedelse-selvstudium-21-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/020-forberedelse-selvstudium-21-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 021 · DOB 6 - Promises og async/await - 22-09-2026
 
@@ -220,9 +220,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 023 · Forberedelse - Selvstudium - 24-09-2026
 
-[Lokal fil](../undervisning/023-forberedelse-selvstudium-24-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/023-forberedelse-selvstudium-24-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 024 · RACE 7 - Sikkerhed og Error Handling - 25-09-2026
 
@@ -246,9 +246,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 026 · Forberedelse - Selvstudium - 29-09-2026
 
-[Lokal fil](../undervisning/026-forberedelse-selvstudium-29-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/026-forberedelse-selvstudium-29-09-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 027 · DOB 8 - Client/Server præsentationer - 30-09-2026
 
