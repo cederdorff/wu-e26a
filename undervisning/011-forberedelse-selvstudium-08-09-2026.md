@@ -33,10 +33,6 @@ I Client/Server forløbet (AMAbot-projektet i uge 35-40) er det de markede modul
 
 [![scrimba-fullstack-dev-path.png](https://eaaa.instructure.com/courses/29949/files/1471832/preview)](https://scrimba.com/fullstack-path-c0fullstack)
 
-## Materialer
-
-- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](./087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
-
 ---
 
 <details>
