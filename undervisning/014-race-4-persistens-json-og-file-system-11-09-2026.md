@@ -56,8 +56,8 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 <summary><strong>6. Gem AMAbottens chathistorik</strong></summary>
 
 - Lige nu lever `messages` kun i memory — historikken forsvinder, når serveren genstartes
-- Sidder et JSON/fs-begreb fast? Tag en kort afstikker til [JSON- og File System-øvelser til AMAbot](../opgaver/json-fs-oevelser-amabot.md)
-- Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): læs `messages` fra `data/messages.json`, når serveren starter, og skriv til filen, hver gang der stilles et nyt spørgsmål
+- Sidder et JSON/fs-begreb fast? Tag en kort afstikker til [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md)
+- Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): læs og skriv `data/messages.json` direkte i `GET /` og `POST /ask`, så filen — ikke en variabel — er den eneste sandhed om samtalen
 - Test persistens: stil et spørgsmål, genstart serveren, og tjek om historikken stadig er der
 </details>
 
@@ -76,8 +76,9 @@ I sidste undervisningsgang arbejdede du med objekter, arrays og funktioner i AMA
 
 - Slides: TBA
 - Opgaver:
-  - [JSON- og File System-øvelser til AMAbot](../opgaver/json-fs-oevelser-amabot.md) — træn `JSON.stringify()`/`JSON.parse()` og `fs.readFile()`/`fs.writeFile()` på et simpelt array, før I bruger dem i øvelse 5
+  - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — en lille selvstændig CRUD-app, der læser og skriver studerende til en JSON-fil, før I bruger samme mønster i øvelse 5
   - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
+  - [Ekstraøvelse: Node.js File System](../opgaver/node-file-system.md) — for dem, der vil videre: `appendFile()`, `mkdir()`, `readdir()`, m.m. på `hello-http-module`
 
 ---
 
