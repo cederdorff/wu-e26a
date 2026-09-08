@@ -6,7 +6,7 @@
 
 Sidste gang byggede I jeres første REST API: CRUD med GET, POST og PUT, route parameters og korrekte statuskoder — men det hele lå samlet i én `server.js`. I dag skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret.
 
-Vi ser på Layered Architecture: hvordan man deler en voksende Express-backend op i lag — routes, controllers/handlers og selve data-adgangen — med Express' `Router`, og på en række konkrete REST best practices for navngivning af ressourcer og konsistente responses. Vi bygger også videre på selve API-designet med et par af de mest almindelige mønstre i et rigtigt REST API: filtrering, sortering og paginering via query parameters, fx `/messages?sender=user` eller `/messages?sender=chatbot`.
+Vi ser på, hvordan man deler en voksende Express-backend op i moduler — I kender allerede idéen fra fx `loadMessages()`/`saveMessages()` og fra at flytte data ud i sin egen fil, men i dag bruger vi den samme tankegang på selve routes med Express' `Router`. Derudover kigger vi på en række konkrete REST best practices for navngivning af ressourcer og konsistente responses, og bygger videre på selve API-designet med et par af de mest almindelige mønstre i et rigtigt REST API: filtrering, sortering og paginering via query parameters, fx `/messages?sender=user` eller `/messages?sender=chatbot`.
 
 Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-error-handling-25-09-2026.md), hvor der er afsat en hel gang til det.
 
@@ -29,14 +29,14 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 - Motivation: samme problem som at proppe al JavaScript ind i én kæmpe funktion
 </details>
 <details>
-<summary><strong>3. Layered Architecture: routes, controllers og data</strong></summary>
+<summary><strong>3. Opdel kode i moduler — samme idé, nyt sted</strong></summary>
 
-- Ansvarsfordeling: routes (HTTP ind/ud) → controllers/handlers (logik) → data-adgang (fx en JSON-fil, senere en database)
-- Hver fil/modul har ét ansvar — genkend mønstret fra `loadMessages()`/`saveMessages()`
-- Et lille eksempel på mappestruktur med `routes/`, `controllers/` og `data/`
+- Genkend mønstret: I har allerede flyttet data og funktioner ud i egne moduler med `export`/`import`
+- I dag bruger vi samme idé på routes: hver ressource kan få sin egen fil
+- Et lille eksempel på mappestruktur med `routes/` og `data/`
 </details>
 <details>
-<summary><strong>4. Express Router: opdel routes i egne filer</strong></summary>
+<summary><strong>4. Express Router: en separat routes-fil</strong></summary>
 
 - `express.Router()` som en selvstændig "mini-app" for én ressource
 - Montér en router på hoved-appen: `app.use("/messages", messagesRouter)`
@@ -60,7 +60,7 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 <details>
 <summary><strong>7. Hands-on: Omstrukturér og udbyg jeres REST API</strong></summary>
 
-- Opdel jeres eksisterende routes i routers/controllers efter dagens mønster
+- Opdel jeres eksisterende routes i en separat routes-fil efter dagens mønster
 - Tilføj filtrering, sortering og/eller paginering til én af jeres GET-routes
 - Test undervejs i Thunder Client med forskellige query parametre
 </details>
@@ -73,7 +73,7 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 - Læs ["Routing"](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen, særligt afsnittet om `express.Router()`
 - Genopfrisk `req.query` i [Request-referencen](https://expressjs.com/en/api.html#req.query) på Express.js — I kender allerede `req.params` og `req.body` fra sidst
 - Læs ["REST API Best Practices – REST Endpoint Design Examples"](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) på freeCodeCamp
-- Skim ["Layer your app"](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/createlayers.md) og ["Structure by components"](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md) fra Node.js best practices-listen som introduktion til dagens arkitekturtanker
+- Skim ["Structure by components"](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md) fra Node.js best practices-listen som introduktion til at opdele kode i moduler
 
 ## Materialer
 
