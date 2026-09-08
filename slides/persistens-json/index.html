@@ -22,8 +22,9 @@
             <p class="loading-text">race.json <b>is loading</b><span class="dots"><i>.</i><i>.</i><i>.</i></span></p>
           </div>
           <aside class="notes">
-            Velkommen tilbage. I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i
-            AMAbottens svarlogik. I dag flytter vi den samme viden over i en ny opgave: data, der overlever en
+            Velkommen tilbage. I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer. I DOB 3 er fokus
+            på string-metoder, funktioner og metoder. I dag bygger vi videre på AMAbotten fra øvelse 4
+            og bruger vores viden om funktioner til at læse og gemme samtalehistorikken: data, der overlever en
             genstart af serveren. [Sources] - Lokal lektionsside:
             undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
           </aside>
@@ -237,13 +238,13 @@
         </section>
 
         <section class="question-slide" data-accent="green">
-          <span class="eyebrow">Opsamlingsaktivitet · øvelse 3, 4 og i dag</span>
+          <span class="eyebrow">Opsamlingsaktivitet · RACE 3 og DOB 3</span>
           <h2>Forklar koden for din sidemakker</h2>
           <ol class="question-grid">
             <li>Kan I forklare, hvordan jeres <code>findAnswer()</code> vælger et svar ud fra nøgleord — eller <code>findBestAnswer()</code>, hvis I er nået til øvelse 4?</li>
             <li>Er I nået til øvelse 4: kan I gennemgå, hvordan <code>topicStats</code> tæller emner/kategorier i et objekt?</li>
             <li>Hvad sker der, når et spørgsmål matcher flere regler samtidig — vinder den rigtige?</li>
-            <li>Hvad er stadig uklart omkring scoring, tælling eller objekter/arrays?</li>
+            <li>Hvordan kan I bruge det, I har lært om string parsing, metoder og funktioner i DOB 3, når I bygger videre på AMAbotten?</li>
           </ol>
           <div class="method-chips">
             <span class="method-chips-label">Forklar også metoden</span>
@@ -258,7 +259,8 @@
             Ikke alle er nødvendigvis nået til findBestAnswer()/topicStats fra øvelse 4 — spørgsmål 1 og 2 er bevidst
             formuleret, så par med kun findAnswer() fra øvelse 3 stadig kan svare. Lad par teste med et spørgsmål, der
             rammer flere regler, og sammenligne resultatet med deres forventning. Notér uklarheder, så I kan samle op
-            i plenum. Brug metode-raden nederst til en hurtig runde: pege på én
+            i plenum. Lad også parrene forklare en string-metode fra DOB 3 og dens mulige brug i AMAbotten samt
+            en funktions parametre og returværdi. De kan bruge kode fra deres AMAbot eller et andet eksempel. Brug metode-raden nederst til en hurtig runde: pege på én
             metode ad gangen, og bed par forklare den uden at kigge i koden. Facit til jer selv:
             <code>toLowerCase()</code> normaliserer store/små bogstaver, før noget sammenlignes. <code>trim()</code>
             fjerner mellemrum i starten/slutningen af brugerens input (øvelse 5:
@@ -327,16 +329,59 @@ const score = matches.length;</code></pre>
           </div>
           <p class="bottom-line">
             Samme spørgsmål, to svar: <code>.some()</code> siger kun ja/nej — <code>.filter().length</code> tæller
-            hvor mange. Samme mønster virker på enhver liste — fx navne eller studerende, ikke kun <code>keywords</code>.
+            hvor mange.
           </p>
           <aside class="notes">
             some() svarer kun ja/nej og kan stoppe ved første match — det er nok til findAnswer() i øvelse 3.
             filter() undersøger alle nøgleord og bygger et nyt array; .length omdanner det array til selve scoren,
-            som findBestAnswer() sammenligner regler ud fra i øvelse 4. Hvis nogen spørger "virker det kun på
-            keywords?", vis gerne live i konsollen: ["Mohanad", "Anna"].some(n => n === "Anna") → true, eller
-            students.filter(s => s.name === "Anna") på et array af objekter — samme to metoder, enhver liste.
-            [Sources] - Lokale øvelser: opgaver/express-ejs-amabot.md - opgaver/express-ejs-amabot-statistik.md
-            [/Sources]
+            som findBestAnswer() sammenligner regler ud fra i øvelse 4. [Sources] - Lokale øvelser:
+            opgaver/express-ejs-amabot.md - opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="method-compare-slide" data-accent="yellow">
+          <span class="eyebrow">Samme metoder — uden AMAbot</span>
+          <h2>.some() og .filter() på et helt andet eksempel</h2>
+          <div class="method-compare">
+            <article>
+              <span><code>.some()</code></span>
+              <pre class="recap-code"><code class="language-javascript">const names = ["Mohanad", "Anna", "Tinus", "Rasmus"];
+
+const hasAnna = names.some((name) => name === "Anna");
+
+console.log(hasAnna); // true</code></pre>
+              <ul class="method-compare-facts">
+                <li><b>Spørgsmål</b>Findes "Anna" i listen?</li>
+                <li><b>Resultat</b><code>true</code> — én boolean</li>
+              </ul>
+            </article>
+            <article>
+              <span><code>.filter()</code></span>
+              <pre class="recap-code"><code class="language-javascript">const students = [
+  { name: "Anna", class: "webA" },
+  { name: "Mohanad", class: "webB" },
+  { name: "Anna", class: "webB" }
+];
+
+const annas = students.filter(
+  (student) => student.name === "Anna"
+);</code></pre>
+              <ul class="method-compare-facts">
+                <li><b>Spørgsmål</b>Hvilke studerende hedder "Anna"?</li>
+                <li><b>Resultat</b>et nyt array med 2 objekter</li>
+              </ul>
+            </article>
+          </div>
+          <p class="bottom-line">
+            Samme mønster som <code>keywords.some()</code>/<code>.filter()</code> i AMAbotten — bare på en liste af
+            navne og en liste af studerende.
+          </p>
+          <aside class="notes">
+            Generalisér metoderne væk fra AMAbot-konteksten, så de studerende ser, at det er de samme to metoder, der
+            går igen — uanset om arrayet indeholder strings eller objekter. some() spørger stadig kun ja/nej;
+            filter() bygger stadig et nyt array, denne gang af de studerende, der matcher. Peg på, at student.name
+            fungerer, fordi students er et array af objekter — samme punktnotation som keyword-eksemplerne.
+            [Sources] - Lokal begrebstræning inspireret af opgaver/javascript-oevelser-amabot.md [/Sources]
           </aside>
         </section>
 
@@ -601,7 +646,7 @@ await fs.writeFile(
         </section>
 
         <section class="code-focus-slide" data-accent="yellow">
-          <span class="eyebrow">To hjælpefunktioner: læs og gem</span>
+          <span class="eyebrow">Byg videre på DOB 3 · funktioner med hver sin opgave</span>
           <h2><code>loadMessages()</code> og <code>saveMessages()</code> er den eneste vej til filen</h2>
           <div class="code-and-result">
             <pre><code class="language-javascript">async function loadMessages() {
@@ -623,6 +668,9 @@ await fs.writeFile(
           </div>
           <p class="bottom-line">Ingen af funktionerne gemmer noget i en variabel uden for sig selv.</p>
           <aside class="notes">
+            Knyt an til begreberne fra DOB 3: funktioner kan have afgrænsede opgaver. Her får læsning og gemning hver sin funktion.
+            Bed eleverne pege på parameteren i saveMessages(messages) og returværdien i loadMessages().
+            Med await loadMessages() får routen arrayet; await saveMessages(messages) venter på skrivningen.
             Disse to funktioner er nøjagtig samme mønster som loadStudents()/saveStudents() fra JSON-øvelsen, bare med
             et andet filnavn. GET / og POST /ask kalder dem, i stedet for at røre filen direkte. [Sources] - Lokal
             øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
@@ -638,7 +686,7 @@ await fs.writeFile(
             <li><code>GET /</code> henter historikken med <code>loadMessages()</code>, i stedet for en tom liste</li>
             <li><code>POST /ask</code> henter, opdaterer og gemmer med <code>loadMessages()</code> og <code>saveMessages()</code></li>
             <li>Ingen <code>messages</code>-variabel lever uden for én enkelt route</li>
-            <li>Testet: spørgsmål stillet, server genstartet, historikken er der stadig</li>
+            <li>Testet: to formuleringer giver de forventede svar, og historikken overlever genstart</li>
           </ul>
           <p class="bottom-line">Husk: samme mønster som JSON-øvelsen — bare på jeres egen AMAbot.</p>
           <aside class="notes">

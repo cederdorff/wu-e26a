@@ -4,7 +4,9 @@
 
 Lige nu lever `messages` kun i memory. Samtalen forsvinder, hver gang du genstarter serveren. I denne øvelse gør du `data/messages.json` til den eneste sandhed om samtalen: hver route læser filen, når den har brug for beskederne, og skriver den igen, når noget ændrer sig — der er ingen `messages`-variabel, der lever videre mellem requests.
 
-Du bygger videre på din egen AMAbot fra [øvelse 4](express-ejs-amabot-statistik.md). Du skal ikke oprette et nyt projekt.
+Du bygger videre på din egen AMAbot fra [øvelse 4](express-ejs-amabot-statistik.md). Du skal ikke oprette et nyt projekt. Har du siden forbedret botten, bygger du videre på den version.
+
+I [DOB 3](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. Her bruger du din viden om funktioner til at give læsning og gemning hver sin funktion, mens din eksisterende svarlogik fortsat finder svaret.
 
 > **Har du ikke allerede lavet den?** Lav først [JSON-øvelse: Studerende i en JSON-fil](express-ejs-json-students.md), hvor du træner `JSON.stringify()`, `JSON.parse()`, `fs.readFile()` og `fs.writeFile()` i en lille selvstændig app, før du bruger dem her. Øvelse 5 bruger nøjagtig samme mønster.
 
@@ -29,7 +31,9 @@ Start serveren:
 npm run dev
 ```
 
-Stil et par spørgsmål, og bekræft at samtalen opdateres.
+Vælg to forskellige formuleringer af samme spørgsmål, som din eksisterende svarlogik kan genkende. Stil begge spørgsmål, og bekræft, at botten giver de forventede svar. Notér formuleringerne og svarene, så du kan gentage testen i trin 7.
+
+Find den string-metode, der bruges til at genkende spørgsmålene, fx `includes()`, `startsWith()`, `endsWith()`, `search()` eller `match()`. Forklar, hvad den gør i din kode — du skal ikke bruge alle metoderne.
 
 Stop derefter serveren med `Ctrl + C`, og start den igen med `npm run dev`. Genindlæs siden i browseren.
 
@@ -77,6 +81,8 @@ Skriv præcis dette i `data/messages.json`:
 
 ## 4. Skriv to hjælpefunktioner: læs og gem
 
+Brug din viden om funktioner, parametre og returværdier fra DOB 3 til at dele filhåndteringen op i overskuelige opgaver: én funktion læser historikken, og én gemmer den. Overvej først, hvilken funktion der skal modtage data som parameter, og hvilken der skal returnere data.
+
 Find linjen, hvor du opretter `messages`:
 
 ```js
@@ -88,7 +94,7 @@ Fjern den linje helt. I stedet skal du selv skrive to funktioner samme sted i fi
 - `loadMessages()` skal læse `data/messages.json`, parse JSON-teksten, og returnere resultatet som et array.
 - `saveMessages(messages)` skal tage et array som parameter, omdanne det til pænt formateret JSON-tekst, og skrive det til `data/messages.json`.
 
-Begge funktioner arbejder med filsystemet og skal derfor være `async`.
+Begge funktioner bruger de asynkrone filsystemmetoder og skal her være `async`. Når du kalder `await loadMessages()`, får du det array, funktionen returnerer. `saveMessages(messages)` modtager arrayet som parameter; her bruger du `await` til at vente på, at filen er skrevet færdig.
 
 Start med denne skabelon:
 
@@ -172,12 +178,12 @@ To ting skal ske i din eksisterende `POST /ask`-route:
 1. Helt i begyndelsen af routen: hent den aktuelle historik med `await loadMessages()`, i stedet for at gå ud fra en variabel, der findes uden for routen.
 2. Lige før `response.render()`: gem den opdaterede historik med `await saveMessages(messages)`.
 
-Behold din egen validering, `findBestAnswer()` og `topicStats`-opdatering uændret — de to nye linjer skal blot føjes til, hvor de passer ind. Husk at gøre callback-funktionen `async`.
+Behold din egen validering, din eksisterende svarlogik samt din `topicStats`-opdatering — de to nye linjer skal blot føjes til, hvor de passer ind. Husk at gøre callback-funktionen `async`.
 
 <details>
 <summary>Se hele POST-routen samlet</summary>
 
-Brug eksemplet til at kontrollere placeringen af de to nye linjer. Behold din egen validering og dine egne variabelnavne.
+Brug eksemplet til at kontrollere placeringen af de to nye linjer. Her hedder svarfunktionen `findBestAnswer()`. Behold dine egne funktionskald, din validering og dine variabelnavne, hvis du har organiseret koden anderledes.
 
 ```js
 app.post("/ask", async (request, response) => {
@@ -219,11 +225,12 @@ Stil et spørgsmål. Åbn `data/messages.json` i editoren, mens serveren stadig 
 
 Nu kommer den vigtige test.
 
-1. Stil to-tre spørgsmål.
-2. Kontrollér i browseren, at samtalen ser rigtig ud.
+1. Stil de to formuleringer fra trin 1 igen.
+2. Kontrollér i browseren, at din svarlogik stadig giver de forventede svar på begge formuleringer.
 3. Stop serveren med `Ctrl + C`.
 4. Start serveren igen med `npm run dev`.
-5. Genindlæs siden.
+5. Genindlæs siden, og kontrollér, at begge formuleringer og deres svar stadig vises.
+6. Stil et nyt spørgsmål, som din svarlogik kan genkende. Kontrollér, at botten stadig svarer korrekt, og at det nye spørgsmål og svar også bliver gemt i filen.
 
 Er samtalen der stadig?
 
@@ -313,6 +320,8 @@ Når du er færdig, skal du gerne kunne forklare:
 5. Hvad gør `JSON.stringify(messages, null, 2)` anderledes end `JSON.stringify(messages)`?
 6. Hvad ville der stå i `data/messages.json`, hvis du glemte `await` foran `fs.writeFile()`?
 7. Hvad er forskellen på at gemme `messages` i en JSON-fil og at gemme den i en database?
+8. Hvordan bruger du funktioner, parametre og returværdier i `loadMessages()` og `saveMessages(messages)`?
+9. Hvorfor kan du tilføje persistens uden at ændre den funktion eller metode, der analyserer spørgsmålet og finder svaret?
 
 ## Videre
 

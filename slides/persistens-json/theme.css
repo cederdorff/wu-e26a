@@ -20,17 +20,28 @@
 
 .flow-pair {
   display: grid;
-  gap: 46px;
+  gap: 36px;
   margin-top: 64px;
+}
+.flow-pair-row {
+  padding: 30px 34px 34px;
+  border-top: 4px solid var(--cyan);
+  background: var(--soft);
+}
+.flow-pair-row:last-child {
+  border-top-color: var(--accent);
 }
 .flow-pair-row .flow-label {
   display: block;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
   color: var(--accent);
   font-size: 18px;
   font-weight: 850;
   letter-spacing: 0.09em;
   text-transform: uppercase;
+}
+.flow-pair-row:first-child .flow-label {
+  color: var(--cyan);
 }
 .flow-pair-row .recap-flow {
   margin-top: 0;
@@ -295,6 +306,58 @@
 }
 .screenshot-links a:hover strong {
   color: var(--accent);
+}
+
+/* Fill the full slide height — several content slides only used the top
+   ~2/3, leaving a large empty gap before the bottom edge or bottom-line. */
+.agenda-slide,
+.definition-slide,
+.normalize-slide,
+.json-syntax-slide,
+.cycle-slide,
+.materials-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.recap-slide {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+.agenda-slide .agenda-grid {
+  flex: 1;
+  align-content: center;
+  margin-top: 0 !important;
+}
+.definition-slide .definition-pair {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+.normalize-slide .normalize-flow {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+.json-syntax-slide .before-after {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+.cycle-slide .flow-pair {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+.materials-slide .material-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+}
+.recap-slide .recap-chain {
+  margin-top: 44px;
 }
 
 /* Title slide: race.json loading gif */

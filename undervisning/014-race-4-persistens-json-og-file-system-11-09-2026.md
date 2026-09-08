@@ -4,16 +4,18 @@
 
 ## Dagens fokus
 
-I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i AMAbottens svarlogik. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
+I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [DOB 3](./012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. I dag bygger vi videre på AMAbotten fra øvelse 4 og bruger vores viden om funktioner til at skrive funktioner, der læser og gemmer samtalehistorikken. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
 
 ---
 
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: øvelse 3 og 4</strong></summary>
+<summary><strong>1. Opsamling: AMAbottens svarlogik og begreber fra DOB 3</strong></summary>
 
 - Forklar to og to, hvordan `findBestAnswer()` vælger den bedst matchende regel ud fra antal matchende nøgleord
+- Vælg en string-metode fra DOB 3, og forklar, hvordan den kan bruges til at genkende noget i et spørgsmål
+- Forklar en af jeres funktioner: hvilke parametre modtager den, og hvad returnerer den?
 - Gennemgå `topicStats` — hvordan I tæller emner/kategorier i et objekt
 - Test med et spørgsmål, der matcher flere regler — vinder den rigtige?
 - Notér, hvad der stadig er uklart omkring scoring, tælling eller objekter/arrays
@@ -57,8 +59,8 @@ I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i A
 
 - Lige nu lever `messages` kun i memory — historikken forsvinder, når serveren genstartes
 - Lav først [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — træn read → modify → write på et enkelt eksempel, før I rører AMAbotten
-- Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): læs og skriv `data/messages.json` direkte i `GET /` og `POST /ask`, så filen — ikke en variabel — er den eneste sandhed om samtalen
-- Test persistens: stil et spørgsmål, genstart serveren, og tjek om historikken stadig er der
+- Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): skriv `loadMessages()` og `saveMessages(messages)`, og kald dem fra `GET /` og `POST /ask`, så filen — ikke en variabel — er den eneste sandhed om samtalen
+- Brug jeres eksisterende svarlogik: test to formuleringer af samme spørgsmål, kontrollér svarene, og genstart serveren for at tjekke, at begge spørgsmål og svar er gemt
 </details>
 
 ---
@@ -66,6 +68,7 @@ I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i A
 ## Forberedelse
 
 - Færdiggør [øvelse 3](../opgaver/express-ejs-amabot.md) og [øvelse 4](../opgaver/express-ejs-amabot-statistik.md), hvis I ikke er helt i mål endnu — se evt. [opsamlingen fra sidst](./087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- Genopfrisk begreberne fra DOB 3: string-metoder, funktioner, parametre og returværdier — dem bruger vi i arbejdet med AMAbotten fra øvelse 4
 - Genopfrisk ["Working with JSON"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) på MDN
 - Læs om [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) og [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) på MDN — se evt. [Scrimba-forklaringen](https://scrimba.com/explain/guide01mo060op) af de to metoder som supplement
 - Skim [W3Schools · Node.js File System](https://www.w3schools.com/nodejs/nodejs_filesystem.asp), særligt `readFile()` og `writeFile()`
