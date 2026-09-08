@@ -4,7 +4,11 @@
 
 ## Dagens fokus
 
-I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [DOB 3](./012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. I dag bygger vi videre på AMAbotten fra øvelse 4 og skriver funktioner, der læser og gemmer samtalehistorikken. Når persistensen virker, bruger I string parsing, metoder og funktioner til én forbedring af svarlogikken. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
+Sidste gang arbejdede vi med objekter, arrays og kontrolstrukturer i AMAbotten. I [DOB 3](./012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) var fokus på string-metoder, funktioner og metoder.
+
+I dag bygger vi videre på AMAbotten fra øvelse 4 og skriver funktioner, der læser og gemmer samtalehistorikken. Når persistensen virker, bruger I string parsing, metoder og funktioner til én forbedring af svarlogikken.
+
+Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
 
 ---
 
@@ -51,7 +55,7 @@ I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [D
 - `node:fs/promises` — indbygget i Node.js, intet at installere
 - `fs.readFile()` og `fs.writeFile()` er asynchronous — derfor `async`/`await`
 - Mønstret: **read → modify → write**
-    - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
+  - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
 - Hvorfor er `push()` på et array alene ikke nok? Data ændres kun i memory, ikke i filen
 </details>
 <details>
@@ -79,10 +83,10 @@ I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [D
 ## Materialer
 
 - Slides:
-    - [RACE 4 · Persistens, JSON og File System](https://cederdorff.com/wu-e26a/persistens-json/)
+  - [RACE 4 · Persistens, JSON og File System](https://cederdorff.com/wu-e26a/persistens-json/)
 - Opgaver:
-    - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — trin 1–7 er obligatoriske og laves først: læs og opret studerende i en JSON-fil. Sletning, redigering, refaktorering og styling er ekstraopgaver
-    - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — trin 1–8 bygger videre på øvelse 4: gem historikken i en JSON-fil, og brug string parsing, metoder og funktioner til én forbedring af svarlogikken. Statistik og rydning af historik er ekstraopgaver
+  - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — trin 1–7 er obligatoriske og laves først: læs og opret studerende i en JSON-fil. Sletning, redigering, refaktorering og styling er ekstraopgaver
+  - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — trin 1–8 bygger videre på øvelse 4: gem historikken i en JSON-fil, og brug string parsing, metoder og funktioner til én forbedring af svarlogikken. Statistik og rydning af historik er ekstraopgaver
 
 ---
 
