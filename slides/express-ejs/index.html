@@ -16,12 +16,6 @@
             <h1>Fra HTTP<br /><span>til HTML på serveren</span></h1>
             <p class="lead">EJS templating · form handling · svar-logik</p>
           </div>
-          <aside class="notes">
-            Velkommen tilbage. I går byggede I jeres første Express-server og testede routes med Thunder Client. I dag
-            bygger vi videre: serveren skal ikke bare svare med tekst eller JSON, men rendere hele HTML-sider med EJS —
-            og reagere på det, en bruger sender ind via en formular. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="outcome-slide">
@@ -33,12 +27,6 @@
             <article><b>03</b><strong>Validere</strong><span>input og vise en forståelig fejl</span></article>
             <article><b>04</b><strong>Svare</strong><span>med regelbaseret logik i AMAbot</span></article>
           </div>
-          <aside class="notes">
-            Dette er den konkrete målestok for dagen. De tre øvelser bygger direkte oven på hinanden i denne
-            rækkefølge: render en template, modtag og valider formulardata, og brug samme mønster til AMAbottens
-            svarlogik. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section id="agenda" class="agenda-slide">
@@ -64,11 +52,6 @@
               <a href="#/amabot"><b>AMAbot</b><small>Øvelse 3: gårsdagens repo bliver til SSR</small></a>
             </li>
           </ol>
-          <aside class="notes">
-            Dagen veksler mellem korte faglige oplæg og kodeøvelser, ligesom i går. Henvis tilbage til agendaen ved
-            hvert kapitel. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section id="opsamling" class="chapter" data-accent="green">
@@ -76,11 +59,6 @@
           <span class="eyebrow">Opsamling</span>
           <h2>Vis og forklar<br />jeres Hello Express</h2>
           <p>I mindre grupper: pege på konkret kode, ikke kun beskrive den.</p>
-          <aside class="notes">
-            Overgang til opsamlingen. Formålet er ikke at få identiske løsninger, men at kunne pege på og forklare
-            egne valg. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="activity-slide" data-accent="green">
@@ -98,14 +76,6 @@
               >Åbn løsningsforslaget ↗</a
             >
           </div>
-          <aside class="notes">
-            Lad par bytte kode og læse hinandens linje for linje højt, før de svarer på spørgsmålene — det tvinger dem
-            til rent faktisk at forklare koden, ikke bare genkende den. Sammenlign til sidst med
-            https://github.com/cederdorff/node-express-todos-rest-api — men gør det klart, at pointen er at kunne
-            forklare valgene, ikke at matche løsningsforslaget linje for linje. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md - Løsningsforslag:
-            https://github.com/cederdorff/node-express-todos-rest-api [/Sources]
-          </aside>
         </section>
 
         <section id="ssr-csr" class="chapter" data-accent="cyan">
@@ -113,11 +83,6 @@
           <span class="eyebrow">SSR og CSR</span>
           <h2>Hvor bliver<br />HTML'en bygget?</h2>
           <p>Samme mål — data skal vises i browseren — men to forskellige steder at gøre arbejdet.</p>
-          <aside class="notes">
-            Introducér de to modeller, før EJS bliver konkret. Pointen er ikke at CSR er forkert, men at vi i dag
-            bevidst vælger SSR. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="definition-slide">
@@ -141,11 +106,6 @@
             </article>
           </div>
           <p class="bottom-line">I dagens løsning bruger vi <b>SSR</b>: browseren modtager allerede-færdig HTML.</p>
-          <aside class="notes">
-            Knyt gerne til deres Firebase-erfaring fra kurset: der byggede browserens JavaScript ofte HTML'en selv ud
-            fra JSON — det er CSR. I dag flytter vi den opgave over til serveren. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="architecture-slide">
@@ -168,11 +128,6 @@
             </article>
           </div>
           <p class="bottom-line">Al logikken kører på serveren — browseren modtager kun det færdige resultat.</p>
-          <aside class="notes">
-            Denne illustration gør SSR-definitionen konkret, før EJS' egne tags introduceres. Peg på, at browserens
-            eneste opgave her er at vise den HTML, den modtager — ingen fetch, intet JavaScript, der bygger DOM'en om.
-            [Sources] - Lokal øvelse: opgaver/express-ejs-formular.md [/Sources]
-          </aside>
         </section>
 
         <section id="ejs" class="chapter" data-accent="yellow">
@@ -180,10 +135,6 @@
           <span class="eyebrow">EJS</span>
           <h2>Embedded<br />JavaScript</h2>
           <p>En template engine, der lader os skrive HTML med JavaScript-logik indeni.</p>
-          <aside class="notes">
-            EJS står for Embedded JavaScript. Det er stadig HTML, men med to slags specialtags. [Sources] - Lokal
-            lektionsside: undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="tag-slide">
@@ -199,11 +150,6 @@
               <p>Skriver en værdi ind i HTML'en og <strong>escaper</strong> den — brugerens input bliver til tekst, ikke til HTML.</p>
             </article>
           </div>
-          <aside class="notes">
-            Escaping betyder, at fx &lt;strong&gt;Ada&lt;/strong&gt; vises med vinklerne i stedet for at browseren gør
-            teksten fed. Brug altid &lt;%= %&gt; til data fra brugeren. [Sources] - Lokal øvelse:
-            opgaver/express-ejs-formular.md [/Sources]
-          </aside>
         </section>
 
         <section class="code-focus-slide">
@@ -223,11 +169,6 @@ app.post("/submit", (request, response) => {
 &lt;% } %&gt;</code></pre>
           </div>
           <p class="bottom-line"><code>{ name }</code> gør variablen <code>name</code> tilgængelig i <code>index.ejs</code>.</p>
-          <aside class="notes">
-            Peg på sammenhængen: samme navn (name) bruges i request.body, i objektet der sendes til render, og i
-            EJS-templaten. Det er den røde tråd, øvelse 1 bygger op omkring. [Sources] - Lokal øvelse:
-            opgaver/express-ejs-formular.md [/Sources]
-          </aside>
         </section>
 
         <section class="activity-slide" data-accent="yellow">
@@ -240,12 +181,6 @@ app.post("/submit", (request, response) => {
             <li>serveren sender navnet til templaten, som viser en personlig hilsen</li>
             <li>I kan finde både GET- og POST-requestet i Network-panelet</li>
           </ul>
-          <aside class="notes">
-            Dette er milepælen fra den lokale øvelse. Mind dem om at skrive koden selv, linje for linje, og teste
-            efter hvert trin frem for at kopiere hele uddrag. [Sources] - Lokal øvelse:
-            opgaver/express-ejs-formular.md -
-            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-formular.md [/Sources]
-          </aside>
         </section>
 
         <section id="flow" class="chapter" data-accent="orange">
@@ -253,10 +188,6 @@ app.post("/submit", (request, response) => {
           <span class="eyebrow">Request/response-flow</span>
           <h2>Fra formular<br />til ny HTML-side</h2>
           <p>Samme cyklus som i går — nu med et ekstra led: formulardata skal først tolkes.</p>
-          <aside class="notes">
-            Dette kapitel gør flowet konkret, så de kan debugge det, når noget går galt. [Sources] - Lokal
-            lektionsside: undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="middleware-slide">
@@ -276,12 +207,6 @@ app.post("/submit", (request, response) => {
           <pre><code class="language-javascript">app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));</code></pre>
           <p class="bottom-line">Rækkefølgen betyder noget: middleware skal stå <b>før</b> de routes, der har brug for den.</p>
-          <aside class="notes">
-            Dette formaliserer begrebet, før det bruges konkret i cyklus-diagrammet på næste slide.
-            express.urlencoded() gør request.body tilgængeligt; express.static() gør filer i public/ hentbare uden en
-            dedikeret route. Begge er eksempler på middleware — kode der kører før jeres egne routes. [Sources] -
-            Lokal øvelse: opgaver/express-ejs-formular.md - opgaver/express-ejs-amabot.md [/Sources]
-          </aside>
         </section>
 
         <section class="cycle-slide">
@@ -296,11 +221,6 @@ app.use(express.static("public"));</code></pre>
             <li><b>6</b><span>EJS → HTML</span><small>ny side til browseren</small></li>
           </ol>
           <p class="cycle-loop">Vær klar til at pege på den konkrete kode bag hvert led</p>
-          <aside class="notes">
-            Dette er det præcise flow fra lektionssiden. Brug det til at stille spørgsmål: hvilken linje kode svarer
-            til led 3? Hvad sker der, hvis led 2 mangler? [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="form-mapping-slide">
@@ -332,10 +252,6 @@ app.use(express.static("public"));</code></pre>
               </tr>
             </tbody>
           </table>
-          <aside class="notes">
-            Denne tabel er selve fejlfindingsværktøjet: Cannot POST opstår typisk, fordi method eller action ikke
-            matcher serverens route. [Sources] - Lokal øvelse: opgaver/express-ejs-formular.md [/Sources]
-          </aside>
         </section>
 
         <section class="status-slide">
@@ -355,11 +271,6 @@ app.use(express.static("public"));</code></pre>
               ><small>Kontrollér <code>express.urlencoded()</code> og feltets <code>name</code></small>
             </article>
           </div>
-          <aside class="notes">
-            Disse tre er de fejl, lektionssiden selv fremhæver. Lad de studerende selv genkende fejlbeskederne, før I
-            viser løsningen — det styrker deres evne til selvstændig fejlfinding. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section id="valider" class="chapter" data-accent="orange">
@@ -367,10 +278,6 @@ app.use(express.static("public"));</code></pre>
           <span class="eyebrow">Validering og svarlogik</span>
           <h2>Serveren stoler<br />ikke blindt på input</h2>
           <p>Tomt eller ugyldigt input skal give en forståelig fejl — ikke et crash.</p>
-          <aside class="notes">
-            Overgang til øvelse 2. Browserens required er nyttig, men serveren skal selv kontrollere data. [Sources] -
-            Lokal øvelse: opgaver/express-ejs-formhaandtering-svarlogik.md [/Sources]
-          </aside>
         </section>
 
         <section class="concept-trio-slide">
@@ -393,11 +300,6 @@ app.use(express.static("public"));</code></pre>
             </article>
           </div>
           <p class="bottom-line">Hold de tre begreber adskilt: de løser forskellige problemer.</p>
-          <aside class="notes">
-            Denne skelnen er central i både øvelse 2 og AMAbot-øvelsen. Advar mod at forsøge et hjemmelavet
-            “XSS-filter” ved at fjerne ord som script — brug i stedet EJS' escaped output. [Sources] - Lokal øvelse:
-            opgaver/express-ejs-amabot.md [/Sources]
-          </aside>
         </section>
 
         <section class="code-focus-slide">
@@ -415,11 +317,6 @@ if (!name || name.trim() === "") {
 
 response.render("index", { name, age, error, names });</code></pre>
           <p class="bottom-line">Kun ét kald til <code>response.render()</code> — uanset om der var en fejl eller ej.</p>
-          <aside class="notes">
-            Dette er den samlede POST-route fra øvelse 2. Peg på rækkefølgen: start uden fejl, kontrollér én regel ad
-            gangen, og render til sidst med de aktuelle data. Samme mønster genbruges direkte i AMAbot-øvelsen.
-            [Sources] - Lokal øvelse: opgaver/express-ejs-formhaandtering-svarlogik.md [/Sources]
-          </aside>
         </section>
 
         <section class="activity-slide" data-accent="orange">
@@ -431,12 +328,6 @@ response.render("index", { name, age, error, names });</code></pre>
             <li>sender flere formularfelter til EJS, som renderer et relevant svar</li>
             <li>sender altid de data til templaten, som templaten forventer</li>
           </ul>
-          <aside class="notes">
-            Milepælen fra lektionssiden. Denne øvelse indfører if/else-kæden og arrayet, som AMAbot senere genbruger
-            direkte. [Sources] - Lokal øvelse: opgaver/express-ejs-formhaandtering-svarlogik.md -
-            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-formhaandtering-svarlogik.md
-            [/Sources]
-          </aside>
         </section>
 
         <section id="amabot" class="chapter express-chapter" data-accent="yellow">
@@ -444,10 +335,6 @@ response.render("index", { name, age, error, names });</code></pre>
           <span class="eyebrow">AMAbot</span>
           <h2>Gårsdagens HTML<br />bliver til Express + EJS</h2>
           <p>Ask Me Anything-bot: regelbaseret svarlogik — ikke kunstig intelligens.</p>
-          <aside class="notes">
-            AMAbotten svarer ud fra regler, arrays og objekter. Design, CSS og billeder fra i går bevares. [Sources] -
-            Lokal øvelse: opgaver/express-ejs-amabot.md [/Sources]
-          </aside>
         </section>
 
         <section class="api-model-slide">
@@ -473,12 +360,6 @@ response.render("index", { name, age, error, names });</code></pre>
             Samme mønster som øvelse 2: læs input → validér → vælg svar (regler) → gem →
             <code>response.render()</code> én gang, der sender hele samtalen tilbage til browseren.
           </p>
-          <aside class="notes">
-            Vi venter bevidst med at vise findAnswer()-koden til næste undervisningsgang, hvor arrays af objekter og
-            funktioner er det faglige fokus. I dag er det nok, at de forstår flowet: spørgsmålet valideres, gemmes i
-            messages, og et svar vælges ud fra regler, før EJS viser hele samtalen igen. [Sources] - Lokal øvelse:
-            opgaver/express-ejs-amabot.md [/Sources]
-          </aside>
         </section>
 
         <section class="activity-slide express-activity" data-accent="yellow">
@@ -492,12 +373,6 @@ response.render("index", { name, age, error, names });</code></pre>
             <li>håndterer tomt input uden at crashe</li>
           </ul>
           <p class="bottom-line">Husk: hold validering, sanitering og EJS' escaping adskilt.</p>
-          <aside class="notes">
-            Dette er dagens definition of done, taget direkte fra lektionssiden. Trin 14 (sanitering) er en del af det
-            forventede produkt; resten af øvelsens ekstraopgaver er valgfrie. [Sources] - Lokal øvelse:
-            opgaver/express-ejs-amabot.md -
-            https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-amabot.md [/Sources]
-          </aside>
         </section>
 
         <section class="recap-slide">
@@ -513,10 +388,6 @@ response.render("index", { name, age, error, names });</code></pre>
             <p>Hvad er forskellen på validering, sanitering og escaping?</p>
             <p>Hvordan vælger AMAbotten et svar?</p>
           </div>
-          <aside class="notes">
-            Brug think-pair-share. Lad dem svare uden at kigge tilbage i koden først. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="materials-slide">
@@ -557,10 +428,6 @@ response.render("index", { name, age, error, names });</code></pre>
               ><strong>Løsningsforslag · Øvelse 3 (AMAbot)</strong><span>GitHub ↗</span></a
             >
           </div>
-          <aside class="notes">
-            Materialerne matcher forberedelsesafsnittet på lektionssiden. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
 
         <section class="closing-slide" data-accent="green">
@@ -568,10 +435,6 @@ response.render("index", { name, age, error, names });</code></pre>
           <h2>Byg ét felt<br /><span>ad gangen</span></h2>
           <p class="lead">Render · modtag · validér · svar — test efter hvert trin</p>
           <div class="closing-note">I morgen: selvstudium — mandag fortsætter vi med RACE 3: data, logik, arrays og objekter</div>
-          <aside class="notes">
-            Slut med arbejdsmetoden fra dagens øvelser. [Sources] - Lokal lektionsside:
-            undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md [/Sources]
-          </aside>
         </section>
       </div>
     </div>
