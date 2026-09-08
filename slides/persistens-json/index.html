@@ -78,8 +78,8 @@
           <span class="eyebrow">Agenda</span>
           <h2>Fra flygtig memory til en fil, der husker</h2>
           <ol class="agenda-grid">
-            <li><a href="#/opsamling"><b>Opsamling</b><small><code>findBestAnswer()</code>, <code>topicStats</code> og metoderne bag</small></a></li>
-            <li><a href="#/objekter-arrays"><b>Objekter og arrays</b><small>Samme struktur i JS, JSON og rigtige API'er — nestet i dybden</small></a></li>
+            <li><a href="#/objekter-arrays"><b>Opsamling: Objekter og arrays</b><small>Samme struktur i JS, JSON og rigtige API'er — nestet i dybden</small></a></li>
+            <li><a href="#/opsamling"><b>Opsamling: AMAbot svarlogik</b><small><code>findBestAnswer()</code>, <code>topicStats</code> og metoderne bag</small></a></li>
             <li><a href="#/persistens"><b>Hvad er persistens?</b><small>Memory vs. persistent storage</small></a></li>
             <li><a href="#/json"><b>Hvad er JSON?</b><small>JavaScript-data skrevet som tekst</small></a></li>
             <li><a href="#/filesystem"><b>File System i Node.js</b><small>Læs og skriv med <code>fs</code></small></a></li>
@@ -87,8 +87,86 @@
           </ol>
         </section>
 
-        <section id="opsamling" class="chapter" data-accent="green">
+        <section id="objekter-arrays" class="chapter" data-accent="cyan">
           <span class="chapter-number">01</span>
+          <span class="eyebrow">Objekter og arrays</span>
+          <h2>Samme struktur<br />overalt</h2>
+          <p>Punktnotation, bracket notation og arrays af objekter — den viden bruger I resten af kurset.</p>
+        </section>
+
+        <section class="build-preview" data-accent="cyan">
+          <span class="eyebrow">Genkend mønsteret</span>
+          <h2>Det samme objekt/array-mønster går igen tre steder</h2>
+          <div class="build-stages" aria-label="Objekter og arrays går igen i JavaScript, JSON over HTTP og senere i en database">
+            <article>
+              <b>01</b><span>JavaScript</span>
+              <strong>Objekter og arrays i jeres kode</strong>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
+            </article>
+            <div class="stage-arrow"><i>→</i><small><code>JSON.stringify()</code></small></div>
+            <article>
+              <b>02</b><span>JSON over HTTP</span>
+              <strong>Samme struktur sendt som tekst</strong>
+              <code>{"keywords":[...],<br />"answer":"..."}</code>
+            </article>
+            <div class="stage-arrow"><i>→</i><small>gemmes · hentes</small></div>
+            <article>
+              <b>03</b><span>En database (senere)</span>
+              <strong>Rækker/dokumenter med samme form</strong>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
+            </article>
+          </div>
+          <p class="bottom-line">JSON repræsenterer blandt andet objekter og arrays som tekst.</p>
+        </section>
+
+        <section class="materials-slide screenshot-links-slide">
+          <span class="eyebrow">Se mønsteret i virkeligheden</span>
+          <h2>Arrays af objekter — fra server til UI</h2>
+          <div class="screenshot-links">
+            <a href="https://eaaa.instructure.com/courses/32059/users" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-users.png" alt="Canvas People-side med Network-fanen åben, der viser et array af brugerobjekter" />
+              <strong>Users</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://eaaa.instructure.com/courses/32059/announcements" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-announcements.png" alt="Canvas Announcements-side med Network-fanen åben, der viser et opslag som JSON" />
+              <strong>Announcements</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://github.com/cederdorff?tab=repositories" target="_blank" rel="noreferrer">
+              <img src="../assets/github-repos.png" alt="GitHub-profilens repositories-side med Network-fanen åben, der viser et array af repository-objekter" />
+              <strong>Repositories</strong><span>GitHub ↗</span>
+            </a>
+          </div>
+          <p class="bottom-line">
+            Hver liste er et array af objekter, hentet fra en server og vist som UI — samme mønster som
+            <code>keywords</code> og <code>answers</code> i AMAbotten.
+          </p>
+        </section>
+
+        <section class="nesting-slide" data-accent="cyan">
+          <span class="eyebrow">Ikke kun "array af objekter"</span>
+          <h2>Objekter og arrays kan indeholde hinanden i vilkårlig dybde</h2>
+          <pre><code class="language-javascript">const answers = [ // et array …
+  { // … af objekter …
+    keywords: ["navn", "hedder"], // … der selv indeholder et array
+    answer: "Jeg hedder Ada."
+  },
+  {
+    keywords: ["bor", "by"],
+    answer: "Jeg bor i Aarhus."
+  }
+];</code></pre>
+          <div class="nesting-facts">
+            <p><b>Array</b><span>en ordnet liste — hvert element kan være en værdi, et objekt eller endnu et array</span></p>
+            <p><b>Objekt</b><span>et sæt af nøgle/værdi-par — en værdi kan selv være et array eller et objekt</span></p>
+          </div>
+          <p class="bottom-line">
+            <code>answers</code> er selv et bevis: et array af objekter, hvor hvert objekt indeholder et array
+            (<code>keywords</code>) — sammensætningen kan gå lige så dybt, som data kræver.
+          </p>
+        </section>
+
+        <section id="opsamling" class="chapter" data-accent="green">
+          <span class="chapter-number">02</span>
           <span class="eyebrow">Opsamling</span>
           <h2>Find den bedste<br />regel — igen</h2>
           <p>
@@ -206,84 +284,6 @@ const annas = students.filter(
           <p class="bottom-line">
             Samme mønster som <code>keywords.some()</code>/<code>.filter()</code> i AMAbotten — bare på en liste af
             navne og en liste af studerende.
-          </p>
-        </section>
-
-        <section id="objekter-arrays" class="chapter" data-accent="cyan">
-          <span class="chapter-number">02</span>
-          <span class="eyebrow">Objekter og arrays</span>
-          <h2>Samme struktur<br />overalt</h2>
-          <p>Punktnotation, bracket notation og arrays af objekter — den viden bruger I resten af kurset.</p>
-        </section>
-
-        <section class="build-preview" data-accent="cyan">
-          <span class="eyebrow">Genkend mønsteret</span>
-          <h2>Det samme objekt/array-mønster går igen tre steder</h2>
-          <div class="build-stages" aria-label="Objekter og arrays går igen i JavaScript, JSON over HTTP og senere i en database">
-            <article>
-              <b>01</b><span>JavaScript</span>
-              <strong>Objekter og arrays i jeres kode</strong>
-              <code>{ keywords: [...],<br />answer: "..." }</code>
-            </article>
-            <div class="stage-arrow"><i>→</i><small><code>JSON.stringify()</code></small></div>
-            <article>
-              <b>02</b><span>JSON over HTTP</span>
-              <strong>Samme struktur sendt som tekst</strong>
-              <code>{"keywords":[...],<br />"answer":"..."}</code>
-            </article>
-            <div class="stage-arrow"><i>→</i><small>gemmes · hentes</small></div>
-            <article>
-              <b>03</b><span>En database (senere)</span>
-              <strong>Rækker/dokumenter med samme form</strong>
-              <code>{ keywords: [...],<br />answer: "..." }</code>
-            </article>
-          </div>
-          <p class="bottom-line">JSON repræsenterer blandt andet objekter og arrays som tekst.</p>
-        </section>
-
-        <section class="materials-slide screenshot-links-slide">
-          <span class="eyebrow">Se mønsteret i virkeligheden</span>
-          <h2>Arrays af objekter — fra server til UI</h2>
-          <div class="screenshot-links">
-            <a href="https://eaaa.instructure.com/courses/32059/users" target="_blank" rel="noreferrer">
-              <img src="../assets/canvas-users.png" alt="Canvas People-side med Network-fanen åben, der viser et array af brugerobjekter" />
-              <strong>Users</strong><span>Canvas ↗</span>
-            </a>
-            <a href="https://eaaa.instructure.com/courses/32059/announcements" target="_blank" rel="noreferrer">
-              <img src="../assets/canvas-announcements.png" alt="Canvas Announcements-side med Network-fanen åben, der viser et opslag som JSON" />
-              <strong>Announcements</strong><span>Canvas ↗</span>
-            </a>
-            <a href="https://github.com/cederdorff?tab=repositories" target="_blank" rel="noreferrer">
-              <img src="../assets/github-repos.png" alt="GitHub-profilens repositories-side med Network-fanen åben, der viser et array af repository-objekter" />
-              <strong>Repositories</strong><span>GitHub ↗</span>
-            </a>
-          </div>
-          <p class="bottom-line">
-            Hver liste er et array af objekter, hentet fra en server og vist som UI — samme mønster som
-            <code>keywords</code> og <code>answers</code> i AMAbotten.
-          </p>
-        </section>
-
-        <section class="nesting-slide" data-accent="cyan">
-          <span class="eyebrow">Ikke kun "array af objekter"</span>
-          <h2>Objekter og arrays kan indeholde hinanden i vilkårlig dybde</h2>
-          <pre><code class="language-javascript">const answers = [ // et array …
-  { // … af objekter …
-    keywords: ["navn", "hedder"], // … der selv indeholder et array
-    answer: "Jeg hedder Ada."
-  },
-  {
-    keywords: ["bor", "by"],
-    answer: "Jeg bor i Aarhus."
-  }
-];</code></pre>
-          <div class="nesting-facts">
-            <p><b>Array</b><span>en ordnet liste — hvert element kan være en værdi, et objekt eller endnu et array</span></p>
-            <p><b>Objekt</b><span>et sæt af nøgle/værdi-par — en værdi kan selv være et array eller et objekt</span></p>
-          </div>
-          <p class="bottom-line">
-            <code>answers</code> er selv et bevis: et array af objekter, hvor hvert objekt indeholder et array
-            (<code>keywords</code>) — sammensætningen kan gå lige så dybt, som data kræver.
           </p>
         </section>
 

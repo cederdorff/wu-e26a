@@ -15,7 +15,15 @@ Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekte
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: AMAbottens svarlogik</strong></summary>
+<summary><strong>1. Opsamling: Objekter og arrays</strong></summary>
+
+- Genbesøg punktnotation og bracket notation på objekter
+- Genbesøg arrays af objekter og `for...of`
+- Se, hvordan den samme struktur (arrays og objekter, indlejret i hinanden) går igen, når vi sender og modtager data over HTTP, og senere når data ligger i en database
+- Pointe: det er ikke tilfældigt — JSON repræsenterer blandt andet objekter og arrays som tekst
+</details>
+<details>
+<summary><strong>2. Opsamling: AMAbot svarlogik</strong></summary>
 
 - Forklar to og to, hvordan `findBestAnswer()` vælger den bedst matchende regel ud fra antal matchende nøgleord
 - Vælg en string-metode fra DOB 3, og forklar, hvordan den kan bruges til at genkende noget i et spørgsmål
@@ -23,14 +31,6 @@ Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekte
 - Gennemgå `topicStats` — hvordan I tæller emner/kategorier i et objekt
 - Test med et spørgsmål, der matcher flere regler — vinder den rigtige?
 - Notér, hvad der stadig er uklart omkring scoring, tælling eller objekter/arrays
-</details>
-<details>
-<summary><strong>2. Objekter og arrays — kort opsamling</strong></summary>
-
-- Genbesøg punktnotation og bracket notation på objekter
-- Genbesøg arrays af objekter og `for...of`
-- Se, hvordan den samme struktur (arrays og objekter, indlejret i hinanden) går igen, når vi sender og modtager data over HTTP, og senere når data ligger i en database
-- Pointe: det er ikke tilfældigt — JSON repræsenterer blandt andet objekter og arrays som tekst
 </details>
 <details>
 <summary><strong>3. Hvad er persistens?</strong></summary>
@@ -41,7 +41,7 @@ Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekte
 - I dag bruger vi en JSON-fil som den simpleste form for persistens; senere i forløbet erstatter vi filen med en rigtig database, men selve idéen — gem data et sted, der ikke forsvinder — er den samme
 </details>
 <details>
-<summary><strong>4. Hvad er JSON, og hvorfor er det smart?</strong></summary>
+<summary><strong>4. Hvad er JSON?</strong></summary>
 
 - JSON (JavaScript Object Notation) er et tekstformat til at repræsentere data — blandt andet objekter og arrays som ren tekst
 - Det ligner JavaScript-objekter, men er ikke det samme: nøgler og strings i dobbelte citationstegn, ingen funktioner, ingen kommentarer, ingen trailing comma
@@ -57,13 +57,13 @@ Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekte
 - Mønstret: **read → modify → write**
   - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
 - Hvorfor er `push()` på et array alene ikke nok? Data ændres kun i memory, ikke i filen
+- Lav [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) som første anvendelse af read → modify → write — trin 1–7, og gå derefter videre til øvelse 5. Trin 8–11 er ekstraopgaver
 </details>
 <details>
-<summary><strong>6. Gem AMAbottens chathistorik</strong></summary>
+<summary><strong>6. Gem chathistorikken</strong></summary>
 
 - Lige nu lever `messages` kun i memory — historikken forsvinder, når serveren genstartes
-- Lav først [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — lav trin 1–7, og gå derefter videre til øvelse 5. Trin 8–11 er ekstraopgaver
-- Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): skriv `loadMessages()` og `saveMessages(messages)`, og kald dem fra `GET /` og `POST /ask`, så filen — ikke en variabel — er den eneste sandhed om samtalen
+- Arbejd med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): skriv `loadMessages()` og `saveMessages(messages)`, og kald dem fra `GET /` og `POST /ask`, så filen — ikke en variabel — er den eneste sandhed om samtalen
 - Test persistensen i øvelse 5, trin 7: kontrollér svar på to formuleringer af samme spørgsmål, og genstart serveren for at tjekke historikken
 - Lav derefter trin 8: brug string parsing, metoder og funktioner til én forbedring af svarlogikken, og test den. Normalisering er udgangspunktet; mere præcis matching er en større udfordring
 </details>
