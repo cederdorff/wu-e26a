@@ -4,25 +4,81 @@
 
 ## Dagens fokus
 
-TBA
+Sidste gang byggede I jeres første REST API: CRUD med GET, POST og PUT, route parameters og korrekte statuskoder — men det hele lå samlet i én `server.js`. I dag skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret.
+
+Vi ser på Layered Architecture: hvordan man deler en voksende Express-backend op i lag — routes, controllers/handlers og selve data-adgangen — med Express' `Router`, og på en række konkrete REST best practices for navngivning af ressourcer og konsistente responses. Vi bygger også videre på selve API-designet med et par af de mest almindelige mønstre i et rigtigt REST API: filtrering, sortering og paginering via query parameters, fx `/messages?sender=user` eller `/messages?sender=chatbot`.
+
+Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-error-handling-25-09-2026.md), hvor der er afsat en hel gang til det.
 
 ---
 
 ## Agenda
 
-- TBA
+<details>
+<summary><strong>1. Opsamling: REST API fra sidste gang</strong></summary>
+
+- Forklar to og to jeres eget REST API fra sidste gang: hvilke routes, statuskoder og route parameters endte I med?
+- Hvordan ser `server.js` ud lige nu — hvor meget forskelligt ansvar ligger i den samme fil?
+- Genbesøg CRUD ↔ HTTP-metoderne, hvis der stadig er tvivl
+</details>
+<details>
+<summary><strong>2. Problemet: når server.js vokser</strong></summary>
+
+- Routes, forretningslogik og data blandet sammen i én fil
+- Svært at finde rundt i, svært at genbruge og svært at teste isoleret
+- Motivation: samme problem som at proppe al JavaScript ind i én kæmpe funktion
+</details>
+<details>
+<summary><strong>3. Layered Architecture: routes, controllers og data</strong></summary>
+
+- Ansvarsfordeling: routes (HTTP ind/ud) → controllers/handlers (logik) → data-adgang (fx en JSON-fil, senere en database)
+- Hver fil/modul har ét ansvar — genkend mønstret fra `loadMessages()`/`saveMessages()`
+- Et lille eksempel på mappestruktur med `routes/`, `controllers/` og `data/`
+</details>
+<details>
+<summary><strong>4. Express Router: opdel routes i egne filer</strong></summary>
+
+- `express.Router()` som en selvstændig "mini-app" for én ressource
+- Montér en router på hoved-appen: `app.use("/messages", messagesRouter)`
+- Praktisk: flyt en eksisterende gruppe routes over i sin egen router-fil
+</details>
+<details>
+<summary><strong>5. REST best practices: navngivning og konsistens</strong></summary>
+
+- Ressourcer er substantiver, ikke verber: `/messages`, ikke `/getMessages`
+- Flertal for collections: `/users`, `/users/:id`
+- Konsistent respons-format og statuskoder på tværs af hele API'et
+</details>
+<details>
+<summary><strong>6. Filtrering, sortering & paginering med query parameters</strong></summary>
+
+- `request.query` til at læse fx `?sender=user`
+- Filtrering: brug `.filter()` på data ud fra en eller flere query parametre
+- Sortering: `?sort=...` — hvilken property skal der sorteres på?
+- Paginering: `?page=` og `?limit=` — hvorfor er det nødvendigt, når data-mængden vokser?
+</details>
+<details>
+<summary><strong>7. Hands-on: Omstrukturér og udbyg jeres REST API</strong></summary>
+
+- Opdel jeres eksisterende routes i routers/controllers efter dagens mønster
+- Tilføj filtrering, sortering og/eller paginering til én af jeres GET-routes
+- Test undervejs i Thunder Client med forskellige query parametre
+</details>
 
 ---
 
 ## Forberedelse
 
-- TBA
+- Genbesøg jeres eget REST API fra sidste gang, og vær klar til at forklare, hvordan `server.js` er organiseret lige nu
+- Læs ["Routing"](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen, særligt afsnittet om `express.Router()`
+- Genopfrisk `req.query` i [Request-referencen](https://expressjs.com/en/api.html#req.query) på Express.js — I kender allerede `req.params` og `req.body` fra sidst
+- Læs ["REST API Best Practices – REST Endpoint Design Examples"](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) på freeCodeCamp
+- Skim ["Layer your app"](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/createlayers.md) og ["Structure by components"](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md) fra Node.js best practices-listen som introduktion til dagens arkitekturtanker
 
 ## Materialer
 
-### Præsentationer
-
-### Opgaver
+- Slides: TBA
+- Opgaver: TBA
 
 ---
 
