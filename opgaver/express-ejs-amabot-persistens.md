@@ -6,7 +6,7 @@ Lige nu lever `messages` kun i memory. Samtalen forsvinder, hver gang du genstar
 
 Du bygger videre på din egen AMAbot fra [øvelse 4](express-ejs-amabot-statistik.md). Du skal ikke oprette et nyt projekt. Har du siden forbedret botten, bygger du videre på den version.
 
-I [DOB 3](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. Her bruger du din viden om funktioner til at give læsning og gemning hver sin funktion, mens din eksisterende svarlogik fortsat finder svaret.
+I [DOB 3](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. Her bruger du din viden om funktioner til at give læsning og gemning hver sin funktion. Når persistensen virker, bruger du også string parsing, metoder og funktioner til at forbedre en konkret del af AMAbottens svarlogik.
 
 > **Har du ikke allerede lavet den?** Lav først [JSON-øvelse: Studerende i en JSON-fil](express-ejs-json-students.md), hvor du træner `JSON.stringify()`, `JSON.parse()`, `fs.readFile()` og `fs.writeFile()` i en lille selvstændig app, før du bruger dem her. Øvelse 5 bruger nøjagtig samme mønster.
 
@@ -238,6 +238,46 @@ Hvis ja, har du lavet **persistens**: `data/messages.json` er den eneste sandhed
 
 ---
 
+### Brug string parsing, metoder og funktioner i AMAbotten
+
+Nu hvor historikken bliver gemt, skal du vælge **én lille forbedring af svarlogikken**, hvor du bruger viden fra DOB 3. Tag udgangspunkt i din egen implementering: hvad har din bot svært ved at genkende? Har du allerede lavet en af forbedringerne, så genbrug den og vis med testen nedenfor, hvordan den virker.
+
+Vælg fx én af disse muligheder:
+
+- **Gør spørgsmål klar til matching:** Saml behandling af store/små bogstaver og mellemrum i en funktion `normalizeQuestion(question)`, der returnerer en ny string. Brug fx `trim()`, `toLowerCase()` og eventuelt `replace(/\s+/g, " ")`, så flere mellemrum i træk bliver til ét. Brug funktionen inde i `findBestAnswer()` i stedet for kun `question.toLowerCase()`.
+- **Gør matching mere præcis:** Undersøg, om `includes()` giver uønskede match i din bot. Fx matcher `"madras".includes("mad")`, selvom spørgsmålet ikke handler om mad. Brug en passende string-metode eller et mønster med `search()` eller `match()` til at genkende det, du faktisk leder efter. Saml tjekket i en funktion, fx `matchesKeyword(question, keyword)`, der returnerer `true` eller `false`, og brug den i din eksisterende `countMatches()`.
+
+Du skal kunne forklare din funktions parametre og returværdi, og hvorfor du har valgt netop de string-metoder. Hvis du organiserer tjekket som en metode på et objekt, skal du kunne forklare, hvorfor den hører til dér.
+
+<details>
+<summary>Hint: normalisering i en selvstændig funktion</summary>
+
+```js
+function normalizeQuestion(question) {
+  // Returnér spørgsmålet med ensartede mellemrum og små bogstaver.
+}
+
+// Inde i din eksisterende findBestAnswer(question):
+const normalizedQuestion = normalizeQuestion(question);
+```
+
+`replace(/\s+/g, " ")` erstatter hver sammenhængende gruppe af whitespace-tegn med ét mellemrum. Det kan fx gøre `"hvem   er du"` til `"hvem er du"`, så en nøglefrase kan matches.
+
+Brug den normaliserede tekst til matching. Behold brugerens formulering i den besked, du lægger i `messages`, så historikken viser det spørgsmål, brugeren stillede.
+
+</details>
+
+**Test forbedringen sammen med persistensen:**
+
+1. Vælg to spørgsmål, der skal genkendes som samme emne, og ét, der ikke skal matche den regel. Notér de forventede svar, før du tester.
+2. Send alle tre spørgsmål gennem formularen. Kontrollér, at din forbedring virker, og at andre svarregler stadig virker som før.
+3. Åbn `data/messages.json`, og kontrollér, at spørgsmål og svar er gemt.
+4. Genstart serveren, og kontrollér, at historikken stadig vises. Send derefter et af spørgsmålene igen for at kontrollere svarlogikken efter genstarten.
+
+Læg mærke til ansvarsfordelingen: string parsing hjælper botten med at forstå spørgsmålet, svarfunktionen vælger svaret, og `loadMessages()`/`saveMessages()` håndterer historikken. `JSON.parse()` læser JSON-formatet — den analyserer ikke betydningen af brugerens spørgsmål.
+
+---
+
 ## Ekstraopgaver
 
 <details>
@@ -322,6 +362,7 @@ Når du er færdig, skal du gerne kunne forklare:
 7. Hvad er forskellen på at gemme `messages` i en JSON-fil og at gemme den i en database?
 8. Hvordan bruger du funktioner, parametre og returværdier i `loadMessages()` og `saveMessages(messages)`?
 9. Hvorfor kan du tilføje persistens uden at ændre den funktion eller metode, der analyserer spørgsmålet og finder svaret?
+10. Hvilken forbedring af svarlogikken valgte du, hvilke string-metoder bruger den, og hvilke spørgsmål viser, at den virker?
 
 ## Videre
 
