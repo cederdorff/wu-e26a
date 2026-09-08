@@ -15,7 +15,7 @@ Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekte
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: AMAbottens svarlogik og begreber fra DOB 3</strong></summary>
+<summary><strong>1. Opsamling: AMAbottens svarlogik</strong></summary>
 
 - Forklar to og to, hvordan `findBestAnswer()` vælger den bedst matchende regel ud fra antal matchende nøgleord
 - Vælg en string-metode fra DOB 3, og forklar, hvordan den kan bruges til at genkende noget i et spørgsmål

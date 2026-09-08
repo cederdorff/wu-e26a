@@ -15,14 +15,14 @@ I dag skifter vi derfor fokus fra at bygge sider til at bygge et REST API. Vi ø
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: Persistens fra RACE 4</strong></summary>
+<summary><strong>1. Opsamling: Persistens</strong></summary>
 
 - Forklar to og to jeres `loadStudents()`/`saveStudents()` eller `loadMessages()`/`saveMessages()` for hinanden
 - Genbesøg read → modify → write: hvorfor er alle tre trin nødvendige, og hvad går galt, hvis I springer et over?
 - Test: har alle fået persistens til at virke i mindst én af øvelserne fra sidst? Genstart serveren, og bekræft at data stadig er der
 </details>
 <details>
-<summary><strong>2. Fra sider til data: SSR vs REST API</strong></summary>
+<summary><strong>2. Fra sider (HTML) til data (JSON): SSR vs REST API</strong></summary>
 
 - Genbesøg SSR fra RACE 2: `response.render()` kombinerer data og en EJS-template til et færdigt HTML-dokument
 - I et REST API sender serveren i stedet rene data — der er intet HTML og ingen visning involveret
