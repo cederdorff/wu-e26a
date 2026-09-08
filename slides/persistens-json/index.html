@@ -10,11 +10,16 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="title-slide solo" data-accent="yellow">
+        <section class="title-slide" data-accent="yellow">
           <div class="title-copy">
             <span class="eyebrow">WU-E26A · RACE 4 · 11. september 2026</span>
             <h1>Fra memory<br /><span>til fil</span></h1>
             <p class="lead">Persistens · JSON · Node.js File System API</p>
+          </div>
+          <div class="loading-mark" aria-hidden="true">
+            <div class="loading-bar"><i></i><i></i><i></i><span>race.json</span></div>
+            <img src="../assets/loading.gif" alt="" />
+            <p class="loading-text">race.json <b>is loading</b><span class="dots"><i>.</i><i>.</i><i>.</i></span></p>
           </div>
           <aside class="notes">
             Velkommen tilbage. I sidste undervisning arbejdede vi med objekter, arrays og kontrolstrukturer i
@@ -78,27 +83,225 @@
           <span class="chapter-number">01</span>
           <span class="eyebrow">Opsamling</span>
           <h2>Find den bedste<br />regel — igen</h2>
-          <p>To og to: forklar <code>findBestAnswer()</code> og <code>topicStats</code> fra jeres egen kode.</p>
+          <p>
+            To og to: forklar <code>findAnswer()</code> — eller <code>findBestAnswer()</code> og
+            <code>topicStats</code>, hvis I er nået længere — fra jeres egen kode.
+          </p>
           <aside class="notes">
-            Kort opsamling på øvelse 3 og 4, før vi går videre til dagens nye stof. Formålet er, at alle kan pege på
-            og forklare egen kode — ikke at nå til identiske løsninger. [Sources] - Lokal opsamlingsside:
-            undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md [/Sources]
+            Kort opsamling på øvelse 3 og 4, før vi går videre til dagens nye stof. Ikke alle er nødvendigvis nået til
+            findBestAnswer()/topicStats fra øvelse 4 — lad dem, der kun har findAnswer() fra øvelse 3, forklare den i
+            stedet. Formålet er, at alle kan pege på og forklare egen kode — ikke at nå til identiske løsninger.
+            [Sources] - Lokal opsamlingsside: undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md
+            [/Sources]
           </aside>
         </section>
 
         <section class="question-slide" data-accent="green">
-          <span class="eyebrow">Opsamlingsaktivitet · øvelse 3 og 4</span>
+          <span class="eyebrow">Opsamlingsaktivitet · øvelse 3, 4 og i dag</span>
           <h2>Forklar koden for din sidemakker</h2>
           <ol class="question-grid">
-            <li>Kan I forklare, hvordan <code>findBestAnswer()</code> vælger den bedst matchende regel ud fra antal matchende nøgleord?</li>
-            <li>Kan I gennemgå, hvordan <code>topicStats</code> tæller emner/kategorier i et objekt?</li>
+            <li>Kan I forklare, hvordan jeres <code>findAnswer()</code> vælger et svar ud fra nøgleord — eller <code>findBestAnswer()</code>, hvis I er nået til øvelse 4?</li>
+            <li>Er I nået til øvelse 4: kan I gennemgå, hvordan <code>topicStats</code> tæller emner/kategorier i et objekt?</li>
             <li>Hvad sker der, når et spørgsmål matcher flere regler samtidig — vinder den rigtige?</li>
             <li>Hvad er stadig uklart omkring scoring, tælling eller objekter/arrays?</li>
           </ol>
+          <div class="method-chips">
+            <span class="method-chips-label">Forklar også metoden</span>
+            <code>toLowerCase()</code>
+            <code>trim()</code>
+            <code>includes()</code>
+            <code>filter()</code>
+            <code>some()</code>
+            <code>.length</code>
+          </div>
           <aside class="notes">
-            Lad par teste med et spørgsmål, der rammer flere regler, og sammenligne resultatet med deres forventning.
-            Notér uklarheder, så I kan samle op i plenum. [Sources] - Lokal lektionsside:
-            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+            Ikke alle er nødvendigvis nået til findBestAnswer()/topicStats fra øvelse 4 — spørgsmål 1 og 2 er bevidst
+            formuleret, så par med kun findAnswer() fra øvelse 3 stadig kan svare. Lad par teste med et spørgsmål, der
+            rammer flere regler, og sammenligne resultatet med deres forventning. Notér uklarheder, så I kan samle op
+            i plenum. Brug metode-raden nederst til en hurtig runde: pege på én
+            metode ad gangen, og bed par forklare den uden at kigge i koden. Facit til jer selv:
+            <code>toLowerCase()</code> normaliserer store/små bogstaver, før noget sammenlignes. <code>trim()</code>
+            fjerner mellemrum i starten/slutningen af brugerens input (øvelse 5:
+            <code>request.body.question.trim()</code>). <code>includes()</code> undersøger, om én streng indeholder
+            en anden. <code>some()</code> afgør, om mindst ét nøgleord matcher (øvelse 3). <code>filter()</code>
+            danner et nyt array med de nøgleord, der matcher, og bruges sammen med <code>.length</code> til at tælle
+            matches — selve scoren i øvelse 4. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md - Lokal øvelse:
+            opgaver/javascript-oevelser-amabot.md - opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="normalize-slide" data-accent="yellow">
+          <span class="eyebrow">Genopfrisk · toLowerCase() · trim() · includes()</span>
+          <h2>Normalisér først — sammenlign bagefter</h2>
+          <div class="normalize-flow">
+            <article><span>Input</span><code>"  Hvad HEDDER du? "</code></article>
+            <i>→</i>
+            <article><span><code>.trim().toLowerCase()</code></span><code>"hvad hedder du?"</code></article>
+            <i>→</i>
+            <article><span><code>.includes("hedder")</code></span><strong>true</strong></article>
+          </div>
+          <div class="method-facts">
+            <p><code>trim()</code><span>fjerner mellemrum i start/slut — ny string</span></p>
+            <p><code>toLowerCase()</code><span>gør alt til små bogstaver — ny string</span></p>
+            <p><code>includes()</code><span>returnerer en boolean</span></p>
+          </div>
+          <pre class="recap-code"><code class="language-javascript">const normalizedQuestion = question.trim().toLowerCase();
+const hasMatch = normalizedQuestion.includes("hedder");</code></pre>
+          <aside class="notes">
+            Hurtig genopfriskning før dagens nye stof. toLowerCase() og includes() er kendt fra øvelse 3;
+            trim() er ny og bruges i øvelse 5 (<code>request.body.question.trim()</code>) til at rense brugerens
+            input, før det gemmes eller sammenlignes. Ingen af de tre ændrer den oprindelige streng — hver
+            returnerer en ny værdi. [Sources] - Lokale øvelser: opgaver/javascript-oevelser-amabot.md -
+            opgaver/express-ejs-amabot-persistens.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="method-compare-slide" data-accent="yellow">
+          <span class="eyebrow">Genopfrisk · .some() · .filter() · .length</span>
+          <h2>Mindst ét match — eller hvor mange?</h2>
+          <div class="method-compare">
+            <article>
+              <span><code>.some()</code></span>
+              <pre class="recap-code"><code class="language-javascript">const hasMatch = keywords.some((keyword) =>
+  normalizedQuestion.includes(keyword)
+);</code></pre>
+              <ul class="method-compare-facts">
+                <li><b>Svarer</b><code>true</code> / <code>false</code></li>
+                <li><b>Stopper</b>ved første match</li>
+                <li><b>AMAbot</b><code>findAnswer()</code></li>
+              </ul>
+            </article>
+            <article>
+              <span><code>.filter()</code> + <code>.length</code></span>
+              <pre class="recap-code"><code class="language-javascript">const matches = keywords.filter((keyword) =>
+  normalizedQuestion.includes(keyword)
+);
+const score = matches.length;</code></pre>
+              <ul class="method-compare-facts">
+                <li><b>Svarer</b><code>2</code> (et tal)</li>
+                <li><b>Stopper</b>når alle nøgleord er undersøgt</li>
+                <li><b>AMAbot</b><code>findBestAnswer()</code></li>
+              </ul>
+            </article>
+          </div>
+          <p class="bottom-line">
+            Samme spørgsmål, to svar: <code>.some()</code> siger kun ja/nej — <code>.filter().length</code> tæller
+            hvor mange.
+          </p>
+          <aside class="notes">
+            some() svarer kun ja/nej og kan stoppe ved første match — det er nok til findAnswer() i øvelse 3.
+            filter() undersøger alle nøgleord og bygger et nyt array; .length omdanner det array til selve scoren,
+            som findBestAnswer() sammenligner regler ud fra i øvelse 4. [Sources] - Lokale øvelser:
+            opgaver/express-ejs-amabot.md - opgaver/express-ejs-amabot-statistik.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="method-compare-slide" data-accent="yellow">
+          <span class="eyebrow">Samme metoder — uden AMAbot</span>
+          <h2>.some() og .filter() på et helt andet eksempel</h2>
+          <div class="method-compare">
+            <article>
+              <span><code>.some()</code></span>
+              <pre class="recap-code"><code class="language-javascript">const names = ["Mohanad", "Anna", "Tinus", "Rasmus"];
+
+const hasAnna = names.some((name) => name === "Anna");
+
+console.log(hasAnna); // true</code></pre>
+              <ul class="method-compare-facts">
+                <li><b>Spørgsmål</b>Findes "Anna" i listen?</li>
+                <li><b>Resultat</b><code>true</code> — én boolean</li>
+              </ul>
+            </article>
+            <article>
+              <span><code>.filter()</code></span>
+              <pre class="recap-code"><code class="language-javascript">const students = [
+  { name: "Anna", class: "webA" },
+  { name: "Mohanad", class: "webB" },
+  { name: "Anna", class: "webB" }
+];
+
+const annas = students.filter(
+  (student) => student.name === "Anna"
+);</code></pre>
+              <ul class="method-compare-facts">
+                <li><b>Spørgsmål</b>Hvilke studerende hedder "Anna"?</li>
+                <li><b>Resultat</b>et nyt array med 2 objekter</li>
+              </ul>
+            </article>
+          </div>
+          <p class="bottom-line">
+            Samme mønster som <code>keywords.some()</code>/<code>.filter()</code> i AMAbotten — bare på en liste af
+            navne og en liste af studerende.
+          </p>
+          <aside class="notes">
+            Generalisér metoderne væk fra AMAbot-konteksten, så de studerende ser, at det er de samme to metoder, der
+            går igen — uanset om arrayet indeholder strings eller objekter. some() spørger stadig kun ja/nej;
+            filter() bygger stadig et nyt array, denne gang af de studerende, der matcher. Peg på, at student.name
+            fungerer, fordi students er et array af objekter — samme punktnotation som keyword-eksemplerne.
+            [Sources] - Lokal begrebstræning inspireret af opgaver/javascript-oevelser-amabot.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="array-methods-overview-slide" data-accent="yellow">
+          <span class="eyebrow">Der findes mange flere</span>
+          <h2><code>.some()</code> og <code>.filter()</code> er kun to ud af mange array-metoder</h2>
+          <div class="array-methods-overview">
+            <div class="am-row">
+              <code>[■ ■ ■ ■]</code>
+              <span><code>.map(■→●)</code></span>
+              <i>→</i>
+              <code>[● ● ● ●]</code>
+            </div>
+            <div class="am-row">
+              <code>[■ ■ ● ■]</code>
+              <span><code>.filter(■)</code></span>
+              <i>→</i>
+              <code>[■ ■ ■]</code>
+            </div>
+            <div class="am-row">
+              <code>[● ● ■ ■]</code>
+              <span><code>.find(■)</code></span>
+              <i>→</i>
+              <code>■</code>
+            </div>
+            <div class="am-row">
+              <code>[● ● ● ■]</code>
+              <span><code>.findIndex(■)</code></span>
+              <i>→</i>
+              <code>3</code>
+            </div>
+            <div class="am-row">
+              <code>[● ■ ■ ●]</code>
+              <span><code>.some(■)</code></span>
+              <i>→</i>
+              <code class="am-result">true</code>
+            </div>
+            <div class="am-row">
+              <code>[■ ■ ■ ●]</code>
+              <span><code>.every(■)</code></span>
+              <i>→</i>
+              <code class="am-result">false</code>
+            </div>
+            <div class="am-row">
+              <code>[■ ■ ● ●]</code>
+              <span><code>.reverse()</code></span>
+              <i>→</i>
+              <code>[● ● ■ ■]</code>
+            </div>
+          </div>
+          <p class="bottom-line">
+            I dag brugte I <code>.some()</code>, <code>.filter()</code> og <code>.length</code> — <code>.map()</code>,
+            <code>.find()</code> og de andre venter i kommende undervisning.
+          </p>
+          <aside class="notes">
+            Ikke en ny undervisningsblok — bare et kort udsyn, så .some() og .filter() ikke fremstår som "de eneste to
+            array-metoder, der findes". map() transformerer hvert element til noget nyt; find() returnerer det første
+            element, der matcher (ikke et array som filter()); findIndex() er find(), men returnerer indekset i
+            stedet for elementet; every() er modstykket til some() — kræver, at ALLE elementer opfylder betingelsen;
+            reverse() vender rækkefølgen om uden at filtrere eller transformere noget. Gå ikke i dybden nu; det er en
+            appetizer til senere undervisning. [Sources] - Lokal begrebstræning inspireret af
+            opgaver/javascript-oevelser-amabot.md [/Sources]
           </aside>
         </section>
 
@@ -120,25 +323,86 @@
             <article>
               <b>01</b><span>JavaScript</span>
               <strong>Objekter og arrays i jeres kode</strong>
-              <code>{ keywords: [...], answer: "..." }</code>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
             </article>
-            <i>→</i>
+            <div class="stage-arrow"><i>→</i><small><code>JSON.stringify()</code></small></div>
             <article>
               <b>02</b><span>JSON over HTTP</span>
               <strong>Samme struktur sendt som tekst</strong>
-              <code>{"keywords":[...],"answer":"..."}</code>
+              <code>{"keywords":[...],<br />"answer":"..."}</code>
             </article>
-            <i>→</i>
+            <div class="stage-arrow"><i>→</i><small>gemmes · hentes</small></div>
             <article>
               <b>03</b><span>En database (senere)</span>
               <strong>Rækker/dokumenter med samme form</strong>
-              <code>{ keywords: [...], answer: "..." }</code>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
             </article>
           </div>
           <p class="bottom-line">Det er ikke tilfældigt — JSON <b>ER</b> JavaScript-objekter og -arrays skrevet som tekst.</p>
           <aside class="notes">
             Denne pointe binder dagens tre begreber sammen: objekter/arrays, JSON og persistens er ikke tre separate
             emner, men tre steder samme datastruktur dukker op. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="materials-slide screenshot-links-slide">
+          <span class="eyebrow">Se mønsteret i virkeligheden</span>
+          <h2>Arrays af objekter — fra server til UI</h2>
+          <div class="screenshot-links">
+            <a href="https://eaaa.instructure.com/courses/32059/users" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-users.png" alt="Canvas People-side med Network-fanen åben, der viser et array af brugerobjekter" />
+              <strong>Users</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://eaaa.instructure.com/courses/32059/announcements" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-announcements.png" alt="Canvas Announcements-side med Network-fanen åben, der viser et opslag som JSON" />
+              <strong>Announcements</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://github.com/cederdorff?tab=repositories" target="_blank" rel="noreferrer">
+              <img src="../assets/github-repos.png" alt="GitHub-profilens repositories-side med Network-fanen åben, der viser et array af repository-objekter" />
+              <strong>Repositories</strong><span>GitHub ↗</span>
+            </a>
+          </div>
+          <p class="bottom-line">
+            Hver liste er et array af objekter, hentet fra en server og vist som UI — samme mønster som
+            <code>keywords</code> og <code>answers</code> i AMAbotten.
+          </p>
+          <aside class="notes">
+            Åbn hvert link live og peg på mønsteret: en liste af ensartede objekter (bruger, opslag, repo), hver med
+            de samme properties, gengivet som rækker/kort i UI'et. Screenshottene viser allerede DevTools' Network-fane
+            med det rå JSON-array ved siden af den gengivne UI — brug dem til at pege på mønsteret, før du åbner
+            linket live. Samme idé som answers-arrayet i AMAbotten — bare hentet fra en rigtig server i stedet for en
+            lokal fil. [Sources] - Live demo: eaaa.instructure.com/courses/32059 - github.com/cederdorff [/Sources]
+          </aside>
+        </section>
+
+        <section class="nesting-slide" data-accent="cyan">
+          <span class="eyebrow">Ikke kun "array af objekter"</span>
+          <h2>Objekter og arrays kan indeholde hinanden i vilkårlig dybde</h2>
+          <pre><code class="language-javascript">const answers = [ // et array …
+  { // … af objekter …
+    keywords: ["navn", "hedder"], // … der selv indeholder et array
+    answer: "Jeg hedder Ada."
+  },
+  {
+    keywords: ["bor", "by"],
+    answer: "Jeg bor i Aarhus."
+  }
+];</code></pre>
+          <div class="nesting-facts">
+            <p><b>Array</b><span>en ordnet liste — hvert element kan være en værdi, et objekt eller endnu et array</span></p>
+            <p><b>Objekt</b><span>et sæt af nøgle/værdi-par — en værdi kan selv være et array eller et objekt</span></p>
+          </div>
+          <p class="bottom-line">
+            <code>answers</code> er selv et bevis: et array af objekter, hvor hvert objekt indeholder et array
+            (<code>keywords</code>) — sammensætningen kan gå lige så dybt, som data kræver.
+          </p>
+          <aside class="notes">
+            Byg direkte oven på forrige slide: det er ikke kun "et array med objekter i" — retningen går begge veje.
+            answers er et array, men hvert element er et objekt, og det objekt indeholder selv et array (keywords).
+            Samme idé som Canvas/GitHub-eksemplerne: en bruger kan have et array af enrollments, hvor hver enrollment
+            er et objekt med endnu flere felter. Pointen er den rekursive struktur: arrays og objekter er byggeklodser,
+            der kan sættes sammen i alle retninger. [Sources] - Lokal lektionsside:
             undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
           </aside>
         </section>
@@ -347,6 +611,7 @@ await fs.writeFile(
         <section class="activity-slide" data-accent="green">
           <span class="eyebrow">JSON-øvelse · gør det først på et enkelt eksempel</span>
           <h2>Studerende i en JSON-fil</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-json-students.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
           <ul class="checklist">
             <li><code>GET /</code> læser <code>data/students.json</code> og viser studerende med EJS</li>
             <li><code>POST /students</code> opretter en ny studerende: læs → <code>push()</code> → skriv</li>
@@ -367,6 +632,7 @@ await fs.writeFile(
           <span class="eyebrow">AMAbot</span>
           <h2>Gem samtalen<br />i en JSON-fil</h2>
           <p>Øvelse 5: <code>data/messages.json</code> bliver den eneste sandhed om samtalen.</p>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-amabot-persistens.md" target="_blank" rel="noreferrer">Åbn øvelse 5 på GitHub ↗</a>
           <aside class="notes">
             Nu bruges dagens mønster på den rigtige AMAbot fra øvelse 4. Ingen ny app skal oprettes — der bygges
             videre på den eksisterende. [Sources] - Lokal øvelse: opgaver/express-ejs-amabot-persistens.md [/Sources]
@@ -433,6 +699,7 @@ await fs.writeFile(
         <section class="activity-slide express-activity" data-accent="yellow">
           <span class="eyebrow">Øvelse 5 · dagens slutprodukt</span>
           <h2>AMAbot med en chathistorik, der overlever en genstart</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-ejs-amabot-persistens.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
           <ul class="checklist">
             <li><code>data/messages.json</code> indeholder <code>[]</code> fra start</li>
             <li><code>GET /</code> henter historikken med <code>loadMessages()</code>, i stedet for en tom liste</li>
