@@ -69,11 +69,12 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 
 ## Forberedelse
 
-- Færdiggør Fullstack &gt; Express.js &gt; "Build an Express API" på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack), hvis I ikke nåede det efter sidste gang
 - Genbesøg jeres eget REST API fra sidste gang, og vær klar til at forklare, hvordan `server.js` er organiseret lige nu
 - Læs ["Routing"](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen, særligt afsnittet om `express.Router()`
 - Genopfrisk `req.query` i [Request-referencen](https://expressjs.com/en/api.html#req.query) på Express.js — I kender allerede `req.params` og `req.body` fra sidst
 - Læs ["REST API Best Practices – REST Endpoint Design Examples"](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) på freeCodeCamp, særligt punktet om filtrering/sortering/paginering
+- Supplerende på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
+  - færdiggør Fullstack &gt; Express.js &gt; "Build an Express API", hvis I ikke nåede det efter sidste gang
 
 ## Materialer
 
