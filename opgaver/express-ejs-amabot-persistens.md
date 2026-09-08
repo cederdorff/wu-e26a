@@ -6,7 +6,7 @@ Lige nu lever `messages` kun i memory. Samtalen forsvinder, hver gang du genstar
 
 Du bygger videre på din egen AMAbot fra [øvelse 4](express-ejs-amabot-statistik.md). Du skal ikke oprette et nyt projekt. Har du siden forbedret botten, bygger du videre på den version.
 
-I [DOB 3](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. Her bruger du din viden om funktioner til at give læsning og gemning hver sin funktion. Når persistensen virker, bruger du også string parsing, metoder og funktioner til at forbedre en konkret del af AMAbottens svarlogik.
+I [DOB 3](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) var fokus på string-metoder, funktioner og metoder. Her bruger du din viden om funktioner til at give læsning og gemning hver sin funktion. Når persistensen virker, bruger du også string parsing, metoder og funktioner til at forbedre en konkret del af AMAbottens svarlogik.
 
 > **Har du ikke allerede lavet den?** Lav først trin 1–7 i [JSON-øvelse: Studerende i en JSON-fil](express-ejs-json-students.md), hvor du træner `JSON.stringify()`, `JSON.parse()`, `fs.readFile()` og `fs.writeFile()` i en lille selvstændig app, før du bruger dem her. Øvelse 5 bruger nøjagtig samme mønster.
 
@@ -81,7 +81,7 @@ Skriv præcis dette i `data/messages.json`:
 
 ## 4. Skriv to hjælpefunktioner: læs og gem
 
-Brug din viden om funktioner, parametre og returværdier fra DOB 3 til at dele filhåndteringen op i overskuelige opgaver: én funktion læser historikken, og én gemmer den. Overvej først, hvilken funktion der skal modtage data som parameter, og hvilken der skal returnere data.
+Brug din viden om funktioner, parametre og returværdier til at dele filhåndteringen op i overskuelige opgaver: én funktion læser historikken, og én gemmer den. Overvej først, hvilken funktion der skal modtage data som parameter, og hvilken der skal returnere data.
 
 Find linjen, hvor du opretter `messages`:
 
@@ -248,7 +248,7 @@ Hvis ja, har du lavet **persistens**: `data/messages.json` er den eneste sandhed
 
 ## 8. Brug string parsing, metoder og funktioner i AMAbotten
 
-Nu hvor historikken bliver gemt, skal du vælge **én lille forbedring af svarlogikken**, hvor du bruger viden fra DOB 3. Tag udgangspunkt i din egen implementering: hvad har din bot svært ved at genkende? Har du allerede lavet en af forbedringerne, så genbrug den og vis med testen nedenfor, hvordan den virker.
+Nu hvor historikken bliver gemt, skal du vælge **én lille forbedring af svarlogikken**. Tag udgangspunkt i din egen implementering: hvad har din bot svært ved at genkende? Har du allerede lavet en af forbedringerne, så genbrug den og vis med testen nedenfor, hvordan den virker.
 
 Vælg normalisering som udgangspunkt. Hvis den allerede fungerer i din bot, kan du demonstrere den med testen nedenfor eller vælge den mere udfordrende matching-opgave:
 
