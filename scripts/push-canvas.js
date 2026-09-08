@@ -2,37 +2,36 @@
 //
 // Sender lokale ændringer i undervisning/*.md tilbage til Canvas (siden.body).
 //
-// Sikkerhed:
-// - Standard er dry-run: viser hvad der VILLE blive sendt, uden at skrive noget.
-//   Kør med --apply for faktisk at opdatere Canvas.
-// - Før hver push tjekkes, om siden er blevet ændret i Canvas siden sidste
-//   `canvas:pull`. Er den det, springes filen over (kør canvas:pull først).
-// - Kun sidens `body` opdateres. Titel, modulplacering og lignende rører vi ikke.
-//
-// Brug:
-//   npm run canvas:push                                   (dry-run af alle lokalt ændrede filer)
-//   npm run canvas:push -- undervisning/008-...md          (dry-run af én fil)
-//   npm run canvas:push -- undervisning/008-...md --apply  (skriver til Canvas)
+// Repoets indhold er styrende for de valgte sider i Canvas.
+// Standard er dry-run af ikke-committede ændringer. --apply sender dem.
+// --since=<commit> vælger ændrede filer fra et commit til HEAD (bruges i CI).
+// En eksplicit filsti kan bruges til at sende en allerede committet side igen.
+// Kun sidens body opdateres; nye sider oprettes ikke, og sider slettes ikke.
 
+import { execFileSync } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import { marked } from "marked";
 import {
   canvasRequest,
-  hash,
   loadLocalEnv,
-  readJsonIfPresent,
   requiredEnv,
 } from "./canvas-lib.js";
 
 const projectRoot = resolve(import.meta.dirname, "..");
 const teachingRoot = resolve(projectRoot, "undervisning");
-const manifestPath = resolve(projectRoot, "canvas/mirror-manifest.json");
 const previewRoot = resolve(projectRoot, ".canvas-push-preview");
 
 const args = process.argv.slice(2);
 const apply = args.includes("--apply");
+const sinceArg = args.find((arg) => arg.startsWith("--since="));
 const explicitPaths = args.filter((arg) => !arg.startsWith("--"));
+for (const arg of args.filter((arg) => arg.startsWith("--"))) {
+  if (arg !== "--apply" && !arg.startsWith("--since=")) throw new Error(`Ukendt argument: ${arg}`);
+}
+if (sinceArg && (!sinceArg.slice(8) || explicitPaths.length)) {
+  throw new Error("Brug enten --since=<commit> eller eksplicitte filstier.");
+}
 
 await loadLocalEnv(resolve(projectRoot, ".env"));
 const baseUrl = requiredEnv("CANVAS_BASE_URL").replace(/\/$/, "");
@@ -41,13 +40,12 @@ const token = requiredEnv("CANVAS_ACCESS_TOKEN");
 const apiRoot = `${baseUrl}/api/v1/courses/${encodeURIComponent(courseId)}`;
 const repoBlobRoot = await githubBlobRoot();
 
-const manifest = (await readJsonIfPresent(manifestPath)) ?? { files: {} };
 const allTeachingFiles = await listMarkdownFiles(teachingRoot);
 const pathToPage = await buildPathToPageMap(allTeachingFiles);
 
 const targets = explicitPaths.length
   ? explicitPaths.map((path) => resolve(projectRoot, path))
-  : await findLocallyChangedFiles(allTeachingFiles, manifest);
+  : changedTeachingFiles(sinceArg?.slice(8));
 
 if (!targets.length) {
   console.log("Ingen lokalt ændrede undervisningsfiler fundet. Intet at pushe.");
@@ -59,7 +57,6 @@ console.log("");
 
 let pushed = 0;
 let skipped = 0;
-let conflicts = 0;
 
 for (const path of targets) {
   const relativePath = relative(projectRoot, path).replaceAll("\\", "/");
@@ -87,15 +84,6 @@ for (const path of targets) {
   }
 
   const livePage = await canvasRequest(`${apiRoot}/pages/page_id:${encodeURIComponent(metadata.canvas_page_id)}`, token);
-  if (livePage.updated_at !== metadata.canvas_updated_at) {
-    console.log(
-      `  KONFLIKT: Siden er ændret i Canvas siden sidste pull (Canvas: ${livePage.updated_at}, lokalt kendt: ${metadata.canvas_updated_at}).`,
-    );
-    console.log("  Kør `npm run canvas:pull` først, og løs evt. konflikt i .canvas-incoming/, før du pusher igen.");
-    conflicts += 1;
-    continue;
-  }
-
   const { html, rewrites } = renderBodyHtml(bodyMarkdown, path, pathToPage, repoBlobRoot);
   const previewPath = resolve(previewRoot, `${relativePath.replace(/\.md$/, "")}.html`);
   await mkdir(dirname(previewPath), { recursive: true });
@@ -126,12 +114,9 @@ for (const path of targets) {
 console.log("");
 console.log(
   apply
-    ? `Færdig: ${pushed} side(r) opdateret, ${conflicts} konflikt(er), ${skipped} sprunget over.`
-    : `Dry-run færdig: ${targets.length - skipped - conflicts} klar til push, ${conflicts} konflikt(er), ${skipped} sprunget over.`,
+    ? `Færdig: ${pushed} side(r) opdateret, ${skipped} sprunget over.`
+    : `Dry-run færdig: ${targets.length - skipped} klar til push, ${skipped} sprunget over.`,
 );
-if (apply && pushed) {
-  console.log("Kør `npm run canvas:pull --force` for at genskabe lokale filer og manifest fra Canvas' egen formatering.");
-}
 
 function parseMirroredFile(raw) {
   const metadataMatch = raw.match(/```yaml\n([\s\S]*?)\n```/);
@@ -194,15 +179,22 @@ async function buildPathToPageMap(files) {
   return map;
 }
 
-async function findLocallyChangedFiles(files, manifest) {
-  const changed = [];
-  for (const file of files) {
-    const relativePath = relative(projectRoot, file).replaceAll("\\", "/");
-    const raw = await readFile(file, "utf8");
-    const entry = manifest.files?.[relativePath];
-    if (!entry || hash(raw) !== entry.canvas_hash) changed.push(file);
-  }
-  return changed;
+function changedTeachingFiles(since) {
+  const git = (args) => execFileSync("git", args, { cwd: projectRoot, encoding: "utf8" });
+  // Et første push har en base bestående af nuller: sammenlign med et tomt træ.
+  const base = since && /^0+$/.test(since)
+    ? execFileSync("git", ["hash-object", "-t", "tree", "--stdin"], {
+      cwd: projectRoot, input: "", encoding: "utf8",
+    }).trim()
+    : since ?? "HEAD";
+  const names = git([
+    "diff", "--name-only", "--diff-filter=AM", "--no-renames", "-z",
+    base, ...(since ? ["HEAD"] : []), "--", "undervisning/",
+  ]).split("\0");
+  if (!since) names.push(...git(["ls-files", "--others", "--exclude-standard", "-z", "--", "undervisning/"]).split("\0"));
+  return [...new Set(names)]
+    .filter((name) => name.endsWith(".md"))
+    .map((name) => resolve(projectRoot, name));
 }
 
 async function listMarkdownFiles(dir) {

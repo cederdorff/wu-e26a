@@ -2,9 +2,9 @@
 
 Canvas-kurset spejles som en flad, nummereret række Markdown-filer. Én fil repræsenterer ét Canvas-modul og samler modulside, links, filer, overskrifter og øvrige modulelementer. Canvas-sider uden modul ligger sidst i rækken.
 
-Hver fil har frontmatter med stabile Canvas-ID'er. De bruges ved senere synkronisering, så en titelændring ikke opretter en dublet i Canvas.
+Hver spejlet fil har stabile Canvas-ID'er i metadatafeltet nederst. Push bruger side-ID'et til at opdatere indholdet på den eksisterende side.
 
-Brug [`_skabelon.md`](_skabelon.md) til nye undervisningssider. Spejlede filer har `local_status: mirrored` og stabile Canvas-ID'er i frontmatter.
+Brug [`_skabelon.md`](_skabelon.md) som kladde til nye undervisningssider. Opret siden i Canvas og kør `npm run canvas:pull`, før den kan opdateres herfra. Se [vedligeholdelse](../README.md#vedligeholdelse) for push og manuel spejling.
 
 Den fælles sidestruktur er:
 

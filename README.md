@@ -129,10 +129,27 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 
 ## Vedligeholdelse
 
-Hele kurset spejles gennem Canvas API'et, inklusive upublicerede moduler og sider. Hent den aktuelle Canvas-version med:
+Når du pusher til `main`, sender GitHub Actions kun ændrede Markdown-filer i `undervisning/` til deres eksisterende Canvas-sider. Der køres ingen fuld spejling og oprettes ingen bot-commits. Slides udgives separat til GitHub Pages, når du ændrer dem.
+
+Repoet er styrende for indholdet på de sider, du sender. Push erstatter sidens indhold, også hvis nogen har redigeret den direkte i Canvas. Hent derfor Canvas-versionen først, hvis sådanne ændringer skal med. Titler, publiceringsstatus og modulrækkefølge ændres ikke. Nye sider skal oprettes i Canvas og hentes med pull; slettede lokale filer sletter ikke sider i Canvas.
+
+### Send manuelt
+
+```bash
+npm run canvas:push                         # preview af ikke-committede ændringer
+npm run canvas:push -- --apply              # send de ændringer
+npm run canvas:push -- --since=HEAD~1       # preview af ændringer i seneste commit
+npm run canvas:push -- undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md --apply
+```
+
+`--since=<commit>` sammenligner det valgte commit med `HEAD`; uden flaget bruges ændrede og nye lokale filer. Preview gemmes i `.canvas-push-preview/`. Hvis et automatisk push fejler, kan du genkøre det pågældende workflow i GitHub Actions eller sende de berørte filer manuelt.
+
+Lokalt kræves `npm ci` og Canvas-oplysningerne fra `.env.example` i `.env` eller miljøvariabler. GitHub Actions bruger de tilsvarende repository secrets.
+
+### Hent fra Canvas efter behov
 
 ```bash
 npm run canvas:pull
 ```
 
-Lokale ændringer overskrives ikke. Ved konflikt lægges den nye Canvas-version i `.canvas-incoming/`. Brug kun `npm run canvas:pull:force`, når Canvas bevidst skal overskrive lokale ændringer.
+Dette spejler hele kurset gennem Canvas API'et, inklusive upublicerede moduler, sider og filer. Det sker kun, når du selv starter kommandoen. Lokale ændringer overskrives ikke; ved konflikt lægges Canvas-versionen i `.canvas-incoming/`. Brug kun `npm run canvas:pull:force`, når Canvas bevidst skal overskrive lokale ændringer.

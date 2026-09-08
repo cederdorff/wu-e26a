@@ -5,7 +5,10 @@ import { createHash } from "node:crypto";
 import { access, readFile, rename, writeFile } from "node:fs/promises";
 
 export async function loadLocalEnv(path) {
-  const source = await readFile(path, "utf8");
+  const source = await readFile(path, "utf8").catch((error) => {
+    if (error.code === "ENOENT") return "";
+    throw error;
+  });
   for (const line of source.split(/\r?\n/)) {
     const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
     if (!match || line.trimStart().startsWith("#")) continue;
@@ -16,7 +19,7 @@ export async function loadLocalEnv(path) {
 
 export function requiredEnv(name) {
   const value = process.env[name]?.trim();
-  if (!value) throw new Error(`${name} mangler i .env.`);
+  if (!value) throw new Error(`${name} mangler i miljøvariabler eller .env.`);
   return value;
 }
 

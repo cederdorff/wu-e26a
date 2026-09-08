@@ -327,59 +327,16 @@ const score = matches.length;</code></pre>
           </div>
           <p class="bottom-line">
             Samme spørgsmål, to svar: <code>.some()</code> siger kun ja/nej — <code>.filter().length</code> tæller
-            hvor mange.
+            hvor mange. Samme mønster virker på enhver liste — fx navne eller studerende, ikke kun <code>keywords</code>.
           </p>
           <aside class="notes">
             some() svarer kun ja/nej og kan stoppe ved første match — det er nok til findAnswer() i øvelse 3.
             filter() undersøger alle nøgleord og bygger et nyt array; .length omdanner det array til selve scoren,
-            som findBestAnswer() sammenligner regler ud fra i øvelse 4. [Sources] - Lokale øvelser:
-            opgaver/express-ejs-amabot.md - opgaver/express-ejs-amabot-statistik.md [/Sources]
-          </aside>
-        </section>
-
-        <section class="method-compare-slide" data-accent="yellow">
-          <span class="eyebrow">Samme metoder — uden AMAbot</span>
-          <h2>.some() og .filter() på et helt andet eksempel</h2>
-          <div class="method-compare">
-            <article>
-              <span><code>.some()</code></span>
-              <pre class="recap-code"><code class="language-javascript">const names = ["Mohanad", "Anna", "Tinus", "Rasmus"];
-
-const hasAnna = names.some((name) => name === "Anna");
-
-console.log(hasAnna); // true</code></pre>
-              <ul class="method-compare-facts">
-                <li><b>Spørgsmål</b>Findes "Anna" i listen?</li>
-                <li><b>Resultat</b><code>true</code> — én boolean</li>
-              </ul>
-            </article>
-            <article>
-              <span><code>.filter()</code></span>
-              <pre class="recap-code"><code class="language-javascript">const students = [
-  { name: "Anna", class: "webA" },
-  { name: "Mohanad", class: "webB" },
-  { name: "Anna", class: "webB" }
-];
-
-const annas = students.filter(
-  (student) => student.name === "Anna"
-);</code></pre>
-              <ul class="method-compare-facts">
-                <li><b>Spørgsmål</b>Hvilke studerende hedder "Anna"?</li>
-                <li><b>Resultat</b>et nyt array med 2 objekter</li>
-              </ul>
-            </article>
-          </div>
-          <p class="bottom-line">
-            Samme mønster som <code>keywords.some()</code>/<code>.filter()</code> i AMAbotten — bare på en liste af
-            navne og en liste af studerende.
-          </p>
-          <aside class="notes">
-            Generalisér metoderne væk fra AMAbot-konteksten, så de studerende ser, at det er de samme to metoder, der
-            går igen — uanset om arrayet indeholder strings eller objekter. some() spørger stadig kun ja/nej;
-            filter() bygger stadig et nyt array, denne gang af de studerende, der matcher. Peg på, at student.name
-            fungerer, fordi students er et array af objekter — samme punktnotation som keyword-eksemplerne.
-            [Sources] - Lokal begrebstræning inspireret af opgaver/javascript-oevelser-amabot.md [/Sources]
+            som findBestAnswer() sammenligner regler ud fra i øvelse 4. Hvis nogen spørger "virker det kun på
+            keywords?", vis gerne live i konsollen: ["Mohanad", "Anna"].some(n => n === "Anna") → true, eller
+            students.filter(s => s.name === "Anna") på et array af objekter — samme to metoder, enhver liste.
+            [Sources] - Lokale øvelser: opgaver/express-ejs-amabot.md - opgaver/express-ejs-amabot-statistik.md
+            [/Sources]
           </aside>
         </section>
 
