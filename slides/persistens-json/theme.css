@@ -123,6 +123,11 @@
   font-size: 0.95em;
 }
 
+.build-preview {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
 .build-preview .build-stages {
   grid-template-columns: 1fr 108px 1fr 108px 1fr;
 }
@@ -181,34 +186,6 @@
   background: var(--soft);
 }
 
-.array-methods-overview {
-  display: grid;
-  gap: 0;
-  margin-top: 28px;
-}
-.am-row {
-  display: grid;
-  grid-template-columns: 260px 1fr 44px 220px;
-  align-items: center;
-  gap: 22px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--line);
-}
-.am-row code {
-  font-size: 20px;
-  letter-spacing: 0.04em;
-}
-.am-row i {
-  color: var(--muted);
-  font-size: 20px;
-  font-style: normal;
-  text-align: center;
-}
-.am-row .am-result {
-  color: var(--accent);
-  font-weight: 700;
-}
-
 .nesting-slide pre code {
   font-size: 20px;
 }
@@ -234,6 +211,58 @@
   color: var(--muted);
 }
 
+.code-and-result img {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 35%);
+}
+
+.solution-showcase-slide {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+.solution-showcase {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 44px;
+  margin-top: 48px;
+}
+.solution-shots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.solution-shots figure {
+  margin: 0;
+}
+.solution-shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 35%);
+}
+.solution-shots figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+}
+.solution-showcase pre {
+  margin: 0;
+}
+.solution-showcase pre code {
+  padding: 22px 26px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.screenshot-links-slide {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
 .screenshot-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -248,7 +277,6 @@
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--line);
   box-shadow: 0 20px 50px rgb(0 0 0 / 35%);
 }
 .screenshot-links strong {
@@ -263,7 +291,7 @@
   font-size: 17px;
 }
 .screenshot-links a:hover img {
-  border-color: var(--accent);
+  box-shadow: 0 20px 50px rgb(0 0 0 / 35%), 0 0 0 2px var(--accent);
 }
 .screenshot-links a:hover strong {
   color: var(--accent);

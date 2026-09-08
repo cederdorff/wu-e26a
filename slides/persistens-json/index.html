@@ -60,27 +60,167 @@
           </aside>
         </section>
 
+        <section class="solution-showcase-slide" data-accent="green">
+          <span class="eyebrow">Sådan ser løsningen ud</span>
+          <h2>En lille CRUD-app — og JSON-filen bag den</h2>
+          <div class="solution-showcase">
+            <div class="solution-shots">
+              <figure>
+                <img src="../assets/students-solution-list.png" alt="Studerende-app med en liste over Aisha og Noah samt et opret-ny-studerende-formular" />
+                <figcaption>Liste + opret</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/students-solution-edit.png" alt="Redigér Noah-siden med udfyldte felter til navn og uddannelse" />
+                <figcaption>Redigér</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/students-solution-created.png" alt="Listen med tre studerende, efter Dan er blevet oprettet" />
+                <figcaption>Efter opret</figcaption>
+              </figure>
+            </div>
+            <pre><code class="language-json">[
+  { "id": 1, "name": "Aisha", "education": "Multimediedesign" },
+  { "id": 2, "name": "Noah", "education": "Datamatiker" },
+  { "id": 1788866474706, "name": "Dan", "education": "Datamatiker" }
+]</code></pre>
+          </div>
+          <p class="bottom-line">
+            Præcis denne app bygger I i dag — gemt i <code>data/students.json</code>. Dans id,
+            <code>1788866474706</code>, er <code>Date.now()</code>, genereret da formularen oprettede ham.
+          </p>
+          <aside class="notes">
+            Vis løsningen som motivation, før øvelsen går i gang — I skal ikke bygge noget avanceret, bare denne lille
+            CRUD-app. De tre skærmbilleder viser samme app: listen med redigér/slet og opret-formular, selve
+            redigeringssiden, og listen igen efter en ny studerende (Dan) er oprettet gennem formularen. JSON-filen
+            til højre er den samme liste, bare som den ligger på disken — Aisha og Noah har håndskrevne id'er (1 og
+            2), mens Dan har et langt tal, fordi koden brugte Date.now() som et nemt, unikt id, da han blev oprettet.
+            [Sources] - Lokal øvelse: opgaver/express-ejs-json-students.md [/Sources]
+          </aside>
+        </section>
+
         <section id="agenda" class="agenda-slide" data-accent="cyan">
           <span class="eyebrow">Agenda</span>
           <h2>Fra flygtig memory til en fil, der husker</h2>
           <ol class="agenda-grid">
-            <li><a href="#/opsamling"><b>Opsamling</b><small>Øvelse 3 og 4 — findBestAnswer() og topicStats</small></a></li>
-            <li><a href="#/objekter-arrays"><b>Objekter og arrays</b><small>Samme struktur går igen som JSON</small></a></li>
+            <li><a href="#/objekter-arrays"><b>Objekter og arrays</b><small>Samme struktur i JS, JSON og rigtige API'er — nestet i dybden</small></a></li>
+            <li><a href="#/opsamling"><b>Opsamling</b><small><code>findBestAnswer()</code>, <code>topicStats</code> og metoderne bag</small></a></li>
             <li><a href="#/persistens"><b>Hvad er persistens?</b><small>Memory vs. persistent storage</small></a></li>
             <li><a href="#/json"><b>Hvad er JSON?</b><small>JavaScript-data skrevet som tekst</small></a></li>
             <li><a href="#/filesystem"><b>File System i Node.js</b><small>Læs og skriv med <code>fs</code></small></a></li>
             <li><a href="#/gem"><b>Gem chathistorikken</b><small>Øvelse 5: <code>messages.json</code> overlever en genstart</small></a></li>
           </ol>
           <aside class="notes">
-            Dagen bevæger sig fra en kort opsamling, over begreberne persistens og JSON, til den konkrete File
-            System-kode og til sidst den samlede AMAbot-øvelse. Brug agenda-linket til at vende tilbage mellem
-            kapitlerne. [Sources] - Lokal lektionsside:
+            Dagen starter, hvor vi sluttede sidst: objekter og arrays. Derfra går det videre over en kort opsamling
+            på øvelse 3 og 4, begreberne persistens og JSON, til den konkrete File System-kode og til sidst den
+            samlede AMAbot-øvelse. Brug agenda-linket til at vende tilbage mellem kapitlerne. [Sources] - Lokal
+            lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section id="objekter-arrays" class="chapter" data-accent="cyan">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Objekter og arrays</span>
+          <h2>Samme struktur<br />overalt</h2>
+          <p>Punktnotation, bracket notation og arrays af objekter — den viden bruger I resten af kurset.</p>
+          <aside class="notes">
+            Kort genbesøg af objekter og arrays, før pointen om JSON gøres eksplicit på næste slide. [Sources] - Lokal
+            lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="build-preview" data-accent="cyan">
+          <span class="eyebrow">Genkend mønsteret</span>
+          <h2>Det samme objekt/array-mønster går igen tre steder</h2>
+          <div class="build-stages" aria-label="Objekter og arrays går igen i JavaScript, JSON over HTTP og senere i en database">
+            <article>
+              <b>01</b><span>JavaScript</span>
+              <strong>Objekter og arrays i jeres kode</strong>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
+            </article>
+            <div class="stage-arrow"><i>→</i><small><code>JSON.stringify()</code></small></div>
+            <article>
+              <b>02</b><span>JSON over HTTP</span>
+              <strong>Samme struktur sendt som tekst</strong>
+              <code>{"keywords":[...],<br />"answer":"..."}</code>
+            </article>
+            <div class="stage-arrow"><i>→</i><small>gemmes · hentes</small></div>
+            <article>
+              <b>03</b><span>En database (senere)</span>
+              <strong>Rækker/dokumenter med samme form</strong>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
+            </article>
+          </div>
+          <p class="bottom-line">Det er ikke tilfældigt — JSON <b>ER</b> JavaScript-objekter og -arrays skrevet som tekst.</p>
+          <aside class="notes">
+            Denne pointe binder dagens tre begreber sammen: objekter/arrays, JSON og persistens er ikke tre separate
+            emner, men tre steder samme datastruktur dukker op. [Sources] - Lokal lektionsside:
+            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
+          </aside>
+        </section>
+
+        <section class="materials-slide screenshot-links-slide">
+          <span class="eyebrow">Se mønsteret i virkeligheden</span>
+          <h2>Arrays af objekter — fra server til UI</h2>
+          <div class="screenshot-links">
+            <a href="https://eaaa.instructure.com/courses/32059/users" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-users.png" alt="Canvas People-side med Network-fanen åben, der viser et array af brugerobjekter" />
+              <strong>Users</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://eaaa.instructure.com/courses/32059/announcements" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-announcements.png" alt="Canvas Announcements-side med Network-fanen åben, der viser et opslag som JSON" />
+              <strong>Announcements</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://github.com/cederdorff?tab=repositories" target="_blank" rel="noreferrer">
+              <img src="../assets/github-repos.png" alt="GitHub-profilens repositories-side med Network-fanen åben, der viser et array af repository-objekter" />
+              <strong>Repositories</strong><span>GitHub ↗</span>
+            </a>
+          </div>
+          <p class="bottom-line">
+            Hver liste er et array af objekter, hentet fra en server og vist som UI — samme mønster som
+            <code>keywords</code> og <code>answers</code> i AMAbotten.
+          </p>
+          <aside class="notes">
+            Åbn hvert link live og peg på mønsteret: en liste af ensartede objekter (bruger, opslag, repo), hver med
+            de samme properties, gengivet som rækker/kort i UI'et. Screenshottene viser allerede DevTools' Network-fane
+            med det rå JSON-array ved siden af den gengivne UI — brug dem til at pege på mønsteret, før du åbner
+            linket live. Samme idé som answers-arrayet i AMAbotten — bare hentet fra en rigtig server i stedet for en
+            lokal fil. [Sources] - Live demo: eaaa.instructure.com/courses/32059 - github.com/cederdorff [/Sources]
+          </aside>
+        </section>
+
+        <section class="nesting-slide" data-accent="cyan">
+          <span class="eyebrow">Ikke kun "array af objekter"</span>
+          <h2>Objekter og arrays kan indeholde hinanden i vilkårlig dybde</h2>
+          <pre><code class="language-javascript">const answers = [ // et array …
+  { // … af objekter …
+    keywords: ["navn", "hedder"], // … der selv indeholder et array
+    answer: "Jeg hedder Ada."
+  },
+  {
+    keywords: ["bor", "by"],
+    answer: "Jeg bor i Aarhus."
+  }
+];</code></pre>
+          <div class="nesting-facts">
+            <p><b>Array</b><span>en ordnet liste — hvert element kan være en værdi, et objekt eller endnu et array</span></p>
+            <p><b>Objekt</b><span>et sæt af nøgle/værdi-par — en værdi kan selv være et array eller et objekt</span></p>
+          </div>
+          <p class="bottom-line">
+            <code>answers</code> er selv et bevis: et array af objekter, hvor hvert objekt indeholder et array
+            (<code>keywords</code>) — sammensætningen kan gå lige så dybt, som data kræver.
+          </p>
+          <aside class="notes">
+            Byg direkte oven på forrige slide: det er ikke kun "et array med objekter i" — retningen går begge veje.
+            answers er et array, men hvert element er et objekt, og det objekt indeholder selv et array (keywords).
+            Samme idé som Canvas/GitHub-eksemplerne: en bruger kan have et array af enrollments, hvor hver enrollment
+            er et objekt med endnu flere felter. Pointen er den rekursive struktur: arrays og objekter er byggeklodser,
+            der kan sættes sammen i alle retninger. [Sources] - Lokal lektionsside:
             undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
           </aside>
         </section>
 
         <section id="opsamling" class="chapter" data-accent="green">
-          <span class="chapter-number">01</span>
+          <span class="chapter-number">02</span>
           <span class="eyebrow">Opsamling</span>
           <h2>Find den bedste<br />regel — igen</h2>
           <p>
@@ -240,170 +380,6 @@ const annas = students.filter(
             filter() bygger stadig et nyt array, denne gang af de studerende, der matcher. Peg på, at student.name
             fungerer, fordi students er et array af objekter — samme punktnotation som keyword-eksemplerne.
             [Sources] - Lokal begrebstræning inspireret af opgaver/javascript-oevelser-amabot.md [/Sources]
-          </aside>
-        </section>
-
-        <section class="array-methods-overview-slide" data-accent="yellow">
-          <span class="eyebrow">Der findes mange flere</span>
-          <h2><code>.some()</code> og <code>.filter()</code> er kun to ud af mange array-metoder</h2>
-          <div class="array-methods-overview">
-            <div class="am-row">
-              <code>[■ ■ ■ ■]</code>
-              <span><code>.map(■→●)</code></span>
-              <i>→</i>
-              <code>[● ● ● ●]</code>
-            </div>
-            <div class="am-row">
-              <code>[■ ■ ● ■]</code>
-              <span><code>.filter(■)</code></span>
-              <i>→</i>
-              <code>[■ ■ ■]</code>
-            </div>
-            <div class="am-row">
-              <code>[● ● ■ ■]</code>
-              <span><code>.find(■)</code></span>
-              <i>→</i>
-              <code>■</code>
-            </div>
-            <div class="am-row">
-              <code>[● ● ● ■]</code>
-              <span><code>.findIndex(■)</code></span>
-              <i>→</i>
-              <code>3</code>
-            </div>
-            <div class="am-row">
-              <code>[● ■ ■ ●]</code>
-              <span><code>.some(■)</code></span>
-              <i>→</i>
-              <code class="am-result">true</code>
-            </div>
-            <div class="am-row">
-              <code>[■ ■ ■ ●]</code>
-              <span><code>.every(■)</code></span>
-              <i>→</i>
-              <code class="am-result">false</code>
-            </div>
-            <div class="am-row">
-              <code>[■ ■ ● ●]</code>
-              <span><code>.reverse()</code></span>
-              <i>→</i>
-              <code>[● ● ■ ■]</code>
-            </div>
-          </div>
-          <p class="bottom-line">
-            I dag brugte I <code>.some()</code>, <code>.filter()</code> og <code>.length</code> — <code>.map()</code>,
-            <code>.find()</code> og de andre venter i kommende undervisning.
-          </p>
-          <aside class="notes">
-            Ikke en ny undervisningsblok — bare et kort udsyn, så .some() og .filter() ikke fremstår som "de eneste to
-            array-metoder, der findes". map() transformerer hvert element til noget nyt; find() returnerer det første
-            element, der matcher (ikke et array som filter()); findIndex() er find(), men returnerer indekset i
-            stedet for elementet; every() er modstykket til some() — kræver, at ALLE elementer opfylder betingelsen;
-            reverse() vender rækkefølgen om uden at filtrere eller transformere noget. Gå ikke i dybden nu; det er en
-            appetizer til senere undervisning. [Sources] - Lokal begrebstræning inspireret af
-            opgaver/javascript-oevelser-amabot.md [/Sources]
-          </aside>
-        </section>
-
-        <section id="objekter-arrays" class="chapter" data-accent="cyan">
-          <span class="chapter-number">02</span>
-          <span class="eyebrow">Objekter og arrays</span>
-          <h2>Samme struktur<br />overalt</h2>
-          <p>Punktnotation, bracket notation og arrays af objekter — den viden bruger I resten af kurset.</p>
-          <aside class="notes">
-            Kort genbesøg af objekter og arrays, før pointen om JSON gøres eksplicit på næste slide. [Sources] - Lokal
-            lektionsside: undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
-          </aside>
-        </section>
-
-        <section class="build-preview" data-accent="cyan">
-          <span class="eyebrow">Genkend mønsteret</span>
-          <h2>Det samme objekt/array-mønster går igen tre steder</h2>
-          <div class="build-stages" aria-label="Objekter og arrays går igen i JavaScript, JSON over HTTP og senere i en database">
-            <article>
-              <b>01</b><span>JavaScript</span>
-              <strong>Objekter og arrays i jeres kode</strong>
-              <code>{ keywords: [...],<br />answer: "..." }</code>
-            </article>
-            <div class="stage-arrow"><i>→</i><small><code>JSON.stringify()</code></small></div>
-            <article>
-              <b>02</b><span>JSON over HTTP</span>
-              <strong>Samme struktur sendt som tekst</strong>
-              <code>{"keywords":[...],<br />"answer":"..."}</code>
-            </article>
-            <div class="stage-arrow"><i>→</i><small>gemmes · hentes</small></div>
-            <article>
-              <b>03</b><span>En database (senere)</span>
-              <strong>Rækker/dokumenter med samme form</strong>
-              <code>{ keywords: [...],<br />answer: "..." }</code>
-            </article>
-          </div>
-          <p class="bottom-line">Det er ikke tilfældigt — JSON <b>ER</b> JavaScript-objekter og -arrays skrevet som tekst.</p>
-          <aside class="notes">
-            Denne pointe binder dagens tre begreber sammen: objekter/arrays, JSON og persistens er ikke tre separate
-            emner, men tre steder samme datastruktur dukker op. [Sources] - Lokal lektionsside:
-            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
-          </aside>
-        </section>
-
-        <section class="materials-slide screenshot-links-slide">
-          <span class="eyebrow">Se mønsteret i virkeligheden</span>
-          <h2>Arrays af objekter — fra server til UI</h2>
-          <div class="screenshot-links">
-            <a href="https://eaaa.instructure.com/courses/32059/users" target="_blank" rel="noreferrer">
-              <img src="../assets/canvas-users.png" alt="Canvas People-side med Network-fanen åben, der viser et array af brugerobjekter" />
-              <strong>Users</strong><span>Canvas ↗</span>
-            </a>
-            <a href="https://eaaa.instructure.com/courses/32059/announcements" target="_blank" rel="noreferrer">
-              <img src="../assets/canvas-announcements.png" alt="Canvas Announcements-side med Network-fanen åben, der viser et opslag som JSON" />
-              <strong>Announcements</strong><span>Canvas ↗</span>
-            </a>
-            <a href="https://github.com/cederdorff?tab=repositories" target="_blank" rel="noreferrer">
-              <img src="../assets/github-repos.png" alt="GitHub-profilens repositories-side med Network-fanen åben, der viser et array af repository-objekter" />
-              <strong>Repositories</strong><span>GitHub ↗</span>
-            </a>
-          </div>
-          <p class="bottom-line">
-            Hver liste er et array af objekter, hentet fra en server og vist som UI — samme mønster som
-            <code>keywords</code> og <code>answers</code> i AMAbotten.
-          </p>
-          <aside class="notes">
-            Åbn hvert link live og peg på mønsteret: en liste af ensartede objekter (bruger, opslag, repo), hver med
-            de samme properties, gengivet som rækker/kort i UI'et. Screenshottene viser allerede DevTools' Network-fane
-            med det rå JSON-array ved siden af den gengivne UI — brug dem til at pege på mønsteret, før du åbner
-            linket live. Samme idé som answers-arrayet i AMAbotten — bare hentet fra en rigtig server i stedet for en
-            lokal fil. [Sources] - Live demo: eaaa.instructure.com/courses/32059 - github.com/cederdorff [/Sources]
-          </aside>
-        </section>
-
-        <section class="nesting-slide" data-accent="cyan">
-          <span class="eyebrow">Ikke kun "array af objekter"</span>
-          <h2>Objekter og arrays kan indeholde hinanden i vilkårlig dybde</h2>
-          <pre><code class="language-javascript">const answers = [ // et array …
-  { // … af objekter …
-    keywords: ["navn", "hedder"], // … der selv indeholder et array
-    answer: "Jeg hedder Ada."
-  },
-  {
-    keywords: ["bor", "by"],
-    answer: "Jeg bor i Aarhus."
-  }
-];</code></pre>
-          <div class="nesting-facts">
-            <p><b>Array</b><span>en ordnet liste — hvert element kan være en værdi, et objekt eller endnu et array</span></p>
-            <p><b>Objekt</b><span>et sæt af nøgle/værdi-par — en værdi kan selv være et array eller et objekt</span></p>
-          </div>
-          <p class="bottom-line">
-            <code>answers</code> er selv et bevis: et array af objekter, hvor hvert objekt indeholder et array
-            (<code>keywords</code>) — sammensætningen kan gå lige så dybt, som data kræver.
-          </p>
-          <aside class="notes">
-            Byg direkte oven på forrige slide: det er ikke kun "et array med objekter i" — retningen går begge veje.
-            answers er et array, men hvert element er et objekt, og det objekt indeholder selv et array (keywords).
-            Samme idé som Canvas/GitHub-eksemplerne: en bruger kan have et array af enrollments, hvor hver enrollment
-            er et objekt med endnu flere felter. Pointen er den rekursive struktur: arrays og objekter er byggeklodser,
-            der kan sættes sammen i alle retninger. [Sources] - Lokal lektionsside:
-            undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md [/Sources]
           </aside>
         </section>
 
