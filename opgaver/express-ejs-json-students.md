@@ -2,9 +2,11 @@
 
 ## Kort fortalt
 
-I denne øvelse bygger du en lille, selvstændig server — adskilt fra din AMAbot. Serveren gemmer ikke sine data i en variabel, men i en JSON-fil. Du starter med at læse og vise nogle allerede oprettede `students`, og bygger derefter en formular, der opretter nye. Alt sker med Node.js' File System API.
+I denne øvelse bygger du en lille, selvstændig server — adskilt fra din AMAbot. Serveren gemmer data mellem requests i en JSON-fil og bruger lokale variabler, mens den behandler en request. Du starter med at læse og vise nogle allerede oprettede `students`, og bygger derefter en formular, der opretter nye. Alt sker med Node.js' File System API.
 
 > Det er den samme read → modify → write-idé, du skal bruge til at gemme AMAbottens chathistorik i [øvelse 5](express-ejs-amabot-persistens.md). Her træner du idéen på et enklere eksempel først.
+
+**Lav trin 1–7, og gå derefter videre til øvelse 5.** Sletning, redigering, refaktorering og styling i trin 8–11 er ekstraopgaver.
 
 ## Det bygger du
 
@@ -227,12 +229,12 @@ Opret en studerende gennem formularen. Du skal lande tilbage på forsiden med de
 ## 7. Test persistens
 
 1. Opret to nye studerende.
-2. Kontrollér, at alle fire studerende vises på siden.
+2. Kontrollér, at de to nye studerende og alle tidligere oprettede studerende vises. Notér antallet.
 3. Stop serveren med `Ctrl + C`.
 4. Start den igen med `npm run dev`.
 5. Genindlæs siden.
 
-Er alle fire studerende der stadig?
+Er de samme studerende der stadig, med det samme antal som før genstarten?
 
 Hvis ja, har du lavet **persistens** uden overhovedet at bruge en variabel til at holde på dataene mellem requests — filen er hele tiden den eneste sandhed.
 
@@ -246,6 +248,8 @@ Hvis ja, har du lavet **persistens** uden overhovedet at bruge en variabel til a
 - opretter en ny studerende via en formular
 - skriver den opdaterede liste tilbage til `data/students.json`
 - beholder alle studerende efter en genstart af serveren
+
+Gå nu videre til [øvelse 5](express-ejs-amabot-persistens.md). Du kan vende tilbage til ekstraopgaverne bagefter.
 
 ---
 
@@ -362,7 +366,7 @@ Test: redigér en studerendes navn og uddannelse, kontrollér at ændringen vise
 <details>
 <summary><strong>10. Flyt læsning og skrivning til to hjælpefunktioner</strong></summary>
 
-Læg mærke til, at alle fire routes (`GET /`, `POST /students`, sletning og redigering) starter eller slutter med de samme par linjer. Saml dem i to funktioner over dine routes:
+Læg mærke til, at alle fem routes (`GET /`, `POST /students`, sletning samt GET- og POST-routen til redigering) starter eller slutter med de samme par linjer. Saml dem i to funktioner over dine routes:
 
 ```js
 async function loadStudents() {
@@ -376,9 +380,27 @@ async function saveStudents(students) {
 }
 ```
 
-Erstat derefter `fs.readFile(...)` og `JSON.parse(...)` i alle dine routes med `await loadStudents()`, og erstat `JSON.stringify(...)` og `fs.writeFile(...)` med `await saveStudents(students)`.
+Erstat derefter `fs.readFile(...)` og `JSON.parse(...)` i alle dine routes med `const students = await loadStudents()`.
 
-Test alle fire routes igen, én ad gangen, for at bekræfte at ingen af dem er gået i stykker under omskrivningen.
+I de routes, der ændrer data, erstatter du `JSON.stringify(...)` og `fs.writeFile(...)` med et kald til `saveStudents()`:
+
+- Oprettelse og gemning af redigering: `await saveStudents(students)`.
+- Sletning: `await saveStudents(remainingStudents)`, fordi `filter()` har lavet et nyt array med dem, der skal beholdes.
+- GET-routes viser kun data og skal ikke kalde `saveStudents()`.
+
+Sletterouten bliver fx:
+
+```js
+app.post("/students/:id/delete", async (request, response) => {
+  const students = await loadStudents();
+  const remainingStudents = students.filter((student) => student.id !== Number(request.params.id));
+
+  await saveStudents(remainingStudents);
+  response.redirect("/");
+});
+```
+
+Test alle fem routes igen, én ad gangen, for at bekræfte at ingen af dem er gået i stykker under omskrivningen.
 
 > Det er præcis samme idé, du støder på igen som `saveMessages()` i [øvelse 5](express-ejs-amabot-persistens.md).
 
@@ -566,4 +588,4 @@ Test i browseren: en tom `data/students.json` (`[]`) skal vise tomt-beskeden, me
 
 ## Videre til øvelse 5
 
-Du har nu bygget en lille CRUD-app, der bruger en JSON-fil som sin eneste datakilde — uden en database. Gå videre til [øvelse 5: Gem AMAbottens chathistorik i en JSON-fil](express-ejs-amabot-persistens.md), og brug samme mønster på din rigtige AMAbot.
+Du har nu en app, der læser og opretter studerende i en JSON-fil. Med ekstraopgaverne om redigering og sletning bliver den en fuld CRUD-app. Gå videre til [øvelse 5: Gem AMAbottens chathistorik i en JSON-fil](express-ejs-amabot-persistens.md), og brug samme mønster på din rigtige AMAbot.

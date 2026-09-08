@@ -8,18 +8,18 @@ Du bygger videre på din egen AMAbot fra [øvelse 4](express-ejs-amabot-statisti
 
 I [DOB 3](../undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. Her bruger du din viden om funktioner til at give læsning og gemning hver sin funktion. Når persistensen virker, bruger du også string parsing, metoder og funktioner til at forbedre en konkret del af AMAbottens svarlogik.
 
-> **Har du ikke allerede lavet den?** Lav først [JSON-øvelse: Studerende i en JSON-fil](express-ejs-json-students.md), hvor du træner `JSON.stringify()`, `JSON.parse()`, `fs.readFile()` og `fs.writeFile()` i en lille selvstændig app, før du bruger dem her. Øvelse 5 bruger nøjagtig samme mønster.
+> **Har du ikke allerede lavet den?** Lav først trin 1–7 i [JSON-øvelse: Studerende i en JSON-fil](express-ejs-json-students.md), hvor du træner `JSON.stringify()`, `JSON.parse()`, `fs.readFile()` og `fs.writeFile()` i en lille selvstændig app, før du bruger dem her. Øvelse 5 bruger nøjagtig samme mønster.
 
 ## Det bygger du
 
 ```text
 GET /      -> loadMessages() -> fs.readFile() -> JSON.parse()                    -> EJS -> HTML
 
-POST /ask  -> loadMessages() -> messages.push() -> saveMessages()
-                                                  -> JSON.stringify() -> fs.writeFile()
+POST /ask  -> loadMessages() -> findBestAnswer() -> tilføj spørgsmål og svar
+           -> saveMessages() -> JSON.stringify() -> fs.writeFile() -> EJS -> HTML
 ```
 
-Mønstret er det samme, uanset hvilken route der kører: **read → modify → write**.
+`GET /` læser og viser historikken. Når et spørgsmål sendes til `POST /ask`, bruges mønstret **read → modify → write**.
 
 ---
 
@@ -75,7 +75,7 @@ Skriv præcis dette i `data/messages.json`:
 []
 ```
 
-> Filen skal indeholde et gyldigt JSON-array, allerede før serveren har skrevet noget til den. Er filen tom, eller mangler den, fejler `JSON.parse()` i næste trin.
+> Filen skal indeholde et gyldigt JSON-array, allerede før serveren har skrevet noget til den. Mangler filen, fejler `fs.readFile()` med `ENOENT`. Er filen tom eller indeholder ugyldig JSON, fejler `JSON.parse()` med en `SyntaxError`.
 
 ---
 
@@ -169,6 +169,14 @@ app.get("/", async (request, response) => {
 
 Genstart serveren, og genindlæs siden. Den skal vise en tom samtale (fordi `data/messages.json` stadig kun indeholder `[]`) — uden fejl.
 
+<details>
+<summary>Fejlfinding: filen kan ikke læses</summary>
+
+- **`ENOENT` ved `fs.readFile()`:** Kontrollér, at mappen `data` og filen `messages.json` findes i projektet, og at du starter serveren fra projektmappen.
+- **`SyntaxError` ved `JSON.parse()`:** Åbn filen, og kontrollér indholdet. En ny historik skal indeholde `[]`, ikke være tom. JSON kræver dobbelte citationstegn og tillader ingen kommentarer eller trailing comma. Bevar eksisterende beskeder, hvis du retter en fil med historik.
+
+</details>
+
 ---
 
 ## 6. Brug `loadMessages()` og `saveMessages()` i `POST /ask`
@@ -234,18 +242,18 @@ Nu kommer den vigtige test.
 
 Er samtalen der stadig?
 
-Hvis ja, har du lavet **persistens**: `data/messages.json` er den eneste sandhed om samtalen. `GET /` og `POST /ask` læser og skriver den, hver gang de kører — der er ingen mellemstation i memory, der kan komme ud af sync med filen.
+Hvis ja, har du lavet **persistens**: `data/messages.json` er den eneste sandhed om samtalen. Historikken indlæses fra filen ved hver request og gemmes efter ændringer. `GET /` læser og viser data; `POST /ask` læser, opdaterer og gemmer.
 
 ---
 
-### Brug string parsing, metoder og funktioner i AMAbotten
+## 8. Brug string parsing, metoder og funktioner i AMAbotten
 
 Nu hvor historikken bliver gemt, skal du vælge **én lille forbedring af svarlogikken**, hvor du bruger viden fra DOB 3. Tag udgangspunkt i din egen implementering: hvad har din bot svært ved at genkende? Har du allerede lavet en af forbedringerne, så genbrug den og vis med testen nedenfor, hvordan den virker.
 
-Vælg fx én af disse muligheder:
+Vælg normalisering som udgangspunkt. Hvis den allerede fungerer i din bot, kan du demonstrere den med testen nedenfor eller vælge den mere udfordrende matching-opgave:
 
-- **Gør spørgsmål klar til matching:** Saml behandling af store/små bogstaver og mellemrum i en funktion `normalizeQuestion(question)`, der returnerer en ny string. Brug fx `trim()`, `toLowerCase()` og eventuelt `replace(/\s+/g, " ")`, så flere mellemrum i træk bliver til ét. Brug funktionen inde i `findBestAnswer()` i stedet for kun `question.toLowerCase()`.
-- **Gør matching mere præcis:** Undersøg, om `includes()` giver uønskede match i din bot. Fx matcher `"madras".includes("mad")`, selvom spørgsmålet ikke handler om mad. Brug en passende string-metode eller et mønster med `search()` eller `match()` til at genkende det, du faktisk leder efter. Saml tjekket i en funktion, fx `matchesKeyword(question, keyword)`, der returnerer `true` eller `false`, og brug den i din eksisterende `countMatches()`.
+- **Normalisering — anbefalet udgangspunkt:** Saml behandling af store/små bogstaver og mellemrum i en funktion `normalizeQuestion(question)`, der returnerer en ny string. Brug fx `trim()`, `toLowerCase()` og eventuelt `replace(/\s+/g, " ")`, så flere mellemrum i træk bliver til ét. Brug funktionen inde i `findBestAnswer()` i stedet for kun `question.toLowerCase()`.
+- **Mere præcis matching — større udfordring:** Undersøg, om `includes()` giver uønskede match i din bot. Fx matcher `"madras".includes("mad")`, selvom spørgsmålet ikke handler om mad. Brug en passende string-metode eller et mønster med `search()` eller `match()` til at genkende det, du faktisk leder efter. Saml tjekket i en funktion, fx `matchesKeyword(question, keyword)`, der returnerer `true` eller `false`, og brug den i din eksisterende `countMatches()`.
 
 Du skal kunne forklare din funktions parametre og returværdi, og hvorfor du har valgt netop de string-metoder. Hvis du organiserer tjekket som en metode på et objekt, skal du kunne forklare, hvorfor den hører til dér.
 
@@ -278,10 +286,19 @@ Læg mærke til ansvarsfordelingen: string parsing hjælper botten med at forst�
 
 ---
 
+## Tjekpunkt
+
+Øvelse 5 er gennemført, når du har lavet trin 1–8:
+
+- Historikken læses med `loadMessages()` og gemmes med `saveMessages(messages)`.
+- Spørgsmål og svar vises igen efter en genstart.
+- Én forbedring med string parsing, metoder og funktioner er implementeret eller demonstreret og testet.
+- Du kan forklare funktionernes opgaver, parametre og returværdier.
+
 ## Ekstraopgaver
 
 <details>
-<summary><strong>8. Gem også statistikken</strong></summary>
+<summary><strong>9. Gem også statistikken</strong></summary>
 
 `topicStats` forsvinder stadig ved en genstart. Brug samme mønster som for `messages`:
 
@@ -328,7 +345,7 @@ app.post("/clear-stats", async (request, response) => {
 </details>
 
 <details>
-<summary><strong>9. Ryd historikken i filen</strong></summary>
+<summary><strong>10. Ryd historikken i filen</strong></summary>
 
 Har du lavet "Ryd beskeder"-knappen (ekstraopgave 18) fra [øvelse 3](express-ejs-amabot.md), tømmer den i dag kun `messages` i memory. Filen beholder den gamle historik.
 
@@ -358,7 +375,7 @@ Når du er færdig, skal du gerne kunne forklare:
 3. Hvorfor er der ingen `messages`-variabel uden for `loadMessages()`, `saveMessages()` og dine routes? Hvad kunne gå galt, hvis der var?
 4. Hvorfor skal `GET /` og `POST /ask` begge være `async`?
 5. Hvad gør `JSON.stringify(messages, null, 2)` anderledes end `JSON.stringify(messages)`?
-6. Hvad ville der stå i `data/messages.json`, hvis du glemte `await` foran `fs.writeFile()`?
+6. Hvorfor skal vi vente på, at `fs.writeFile()` er færdig, før vi sender svaret til browseren? Skrivningen starter også uden `await` — hvad ændrer det for rækkefølgen?
 7. Hvad er forskellen på at gemme `messages` i en JSON-fil og at gemme den i en database?
 8. Hvordan bruger du funktioner, parametre og returværdier i `loadMessages()` og `saveMessages(messages)`?
 9. Hvorfor kan du tilføje persistens uden at ændre den funktion eller metode, der analyserer spørgsmålet og finder svaret?

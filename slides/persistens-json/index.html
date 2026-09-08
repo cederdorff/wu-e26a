@@ -37,7 +37,7 @@
           <span class="eyebrow">Dagens mål</span>
           <h2>I dag flytter I AMAbottens hukommelse fra memory til en fil</h2>
           <div class="outcome-path" aria-label="Dagens progression">
-            <article><b>01</b><strong>Forstå</strong><span>hvorfor data i variabler forsvinder ved en genstart</span></article>
+            <article><b>01</b><strong>Forstå</strong><span>hvorfor ændringer i memory går tabt ved en genstart</span></article>
             <article><b>02</b><strong>Læs</strong><span><code>fs.readFile()</code> + <code>JSON.parse()</code> henter data fra en fil</span></article>
             <article><b>03</b><strong>Skriv</strong><span><code>JSON.stringify()</code> + <code>fs.writeFile()</code> gemmer ændringer</span></article>
             <article><b>04</b><strong>Test</strong><span>samtalen overlever en genstart af serveren</span></article>
@@ -45,7 +45,7 @@
         </section>
 
         <section class="solution-showcase-slide" data-accent="green">
-          <span class="eyebrow">Sådan ser løsningen ud</span>
+          <span class="eyebrow">Eksempel på løsning · inklusive ekstraopgaver</span>
           <h2>En lille CRUD-app — og JSON-filen bag den</h2>
           <div class="solution-showcase">
             <div class="solution-shots">
@@ -55,7 +55,7 @@
               </figure>
               <figure>
                 <img src="../assets/students-solution-edit.png" alt="Redigér Noah-siden med udfyldte felter til navn og uddannelse" />
-                <figcaption>Redigér</figcaption>
+                <figcaption>Redigér · ekstraopgave</figcaption>
               </figure>
               <figure>
                 <img src="../assets/students-solution-created.png" alt="Listen med tre studerende, efter Dan er blevet oprettet" />
@@ -69,8 +69,8 @@
 ]</code></pre>
           </div>
           <p class="bottom-line">
-            Præcis denne app bygger I i dag — gemt i <code>data/students.json</code>. Dans id,
-            <code>1788866474706</code>, er <code>Date.now()</code>, genereret da formularen oprettede ham.
+            Trin 1–7: læs, opret og gem i <code>data/students.json</code>.
+            Redigering, sletning og styling på billederne er ekstraopgaver.
           </p>
         </section>
 
@@ -78,8 +78,8 @@
           <span class="eyebrow">Agenda</span>
           <h2>Fra flygtig memory til en fil, der husker</h2>
           <ol class="agenda-grid">
-            <li><a href="#/objekter-arrays"><b>Objekter og arrays</b><small>Samme struktur i JS, JSON og rigtige API'er — nestet i dybden</small></a></li>
             <li><a href="#/opsamling"><b>Opsamling</b><small><code>findBestAnswer()</code>, <code>topicStats</code> og metoderne bag</small></a></li>
+            <li><a href="#/objekter-arrays"><b>Objekter og arrays</b><small>Samme struktur i JS, JSON og rigtige API'er — nestet i dybden</small></a></li>
             <li><a href="#/persistens"><b>Hvad er persistens?</b><small>Memory vs. persistent storage</small></a></li>
             <li><a href="#/json"><b>Hvad er JSON?</b><small>JavaScript-data skrevet som tekst</small></a></li>
             <li><a href="#/filesystem"><b>File System i Node.js</b><small>Læs og skriv med <code>fs</code></small></a></li>
@@ -87,86 +87,8 @@
           </ol>
         </section>
 
-        <section id="objekter-arrays" class="chapter" data-accent="cyan">
-          <span class="chapter-number">01</span>
-          <span class="eyebrow">Objekter og arrays</span>
-          <h2>Samme struktur<br />overalt</h2>
-          <p>Punktnotation, bracket notation og arrays af objekter — den viden bruger I resten af kurset.</p>
-        </section>
-
-        <section class="build-preview" data-accent="cyan">
-          <span class="eyebrow">Genkend mønsteret</span>
-          <h2>Det samme objekt/array-mønster går igen tre steder</h2>
-          <div class="build-stages" aria-label="Objekter og arrays går igen i JavaScript, JSON over HTTP og senere i en database">
-            <article>
-              <b>01</b><span>JavaScript</span>
-              <strong>Objekter og arrays i jeres kode</strong>
-              <code>{ keywords: [...],<br />answer: "..." }</code>
-            </article>
-            <div class="stage-arrow"><i>→</i><small><code>JSON.stringify()</code></small></div>
-            <article>
-              <b>02</b><span>JSON over HTTP</span>
-              <strong>Samme struktur sendt som tekst</strong>
-              <code>{"keywords":[...],<br />"answer":"..."}</code>
-            </article>
-            <div class="stage-arrow"><i>→</i><small>gemmes · hentes</small></div>
-            <article>
-              <b>03</b><span>En database (senere)</span>
-              <strong>Rækker/dokumenter med samme form</strong>
-              <code>{ keywords: [...],<br />answer: "..." }</code>
-            </article>
-          </div>
-          <p class="bottom-line">Det er ikke tilfældigt — JSON <b>ER</b> JavaScript-objekter og -arrays skrevet som tekst.</p>
-        </section>
-
-        <section class="materials-slide screenshot-links-slide">
-          <span class="eyebrow">Se mønsteret i virkeligheden</span>
-          <h2>Arrays af objekter — fra server til UI</h2>
-          <div class="screenshot-links">
-            <a href="https://eaaa.instructure.com/courses/32059/users" target="_blank" rel="noreferrer">
-              <img src="../assets/canvas-users.png" alt="Canvas People-side med Network-fanen åben, der viser et array af brugerobjekter" />
-              <strong>Users</strong><span>Canvas ↗</span>
-            </a>
-            <a href="https://eaaa.instructure.com/courses/32059/announcements" target="_blank" rel="noreferrer">
-              <img src="../assets/canvas-announcements.png" alt="Canvas Announcements-side med Network-fanen åben, der viser et opslag som JSON" />
-              <strong>Announcements</strong><span>Canvas ↗</span>
-            </a>
-            <a href="https://github.com/cederdorff?tab=repositories" target="_blank" rel="noreferrer">
-              <img src="../assets/github-repos.png" alt="GitHub-profilens repositories-side med Network-fanen åben, der viser et array af repository-objekter" />
-              <strong>Repositories</strong><span>GitHub ↗</span>
-            </a>
-          </div>
-          <p class="bottom-line">
-            Hver liste er et array af objekter, hentet fra en server og vist som UI — samme mønster som
-            <code>keywords</code> og <code>answers</code> i AMAbotten.
-          </p>
-        </section>
-
-        <section class="nesting-slide" data-accent="cyan">
-          <span class="eyebrow">Ikke kun "array af objekter"</span>
-          <h2>Objekter og arrays kan indeholde hinanden i vilkårlig dybde</h2>
-          <pre><code class="language-javascript">const answers = [ // et array …
-  { // … af objekter …
-    keywords: ["navn", "hedder"], // … der selv indeholder et array
-    answer: "Jeg hedder Ada."
-  },
-  {
-    keywords: ["bor", "by"],
-    answer: "Jeg bor i Aarhus."
-  }
-];</code></pre>
-          <div class="nesting-facts">
-            <p><b>Array</b><span>en ordnet liste — hvert element kan være en værdi, et objekt eller endnu et array</span></p>
-            <p><b>Objekt</b><span>et sæt af nøgle/værdi-par — en værdi kan selv være et array eller et objekt</span></p>
-          </div>
-          <p class="bottom-line">
-            <code>answers</code> er selv et bevis: et array af objekter, hvor hvert objekt indeholder et array
-            (<code>keywords</code>) — sammensætningen kan gå lige så dybt, som data kræver.
-          </p>
-        </section>
-
         <section id="opsamling" class="chapter" data-accent="green">
-          <span class="chapter-number">02</span>
+          <span class="chapter-number">01</span>
           <span class="eyebrow">Opsamling</span>
           <h2>Find den bedste<br />regel — igen</h2>
           <p>
@@ -185,13 +107,13 @@
             <li>Hvordan kan I bruge det, I har lært om string parsing, metoder og funktioner i DOB 3, når I bygger videre på AMAbotten?</li>
           </ol>
           <div class="method-chips">
-            <span class="method-chips-label">Forklar også metoden</span>
+            <span class="method-chips-label">Metoder og properties</span>
             <code>toLowerCase()</code>
             <code>trim()</code>
             <code>includes()</code>
             <code>filter()</code>
             <code>some()</code>
-            <code>.length</code>
+            <code>.length · property</code>
           </div>
         </section>
 
@@ -287,11 +209,89 @@ const annas = students.filter(
           </p>
         </section>
 
+        <section id="objekter-arrays" class="chapter" data-accent="cyan">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Objekter og arrays</span>
+          <h2>Samme struktur<br />overalt</h2>
+          <p>Punktnotation, bracket notation og arrays af objekter — den viden bruger I resten af kurset.</p>
+        </section>
+
+        <section class="build-preview" data-accent="cyan">
+          <span class="eyebrow">Genkend mønsteret</span>
+          <h2>Det samme objekt/array-mønster går igen tre steder</h2>
+          <div class="build-stages" aria-label="Objekter og arrays går igen i JavaScript, JSON over HTTP og senere i en database">
+            <article>
+              <b>01</b><span>JavaScript</span>
+              <strong>Objekter og arrays i jeres kode</strong>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
+            </article>
+            <div class="stage-arrow"><i>→</i><small><code>JSON.stringify()</code></small></div>
+            <article>
+              <b>02</b><span>JSON over HTTP</span>
+              <strong>Samme struktur sendt som tekst</strong>
+              <code>{"keywords":[...],<br />"answer":"..."}</code>
+            </article>
+            <div class="stage-arrow"><i>→</i><small>gemmes · hentes</small></div>
+            <article>
+              <b>03</b><span>En database (senere)</span>
+              <strong>Rækker/dokumenter med samme form</strong>
+              <code>{ keywords: [...],<br />answer: "..." }</code>
+            </article>
+          </div>
+          <p class="bottom-line">JSON repræsenterer blandt andet objekter og arrays som tekst.</p>
+        </section>
+
+        <section class="materials-slide screenshot-links-slide">
+          <span class="eyebrow">Se mønsteret i virkeligheden</span>
+          <h2>Arrays af objekter — fra server til UI</h2>
+          <div class="screenshot-links">
+            <a href="https://eaaa.instructure.com/courses/32059/users" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-users.png" alt="Canvas People-side med Network-fanen åben, der viser et array af brugerobjekter" />
+              <strong>Users</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://eaaa.instructure.com/courses/32059/announcements" target="_blank" rel="noreferrer">
+              <img src="../assets/canvas-announcements.png" alt="Canvas Announcements-side med Network-fanen åben, der viser et opslag som JSON" />
+              <strong>Announcements</strong><span>Canvas ↗</span>
+            </a>
+            <a href="https://github.com/cederdorff?tab=repositories" target="_blank" rel="noreferrer">
+              <img src="../assets/github-repos.png" alt="GitHub-profilens repositories-side med Network-fanen åben, der viser et array af repository-objekter" />
+              <strong>Repositories</strong><span>GitHub ↗</span>
+            </a>
+          </div>
+          <p class="bottom-line">
+            Hver liste er et array af objekter, hentet fra en server og vist som UI — samme mønster som
+            <code>keywords</code> og <code>answers</code> i AMAbotten.
+          </p>
+        </section>
+
+        <section class="nesting-slide" data-accent="cyan">
+          <span class="eyebrow">Ikke kun "array af objekter"</span>
+          <h2>Objekter og arrays kan indeholde hinanden i vilkårlig dybde</h2>
+          <pre><code class="language-javascript">const answers = [ // et array …
+  { // … af objekter …
+    keywords: ["navn", "hedder"], // … der selv indeholder et array
+    answer: "Jeg hedder Ada."
+  },
+  {
+    keywords: ["bor", "by"],
+    answer: "Jeg bor i Aarhus."
+  }
+];</code></pre>
+          <div class="nesting-facts">
+            <p><b>Array</b><span>en ordnet liste — hvert element kan være en værdi, et objekt eller endnu et array</span></p>
+            <p><b>Objekt</b><span>et sæt af nøgle/værdi-par — en værdi kan selv være et array eller et objekt</span></p>
+          </div>
+          <p class="bottom-line">
+            <code>answers</code> er selv et bevis: et array af objekter, hvor hvert objekt indeholder et array
+            (<code>keywords</code>) — sammensætningen kan gå lige så dybt, som data kræver.
+          </p>
+        </section>
+
         <section id="persistens" class="chapter" data-accent="orange">
           <span class="chapter-number">03</span>
           <span class="eyebrow">Hvad er persistens?</span>
           <h2>Data, der<br />overlever</h2>
-          <p>Hvad sker der med <code>messages</code> og <code>answers</code>, når serveren genstartes?</p>
+          <p>Hvorfor bliver <code>messages</code> tom igen, mens reglerne i <code>answers</code> kommer tilbage fra kildekoden?</p>
         </section>
 
         <section class="definition-slide" data-accent="orange">
@@ -301,8 +301,8 @@ const annas = students.filter(
             <article>
               <span>I memory · variabler</span>
               <p>
-                Data findes kun, mens Node-processen kører. En almindelig array- eller objekt-variabel forsvinder
-                helt ved en genstart, <code>Ctrl</code>+<code>C</code>, eller et crash.
+                Ændringer i memory går tabt, når processen stopper. Ved genstart oprettes variablerne igen
+                fra kildekoden: <code>messages</code> bliver tom, mens <code>answers</code> får sine oprindelige regler.
               </p>
             </article>
             <article>
@@ -453,7 +453,7 @@ await fs.writeFile(
             <li>Filen er hele tiden den eneste sandhed — ingen <code>students</code>-variabel lever mellem requests</li>
             <li>Test persistens: opret studerende, genstart serveren, og tjek at de stadig er der</li>
           </ul>
-          <p class="bottom-line">Træn mønstret her først — I skal bruge nøjagtig samme idé i øvelse 5.</p>
+          <p class="bottom-line">Lav trin 1–7, og gå derefter videre til øvelse 5. Trin 8–11 er ekstraopgaver.</p>
         </section>
 
         <section id="gem" class="chapter express-chapter" data-accent="yellow">
@@ -511,6 +511,19 @@ await fs.writeFile(
           <p class="bottom-line">Ingen af funktionerne gemmer noget i en variabel uden for sig selv.</p>
         </section>
 
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 5 · trin 8 · brug viden fra DOB 3</span>
+          <h2>Forbedr én del af svarlogikken</h2>
+          <ul class="checklist">
+            <li>Start med <code>normalizeQuestion(question)</code>: ensartede mellemrum og små bogstaver</li>
+            <li>Større udfordring: præcis matching, så <code>madras</code> ikke matcher <code>mad</code></li>
+            <li>Forklar funktionens parametre, returværdi og valg af string-metoder</li>
+            <li>Test to matchende spørgsmål og ét, der ikke skal matche reglen</li>
+            <li>Kontrollér, at spørgsmål og svar er gemt efter en genstart</li>
+          </ul>
+          <p class="bottom-line">Har I allerede forbedringen? Demonstrér den med testen. Behold brugerens formulering i historikken.</p>
+        </section>
+
         <section class="activity-slide express-activity" data-accent="yellow">
           <span class="eyebrow">Øvelse 5 · dagens slutprodukt</span>
           <h2>AMAbot med en chathistorik, der overlever en genstart</h2>
@@ -519,10 +532,10 @@ await fs.writeFile(
             <li><code>data/messages.json</code> indeholder <code>[]</code> fra start</li>
             <li><code>GET /</code> henter historikken med <code>loadMessages()</code>, i stedet for en tom liste</li>
             <li><code>POST /ask</code> henter, opdaterer og gemmer med <code>loadMessages()</code> og <code>saveMessages()</code></li>
-            <li>Ingen <code>messages</code>-variabel lever uden for én enkelt route</li>
+            <li>Trin 8: én forbedring med string parsing, metoder og funktioner er testet</li>
             <li>Testet: to formuleringer giver de forventede svar, og historikken overlever genstart</li>
           </ul>
-          <p class="bottom-line">Husk: samme mønster som JSON-øvelsen — bare på jeres egen AMAbot.</p>
+          <p class="bottom-line">Færdig med trin 1–8? Statistik og rydning af historik i trin 9–10 er ekstraopgaver.</p>
         </section>
 
         <section class="statement-slide" data-accent="green">
@@ -530,8 +543,8 @@ await fs.writeFile(
           <h2>Samtalen overlever nu en genstart af serveren</h2>
           <div class="statement-support">
             <span><code>data/messages.json</code> er den eneste sandhed</span>
-            <span><code>GET /</code> og <code>POST /ask</code> læser og skriver filen hver gang</span>
-            <span>ingen mellemstation i memory kan komme ud af sync med filen</span>
+            <span><code>GET /</code> indlæser historikken fra filen og viser den</span>
+            <span><code>POST /ask</code> indlæser historikken og gemmer den efter ændringer</span>
           </div>
         </section>
 

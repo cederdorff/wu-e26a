@@ -4,7 +4,7 @@
 
 ## Dagens fokus
 
-I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [DOB 3](./012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. I dag bygger vi videre på AMAbotten fra øvelse 4 og bruger vores viden om funktioner til at skrive funktioner, der læser og gemmer samtalehistorikken. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
+I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [DOB 3](./012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) er fokus på string-metoder, funktioner og metoder. I dag bygger vi videre på AMAbotten fra øvelse 4 og skriver funktioner, der læser og gemmer samtalehistorikken. Når persistensen virker, bruger I string parsing, metoder og funktioner til én forbedring af svarlogikken. Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
 
 ---
 
@@ -26,12 +26,12 @@ I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [D
 - Genbesøg punktnotation og bracket notation på objekter
 - Genbesøg arrays af objekter og `for...of`
 - Se, hvordan den samme struktur (arrays og objekter, indlejret i hinanden) går igen, når vi sender og modtager data over HTTP, og senere når data ligger i en database
-- Pointe: det er ikke tilfældigt — det er fordi JSON *er* JavaScript-objekter og -arrays skrevet som tekst
+- Pointe: det er ikke tilfældigt — JSON repræsenterer blandt andet objekter og arrays som tekst
 </details>
 <details>
 <summary><strong>3. Hvad er persistens?</strong></summary>
 
-- Hvad sker der med data i `messages`, `answers` m.fl., når serveren genstartes? Det forsvinder — det lever kun i memory (variabler/arrays), mens processen kører
+- Ændringer i memory går tabt ved genstart, hvis de ikke er gemt. `messages` starter igen som `[]`, mens svarreglerne i `answers` oprettes igen fra kildekoden
 - Persistens betyder, at data overlever, selvom programmet eller serveren stopper
 - En fil på disken og en database er begge former for persistent storage — forskellen er bare hvor og hvordan data gemmes
 - I dag bruger vi en JSON-fil som den simpleste form for persistens; senere i forløbet erstatter vi filen med en rigtig database, men selve idéen — gem data et sted, der ikke forsvinder — er den samme
@@ -39,7 +39,7 @@ I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [D
 <details>
 <summary><strong>4. Hvad er JSON, og hvorfor er det smart?</strong></summary>
 
-- JSON (JavaScript Object Notation) er et tekstformat til at repræsentere data — objekter og arrays som ren tekst
+- JSON (JavaScript Object Notation) er et tekstformat til at repræsentere data — blandt andet objekter og arrays som ren tekst
 - Det ligner JavaScript-objekter, men er ikke det samme: nøgler og strings i dobbelte citationstegn, ingen funktioner, ingen kommentarer, ingen trailing comma
 - JSON er sprog-uafhængigt — næsten alle programmeringssprog kan læse og skrive det, derfor er det de facto-standarden for data på webbet (APIs, config-filer, m.m.)
 - `JSON.stringify()` — fra JavaScript-data til JSON-tekst
@@ -58,9 +58,10 @@ I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [D
 <summary><strong>6. Gem AMAbottens chathistorik</strong></summary>
 
 - Lige nu lever `messages` kun i memory — historikken forsvinder, når serveren genstartes
-- Lav først [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — træn read → modify → write på et enkelt eksempel, før I rører AMAbotten
+- Lav først [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — lav trin 1–7, og gå derefter videre til øvelse 5. Trin 8–11 er ekstraopgaver
 - Arbejd derefter med [øvelse 5](../opgaver/express-ejs-amabot-persistens.md): skriv `loadMessages()` og `saveMessages(messages)`, og kald dem fra `GET /` og `POST /ask`, så filen — ikke en variabel — er den eneste sandhed om samtalen
-- Brug jeres eksisterende svarlogik: test to formuleringer af samme spørgsmål, kontrollér svarene, og genstart serveren for at tjekke, at begge spørgsmål og svar er gemt
+- Test persistensen i øvelse 5, trin 7: kontrollér svar på to formuleringer af samme spørgsmål, og genstart serveren for at tjekke historikken
+- Lav derefter trin 8: brug string parsing, metoder og funktioner til én forbedring af svarlogikken, og test den. Normalisering er udgangspunktet; mere præcis matching er en større udfordring
 </details>
 
 ---
@@ -80,8 +81,8 @@ I RACE 3 arbejdede I med objekter, arrays og kontrolstrukturer i AMAbotten. I [D
 - Slides:
     - [RACE 4 · Persistens, JSON og File System](https://cederdorff.com/wu-e26a/persistens-json/)
 - Opgaver:
-    - [JSON-øvelse: Students i en JSON-fil](../opgaver/express-ejs-json-students.md) — obligatorisk, laves først: en lille CRUD-app, der læser og skriver `students` til en JSON-fil, før I bruger samme mønster i øvelse 5
-    - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — bygger videre på øvelse 4, gemmer `messages` (og evt. `topicStats`) i en JSON-fil, så historikken overlever en genstart
+    - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — trin 1–7 er obligatoriske og laves først: læs og opret studerende i en JSON-fil. Sletning, redigering, refaktorering og styling er ekstraopgaver
+    - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — trin 1–8 bygger videre på øvelse 4: gem historikken i en JSON-fil, og brug string parsing, metoder og funktioner til én forbedring af svarlogikken. Statistik og rydning af historik er ekstraopgaver
 
 ---
 
