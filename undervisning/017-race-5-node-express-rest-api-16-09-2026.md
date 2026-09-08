@@ -67,7 +67,11 @@ I dag skifter vi derfor fokus fra at bygge sider til at bygge et REST API. Vi ø
 - Genopfrisk [Response object](https://expressjs.com/en/5x/api/response/) i Express.js API-referencen, særligt `res.json()` — I kender allerede [Request object](https://expressjs.com/en/5x/api/request/) fra RACE 2
 - Læs om [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) på MDN, særligt `200`, `201` og `404`
 - Skim ["REST"](https://developer.mozilla.org/en-US/docs/Glossary/REST) på MDN som en hurtig introduktion til begrebet
-- Fortsæt/afslut Fullstack &gt; Express.js på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack), hvis I ikke nåede det efter RACE 1
+- Supplerende på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
+  - fortsæt på Fullstack &gt; Express.js (særligt "Build an Express API")
+  - ["What is a REST API?"](https://scrimba.com/explain/guide09u8e4urj)
+  - ["HTTP Methods Explained"](https://scrimba.com/explain/guide0l5rrn4da)
+  - ["HTTP Request Methods"](https://scrimba.com/explain/guide0067ph2c4)
 
 ---
 

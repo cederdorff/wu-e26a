@@ -6,7 +6,7 @@
 
 Sidste gang byggede I jeres første REST API: CRUD med GET, POST og PUT, route parameters og korrekte statuskoder — men det hele lå samlet i én `server.js`. I dag skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret.
 
-Vi ser på, hvordan man deler en voksende Express-backend op i moduler — I kender allerede idéen fra fx `loadMessages()`/`saveMessages()` og fra at flytte data ud i sin egen fil, men i dag bruger vi den samme tankegang på selve routes med Express' `Router`. Derudover kigger vi på en række konkrete REST best practices for navngivning af ressourcer og konsistente responses, og bygger videre på selve API-designet med et par af de mest almindelige mønstre i et rigtigt REST API: filtrering, sortering og paginering via query parameters, fx `/messages?sender=user` eller `/messages?sender=chatbot`.
+Vi ser på, hvordan man deler en voksende Express-backend op i lag — routes, controllers og selve data-adgangen — så hver fil har ét ansvar. I kender allerede idéen fra fx `loadMessages()`/`saveMessages()` og fra at flytte data ud i sin egen fil; i dag bruger vi den samme tankegang på hele request/response-flowet, fra server til routes til controllers til data, med Express' `Router` som det praktiske værktøj. Derudover kigger vi på en række konkrete REST best practices for navngivning af ressourcer og konsistente responses, og bygger videre på selve API-designet med et par af de mest almindelige mønstre i et rigtigt REST API: filtrering, sortering og paginering via query parameters, fx `/messages?sender=user` eller `/messages?sender=chatbot`.
 
 Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-error-handling-25-09-2026.md), hvor der er afsat en hel gang til det.
 
@@ -29,18 +29,18 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 - Motivation: samme problem som at proppe al JavaScript ind i én kæmpe funktion
 </details>
 <details>
-<summary><strong>3. Opdel kode i moduler — samme idé, nyt sted</strong></summary>
+<summary><strong>3. Layered Architecture: routes, controllers og data</strong></summary>
 
-- Genkend mønstret: I har allerede flyttet data og funktioner ud i egne moduler med `export`/`import`
-- I dag bruger vi samme idé på routes: hver ressource kan få sin egen fil
-- Et lille eksempel på mappestruktur med `routes/` og `data/`
+- Ansvarsfordeling: routes (HTTP ind/ud) → controllers (logik) → data-adgang (fx en JSON-fil, senere en database)
+- Hver fil/modul har ét ansvar — genkend mønstret fra `loadMessages()`/`saveMessages()`
+- Et lille eksempel på mappestruktur med `routes/`, `controllers/` og `data/`
 </details>
 <details>
 <summary><strong>4. Express Router: en separat routes-fil</strong></summary>
 
 - `express.Router()` som en selvstændig "mini-app" for én ressource
 - Montér en router på hoved-appen: `app.use("/messages", messagesRouter)`
-- Praktisk: flyt en eksisterende gruppe routes over i sin egen router-fil
+- Routen kalder en controller-funktion; selve logikken bor i controlleren, ikke i routen
 </details>
 <details>
 <summary><strong>5. REST best practices: navngivning og konsistens</strong></summary>
@@ -60,7 +60,7 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 <details>
 <summary><strong>7. Hands-on: Omstrukturér og udbyg jeres REST API</strong></summary>
 
-- Opdel jeres eksisterende routes i en separat routes-fil efter dagens mønster
+- Opdel jeres eksisterende routes i routes/controllers efter dagens mønster
 - Tilføj filtrering, sortering og/eller paginering til én af jeres GET-routes
 - Test undervejs i Thunder Client med forskellige query parametre
 </details>
@@ -69,6 +69,7 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 
 ## Forberedelse
 
+- Færdiggør Fullstack &gt; Express.js &gt; "Build an Express API" på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack), hvis I ikke nåede det efter sidste gang
 - Genbesøg jeres eget REST API fra sidste gang, og vær klar til at forklare, hvordan `server.js` er organiseret lige nu
 - Læs ["Routing"](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen, særligt afsnittet om `express.Router()`
 - Genopfrisk `req.query` i [Request-referencen](https://expressjs.com/en/api.html#req.query) på Express.js — I kender allerede `req.params` og `req.body` fra sidst
