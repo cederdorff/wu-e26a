@@ -223,6 +223,7 @@ const hasMatch = normalizedQuestion.includes("hedder");</code></pre>
               <pre class="recap-code"><code class="language-javascript">const hasMatch = keywords.some((keyword) =>
   normalizedQuestion.includes(keyword)
 );</code></pre>
+              <p class="method-compare-def">Er der <b>mindst ét</b> element, der opfylder betingelsen?</p>
               <ul class="method-compare-facts">
                 <li><b>Svarer</b><code>true</code> / <code>false</code></li>
                 <li><b>Stopper</b>ved første match</li>
@@ -235,6 +236,7 @@ const hasMatch = normalizedQuestion.includes("hedder");</code></pre>
   normalizedQuestion.includes(keyword)
 );
 const score = matches.length;</code></pre>
+              <p class="method-compare-def">Giv mig et <b>nyt array</b> med alle elementer, der opfylder betingelsen.</p>
               <ul class="method-compare-facts">
                 <li><b>Svarer</b><code>2</code> (et tal)</li>
                 <li><b>Stopper</b>når alle nøgleord er undersøgt</li>

@@ -111,6 +111,11 @@
   padding: 16px 22px;
   font-size: 19px;
 }
+.method-compare-def {
+  margin: 22px 0 0;
+  font-size: 20px;
+  color: var(--ink);
+}
 .method-compare-facts {
   display: grid;
   gap: 12px;
