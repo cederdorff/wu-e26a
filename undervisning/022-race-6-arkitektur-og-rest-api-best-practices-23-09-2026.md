@@ -4,11 +4,9 @@
 
 ## Dagens fokus
 
-Sidste gang byggede I jeres første REST API: CRUD med GET, POST og PUT, route parameters og korrekte statuskoder — men det hele lå samlet i én `server.js`. I dag skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret.
+Sidste gang byggede I jeres første REST API, men samlet i én `server.js`. I dag skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret: vi deler backenden op i lag — routes, controllers, data — med Express' `Router`, ser på REST best practices for navngivning og konsistente responses, og tilføjer filtrering, sortering og paginering via query parameters.
 
-Vi ser på, hvordan man deler en voksende Express-backend op i lag — routes, controllers og selve data-adgangen — så hver fil har ét ansvar. I kender allerede idéen fra fx `loadMessages()`/`saveMessages()` og fra at flytte data ud i sin egen fil; i dag bruger vi den samme tankegang på hele request/response-flowet, fra server til routes til controllers til data, med Express' `Router` som det praktiske værktøj. Derudover kigger vi på en række konkrete REST best practices for navngivning af ressourcer og konsistente responses, og bygger videre på selve API-designet med et par af de mest almindelige mønstre i et rigtigt REST API: filtrering, sortering og paginering via query parameters, fx `/messages?sender=user` eller `/messages?sender=chatbot`.
-
-Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-error-handling-25-09-2026.md), hvor der er afsat en hel gang til det.
+Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
 ---
 
@@ -75,6 +73,8 @@ Fejlhåndtering (og sikkerhed) gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-
 - Læs ["REST API Best Practices – REST Endpoint Design Examples"](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) på freeCodeCamp, særligt punktet om filtrering/sortering/paginering
 - Supplerende på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
   - færdiggør Fullstack &gt; Express.js &gt; "Build an Express API", hvis I ikke nåede det efter sidste gang
+
+---
 
 ## Materialer
 
