@@ -4,11 +4,7 @@
 
 ## Dagens fokus
 
-Sidste gang fik AMAbottens samtalehistorik sit eget liv i en JSON-fil, så data kan overleve en genstart af serveren. Indtil nu har jeres server dog kun svaret med færdigrenderet HTML — enten fra en simpel formular eller fra EJS.
-
-Om en uges tid, i [DOB 5](./019-dob-5-fetch-og-async-javascript-18-09-2026.md), skal I begynde at hente data fra JavaScript i browseren med `fetch()` — og til det har serveren brug for et andet slags svar: rene data i JSON-format, ikke HTML.
-
-I dag skifter vi derfor fokus fra at bygge sider til at bygge et REST API. Vi øver HTTP-metoderne som CRUD, route parameters, statuskoder og `response.json()` i en mindre, separat øvelse. Først senere omskriver I selve AMAbotten fra en SSR-app til et REST API — i dag træner vi konceptet et andet sted først.
+I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som CRUD, route parameters, statuskoder og `response.json()`. Vi øver det i en separat, mindre øvelse, før I senere omskriver selve AMAbotten fra SSR til REST API — blandt andet fordi `fetch()` i [DOB 5](./019-dob-5-fetch-og-async-javascript-18-09-2026.md) har brug for et JSON-svar i stedet for HTML.
 
 ---
 
