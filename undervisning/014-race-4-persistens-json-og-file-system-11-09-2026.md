@@ -4,11 +4,7 @@
 
 ## Dagens fokus
 
-Sidste gang arbejdede vi med objekter, arrays og kontrolstrukturer i AMAbotten. I [DOB 3](./012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md) var fokus på string-metoder, funktioner og metoder.
-
-I dag bygger vi videre på AMAbotten fra øvelse 4 og skriver funktioner, der læser og gemmer samtalehistorikken. Når persistensen virker, bruger I string parsing, metoder og funktioner til én forbedring af svarlogikken.
-
-Vi starter i dag med kort at samle op på øvelse 3 og 4, og på hvordan objekter og arrays fra JavaScript genfindes som JSON i resten af webbet. Vi arbejder med Node.js' File System API, så vi kan læse og skrive JSON-filer fra serveren. Målet er, at AMAbottens samtalehistorik kan overleve en genstart af serveren — vi går fra data, der kun findes i memory, til rigtig persistens.
+I dag giver vi AMAbotten persistens: vi bruger Node.js' File System API til at læse og skrive samtalehistorikken som en JSON-fil, så den overlever en genstart af serveren. Undervejs forbedrer I svarlogikken med string parsing og metoder fra sidste gang.
 
 ---
 
