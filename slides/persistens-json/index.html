@@ -349,6 +349,33 @@ const annas = students.filter(
           <p>JavaScript Object Notation — et tekstformat, der ligner jeres egne objekter og arrays.</p>
         </section>
 
+        <section class="json-meme-slide" data-accent="yellow">
+          <img
+            src="../assets/frontend-backend-json-meme.png"
+            alt="Meme: Frontend Dev og Backend Dev giver hånd via JSON — en fuldstack-udvikler giver bare sig selv en high five"
+          />
+          <p>Frontend og backend taler sammen via JSON — the glue, uanset hvem der sidder i midten.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="yellow">
+          <span class="eyebrow">Hvorfor JSON?</span>
+          <h2>Samme sprog for data — uanset hvem der taler</h2>
+          <div class="definition-pair">
+            <article>
+              <span>Hvad JSON er</span>
+              <p>Et letvægts tekstformat til at gemme og udveksle data: nøgle/værdi-par, arrays og objekter. <strong>Sprog-uafhængigt</strong> — næsten ethvert program kan læse og skrive det.</p>
+            </article>
+            <article>
+              <span>Hvor I allerede har set det</span>
+              <p>Canvas og GitHub sender data som JSON, når en side henter en liste (jf. <strong>Network</strong>-fanen). Request/response fra RACE 3 er den samme model — JSON er bare det, der rejser med.</p>
+            </article>
+          </div>
+          <p class="bottom-line">
+            Derfor er JSON <strong>the glue</strong> mellem frontend og backend — i dag mellem jeres server og en fil,
+            senere mellem en klient og et rigtigt API.
+          </p>
+        </section>
+
         <section class="json-syntax-slide" data-accent="yellow">
           <span class="eyebrow">JSON ligner JavaScript — men er ikke det samme</span>
           <h2>Nøgler og strings i dobbelte citationstegn</h2>
@@ -371,6 +398,22 @@ const annas = students.filter(
             </article>
           </div>
           <p class="bottom-line">JSON tillader ingen funktioner, ingen kommentarer og ingen trailing comma.</p>
+        </section>
+
+        <section class="nesting-slide" data-accent="yellow">
+          <span class="eyebrow">Ligesom i kapitel 01 — bare som JSON</span>
+          <h2>Objekter i objekter, arrays og booleans er alle gyldig JSON</h2>
+          <pre><code class="language-json">{
+  "name": "Rasmus Cederdorff",
+  "education": { "degree": "Cand.it." },
+  "skills": ["JavaScript", "React", "Node.js"],
+  "lovesJavaScript": true
+}</code></pre>
+          <div class="nesting-facts">
+            <p><b>Objekt i objekt</b><span><code>education</code> er selv et JSON-objekt — nestet i det ydre objekt</span></p>
+            <p><b>Array & boolean</b><span><code>skills</code> er en liste af strings, <code>true</code>/<code>false</code> er en gyldig JSON-værdi</span></p>
+          </div>
+          <p class="bottom-line">Samme regel som i kapitel 01: sammensætningen kan gå lige så dybt, som data kræver — også i JSON.</p>
         </section>
 
         <section class="normalize-slide" data-accent="yellow">
@@ -590,12 +633,6 @@ await fs.writeFile(
           </div>
         </section>
 
-        <section class="closing-slide" data-accent="green">
-          <span class="eyebrow">Næste skridt</span>
-          <h2>Læs · ret ·<br /><span>skriv · test</span></h2>
-          <p class="lead">Ét trin ad gangen — genstart serveren, og bekræft at data stadig er der.</p>
-          <div class="closing-note">Persistens med en JSON-fil er første skridt mod en rigtig database senere i forløbet.</div>
-        </section>
       </div>
     </div>
     <script type="module" src="../shared/deck.js"></script>

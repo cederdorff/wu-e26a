@@ -6,7 +6,7 @@ I denne øvelse bygger du en lille, selvstændig server — adskilt fra din AMAb
 
 > Det er den samme read → modify → write-idé, du skal bruge til at gemme AMAbottens chathistorik i [øvelse 5](express-ejs-amabot-persistens.md). Her træner du idéen på et enklere eksempel først.
 
-**Lav trin 1–7, og gå derefter videre til øvelse 5.** Sletning, redigering, refaktorering og styling i trin 8–11 er ekstraopgaver.
+**Lav trin 1–7. Derefter kan du vurdere om du vil gå derefter videre til øvelse 5 (AMAbot).** Eller du kan fortsætte med slet, rediger, refaktorering og styling i trin 8–11.
 
 ## Det bygger du
 
@@ -23,7 +23,7 @@ Hver route læser filen, ændrer eller viser data, og (ved ændringer) skriver f
 
 ## 1. Opsætning
 
-Opret et nyt, tomt projekt, ligesom du plejer — det skal ikke ligge inde i din AMAbot:
+Opret et nyt, tomt projekt, ligesom du plejer — det skal ikke ligge inde i din AMAbot (og nej, du behøver ikke oprette på den nørdede terminal-facon):
 
 ```bash
 mkdir students-json
