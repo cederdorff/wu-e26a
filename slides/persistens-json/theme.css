@@ -226,6 +226,34 @@
   text-align: center;
 }
 
+.array-methods-overview {
+  display: grid;
+  gap: 0;
+  margin-top: 28px;
+}
+.am-row {
+  display: grid;
+  grid-template-columns: 260px 1fr 44px 220px;
+  align-items: center;
+  gap: 22px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.am-row code {
+  font-size: 20px;
+  letter-spacing: 0.04em;
+}
+.am-row i {
+  color: var(--muted);
+  font-size: 20px;
+  font-style: normal;
+  text-align: center;
+}
+.am-row .am-result {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .nesting-slide pre code {
   font-size: 20px;
 }
