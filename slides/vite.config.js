@@ -13,7 +13,8 @@ export default defineConfig({
         nodeExpress: resolve("slides/node-express/index.html"),
         expressEjs: resolve("slides/express-ejs/index.html"),
         dataLogik: resolve("slides/data-logik/index.html"),
-        persistensJson: resolve("slides/persistens-json/index.html")
+        persistensJson: resolve("slides/persistens-json/index.html"),
+        restApi: resolve("slides/rest-api/index.html")
       }
     }
   }

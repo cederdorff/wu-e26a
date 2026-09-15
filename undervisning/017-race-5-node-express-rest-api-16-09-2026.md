@@ -73,8 +73,10 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 
 ## Materialer
 
-- Slides: TBA
-- Opgaver: TBA
+- Slides:
+  - [RACE 5 · Node/Express REST API](https://cederdorff.com/wu-e26a/rest-api/)
+- Opgaver:
+  - [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) — Del 1 bygger fuld CRUD (GET, POST, PUT, DELETE) for `/students` i memory, Del 2 flytter data til en JSON-fil uden at ændre routes' logik. Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse
 
 ---
 

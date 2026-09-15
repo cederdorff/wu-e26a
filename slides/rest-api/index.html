@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RACE 5 · Node/Express REST API · WU-E26A · 16. september 2026" />
+    <title>Node/Express REST API · WU-E26A</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-accent="orange">
+          <div class="title-copy">
+            <span class="eyebrow">WU-E26A · RACE 5 · 16. september 2026</span>
+            <h1>Fra sider<br /><span>til et REST API</span></h1>
+            <p class="lead">HTTP-metoder som CRUD · statuskoder · response.json()</p>
+          </div>
+        </section>
+
+        <section id="agenda" class="agenda-slide" data-accent="cyan">
+          <span class="eyebrow">Agenda</span>
+          <h2>Fra HTML-sider til rene data</h2>
+          <ol class="agenda-grid">
+            <li><a href="#/opsamling"><b>Opsamling: Persistens</b><small>loadStudents()/saveStudents() og read → modify → write</small></a></li>
+            <li><a href="#/ssr-rest"><b>Fra sider (HTML) til data (JSON)</b><small>SSR vs REST API</small></a></li>
+            <li><a href="#/hvad-er-rest"><b>Hvad er et REST API?</b><small>Ressourcer, CRUD og statuskoder</small></a></li>
+            <li><a href="#/json-begge-veje"><b>JSON begge veje</b><small><code>express.json()</code></small></a></li>
+            <li><a href="#/route-parameters"><b>Find én bestemt ressource</b><small>route parameters</small></a></li>
+            <li><a href="#/byg-api"><b>Byg et REST API</b><small>Dagens øvelse</small></a></li>
+          </ol>
+        </section>
+
+        <section id="opsamling" class="chapter" data-accent="orange">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Opsamling</span>
+          <h2>Persistens<br />fra sidste gang</h2>
+          <p><code>loadStudents()</code>/<code>saveStudents()</code> eller <code>loadMessages()</code>/<code>saveMessages()</code> — og hvorfor read → modify → write ikke må springes over.</p>
+        </section>
+
+        <section class="recap-slide">
+          <span class="eyebrow">Opsamling</span>
+          <h2>Kan I forklare de fire led med jeres egne ord?</h2>
+          <div class="recap-chain">
+            <span>fil</span><b>→</b><span><code>JSON.parse()</code></span><b>→</b><span>ret data</span><b>→</b
+            ><span><code>JSON.stringify()</code></span><b>→</b><span>fil</span>
+          </div>
+          <div class="recap-questions">
+            <p>Hvorfor forsvandt data ved en genstart, før I fik persistens til at virke?</p>
+            <p>Hvorfor skal jeres JSON-fil indeholde <code>[]</code>, allerede før serveren skriver noget?</p>
+            <p>Hvad gør <code>JSON.stringify(data, null, 2)</code> anderledes end uden de sidste to argumenter?</p>
+            <p>Har I fået det til at virke i mindst én øvelse — og bekræftet det ved at genstarte serveren?</p>
+          </div>
+        </section>
+
+        <section id="ssr-rest" class="chapter" data-accent="cyan">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">SSR vs REST API</span>
+          <h2>Fra HTML-sider<br />til rene data</h2>
+          <p>Samme request/response-model og samme routing-tankegang — bare et andet "produkt" i selve svaret.</p>
+        </section>
+
+        <section id="hvad-er-rest" class="chapter" data-accent="green">
+          <span class="chapter-number">03</span>
+          <span class="eyebrow">REST API</span>
+          <h2>Ressourcer,<br />metoder og statuskoder</h2>
+          <p>GET, POST, PUT og DELETE møder CRUD — og statuskoder fortæller resultatet af et request.</p>
+        </section>
+
+        <section id="json-begge-veje" class="chapter" data-accent="yellow">
+          <span class="chapter-number">04</span>
+          <span class="eyebrow"><code>express.json()</code></span>
+          <h2>JSON<br />begge veje</h2>
+          <p><code>express.urlencoded()</code> og <code>express.json()</code> er to måder, en request body kan være kodet på.</p>
+        </section>
+
+        <section id="route-parameters" class="chapter" data-accent="cyan">
+          <span class="chapter-number">05</span>
+          <span class="eyebrow">Route parameters</span>
+          <h2>Find én<br />bestemt ressource</h2>
+          <p><code>:id</code> i stien, <code>request.params.id</code> som string, <code>.find()</code> og <code>404</code> når intet matcher.</p>
+        </section>
+
+        <section id="byg-api" class="chapter" data-accent="green">
+          <span class="chapter-number">06</span>
+          <span class="eyebrow">Dagens øvelse</span>
+          <h2>Byg et<br />REST API</h2>
+          <p>GET, POST, route parameters + 404 og PUT som minimum — testet i Thunder Client undervejs.</p>
+        </section>
+
+      </div>
+    </div>
+    <script type="module" src="../shared/deck.js"></script>
+  </body>
+</html>
