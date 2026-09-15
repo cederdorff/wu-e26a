@@ -120,9 +120,11 @@ npm uninstall ejs
 
 `GET /` og `POST /ask` fra øvelse 3 bruger `response.render()` og læser `request.body.question` fra en formular — begge dele er væk nu. Slet begge routes helt fra `server.js`. Lad `messages`, `answers`, `loadMessages()`, `saveMessages()`, `findBestAnswer()` (eller din tilsvarende svarfunktion) og eventuel `topicStats` blive stående — den logik skal du genbruge i Del 2 og 3.
 
+> Har du lavet en eller flere af ekstraopgaverne fra øvelse 3/4 — `/clear-messages` (ekstraopgave 18) eller `/clear-stats` (ekstraopgave 12) — skal de slettes her sammen med `GET /` og `POST /ask`. Begge bruger `response.redirect("/")`, som venter på en `GET /`-route, der ikke længere findes. Du bygger deres funktionalitet igen som rigtige endpoints i Del 2 (`DELETE /messages`) og kan gøre det samme for `/answers`, hvis du får brug for det. Har du lavet `/debug`- og `/debug/:name`-routes (ekstraopgave 20), kan de roligt blive stående — de bruger `response.send()`, ikke `response.render()` eller `redirect()`, og er derfor upåvirket af omlægningen.
+
 #### Test trin 4
 
-Genstart serveren. Send `GET http://localhost:3000/` i Thunder Client. Du får `Cannot GET /` — det er forventet, der er ikke længere nogen side på roden af API'et.
+Genstart serveren. Send `GET http://localhost:3000/` i Thunder Client. Du får `Cannot GET /` — det er forventet, der er ikke længere nogen side på roden af API'et. Har du haft `/clear-messages` eller `/clear-stats`, så send også en `POST` til dem — du skal nu få `Cannot POST /clear-messages` (eller `-stats`), fordi routen er slettet, ikke en fejl om en manglende `GET /`.
 
 ## Tjekpunkt: Del 1
 
@@ -131,7 +133,7 @@ Del 1 er gennemført, når:
 - projektet er delt i `client/` og `server/`
 - serveren starter uden fejl fra `server/`-mappen, uden EJS, `express.static()` eller `express.urlencoded()`
 - `express.json()` er tilføjet
-- de gamle `GET /` og `POST /ask`-routes er fjernet
+- de gamle `GET /` og `POST /ask`-routes er fjernet, samt `/clear-messages`/`/clear-stats`, hvis du havde dem
 
 ---
 
@@ -165,10 +167,12 @@ Send `GET http://localhost:3000/messages` i Thunder Client. Du skal se din eksis
 
 Du kender allerede denne validering fra øvelse 3 — kun formen for svaret ændrer sig: fra en fejltekst i EJS til et JSON-svar.
 
+> **Nyt i forhold til øvelse 3:** `?? ""`, før `.trim()` kaldes. I øvelse 3 sendte HTML-formularen altid feltet `question`, selv som en tom streng. I Thunder Client kan du nemt glemme `question`-nøglen helt, og så er `request.body.question` `undefined` — `undefined.trim()` ville crashe serveren med en 500-fejl, i stedet for at give jer den pæne fejlbesked, I bygger her. `?? ""` sikrer, at I altid har en streng at kalde `.trim()` på.
+
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = request.body.question.trim();
+  const question = (request.body.question ?? "").trim();
 
   // TODO: Hvis question er tom, send fejlen som JSON i stedet for at rendere index igen,
   // fx response.json({ error: "Skriv et spørgsmål, før du sender." }), og stop routen med return.
@@ -195,7 +199,7 @@ if (!question) {
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = request.body.question.trim();
+  const question = (request.body.question ?? "").trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
@@ -212,6 +216,8 @@ app.post("/messages", async (request, response) => {
 
 Send `POST http://localhost:3000/messages` med body `{ "question": "" }` — du skal få fejlbeskeden tilbage som JSON. Send derefter med et rigtigt spørgsmål, fx `{ "question": "Hvad hedder du?" }` — du skal få `{ "received": "Hvad hedder du?" }` tilbage.
 
+Send til sidst en `POST` helt uden body (eller med `{}`). Du skal stadig få fejlbeskeden tilbage som JSON — ikke en 500-fejl i terminalen.
+
 ---
 
 ### 7. POST /messages: opret og gem spørgsmålsbeskeden
@@ -221,14 +227,14 @@ Byg videre på routen ét skridt ad gangen. Start med kun spørgsmålet — svar
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = request.body.question.trim();
+  const question = (request.body.question ?? "").trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
     return;
   }
 
-  // TODO: Opret en spørgsmål-besked, { type: "question", text: question }, og tilføj den til messages.
+  // TODO: Opret en spørgsmål-besked, { type: "question", text: question, createdAt: new Date().toISOString() }, og tilføj den til messages.
 
   // TODO: Gem den opdaterede liste med saveMessages(messages).
 
@@ -240,7 +246,7 @@ app.post("/messages", async (request, response) => {
 <summary>Hint</summary>
 
 ```text
-message = { type: "question", text: question }
+message = { type: "question", text: question, createdAt: new Date().toISOString() }
 messages.push(message)
 
 await saveMessages(messages)
@@ -255,14 +261,14 @@ response.json(message)
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = request.body.question.trim();
+  const question = (request.body.question ?? "").trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
     return;
   }
 
-  const message = { type: "question", text: question };
+  const message = { type: "question", text: question, createdAt: new Date().toISOString() };
   messages.push(message);
 
   await saveMessages(messages);
@@ -271,11 +277,13 @@ app.post("/messages", async (request, response) => {
 });
 ```
 
+> **Nyt: `createdAt`.** Hver besked får nu et tidsstempel for, hvornår den blev oprettet — almindeligt for en REST-ressource, og noget du kan sortere eller filtrere på senere (RACE 6). `new Date().toISOString()` giver en tekststreng, fx `"2026-09-15T10:32:00.000Z"` — ikke et rent `Date`-objekt. Det er bevidst: et `Date`-objekt overlever ikke turen gennem `JSON.stringify()`/`JSON.parse()` (som `saveMessages()`/`loadMessages()` bruger) som andet end præcis sådan en tekststreng, så du kan lige så godt oprette den som streng med det samme. Har du allerede `createdAt` fra ekstraopgave 19 i øvelse 3, er det denne detalje, der er ny.
+
 </details>
 
 #### Test trin 7
 
-Send `POST http://localhost:3000/messages` med et rigtigt spørgsmål. Du skal få spørgsmål-beskeden tilbage som JSON — endnu uden svar. Send derefter `GET /messages`, og bekræft at spørgsmålet er gemt i historikken. Der er endnu ikke noget svar med — det er forventet, indtil næste trin.
+Send `POST http://localhost:3000/messages` med et rigtigt spørgsmål. Du skal få spørgsmål-beskeden tilbage som JSON, med et `createdAt`-tidsstempel — endnu uden svar. Send derefter `GET /messages`, og bekræft at spørgsmålet er gemt i historikken. Der er endnu ikke noget svar med — det er forventet, indtil næste trin.
 
 ---
 
@@ -286,18 +294,18 @@ Byg videre på routen fra trin 7. Genbrug din egen svarfunktion fra øvelse 3/4 
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = request.body.question.trim();
+  const question = (request.body.question ?? "").trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
     return;
   }
 
-  const message = { type: "question", text: question };
+  const message = { type: "question", text: question, createdAt: new Date().toISOString() };
   messages.push(message);
 
   // TODO: Find svaret med din egen svarfunktion, fx findBestAnswer(question).
-  // TODO: Opret en svar-besked, { type: "answer", text: ... }, og tilføj den til messages.
+  // TODO: Opret en svar-besked, { type: "answer", text: ..., createdAt: new Date().toISOString() }, og tilføj den til messages.
 
   await saveMessages(messages);
 
@@ -311,7 +319,7 @@ app.post("/messages", async (request, response) => {
 
 ```text
 result = findBestAnswer(question)   // eller findAnswer(question), afhængigt af din egen kode
-answerMessage = { type: "answer", text: result.answer ?? result }
+answerMessage = { type: "answer", text: result.answer ?? result, createdAt: new Date().toISOString() }
 messages.push(answerMessage)
 
 response.json({ question: message, answer: answerMessage })
@@ -325,18 +333,18 @@ response.json({ question: message, answer: answerMessage })
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = request.body.question.trim();
+  const question = (request.body.question ?? "").trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
     return;
   }
 
-  const message = { type: "question", text: question };
+  const message = { type: "question", text: question, createdAt: new Date().toISOString() };
   messages.push(message);
 
   const result = findBestAnswer(question);
-  const answerMessage = { type: "answer", text: result.answer };
+  const answerMessage = { type: "answer", text: result.answer, createdAt: new Date().toISOString() };
   messages.push(answerMessage);
 
   await saveMessages(messages);
@@ -410,6 +418,16 @@ I modsætning til `/messages` giver `/answers` god mening at give fuld CRUD: en 
 > **Nyt: identifikatoren er ikke et tal.** I `/students` og REST API-øvelsen brugte du et numerisk `id`, genereret af serveren med `Date.now()`. Her har hver regel allerede en unik `category` (fra øvelse 4), fx `"navn"` eller `"bosted"` — så du bruger den direkte som identifikator i URL'en, i stedet for at opfinde et nyt id. En REST-ressource kan identificeres af hvilket som helst unikt felt, ikke kun et autogenereret tal. Det betyder også, at du **ikke** skal bruge `Number()` her — `category` er en string i begge ender af sammenligningen.
 
 Denne del holdes i memory, ligesom Del 1 i REST API-øvelsen med studerende — ændringer forsvinder ved en genstart. Det kan I rette i en senere øvelse, med samme mønster som `loadMessages()`/`saveMessages()`.
+
+**Har du lavet ekstraopgave 13 fra øvelse 4 (flyttet `answers` til sit eget modul, `data/answers.js`)?** Så skal `answers` konverteres fra et JavaScript-modul til almindelig data, ligesom `messages` allerede er det. Omdøb filen til `data/answers.json`, fjern `export const answers =`, og behold kun selve arrayet — som gyldig JSON, altså med dobbelte anførselstegn og ingen kommentarer. Fjern derefter `import { answers } from "./data/answers.js"` i `server.js`, og tilføj i stedet, øverst i filen — under din eksisterende `import fs from "node:fs/promises";` fra øvelse 5, ikke som en ny kopi af den:
+
+```js
+let answers = JSON.parse(await fs.readFile("./data/answers.json", "utf8"));
+```
+
+> Grunden: en importeret binding (`import { answers } from ...`) kan du kun mutere — `push()`, ændre en regels felter — ikke gentildele. `DELETE /answers/:category` i trin 16 gentildeler selve `answers` med `filter()`, og det kræver, at `answers` er en almindelig `let`-variabel i `server.js`, ikke en importeret `const`. Læg mærke til `await` uden for en `async`-funktion — det kaldes top-level await, og virker øverst i en fil, fordi `"type": "module"` i din `package.json` allerede gør `server.js` til et JavaScript-modul. Bemærk desuden, at denne linje kun læser filen én gang, når serveren starter — ikke ved hvert request, som `loadMessages()` gør. Det er samtidig et fint forspring til den senere øvelse, hvor `/answers` får sin egen persistens med `loadAnswers()`/`saveAnswers()`, i samme mønster som `messages`.
+
+> **Har du lavet ekstraopgave 17 fra øvelse 3 (flere svarmuligheder)?** Så hedder feltet `answers` (et array), ikke `answer` (en string), i alle dine regler. Koden herunder bruger `answer` — skriv `request.body.answers`/`answerRule.answers` i stedet, konsekvent gennem hele Del 3, hvis det er dit feltnavn. De to felter fungerer ens i denne del; det er kun navnet, der skal matche din egen `findBestAnswer()`.
 
 ### 11. GET /answers: alle regler
 
@@ -650,6 +668,7 @@ Slet `mad`-reglen igen. Bekræft med `GET /answers`, at den er væk. Spørg AMAb
 5. `PUT /answers/:category` — ret svaret, og bekræft ændringen.
 6. `DELETE /answers/:category`.
 7. `GET /answers` — er du tilbage på antallet fra punkt 1?
+8. Opret endnu en regel med `POST /answers`, og genstart derefter serveren. Send `GET /answers` igen — er den regel her stadig, eller er du tilbage på antallet fra punkt 1? Sammenlign med `GET /messages` fra trin 8 i Del 2, som beholdt sine ændringer efter en genstart. Hvorfor er der forskel?
 
 ## Tjekpunkt: Del 3
 

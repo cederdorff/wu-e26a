@@ -77,6 +77,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
   - [RACE 5 · Node/Express REST API](https://cederdorff.com/wu-e26a/rest-api/)
 - Opgaver:
   - [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) — Del 1 bygger fuld CRUD (GET, POST, PUT, DELETE) for `/students` i memory, Del 2 flytter data til en JSON-fil uden at ændre routes' logik. Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse
+  - [Øvelse 6: AMAbotten som REST API](../opgaver/express-rest-api-amabot.md) — bygger videre på jeres egen AMAbot fra øvelse 3-5: del projektet i `client`/`server`, fjern EJS, og genskab AMAbotten som et rent REST API — `/messages` med tre endpoints, `/answers` med fuld CRUD
 
 ---
 
