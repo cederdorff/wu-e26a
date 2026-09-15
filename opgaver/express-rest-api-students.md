@@ -307,7 +307,7 @@ Genbrug præcis samme kode som i GET /students/:id.
 
 #### Test trin 8
 
-Send `GET http://localhost:3000/students/1`... nej, denne gang skal du sende en **PUT** til `http://localhost:3000/students/1` (uden body). Du skal få Aisha tilbage, uændret. Virker det ikke, er det formentlig `Number()`-konverteringen eller selve `.find()`, der er forkert — genbesøg trin 5.
+Send en **PUT** (ikke en GET) til `http://localhost:3000/students/1`, uden body. Du skal få Aisha tilbage, uændret. Virker det ikke, er det formentlig `Number()`-konverteringen eller selve `.find()`, der er forkert — genbesøg trin 5.
 
 ---
 
@@ -649,7 +649,8 @@ app.post("/students", async (request, response) => {
     education: request.body.education
   };
 
-  // TODO: Tilføj newStudent til listen med push(), ligesom i Del 1.
+  students.push(newStudent);
+
   // TODO: Gem den opdaterede liste med saveStudents(), før du sender svaret.
 
   response.json(newStudent);
@@ -661,11 +662,10 @@ app.post("/students", async (request, response) => {
 
 ```text
 students = await loadStudents()
-students.push(newStudent)
 await saveStudents(students)
 ```
 
-Husk `async` på routens callback-funktion.
+`push(newStudent)` er uændret fra Del 1. Husk `async` på routens callback-funktion.
 
 </details>
 
