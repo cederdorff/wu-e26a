@@ -4,7 +4,7 @@
 
 I denne øvelse bygger du et nyt, selvstændigt Express-projekt — adskilt fra din AMAbot, ligesom [JSON-øvelsen med studerende](express-ejs-json-students.md) fra sidst. Denne gang er der ingen EJS og ingen HTML-formularer: serveren sender og modtager kun JSON, og du tester med Thunder Client i stedet for browseren.
 
-Øvelsen er delt i to uafhængige dele:
+Øvelsen er delt i to:
 
 - **Del 1** bygger et REST API for `/students` med fuld CRUD (Create, Read, Update, Delete) — data ligger i et almindeligt array i memory.
 - **Del 2** flytter de samme data over i en JSON-fil, med `loadStudents()`/`saveStudents()`, ligesom du kender fra RACE 4.
@@ -159,7 +159,6 @@ Byg nu videre på routen fra trin 4, så den rent faktisk finder og returnerer e
 app.get("/students/:id", (request, response) => {
   // TODO: Find studerenden i students, hvor id matcher request.params.id.
   // Husk at request.params.id er en string.
-
   // TODO: Send den fundne studerende som JSON.
 });
 ```
@@ -229,6 +228,8 @@ Body (JSON):
 }
 ```
 
+![Et POST-request til /students med en JSON-body i Thunder Client](assets/thunder-client-post.png)
+
 Kig i terminalen: står `{ name: 'Mateo', education: 'Webudvikling' }` der? Og indeholder responsen det samme? Hvis ja, virker `express.json()`, og du er klar til at bygge selve oprettelsen.
 
 ---
@@ -241,9 +242,7 @@ Erstat den midlertidige route fra trin 6 med den rigtige logik:
 app.post("/students", (request, response) => {
   // TODO: Opret et nyt studerende-objekt ud fra request.body.name og request.body.education.
   // Giv den et unikt id, fx med Date.now().
-
   // TODO: Tilføj den nye studerende til students-arrayet med push().
-
   // TODO: Send den nye studerende som JSON.
 });
 ```
@@ -293,7 +292,6 @@ PUT bygges i to trin. Start med kun at finde studerenden — helt ligesom i trin
 ```js
 app.put("/students/:id", (request, response) => {
   // TODO: Find studerenden ud fra request.params.id, ligesom i GET /students/:id.
-
   // TODO: Send den fundne studerende som JSON — uændret, indtil videre.
 });
 ```
@@ -463,7 +461,7 @@ Forsvinder der en studerende, du ikke bad om at slette, med den ene løsning? `s
 **Reflektér:** Begge løsninger virker fint, når id'et findes. Men:
 
 - Hvilken løsning ændrer det oprindelige array, og hvilken laver et nyt?
-- Hvilken af de to har du selv mest tillid til, når id'et *ikke* findes — og hvorfor?
+- Hvilken af de to har du selv mest tillid til, når id'et _ikke_ findes — og hvorfor?
 - Hvilken synes du er nemmest at læse og forstå?
 
 Der er ikke ét rigtigt svar her. Vælg den løsning, du forstår bedst og har mest tillid til, og brug den videre i øvelsen — peger du på `filter()`, skal du huske at bruge den samme tilgang i Del 2. Selve fejlen med et ugyldigt id retter I først i en senere øvelse.
