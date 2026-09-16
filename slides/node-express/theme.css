@@ -199,11 +199,11 @@ body {
   display: none;
 }
 .reveal .controls {
-  color: var(--green);
+  color: var(--green) !important;
 }
 .reveal .progress {
   height: 4px;
-  color: var(--green);
+  color: var(--green) !important;
 }
 .reveal .slide-number {
   right: 132px;
