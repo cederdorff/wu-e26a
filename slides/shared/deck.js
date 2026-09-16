@@ -30,7 +30,7 @@ if (agenda) {
   link.href = "#/agenda";
   link.textContent = "Agenda";
   link.setAttribute("aria-label", "Gå til agendaen");
-  document.querySelector(".reveal")?.append(link);
+  document.querySelector(".reveal .slides")?.append(link);
   const sync = () => { link.hidden = deck.getCurrentSlide() === agenda; };
   deck.on("slidechanged", sync);
   sync();
