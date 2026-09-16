@@ -13,8 +13,8 @@
         <section class="title-slide" data-accent="orange">
           <div class="title-copy">
             <span class="eyebrow">WU-E26A · RACE 5 · 16. september 2026</span>
-            <h1>Fra sider<br /><span>til et REST API</span></h1>
-            <p class="lead">HTTP-metoder som CRUD · statuskoder · response.json()</p>
+            <h1>Fra HTML<br /><span>til JSON</span></h1>
+            <p class="lead">REST API: HTTP-metoder som CRUD · statuskoder · response.json()</p>
           </div>
         </section>
 
@@ -25,7 +25,7 @@
             <li><a href="#/opsamling"><b>Opsamling: Persistens</b><small>loadStudents()/saveStudents() og read → modify → write</small></a></li>
             <li><a href="#/ssr-rest"><b>Fra sider (HTML) til data (JSON)</b><small>SSR vs REST API</small></a></li>
             <li><a href="#/hvad-er-api"><b>Hvad er et API?</b><small>Application Programming Interface — og restaurant-analogien</small></a></li>
-            <li><a href="#/hvad-er-rest"><b>Hvad er et REST API?</b><small>Ressourcer, CRUD, statuskoder, REST's Key Principles — og dagens øvelse</small></a></li>
+            <li><a href="#/hvad-er-rest"><b>Hvad er et REST API?</b><small>HTTP, ressourcer, CRUD, statuskoder, REST's Key Principles — og dagens øvelse</small></a></li>
             <li><a href="#/json-begge-veje"><b>JSON begge veje</b><small><code>express.json()</code></small></a></li>
             <li><a href="#/route-parameters"><b>Find én bestemt ressource</b><small>route parameters</small></a></li>
           </ol>
@@ -46,6 +46,8 @@
             ><span><code>JSON.stringify()</code></span><b>→</b><span>fil</span>
           </div>
           <div class="recap-questions">
+            <p>Hvad er JSON egentlig — og hvordan er det forskelligt fra et JavaScript-objekt?</p>
+            <p>Hvorfor bruger vi JSON til at gemme og sende data, frem for fx almindelig tekst?</p>
             <p>Hvorfor forsvandt data ved en genstart, før I fik persistens til at virke?</p>
             <p>Hvorfor skal jeres JSON-fil indeholde <code>[]</code>, allerede før serveren skriver noget?</p>
             <p>Hvad gør <code>JSON.stringify(data, null, 2)</code> anderledes end uden de sidste to argumenter?</p>
@@ -284,7 +286,24 @@
           <span class="chapter-number">04</span>
           <span class="eyebrow">REST API</span>
           <h2>Ressourcer,<br />metoder og statuskoder</h2>
-          <p>Sådan gør REST et API konkret — ressourcer, CRUD, statuskoder og REST's Key Principles.</p>
+          <p>Sådan gør REST et API konkret — bygget oven på HTTP, med ressourcer, CRUD, statuskoder og REST's Key Principles.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Fundamentet under REST</span>
+          <h2>REST opfinder intet nyt — det bruger HTTP, som det allerede er</h2>
+          <a class="exercise-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" rel="noreferrer">Kilde: MDN ↗</a>
+          <div class="definition-pair">
+            <article>
+              <span>HTTP · protokollen</span>
+              <p>"HTTP is the standard way to communicate between clients and servers" — en request-response-protokol, som browseren og Thunder Client allerede taler.</p>
+            </article>
+            <article>
+              <span>HTTP · metoderne</span>
+              <p>"HTTP defines a set of request methods to indicate the desired action to be performed for a given resource." — GET, POST, PUT og DELETE er HTTP's egne metoder, ikke noget REST selv opfinder.</p>
+            </article>
+          </div>
+          <p class="bottom-line">REST er reglerne for <b>hvordan</b> I bruger de HTTP-metoder, der allerede findes — derfor går GET/POST/PUT/DELETE igen i næste princip.</p>
         </section>
 
         <section class="definition-slide" data-accent="green">
@@ -408,8 +427,8 @@
             </article>
             <article>
               <span>Jeres API</span>
-              <strong>En besked</strong>
-              <small><code>/messages/12</code> — én besked i AMAbottens historik</small>
+              <strong>En svarregel</strong>
+              <small><code>/answers/mad</code> — én bestemt svarregel i AMAbotten</small>
             </article>
             <article>
               <span>Dataforsyningen</span>
@@ -682,6 +701,9 @@ app.use(express.json());</code></pre>
             >
             <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank" rel="noreferrer"
               ><strong>HTTP response status codes</strong><span>MDN ↗</span></a
+            >
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" rel="noreferrer"
+              ><strong>HTTP request methods</strong><span>MDN ↗</span></a
             >
             <a href="https://developer.mozilla.org/en-US/docs/Glossary/REST" target="_blank" rel="noreferrer"
               ><strong>REST</strong><span>MDN ↗</span></a

@@ -13,6 +13,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 <details>
 <summary><strong>1. Opsamling: Persistens</strong></summary>
 
+- Hvad er JSON egentlig, og hvorfor bruger vi det til at gemme og sende data — frem for fx almindelig tekst?
 - Forklar to og to jeres `loadStudents()`/`saveStudents()` eller `loadMessages()`/`saveMessages()` for hinanden
 - Genbesøg read → modify → write: hvorfor er alle tre trin nødvendige, og hvad går galt, hvis I springer et over?
 - Test: har alle fået persistens til at virke i mindst én af øvelserne fra sidst? Genstart serveren, og bekræft at data stadig er der
@@ -39,6 +40,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 <summary><strong>4. Hvad er et REST API?</strong></summary>
 
 - Præcis definition: REST (**RE**presentational **S**tate **T**ransfer) er en arkitektur-stil for API'er, bygget oven på HTTP — ikke en protokol eller teknologi, I installerer (se evt. [REST APIs i 100 sekunder](https://www.youtube.com/watch?v=-MTSQjw5DrM&ab_channel=Fireship))
+- HTTP er selve fundamentet: en request-response-protokol, der allerede definerer de metoder (GET, POST, PUT, DELETE …), REST genbruger til CRUD — REST opfinder ikke metoderne, det sætter faste regler for, hvordan de bruges (se evt. [MDN: HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods))
 - Ressourcer (fx `users`, `posts`) identificeres ved en URL — `/users`, `/users/:id` — semantisk og ren, ikke gemt i en query-string
 - HTTP-metoderne GET, POST, PUT og DELETE svarer til CRUD: Read, Create, Update, Delete
 - Statuskoder fortæller om resultatet af et request: `200 OK`, `201 Created`, `404 Not Found`
@@ -51,6 +53,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
   4. **CRUD via HTTP-metoder** — GET/POST/PUT/DELETE på `/students`
   5. **Statuskoder** — `200`, `201`, `404` (kendt fra RACE 1)
   6. **JSON som format** — `response.json()` sender arrayet som JSON, med korrekt `Content-Type`
+- I går i gang med dagens øvelse undervejs: byg GET, POST, route parameters, PUT og DELETE som minimum, og test hver route i Thunder Client — ikke kun i browseren. Formålet er at træne mønsteret, før I senere overfører det til AMAbotten
 </details>
 <details>
 <summary><strong>5. JSON begge veje: <code>express.json()</code></strong></summary>
@@ -64,14 +67,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 
 - `:id` i routens sti, værdien findes i `request.params.id`
 - `request.params.id` er altid en string — `Number()` er nødvendig, når den skal sammenlignes med et numerisk id
-- `.find()` finder én bestemt ressource; send `404`, hvis intet matcher
-</details>
-<details>
-<summary><strong>7. Byg et REST API</strong></summary>
-
-- Arbejd med dagens øvelse: byg GET, POST, route parameters, PUT og DELETE som minimum
-- Test hver route i Thunder Client undervejs — ikke kun i browseren
-- Formålet er at træne mønsteret, før I senere overfører det til AMAbotten
+- `.find()` finder én bestemt ressource; findes intet, får I `null` tilbage i dag — rigtig `404`-håndtering venter til en senere øvelse
 </details>
 
 ---
@@ -82,6 +78,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 - Genopfrisk [Response object](https://expressjs.com/en/5x/api/response/) i Express.js API-referencen, særligt `res.json()` — I kender allerede [Request object](https://expressjs.com/en/5x/api/request/) fra RACE 2
 - Læs om [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) på MDN, særligt `200`, `201` og `404`
 - Skim ["REST"](https://developer.mozilla.org/en-US/docs/Glossary/REST) på MDN som en hurtig introduktion til begrebet
+- Skim ["HTTP request methods"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) på MDN — GET/POST/PUT/DELETE findes i HTTP, længe før REST kommer ind i billedet
 - Skim ["REST — Key Principles"](https://www.codecademy.com/article/what-is-rest) på Codecademy og evt. ["REST API Explained (2 min)"](https://www.youtube.com/watch?v=WRsKs-K6iII) på YouTube
 - Supplerende på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
   - fortsæt på Fullstack &gt; Express.js (særligt "Build an Express API")
