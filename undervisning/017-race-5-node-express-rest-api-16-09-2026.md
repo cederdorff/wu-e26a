@@ -26,31 +26,50 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 - Motivation: en `fetch()` fra JavaScript i browseren (DOB 5) forventer JSON tilbage, ikke en hel HTML-side
 </details>
 <details>
-<summary><strong>3. Hvad er et REST API?</strong></summary>
+<summary><strong>3. Hvad er et API?</strong></summary>
 
-- Ressourcer (fx `users`, `posts`) identificeres ved en URL — `/users`, `/users/:id`
+- Client-server-modellen: klienten (en app, en browser, et andet program) sender et request, serveren svarer med et response — API'et er aftalen om *hvordan* den samtale foregår
+- Et API er et sæt regler, et program stiller til rådighed, så andre programmer kan bruge dets data eller funktioner — uden selv at kende det indeni
+- Eksempler I allerede kender: `getUserMedia()` beder om adgang til kameraet, `navigator.geolocation` spørger om enhedens position, en vejrtjeneste eller en betalingsudbyder som MobilePay/Stripe — alt sammen API'er, ikke kun webservere
+- I har allerede set det i praksis: Network-fanen fra RACE 4, hvor Canvas' People-side henter kursister som et JSON-array via GET — og Instagram gør det samme med profil- og opslagsdata via GraphQL
+- Restaurant-analogi (se [video](https://www.youtube.com/watch?v=s7wmiS2mSXY)): kunden (klienten) bestiller hos tjeneren (API'et), som videregiver ordren til køkkenet (serveren) og bringer resultatet tilbage — uden at kunden nogensinde ser køkkenet
+- En REST API er én bestemt måde at bygge et API på — det er dét, resten af dagen handler om
+</details>
+<details>
+<summary><strong>4. Hvad er et REST API?</strong></summary>
+
+- Præcis definition: REST (**RE**presentational **S**tate **T**ransfer) er en arkitektur-stil for API'er, bygget oven på HTTP — ikke en protokol eller teknologi, I installerer (se evt. [REST APIs i 100 sekunder](https://www.youtube.com/watch?v=-MTSQjw5DrM&ab_channel=Fireship))
+- Ressourcer (fx `users`, `posts`) identificeres ved en URL — `/users`, `/users/:id` — semantisk og ren, ikke gemt i en query-string
 - HTTP-metoderne GET, POST, PUT og DELETE svarer til CRUD: Read, Create, Update, Delete
 - Statuskoder fortæller om resultatet af et request: `200 OK`, `201 Created`, `404 Not Found`
 - `response.json()` sender JavaScript-data som JSON i responsen, med korrekt `Content-Type`
+- Rigtigt eksempel: Dataforsyningens danske adressedata-API (`api.dataforsyningen.dk`) følger samme mønster — samling giver et array, ét element giver et objekt
+- REST's Key Principles opsummeres først i overblik (kilde: [Codecademy](https://www.codecademy.com/article/what-is-rest-api)), derefter ét slide per princip, med eksempler fra dagens `/students`-API:
+  1. **Client-Server** — Thunder Client og Express-serveren kender intet til hinandens indre, kun til `/students`
+  2. **Stateless** — `GET /students/1` og `GET /students/2` er to helt uafhængige requests; id'et skal med hver gang
+  3. **Ressourcer & URI'er** — `/students` (samling) og `/students/:id` (element)
+  4. **CRUD via HTTP-metoder** — GET/POST/PUT/DELETE på `/students`
+  5. **Statuskoder** — `200`, `201`, `404` (kendt fra RACE 1)
+  6. **JSON som format** — `response.json()` sender arrayet som JSON, med korrekt `Content-Type`
 </details>
 <details>
-<summary><strong>4. JSON begge veje: <code>express.json()</code></strong></summary>
+<summary><strong>5. JSON begge veje: <code>express.json()</code></strong></summary>
 
 - `express.urlencoded()` (fra HTML-formularer) og `express.json()` (fra fetch/Thunder Client) er to forskellige måder, en request body kan være kodet på
 - `request.body` findes stadig — bare med en JSON-struktur i stedet for form-felter
 - Test i Thunder Client: send en POST med en JSON body, og se hvad der lander i `request.body`
 </details>
 <details>
-<summary><strong>5. Find én bestemt ressource: route parameters</strong></summary>
+<summary><strong>6. Find én bestemt ressource: route parameters</strong></summary>
 
 - `:id` i routens sti, værdien findes i `request.params.id`
 - `request.params.id` er altid en string — `Number()` er nødvendig, når den skal sammenlignes med et numerisk id
 - `.find()` finder én bestemt ressource; send `404`, hvis intet matcher
 </details>
 <details>
-<summary><strong>6. Byg et REST API</strong></summary>
+<summary><strong>7. Byg et REST API</strong></summary>
 
-- Arbejd med dagens øvelse: byg GET, POST, route parameters + 404 og PUT som minimum
+- Arbejd med dagens øvelse: byg GET, POST, route parameters, PUT og DELETE som minimum
 - Test hver route i Thunder Client undervejs — ikke kun i browseren
 - Formålet er at træne mønsteret, før I senere overfører det til AMAbotten
 </details>
@@ -63,6 +82,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 - Genopfrisk [Response object](https://expressjs.com/en/5x/api/response/) i Express.js API-referencen, særligt `res.json()` — I kender allerede [Request object](https://expressjs.com/en/5x/api/request/) fra RACE 2
 - Læs om [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) på MDN, særligt `200`, `201` og `404`
 - Skim ["REST"](https://developer.mozilla.org/en-US/docs/Glossary/REST) på MDN som en hurtig introduktion til begrebet
+- Skim ["REST — Key Principles"](https://www.codecademy.com/article/what-is-rest) på Codecademy og evt. ["REST API Explained (2 min)"](https://www.youtube.com/watch?v=WRsKs-K6iII) på YouTube
 - Supplerende på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
   - fortsæt på Fullstack &gt; Express.js (særligt "Build an Express API")
   - ["What is a REST API?"](https://scrimba.com/explain/guide09u8e4urj)

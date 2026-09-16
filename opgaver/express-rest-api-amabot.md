@@ -167,12 +167,10 @@ Send `GET http://localhost:3000/messages` i Thunder Client. Du skal se din eksis
 
 Du kender allerede denne validering fra øvelse 3 — kun formen for svaret ændrer sig: fra en fejltekst i EJS til et JSON-svar.
 
-> **Nyt i forhold til øvelse 3:** `?? ""`, før `.trim()` kaldes. I øvelse 3 sendte HTML-formularen altid feltet `question`, selv som en tom streng. I Thunder Client kan du nemt glemme `question`-nøglen helt, og så er `request.body.question` `undefined` — `undefined.trim()` ville crashe serveren med en 500-fejl, i stedet for at give jer den pæne fejlbesked, I bygger her. `?? ""` sikrer, at I altid har en streng at kalde `.trim()` på.
-
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = (request.body.question ?? "").trim();
+  const question = request.body.question.trim();
 
   // TODO: Hvis question er tom, send fejlen som JSON i stedet for at rendere index igen,
   // fx response.json({ error: "Skriv et spørgsmål, før du sender." }), og stop routen med return.
@@ -199,7 +197,7 @@ if (!question) {
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = (request.body.question ?? "").trim();
+  const question = request.body.question.trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
@@ -216,8 +214,6 @@ app.post("/messages", async (request, response) => {
 
 Send `POST http://localhost:3000/messages` med body `{ "question": "" }` — du skal få fejlbeskeden tilbage som JSON. Send derefter med et rigtigt spørgsmål, fx `{ "question": "Hvad hedder du?" }` — du skal få `{ "received": "Hvad hedder du?" }` tilbage.
 
-Send til sidst en `POST` helt uden body (eller med `{}`). Du skal stadig få fejlbeskeden tilbage som JSON — ikke en 500-fejl i terminalen.
-
 ---
 
 ### 7. POST /messages: opret og gem spørgsmålsbeskeden
@@ -227,7 +223,7 @@ Byg videre på routen ét skridt ad gangen. Start med kun spørgsmålet — svar
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = (request.body.question ?? "").trim();
+  const question = request.body.question.trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
@@ -261,7 +257,7 @@ response.json(message)
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = (request.body.question ?? "").trim();
+  const question = request.body.question.trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
@@ -294,7 +290,7 @@ Byg videre på routen fra trin 7. Genbrug din egen svarfunktion fra øvelse 3/4 
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = (request.body.question ?? "").trim();
+  const question = request.body.question.trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });
@@ -319,7 +315,7 @@ app.post("/messages", async (request, response) => {
 
 ```text
 result = findBestAnswer(question)   // eller findAnswer(question), afhængigt af din egen kode
-answerMessage = { type: "answer", text: result.answer ?? result, createdAt: new Date().toISOString() }
+answerMessage = { type: "answer", text: result.answer, createdAt: new Date().toISOString() }
 messages.push(answerMessage)
 
 response.json({ question: message, answer: answerMessage })
@@ -333,7 +329,7 @@ response.json({ question: message, answer: answerMessage })
 ```js
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
-  const question = (request.body.question ?? "").trim();
+  const question = request.body.question.trim();
 
   if (!question) {
     response.json({ error: "Skriv et spørgsmål, før du sender." });

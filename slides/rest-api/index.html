@@ -24,10 +24,10 @@
           <ol class="agenda-grid">
             <li><a href="#/opsamling"><b>Opsamling: Persistens</b><small>loadStudents()/saveStudents() og read → modify → write</small></a></li>
             <li><a href="#/ssr-rest"><b>Fra sider (HTML) til data (JSON)</b><small>SSR vs REST API</small></a></li>
-            <li><a href="#/hvad-er-rest"><b>Hvad er et REST API?</b><small>Ressourcer, CRUD og statuskoder</small></a></li>
+            <li><a href="#/hvad-er-api"><b>Hvad er et API?</b><small>Application Programming Interface — og restaurant-analogien</small></a></li>
+            <li><a href="#/hvad-er-rest"><b>Hvad er et REST API?</b><small>Ressourcer, CRUD, statuskoder, REST's Key Principles — og dagens øvelse</small></a></li>
             <li><a href="#/json-begge-veje"><b>JSON begge veje</b><small><code>express.json()</code></small></a></li>
             <li><a href="#/route-parameters"><b>Find én bestemt ressource</b><small>route parameters</small></a></li>
-            <li><a href="#/byg-api"><b>Byg et REST API</b><small>Dagens øvelse</small></a></li>
           </ol>
         </section>
 
@@ -38,7 +38,7 @@
           <p><code>loadStudents()</code>/<code>saveStudents()</code> eller <code>loadMessages()</code>/<code>saveMessages()</code> — og hvorfor read → modify → write ikke må springes over.</p>
         </section>
 
-        <section class="recap-slide">
+        <section class="recap-slide" data-accent="orange">
           <span class="eyebrow">Opsamling</span>
           <h2>Kan I forklare de fire led med jeres egne ord?</h2>
           <div class="recap-chain">
@@ -84,10 +84,16 @@
   response.render("index", {
     messages
   });
-});</code></pre>
+});
+
+// → et helt HTML-dokument,
+// bygget af index.ejs</code></pre>
             <pre><code class="language-javascript">app.get("/messages", (request, response) => {
   response.json(messages);
-});</code></pre>
+});
+
+// → kun dataene,
+// som JSON</code></pre>
           </div>
           <p class="bottom-line">Ingen EJS, ingen <code>views</code>-mappe — <code>messages</code> sendes direkte som JSON.</p>
         </section>
@@ -116,15 +122,311 @@
           <p class="bottom-line">Samme AMAbot, samme svarlogik — men senere uden EJS, drevet af <code>fetch()</code> i stedet.</p>
         </section>
 
-        <section id="hvad-er-rest" class="chapter" data-accent="green">
+        <section id="hvad-er-api" class="chapter" data-accent="cyan">
           <span class="chapter-number">03</span>
+          <span class="eyebrow">API</span>
+          <h2>Hvad er<br />et API?</h2>
+          <p>Application Programming Interface — en måde to systemer kan kommunikere sammen på.</p>
+        </section>
+
+        <section class="client-server-slide" data-accent="cyan">
+          <span class="eyebrow">Client-Server-modellen</span>
+          <h2>To programmer, hver sin rolle — forbundet af et request</h2>
+          <div class="client-server-flow" aria-label="Klienten sender en request til serveren, som sender en response tilbage">
+            <article>
+              <span>Client</span>
+              <strong>Beder om noget</strong>
+              <small>en app, en browser, et andet program</small>
+            </article>
+            <div class="request-response">
+              <p><b>Request →</b><span>metode · URL · evt. body</span></p>
+              <p><b>← Response</b><span>status · data</span></p>
+            </div>
+            <article>
+              <span>Server</span>
+              <strong>Svarer igen</strong>
+              <small>har adgang til data eller logik, klienten ikke selv har</small>
+            </article>
+          </div>
+          <p class="bottom-line">API'et er aftalen om <b>hvordan</b> den samtale foregår — ikke selve samtalen.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="cyan">
+          <span class="eyebrow">Application Programming Interface</span>
+          <h2>Et API er reglerne for, hvordan to programmer taler sammen</h2>
+          <div class="definition-pair">
+            <article>
+              <span>API · det generelle begreb</span>
+              <p>Et sæt regler, et program stiller til rådighed, så andre programmer kan bruge dets data eller funktioner — uden selv at kende det indeni.</p>
+            </article>
+            <article>
+              <span>REST API · i dag</span>
+              <p>Én bestemt måde at bygge et API på: hver ressource har sin egen URL, og HTTP-metoderne GET/POST/PUT/DELETE bruges til at arbejde med den.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Jeres Express-routes er allerede et API — i dag gør vi dem <b>RESTful</b>.</p>
+        </section>
+
+        <section class="tools-check-slide" data-accent="cyan">
+          <span class="eyebrow">API'er er overalt</span>
+          <h2>Ikke kun webservere — I møder API'er hver dag</h2>
+          <div class="example-grid">
+            <article>
+              <span>Enhedens API</span>
+              <strong>Kameraet</strong>
+              <small><code>getUserMedia()</code> beder telefonen eller laptoppen om adgang til kamera og mikrofon</small>
+            </article>
+            <article>
+              <span>Enhedens API</span>
+              <strong>Lokation</strong>
+              <small><code>navigator.geolocation</code> spørger enheden, hvor brugeren befinder sig</small>
+            </article>
+            <article>
+              <span>Tredjeparts-API</span>
+              <strong>Vejrdata</strong>
+              <small>en vejrtjeneste sender temperatur og vind tilbage som JSON</small>
+            </article>
+            <article>
+              <span>Tredjeparts-API</span>
+              <strong>Betaling</strong>
+              <small>MobilePay eller Stripe håndterer selve transaktionen for jer</small>
+            </article>
+          </div>
+          <p class="bottom-line">Og faktisk har I allerede set API-kald i praksis — det binder vi lige sammen.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">Genkend mønsteret</span>
+          <h2>I har allerede set API-kald i Network-fanen</h2>
+          <div class="screenshot-pair">
+            <figure>
+              <img src="../assets/canvas-users.png" alt="Canvas' People-side med DevTools' Network-fane åben, der viser et GET-kald til /users med et JSON-array af studerende i svaret" />
+              <figcaption>Canvas' "People"-side henter alle kursister som et JSON-array</figcaption>
+            </figure>
+            <figure>
+              <img src="../assets/instagram-api.png" alt="Instagram-profil med DevTools' Network-fane åben, der viser et GraphQL-kald med profil- og opslagsdata som JSON i svaret" />
+              <figcaption>Instagram henter selv profildata og opslag som JSON, bag kulisserne</figcaption>
+            </figure>
+          </div>
+          <p class="bottom-line">Samme mønster, I så i Network-fanen i RACE 4 — Canvas og Instagram henter deres data sådan.</p>
+        </section>
+
+        <section class="architecture-slide" data-accent="cyan">
+          <span class="eyebrow">Analogi</span>
+          <h2>Tjeneren tager imod bestillingen — uden selv at lave maden</h2>
+          <div class="floorplan" aria-label="Kunden bestiller hos tjeneren, tjeneren giver ordren videre til køkkenet og bringer den færdige ret tilbage">
+            <svg viewBox="0 0 1400 330" role="img" aria-hidden="true">
+              <line x1="260" y1="140" x2="1140" y2="140" stroke="var(--cyan)" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow-cyan)" />
+              <line x1="1140" y1="180" x2="260" y2="180" stroke="var(--orange)" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow-orange)" />
+              <text x="440" y="122" text-anchor="middle" class="floorplan-flow">Bestilling</text>
+              <text x="440" y="205" text-anchor="middle" class="floorplan-flow">Levering</text>
+
+              <circle cx="170" cy="80" r="24" fill="var(--ink)" />
+              <rect x="128" y="106" width="84" height="76" rx="30" fill="var(--cyan)" />
+              <rect x="75" y="192" width="190" height="14" rx="6" fill="var(--line)" />
+              <rect x="95" y="206" width="8" height="26" fill="var(--line)" />
+              <rect x="247" y="206" width="8" height="26" fill="var(--line)" />
+              <text x="170" y="252" text-anchor="middle" class="floorplan-role">Klient</text>
+              <text x="170" y="284" text-anchor="middle" class="floorplan-label">Kunde</text>
+
+              <circle cx="700" cy="64" r="22" fill="var(--ink)" />
+              <rect x="662" y="88" width="76" height="90" rx="32" fill="var(--yellow)" />
+              <line x1="736" y1="125" x2="782" y2="140" stroke="var(--yellow)" stroke-width="6" stroke-linecap="round" />
+              <circle cx="792" cy="145" r="24" fill="none" stroke="var(--yellow)" stroke-width="5" />
+              <circle cx="792" cy="145" r="8" fill="var(--yellow)" />
+              <text x="700" y="252" text-anchor="middle" class="floorplan-role">API</text>
+              <text x="700" y="284" text-anchor="middle" class="floorplan-label">Tjener</text>
+
+              <rect x="1135" y="192" width="190" height="14" rx="6" fill="var(--line)" />
+              <circle cx="1230" cy="120" r="34" fill="none" stroke="var(--green)" stroke-width="5" />
+              <rect x="1188" y="112" width="14" height="8" rx="4" fill="var(--green)" />
+              <rect x="1268" y="112" width="14" height="8" rx="4" fill="var(--green)" />
+              <path d="M1215 78 q6 -14 0 -26" stroke="var(--green)" stroke-width="3" fill="none" stroke-linecap="round" />
+              <path d="M1230 78 q6 -14 0 -26" stroke="var(--green)" stroke-width="3" fill="none" stroke-linecap="round" />
+              <path d="M1245 78 q6 -14 0 -26" stroke="var(--green)" stroke-width="3" fill="none" stroke-linecap="round" />
+              <text x="1230" y="252" text-anchor="middle" class="floorplan-role">Server</text>
+              <text x="1230" y="284" text-anchor="middle" class="floorplan-label">Køkken</text>
+
+              <defs>
+                <marker id="arrow-cyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 Z" fill="var(--cyan)" />
+                </marker>
+                <marker id="arrow-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 Z" fill="var(--orange)" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <div class="floorplan-captions">
+            <p>ved ikke, hvordan køkkenet er indrettet</p>
+            <p>tager imod, videregiver, leverer svaret</p>
+            <p>laver retten — logik og data bag kulisserne</p>
+          </div>
+          <p class="bottom-line">Kunden går aldrig ind i køkkenet — det er præcis, hvad et API skjuler for klienten.</p>
+        </section>
+
+        <section class="video-slide" data-accent="cyan">
+          <span class="eyebrow">Video · 2 min</span>
+          <h2>Restaurant-analogien, forklaret</h2>
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/s7wmiS2mSXY"
+              title="Restaurant-analogien for et API"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a class="exercise-link" href="https://www.youtube.com/watch?v=s7wmiS2mSXY" target="_blank" rel="noreferrer">Åbn på YouTube ↗</a>
+        </section>
+
+        <section id="hvad-er-rest" class="chapter" data-accent="green">
+          <span class="chapter-number">04</span>
           <span class="eyebrow">REST API</span>
           <h2>Ressourcer,<br />metoder og statuskoder</h2>
-          <p>GET, POST, PUT og DELETE møder CRUD — og statuskoder fortæller resultatet af et request.</p>
+          <p>Sådan gør REST et API konkret — ressourcer, CRUD, statuskoder og REST's Key Principles.</p>
         </section>
 
         <section class="definition-slide" data-accent="green">
-          <span class="eyebrow">Ressource</span>
+          <span class="eyebrow">REpresentational State Transfer</span>
+          <h2>En måde at bygge et API på — efter faste retningslinjer og principper</h2>
+          <div class="definition-pair">
+            <article>
+              <span>Præcis definition</span>
+              <p>Et sæt regler for, hvordan ressourcer navngives med URL'er og manipuleres med stateless HTTP-requests — REST er ikke en protokol, men en arkitektur-stil.</p>
+            </article>
+            <article>
+              <span>I praksis</span>
+              <p>Hver ressource (fx <code>/students</code>) har sin egen URL. HTTP-metoderne GET/POST/PUT/DELETE læser og ændrer den — uden at serveren husker noget mellem requests.</p>
+            </article>
+          </div>
+          <p class="bottom-line">REST er ikke noget, I installerer — det er retningslinjerne, I designer API'et efter.</p>
+        </section>
+
+        <section class="video-slide" data-accent="green">
+          <span class="eyebrow">Video · Fireship · ~100 sek</span>
+          <h2>REST APIs i 100 sekunder</h2>
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/-MTSQjw5DrM"
+              title="REST APIs i 100 sekunder"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a class="exercise-link" href="https://www.youtube.com/watch?v=-MTSQjw5DrM&ab_channel=Fireship" target="_blank" rel="noreferrer">Åbn på YouTube ↗</a>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Dagens øvelse · Del 1</span>
+          <h2>REST API-øvelse: Studerende med CRUD</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-students.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Nyt, selvstændigt projekt — <code>express.json()</code>, ingen EJS og ingen <code>express.urlencoded()</code></li>
+            <li>Byg GET, GET/:id, POST, PUT og DELETE — test hver route i Thunder Client, før du går videre</li>
+            <li><code>request.params.id</code> er en string — husk <code>Number()</code>, når den skal sammenlignes med et id</li>
+            <li>Del 2 flytter data til <code>data/students.json</code> med <code>loadStudents()</code>/<code>saveStudents()</code> — uden at ændre selve CRUD-logikken</li>
+          </ul>
+          <p class="bottom-line">I går i gang nu — vi stopper undervejs og gennemgår principperne. Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse.</p>
+        </section>
+
+        <section class="principles-slide" data-accent="green">
+          <span class="eyebrow">REST — Key Principles</span>
+          <h2>Seks principper binder det hele sammen</h2>
+          <a class="exercise-link" href="https://www.codecademy.com/article/what-is-rest-api" target="_blank" rel="noreferrer">Kilde: Codecademy ↗</a>
+          <div class="principles-grid">
+            <article><b>01</b><strong>Client-Server</strong><span>Klient og server har adskilte ansvar — klienten viser UI'et, serveren håndterer data og logik.</span></article>
+            <article><b>02</b><strong>Stateless</strong><span>Hvert request fra klienten indeholder al nødvendig information — serveren gemmer ikke klientens tilstand mellem requests.</span></article>
+            <article><b>03</b><strong>Ressourcer &amp; URI'er</strong><span>Alt er en ressource med sin egen URL, fx <code>/students</code> og <code>/students/:id</code>.</span></article>
+            <article><b>04</b><strong>CRUD via HTTP-metoder</strong><span><code>GET</code>/<code>POST</code>/<code>PUT</code>/<code>DELETE</code> mapper direkte til Read/Create/Update/Delete.</span></article>
+            <article><b>05</b><strong>Statuskoder</strong><span>Svaret fortæller altid, hvad der skete — <code>200</code>, <code>201</code>, <code>404</code>, flere kommer senere.</span></article>
+            <article><b>06</b><strong>JSON som format</strong><span>Data sendes som JSON begge veje — let at læse for både mennesker og maskiner.</span></article>
+          </div>
+          <p class="bottom-line">Lad os se nærmere på hver af dem — med eksempler fra jeres <code>/students</code>-API.</p>
+        </section>
+
+        <section class="client-server-slide" data-accent="green">
+          <span class="eyebrow">Princip 01 · Client-Server</span>
+          <h2>Klient og server kan skiftes ud uden at kende hinandens indre</h2>
+          <p class="concept-intro"><b>Client-Server:</b> adskiller klient og server, så de kan udvikle sig uafhængigt af hinanden — klienten bekymrer sig ikke om datalagring, serveren bekymrer sig ikke om brugergrænsefladen.</p>
+          <div class="client-server-flow" aria-label="Thunder Client sender et request til Express-serveren på /students, som svarer med et JSON-array">
+            <article>
+              <span>Client · Thunder Client</span>
+              <strong>Beder om /students</strong>
+              <small>ved kun, at ressourcen findes og svarer med JSON — ligeglad med om data ligger i memory eller en fil</small>
+            </article>
+            <div class="request-response">
+              <p><b>Request →</b><span>GET /students</span></p>
+              <p><b>← Response</b><span>200 · JSON-array</span></p>
+            </div>
+            <article>
+              <span>Server · jeres Express-app</span>
+              <strong>Svarer med data</strong>
+              <small>ved kun, at et request er kommet ind — ligeglad med om afsenderen er Thunder Client eller en browser</small>
+            </article>
+          </div>
+          <p class="bottom-line">Derfor kan I teste jeres API i Thunder Client, længe før der findes en rigtig frontend.</p>
+        </section>
+
+        <section class="stateless-slide" data-accent="green">
+          <span class="eyebrow">Princip 02 · Stateless</span>
+          <h2>Serveren husker intet mellem to requests</h2>
+          <p class="concept-intro"><b>Stateless:</b> hvert request fra klienten til serveren indeholder al nødvendig information — serveren gemmer ikke klientens tilstand mellem requests.</p>
+          <div class="stateless-flow" aria-label="To uafhængige requests til samme server — serveren har ingen hukommelse mellem dem">
+            <article class="stateless-card">
+              <span>Request 1</span>
+              <code>GET /students/1</code>
+              <small>Serveren slår 1 op i students-arrayet og svarer</small>
+            </article>
+            <div class="stateless-divider">
+              <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
+                <circle cx="50" cy="50" r="38" fill="none" stroke="var(--line)" stroke-width="6" />
+                <path d="M28 50 h44" stroke="var(--muted)" stroke-width="6" stroke-linecap="round" />
+                <path d="M27 27 L73 73" stroke="#ff6767" stroke-width="7" stroke-linecap="round" />
+              </svg>
+              <span>Ingen hukommelse<br />mellem requests</span>
+            </div>
+            <article class="stateless-card">
+              <span>Request 2</span>
+              <code>GET /students/2</code>
+              <small>Helt nyt, uafhængigt request — id'et skal med igen</small>
+            </article>
+          </div>
+          <p class="bottom-line">Derfor står id'et i URL'en hver gang — <code>request.params.id</code> er den eneste "hukommelse", requestet har.</p>
+        </section>
+
+        <section class="tools-check-slide" data-accent="green">
+          <span class="eyebrow">Princip 03 · Ressourcer &amp; URI'er</span>
+          <h2>En ressource er alt, der kan identificeres og tilgås via sin egen URL</h2>
+          <p class="concept-intro"><b>Ressource-baseret design:</b> i REST er alt en ressource — struktureret omkring entydigt identificerbare ressourcer, der tilgås via specifikke URL'er og kan manipuleres med HTTP-metoderne GET/POST/PUT/DELETE.</p>
+          <div class="example-grid">
+            <article>
+              <span>Jeres API</span>
+              <strong>En studerende</strong>
+              <small><code>/students/3</code> — én bestemt studerende i listen</small>
+            </article>
+            <article>
+              <span>Jeres API</span>
+              <strong>En besked</strong>
+              <small><code>/messages/12</code> — én besked i AMAbottens historik</small>
+            </article>
+            <article>
+              <span>Dataforsyningen</span>
+              <strong>En region</strong>
+              <small><code>/regioner/1082</code> — én bestemt region</small>
+            </article>
+            <article>
+              <span>GitHub</span>
+              <strong>En bruger</strong>
+              <small><code>/users/cederdorff</code> — én bestemt konto</small>
+            </article>
+          </div>
+          <p class="bottom-line">En ressource er ikke en handling — det er en <b>ting</b>, jeres API stiller til rådighed med sin egen URL.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Princip 03 · Samling vs. element</span>
           <h2>En URL identificerer én ting — eller en hel samling</h2>
           <div class="definition-pair">
             <article>
@@ -139,9 +441,48 @@
           <p class="bottom-line">Ressourcer navngives med et navneord i flertal — ikke et verbum i URL'en.</p>
         </section>
 
+        <section class="url-semantics-slide" data-accent="green">
+          <span class="eyebrow">Princip 03 · Semantisk URL</span>
+          <h2>Ressourcens sti — ikke et spørgsmålstegn eller et verbum — bærer betydningen</h2>
+          <p class="concept-intro"><b>Navneord + HTTP-metode er nok:</b> ressourcens navn i stien og metoden (<code>GET</code>/<code>POST</code>/<code>PUT</code>/<code>DELETE</code>) beskriver tilsammen operationen — det er præcis det, der gør URL'en simpel og fri for verber.</p>
+          <div class="url-pattern-columns">
+            <div class="url-pattern-column url-pattern-avoid">
+              <span class="url-pattern-heading">Undgå</span>
+              <div class="url-pattern-row">
+                <code>GET /students?id=2</code>
+                <small>Id'et gemmer sig i en query — stien fortæller ikke, at det er én bestemt studerende.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>GET /getStudent/2</code>
+                <small>Et verbum i stien — <code>GET</code> siger allerede, at det er en hentning.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>POST /createStudent</code>
+                <small>Endnu et verbum i stien — <code>POST</code> siger allerede, at det er en oprettelse.</small>
+              </div>
+            </div>
+            <div class="url-pattern-column url-pattern-correct">
+              <span class="url-pattern-heading">Korrekt</span>
+              <div class="url-pattern-row">
+                <code>GET /students/2</code>
+                <small>Stien fortæller historien selv: samlingen <code>students</code>, elementet <code>2</code>.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>DELETE /students/2</code>
+                <small>Samme sti, ny metode — <code>DELETE</code> genbruger URL'en, den ændrer den aldrig.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>POST /students</code>
+                <small>Samme regel gælder ved oprettelse: ressourcens sti, ikke et verbum.</small>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Samme ressource, samme sti — <code>GET</code>/<code>POST</code>/<code>PUT</code>/<code>DELETE</code> giver den fire forskellige betydninger. Det er næste princip.</p>
+        </section>
+
         <section class="crud-overview-slide" data-accent="green">
-          <span class="eyebrow">HTTP-metoder møder CRUD</span>
-          <h2>Fire metoder, fire operationer</h2>
+          <span class="eyebrow">Princip 04 · CRUD via HTTP-metoder</span>
+          <h2>HTTP-metoderne mapper direkte til CRUD</h2>
           <div class="crud-table">
             <div class="crud-row crud-row-get">
               <code class="crud-method">GET</code><span>Read</span><small>hent én eller flere studerende</small>
@@ -150,29 +491,37 @@
               <code class="crud-method">POST</code><span>Create</span><small>opret en ny studerende</small>
             </div>
             <div class="crud-row crud-row-put">
-              <code class="crud-method">PUT</code><span>Update</span><small>opdatér en eksisterende studerende</small>
+              <code class="crud-method">PUT</code><span>Update (fuld)</span><small>erstat hele den eksisterende studerende</small>
+            </div>
+            <div class="crud-row crud-row-patch">
+              <code class="crud-method">PATCH</code><span>Update (delvis)</span><small>opdatér kun udvalgte felter</small>
             </div>
             <div class="crud-row crud-row-delete">
               <code class="crud-method">DELETE</code><span>Delete</span><small>fjern en studerende</small>
             </div>
           </div>
-          <p class="bottom-line">CRUD er navnet på mønsteret — GET/POST/PUT/DELETE er HTTP's version af det.</p>
+          <p class="bottom-line">CRUD er navnet på mønsteret — GET/POST/PUT/PATCH/DELETE er HTTP's version af det. I øvelserne bruger vi <code>PUT</code>.</p>
         </section>
 
         <section class="status-slide" data-accent="green">
-          <span class="eyebrow">Statuskoder · genkend mønsteret fra RACE 1</span>
+          <span class="eyebrow">Princip 05 · Statuskoder (kendt fra RACE 1)</span>
           <h2>Statuskoden fortæller, hvad der skete med ressourcen</h2>
+          <a class="exercise-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank" rel="noreferrer">Alle statuskoder · MDN ↗</a>
           <div class="status-list">
             <article><strong>200</strong><span>OK</span><small>GET, PUT og DELETE lykkedes</small></article>
             <article><strong>201</strong><span>Created</span><small>POST oprettede en ny ressource</small></article>
+            <article><strong>204</strong><span>No Content</span><small>DELETE lykkedes — intet at sende tilbage</small></article>
+            <article><strong>400</strong><span>Bad Request</span><small>klientens data er ugyldige, fx et manglende felt</small></article>
             <article><strong>404</strong><span>Not Found</span><small>ingen ressource matcher det id</small></article>
+            <article><strong>500</strong><span>Server Error</span><small>noget gik galt inde i serveren selv</small></article>
           </div>
           <p class="bottom-line"><code>response.json()</code> sætter automatisk <code>200</code> — jeres egne statuskoder venter til en senere øvelse.</p>
         </section>
 
         <section class="message-slide response-message" data-accent="green">
-          <span class="eyebrow"><code>response.json()</code> sætter selv Content-Type</span>
-          <h2>Thunder Client får at vide, at svaret er JSON</h2>
+          <span class="eyebrow">Princip 06 · JSON som format</span>
+          <h2>REST API'er taler typisk JSON — læsbart for mennesker, hurtigt for maskiner</h2>
+          <p class="concept-intro"><b>JSON som format:</b> REST API'er bruger typisk JSON som dataformat for effektiv og letlæselig kommunikation mellem klient og server.</p>
           <div class="message-layout">
             <pre><code class="language-http">HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
@@ -184,7 +533,7 @@ Content-Type: application/json; charset=utf-8
             <dl>
               <div>
                 <dt>Kald</dt>
-                <dd><code>response.json(students)</code></dd>
+                <dd><code>response.json()</code></dd>
               </div>
               <div>
                 <dt>Status</dt>
@@ -200,10 +549,11 @@ Content-Type: application/json; charset=utf-8
               </div>
             </dl>
           </div>
+          <p class="bottom-line">I kan altid se det selv i Thunder Client — <code>Content-Type: application/json</code> står lige der i response-headers.</p>
         </section>
 
         <section id="json-begge-veje" class="chapter" data-accent="yellow">
-          <span class="chapter-number">04</span>
+          <span class="chapter-number">05</span>
           <span class="eyebrow"><code>express.json()</code></span>
           <h2>JSON<br />begge veje</h2>
           <p><code>express.urlencoded()</code> og <code>express.json()</code> er to måder, en request body kan være kodet på.</p>
@@ -229,11 +579,16 @@ Content-Type: application/json; charset=utf-8
           <span class="eyebrow">Registrér middlewaren først</span>
           <h2><code>express.json()</code> gør JSON-bodyen til <code>request.body</code></h2>
           <div class="code-and-result">
-            <pre><code class="language-javascript">const app = express();
+            <pre><code class="language-javascript">import express from "express";
 
+const app = express();
+
+// gør JSON-bodyen tilgængelig
+// i request.body
 app.use(express.json());</code></pre>
             <pre><code class="language-javascript">app.post("/students", (request, response) => {
   console.log(request.body);
+  // { name: "Mateo", education: "..." }
 
   response.json(request.body);
 });</code></pre>
@@ -243,25 +598,25 @@ app.use(express.json());</code></pre>
 
         <section class="status-slide" data-accent="yellow">
           <span class="eyebrow">Debugging</span>
-          <h2>Én typisk fejl — og hvor du retter den</h2>
+          <h2>Tre typiske fejl — og hvor du retter dem</h2>
           <div class="status-list">
             <article>
-              <strong>body undefined</strong><span><code>request.body</code> mangler</span
+              <strong>undefined</strong><span><code>request.body</code> mangler</span
               ><small>Kontrollér at <code>app.use(express.json())</code> står før dine routes</small>
             </article>
             <article>
-              <strong>body er tomt objekt</strong><span><code>{}</code> i stedet for data</span
+              <strong>tomt objekt</strong><span><code>{}</code> i stedet for data</span
               ><small>Tjek at Thunder Client faktisk sender en JSON-body, ikke form-data</small>
             </article>
             <article>
-              <strong>forkert Content-Type</strong><span>serveren parser ikke bodyen</span
+              <strong>forkert header</strong><span>serveren parser ikke bodyen</span
               ><small>Thunder Client skal sætte <code>Content-Type: application/json</code></small>
             </article>
           </div>
         </section>
 
         <section id="route-parameters" class="chapter" data-accent="cyan">
-          <span class="chapter-number">05</span>
+          <span class="chapter-number">06</span>
           <span class="eyebrow">Route parameters</span>
           <h2>Find én<br />bestemt ressource</h2>
           <p><code>:id</code> i stien, <code>request.params.id</code> som string, <code>.find()</code> og <code>404</code> når intet matcher.</p>
@@ -318,42 +673,6 @@ app.use(express.json());</code></pre>
           <p class="bottom-line">Findes id'et ikke, får du <code>null</code> tilbage i dag — rigtig 404-håndtering venter til en senere øvelse.</p>
         </section>
 
-        <section id="byg-api" class="chapter" data-accent="green">
-          <span class="chapter-number">06</span>
-          <span class="eyebrow">Dagens øvelse</span>
-          <h2>Byg et<br />REST API</h2>
-          <p>GET, POST, route parameters + 404 og PUT som minimum — testet i Thunder Client undervejs.</p>
-        </section>
-
-        <section class="definition-slide" data-accent="green">
-          <span class="eyebrow">Genkend mønsteret fra kapitel 03</span>
-          <h2>Fem routes — to slags URL'er</h2>
-          <div class="definition-pair">
-            <article>
-              <span><code>/students</code> · samlingen</span>
-              <p><code>GET /students</code> — alle studerende<br /><code>POST /students</code> — opret en ny studerende</p>
-            </article>
-            <article>
-              <span><code>/students/:id</code> · én bestemt</span>
-              <p><code>GET /students/:id</code> — én studerende<br /><code>PUT /students/:id</code> — opdatér<br /><code>DELETE /students/:id</code> — slet</p>
-            </article>
-          </div>
-          <p class="bottom-line">Test hver route for sig i Thunder Client, i den rækkefølge, du bygger dem.</p>
-        </section>
-
-        <section class="activity-slide" data-accent="green">
-          <span class="eyebrow">Dagens øvelse · Del 1</span>
-          <h2>REST API-øvelse: Studerende med CRUD</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-students.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
-          <ul class="checklist">
-            <li>Nyt, selvstændigt projekt — <code>express.json()</code>, ingen EJS og ingen <code>express.urlencoded()</code></li>
-            <li>Byg GET, GET/:id, POST og PUT — test hver route i Thunder Client, før du går videre</li>
-            <li><code>request.params.id</code> er en string — husk <code>Number()</code>, når den skal sammenlignes med et id</li>
-            <li>Del 2 flytter data til <code>data/students.json</code> med <code>loadStudents()</code>/<code>saveStudents()</code> — uden at ændre selve CRUD-logikken</li>
-          </ul>
-          <p class="bottom-line">Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse — i dag er fokus selve CRUD-mønsteret.</p>
-        </section>
-
         <section class="materials-slide">
           <span class="eyebrow">Arbejd videre</span>
           <h2>Opslagsværker og øvelser</h2>
@@ -366,6 +685,15 @@ app.use(express.json());</code></pre>
             >
             <a href="https://developer.mozilla.org/en-US/docs/Glossary/REST" target="_blank" rel="noreferrer"
               ><strong>REST</strong><span>MDN ↗</span></a
+            >
+            <a href="https://www.codecademy.com/article/what-is-rest-api" target="_blank" rel="noreferrer"
+              ><strong>REST — Key Principles</strong><span>Codecademy ↗</span></a
+            >
+            <a href="https://www.youtube.com/watch?v=WRsKs-K6iII" target="_blank" rel="noreferrer"
+              ><strong>REST API Explained (2 min)</strong><span>YouTube ↗</span></a
+            >
+            <a href="https://dataforsyningen.dk/data" target="_blank" rel="noreferrer"
+              ><strong>Dataforsyningen · en rigtig dansk REST API</strong><span>dataforsyningen.dk ↗</span></a
             >
             <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-students.md" target="_blank" rel="noreferrer"
               ><strong>REST API-øvelse · Studerende med CRUD</strong><span>GitHub ↗</span></a

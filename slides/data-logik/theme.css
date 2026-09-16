@@ -59,13 +59,13 @@
 
 .client-server-flow article {
   padding: 28px 30px;
-  border-block: 2px solid var(--orange);
+  border-block: 2px solid var(--accent);
 }
 
 .client-server-flow article > span {
   display: block;
   margin-bottom: 10px;
-  color: var(--orange);
+  color: var(--accent);
   font-size: 18px;
   font-weight: 850;
   letter-spacing: 0.1em;
@@ -101,7 +101,7 @@
 }
 
 .request-response b {
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .request-response span {

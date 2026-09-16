@@ -2258,13 +2258,13 @@ body {
 }
 .recap-chain span {
   padding: 20px 24px;
-  border: 1px solid var(--green);
-  background: rgb(104 211 145 / 8%);
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
   font-size: 23px;
   font-weight: 750;
 }
 .recap-chain b {
-  color: var(--green);
+  color: var(--accent);
 }
 .recap-questions {
   display: grid;
@@ -2274,7 +2274,7 @@ body {
 }
 .recap-questions p {
   padding: 18px 22px;
-  border-left: 4px solid var(--green);
+  border-left: 4px solid var(--accent);
   background: var(--soft);
   color: var(--muted);
   font-size: 22px;
