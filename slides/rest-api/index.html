@@ -60,11 +60,146 @@
           <p>Samme request/response-model og samme routing-tankegang — bare et andet "produkt" i selve svaret.</p>
         </section>
 
+        <section class="definition-slide" data-accent="cyan">
+          <span class="eyebrow">To måder at svare på en request</span>
+          <h2>Samme server — helt forskelligt "produkt" i svaret</h2>
+          <div class="definition-pair">
+            <article>
+              <span>SSR · kendt fra RACE 2</span>
+              <p><code>response.render()</code> kombinerer data og en EJS-template til et færdigt HTML-dokument. Browseren viser det med det samme.</p>
+            </article>
+            <article>
+              <span>REST API · i dag</span>
+              <p><code>response.json()</code> sender rene data — intet HTML, ingen visning involveret. Det er op til klienten selv at vise dem.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Samme request/response-model, samme routing-tankegang — bare et andet svar.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">Samme data — to slags svar</span>
+          <h2><code>response.render()</code> vs. <code>response.json()</code></h2>
+          <div class="code-and-result">
+            <pre><code class="language-javascript">app.get("/", (request, response) => {
+  response.render("index", {
+    messages
+  });
+});</code></pre>
+            <pre><code class="language-javascript">app.get("/messages", (request, response) => {
+  response.json(messages);
+});</code></pre>
+          </div>
+          <p class="bottom-line">Ingen EJS, ingen <code>views</code>-mappe — <code>messages</code> sendes direkte som JSON.</p>
+        </section>
+
+        <section class="tradeoff-slide" data-accent="cyan">
+          <span class="eyebrow">Hvorfor skifter vi?</span>
+          <h2>En klient, der selv kører JavaScript, har brug for data — ikke en hel side</h2>
+          <div class="two-sides">
+            <article>
+              <h3>SSR · det I kender</h3>
+              <ul>
+                <li>Serveren bestemmer hele visningen</li>
+                <li>Et helt nyt HTML-dokument for hvert request</li>
+                <li>Fint, når browseren bare skal vise siden</li>
+              </ul>
+            </article>
+            <article>
+              <h3>REST API · det I bygger nu</h3>
+              <ul>
+                <li>Serveren sender kun data</li>
+                <li><code>fetch()</code> i browseren beder selv om data og bygger UI'et</li>
+                <li>Forberedelse til DOB 5: <code>fetch()</code> og async JavaScript</li>
+              </ul>
+            </article>
+          </div>
+          <p class="bottom-line">Samme AMAbot, samme svarlogik — men senere uden EJS, drevet af <code>fetch()</code> i stedet.</p>
+        </section>
+
         <section id="hvad-er-rest" class="chapter" data-accent="green">
           <span class="chapter-number">03</span>
           <span class="eyebrow">REST API</span>
           <h2>Ressourcer,<br />metoder og statuskoder</h2>
           <p>GET, POST, PUT og DELETE møder CRUD — og statuskoder fortæller resultatet af et request.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Ressource</span>
+          <h2>En URL identificerer én ting — eller en hel samling</h2>
+          <div class="definition-pair">
+            <article>
+              <span>Samlingen</span>
+              <p><code>/students</code> — hele listen af studerende. <code>GET</code> og <code>POST</code> arbejder her, uden id i URL'en.</p>
+            </article>
+            <article>
+              <span>Én bestemt ressource</span>
+              <p><code>/students/:id</code> — samlingens URL plus dens id. <code>GET</code>, <code>PUT</code> og <code>DELETE</code> på én bestemt studerende bruger denne form.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Ressourcer navngives med et navneord i flertal — ikke et verbum i URL'en.</p>
+        </section>
+
+        <section class="crud-overview-slide" data-accent="green">
+          <span class="eyebrow">HTTP-metoder møder CRUD</span>
+          <h2>Fire metoder, fire operationer</h2>
+          <div class="crud-table">
+            <div class="crud-row crud-row-get">
+              <code class="crud-method">GET</code><span>Read</span><small>hent én eller flere studerende</small>
+            </div>
+            <div class="crud-row crud-row-post">
+              <code class="crud-method">POST</code><span>Create</span><small>opret en ny studerende</small>
+            </div>
+            <div class="crud-row crud-row-put">
+              <code class="crud-method">PUT</code><span>Update</span><small>opdatér en eksisterende studerende</small>
+            </div>
+            <div class="crud-row crud-row-delete">
+              <code class="crud-method">DELETE</code><span>Delete</span><small>fjern en studerende</small>
+            </div>
+          </div>
+          <p class="bottom-line">CRUD er navnet på mønsteret — GET/POST/PUT/DELETE er HTTP's version af det.</p>
+        </section>
+
+        <section class="status-slide" data-accent="green">
+          <span class="eyebrow">Statuskoder · genkend mønsteret fra RACE 1</span>
+          <h2>Statuskoden fortæller, hvad der skete med ressourcen</h2>
+          <div class="status-list">
+            <article><strong>200</strong><span>OK</span><small>GET, PUT og DELETE lykkedes</small></article>
+            <article><strong>201</strong><span>Created</span><small>POST oprettede en ny ressource</small></article>
+            <article><strong>404</strong><span>Not Found</span><small>ingen ressource matcher det id</small></article>
+          </div>
+          <p class="bottom-line"><code>response.json()</code> sætter automatisk <code>200</code> — jeres egne statuskoder venter til en senere øvelse.</p>
+        </section>
+
+        <section class="message-slide response-message" data-accent="green">
+          <span class="eyebrow"><code>response.json()</code> sætter selv Content-Type</span>
+          <h2>Thunder Client får at vide, at svaret er JSON</h2>
+          <div class="message-layout">
+            <pre><code class="language-http">HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+[
+  { "id": 1, "name": "Aisha", "education": "Multimediedesign" },
+  { "id": 2, "name": "Noah", "education": "Datamatiker" }
+]</code></pre>
+            <dl>
+              <div>
+                <dt>Kald</dt>
+                <dd><code>response.json(students)</code></dd>
+              </div>
+              <div>
+                <dt>Status</dt>
+                <dd>200 (sat automatisk)</dd>
+              </div>
+              <div>
+                <dt>Content-Type</dt>
+                <dd>application/json</dd>
+              </div>
+              <div>
+                <dt>Body</dt>
+                <dd>arrayet, skrevet som JSON-tekst</dd>
+              </div>
+            </dl>
+          </div>
         </section>
 
         <section id="json-begge-veje" class="chapter" data-accent="yellow">
@@ -74,6 +209,57 @@
           <p><code>express.urlencoded()</code> og <code>express.json()</code> er to måder, en request body kan være kodet på.</p>
         </section>
 
+        <section class="definition-slide" data-accent="yellow">
+          <span class="eyebrow">To måder en request body kan være kodet på</span>
+          <h2>Samme <code>request.body</code> — forskellig middleware</h2>
+          <div class="definition-pair">
+            <article>
+              <span><code>express.urlencoded()</code> · kendt fra RACE 2</span>
+              <p>Forstår data fra en HTML-formular: <code>name=Aisha&amp;education=...</code></p>
+            </article>
+            <article>
+              <span><code>express.json()</code> · nyt i dag</span>
+              <p>Forstår en JSON-body: <code>{ "name": "Aisha" }</code> — det Thunder Client og senere <code>fetch()</code> sender.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Uden den rigtige middleware er <code>request.body</code> <code>undefined</code> — uanset hvad klienten sender.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="yellow">
+          <span class="eyebrow">Registrér middlewaren først</span>
+          <h2><code>express.json()</code> gør JSON-bodyen til <code>request.body</code></h2>
+          <div class="code-and-result">
+            <pre><code class="language-javascript">const app = express();
+
+app.use(express.json());</code></pre>
+            <pre><code class="language-javascript">app.post("/students", (request, response) => {
+  console.log(request.body);
+
+  response.json(request.body);
+});</code></pre>
+          </div>
+          <p class="bottom-line">Ligesom <code>express.urlencoded()</code> skal den registreres <b>før</b> de routes, der bruger <code>request.body</code>.</p>
+        </section>
+
+        <section class="status-slide" data-accent="yellow">
+          <span class="eyebrow">Debugging</span>
+          <h2>Én typisk fejl — og hvor du retter den</h2>
+          <div class="status-list">
+            <article>
+              <strong>body undefined</strong><span><code>request.body</code> mangler</span
+              ><small>Kontrollér at <code>app.use(express.json())</code> står før dine routes</small>
+            </article>
+            <article>
+              <strong>body er tomt objekt</strong><span><code>{}</code> i stedet for data</span
+              ><small>Tjek at Thunder Client faktisk sender en JSON-body, ikke form-data</small>
+            </article>
+            <article>
+              <strong>forkert Content-Type</strong><span>serveren parser ikke bodyen</span
+              ><small>Thunder Client skal sætte <code>Content-Type: application/json</code></small>
+            </article>
+          </div>
+        </section>
+
         <section id="route-parameters" class="chapter" data-accent="cyan">
           <span class="chapter-number">05</span>
           <span class="eyebrow">Route parameters</span>
@@ -81,11 +267,113 @@
           <p><code>:id</code> i stien, <code>request.params.id</code> som string, <code>.find()</code> og <code>404</code> når intet matcher.</p>
         </section>
 
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">:id i stien</span>
+          <h2><code>request.params.id</code> er altid en string</h2>
+          <div class="code-and-result">
+            <pre><code class="language-javascript">app.get("/students/:id", (request, response) => {
+  console.log(
+    request.params.id,
+    typeof request.params.id
+  );
+
+  response.send();
+});</code></pre>
+            <pre><code class="language-text">GET /students/2
+
+2 string</code></pre>
+          </div>
+          <p class="bottom-line">Selvom id'et ligner et tal i URL'en, er <code>request.params.id</code> altid en string.</p>
+        </section>
+
+        <section class="normalize-slide" data-accent="cyan">
+          <span class="eyebrow"><code>Number()</code> før sammenligning</span>
+          <h2>En string kan ikke være strict-equal med et tal</h2>
+          <div class="normalize-flow">
+            <article><span>Fra URL'en</span><code>request.params.id // "2"</code></article>
+            <i>→</i>
+            <article><span><code>Number()</code></span><code>Number(request.params.id) // 2</code></article>
+            <i>→</i>
+            <article><span><code>.find()</code></span><code>student.id === 2 // true</code></article>
+          </div>
+          <div class="method-facts">
+            <p><code>Number()</code><span>konverterer en string til et tal — eller <code>NaN</code>, hvis det ikke lykkes</span></p>
+            <p><code>===</code><span>sammenligner både værdi og type — <code>"2" === 2</code> er <code>false</code></span></p>
+          </div>
+          <pre class="recap-code"><code class="language-javascript">const student = students.find(
+  (student) => student.id === Number(request.params.id)
+);</code></pre>
+        </section>
+
+        <section class="build-preview" data-accent="cyan">
+          <span class="eyebrow">Find én bestemt ressource</span>
+          <h2>Fra URL til ét bestemt objekt</h2>
+          <div class="build-stages" aria-label="GET /students/:id finder én studerende og returnerer den som JSON">
+            <article><b>01</b><span>URL</span><strong><code>/students/2</code></strong><code>:id i stien</code></article>
+            <div class="stage-arrow"><i>→</i><small><code>request.params.id</code></small></div>
+            <article><b>02</b><span>Konvertér</span><strong><code>Number()</code></strong><code>string → tal</code></article>
+            <div class="stage-arrow"><i>→</i><small><code>.find()</code></small></div>
+            <article><b>03</b><span>Svar</span><strong><code>response.json(student)</code></strong><code>ét objekt, ikke et array</code></article>
+          </div>
+          <p class="bottom-line">Findes id'et ikke, får du <code>null</code> tilbage i dag — rigtig 404-håndtering venter til en senere øvelse.</p>
+        </section>
+
         <section id="byg-api" class="chapter" data-accent="green">
           <span class="chapter-number">06</span>
           <span class="eyebrow">Dagens øvelse</span>
           <h2>Byg et<br />REST API</h2>
           <p>GET, POST, route parameters + 404 og PUT som minimum — testet i Thunder Client undervejs.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Genkend mønsteret fra kapitel 03</span>
+          <h2>Fem routes — to slags URL'er</h2>
+          <div class="definition-pair">
+            <article>
+              <span><code>/students</code> · samlingen</span>
+              <p><code>GET /students</code> — alle studerende<br /><code>POST /students</code> — opret en ny studerende</p>
+            </article>
+            <article>
+              <span><code>/students/:id</code> · én bestemt</span>
+              <p><code>GET /students/:id</code> — én studerende<br /><code>PUT /students/:id</code> — opdatér<br /><code>DELETE /students/:id</code> — slet</p>
+            </article>
+          </div>
+          <p class="bottom-line">Test hver route for sig i Thunder Client, i den rækkefølge, du bygger dem.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Dagens øvelse · Del 1</span>
+          <h2>REST API-øvelse: Studerende med CRUD</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-students.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Nyt, selvstændigt projekt — <code>express.json()</code>, ingen EJS og ingen <code>express.urlencoded()</code></li>
+            <li>Byg GET, GET/:id, POST og PUT — test hver route i Thunder Client, før du går videre</li>
+            <li><code>request.params.id</code> er en string — husk <code>Number()</code>, når den skal sammenlignes med et id</li>
+            <li>Del 2 flytter data til <code>data/students.json</code> med <code>loadStudents()</code>/<code>saveStudents()</code> — uden at ændre selve CRUD-logikken</li>
+          </ul>
+          <p class="bottom-line">Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse — i dag er fokus selve CRUD-mønsteret.</p>
+        </section>
+
+        <section class="materials-slide">
+          <span class="eyebrow">Arbejd videre</span>
+          <h2>Opslagsværker og øvelser</h2>
+          <div class="material-links">
+            <a href="https://expressjs.com/en/5x/api/response/" target="_blank" rel="noreferrer"
+              ><strong>Response object</strong><span>Express.js ↗</span></a
+            >
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank" rel="noreferrer"
+              ><strong>HTTP response status codes</strong><span>MDN ↗</span></a
+            >
+            <a href="https://developer.mozilla.org/en-US/docs/Glossary/REST" target="_blank" rel="noreferrer"
+              ><strong>REST</strong><span>MDN ↗</span></a
+            >
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-students.md" target="_blank" rel="noreferrer"
+              ><strong>REST API-øvelse · Studerende med CRUD</strong><span>GitHub ↗</span></a
+            >
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot.md" target="_blank" rel="noreferrer"
+              ><strong>Øvelse 6 · AMAbotten som REST API</strong><span>GitHub ↗</span></a
+            >
+          </div>
         </section>
 
       </div>

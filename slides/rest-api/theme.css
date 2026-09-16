@@ -1,3 +1,66 @@
 @import "../persistens-json/theme.css";
 
 /* RACE 5 deck additions */
+
+/* CRUD overview: HTTP method meets CRUD verb */
+.crud-table {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 75px;
+}
+.crud-row {
+  display: grid;
+  grid-template-columns: 170px 190px 1fr;
+  align-items: center;
+  gap: 30px;
+  padding: 26px 34px;
+  border-left: 6px solid var(--line);
+  background: var(--soft);
+}
+.crud-method {
+  justify-self: start;
+  padding: 10px 24px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+.crud-row span {
+  font-size: 30px;
+  font-weight: 700;
+}
+.crud-row small {
+  color: var(--muted);
+  font-size: 21px;
+}
+.crud-row-get {
+  border-left-color: var(--cyan);
+}
+.crud-row-get .crud-method {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+.crud-row-post {
+  border-left-color: var(--green);
+}
+.crud-row-post .crud-method {
+  color: var(--green);
+  border-color: var(--green);
+}
+.crud-row-put {
+  border-left-color: var(--yellow);
+}
+.crud-row-put .crud-method {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
+.crud-row-delete {
+  border-left-color: #ff6767;
+}
+.crud-row-delete .crud-method {
+  color: #ff6767;
+  border-color: #ff6767;
+}
