@@ -4,7 +4,7 @@
 
 ## Dagens fokus
 
-Sidste gang byggede I jeres første REST API, men samlet i én `server.js`. I dag skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret: vi deler backenden op i lag — routes, controllers, data — med Express' `Router`, ser på REST best practices for navngivning og konsistente responses, og tilføjer filtrering, sortering og paginering via query parameters.
+Sidste gang byggede I jeres første REST API, men samlet i én `server.js`. I dag mærker I selv, hvor hurtigt det vokser sig uoverskueligt — I udvider jeres students-API med et tilsvarende sæt endpoints for teachers, i samme fil. Derefter skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret: vi deler `server.js` op med Express' `Router`, flytter data-adgangen videre til sit eget data-modul, ser på REST best practices for navngivning og konsistente responses, tilføjer filtrering, sortering og paginering via query parameters, og kigger kort (og frivilligt) videre på endnu et lag med controllers.
 
 Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
@@ -22,46 +22,57 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 - Kort opsamling i plenum: hvor er grupperne enige/uenige?
 </details>
 <details>
-<summary><strong>2. Problemet: når server.js vokser</strong></summary>
+<summary><strong>2. Hands-on: Udvid jeres students-API med et teachers-API</strong></summary>
 
+- Tilføj samme CRUD-mønster for en ny ressource `/teachers` i jeres eksisterende `server.js` — `GET`, `GET/:id`, `POST`, `PUT`, `DELETE`, kopiér mønstret fra `/students`
+- Samme tilgang som students del 1: et array i memory, ingen statuskoder eller fejlhåndtering endnu
+- Mål: mærk selv hvor stort og uoverskueligt `server.js` bliver med to ressourcer i samme fil
+</details>
+<details>
+<summary><strong>3. Problemet: hvad skete der i jeres server.js?</strong></summary>
+
+- Kort fælles refleksion: hvad blev svært, da I tilføjede teachers oveni students?
 - Routes, forretningslogik og data blandet sammen i én fil
 - Svært at finde rundt i, svært at genbruge og svært at teste isoleret
 - Motivation: samme problem som at proppe al JavaScript ind i én kæmpe funktion
 </details>
 <details>
-<summary><strong>3. Layered Architecture: routes, controllers og data</strong></summary>
-
-- Ansvarsfordeling: routes (HTTP ind/ud) → controllers (logik) → data-adgang (fx en JSON-fil, senere en database)
-- Hver fil/modul har ét ansvar — genkend mønstret fra `loadMessages()`/`saveMessages()`
-- Et lille eksempel på mappestruktur med `routes/`, `controllers/` og `data/`
-</details>
-<details>
-<summary><strong>4. Express Router: en separat routes-fil</strong></summary>
+<summary><strong>4. Express Router og data-modul: opdel i separate filer</strong></summary>
 
 - `express.Router()` som en selvstændig "mini-app" for én ressource
-- Montér en router på hoved-appen: `app.use("/messages", messagesRouter)`
-- Routen kalder en controller-funktion; selve logikken bor i controlleren, ikke i routen
+- Montér en router på hoved-appen: `app.use("/students", studentsRouter)` og `app.use("/teachers", teachersRouter)`
+- `loadStudents()`/`saveStudents()` (og teachers-varianterne) hører ikke hjemme i en routes-fil — en route skal håndtere HTTP ind/ud, ikke filsystemet — så de flytter videre til deres eget data-modul (`data/students.js`, `data/teachers.js`)
+- Hands-on: flyt jeres students- og teachers-routes over i hver sin fil i en `routes/`-mappe, og flyt derfra data-adgangen videre til et `data/`-modul
 </details>
 <details>
 <summary><strong>5. REST best practices: navngivning og konsistens</strong></summary>
 
-- Ressourcer er substantiver, ikke verber: `/messages`, ikke `/getMessages`
-- Flertal for collections: `/users`, `/users/:id`
-- Konsistent respons-format og statuskoder på tværs af hele API'et
+- Ressourcer er substantiver, ikke verber: `/teachers`, ikke `/getTeachers`
+- Flertal for collections: `/students`, `/students/:id`
+- Konsistent respons-format og statuskoder på tværs af `/students` og `/teachers`
 </details>
 <details>
 <summary><strong>6. Filtrering, sortering & paginering med query parameters</strong></summary>
 
-- `request.query` til at læse fx `?sender=user`
+- `request.query` til at læse fx `?education=Datamatiker`
 - Filtrering: brug `.filter()` på data ud fra en eller flere query parametre
 - Sortering: `?sort=...` — hvilken property skal der sorteres på?
 - Paginering: `?page=` og `?limit=` — hvorfor er det nødvendigt, når data-mængden vokser?
+- Hands-on: tilføj filtrering, sortering og/eller paginering til én af jeres GET-routes
 </details>
 <details>
-<summary><strong>7. Hands-on: Omstrukturér og udbyg jeres REST API</strong></summary>
+<summary><strong>7. Et kig videre: controllers (frivilligt)</strong></summary>
 
-- Opdel jeres eksisterende routes i routes/controllers efter dagens mønster
-- Tilføj filtrering, sortering og/eller paginering til én af jeres GET-routes
+- Når en routes-fil selv får rigtig logik (som filtreringen ovenfor), kan I trække den ud i en controller-funktion — routen kalder bare controlleren
+- Kort demo af mappestruktur med `routes/`, `data/` og `controllers/` — I skal ikke nå at bygge det i dag, men vide hvornår det giver mening
+- Frivilligt stretch: dem der er færdige, kan prøve at trække en controller ud for students eller teachers
+</details>
+<details>
+<summary><strong>8. Hands-on: Fortsæt udbygning af jeres REST API</strong></summary>
+
+- Sørg for at students og teachers begge ligger i egne routes-filer, med data-adgang i et data-modul
+- Tilføj filtrering, sortering og/eller paginering, hvis I ikke nåede det under punkt 6
+- Frivilligt: prøv at trække en controller ud, jf. punkt 7
 - Test undervejs i Thunder Client med forskellige query parametre
 </details>
 
@@ -82,7 +93,7 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 ## Materialer
 
 - Slides: TBA
-- Opgaver: TBA
+- Opgaver: [REST API-øvelse: Arkitektur — routes, data og controllers](../opgaver/express-rest-api-arkitektur.md)
 
 ---
 
