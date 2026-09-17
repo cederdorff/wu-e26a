@@ -413,36 +413,97 @@ I modsætning til `/messages` giver `/answers` god mening at give fuld CRUD: en 
 
 > **Nyt: identifikatoren er ikke et tal.** I `/students` og REST API-øvelsen brugte du et numerisk `id`, genereret af serveren med `Date.now()`. Her har hver regel allerede en unik `category` (fra øvelse 4), fx `"navn"` eller `"bosted"` — så du bruger den direkte som identifikator i URL'en, i stedet for at opfinde et nyt id. En REST-ressource kan identificeres af hvilket som helst unikt felt, ikke kun et autogenereret tal. Det betyder også, at du **ikke** skal bruge `Number()` her — `category` er en string i begge ender af sammenligningen.
 
-Denne del holdes i memory, ligesom Del 1 i REST API-øvelsen med studerende — ændringer forsvinder ved en genstart. Det kan I rette i en senere øvelse, med samme mønster som `loadMessages()`/`saveMessages()`.
+Del 3 starter med at gøre `answers` til en fil på disken — samme mønster som `messages` fik i øvelse 5. Sådan starter alle fra samme sted i resten af Del 3, uanset om `answers` lige nu er en almindelig array i `server.js`, eller om du allerede har flyttet den til sit eget modul (ekstraopgave 13 fra øvelse 4).
 
-**Har du lavet ekstraopgave 13 fra øvelse 4 (flyttet `answers` til sit eget modul, `data/answers.js`)?** Så skal `answers` konverteres fra et JavaScript-modul til almindelig data, ligesom `messages` allerede er det. Omdøb filen til `data/answers.json`, fjern `export const answers =`, og behold kun selve arrayet — som gyldig JSON, altså med dobbelte anførselstegn og ingen kommentarer. Fjern derefter `import { answers } from "./data/answers.js"` i `server.js`, og tilføj i stedet, øverst i filen — under din eksisterende `import fs from "node:fs/promises";` fra øvelse 5, ikke som en ny kopi af den:
+### 11. Gør answers til en JSON-fil
 
-```js
-let answers = JSON.parse(await fs.readFile("./data/answers.json", "utf8"));
+Opret filen `data/answers.json`, og skriv dine nuværende svarregler ind som et JSON-array — nøjagtig den samme struktur, du allerede har, men som gyldig JSON (dobbelte anførselstegn, ingen kommentarer, intet afsluttende komma):
+
+```json
+[
+  {
+    "category": "hilsen",
+    "keywords": ["hej", "hallo", "hello", "hey"],
+    "answer": "Hej! Hvad vil du gerne vide om mig?"
+  }
+]
 ```
 
-> Grunden: en importeret binding (`import { answers } from ...`) kan du kun mutere — `push()`, ændre en regels felter — ikke gentildele. `DELETE /answers/:category` i trin 16 gentildeler selve `answers` med `filter()`, og det kræver, at `answers` er en almindelig `let`-variabel i `server.js`, ikke en importeret `const`. Læg mærke til `await` uden for en `async`-funktion — det kaldes top-level await, og virker øverst i en fil, fordi `"type": "module"` i din `package.json` allerede gør `server.js` til et JavaScript-modul. Bemærk desuden, at denne linje kun læser filen én gang, når serveren starter — ikke ved hvert request, som `loadMessages()` gør. Det er samtidig et fint forspring til den senere øvelse, hvor `/answers` får sin egen persistens med `loadAnswers()`/`saveAnswers()`, i samme mønster som `messages`.
+> Har du `let answers = [...]` direkte i `server.js`? Kopiér indholdet over i `data/answers.json`, og slet variablen fra `server.js` bagefter.
+>
+> **Har du lavet ekstraopgave 13 fra øvelse 4** (flyttet `answers` til sit eget modul, `data/answers.js`)? Så omdøber du i stedet filen til `data/answers.json`, fjerner `export const answers =`, og beholder kun selve arrayet. Fjern derefter `import { answers } from "./data/answers.js"` i `server.js`.
+>
+> **Har du lavet ekstraopgave 17 fra øvelse 3** (flere svarmuligheder)? Så hedder feltet `answers` (et array), ikke `answer` (en string), i alle dine regler. Koden i resten af Del 3 bruger `answer` — skriv `request.body.answers`/`answerRule.answers` i stedet, konsekvent gennem hele Del 3, hvis det er dit feltnavn.
 
-> **Har du lavet ekstraopgave 17 fra øvelse 3 (flere svarmuligheder)?** Så hedder feltet `answers` (et array), ikke `answer` (en string), i alle dine regler. Koden herunder bruger `answer` — skriv `request.body.answers`/`answerRule.answers` i stedet, konsekvent gennem hele Del 3, hvis det er dit feltnavn. De to felter fungerer ens i denne del; det er kun navnet, der skal matche din egen `findBestAnswer()`.
+#### Test trin 11
 
-### 11. GET /answers: alle regler
+Åbn `data/answers.json`, og bekræft at den indeholder et gyldigt JSON-array med alle dine regler. `JSON.parse()` i næste trin fejler, hvis filen er tom eller har en syntaksfejl.
+
+---
+
+### 12. Skriv loadAnswers() og saveAnswers()
+
+Samme mønster som `loadMessages()`/`saveMessages()` fra øvelse 5 — placer dem samme sted i filen:
 
 ```js
-app.get("/answers", (request, response) => {
+async function loadAnswers() {
+  // TODO: Læs data/answers.json med fs.readFile() ("utf8").
+  // TODO: Parse JSON-teksten til et array, og returnér det.
+}
+
+async function saveAnswers(answers) {
+  // TODO: Omdan answers til formateret JSON-tekst med JSON.stringify().
+  // TODO: Skriv teksten til data/answers.json med fs.writeFile().
+}
+```
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```js
+async function loadAnswers() {
+  const data = await fs.readFile("./data/answers.json", "utf8");
+  return JSON.parse(data);
+}
+
+async function saveAnswers(answers) {
+  const json = JSON.stringify(answers, null, 2);
+  await fs.writeFile("./data/answers.json", json);
+}
+```
+
+</details>
+
+> `findBestAnswer()` skal fremover have `answers` som parameter, fx `findBestAnswer(question, answers)`, i stedet for at læse en variabel uden for sig selv. Det gælder også `POST /messages` i Del 2: tilføj `const answers = await loadAnswers();`, før du kalder `findBestAnswer()`, ligesom du allerede henter `messages` med `loadMessages()` i toppen af routen.
+
+#### Test trin 12
+
+Ingen synlig ændring endnu — serveren skal stadig starte uden fejl. Fejler den, mangler du sandsynligvis at fjerne den gamle `answers`-variabel eller -import et sted.
+
+---
+
+### 13. GET /answers: alle regler
+
+```js
+app.get("/answers", async (request, response) => {
+  const answers = await loadAnswers();
+
   response.json(answers);
 });
 ```
 
-#### Test trin 11
+#### Test trin 13
 
 Send `GET http://localhost:3000/answers`. Du skal se dine egne svarregler som JSON, med `category`, `keywords` og dit svar-felt.
 
 ---
 
-### 12. GET /answers/:category: find én regel
+### 14. GET /answers/:category: find én regel
 
 ```js
-app.get("/answers/:category", (request, response) => {
+app.get("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
+
   // TODO: Find reglen i answers, hvor category matcher request.params.category.
   // Denne gang skal du IKKE bruge Number() — begge sider er allerede strings.
 
@@ -464,7 +525,8 @@ response.json(answerRule)
 <summary>Se løsningsforslag</summary>
 
 ```js
-app.get("/answers/:category", (request, response) => {
+app.get("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
   const answerRule = answers.find((a) => a.category === request.params.category);
 
   response.json(answerRule);
@@ -473,21 +535,23 @@ app.get("/answers/:category", (request, response) => {
 
 </details>
 
-#### Test trin 12
+#### Test trin 14
 
 Send `GET /answers/navn` (eller en af dine egne kategorier). Du skal få den rigtige regel. Prøv også en kategori, der ikke findes — du skal få `null`, ligesom med et ukendt id i studerende-øvelsen.
 
 ---
 
-### 13. POST /answers: opret en ny regel
+### 15. POST /answers: opret en ny regel
 
 Denne gang genererer serveren ikke selv en identifikator — klienten sender `category` med i body'en, fordi det giver mening at vælge et meningsfuldt navn til en ny regel, i stedet for et tilfældigt tal:
 
 ```js
-app.post("/answers", (request, response) => {
+app.post("/answers", async (request, response) => {
+  const answers = await loadAnswers();
+
   // TODO: Opret et nyt regel-objekt ud fra request.body.category, request.body.keywords og request.body.answer.
 
-  // TODO: Tilføj den til answers med push().
+  // TODO: Tilføj den til answers med push(), og gem den opdaterede liste med saveAnswers(answers).
 
   // TODO: Send den nye regel som JSON.
 });
@@ -499,6 +563,7 @@ app.post("/answers", (request, response) => {
 ```text
 newAnswerRule = { category: ..., keywords: ..., answer: ... }
 answers.push(newAnswerRule)
+await saveAnswers(answers)
 response.json(newAnswerRule)
 ```
 
@@ -508,7 +573,8 @@ response.json(newAnswerRule)
 <summary>Se løsningsforslag</summary>
 
 ```js
-app.post("/answers", (request, response) => {
+app.post("/answers", async (request, response) => {
+  const answers = await loadAnswers();
   const newAnswerRule = {
     category: request.body.category,
     keywords: request.body.keywords,
@@ -516,6 +582,7 @@ app.post("/answers", (request, response) => {
   };
 
   answers.push(newAnswerRule);
+  await saveAnswers(answers);
 
   response.json(newAnswerRule);
 });
@@ -523,7 +590,7 @@ app.post("/answers", (request, response) => {
 
 </details>
 
-#### Test trin 13
+#### Test trin 15
 
 Send i Thunder Client:
 
@@ -541,12 +608,14 @@ Bekræft med `GET /answers`, at den nye regel er der. Test derefter, at den rent
 
 ---
 
-### 14. PUT /answers/:category: find reglen
+### 16. PUT /answers/:category: find reglen
 
 PUT bygges i to trin, ligesom i studerende-øvelsen. Start med kun at finde reglen — uden at ændre noget endnu:
 
 ```js
-app.put("/answers/:category", (request, response) => {
+app.put("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
+
   // TODO: Find reglen, ligesom i GET /answers/:category.
 
   // TODO: Send den fundne regel som JSON — uændret, indtil videre.
@@ -560,23 +629,24 @@ Genbrug præcis samme kode som i GET /answers/:category.
 
 </details>
 
-#### Test trin 14
+#### Test trin 16
 
 Send `PUT /answers/mad` (eller en af dine egne kategorier), uden body. Du skal få reglen tilbage, uændret.
 
 ---
 
-### 15. PUT /answers/:category: opdater reglen
+### 17. PUT /answers/:category: opdater reglen
 
-Byg videre på routen fra trin 14:
+Byg videre på routen fra trin 16:
 
 ```js
-app.put("/answers/:category", (request, response) => {
+app.put("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
   const answerRule = answers.find((a) => a.category === request.params.category);
 
   // TODO: Opdater answerRule.keywords og answerRule.answer med værdierne fra request.body.
 
-  // TODO: Send den opdaterede regel som JSON.
+  // TODO: Gem den opdaterede liste med saveAnswers(answers), og send answerRule som JSON.
 });
 ```
 
@@ -586,6 +656,7 @@ app.put("/answers/:category", (request, response) => {
 ```text
 answerRule.keywords = request.body.keywords
 answerRule.answer = request.body.answer
+await saveAnswers(answers)
 response.json(answerRule)
 ```
 
@@ -595,11 +666,13 @@ response.json(answerRule)
 <summary>Se løsningsforslag</summary>
 
 ```js
-app.put("/answers/:category", (request, response) => {
+app.put("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
   const answerRule = answers.find((a) => a.category === request.params.category);
 
   answerRule.keywords = request.body.keywords;
   answerRule.answer = request.body.answer;
+  await saveAnswers(answers);
 
   response.json(answerRule);
 });
@@ -609,19 +682,23 @@ app.put("/answers/:category", (request, response) => {
 
 </details>
 
-#### Test trin 15
+#### Test trin 17
 
 Send `PUT /answers/mad` med et opdateret svar. Bekræft ændringen i responsen. Spørg derefter AMAbotten igen via `POST /messages`, og bekræft at den nu bruger det opdaterede svar.
 
 ---
 
-### 16. DELETE /answers/:category: slet en regel
+### 18. DELETE /answers/:category: slet en regel
 
-Brug `filter()`, ligesom i studerende-øvelsen. Husk at `answers` derfor skal være erklæret med `let`, ikke `const`, hvis den ikke allerede er det:
+Brug `filter()`, ligesom i studerende-øvelsen, og gem den filtrerede liste med `saveAnswers()`:
 
 ```js
-app.delete("/answers/:category", (request, response) => {
+app.delete("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
+
   // TODO: Fjern reglen fra answers, hvor category matcher request.params.category, med filter().
+
+  // TODO: Gem den opdaterede liste med saveAnswers().
 
   response.send();
 });
@@ -631,7 +708,8 @@ app.delete("/answers/:category", (request, response) => {
 <summary>Hint</summary>
 
 ```text
-answers = answers.filter(a => a.category !== request.params.category)
+const updatedAnswers = answers.filter(a => a.category !== request.params.category)
+await saveAnswers(updatedAnswers)
 ```
 
 </details>
@@ -640,8 +718,11 @@ answers = answers.filter(a => a.category !== request.params.category)
 <summary>Se løsningsforslag</summary>
 
 ```js
-app.delete("/answers/:category", (request, response) => {
-  answers = answers.filter((a) => a.category !== request.params.category);
+app.delete("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
+  const updatedAnswers = answers.filter((a) => a.category !== request.params.category);
+
+  await saveAnswers(updatedAnswers);
 
   response.send();
 });
@@ -649,22 +730,9 @@ app.delete("/answers/:category", (request, response) => {
 
 </details>
 
-#### Test trin 16
+#### Test trin 18
 
 Slet `mad`-reglen igen. Bekræft med `GET /answers`, at den er væk. Spørg AMAbotten om livretten igen — hvilket svar får du nu?
-
----
-
-### 17. Test hele answers-flowet
-
-1. `GET /answers` — notér antallet af regler.
-2. `POST /answers` — opret en ny regel.
-3. `GET /answers` — er der én mere end i punkt 1?
-4. `GET /answers/:category` med den nye kategori.
-5. `PUT /answers/:category` — ret svaret, og bekræft ændringen.
-6. `DELETE /answers/:category`.
-7. `GET /answers` — er du tilbage på antallet fra punkt 1?
-8. Opret endnu en regel med `POST /answers`, og genstart derefter serveren. Send `GET /answers` igen — er den regel her stadig, eller er du tilbage på antallet fra punkt 1? Sammenlign med `GET /messages` fra trin 8 i Del 2, som beholdt sine ændringer efter en genstart. Hvorfor er der forskel?
 
 ## Tjekpunkt: Del 3
 
@@ -676,6 +744,20 @@ Del 3 er gennemført, når API'et:
 - opdaterer en regel med `PUT /answers/:category`
 - sletter en regel med `DELETE /answers/:category`
 - rent faktisk bruger de opdaterede/nye/slettede regler, når du spørger via `POST /messages`
+- gemmer ændringer i `data/answers.json`, så de overlever en genstart af serveren
+
+---
+
+### 19. Test hele answers-flowet
+
+1. `GET /answers` — notér antallet af regler.
+2. `POST /answers` — opret en ny regel.
+3. `GET /answers` — er der én mere end i punkt 1?
+4. `GET /answers/:category` med den nye kategori.
+5. `PUT /answers/:category` — ret svaret, og bekræft ændringen.
+6. `DELETE /answers/:category`.
+7. `GET /answers` — er du tilbage på antallet fra punkt 1?
+8. Opret endnu en regel med `POST /answers`, og genstart derefter serveren. Send `GET /answers` igen — er den nye regel her stadig? Det skal den være, med samme mønster som `GET /messages` fra trin 8 i Del 2.
 
 ---
 
@@ -687,9 +769,9 @@ Når du er færdig, skal du gerne kunne forklare:
 2. Hvorfor bruger `/answers/:category` ikke `Number()`, når `/students/:id` og `/messages` (havde de haft et id) ville have gjort det?
 3. Hvorfor genererer serveren et id i `POST /students`, men ikke i `POST /answers`?
 4. Hvor meget af din eksisterende svarlogik (`findBestAnswer()`/`findAnswer()`, `loadMessages()`, `saveMessages()`) skulle du ændre, for at gøre AMAbotten til et REST API? Hvad fortæller det dig om forholdet mellem forretningslogik og den måde, den bliver præsenteret på (HTML vs. JSON)?
-5. Hvad skete der med dine `/answers`-ændringer, sidst du genstartede serveren? Hvorfor, og hvordan ville du rette det?
+5. Del 3 starter med at gøre `answers` til en JSON-fil (trin 11-12), før selve CRUD-routerne bygges. Hvorfor giver det mening at gøre det i den rækkefølge — særligt når nogle i klassen allerede havde `answers` i et modul, og andre havde den som en almindelig array?
 6. Hvordan hænger `client/`- og `server/`-mapperne sammen med det, du snart skal bruge `fetch()` til?
 
 ## Videre
 
-Din AMAbot er nu et rent REST API — samme regler, samme svarlogik, samme historik, men uden en eneste linje HTML fra serveren. `client/`-mappen venter stadig på sit indhold: i DOB 5 bygger du en rigtig frontend, der bruger `fetch()` til at tale med præcis de endpoints, du lige har bygget. I RACE 6 arbejder du videre med selve API'ets struktur — routes, controllers og data i separate filer — og statuskoder og fejlhåndtering for både `/messages` og `/answers` venter i en senere øvelse. Persistens for `/answers`, så dine ændringer overlever en genstart, er et oplagt næste skridt, når du er klar til det, med præcis samme mønster som `loadMessages()`/`saveMessages()`.
+Din AMAbot er nu et rent REST API — samme regler, samme svarlogik, samme historik, men uden en eneste linje HTML fra serveren, og med både `/messages` og `/answers` gemt i deres egne JSON-filer, så intet forsvinder ved en genstart. `client/`-mappen venter stadig på sit indhold: i DOB 5 bygger du en rigtig frontend, der bruger `fetch()` til at tale med præcis de endpoints, du lige har bygget. I RACE 6 arbejder du videre med selve API'ets struktur — routes, controllers og data i separate filer — og statuskoder og fejlhåndtering for både `/messages` og `/answers` venter i en senere øvelse.
