@@ -6,6 +6,8 @@ Denne øvelse bygger videre på jeres `students-rest-api`-projekt fra [REST API-
 
 I dag tilføjer I en ny ressource, `/teachers`, med præcis samme mønster som `/students` — og bruger det som anledning til at mærke, hvor uoverskuelig `server.js` bliver med to ressourcer i samme fil. Det er motivationen for resten af øvelsen: at dele API'et op i lag.
 
+Begreb: **Separation of Concerns** — når routes, logik og data-adgang alle bor i samme fil, har filen flere ansvar på én gang; det er det, lagene i denne øvelse retter op på.
+
 Øvelsen er delt i fem dele, hvor de tre første er kernestoffet for i dag, og de sidste to er frivillige:
 
 - **Del 1** (obligatorisk): byg `/teachers` med fuld CRUD, direkte i `server.js`.
@@ -247,6 +249,8 @@ Del 1 er gennemført, når:
 
 - `/teachers` har fuld CRUD, persisteret i `data/teachers.json`, ved siden af `/students`
 - `server.js` nu indeholder to sæt næsten identiske routes — kig på filen: hvor mange linjer er den blevet?
+
+Begreb: **DRY (Don't Repeat Yourself)** — læg mærke til hvor meget I lige har kopieret fra students til teachers; det er bevidst her, men det er præcis den slags gentagelse, kode helst ikke skal have for meget af.
 
 ---
 
@@ -514,11 +518,15 @@ Del 2 er gennemført, når:
 - `server.js` kun importerer og monterer to routere — ingen route-definitioner tilbage
 - `/students` og `/teachers` ligger i hver sin fil i `routes/`, og al CRUD-funktionalitet virker som før
 
+Begreb: **Single Responsibility** — hver routes-fil har nu kun ansvar for én ressource; det er Separation of Concerns i praksis, en fil ad gangen.
+
 ---
 
 ## Del 3: Data-modul
 
 `loadStudents()`/`saveStudents()` og `loadTeachers()`/`saveTeachers()` bor stadig inde i den enkelte routes-fil. Det hører ikke rigtig hjemme der — en routes-fil skal håndtere HTTP ind og ud, ikke filsystemet. I dette trin flytter I dem ud i deres eget modul.
+
+Begreb: **Encapsulation** — routes-filen skal ikke vide, om data ligger i en JSON-fil, en database eller et array; den kalder bare `loadX()`/`saveX()`, og lader data-modulet gemme på detaljen.
 
 ### 8. Opret data/students.js
 
