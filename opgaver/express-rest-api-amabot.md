@@ -402,11 +402,11 @@ Del 2 er gennemført, når API'et:
 ## Del 3: REST API for /answers
 
 ```text
-GET    /answers            -> response.json(answers)
-GET    /answers/:category  -> find()   -> response.json(answerRule)
-POST   /answers            -> push()   -> response.json(newAnswerRule)
-PUT    /answers/:category  -> find()   -> response.json(answerRule)
-DELETE /answers/:category  -> filter() -> response.send()
+GET    /answers            -> loadAnswers()                              -> response.json(answers)
+GET    /answers/:category  -> loadAnswers() -> find()                    -> response.json(answerRule)
+POST   /answers            -> loadAnswers() -> push()   -> saveAnswers() -> response.json(newAnswerRule)
+PUT    /answers/:category  -> loadAnswers() -> find()   -> saveAnswers() -> response.json(answerRule)
+DELETE /answers/:category  -> loadAnswers() -> filter() -> saveAnswers() -> response.send()
 ```
 
 I modsætning til `/messages` giver `/answers` god mening at give fuld CRUD: en svarregel er noget, du reelt vil oprette, rette og slette over tid, uden at skulle redigere kildekoden og genstarte serveren hver gang.
