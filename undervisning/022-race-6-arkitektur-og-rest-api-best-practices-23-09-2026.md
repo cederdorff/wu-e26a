@@ -21,7 +21,7 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 <details>
 <summary><strong>1. Opsamling: Lever jeres REST API op til principperne og best practices?</strong></summary>
 
-- Kort oplæg: genopfrisk sammen de seks REST-principper fra RACE 5 — Client-Server, Stateless, Ressourcer & URI'er, CRUD via HTTP-metoder, Statuskoder, JSON som format
+- Kort oplæg: genopfrisk sammen de seks REST-principper fra sidste gang — Client-Server, Stateless, Ressourcer & URI'er, CRUD via HTTP-metoder, Statuskoder, JSON som format
 - Suppler med et par konkrete best practices fra artiklen, som principperne ikke selv siger noget om: er ressourcer navngivet som substantiver i flertal (`/students`, ikke `/getStudent`)? Er jeres responses og statuskoder konsistente på tværs af routes?
 - Nævnes kort, men er ikke i dag: nested resources (fx `/teachers/:id/students`), versionering (`/v1/...`) og API-dokumentation er også udbredte REST best practices (kilde: [freeCodeCamp](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)) — gode at kende til, men venter til en anden gang
 - Nu er de klar: to og to, hold principperne og best practices op mod jeres eget `/students`-API fra [Studerende med CRUD](../opgaver/express-rest-api-students.md): for hvert punkt — lever jeres løsning op til det, og hvorfor/hvorfor ikke?
@@ -42,7 +42,7 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 <summary><strong>3. Modules, Import & Export</strong></summary>
 
 - Kort om `import`/`export` (ES modules) — forudsætningen for at dele kode mellem filer
-- Hands-on del 1: tilføj samme CRUD-mønster for en ny ressource `/teachers` i jeres eksisterende `server.js` — `GET`, `GET/:id`, `POST`, `PUT`, `DELETE`, kopiér mønstret fra `/students`, samme tilgang som students del 1: et array i memory, ingen statuskoder eller fejlhåndtering endnu
+- Hands-on del 1: tilføj samme CRUD-mønster for en ny ressource `/teachers` i jeres eksisterende `server.js` — `GET`, `GET/:id`, `POST`, `PUT`, `DELETE`, kopiér mønstret fra `/students`, denne gang direkte oven på en JSON-fil (`data/teachers.json`) — I kender allerede fra `/students`, hvorfor persistens i en fil er nødvendig, så mellemtrinnet med et rent in-memory array springes over; ingen statuskoder eller fejlhåndtering endnu
 - Mål: mærk selv problemet fra sidste punkt i jeres eget API, når det vokser til to ressourcer
 - Begreb: **DRY (Don't Repeat Yourself)** — læg mærke til hvor meget I lige har kopieret fra students til teachers; det er bevidst i dag, men navngiv tensionen — det er præcis den slags gentagelse, kode helst ikke skal have for meget af
 - Arbejd videre i eget tempo — I når forskelligt langt herfra
@@ -79,7 +79,7 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 
 ## Forberedelse
 
-- Færdiggør [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) (Del 1 og Del 2) fra RACE 5, hvis I ikke er helt i mål endnu — det er jeres eget `/students`-API, I skal holde op mod de seks principper i dagens opsamling. Har I ikke nået den, så kig i stedet på [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) og vær klar til at tale ud fra den
+- Færdiggør [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) (Del 1 og Del 2) fra sidste gang, hvis I ikke er helt i mål endnu — det er jeres eget `/students`-API, I skal holde op mod de seks principper i dagens opsamling. Har I ikke nået den, så kig i stedet på [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) og vær klar til at tale ud fra den
 - [Øvelse 6: AMAbotten som REST API](../opgaver/express-rest-api-amabot.md) er nu mere jeres eget tempo — I må gerne arbejde videre med den, men det er ikke et krav for i dag
 - Læs ["Routing"](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen, særligt afsnittet om `express.Router()`
 - Genopfrisk `req.query` i [Request-referencen](https://expressjs.com/en/api.html#req.query) på Express.js — I kender allerede `req.params` og `req.body` fra sidst
@@ -93,7 +93,7 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 
 - Slides: TBA
 - Opgaver:
-  - [REST API-øvelse: Arkitektur — routes, data og controllers](../opgaver/express-rest-api-arkitektur.md)
+  - [REST API-øvelse: Arkitektur — routes, data, controllers og filtrering](../opgaver/express-rest-api-arkitektur.md)
   - [Øvelse 7: AMAbotten i lag — routes og data-modul](../opgaver/express-rest-api-amabot-arkitektur.md) — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo
 
 ---
