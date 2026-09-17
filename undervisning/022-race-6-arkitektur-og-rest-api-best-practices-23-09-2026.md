@@ -92,7 +92,9 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 ## Materialer
 
 - Slides: TBA
-- Opgaver: [REST API-øvelse: Arkitektur — routes, data og controllers](../opgaver/express-rest-api-arkitektur.md)
+- Opgaver:
+  - [REST API-øvelse: Arkitektur — routes, data og controllers](../opgaver/express-rest-api-arkitektur.md)
+  - [Øvelse 7: AMAbotten i lag — routes og data-modul](../opgaver/express-rest-api-amabot-arkitektur.md) — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo
 
 ---
 
