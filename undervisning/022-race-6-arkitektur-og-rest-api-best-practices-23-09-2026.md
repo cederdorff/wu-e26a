@@ -4,7 +4,7 @@
 
 ## Dagens fokus
 
-Sidste gang byggede I jeres første REST API, men samlet i én `server.js`. I dag mærker I selv, hvor hurtigt det vokser sig uoverskueligt — I udvider jeres students-API med et tilsvarende sæt endpoints for teachers, i samme fil. Derefter skifter vi fokus fra _om_ API'et virker til _hvordan_ det er struktureret: vi deler `server.js` op med Express' `Router`, flytter data-adgangen videre til sit eget data-modul, ser på REST best practices for navngivning og konsistente responses, tilføjer filtrering, sortering og paginering via query parameters, og kigger kort (og frivilligt) videre på endnu et lag med controllers.
+I dag starter vi med at holde jeres eget `/students`-API op mod de seks REST-principper fra sidst og et par konkrete best practices for navngivning og konsistens — og bruger det til at identificere, hvad der mangler. Derefter rammesætter vi resten af dagen: hvad sker der, når et API vokser sig stort i én fil? I kan allerede se tendensen i AMAbotten. Det motiverer, at I selv udvider jeres students-API med et tilsvarende sæt endpoints for teachers, i samme fil — så I mærker problemet på egen krop, inden vi løser det: vi deler `server.js` op med Express' `Router`, og flytter data-adgangen videre til sit eget data-modul (og retter samtidig op på det, opsamlingen afslørede). Til sidst tilføjer vi filtrering, sortering og paginering via query parameters, og kigger kort (og frivilligt) videre på endnu et lag med controllers.
 
 Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
@@ -13,43 +13,47 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: Lever jeres REST API op til de seks principper?</strong></summary>
+<summary><strong>1. Opsamling: Lever jeres REST API op til principperne og best practices?</strong></summary>
 
 - To og to: genbesøg de seks REST-principper fra RACE 5 — Client-Server, Stateless, Ressourcer & URI'er, CRUD via HTTP-metoder, Statuskoder, JSON som format
 - Hold dem op mod jeres eget `/students`-API fra [Studerende med CRUD](../opgaver/express-rest-api-students.md): for hvert princip — lever jeres løsning op til det, og hvorfor/hvorfor ikke?
 - Har I ikke nået øvelsen, så brug i stedet [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) som udgangspunkt for samtalen
-- Hvilket princip føles mest abstrakt eller svært at få hold på i praksis — og hvorfor?
-- Kort opsamling i plenum: hvor er grupperne enige/uenige?
+- Suppler med et par konkrete best practices, principperne ikke selv siger noget om: er ressourcer navngivet som substantiver i flertal (`/teachers`, ikke `/getTeacher`)? Er jeres responses og statuskoder konsistente på tværs af routes?
+- Nævnes kort, men er ikke i dag: nested resources (fx `/teachers/:id/students`), versionering (`/v1/...`) og API-dokumentation er også udbredte REST best practices (kilde: [freeCodeCamp](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)) — gode at kende til, men venter til en anden gang
+- Hvilket princip eller best practice føles mest abstrakt eller svært at få hold på i praksis — og hvorfor?
+- Kort opsamling i plenum: hvor er grupperne enige/uenige, og hvad manglede der flest steder?
 </details>
 <details>
-<summary><strong>2. Hands-on: Udvid jeres students-API med et teachers-API</strong></summary>
+<summary><strong>2. Problemet: hvad sker der, når koden vokser?</strong></summary>
 
-- Tilføj samme CRUD-mønster for en ny ressource `/teachers` i jeres eksisterende `server.js` — `GET`, `GET/:id`, `POST`, `PUT`, `DELETE`, kopiér mønstret fra `/students`
-- Samme tilgang som students del 1: et array i memory, ingen statuskoder eller fejlhåndtering endnu
-- Mål: mærk selv hvor stort og uoverskueligt `server.js` bliver med to ressourcer i samme fil
+- Et generelt problem: jo mere kode I propper ind ét sted — én fil, én funktion — jo sværere bliver det at finde rundt i, genbruge og teste isoleret
+- Kort demo: se det konkret i et Express-API, der er vokset sig stort i én `server.js` — I kan allerede se tendensen i jeres AMAbot-API
+- Her: routes, forretningslogik og data blandet sammen i én fil
+- Rammesætter resten af dagen: derfor skal vi tale om modules, `Router` og lagdelt arkitektur
 </details>
 <details>
-<summary><strong>3. Problemet: hvad skete der i jeres server.js?</strong></summary>
+<summary><strong>3. Modules, Import & Export</strong></summary>
 
-- Kort fælles refleksion: hvad blev svært, da I tilføjede teachers oveni students?
-- Routes, forretningslogik og data blandet sammen i én fil
-- Svært at finde rundt i, svært at genbruge og svært at teste isoleret
-- Motivation: samme problem som at proppe al JavaScript ind i én kæmpe funktion
+- Kort om `import`/`export` (ES modules) — forudsætningen for at dele kode mellem filer
+- Hands-on del 1: tilføj samme CRUD-mønster for en ny ressource `/teachers` i jeres eksisterende `server.js` — `GET`, `GET/:id`, `POST`, `PUT`, `DELETE`, kopiér mønstret fra `/students`, samme tilgang som students del 1: et array i memory, ingen statuskoder eller fejlhåndtering endnu
+- Mål: mærk selv problemet fra sidste punkt i jeres eget API, når det vokser til to ressourcer
+- Arbejd videre i eget tempo — I når forskelligt langt herfra
 </details>
 <details>
-<summary><strong>4. Express Router og data-modul: opdel i separate filer</strong></summary>
+<summary><strong>4. Express Router</strong></summary>
 
 - `express.Router()` som en selvstændig "mini-app" for én ressource
 - Montér en router på hoved-appen: `app.use("/students", studentsRouter)` og `app.use("/teachers", teachersRouter)`
-- `loadStudents()`/`saveStudents()` (og teachers-varianterne) hører ikke hjemme i en routes-fil — en route skal håndtere HTTP ind/ud, ikke filsystemet — så de flytter videre til deres eget data-modul (`data/students.js`, `data/teachers.js`)
-- Hands-on: flyt jeres students- og teachers-routes over i hver sin fil i en `routes/`-mappe, og flyt derfra data-adgangen videre til et `data/`-modul
+- Hands-on: flyt jeres students- og teachers-routes over i hver sin fil i en `routes/`-mappe
 </details>
 <details>
-<summary><strong>5. REST best practices: navngivning og konsistens</strong></summary>
+<summary><strong>5. Lagdelt arkitektur: data-modul og controllers</strong></summary>
 
-- Ressourcer er substantiver, ikke verber: `/teachers`, ikke `/getTeachers`
-- Flertal for collections: `/students`, `/students/:id`
-- Konsistent respons-format og statuskoder på tværs af `/students` og `/teachers`
+- `loadStudents()`/`saveStudents()` (og teachers-varianterne) hører ikke hjemme i en routes-fil — en route skal håndtere HTTP ind/ud, ikke filsystemet — så de flytter videre til deres eget data-modul (`data/students.js`, `data/teachers.js`)
+- Hands-on: flyt data-adgangen fra jeres routes-filer videre til et `data/`-modul
+- Brug samtidig lejligheden til at rette navngivning og konsistens, I fandt frem til i dagens opsamling
+- Frivilligt: når en routes-fil selv får rigtig logik (fx filtrering, se næste punkt), kan I trække den ud i en controller-funktion — routen kalder bare controlleren
+- Kort demo af mappestruktur med `routes/`, `data/` og `controllers/` — I skal ikke nå at bygge controllers i dag, men vide hvornår det giver mening
 </details>
 <details>
 <summary><strong>6. Filtrering, sortering & paginering med query parameters</strong></summary>
@@ -59,21 +63,6 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 - Sortering: `?sort=...` — hvilken property skal der sorteres på?
 - Paginering: `?page=` og `?limit=` — hvorfor er det nødvendigt, når data-mængden vokser?
 - Hands-on: tilføj filtrering, sortering og/eller paginering til én af jeres GET-routes
-</details>
-<details>
-<summary><strong>7. Et kig videre: controllers (frivilligt)</strong></summary>
-
-- Når en routes-fil selv får rigtig logik (som filtreringen ovenfor), kan I trække den ud i en controller-funktion — routen kalder bare controlleren
-- Kort demo af mappestruktur med `routes/`, `data/` og `controllers/` — I skal ikke nå at bygge det i dag, men vide hvornår det giver mening
-- Frivilligt stretch: dem der er færdige, kan prøve at trække en controller ud for students eller teachers
-</details>
-<details>
-<summary><strong>8. Hands-on: Fortsæt udbygning af jeres REST API</strong></summary>
-
-- Sørg for at students og teachers begge ligger i egne routes-filer, med data-adgang i et data-modul
-- Tilføj filtrering, sortering og/eller paginering, hvis I ikke nåede det under punkt 6
-- Frivilligt: prøv at trække en controller ud, jf. punkt 7
-- Test undervejs i Thunder Client med forskellige query parametre
 </details>
 
 ---
