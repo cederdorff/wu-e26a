@@ -13,11 +13,13 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: REST API fra sidste gang</strong></summary>
+<summary><strong>1. Opsamling: Lever jeres REST API op til de seks principper?</strong></summary>
 
-- Forklar to og to jeres eget REST API fra sidste gang: hvilke routes, statuskoder og route parameters endte I med?
-- Hvordan ser `server.js` ud lige nu — hvor meget forskelligt ansvar ligger i den samme fil?
-- Genbesøg CRUD ↔ HTTP-metoderne, hvis der stadig er tvivl
+- To og to: genbesøg de seks REST-principper fra RACE 5 — Client-Server, Stateless, Ressourcer & URI'er, CRUD via HTTP-metoder, Statuskoder, JSON som format
+- Hold dem op mod jeres eget `/students`-API fra [Studerende med CRUD](../opgaver/express-rest-api-students.md): for hvert princip — lever jeres løsning op til det, og hvorfor/hvorfor ikke?
+- Har I ikke nået øvelsen, så brug i stedet [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) som udgangspunkt for samtalen
+- Hvilket princip føles mest abstrakt eller svært at få hold på i praksis — og hvorfor?
+- Kort opsamling i plenum: hvor er grupperne enige/uenige?
 </details>
 <details>
 <summary><strong>2. Problemet: når server.js vokser</strong></summary>
@@ -67,7 +69,8 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 
 ## Forberedelse
 
-- Genbesøg jeres eget REST API fra sidste gang, og vær klar til at forklare, hvordan `server.js` er organiseret lige nu
+- Færdiggør [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) (Del 1 og Del 2) fra RACE 5, hvis I ikke er helt i mål endnu — det er jeres eget `/students`-API, I skal holde op mod de seks principper i dagens opsamling. Har I ikke nået den, så kig i stedet på [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) og vær klar til at tale ud fra den
+- [Øvelse 6: AMAbotten som REST API](../opgaver/express-rest-api-amabot.md) er nu mere jeres eget tempo — I må gerne arbejde videre med den, men det er ikke et krav for i dag
 - Læs ["Routing"](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen, særligt afsnittet om `express.Router()`
 - Genopfrisk `req.query` i [Request-referencen](https://expressjs.com/en/api.html#req.query) på Express.js — I kender allerede `req.params` og `req.body` fra sidst
 - Læs ["REST API Best Practices – REST Endpoint Design Examples"](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) på freeCodeCamp, særligt punktet om filtrering/sortering/paginering

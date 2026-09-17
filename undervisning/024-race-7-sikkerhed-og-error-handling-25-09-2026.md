@@ -11,6 +11,7 @@ TBA
 ## Agenda
 
 - TBA
+  husk CORS
 
 ---
 
