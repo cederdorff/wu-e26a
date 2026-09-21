@@ -268,7 +268,6 @@ import hentStuderende from "./data-helpers.js";</code></pre>
   const students = JSON.parse(data);
   response.json(students);
 });
-
 router.post("/", async (request, response) => {
   const data = await fs.readFile(
     "./data/students.json", "utf8"
@@ -285,7 +284,6 @@ router.post("/", async (request, response) => {
   const students = await loadStudents();
   response.json(students);
 });
-
 router.post("/", async (request, response) => {
   const students = await loadStudents();
   students.push(request.body);
@@ -294,7 +292,7 @@ router.post("/", async (request, response) => {
 });</code></pre>
             </article>
           </div>
-          <p class="bottom-line">Samme gentagelse opstår på tværs af ressourcer — <code>loadTeachers()</code> bliver næsten identisk med <code>loadStudents()</code>, kun navn og filsti er forskellige. En oplagt kandidat til en generisk <code>loadData(file)</code>, hvis I arbejder videre.</p>
+          <p class="bottom-line">Gælder også på tværs af ressourcer — <code>loadTeachers()</code> bliver næsten identisk med <code>loadStudents()</code>. Samme kode to steder er tegn på en manglende funktion.</p>
         </section>
 
         <section id="router" class="chapter" data-accent="green">
