@@ -701,7 +701,62 @@ Indtil nu har `GET /students` altid returneret hele listen. Nu bruger I `request
 
 > Byg videre på jeres `GET /students`-route fra Del 3 — koden er den samme, uanset hvor den bor.
 
-### 11. Filtrering: ?education=...
+### 11. Tilføj flere studerende
+
+Med kun to studerende i `data/students.json` er der ikke meget at filtrere, sortere eller paginere i. Brug jeres egen `POST /students`-route til at tilføje flere, med overlappende `education`-værdier, fx:
+
+```text
+POST http://localhost:3000/students
+Body (JSON):
+{ "name": "Freja", "education": "Datamatiker" }
+```
+
+Send POST'en 5-6 gange, med forskellige navne og en blanding af `"Datamatiker"` og `"Multimediedesign"` (eller jeres egne uddannelser) som `education`.
+
+#### Test trin 11
+
+Send `GET /students` — I skal nu se Aisha og Noah, plus alle dem I lige har tilføjet, med mindst to forskellige uddannelser repræsenteret flere gange hver.
+
+---
+
+### 12. Udforsk request.query
+
+Før I bruger `request.query` til noget som helst, skal I lige se, hvad det faktisk er. Tilføj en `console.log()` øverst i `GET /students`-routen:
+
+```js
+router.get("/", async (request, response) => {
+  console.log(request.query);
+
+  const students = await loadStudents();
+
+  response.json(students);
+});
+```
+
+#### Test trin 12
+
+Kig i terminalen, hvor serveren kører, mens I sender disse requests fra Thunder Client:
+
+- `GET /students` (helt uden query parameters) — hvad logges? (`{}`, et tomt objekt)
+- `GET /students?education=Datamatiker` — hvad logges nu?
+- `GET /students?education=Datamatiker&sort=name` — læg mærke til, at begge query parameters havner i samme objekt, som hver sin property
+- `GET /students?page=2&limit=5` — kig nøje på værdierne af `page` og `limit` i terminalen: er det tal eller strings?
+
+`request.query` er altså bare et almindeligt JavaScript-objekt, bygget ud fra det, der står efter `?` i URL'en — én property pr. query parameter, og alle værdier er strings, uanset hvad de "ligner". Det er præcis den byggesten, filtrering, sortering og paginering i resten af Del 4 bruger.
+
+---
+
+### 13. Filtrering: ?education=...
+
+Inden I bygger filtreringen ind i routen, så prøv `filter()` for sig selv. Tilføj midlertidigt denne linje, lige efter I har hentet `students`:
+
+```js
+console.log(students.filter((student) => student.education === "Datamatiker"));
+```
+
+Send en almindelig `GET /students` og kig i terminalen — I skal kun se de studerende, der har `education: "Datamatiker"`. `filter()` ændrer ikke `students` selv; den returnerer et helt nyt array, kun med de elementer, hvor funktionen returnerer `true`.
+
+Fjern `console.log()` igen, og byg nu filtreringen ind i routen — denne gang ud fra `request.query.education`, ikke en hårdkodet værdi:
 
 ```js
 router.get("/", async (request, response) => {
@@ -742,15 +797,23 @@ router.get("/", async (request, response) => {
 
 </details>
 
-#### Test trin 11
+#### Test trin 13
 
 Send `GET /students?education=Datamatiker` — I skal kun se studerende med den uddannelse. Send derefter almindelig `GET /students`, uden query parameter — I skal stadig se hele listen.
 
 ---
 
-### 12. Sortering: ?sort=...
+### 14. Sortering: ?sort=...
 
-Byg videre på routen fra trin 11:
+Prøv også `sort()` for sig selv, før den kommer ind i routen. Tilføj midlertidigt, lige efter I har hentet `students`:
+
+```js
+console.log(students.sort((a, b) => (a.name > b.name ? 1 : -1)));
+```
+
+Send en `GET /students` og kig i terminalen — kommer de studerende tilbage i alfabetisk rækkefølge efter navn? Modsat `filter()` sorterer `sort()` faktisk det oprindelige array selv (og returnerer det samme array igen) — det er værd at lægge mærke til.
+
+Fjern `console.log()` igen, og byg videre på routen fra trin 13 — denne gang ud fra `request.query.sort`, ikke en hårdkodet property:
 
 ```js
 router.get("/", async (request, response) => {
@@ -803,15 +866,36 @@ router.get("/", async (request, response) => {
 
 </details>
 
-#### Test trin 12
+#### Test trin 14
 
 Send `GET /students?sort=name` — kommer studerende tilbage i alfabetisk rækkefølge? Kombinér med filtrering: `GET /students?education=Datamatiker&sort=name`.
 
 ---
 
-### 13. Paginering: ?page=...&limit=...
+### 15. Paginering: ?page=...&limit=...
 
-Byg videre på routen fra trin 12 — pagineringen skal ske til sidst, efter filtrering og sortering:
+Prøv også `slice()` for sig selv, før den kommer ind i routen. Tilføj midlertidigt, lige efter I har hentet `students`:
+
+```js
+console.log(students.slice(0, 2));
+```
+
+Send en `GET /students` og kig i terminalen — I skal se de to første studerende i listen. `slice(start, end)` returnerer et nyt array med elementerne fra index `start` og op til (men ikke med) index `end`; det ændrer ikke `students` selv.
+
+Det, I selv skal regne ud i TODO'en, er hvad `start` skal være, ud fra `page` og `limit`. Prøv også den udregning for sig selv, stadig med `console.log()`:
+
+```js
+const page = 2;
+const limit = 2;
+const start = (page - 1) * limit;
+
+console.log(start); // hvor mange elementer skal vi springe over?
+console.log(students.slice(start, start + limit));
+```
+
+Prøv at ændre `page` og `limit` og se, hvordan `start` og resultatet ændrer sig. Det er præcis den udregning, `request.query.page` og `request.query.limit` skal bruges til nedenfor.
+
+Fjern `console.log()`'erne igen, og byg nu pagineringen ind i routen fra trin 14 — pagineringen skal ske til sidst, efter filtrering og sortering:
 
 ```js
 router.get("/", async (request, response) => {
@@ -876,7 +960,7 @@ router.get("/", async (request, response) => {
 
 </details>
 
-#### Test trin 13
+#### Test trin 15
 
 Send `GET /students?page=1&limit=2` — I skal kun få de første to studerende. Send `GET /students?page=2&limit=2` — I skal få de næste to (eller færre, hvis listen slipper op). Prøv til sidst alle tre sammen: `GET /students?education=Datamatiker&sort=name&page=1&limit=2`.
 
@@ -917,7 +1001,7 @@ data/students.js                    adgang til data: loadStudents()/saveStudents
 data/students.json                  selve dataen
 ```
 
-### 14. Opret controllers/studentsController.js
+### 16. Opret controllers/studentsController.js
 
 ```js
 // controllers/studentsController.js
@@ -1039,13 +1123,13 @@ router.delete("/:id", deleteStudent);
 export default router;
 ```
 
-#### Test trin 14
+#### Test trin 16
 
 Kør hele flowet for `/students` igennem: almindelig CRUD, og query parametrene fra Del 4 (`?education=`, `?sort=`, `?page=`/`?limit=`). `routes/students.js` skal nu være meget kort — kun import og fem linjer routing.
 
 ---
 
-### 15. Opret controllers/teachersController.js
+### 17. Opret controllers/teachersController.js
 
 Gør det samme for teachers, selv (uden filtrering/sortering/paginering, medmindre I også byggede det for `/teachers` i Del 4).
 
@@ -1134,7 +1218,7 @@ export default router;
 
 </details>
 
-#### Test trin 15
+#### Test trin 17
 
 Kør CRUD-flowet for `/teachers` igennem én sidste gang.
 
@@ -1166,35 +1250,35 @@ Foreslået datamodel, hvis I ikke har egne idéer:
 ]
 ```
 
-### 16. courses og educations: CRUD + JSON
+### 18. courses og educations: CRUD + JSON
 
 Byg `/courses` og `/educations` med fuld CRUD, ligesom I gjorde for `/teachers` i Del 1 — `loadX()`/`saveX()` og de fem routes, direkte i `server.js` eller allerede i hver sin routes-fil, hvis I vil springe mellemtrinnet over.
 
-#### Test trin 16
+#### Test trin 18
 
 Kør CRUD-flowet for begge ressourcer igennem i Thunder Client.
 
 ---
 
-### 17. Split i routes-filer
+### 19. Split i routes-filer
 
 Flyt `/courses` og `/educations` over i `routes/courses.js` og `routes/educations.js`, monteret i `server.js` — som i Del 2.
 
-#### Test trin 17
+#### Test trin 19
 
 Kør CRUD-flowet igennem igen efter split'et.
 
 ---
 
-### 18. Data-modul
+### 20. Data-modul
 
 Flyt data-adgangen videre til `data/courses.js` og `data/educations.js` — som i Del 3. Spring ikke dette trin over, selv om resten af Del 6 er frivillig: `loadX()`/`saveX()` skal stadig ikke bo i en routes-fil.
 
-#### Test trin 18
+#### Test trin 20
 
 Kør CRUD-flowet igennem en sidste gang.
 
-### 19. Valgfrit videre: controllers
+### 21. Valgfrit videre: controllers
 
 Har I tid og lyst, træk da også logikken ud i `controllers/coursesController.js` og `controllers/educationsController.js` — som i Del 5.
 
@@ -1213,7 +1297,7 @@ Når I er færdige, skal I gerne kunne forklare:
 3. Hvad var forskellen på at flytte data-adgang ud (Del 3) og at flytte logikken ud (Del 5)? Er det samme slags problem, de to trin løser?
 4. Efter Del 5 er `getAllStudents` markant større end de øvrige controller-funktioner (opret, hent én, opdatér, slet), fordi den også indeholder filtrering, sortering og paginering fra Del 4. Hvorfor er det netop den funktion, der vokser — og hvad fortæller det jer om, hvornår et controller-lag reelt gør en forskel?
 5. Hvis I skulle forklare forskellen på routes, controllers og data-modul til en, der ikke kender Express, hvilken analogi ville I bruge?
-6. I Del 4 sker pagineringen (trin 13) til sidst, efter filtrering og sortering. Hvad ville der ske, hvis rækkefølgen var omvendt?
+6. I Del 4 sker pagineringen (trin 15) til sidst, efter filtrering og sortering. Hvad ville der ske, hvis rækkefølgen var omvendt?
 
 ## Videre
 
