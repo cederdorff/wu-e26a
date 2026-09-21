@@ -14,7 +14,8 @@ export default defineConfig({
         expressEjs: resolve("slides/express-ejs/index.html"),
         dataLogik: resolve("slides/data-logik/index.html"),
         persistensJson: resolve("slides/persistens-json/index.html"),
-        restApi: resolve("slides/rest-api/index.html")
+        restApi: resolve("slides/rest-api/index.html"),
+        arkitektur: resolve("slides/arkitektur/index.html")
       }
     }
   }

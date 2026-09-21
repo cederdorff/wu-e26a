@@ -355,7 +355,7 @@
           <p class="bottom-line">I går i gang nu — vi stopper undervejs og gennemgår principperne. Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse.</p>
         </section>
 
-        <section class="principles-slide" data-accent="green">
+        <section id="principperne" class="principles-slide" data-accent="green">
           <span class="eyebrow">REST — Key Principles</span>
           <h2>Seks principper binder det hele sammen</h2>
           <a class="exercise-link" href="https://www.codecademy.com/article/what-is-rest-api" target="_blank" rel="noreferrer">Kilde: Codecademy ↗</a>
@@ -370,7 +370,7 @@
           <p class="bottom-line">Lad os se nærmere på hver af dem — med eksempler fra jeres <code>/students</code>-API.</p>
         </section>
 
-        <section class="client-server-slide" data-accent="green">
+        <section id="princip-client-server" class="client-server-slide" data-accent="green">
           <span class="eyebrow">Princip 01 · Client-Server</span>
           <h2>Klient og server kan skiftes ud uden at kende hinandens indre</h2>
           <p class="concept-intro"><b>Client-Server:</b> adskiller klient og server, så de kan udvikle sig uafhængigt af hinanden — klienten bekymrer sig ikke om datalagring, serveren bekymrer sig ikke om brugergrænsefladen.</p>
@@ -393,7 +393,7 @@
           <p class="bottom-line">Derfor kan I teste jeres API i Thunder Client, længe før der findes en rigtig frontend.</p>
         </section>
 
-        <section class="stateless-slide" data-accent="green">
+        <section id="princip-stateless" class="stateless-slide" data-accent="green">
           <span class="eyebrow">Princip 02 · Stateless</span>
           <h2>Serveren husker intet mellem to requests</h2>
           <p class="concept-intro"><b>Stateless:</b> hvert request fra klienten til serveren indeholder al nødvendig information — serveren gemmer ikke klientens tilstand mellem requests.</p>
@@ -420,7 +420,7 @@
           <p class="bottom-line">Derfor står id'et i URL'en hver gang — <code>request.params.id</code> er den eneste "hukommelse", requestet har.</p>
         </section>
 
-        <section class="tools-check-slide" data-accent="green">
+        <section id="princip-ressourcer" class="tools-check-slide" data-accent="green">
           <span class="eyebrow">Princip 03 · Ressourcer &amp; URI'er</span>
           <h2>En ressource er alt, der kan identificeres og tilgås via sin egen URL</h2>
           <p class="concept-intro"><b>Ressource-baseret design:</b> i REST er alt en ressource — struktureret omkring entydigt identificerbare ressourcer, der tilgås via specifikke URL'er og kan manipuleres med HTTP-metoderne GET/POST/PUT/DELETE.</p>
@@ -465,7 +465,7 @@
           <p class="bottom-line">Ressourcer navngives med et navneord i flertal — ikke et verbum i URL'en.</p>
         </section>
 
-        <section class="url-semantics-slide" data-accent="green">
+        <section id="princip-url-navngivning" class="url-semantics-slide" data-accent="green">
           <span class="eyebrow">Princip 03 · Semantisk URL</span>
           <h2>Ressourcens sti — ikke et spørgsmålstegn eller et verbum — bærer betydningen</h2>
           <p class="concept-intro"><b>Navneord + HTTP-metode er nok:</b> ressourcens navn i stien og metoden (<code>GET</code>/<code>POST</code>/<code>PUT</code>/<code>DELETE</code>) beskriver tilsammen operationen — det er præcis det, der gør URL'en simpel og fri for verber.</p>
@@ -504,7 +504,7 @@
           <p class="bottom-line">Samme ressource, samme sti — <code>GET</code>/<code>POST</code>/<code>PUT</code>/<code>DELETE</code> giver den fire forskellige betydninger. Det er næste princip.</p>
         </section>
 
-        <section class="crud-overview-slide" data-accent="green">
+        <section id="princip-crud" class="crud-overview-slide" data-accent="green">
           <span class="eyebrow">Princip 04 · CRUD via HTTP-metoder</span>
           <h2>HTTP-metoderne mapper direkte til CRUD</h2>
           <div class="crud-table">
@@ -527,7 +527,7 @@
           <p class="bottom-line">CRUD er navnet på mønsteret — GET/POST/PUT/PATCH/DELETE er HTTP's version af det. I øvelserne bruger vi <code>PUT</code>.</p>
         </section>
 
-        <section class="status-slide" data-accent="green">
+        <section id="princip-statuskoder" class="status-slide" data-accent="green">
           <span class="eyebrow">Princip 05 · Statuskoder (kendt fra RACE 1)</span>
           <h2>Statuskoden fortæller, hvad der skete med ressourcen</h2>
           <a class="exercise-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank" rel="noreferrer">Alle statuskoder · MDN ↗</a>
@@ -542,7 +542,7 @@
           <p class="bottom-line"><code>response.json()</code> sætter automatisk <code>200</code> — jeres egne statuskoder venter til en senere øvelse.</p>
         </section>
 
-        <section class="message-slide response-message" data-accent="green">
+        <section id="princip-json" class="message-slide response-message" data-accent="green">
           <span class="eyebrow">Princip 06 · JSON som format</span>
           <h2>REST API'er taler typisk JSON — læsbart for mennesker, hurtigt for maskiner</h2>
           <p class="concept-intro"><b>JSON som format:</b> REST API'er bruger typisk JSON som dataformat for effektiv og letlæselig kommunikation mellem klient og server.</p>

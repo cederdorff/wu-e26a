@@ -1,0 +1,359 @@
+@import "../rest-api/theme.css";
+
+/* RACE 6 deck additions */
+
+/* Project-tree demos: two-line "Før/Efter" ASCII trees can run wider than
+   the default project-tree column ratio comfortably fits */
+.project-tree pre {
+  font-size: 20px;
+}
+
+/* Named vs. default export: two cards, each its own module file stacked
+   above the file that imports from it, plus a one-line takeaway */
+.export-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 34px;
+}
+.export-compare article {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 30px;
+  border-top: 5px solid var(--cyan);
+  background: var(--soft);
+}
+.export-compare article:last-child {
+  border-top-color: var(--orange);
+}
+.export-compare-title {
+  display: block;
+  color: var(--accent);
+  font-size: 19px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.export-compare pre code {
+  padding: 18px 22px;
+  font-size: 19px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.export-compare-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+/* Fill the full slide height — short code snippets on code-focus-slide
+   otherwise leave a large empty gap before the bottom-line */
+.code-focus-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.code-focus-slide .code-and-result,
+.code-focus-slide .before-after {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+.code-focus-slide .concept-intro + .code-and-result,
+.code-focus-slide .concept-intro + .before-after {
+  margin-top: 20px;
+}
+.code-focus-slide > pre {
+  margin-top: 0;
+}
+.code-focus-slide:has(> pre) {
+  justify-content: center;
+}
+.code-focus-slide .dense-code code {
+  padding: 18px 26px;
+  font-size: 20px;
+  line-height: 1.32;
+}
+
+/* Router mount example: the "efter" line is long enough that two equal
+   1fr tracks at the base font-size overflow the slide */
+.before-after pre code {
+  font-size: 19px;
+}
+
+/* Fill the full slide height — a three-row crud-table (reused here for
+   filter/sort/paginate) leaves a large empty gap below the base five-row layout */
+.crud-overview-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.crud-overview-slide .crud-table {
+  flex: 1;
+  justify-content: center;
+  margin-top: 0;
+}
+
+/* Principles recap: each card links out to its full RACE 5 explanation */
+.principles-grid a {
+  display: block;
+  min-height: 226px;
+  padding: 22px 26px;
+  border-top: 5px solid var(--accent);
+  background: var(--soft);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.principles-grid a:hover {
+  background: color-mix(in srgb, var(--accent) 16%, var(--soft));
+}
+.principles-grid a b {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 850;
+}
+.principles-grid a strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+.principles-grid a span {
+  display: block;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.32;
+}
+.principles-grid a small {
+  display: block;
+  margin-top: 14px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* Small inline link to a specific RACE 5 slide, inside a definition-pair card */
+.deepen-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--accent) !important;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.deepen-link:hover {
+  text-decoration: underline;
+}
+
+/* Fill the full slide height — a 4-card example-grid on a tools-check-slide
+   (unlike the project-tree variant of this slide type) leaves a large gap below */
+.tools-check-slide:has(.example-grid) {
+  display: flex !important;
+  flex-direction: column;
+}
+.tools-check-slide .example-grid {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+
+/* Separation of Concerns: three recognizable examples side by side, each split
+   into its concerns — colored consistently across cards (data/view/logic) so
+   the parallel between them is visual, not just verbal */
+.soc-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.soc-slide .soc-examples {
+  margin: auto 0;
+}
+.soc-examples {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.soc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 26px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--soft);
+}
+.soc-card h3 {
+  margin: 0 0 4px;
+  font-size: 21px;
+}
+.soc-card-accent {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--soft));
+}
+.soc-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 11px 16px;
+  border-left: 4px solid var(--line);
+  background: rgb(255 255 255 / 3%);
+}
+.soc-row strong {
+  font-size: 19px;
+}
+.soc-row code {
+  font-size: 17px;
+}
+.soc-row span {
+  color: var(--muted);
+  font-size: 15px;
+}
+.soc-row-data {
+  border-left-color: var(--cyan);
+}
+.soc-row-view {
+  border-left-color: var(--orange);
+}
+.soc-row-logic {
+  border-left-color: var(--green);
+}
+.soc-row-later {
+  border-left-style: dashed;
+  border-left-color: var(--muted);
+  opacity: 0.75;
+}
+
+/* Full best-practices overview: nine compact rows, tagged by how today treats each one */
+.bp-overview-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.bp-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 0;
+}
+.bp-row {
+  display: grid;
+  grid-template-columns: 46px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 9px 24px;
+  border-left: 5px solid var(--line);
+  background: var(--soft);
+}
+.bp-num {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 800;
+}
+.bp-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.bp-row strong {
+  font-size: 21px;
+  font-weight: 700;
+}
+.bp-en {
+  color: var(--muted);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.2;
+}
+.bp-row small {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.bp-covered {
+  border-left-color: var(--green);
+}
+.bp-covered small {
+  background: color-mix(in srgb, var(--green) 16%, transparent);
+  color: var(--green);
+}
+.bp-today {
+  border-left-color: var(--yellow);
+}
+.bp-today small {
+  background: color-mix(in srgb, var(--yellow) 16%, transparent);
+  color: var(--yellow);
+}
+.bp-later {
+  border-left-color: var(--muted);
+}
+.bp-later small {
+  background: color-mix(in srgb, var(--muted) 14%, transparent);
+  color: var(--muted);
+}
+
+/* Group-work slide: two even columns (setup vs. reflection questions)
+   instead of one flat checklist, so it fills the slide height cleanly
+   without the card backgrounds running into the absolutely-positioned
+   bottom-line */
+.activity-slide-split .two-sides {
+  margin-top: 32px;
+  margin-bottom: 26px;
+}
+.activity-slide-split .two-sides article {
+  min-height: 390px;
+}
+.activity-slide-split .two-sides li {
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+/* Fill the full slide height — the navngivning/konsistens undgå-korrekt
+   pairs otherwise leave a gap below the base fixed margin-top */
+.url-semantics-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.url-semantics-slide .url-pattern-columns {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+.url-semantics-slide .concept-intro + .url-pattern-columns {
+  margin-top: 20px;
+}
+
+/* Hands-on slides: 3-5 checklist items, varying by part, otherwise land at
+   very different heights and leave inconsistent dead space above the
+   bottom-line. The checklist itself has no filled background (only a thin
+   top border per item), so centering it in the leftover space is safe —
+   unlike a visibly-filled card (see the group-work slide fix above) */
+.activity-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.activity-slide .checklist {
+  margin: auto 0 !important;
+}
+
+/* DRY slide: a single short function pair per side (not a filled card),
+   so it's safe to flex-center like the other code-focus-slide compares */
+.tradeoff-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.tradeoff-slide .before-after {
+  flex: 1;
+  align-content: center;
+  margin-top: 0;
+}
+.tradeoff-slide .concept-intro + .before-after {
+  margin-top: 20px;
+}

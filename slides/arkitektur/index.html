@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RACE 6 · Arkitektur og REST API best practices · WU-E26A · 23. september 2026" />
+    <title>Arkitektur og REST API best practices · WU-E26A</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-accent="green">
+          <div class="title-copy">
+            <span class="eyebrow">WU-E26A · RACE 6 · 23. september 2026</span>
+            <h1>Fra én fil<br /><span>til flere lag</span></h1>
+            <p class="lead">Express Router, moduler og lagdelt arkitektur — og filtrering, sortering og paginering med query parameters.</p>
+          </div>
+        </section>
+
+        <section id="agenda" class="agenda-slide" data-accent="cyan">
+          <span class="eyebrow">Agenda</span>
+          <h2>Fra ét stort server.js til flere ansvarsområder</h2>
+          <ol class="agenda-grid">
+            <li><a href="#/opsamling"><b>Opsamling: Lever jeres API op til principperne?</b><small>de seks REST-principper og et par best practices fra sidst</small></a></li>
+            <li><a href="#/problemet"><b>Problemet: hvad sker der, når koden vokser?</b><small>Separation of Concerns</small></a></li>
+            <li><a href="#/modules"><b>Modules, Import &amp; Export</b><small>forudsætningen for at dele kode mellem filer — og DRY</small></a></li>
+            <li><a href="#/router"><b>Express Router</b><small>en selvstændig "mini-app" pr. ressource</small></a></li>
+            <li><a href="#/lagdelt"><b>Lagdelt arkitektur</b><small>data-modul, Encapsulation — og frivilligt: controllers</small></a></li>
+            <li><a href="#/query"><b>Filtrering, sortering &amp; paginering</b><small><code>request.query</code>, <code>filter()</code>, <code>sort()</code>, <code>slice()</code></small></a></li>
+          </ol>
+        </section>
+
+        <section id="opsamling" class="chapter" data-accent="orange">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Opsamling</span>
+          <h2>Lever jeres API<br />op til principperne?</h2>
+          <p>Seks REST-principper og et par best practices fra sidst — holdt op mod jeres eget <code>/students</code>-API.</p>
+        </section>
+
+        <section id="principper" class="principles-slide" data-accent="orange">
+          <span class="eyebrow">Genkald · REST — Key Principles</span>
+          <h2>Seks principper, kort genopfrisket</h2>
+          <div class="principles-grid">
+            <a href="../rest-api/#/princip-client-server" target="_blank" rel="noreferrer"><b>01</b><strong>Client-Server</strong><span>Klient og server har adskilte ansvar.</span><small>RACE 5 ↗</small></a>
+            <a href="../rest-api/#/princip-stateless" target="_blank" rel="noreferrer"><b>02</b><strong>Stateless</strong><span>Serveren husker intet mellem to requests.</span><small>RACE 5 ↗</small></a>
+            <a href="../rest-api/#/princip-ressourcer" target="_blank" rel="noreferrer"><b>03</b><strong>Ressourcer &amp; URI'er</strong><span>Alt er en ressource med sin egen URL.</span><small>RACE 5 ↗</small></a>
+            <a href="../rest-api/#/princip-crud" target="_blank" rel="noreferrer"><b>04</b><strong>CRUD via HTTP-metoder</strong><span>GET/POST/PUT/DELETE mapper til Create/Read/Update/Delete.</span><small>RACE 5 ↗</small></a>
+            <a href="../rest-api/#/princip-statuskoder" target="_blank" rel="noreferrer"><b>05</b><strong>Statuskoder</strong><span>Svaret fortæller altid, hvad der skete.</span><small>RACE 5 ↗</small></a>
+            <a href="../rest-api/#/princip-json" target="_blank" rel="noreferrer"><b>06</b><strong>JSON som format</strong><span>Data sendes som JSON begge veje.</span><small>RACE 5 ↗</small></a>
+          </div>
+          <p class="bottom-line">Klik et princip for uddybningen fra RACE 5 — næste slide viser alle best practices fra artiklen.</p>
+        </section>
+
+        <section id="best-practices" class="bp-overview-slide" data-accent="orange">
+          <span class="eyebrow">Alle ni, fra artiklen</span>
+          <h2>REST API Best Practices — hele listen</h2>
+          <div class="bp-list">
+            <div class="bp-row bp-covered"><span class="bp-num">01</span><span class="bp-title"><strong>JSON som format</strong><span class="bp-en">Use JSON as the Format for Sending and Receiving Data</span></span><small>Princip 06</small></div>
+            <div class="bp-row bp-covered"><span class="bp-num">02</span><span class="bp-title"><strong>Ingen verber i URL'er</strong><span class="bp-en">Use Nouns Instead of Verbs in Endpoints</span></span><small>Princip 03 · uddybes nu</small></div>
+            <div class="bp-row bp-covered"><span class="bp-num">03</span><span class="bp-title"><strong>Ressourcer i flertal</strong><span class="bp-en">Name Collections with Plural Nouns</span></span><small>Princip 03 · uddybes nu</small></div>
+            <div class="bp-row bp-covered"><span class="bp-num">04</span><span class="bp-title"><strong>HTTP-statuskoder</strong><span class="bp-en">Use Status Codes in Error Handling</span></span><small>Princip 05</small></div>
+            <div class="bp-row bp-later"><span class="bp-num">05</span><span class="bp-title"><strong>Nested resources</strong><span class="bp-en">Use Nesting on Endpoints to Show Relationships</span></span><small>Kort i dag</small></div>
+            <div class="bp-row bp-today"><span class="bp-num">06</span><span class="bp-title"><strong>Filtrering, sortering &amp; paginering</strong><span class="bp-en">Use Filtering, Sorting, and Pagination to Retrieve the Data Requested</span></span><small>Kapitel 6 i dag</small></div>
+            <div class="bp-row bp-later"><span class="bp-num">07</span><span class="bp-title"><strong>HTTPS</strong><span class="bp-en">Use SSL for Security</span></span><small>Kort i dag</small></div>
+            <div class="bp-row bp-later"><span class="bp-num">08</span><span class="bp-title"><strong>Versionering</strong><span class="bp-en">Be Clear with Versioning</span></span><small>Kort i dag</small></div>
+            <div class="bp-row bp-later"><span class="bp-num">09</span><span class="bp-title"><strong>API-dokumentation</strong><span class="bp-en">Provide Accurate API Documentation</span></span><small>Kort i dag</small></div>
+          </div>
+          <p class="bottom-line">Kilde: <a href="https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/" target="_blank" rel="noreferrer">freeCodeCamp — REST API Best Practices ↗</a></p>
+        </section>
+
+        <section class="url-semantics-slide" data-accent="orange">
+          <span class="eyebrow">02-03 · Navngivning · Princip 03, i praksis</span>
+          <h2>Ressourcens navn — ental eller flertal, verbum eller ej</h2>
+          <p class="concept-intro">Samme regel, som I allerede kender fra <code>/students</code> — nu på jeres nye <code>/teachers</code>-ressource.</p>
+          <div class="url-pattern-columns">
+            <div class="url-pattern-column url-pattern-avoid">
+              <span class="url-pattern-heading">Undgå</span>
+              <div class="url-pattern-row">
+                <code>GET /getTeacher/2</code>
+                <small>Verbum i stien — <code>GET</code> siger allerede, det er en hentning.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>POST /createTeacher</code>
+                <small>Endnu et verbum — <code>POST</code> siger allerede, det er en oprettelse.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>GET /teacher</code>
+                <small>Ental antyder én bestemt ting — men routen returnerer en hel samling.</small>
+              </div>
+            </div>
+            <div class="url-pattern-column url-pattern-correct">
+              <span class="url-pattern-heading">Korrekt</span>
+              <div class="url-pattern-row">
+                <code>GET /teachers/2</code>
+                <small>Stien fortæller historien selv: samlingen <code>teachers</code>, elementet <code>2</code>.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>POST /teachers</code>
+                <small>Samme regel ved oprettelse: ressourcens sti, ikke et verbum.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>GET /teachers</code>
+                <small>Flertal — det er en samling af flere teachers.</small>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Uddybning: <a href="../rest-api/#/princip-url-navngivning" target="_blank" rel="noreferrer">RACE 5 · Semantisk URL ↗</a></p>
+        </section>
+
+        <section class="url-semantics-slide" data-accent="orange">
+          <span class="eyebrow">Konsistens · ny vane, ikke et princip</span>
+          <h2>Samme mønster, uanset hvilken ressource man kalder</h2>
+          <p class="concept-intro">Konsistens er ikke ét af de seks principper — det er vanen at holde de andre principper <b>ens</b>, på tværs af alle jeres routes.</p>
+          <div class="url-pattern-columns">
+            <div class="url-pattern-column url-pattern-avoid">
+              <span class="url-pattern-heading">Inkonsistent</span>
+              <div class="url-pattern-row">
+                <code>{ data: [...] }</code>
+                <small><code>GET /students</code> pakker listen ind i et objekt.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>200</code>
+                <small><code>POST /students</code> svarer 200, selvom den opretter noget nyt.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>fullName</code>
+                <small><code>/teachers</code> bruger <code>fullName</code>, men <code>/students</code> bruger blot <code>name</code> — for samme slags felt.</small>
+              </div>
+            </div>
+            <div class="url-pattern-column url-pattern-correct">
+              <span class="url-pattern-heading">Konsistent</span>
+              <div class="url-pattern-row">
+                <code>[...]</code>
+                <small>Alle GET-lister sender arrayet direkte — samme form, hver gang.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>201</code>
+                <small>Alle POST-routes svarer <code>201 Created</code>, på tværs af ressourcer.</small>
+              </div>
+              <div class="url-pattern-row">
+                <code>name</code>
+                <small>Samme feltnavn for samme slags data, i alle jeres JSON-filer.</small>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Det eneste, der reelt er nyt i dag — resten venter til <code>filtrering/sortering/paginering</code> (punkt 06) senere.</p>
+        </section>
+
+        <section class="tools-check-slide" data-accent="orange">
+          <span class="eyebrow">05, 07-09 · Nævnes kort, men ikke i dag</span>
+          <h2>Fire best practices mere — kort og konkret</h2>
+          <div class="example-grid">
+            <article>
+              <span>Nested resources</span>
+              <strong><code>/educations/:id/courses</code></strong>
+              <small>Henter alle kurser i én bestemt uddannelse — hold jer til maks. 2-3 niveauer</small>
+            </article>
+            <article>
+              <span>HTTPS</span>
+              <strong><code>https://</code></strong>
+              <small>Krypterer data mellem klient og server — sat op af hosting-platformen ved deployment</small>
+            </article>
+            <article>
+              <span>Versionering</span>
+              <strong><code>/v1/students</code></strong>
+              <small>API'et kan ændre sig uden at ødelægge klienter, der stadig bruger den gamle version</small>
+            </article>
+            <article>
+              <span>API-dokumentation</span>
+              <strong>Swagger/OpenAPI</strong>
+              <small>Beskriver hvert endpoint, eksempler og fejlkoder — så andre kan bruge API'et uden at læse koden</small>
+            </article>
+          </div>
+          <p class="bottom-line">Kilde: <a href="https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/" target="_blank" rel="noreferrer">freeCodeCamp — REST API Best Practices ↗</a></p>
+        </section>
+
+        <section class="activity-slide activity-slide-split" data-accent="orange">
+          <span class="eyebrow">Gruppearbejde · to og to</span>
+          <h2>Hold jeres eget <code>/students</code>-API op mod listen</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-students.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <div class="two-sides">
+            <article>
+              <h3>Sådan gør I</h3>
+              <ul>
+                <li>Find sammen to og to</li>
+                <li>Brug <a href="#/principper">de seks principper ↗</a> og <a href="#/best-practices">REST API Best Practices ↗</a> på jeres eget <code>/students</code>-API</li>
+                <li>Ikke i mål? Brug i stedet <a href="https://github.com/cederdorff/express-rest-api-students" target="_blank" rel="noreferrer">min løsning ↗</a></li>
+              </ul>
+            </article>
+            <article>
+              <h3>For hvert punkt</h3>
+              <ul>
+                <li>Lever koden op til princippet/best practice — hvorfor, eller hvorfor ikke?</li>
+                <li>Hvor er der mangler — hvad er der slet ikke taget hånd om?</li>
+                <li>Hvilket princip eller best practice føles mest abstrakt eller svært at få hold på i praksis — og hvorfor?</li>
+              </ul>
+            </article>
+          </div>
+          <p class="bottom-line">Kort opsamling i plenum bagefter: hvor er grupperne enige/uenige, og hvad manglede der flest steder?</p>
+        </section>
+
+        <section id="problemet" class="chapter" data-accent="cyan">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Problemet</span>
+          <h2>Hvad sker der,<br />når koden vokser?</h2>
+          <p>Jo mere kode i ét sted — én fil, én funktion — jo sværere er det at finde rundt i, genbruge og teste isoleret.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">Kort demo</span>
+          <h2>Routes, logik og data — blandet sammen i én fil</h2>
+          <pre><code class="language-javascript">// server.js — alt i én fil
+async function loadStudents() { /* fs.readFile(...) */ }
+async function saveStudents(students) { /* fs.writeFile(...) */ }
+
+app.get("/students", async (request, response) => {
+  const students = await loadStudents();
+  // ...filtrering, sortering, paginering kommer også herind
+  response.json(students);
+});
+
+// + 4 routes mere for /students
+// + samme mønster igen for /teachers, /courses, /educations...</code></pre>
+          <p class="bottom-line">Samme tendens ses allerede i AMAbot-API'et — routing, logik og data-adgang har alle hjemme i samme funktion.</p>
+        </section>
+
+        <section class="definition-slide soc-slide" data-accent="cyan">
+          <span class="eyebrow">Begreb</span>
+          <h2>Separation of Concerns — hver del af koden bør have ét ansvar</h2>
+          <p class="concept-intro">Routing, forretningslogik og data-adgang er tre forskellige slags arbejde — hver bør leve sit eget sted, så de kan ændres og testes uafhængigt af hinanden. Ikke et nyt princip — I kender det allerede, bare under andre navne.</p>
+          <div class="soc-examples">
+            <article class="soc-card">
+              <h3>HTML · CSS · JS</h3>
+              <div class="soc-row soc-row-data"><strong>HTML</strong><span>Struktur &amp; indhold</span></div>
+              <div class="soc-row soc-row-view"><strong>CSS</strong><span>Præsentation</span></div>
+              <div class="soc-row soc-row-logic"><strong>JS</strong><span>Adfærd</span></div>
+            </article>
+            <article class="soc-card">
+              <h3>MVC</h3>
+              <div class="soc-row soc-row-data"><strong>Model</strong><span>Data</span></div>
+              <div class="soc-row soc-row-view"><strong>View</strong><span>Præsentation</span></div>
+              <div class="soc-row soc-row-logic"><strong>Controller</strong><span>Logik &amp; koordinering</span></div>
+            </article>
+            <article class="soc-card soc-card-accent">
+              <h3>Jeres <code>/students</code>-API, i dag</h3>
+              <div class="soc-row soc-row-data"><strong><code>data/students.js</code></strong><span>Data-adgang</span></div>
+              <div class="soc-row soc-row-logic"><strong><code>routes/students.js</code></strong><span>Routing + al logik, for nu</span></div>
+              <div class="soc-row soc-row-later"><strong><code>controllers/</code></strong><span>Forretningslogik — frivilligt, senere i dag</span></div>
+            </article>
+          </div>
+          <p class="bottom-line">Løsningen kommer i tre skridt: moduler, Express <code>Router</code>, og et eget data-modul.</p>
+        </section>
+
+        <section id="modules" class="chapter" data-accent="cyan">
+          <span class="chapter-number">03</span>
+          <span class="eyebrow">Modules</span>
+          <h2>Import<br />&amp; Export</h2>
+          <p>Løsningens første skridt — og faktisk noget I allerede har gjort, hver gang I skrev <code>import express from "express"</code>. Det er præcis det, der gør det muligt at dele koden op i flere moduler, i stedet for én stor fil.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">Genkald, ikke nyt</span>
+          <h2>I har allerede importeret og eksporteret — hver dag</h2>
+          <p class="concept-intro">Hver gang I skrev <code>import express from "express"</code> eller <code>import fs from "node:fs/promises"</code>, brugte I præcis den samme <code>import</code>/<code>export</code>-syntaks, vi nu skal bruge mellem jeres <b>egne</b> filer.</p>
+          <div class="before-after">
+            <article>
+              <span>server.js</span>
+              <pre><code class="language-javascript">import express from "express";
+import fs from "node:fs/promises";
+
+const app = express();</code></pre>
+            </article>
+            <b aria-hidden="true">+</b>
+            <article>
+              <span>package.json</span>
+              <pre><code class="language-json">{
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.0"
+  }
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line"><code>"type": "module"</code> fortæller Node, at I skriver ES modules — uden den skulle I bruge <code>require()</code> i stedet for <code>import</code>.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">Det nye: jeres egne filer</span>
+          <h2><code>export</code> gør jeres egen kode tilgængelig for andre filer</h2>
+          <p class="concept-intro"><b>Hvad?</b> Samme <code>import</code>/<code>export</code> som lige før — men nu er det jeres egen funktion, ikke en pakke fra npm. <b>Hvorfor?</b> Uden det ville al kode skulle bo i samme fil.</p>
+          <div class="code-and-result">
+            <pre><code class="language-javascript">// data-helpers.js
+export async function loadStudents() {
+  const data = await fs.readFile(
+    "./data/students.json", "utf8"
+  );
+  return JSON.parse(data);
+}</code></pre>
+            <pre><code class="language-javascript">// server.js
+import { loadStudents } from "./data-helpers.js";
+
+app.get("/students", async (request, response) => {
+  const students = await loadStudents();
+  response.json(students);
+});</code></pre>
+          </div>
+          <p class="bottom-line">Navnene i <code>{ }</code> skal matche præcis det, den anden fil eksporterer — og stien skal starte med <code>./</code> og ende på <code>.js</code>. Det er præcis <code>loadStudents()</code>/<code>saveStudents()</code>, I flytter til sit eget modul om lidt.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">To slags export</span>
+          <h2>Named eller default — hvornår bruger man hvad</h2>
+          <p class="concept-intro">Samme fil, samme funktion — men to måder at eksportere den på, med forskellig konsekvens ved import.</p>
+          <div class="export-compare">
+            <article>
+              <span class="export-compare-title">Named export</span>
+              <pre><code class="language-javascript">// data-helpers.js
+export function loadStudents() { /* ... */ }
+export function saveStudents(students) { /* ... */ }</code></pre>
+              <pre><code class="language-javascript">// server.js
+import { loadStudents, saveStudents } from "./data-helpers.js";</code></pre>
+              <p class="export-compare-note">Flere eksports fra samme fil — navnet i <code>{ }</code> skal matche præcis det, filen eksporterer.</p>
+            </article>
+            <article>
+              <span class="export-compare-title">Default export</span>
+              <pre><code class="language-javascript">// data-helpers.js
+export default function loadStudents() { /* ... */ }</code></pre>
+              <pre><code class="language-javascript">// server.js
+import hentStuderende from "./data-helpers.js";</code></pre>
+              <p class="export-compare-note">Kun én pr. fil, ingen <code>{ }</code> — og I må selv navngive den ved import.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Tommelfingerregel: named, når filen har flere ting at tilbyde (som vores data-modul) — default, når den kun har én.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="cyan">
+          <span class="eyebrow">Hands-on · Del 1</span>
+          <h2>Tilføj <code>/teachers</code> til jeres eksisterende server.js</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Samme CRUD-mønster som <code>/students</code> — <code>GET</code>, <code>GET/:id</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code></li>
+            <li>Direkte oven på en JSON-fil, <code>data/teachers.json</code> — mellemtrinnet med et in-memory array springes over</li>
+            <li>Ingen statuskoder eller fejlhåndtering endnu — det venter til RACE 7</li>
+            <li>Mærk selv problemet fra sidste kapitel, når jeres eget API vokser til to ressourcer</li>
+          </ul>
+          <p class="bottom-line">Arbejd videre i eget tempo — I når forskelligt langt herfra.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="cyan">
+          <span class="eyebrow">Begreb</span>
+          <h2>DRY — Don't Repeat Yourself</h2>
+          <p class="concept-intro">Den samme logik bør kun stå ét sted. Det er netop derfor, vi skriver funktioner — <code>loadStudents()</code> og <code>saveStudents()</code> findes, så <code>fs.readFile()</code>/<code>JSON.parse()</code> ikke skal skrives forfra i hver eneste route.</p>
+          <div class="before-after">
+            <article>
+              <span>Uden funktion — gentaget i hver route</span>
+              <pre><code class="language-javascript">router.get("/", async (request, response) => {
+  const data = await fs.readFile(
+    "./data/students.json", "utf8"
+  );
+  const students = JSON.parse(data);
+  response.json(students);
+});
+
+router.post("/", async (request, response) => {
+  const data = await fs.readFile(
+    "./data/students.json", "utf8"
+  );
+  const students = JSON.parse(data);
+  students.push(request.body);
+  // ...
+});</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>Med funktion — kaldes blot</span>
+              <pre><code class="language-javascript">router.get("/", async (request, response) => {
+  const students = await loadStudents();
+  response.json(students);
+});
+
+router.post("/", async (request, response) => {
+  const students = await loadStudents();
+  students.push(request.body);
+  await saveStudents(students);
+  // ...
+});</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">Tommelfingerregel: så snart samme kode skal bruges to steder, er det et tegn på, at den bør flyttes ud i en funktion.</p>
+        </section>
+
+        <section class="tradeoff-slide" data-accent="cyan">
+          <span class="eyebrow">Endnu en gentagelse</span>
+          <h2>DRY gælder også på tværs af ressourcer</h2>
+          <p class="concept-intro">Jeres ti routes skal ligne hinanden — det er REST, der er konsekvent, ikke en fejl. Den rigtige gentagelse sidder i load/save-funktionerne:</p>
+          <div class="before-after">
+            <article>
+              <span>loadStudents · saveStudents</span>
+              <pre><code class="language-javascript">async function loadStudents() {
+  const data = await fs.readFile(
+    "./data/students.json", "utf8"
+  );
+  return JSON.parse(data);
+}</code></pre>
+            </article>
+            <b aria-hidden="true">≈</b>
+            <article>
+              <span>loadTeachers · saveTeachers</span>
+              <pre><code class="language-javascript">async function loadTeachers() {
+  const data = await fs.readFile(
+    "./data/teachers.json", "utf8"
+  );
+  return JSON.parse(data);
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">Kun ressourcens navn og filsti er forskellige — en oplagt kandidat til en generisk <code>loadData(file)</code>, hvis I arbejder videre. Express <code>Router</code> (næste kapitel) organiserer filerne i sig selv — men fjerner ikke denne gentagelse.</p>
+        </section>
+
+        <section id="router" class="chapter" data-accent="green">
+          <span class="chapter-number">04</span>
+          <span class="eyebrow">Express Router</span>
+          <h2>En selvstændig<br />"mini-app"</h2>
+          <p>Én router pr. ressource, monteret på hoved-appen — uden at kende sin egen fulde sti.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow"><code>express.Router()</code></span>
+          <h2>Routeren kender ikke sit eget mount-punkt</h2>
+          <div class="definition-pair">
+            <article>
+              <span>I routes-filen</span>
+              <p><code>router.get("/", ...)</code> og <code>router.get("/:id", ...)</code> — routeren definerer kun stier <b>relativt</b> til sig selv.</p>
+            </article>
+            <article>
+              <span>I <code>server.js</code></span>
+              <p><code>app.use("/students", studentsRouter)</code> sætter den fulde sti først, når routeren monteres — Express lægger <code>/students</code> foran alt, routeren selv definerer.</p>
+            </article>
+          </div>
+          <p class="bottom-line"><code>router.get("/")</code> monteret på <code>/students</code> bliver til <code>GET /students</code> — <code>router.get("/:id")</code> bliver til <code>GET /students/:id</code>.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="green">
+          <span class="eyebrow">Mønsteret</span>
+          <h2>Fra routes i <code>server.js</code> til en monteret <code>Router</code></h2>
+          <div class="before-after">
+            <article>
+              <span>Før</span>
+              <pre><code class="language-javascript">app.get("/students", async (request, response) => {
+  const students = await loadStudents();
+  response.json(students);
+});</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>Efter</span>
+              <pre><code class="language-javascript">// routes/students.js
+router.get("/", async (request, response) => {
+  const students = await loadStudents();
+  response.json(students);
+});</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">Selve logikken er uændret — kun stien (<code>"/students"</code> → <code>"/"</code>) og hvor koden bor.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="green">
+          <span class="eyebrow">Montér routeren</span>
+          <h2><code>server.js</code> bliver til opsætning og montering</h2>
+          <pre><code class="language-javascript">import express from "express";
+import studentsRouter from "./routes/students.js";
+import teachersRouter from "./routes/teachers.js";
+
+const app = express();
+app.use(express.json());
+
+app.use("/students", studentsRouter);
+app.use("/teachers", teachersRouter);
+
+app.listen(3000);</code></pre>
+          <p class="bottom-line">Ingen route-definitioner tilbage i <code>server.js</code> — kun import og montering af to routere.</p>
+        </section>
+
+        <section class="tools-check-slide" data-accent="green">
+          <span class="eyebrow">Før / efter Router-split</span>
+          <h2>Ti routes i én fil bliver til to filer, én pr. ressource</h2>
+          <div class="project-tree">
+            <pre><code class="language-text">Før:                          Efter:
+
+server.js                     server.js
+ ├─ loadStudents()/            ├─ app.use("/students",
+ │   saveStudents()            │   studentsRouter)
+ ├─ loadTeachers()/            └─ app.use("/teachers",
+ │   saveTeachers()                teachersRouter)
+ ├─ 5 routes for /students
+ └─ 5 routes for /teachers    routes/students.js
+                                └─ loadStudents()/saveStudents()
+                                   + 5 routes
+
+                               routes/teachers.js
+                                └─ loadTeachers()/saveTeachers()
+                                   + 5 routes</code></pre>
+            <div class="project-rules">
+              <p><b>Rør ikke:</b> selve CRUD-logikken — kun placeringen ændrer sig</p>
+              <p><b>Test efter hver fil:</b> hele CRUD-flowet, før I går videre</p>
+              <p><b>Bemærk:</b> <code>loadX()</code>/<code>saveX()</code> bor stadig i routes-filen her</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="recap-slide" data-accent="green">
+          <span class="eyebrow">Vejen igennem koden</span>
+          <h2>Sådan finder et request vej efter Router-splittet</h2>
+          <div class="recap-chain">
+            <span>Request</span><b>→</b><span>server.js</span><b>→</b><span>routes/students.js</span><b>→</b><span>data/students.json</span>
+          </div>
+          <p class="bottom-line"><code>server.js</code> monterer routeren — <code>routes/students.js</code> taler stadig direkte med JSON-filen, det flytter næste kapitel.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Hands-on · Del 2</span>
+          <h2>Flyt jeres routes over i en <code>routes/</code>-mappe</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Opret <code>routes/students.js</code> og <code>routes/teachers.js</code>, én router pr. ressource</li>
+            <li>Montér begge i <code>server.js</code> med <code>app.use(sti, router)</code></li>
+            <li>Kør hele CRUD-flowet igennem for begge ressourcer, efter split'et</li>
+          </ul>
+          <p class="bottom-line">Begreb: <b>Single Responsibility</b> — hver routes-fil har nu ansvar for kun én ressource.</p>
+        </section>
+
+        <section id="lagdelt" class="chapter" data-accent="green">
+          <span class="chapter-number">05</span>
+          <span class="eyebrow">Lagdelt arkitektur</span>
+          <h2>Data-modul<br />&amp; controllers</h2>
+          <p>En route håndterer HTTP ind/ud — ikke filsystemet. Data-adgangen flytter videre til sit eget modul.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Begreb</span>
+          <h2>Encapsulation — routes-filen skal ikke vide, hvor data bor</h2>
+          <div class="definition-pair">
+            <article>
+              <span>Routes-filen</span>
+              <p>Kalder blot <code>loadStudents()</code>/<code>saveStudents()</code> — og er ligeglad med, om data ligger i en JSON-fil, en database eller et array.</p>
+            </article>
+            <article>
+              <span>Data-modulet</span>
+              <p><code>data/students.js</code> gemmer på detaljen — <code>fs.readFile()</code>/<code>fs.writeFile()</code> i dag, en database-forespørgsel senere.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Skift databagvedliggeren senere, og kun <code>data/students.js</code> skal ændres — ikke routes-filen.</p>
+        </section>
+
+        <section class="recap-slide" data-accent="green">
+          <span class="eyebrow">Vejen igennem koden · endnu et led</span>
+          <h2>Sådan ser et request igennem lagene ud efter Del 3</h2>
+          <div class="recap-chain">
+            <span>Request</span><b>→</b><span>server.js</span><b>→</b><span>routes/students.js</span><b>→</b><span>data/students.js</span><b>→</b><span>data/students.json</span>
+          </div>
+          <p class="bottom-line"><code>routes/students.js</code> importerer <code>fs</code> og definerer <code>loadX()</code>/<code>saveX()</code> ikke længere selv.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="green">
+          <span class="eyebrow">Flyt <code>loadX()</code>/<code>saveX()</code> ud</span>
+          <h2>Fra routes-filen til sit eget data-modul</h2>
+          <div class="before-after">
+            <article>
+              <span>routes/students.js</span>
+              <pre><code class="language-javascript">import fs from "node:fs/promises";
+
+async function loadStudents() {
+  const data = await fs.readFile(
+    "./data/students.json", "utf8"
+  );
+  return JSON.parse(data);
+}</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>data/students.js</span>
+              <pre><code class="language-javascript">import fs from "node:fs/promises";
+
+export async function loadStudents() {
+  const data = await fs.readFile(
+    "./data/students.json", "utf8"
+  );
+  return JSON.parse(data);
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">Kun placeringen og <code>export</code> ændrer sig — routes-filen importerer nu funktionen i stedet.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Hands-on · Del 3</span>
+          <h2>Flyt data-adgangen til et <code>data/</code>-modul</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Opret <code>data/students.js</code> og <code>data/teachers.js</code> med <code>loadX()</code>/<code>saveX()</code>, som eksporterede funktioner</li>
+            <li>Ret routes-filerne til at importere fra data-modulet, i stedet for at definere funktionerne selv</li>
+            <li>Brug samtidig lejligheden til at rette navngivning og konsistens fra dagens opsamling</li>
+            <li>Kør hele CRUD-flowet igennem igen — intet skal ændre sig udadtil</li>
+          </ul>
+          <p class="bottom-line">Begreb: <b>Encapsulation</b> — routes-filen kalder blot <code>loadX()</code>/<code>saveX()</code>, uden at vide, hvor data faktisk bor.</p>
+        </section>
+
+        <section class="tools-check-slide" data-accent="green">
+          <span class="eyebrow">Frivilligt · kort demo</span>
+          <h2>Får en route rigtig logik, kan den trækkes ud i en controller</h2>
+          <div class="project-tree">
+            <pre><code class="language-text">students-rest-api/
+├── controllers/
+│   └── studentsController.js   (logik: find, filtrér, sortér...)
+├── data/
+│   └── students.js              (loadStudents()/saveStudents())
+├── routes/
+│   └── students.js              (kun routing: sti → controller-funktion)
+└── server.js                    (opsætning + montering af routere)</code></pre>
+            <div class="project-rules">
+              <p><b>Routen</b> kalder blot controlleren — routing og logik adskilles</p>
+              <p><b>Betaler sig</b> først, når en route reelt har noget værd at flytte</p>
+              <p><b>I dag:</b> I skal ikke nå at bygge controllers — kun vide, hvornår det giver mening</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="query" class="chapter" data-accent="yellow">
+          <span class="chapter-number">06</span>
+          <span class="eyebrow"><code>request.query</code></span>
+          <h2>Filtrering, sortering<br />&amp; paginering</h2>
+          <p>Klienten bestemmer selv, hvilken del af listen den får — via query parameters i URL'en.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="yellow">
+          <span class="eyebrow">Udforsk <code>request.query</code></span>
+          <h2>Alt efter <code>?</code> i URL'en havner i ét objekt</h2>
+          <div class="code-and-result">
+            <pre><code class="language-javascript">router.get("/", async (request, response) => {
+  console.log(request.query);
+
+  const students = await loadStudents();
+  response.json(students);
+});</code></pre>
+            <pre><code class="language-text">GET /students
+→ {}
+
+GET /students?education=Datamatiker
+→ { education: "Datamatiker" }
+
+GET /students?page=2&limit=5
+→ { page: "2", limit: "5" }</code></pre>
+          </div>
+          <p class="bottom-line">Alle værdier er strings, uanset hvad de "ligner" — <code>page</code> skal igennem <code>Number()</code>, før det regnes med.</p>
+        </section>
+
+        <section class="crud-overview-slide" data-accent="yellow">
+          <span class="eyebrow">Tre query-baserede værktøjer</span>
+          <h2>Hver query parameter løses med sin egen array-metode</h2>
+          <a class="exercise-link" href="https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/" target="_blank" rel="noreferrer">Kilde: freeCodeCamp — REST API Best Practices ↗</a>
+          <div class="crud-table">
+            <div class="crud-row crud-row-get">
+              <code class="crud-method">filter()</code><span>?education=...</span><small>behold kun de elementer, hvor betingelsen er sand</small>
+            </div>
+            <div class="crud-row crud-row-put">
+              <code class="crud-method">sort()</code><span>?sort=...</span><small>sortér efter en property, angivet i query'en</small>
+            </div>
+            <div class="crud-row crud-row-patch">
+              <code class="crud-method">slice()</code><span>?page=&amp;limit=</span><small>udsnit af listen — beregnet ud fra side og sidestørrelse</small>
+            </div>
+          </div>
+          <p class="bottom-line">Rækkefølgen betyder noget: filtrér og sortér <b>før</b> I paginerer — ellers pagineres der i den forkerte liste.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="yellow">
+          <span class="eyebrow">Sat sammen</span>
+          <h2>Filtrering → sortering → paginering, i den rækkefølge</h2>
+          <pre class="dense-code"><code class="language-javascript">router.get("/", async (request, response) => {
+  let students = await loadStudents();
+  if (request.query.education) {
+    students = students.filter((s) => s.education === request.query.education);
+  }
+  if (request.query.sort) {
+    const key = request.query.sort;
+    students = students.sort((a, b) => (a[key] > b[key] ? 1 : -1));
+  }
+  if (request.query.page && request.query.limit) {
+    const page = Number(request.query.page);
+    const limit = Number(request.query.limit);
+    const start = (page - 1) * limit;
+    students = students.slice(start, start + limit);
+  }
+  response.json(students);
+});</code></pre>
+          <p class="bottom-line">Ingen query parameters sat? Så returneres hele listen, uændret — hvert trin er en <code>if</code>, ikke et krav.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="yellow">
+          <span class="eyebrow">Hands-on · Del 4</span>
+          <h2>Tilføj filtrering, sortering og/eller paginering</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Tilføj først flere studerende, med overlappende <code>education</code>-værdier — ellers er der ikke meget at filtrere i</li>
+            <li>Byg videre på <code>GET /students</code> fra Del 3 — koden er den samme, uanset hvor den bor</li>
+            <li>Test hvert trin for sig, i Thunder Client, før I lægger det næste oveni</li>
+          </ul>
+          <p class="bottom-line">Statuskoder og fejlhåndtering af ugyldige query-værdier venter til RACE 7.</p>
+        </section>
+
+        <section class="materials-slide">
+          <span class="eyebrow">Arbejd videre</span>
+          <h2>Opslagsværker og øvelser</h2>
+          <div class="material-links">
+            <a href="https://expressjs.com/en/guide/routing.html" target="_blank" rel="noreferrer"
+              ><strong>Routing — <code>express.Router()</code></strong><span>Express.js ↗</span></a
+            >
+            <a href="https://expressjs.com/en/api.html#req.query" target="_blank" rel="noreferrer"
+              ><strong><code>req.query</code></strong><span>Express.js ↗</span></a
+            >
+            <a href="https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/" target="_blank" rel="noreferrer"
+              ><strong>REST API Best Practices</strong><span>freeCodeCamp ↗</span></a
+            >
+            <a href="https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export" target="_blank" rel="noreferrer"
+              ><strong><code>export</code></strong><span>MDN ↗</span></a
+            >
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md" target="_blank" rel="noreferrer"
+              ><strong>REST API-øvelse · Arkitektur</strong><span>GitHub ↗</span></a
+            >
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-arkitektur.md" target="_blank" rel="noreferrer"
+              ><strong>Øvelse 7 · AMAbotten i lag</strong><span>GitHub ↗</span></a
+            >
+          </div>
+        </section>
+
+      </div>
+    </div>
+    <script type="module" src="../shared/deck.js"></script>
+  </body>
+</html>

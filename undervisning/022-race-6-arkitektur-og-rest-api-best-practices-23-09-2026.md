@@ -19,9 +19,10 @@ Til sidst tilføjer vi filtrering, sortering og paginering via query parameters,
 
 - Kort oplæg: genopfrisk sammen de seks REST-principper fra sidste gang — Client-Server, Stateless, Ressourcer & URI'er, CRUD via HTTP-metoder, Statuskoder, JSON som format
 - Suppler med best practices fra artiklen, som principperne ikke dækker: er ressourcer navngivet som substantiver i flertal (`/students`, ikke `/getStudent`)? Er responses og statuskoder konsistente på tværs af routes?
-- Nævnes kort, men ikke i dag: nested resources (fx `/teachers/:id/students`), versionering (`/v1/...`) og API-dokumentation — udbredte REST best practices (kilde: [freeCodeCamp](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)), gode at kende, men venter til en anden gang
-- To og to: hold principperne og best practices op mod jeres eget `/students`\-API fra [Studerende med CRUD](../opgaver/express-rest-api-students.md) — for hvert punkt, lever løsningen op til det, og hvorfor/hvorfor ikke?
+- Nævnes kort, men ikke i dag: nested resources (fx `/educations/:id/courses`), versionering (`/v1/...`), API-dokumentation og HTTPS — udbredte REST best practices (kilde: [freeCodeCamp](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)), gode at kende, men venter til en anden gang
+- Find sammen to og to og hold principperne og best practices op mod jeres eget `/students`\-API fra [Studerende med CRUD](../opgaver/express-rest-api-students.md) — for hvert punkt, lever løsningen op til det, og hvorfor/hvorfor ikke?
 - Har I ikke nået øvelsen, så brug i stedet [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) som udgangspunkt for samtalen
+- Hvor er der mangler — hvad er der slet ikke taget hånd om?
 - Hvilket princip eller best practice føles mest abstrakt eller svært at få hold på i praksis — og hvorfor?
 - Kort opsamling i plenum: hvor er grupperne enige/uenige, og hvad manglede der flest steder?
 </details>
@@ -87,7 +88,8 @@ Til sidst tilføjer vi filtrering, sortering og paginering via query parameters,
 
 ## Materialer
 
-- Slides: TBA
+- Slides:
+    - [RACE 6 · Arkitektur og REST API best practices](https://cederdorff.com/wu-e26a/arkitektur/)
 - Opgaver:
     - [REST API-øvelse: Arkitektur — routes, data, controllers og filtrering](../opgaver/express-rest-api-arkitektur.md)
     - [Øvelse 7: AMAbotten i lag — routes og data-modul](../opgaver/express-rest-api-amabot-arkitektur.md) — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo
