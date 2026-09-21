@@ -95,6 +95,47 @@
   margin-top: 0;
 }
 
+/* Concept recap: reuses the crud-table row pattern, but term names (SoC,
+   Encaps.) run wider than HTTP verbs, so the first two columns need more room */
+.concepts-recap-slide .crud-row {
+  grid-template-columns: 190px 300px 1fr;
+}
+
+/* Encapsulation reuses the soc-card grid, but with only one row per card
+   (no data/view/logic split) — taller, centered cards instead of cramped ones */
+.encaps-slide .soc-card {
+  min-height: 340px;
+  padding: 34px 36px;
+  justify-content: center;
+}
+.encaps-slide .soc-card h3 {
+  font-size: 24px;
+}
+.encaps-slide .soc-row {
+  padding: 22px 26px;
+}
+.encaps-slide .soc-row strong {
+  font-size: 24px;
+}
+.encaps-slide .soc-row span {
+  display: block;
+  margin-top: 6px;
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+/* SRP revisit: each card holds just one short bullet, so the base 470px
+   min-height leaves a lot of dead air below it — shrink and center instead */
+.srp-revisit-slide .two-sides {
+  margin: auto 0;
+}
+.srp-revisit-slide .two-sides article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
+}
+
 /* Principles recap: each card links out to its full RACE 5 explanation */
 .principles-grid a {
   display: block;

@@ -25,7 +25,7 @@
             <li><a href="#/opsamling"><b>Opsamling: Lever jeres API op til principperne?</b><small>de seks REST-principper og et par best practices fra sidst</small></a></li>
             <li><a href="#/problemet"><b>Problemet: hvad sker der, når koden vokser?</b><small>Separation of Concerns</small></a></li>
             <li><a href="#/modules"><b>Modules, Import &amp; Export</b><small>forudsætningen for at dele kode mellem filer — og DRY</small></a></li>
-            <li><a href="#/router"><b>Express Router</b><small>en selvstændig "mini-app" pr. ressource</small></a></li>
+            <li><a href="#/router"><b>Express Router</b><small>en selvstændig "mini-app" pr. ressource — og Single Responsibility</small></a></li>
             <li><a href="#/lagdelt"><b>Lagdelt arkitektur</b><small>data-modul, Encapsulation — og frivilligt: controllers</small></a></li>
             <li><a href="#/query"><b>Filtrering, sortering &amp; paginering</b><small><code>request.query</code>, <code>filter()</code>, <code>sort()</code>, <code>slice()</code></small></a></li>
           </ol>
@@ -426,6 +426,22 @@ router.post("/", async (request, response) => {
         </section>
 
         <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Begreb</span>
+          <h2>En Router er jeres helt egen mini-<code>app</code>, for én ressource</h2>
+          <div class="definition-pair">
+            <article>
+              <span>Hvad er det?</span>
+              <p>Et objekt fra <code>express.Router()</code> — det kan præcis det samme som <code>app</code>: <code>.get()</code>, <code>.post()</code>, <code>.put()</code>, <code>.delete()</code>, og kan bruge middleware.</p>
+            </article>
+            <article>
+              <span>Hvad bruger vi det til?</span>
+              <p>At samle alle ruter for <b>én</b> ressource i sin egen fil — <code>routes/students.js</code> kender kun til students, intet andet.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Routeren eksporteres, ligesom modulerne i sidste kapitel — <code>server.js</code> importerer den blot.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
           <span class="eyebrow"><code>express.Router()</code></span>
           <h2>Routeren kender ikke sit eget mount-punkt</h2>
           <div class="definition-pair">
@@ -527,7 +543,24 @@ server.js                     server.js
             <li>Montér begge i <code>server.js</code> med <code>app.use(sti, router)</code></li>
             <li>Kør hele CRUD-flowet igennem for begge ressourcer, efter split'et</li>
           </ul>
-          <p class="bottom-line">Begreb: <b>Single Responsibility</b> — hver routes-fil har nu ansvar for kun én ressource.</p>
+          <p class="bottom-line">Test grundigt — split'et må ikke ændre API'ets adfærd udadtil.</p>
+        </section>
+
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Begreb</span>
+          <h2>Single Responsibility — saml det, der ændrer sig sammen</h2>
+          <p class="concept-intro">Ikke "gør kun én ting" bogstaveligt — et <b>ansvar</b> er netop det: en grund til at ændre sig. Det, I lige har lavet med Router-splittet, er et konkret eksempel.</p>
+          <div class="definition-pair">
+            <article>
+              <span><code>routes/students.js</code></span>
+              <p>Ændrer sig kun, når <b>students</b>-logikken gør — nye felter, nye regler, nye routes for netop denne ressource.</p>
+            </article>
+            <article>
+              <span><code>routes/teachers.js</code></span>
+              <p>Rører I slet ikke, når I retter i students — de to filer har hver deres egen, uafhængige grund til at ændre sig.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Derfor virker Router-splittet: hver fil har nu kun ét ansvar — én ressource.</p>
         </section>
 
         <section id="lagdelt" class="chapter" data-accent="green">
@@ -537,17 +570,43 @@ server.js                     server.js
           <p>En route håndterer HTTP ind/ud — ikke filsystemet. Data-adgangen flytter videre til sit eget modul.</p>
         </section>
 
-        <section class="definition-slide" data-accent="green">
-          <span class="eyebrow">Begreb</span>
-          <h2>Encapsulation — routes-filen skal ikke vide, hvor data bor</h2>
-          <div class="definition-pair">
+        <section class="tradeoff-slide srp-revisit-slide" data-accent="green">
+          <span class="eyebrow">Samme princip, ny led</span>
+          <h2>Single Responsibility gælder også på tværs af lag</h2>
+          <p class="concept-intro">Sidst splittede I pr. ressource. Nu splitter I langs en anden led — pr. slags arbejde.</p>
+          <div class="two-sides">
             <article>
-              <span>Routes-filen</span>
-              <p>Kalder blot <code>loadStudents()</code>/<code>saveStudents()</code> — og er ligeglad med, om data ligger i en JSON-fil, en database eller et array.</p>
+              <h3><code>routes/students.js</code></h3>
+              <ul>
+                <li>Ændrer sig kun, når <b>HTTP-håndteringen</b> gør</li>
+              </ul>
             </article>
             <article>
-              <span>Data-modulet</span>
-              <p><code>data/students.js</code> gemmer på detaljen — <code>fs.readFile()</code>/<code>fs.writeFile()</code> i dag, en database-forespørgsel senere.</p>
+              <h3><code>data/students.js</code></h3>
+              <ul>
+                <li>Ændrer sig kun, når <b>datalageret</b> gør — JSON-fil i dag, database senere</li>
+              </ul>
+            </article>
+          </div>
+          <p class="bottom-line">Samme grundregel begge steder: saml det, der ændrer sig sammen, adskil det, der ikke gør.</p>
+        </section>
+
+        <section class="definition-slide soc-slide encaps-slide" data-accent="green">
+          <span class="eyebrow">Begreb</span>
+          <h2>Encapsulation — skjul hvordan, vis kun hvad</h2>
+          <p class="concept-intro">En funktion, en router eller et modul bør have en simpel udadvendt facade — og gemme detaljerne for sig selv. Kalderen skal vide, hvad den kan bruges til, ikke hvordan den virker indeni. Det går igen flere steder i dag.</p>
+          <div class="soc-examples">
+            <article class="soc-card">
+              <h3>Funktioner · fra Modules</h3>
+              <div class="soc-row"><strong><code>loadStudents()</code></strong><span>Skjuler <code>fs.readFile()</code> + <code>JSON.parse()</code> bag et navn</span></div>
+            </article>
+            <article class="soc-card">
+              <h3>Express Router</h3>
+              <div class="soc-row"><strong><code>app.use("/students", studentsRouter)</code></strong><span>Skjuler, hvordan routeren håndterer GET/POST/PUT/DELETE internt</span></div>
+            </article>
+            <article class="soc-card soc-card-accent">
+              <h3>Data-modulet · om lidt</h3>
+              <div class="soc-row"><strong><code>data/students.js</code></strong><span>Skjuler om data ligger i en JSON-fil eller en database</span></div>
             </article>
           </div>
           <p class="bottom-line">Skift databagvedliggeren senere, og kun <code>data/students.js</code> skal ændres — ikke routes-filen.</p>
@@ -706,6 +765,26 @@ GET /students?page=2&limit=5
             <li>Test hvert trin for sig, i Thunder Client, før I lægger det næste oveni</li>
           </ul>
           <p class="bottom-line">Statuskoder og fejlhåndtering af ugyldige query-værdier venter til RACE 7.</p>
+        </section>
+
+        <section class="crud-overview-slide concepts-recap-slide">
+          <span class="eyebrow">Opsamling · begreber</span>
+          <h2>Fire begreber, samlet — og hvor I så dem i dag</h2>
+          <div class="crud-table">
+            <div class="crud-row crud-row-get">
+              <code class="crud-method">SoC</code><span>Ét ansvar pr. del af koden</span><small>HTML/CSS/JS, MVC — og jeres eget routing/data-split</small>
+            </div>
+            <div class="crud-row crud-row-post">
+              <code class="crud-method">DRY</code><span>Gentaget kode → funktion</span><small><code>loadStudents()</code>/<code>saveStudents()</code>, genbrugt på tværs af routes</small>
+            </div>
+            <div class="crud-row crud-row-put">
+              <code class="crud-method">SRP</code><span>Én grund til at ændre sig</span><small>Router-split pr. ressource — og lagdeling pr. slags arbejde</small>
+            </div>
+            <div class="crud-row crud-row-patch">
+              <code class="crud-method">Encaps.</code><span>Skjul hvordan, vis kun hvad</span><small><code>loadX()</code>, routerens mount-punkt, og data-modulet</small>
+            </div>
+          </div>
+          <p class="bottom-line">Ingen af dem er nye regler — bare navne på vaner, I allerede har opbygget i dag.</p>
         </section>
 
         <section class="materials-slide">
