@@ -897,6 +897,8 @@ Del 4 er gennemført, når `GET /students`:
 
 I Del 4 fik `GET /students` for alvor noget at lave — filtrering, sortering og paginering, alt sammen direkte i routen. De øvrige routes (opret, hent én, opdatér, slet) er stadig tynde rene gennemløb, men `GET /students` er nu blevet stor nok til, at det gør en forskel at flytte logikken væk fra selve routingen. Det er derfor controllerlaget kommer her, efter Del 4 — det betaler sig først, når der reelt er noget værd at flytte.
 
+> **Hvorfor egentlig et controller-lag?** Delvist handler det om projektets størrelse: med fem tynde routes er der intet at vinde ved at splitte dem op, men jo mere logik en route samler på — som filtreringen, sorteringen og pagineringen i `getAllStudents` — jo sværere bliver den at overskue, når routing og logik ligger i samme funktion. Den konkrete gevinst her er, at `routes/students.js` bliver en ren liste over endpoints, mens controlleren rummer den logik, der faktisk er værd at læse for sig selv. Læg dog mærke til, at jeres controller-funktioner stadig tager `(request, response)` direkte fra Express — de er altså ikke fuldt afkoblet fra HTTP-laget. Skulle I for alvor genbruge logikken uden for én bestemt route, fx fra et script eller en helt anden slags endpoint, ville næste skridt være at trække selve logikken endnu længere ud, så den ikke rører `request`/`response` overhovedet — det ligger uden for denne øvelse.
+
 Sådan ser en enkelt request igennem alle fire lag ud, når Del 5 er færdig:
 
 ```text
