@@ -744,6 +744,8 @@ Kig i terminalen, hvor serveren kører, mens I sender disse requests fra Thunder
 
 `request.query` er altså bare et almindeligt JavaScript-objekt, bygget ud fra det, der står efter `?` i URL'en — én property pr. query parameter, og alle værdier er strings, uanset hvad de "ligner". Det er præcis den byggesten, filtrering, sortering og paginering i resten af Del 4 bruger.
 
+Fjern `console.log(request.query)` igen, når I har set nok — den skal ikke blive stående i den route, I bygger videre på herfra.
+
 ---
 
 ### 13. Filtrering: ?education=...
