@@ -35,6 +35,8 @@ Vi kigger også nærmere på organisering af koden bag svarlogikken. Jo mere ava
 
 ### Præsentationer
 
+- [DOB 3 - String parsing, metoder og funktioner - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%203%20-%20String%20parsing%2C%20metoder%20og%20funktioner%20-%20slides.pdf)
+
 ### Opgaver
 
 ---

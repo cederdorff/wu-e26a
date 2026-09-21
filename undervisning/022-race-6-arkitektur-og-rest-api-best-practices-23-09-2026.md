@@ -4,7 +4,7 @@
 
 ## Dagens fokus
 
-I dag starter vi med at holde jeres eget `/students`-API op mod de seks REST-principper fra sidst og et par konkrete best practices for navngivning og konsistens — og bruger det til at identificere, hvad der mangler.
+I dag starter vi med at holde jeres eget `/students`\-API op mod de seks REST-principper fra sidst og et par konkrete best practices for navngivning og konsistens — og bruger det til at identificere, hvad der mangler.
 
 Derefter rammesætter vi resten af dagen: hvad sker der, når et API vokser sig stort i én fil? I kan allerede se tendensen i AMAbotten.
 
@@ -24,7 +24,7 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 - Kort oplæg: genopfrisk sammen de seks REST-principper fra sidste gang — Client-Server, Stateless, Ressourcer & URI'er, CRUD via HTTP-metoder, Statuskoder, JSON som format
 - Suppler med et par konkrete best practices fra artiklen, som principperne ikke selv siger noget om: er ressourcer navngivet som substantiver i flertal (`/students`, ikke `/getStudent`)? Er jeres responses og statuskoder konsistente på tværs af routes?
 - Nævnes kort, men er ikke i dag: nested resources (fx `/teachers/:id/students`), versionering (`/v1/...`) og API-dokumentation er også udbredte REST best practices (kilde: [freeCodeCamp](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)) — gode at kende til, men venter til en anden gang
-- Nu er de klar: to og to, hold principperne og best practices op mod jeres eget `/students`-API fra [Studerende med CRUD](../opgaver/express-rest-api-students.md): for hvert punkt — lever jeres løsning op til det, og hvorfor/hvorfor ikke?
+- Nu er de klar: to og to, hold principperne og best practices op mod jeres eget `/students`\-API fra [Studerende med CRUD](../opgaver/express-rest-api-students.md): for hvert punkt — lever jeres løsning op til det, og hvorfor/hvorfor ikke?
 - Har I ikke nået øvelsen, så brug i stedet [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) som udgangspunkt for samtalen
 - Hvilket princip eller best practice føles mest abstrakt eller svært at få hold på i praksis — og hvorfor?
 - Kort opsamling i plenum: hvor er grupperne enige/uenige, og hvad manglede der flest steder?
@@ -39,7 +39,7 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 - Rammesætter resten af dagen: derfor skal vi tale om modules, `Router` og lagdelt arkitektur
 </details>
 <details>
-<summary><strong>3. Modules, Import & Export</strong></summary>
+<summary><strong>3. Modules, Import &amp; Export</strong></summary>
 
 - Kort om `import`/`export` (ES modules) — forudsætningen for at dele kode mellem filer
 - Hands-on del 1: tilføj samme CRUD-mønster for en ny ressource `/teachers` i jeres eksisterende `server.js` — `GET`, `GET/:id`, `POST`, `PUT`, `DELETE`, kopiér mønstret fra `/students`, denne gang direkte oven på en JSON-fil (`data/teachers.json`) — I kender allerede fra `/students`, hvorfor persistens i en fil er nødvendig, så mellemtrinnet med et rent in-memory array springes over; ingen statuskoder eller fejlhåndtering endnu
@@ -52,21 +52,21 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 
 - `express.Router()` som en selvstændig "mini-app" for én ressource
 - Montér en router på hoved-appen: `app.use("/students", studentsRouter)` og `app.use("/teachers", teachersRouter)`
-- Hands-on: flyt jeres students- og teachers-routes over i hver sin fil i en `routes/`-mappe
+- Hands-on: flyt jeres students- og teachers-routes over i hver sin fil i en `routes/`\-mappe
 - Begreb: **Single Responsibility** — hver routes-fil har nu kun ansvar for én ressource; det er Separation of Concerns i praksis, en fil ad gangen
 </details>
 <details>
 <summary><strong>5. Lagdelt arkitektur: data-modul og controllers</strong></summary>
 
 - `loadStudents()`/`saveStudents()` (og teachers-varianterne) hører ikke hjemme i en routes-fil — en route skal håndtere HTTP ind/ud, ikke filsystemet — så de flytter videre til deres eget data-modul (`data/students.js`, `data/teachers.js`)
-- Hands-on: flyt data-adgangen fra jeres routes-filer videre til et `data/`-modul
+- Hands-on: flyt data-adgangen fra jeres routes-filer videre til et `data/`\-modul
 - Begreb: **Encapsulation** — routes-filen skal ikke vide, om data ligger i en JSON-fil, en database eller et array; den kalder bare `loadStudents()`/`saveStudents()` og lader data-modulet gemme på detaljen
 - Brug samtidig lejligheden til at rette navngivning og konsistens, I fandt frem til i dagens opsamling
 - Frivilligt: når en routes-fil selv får rigtig logik (fx filtrering, se næste punkt), kan I trække den ud i en controller-funktion — routen kalder bare controlleren
 - Kort demo af mappestruktur med `routes/`, `data/` og `controllers/` — I skal ikke nå at bygge controllers i dag, men vide hvornår det giver mening
 </details>
 <details>
-<summary><strong>6. Filtrering, sortering & paginering med query parameters</strong></summary>
+<summary><strong>6. Filtrering, sortering &amp; paginering med query parameters</strong></summary>
 
 - `request.query` til at læse fx `?education=Datamatiker`
 - Filtrering: brug `.filter()` på data ud fra en eller flere query parametre
@@ -79,13 +79,13 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 
 ## Forberedelse
 
-- Færdiggør [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) (Del 1 og Del 2) fra sidste gang, hvis I ikke er helt i mål endnu — det er jeres eget `/students`-API, I skal holde op mod de seks principper i dagens opsamling. Har I ikke nået den, så kig i stedet på [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) og vær klar til at tale ud fra den
+- Færdiggør [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) (Del 1 og Del 2) fra sidste gang, hvis I ikke er helt i mål endnu — det er jeres eget `/students`\-API, I skal holde op mod de seks principper i dagens opsamling. Har I ikke nået den, så kig i stedet på [cederdorff/express-rest-api-students](https://github.com/cederdorff/express-rest-api-students) og vær klar til at tale ud fra den
 - [Øvelse 6: AMAbotten som REST API](../opgaver/express-rest-api-amabot.md) er nu mere jeres eget tempo — I må gerne arbejde videre med den, men det er ikke et krav for i dag
 - Læs ["Routing"](https://expressjs.com/en/guide/routing.html) i Express.js-dokumentationen, særligt afsnittet om `express.Router()`
 - Genopfrisk `req.query` i [Request-referencen](https://expressjs.com/en/api.html#req.query) på Express.js — I kender allerede `req.params` og `req.body` fra sidst
 - Læs ["REST API Best Practices – REST Endpoint Design Examples"](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) på freeCodeCamp, særligt punktet om filtrering/sortering/paginering
 - Supplerende på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
-  - færdiggør Fullstack &gt; Express.js &gt; "Build an Express API", hvis I ikke nåede det efter sidste gang
+    - færdiggør Fullstack > Express.js > "Build an Express API", hvis I ikke nåede det efter sidste gang
 
 ---
 
@@ -93,8 +93,8 @@ Fejlhåndtering og sikkerhed gemmer vi til [RACE 7](./024-race-7-sikkerhed-og-er
 
 - Slides: TBA
 - Opgaver:
-  - [REST API-øvelse: Arkitektur — routes, data, controllers og filtrering](../opgaver/express-rest-api-arkitektur.md)
-  - [Øvelse 7: AMAbotten i lag — routes og data-modul](../opgaver/express-rest-api-amabot-arkitektur.md) — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo
+    - [REST API-øvelse: Arkitektur — routes, data, controllers og filtrering](../opgaver/express-rest-api-arkitektur.md)
+    - [Øvelse 7: AMAbotten i lag — routes og data-modul](../opgaver/express-rest-api-amabot-arkitektur.md) — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo
 
 ---
 
@@ -111,8 +111,8 @@ canvas_module_item_position: 1
 canvas_page_id: 200718
 canvas_page_slug: "plan-for-race-6-arkitektur-og-rest-api-best-practices"
 canvas_page_title: "Plan for RACE 6 - Arkitektur og REST API Best Practices"
-canvas_page_published: false
-canvas_updated_at: "2026-08-10T12:34:10Z"
+canvas_page_published: true
+canvas_updated_at: "2026-09-17T11:25:00Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018715"
 local_status: mirrored
 ```

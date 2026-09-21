@@ -9,9 +9,10 @@
 ### Undervisere
 
 - [👤 DOB — Dan Okkels Brendstrup — dob@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/dan-okkels-brendstrup)
-- [👤 MAGL - Magnus Lindholm Nielsen - magl@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/magnus-lindholm-nielsen)
-- [👤 NYCH - Nynne Lucca Christiansen - nych@eaaa.dk](https://www.linkedin.com/in/nynne-lucca-christiansen-6b93021a6/)
 - [👤 RACE — Rasmus Cederdorff — race@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/rasmus-vase-cederdorff)
+- [👤 MAGL — Magnus Lindholm Nielsen — magl@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/magnus-lindholm-nielsen)
+- [👤 NKKR — Nikolaj Krogh Kjær-Rasmussen — nkkr@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/nikolaj-krogh-kjaer-rasmussen)
+- [👤 HEOE — Henrik Øllgaard — heoe@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/henrik-ollgaard)
 
 ### Anbefalede Scrimba-kurser
 

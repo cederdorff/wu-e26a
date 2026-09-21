@@ -33,8 +33,8 @@
     "content_type": "application/pdf",
     "size": 30712,
     "created_at": "2026-08-26T11:39:40Z",
-    "updated_at": "2026-08-26T11:40:31Z",
-    "locked": true,
+    "updated_at": "2026-09-16T09:29:47Z",
+    "locked": false,
     "hidden": false,
     "local_path": "materialer/canvas-filer/Bordgrupper/Bordgrupper uge 38.pdf"
   },
@@ -91,6 +91,45 @@
     "local_path": "materialer/canvas-filer/AMAbot/DOB 2 - Git branching & DevTools - slides.pdf"
   },
   {
+    "id": 1693928,
+    "folder_id": 417309,
+    "display_name": "DOB 3 - String parsing, metoder og funktioner - slides.pdf",
+    "filename": "DOB+3+-+String+parsing%2C+metoder+og+funktioner+-+slides.pdf",
+    "content_type": "application/pdf",
+    "size": 284347,
+    "created_at": "2026-09-09T06:34:38Z",
+    "updated_at": "2026-09-09T06:47:51Z",
+    "locked": false,
+    "hidden": false,
+    "local_path": "materialer/canvas-filer/AMAbot/DOB 3 - String parsing, metoder og funktioner - slides.pdf"
+  },
+  {
+    "id": 1697780,
+    "folder_id": 417309,
+    "display_name": "DOB 4 - DOM manipulation med JS - slides.pdf",
+    "filename": "DOB+4+-+DOM+manipulation+med+JS+-+slides.pdf",
+    "content_type": "application/pdf",
+    "size": 298559,
+    "created_at": "2026-09-15T06:56:47Z",
+    "updated_at": "2026-09-15T07:00:14Z",
+    "locked": false,
+    "hidden": false,
+    "local_path": "materialer/canvas-filer/AMAbot/DOB 4 - DOM manipulation med JS - slides.pdf"
+  },
+  {
+    "id": 1700538,
+    "folder_id": 417309,
+    "display_name": "DOB 5 - Fetch & async JavaScript - slides.pdf",
+    "filename": "DOB+5+-+Fetch+%26+async+JavaScript+-+slides.pdf",
+    "content_type": "application/pdf",
+    "size": 5580501,
+    "created_at": "2026-09-18T06:07:50Z",
+    "updated_at": "2026-09-18T10:58:05Z",
+    "locked": false,
+    "hidden": false,
+    "local_path": "materialer/canvas-filer/AMAbot/DOB 5 - Fetch & async JavaScript - slides.pdf"
+  },
+  {
     "id": 1678469,
     "folder_id": 417309,
     "display_name": "Intro - slides.pdf",
@@ -128,6 +167,45 @@
     "locked": false,
     "hidden": false,
     "local_path": "materialer/canvas-filer/AMAbot/INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx"
+  },
+  {
+    "id": 1700939,
+    "folder_id": 402024,
+    "display_name": "pairs-absent.webp",
+    "filename": "pairs-absent.webp",
+    "content_type": "image/webp",
+    "size": 140936,
+    "created_at": "2026-09-18T10:54:30Z",
+    "updated_at": "2026-09-18T10:54:30Z",
+    "locked": false,
+    "hidden": true,
+    "local_path": "materialer/canvas-filer/Uploaded Media/pairs-absent.webp"
+  },
+  {
+    "id": 1700937,
+    "folder_id": 402024,
+    "display_name": "pairs-present.webp",
+    "filename": "pairs-present.webp",
+    "content_type": "image/webp",
+    "size": 318670,
+    "created_at": "2026-09-18T10:53:46Z",
+    "updated_at": "2026-09-18T10:53:46Z",
+    "locked": false,
+    "hidden": true,
+    "local_path": "materialer/canvas-filer/Uploaded Media/pairs-present.webp"
+  },
+  {
+    "id": 1694686,
+    "folder_id": 402024,
+    "display_name": "regex-elvish.webp",
+    "filename": "regex-elvish.webp",
+    "content_type": "image/webp",
+    "size": 32668,
+    "created_at": "2026-09-09T10:55:45Z",
+    "updated_at": "2026-09-09T10:55:45Z",
+    "locked": false,
+    "hidden": true,
+    "local_path": "materialer/canvas-filer/Uploaded Media/regex-elvish.webp"
   },
   {
     "id": 1678067,

@@ -36,6 +36,8 @@ Nu hvor I har byggeklodserne til et fungerende API, skal vi lære at kommunikere
 
 ### Præsentationer
 
+- [DOB 5 - Fetch & async JavaScript - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%205%20-%20Fetch%20%26%20async%20JavaScript%20-%20slides.pdf)
+
 ### Opgaver
 
 ---

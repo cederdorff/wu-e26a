@@ -10,8 +10,7 @@ TBA
 
 ## Agenda
 
-- TBA
-  husk CORS
+- TBA husk CORS
 
 ---
 
@@ -21,9 +20,9 @@ TBA
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
-### Opgaver
+## Opgaver
 
 ---
 
@@ -41,7 +40,7 @@ canvas_page_id: 200719
 canvas_page_slug: "plan-for-race-7-sikkerhed-og-error-handling"
 canvas_page_title: "Plan for RACE 7 - Sikkerhed og Error Handling"
 canvas_page_published: false
-canvas_updated_at: "2026-08-10T12:34:11Z"
+canvas_updated_at: "2026-09-17T08:18:16Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018718"
 local_status: mirrored
 ```

@@ -32,6 +32,8 @@ Vi kigger også på Git remotes og hvordan vi kan push'e og pull'e fra flere rem
 
 ### Præsentationer
 
+- [DOB 4 - DOM manipulation med JS - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%204%20-%20DOM%20manipulation%20med%20JS%20-%20slides.pdf)
+
 ### Opgaver
 
 ---

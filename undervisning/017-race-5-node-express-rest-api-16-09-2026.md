@@ -46,13 +46,13 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 - Statuskoder fortæller om resultatet af et request: `200 OK`, `201 Created`, `404 Not Found`
 - `response.json()` sender JavaScript-data som JSON i responsen, med korrekt `Content-Type`
 - Rigtigt eksempel: Dataforsyningens danske adressedata-API (`api.dataforsyningen.dk`) følger samme mønster — samling giver et array, ét element giver et objekt
-- REST's Key Principles opsummeres først i overblik (kilde: [Codecademy](https://www.codecademy.com/article/what-is-rest-api)), derefter ét slide per princip, med eksempler fra dagens `/students`-API:
-  1. **Client-Server** — Thunder Client og Express-serveren kender intet til hinandens indre, kun til `/students`
-  2. **Stateless** — `GET /students/1` og `GET /students/2` er to helt uafhængige requests; id'et skal med hver gang
-  3. **Ressourcer & URI'er** — `/students` (samling) og `/students/:id` (element)
-  4. **CRUD via HTTP-metoder** — GET/POST/PUT/DELETE på `/students`
-  5. **Statuskoder** — `200`, `201`, `404` (kendt fra RACE 1)
-  6. **JSON som format** — `response.json()` sender arrayet som JSON, med korrekt `Content-Type`
+- REST's Key Principles opsummeres først i overblik (kilde: [Codecademy](https://www.codecademy.com/article/what-is-rest-api)), derefter ét slide per princip, med eksempler fra dagens `/students`\-API:
+    1.  **Client-Server** — Thunder Client og Express-serveren kender intet til hinandens indre, kun til `/students`
+    2.  **Stateless** — `GET /students/1` og `GET /students/2` er to helt uafhængige requests; id'et skal med hver gang
+    3.  **Ressourcer & URI'er** — `/students` (samling) og `/students/:id` (element)
+    4.  **CRUD via HTTP-metoder** — GET/POST/PUT/DELETE på `/students`
+    5.  **Statuskoder** — `200`, `201`, `404` (kendt fra RACE 1)
+    6.  **JSON som format** — `response.json()` sender arrayet som JSON, med korrekt `Content-Type`
 - I går i gang med dagens øvelse undervejs: byg GET, POST, route parameters, PUT og DELETE som minimum, og test hver route i Thunder Client — ikke kun i browseren. Formålet er at træne mønsteret, før I senere overfører det til AMAbotten
 </details>
 <details>
@@ -67,7 +67,7 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 
 - `:id` i routens sti, værdien findes i `request.params.id`
 - `request.params.id` er altid en string — `Number()` er nødvendig, når den skal sammenlignes med et numerisk id
-- `.find()` finder én bestemt ressource; findes intet, får I `null` tilbage i dag — rigtig `404`-håndtering venter til en senere øvelse
+- `.find()` finder én bestemt ressource; findes intet, får I `null` tilbage i dag — rigtig `404`\-håndtering venter til en senere øvelse
 </details>
 
 ---
@@ -81,20 +81,20 @@ I dag skifter vi fra at bygge sider til at bygge et REST API: HTTP-metoderne som
 - Skim ["HTTP request methods"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) på MDN — GET/POST/PUT/DELETE findes i HTTP, længe før REST kommer ind i billedet
 - Skim ["REST — Key Principles"](https://www.codecademy.com/article/what-is-rest) på Codecademy og evt. ["REST API Explained (2 min)"](https://www.youtube.com/watch?v=WRsKs-K6iII) på YouTube
 - Supplerende på [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
-  - fortsæt på Fullstack &gt; Express.js (særligt "Build an Express API")
-  - ["What is a REST API?"](https://scrimba.com/explain/guide09u8e4urj)
-  - ["HTTP Methods Explained"](https://scrimba.com/explain/guide0l5rrn4da)
-  - ["HTTP Request Methods"](https://scrimba.com/explain/guide0067ph2c4)
+    - fortsæt på Fullstack > Express.js (særligt "Build an Express API")
+    - ["What is a REST API?"](https://scrimba.com/explain/guide09u8e4urj)
+    - ["HTTP Methods Explained"](https://scrimba.com/explain/guide0l5rrn4da)
+    - ["HTTP Request Methods"](https://scrimba.com/explain/guide0067ph2c4)
 
 ---
 
 ## Materialer
 
 - Slides:
-  - [RACE 5 · Node/Express REST API](https://cederdorff.com/wu-e26a/rest-api/)
+    - [RACE 5 · Node/Express REST API](https://cederdorff.com/wu-e26a/rest-api/)
 - Opgaver:
-  - [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) — Del 1 bygger fuld CRUD (GET, POST, PUT, DELETE) for `/students` i memory, Del 2 flytter data til en JSON-fil uden at ændre routes' logik. Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse
-  - [Øvelse 6: AMAbotten som REST API](../opgaver/express-rest-api-amabot.md) — bygger videre på jeres egen AMAbot fra øvelse 3-5: del projektet i `client`/`server`, fjern EJS, og genskab AMAbotten som et rent REST API — `/messages` med tre endpoints, `/answers` med fuld CRUD
+    - [REST API-øvelse: Studerende med CRUD](../opgaver/express-rest-api-students.md) — Del 1 bygger fuld CRUD (GET, POST, PUT, DELETE) for `/students` i memory, Del 2 flytter data til en JSON-fil uden at ændre routes' logik. Statuskoder og fejlhåndtering af ugyldige id'er venter til en senere øvelse
+    - [Øvelse 6: AMAbotten som REST API](../opgaver/express-rest-api-amabot.md) — bygger videre på jeres egen AMAbot fra øvelse 3-5: del projektet i `client`/`server`, fjern EJS, og genskab AMAbotten som et rent REST API — `/messages` med tre endpoints, `/answers` med fuld CRUD
 
 ---
 
@@ -112,7 +112,7 @@ canvas_page_id: 200715
 canvas_page_slug: "plan-for-race-5-node-slash-express-rest-api"
 canvas_page_title: "Plan for RACE 5 - Node/Express REST API"
 canvas_page_published: true
-canvas_updated_at: "2026-09-16T08:50:15Z"
+canvas_updated_at: "2026-09-16T08:59:04Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018706"
 local_status: mirrored
 ```

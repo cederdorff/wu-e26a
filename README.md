@@ -45,18 +45,18 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [024 · RACE 7 - Sikkerhed og Error Handling - 25-09-2026](./undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md)
 - [025 · DOB 7 - Client-side error handling - 28-09-2026](./undervisning/025-dob-7-client-side-error-handling-28-09-2026.md)
 - [026 · Forberedelse - Selvstudium - 29-09-2026](./undervisning/026-forberedelse-selvstudium-29-09-2026.md)
-- [027 · DOB 8 - Client/Server præsentationer - 30-09-2026](./undervisning/027-dob-8-client-server-praesentationer-30-09-2026.md) — *kladde i Canvas*
+- [027 · DOB + RACE 8 - Client/Server præsentationer - 30-09-2026](./undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md)
 
 ### Chatbot (Uge 41-46)
 
 - [028 · Forløbsoversigt og fælles materialer](./undervisning/028-chatbot-uge-41-46.md)
 - [029 · Forberedelse - Selvstudium - 01-10-2026](./undervisning/029-forberedelse-selvstudium-01-10-2026.md) — *kladde i Canvas*
-- [030 · NYCH 1 - Byg et chatbot UI i Figma - 02-10-2026](./undervisning/030-nych-1-byg-et-chatbot-ui-i-figma-02-10-2026.md) — *kladde i Canvas*
+- [030 · NKKR 1 - Byg et chatbot UI i Figma - 02-10-2026](./undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md) — *kladde i Canvas*
 - [031 · Forberedelse - Selvstudium - 05-10-2026](./undervisning/031-forberedelse-selvstudium-05-10-2026.md) — *kladde i Canvas*
 - [032 · RACE 8 - Thinking in React - 06-10-2026](./undervisning/032-race-8-thinking-in-react-06-10-2026.md) — *kladde i Canvas*
 - [033 · DOB 9 - React state & routing med React Router - 07-10-2026](./undervisning/033-dob-9-react-state-routing-med-react-router-07-10-2026.md) — *kladde i Canvas*
 - [034 · Forberedelse - Selvstudium - 08-10-2026](./undervisning/034-forberedelse-selvstudium-08-10-2026.md) — *kladde i Canvas*
-- [035 · NYCH 2 - Informationsarkitektur & accessibility - 09-10-2026](./undervisning/035-nych-2-informationsarkitektur-accessibility-09-10-2026.md) — *kladde i Canvas*
+- [035 · HEOE 1 - Informationsarkitektur & accessibility - 09-10-2026](./undervisning/035-heoe-1-informationsarkitektur-accessibility-09-10-2026.md) — *kladde i Canvas*
 - [036 · Forberedelse - Selvstudium - 12-10-2026](./undervisning/036-forberedelse-selvstudium-12-10-2026.md) — *kladde i Canvas*
 - [037 · DOB 10 - Data fetching og mutation via Supabase - 13-10-2026](./undervisning/037-dob-10-data-fetching-og-mutation-via-supabase-13-10-2026.md) — *kladde i Canvas*
 - [038 · MAGL 1 - SQL intro via Supabase - 14-10-2026](./undervisning/038-magl-1-sql-intro-via-supabase-14-10-2026.md) — *kladde i Canvas*
@@ -66,17 +66,17 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [042 · MAGL 3 - Læs og skriv beskeder via SQL - 20-10-2026](./undervisning/042-magl-3-laes-og-skriv-beskeder-via-sql-20-10-2026.md) — *kladde i Canvas*
 - [043 · DOB 11 - AI integration via Mistral API - 21-10-2026](./undervisning/043-dob-11-ai-integration-via-mistral-api-21-10-2026.md) — *kladde i Canvas*
 - [044 · Forberedelse - Selvstudium - 22-10-2026](./undervisning/044-forberedelse-selvstudium-22-10-2026.md) — *kladde i Canvas*
-- [045 · NYCH 3 - Design tokens og theming - 23-10-2026](./undervisning/045-nych-3-design-tokens-og-theming-23-10-2026.md) — *kladde i Canvas*
+- [045 · HEOE 3 - Design tokens og theming - 23-10-2026](./undervisning/045-heoe-3-design-tokens-og-theming-23-10-2026.md) — *kladde i Canvas*
 - [046 · Forberedelse - Selvstudium - 26-10-2026](./undervisning/046-forberedelse-selvstudium-26-10-2026.md) — *kladde i Canvas*
 - [047 · MAGL 4 - Slette oprette og redigere tråde - 27-10-2026](./undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md) — *kladde i Canvas*
 - [048 · RACE 9 - User authentication og login - 28-10-2026](./undervisning/048-race-9-user-authentication-og-login-28-10-2026.md) — *kladde i Canvas*
 - [049 · Forberedelse - Selvstudium - 29-10-2026](./undervisning/049-forberedelse-selvstudium-29-10-2026.md) — *kladde i Canvas*
-- [050 · NYCH 4 - Planlægning af designprocesser - 30-10-2026](./undervisning/050-nych-4-planlaegning-af-designprocesser-30-10-2026.md) — *kladde i Canvas*
+- [050 · HEOE 4 - Planlægning af designprocesser - 30-10-2026](./undervisning/050-heoe-4-planlaegning-af-designprocesser-30-10-2026.md) — *kladde i Canvas*
 - [051 · Forberedelse - Selvstudium - 02-11-2026](./undervisning/051-forberedelse-selvstudium-02-11-2026.md) — *kladde i Canvas*
 - [052 · RACE 10 - JWT tokens fra frontend - 03-11-2026](./undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md) — *kladde i Canvas*
 - [053 · DOB 12 - Test, kvalitetssikring og deployment - 04-11-2026](./undervisning/053-dob-12-test-kvalitetssikring-og-deployment-04-11-2026.md) — *kladde i Canvas*
 - [054 · Forberedelse - Selvstudium - 05-11-2026](./undervisning/054-forberedelse-selvstudium-05-11-2026.md) — *kladde i Canvas*
-- [055 · NYCH 5 - Brugertest til validering af en løsning - 06-11-2026](./undervisning/055-nych-5-brugertest-til-validering-af-en-loesning-06-11-2026.md) — *kladde i Canvas*
+- [055 · HEOE 5 - Brugertest til validering af en løsning - 06-11-2026](./undervisning/055-heoe-5-brugertest-til-validering-af-en-loesning-06-11-2026.md) — *kladde i Canvas*
 - [056 · Forberedelse - Selvstudium - 09-11-2026](./undervisning/056-forberedelse-selvstudium-09-11-2026.md) — *kladde i Canvas*
 - [057 · MAGL 5 - Backend auth enforcement - 10-11-2026](./undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md) — *kladde i Canvas*
 - [058 · RACE 11 - Session expiration handling i Frontend - 11-11-2026](./undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) — *kladde i Canvas*

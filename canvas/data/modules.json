@@ -9,7 +9,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 11,
+    "items_count": 12,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/176702/items",
     "items": [
       {
@@ -75,42 +75,8 @@
         }
       },
       {
-        "id": 1010880,
-        "position": 5,
-        "title": "👤 MAGL - Magnus Lindholm Nielsen - magl@eaaa.dk",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 176702,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1010880",
-        "external_url": "https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/magnus-lindholm-nielsen",
-        "new_tab": true,
-        "published": true,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1010899,
-        "position": 6,
-        "title": "👤 NYCH - Nynne Lucca Christiansen - nych@eaaa.dk",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "ExternalUrl",
-        "module_id": 176702,
-        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1010899",
-        "external_url": "https://www.linkedin.com/in/nynne-lucca-christiansen-6b93021a6/",
-        "new_tab": true,
-        "published": true,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
         "id": 1010878,
-        "position": 7,
+        "position": 5,
         "title": "👤 RACE — Rasmus Cederdorff — race@eaaa.dk",
         "indent": 1,
         "quiz_lti": false,
@@ -126,8 +92,59 @@
         }
       },
       {
-        "id": 1010937,
+        "id": 1010880,
+        "position": 6,
+        "title": "👤 MAGL — Magnus Lindholm Nielsen — magl@eaaa.dk",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 176702,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1010880",
+        "external_url": "https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/magnus-lindholm-nielsen",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1055746,
+        "position": 7,
+        "title": "👤 NKKR — Nikolaj Krogh Kjær-Rasmussen — nkkr@eaaa.dk",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 176702,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1055746",
+        "external_url": "https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/nikolaj-krogh-kjaer-rasmussen",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1010899,
         "position": 8,
+        "title": "👤 HEOE — Henrik Øllgaard — heoe@eaaa.dk",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 176702,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1010899",
+        "external_url": "https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/henrik-ollgaard",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1010937,
+        "position": 9,
         "title": "Anbefalede Scrimba-kurser",
         "indent": 0,
         "quiz_lti": false,
@@ -141,7 +158,7 @@
       },
       {
         "id": 1011157,
-        "position": 9,
+        "position": 10,
         "title": "Learn JavaScript",
         "indent": 1,
         "quiz_lti": false,
@@ -158,7 +175,7 @@
       },
       {
         "id": 1011158,
-        "position": 10,
+        "position": 11,
         "title": "Learn Node.js",
         "indent": 1,
         "quiz_lti": false,
@@ -175,7 +192,7 @@
       },
       {
         "id": 1011159,
-        "position": 11,
+        "position": 12,
         "title": "The Fullstack Developer Path",
         "indent": 1,
         "quiz_lti": false,
@@ -286,10 +303,9 @@
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1037534",
         "content_id": 1677512,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1677512",
-        "published": false,
-        "unpublishable": false,
+        "published": true,
+        "unpublishable": true,
         "content_details": {
-          "locked": true,
           "display_name": "Bordgrupper uge 38.pdf",
           "thumbnail_url": null,
           "locked_for_user": false
@@ -915,7 +931,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178035/items",
     "items": [
       {
@@ -944,15 +960,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178035,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018699,
+        "id": 1051517,
         "position": 3,
+        "title": "DOB 3 - String parsing, metoder og funktioner - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178035,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1051517",
+        "content_id": 1693928,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1693928",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 3 - String parsing, metoder og funktioner - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018699,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -1027,7 +1062,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178037/items",
     "items": [
       {
@@ -1043,34 +1078,6 @@
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-4-persistens-json-og-file-system",
         "published": true,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018701,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178037,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018702,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178037,
-        "published": false,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1121,7 +1128,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178039/items",
     "items": [
       {
@@ -1150,15 +1157,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178039,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018705,
+        "id": 1054382,
         "position": 3,
+        "title": "DOB 4 - DOM manipulation med JS - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178039,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1054382",
+        "content_id": 1697780,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1697780",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 4 - DOM manipulation med JS - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018705,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -1182,7 +1208,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178040/items",
     "items": [
       {
@@ -1197,35 +1223,7 @@
         "page_url": "plan-for-race-5-node-slash-express-rest-api",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-5-node-slash-express-rest-api",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018707,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178040,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018708,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178040,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1276,7 +1274,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178042/items",
     "items": [
       {
@@ -1305,15 +1303,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178042,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018711,
+        "id": 1056054,
         "position": 3,
+        "title": "DOB 5 - Fetch & async JavaScript - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178042,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1056054",
+        "content_id": 1700538,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1700538",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 5 - Fetch & async JavaScript - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018711,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -1337,12 +1354,30 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 1,
+    "items_count": 2,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178043/items",
     "items": [
       {
-        "id": 1050443,
+        "id": 1056213,
         "position": 1,
+        "title": "Byg et kortspil — lav opgave 4 fra i fredags færdig (parvis)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178043,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1056213",
+        "page_url": "byg-et-kortspil-lav-opgave-4-fra-i-fredags-faerdig-parvis",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/byg-et-kortspil-lav-opgave-4-fra-i-fredags-faerdig-parvis",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1050443,
+        "position": 2,
         "title": "Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)",
         "indent": 0,
         "quiz_lti": false,
@@ -1446,7 +1481,7 @@
         "page_url": "plan-for-race-6-arkitektur-og-rest-api-best-practices",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-6-arkitektur-og-rest-api-best-practices",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1673,29 +1708,29 @@
   {
     "id": 178050,
     "position": 27,
-    "name": "DOB 8 - Client/Server præsentationer - 30-09-2026",
+    "name": "DOB + RACE 8 - Client/Server præsentationer - 30-09-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178050/items",
     "items": [
       {
         "id": 1018724,
         "position": 1,
-        "title": "Plan for DOB 8 - Client/Server præsentationer",
+        "title": "Plan for DOB + RACE 8 - Client/Server præsentationer",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178050,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018724",
-        "page_url": "plan-for-dob-8-client-slash-server-praesentationer",
+        "page_url": "plan-for-dob-+-race-8-client-slash-server-praesentationer",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-8-client-slash-server-praesentationer",
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-+-race-8-client-slash-server-praesentationer",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1762,7 +1797,7 @@
   {
     "id": 178053,
     "position": 30,
-    "name": "NYCH 1 - Byg et chatbot UI i Figma - 02-10-2026",
+    "name": "NKKR 1 - Byg et chatbot UI i Figma - 02-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -1973,7 +2008,7 @@
   {
     "id": 178058,
     "position": 35,
-    "name": "NYCH 2 - Informationsarkitektur & accessibility - 09-10-2026",
+    "name": "HEOE 1 - Informationsarkitektur & accessibility - 09-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -2395,7 +2430,7 @@
   {
     "id": 178068,
     "position": 45,
-    "name": "NYCH 3 - Design tokens og theming - 23-10-2026",
+    "name": "HEOE 3 - Design tokens og theming - 23-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -2606,7 +2641,7 @@
   {
     "id": 178073,
     "position": 50,
-    "name": "NYCH 4 - Planlægning af designprocesser - 30-10-2026",
+    "name": "HEOE 4 - Planlægning af designprocesser - 30-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -2817,7 +2852,7 @@
   {
     "id": 178078,
     "position": 55,
-    "name": "NYCH 5 - Brugertest til validering af en løsning - 06-11-2026",
+    "name": "HEOE 5 - Brugertest til validering af en løsning - 06-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",

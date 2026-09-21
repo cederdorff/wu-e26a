@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-07T20:15:18.010Z
+Senest hentet: 2026-09-21T06:56:31.078Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -15,9 +15,10 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 ### Undervisere
 
 - [👤 DOB — Dan Okkels Brendstrup — dob@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/dan-okkels-brendstrup)
-- [👤 MAGL - Magnus Lindholm Nielsen - magl@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/magnus-lindholm-nielsen)
-- [👤 NYCH - Nynne Lucca Christiansen - nych@eaaa.dk](https://www.linkedin.com/in/nynne-lucca-christiansen-6b93021a6/)
 - [👤 RACE — Rasmus Cederdorff — race@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/rasmus-vase-cederdorff)
+- [👤 MAGL — Magnus Lindholm Nielsen — magl@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/magnus-lindholm-nielsen)
+- [👤 NKKR — Nikolaj Krogh Kjær-Rasmussen — nkkr@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/nikolaj-krogh-kjaer-rasmussen)
+- [👤 HEOE — Henrik Øllgaard — heoe@eaaa.dk](https://www.eaaa.dk/kontakt/find-medarbejder/medarbejder/henrik-ollgaard)
 
 ### Anbefalede Scrimba-kurser
 
@@ -133,6 +134,8 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
+- [DOB 3 - String parsing, metoder og funktioner - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%203%20-%20String%20parsing%2C%20metoder%20og%20funktioner%20-%20slides.pdf)
+
 ### Opgaver
 
 ## 013 · Forberedelse - Selvstudium - 10-09-2026
@@ -148,10 +151,6 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 - [Plan for RACE 4 - Persistens, JSON og File System](../undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md)
 
-### Præsentationer
-
-### Opgaver
-
 ## 015 · Forberedelse - Selvstudium - 14-09-2026
 
 [Lokal fil](../undervisning/015-forberedelse-selvstudium-14-09-2026.md) · publiceret
@@ -166,6 +165,8 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
+- [DOB 4 - DOM manipulation med JS - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%204%20-%20DOM%20manipulation%20med%20JS%20-%20slides.pdf)
+
 ### Opgaver
 
 ## 017 · RACE 5 - Node/Express REST API - 16-09-2026
@@ -173,10 +174,6 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/017-race-5-node-express-rest-api-16-09-2026.md) · publiceret
 
 - [Plan for RACE 5 - Node/Express REST API](../undervisning/017-race-5-node-express-rest-api-16-09-2026.md)
-
-### Præsentationer
-
-### Opgaver
 
 ## 018 · Forberedelse - Selvstudium - 17-09-2026
 
@@ -192,12 +189,15 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
+- [DOB 5 - Fetch & async JavaScript - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%205%20-%20Fetch%20%26%20async%20JavaScript%20-%20slides.pdf)
+
 ### Opgaver
 
 ## 020 · Forberedelse - Selvstudium - 21-09-2026
 
 [Lokal fil](../undervisning/020-forberedelse-selvstudium-21-09-2026.md) · publiceret
 
+- [Byg et kortspil — lav opgave 4 fra i fredags færdig (parvis)](../undervisning/020-forberedelse-selvstudium-21-09-2026.md)
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
 ## 021 · DOB 6 - Promises og async/await - 22-09-2026
@@ -252,11 +252,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
 
-## 027 · DOB 8 - Client/Server præsentationer - 30-09-2026
+## 027 · DOB + RACE 8 - Client/Server præsentationer - 30-09-2026
 
-[Lokal fil](../undervisning/027-dob-8-client-server-praesentationer-30-09-2026.md) · upubliceret
+[Lokal fil](../undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md) · publiceret
 
-- [Plan for DOB 8 - Client/Server præsentationer](../undervisning/027-dob-8-client-server-praesentationer-30-09-2026.md)
+- [Plan for DOB + RACE 8 - Client/Server præsentationer](../undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md)
 
 ### Præsentationer
 
@@ -274,11 +274,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 030 · NYCH 1 - Byg et chatbot UI i Figma - 02-10-2026
+## 030 · NKKR 1 - Byg et chatbot UI i Figma - 02-10-2026
 
-[Lokal fil](../undervisning/030-nych-1-byg-et-chatbot-ui-i-figma-02-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md) · upubliceret
 
-- [Plan for NYCH 1 - Byg et chatbot UI i Figma](../undervisning/030-nych-1-byg-et-chatbot-ui-i-figma-02-10-2026.md)
+- [Plan for NYCH 1 - Byg et chatbot UI i Figma](../undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md)
 
 ### Præsentationer
 
@@ -316,11 +316,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 035 · NYCH 2 - Informationsarkitektur & accessibility - 09-10-2026
+## 035 · HEOE 1 - Informationsarkitektur & accessibility - 09-10-2026
 
-[Lokal fil](../undervisning/035-nych-2-informationsarkitektur-accessibility-09-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/035-heoe-1-informationsarkitektur-accessibility-09-10-2026.md) · upubliceret
 
-- [Plan for NYCH 2 - Informationsarkitektur & accessibility](../undervisning/035-nych-2-informationsarkitektur-accessibility-09-10-2026.md)
+- [Plan for NYCH 2 - Informationsarkitektur & accessibility](../undervisning/035-heoe-1-informationsarkitektur-accessibility-09-10-2026.md)
 
 ### Præsentationer
 
@@ -400,11 +400,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 045 · NYCH 3 - Design tokens og theming - 23-10-2026
+## 045 · HEOE 3 - Design tokens og theming - 23-10-2026
 
-[Lokal fil](../undervisning/045-nych-3-design-tokens-og-theming-23-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/045-heoe-3-design-tokens-og-theming-23-10-2026.md) · upubliceret
 
-- [Plan for NYCH 3 - Design tokens og theming](../undervisning/045-nych-3-design-tokens-og-theming-23-10-2026.md)
+- [Plan for NYCH 3 - Design tokens og theming](../undervisning/045-heoe-3-design-tokens-og-theming-23-10-2026.md)
 
 ### Præsentationer
 
@@ -442,11 +442,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 050 · NYCH 4 - Planlægning af designprocesser - 30-10-2026
+## 050 · HEOE 4 - Planlægning af designprocesser - 30-10-2026
 
-[Lokal fil](../undervisning/050-nych-4-planlaegning-af-designprocesser-30-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/050-heoe-4-planlaegning-af-designprocesser-30-10-2026.md) · upubliceret
 
-- [Plan for NYCH 4 - Planlægning af designprocesser](../undervisning/050-nych-4-planlaegning-af-designprocesser-30-10-2026.md)
+- [Plan for NYCH 4 - Planlægning af designprocesser](../undervisning/050-heoe-4-planlaegning-af-designprocesser-30-10-2026.md)
 
 ### Præsentationer
 
@@ -484,11 +484,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 055 · NYCH 5 - Brugertest til validering af en løsning - 06-11-2026
+## 055 · HEOE 5 - Brugertest til validering af en løsning - 06-11-2026
 
-[Lokal fil](../undervisning/055-nych-5-brugertest-til-validering-af-en-loesning-06-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/055-heoe-5-brugertest-til-validering-af-en-loesning-06-11-2026.md) · upubliceret
 
-- [Plan for NYCH 5 - Brugertest til validering af en løsning](../undervisning/055-nych-5-brugertest-til-validering-af-en-loesning-06-11-2026.md)
+- [Plan for NYCH 5 - Brugertest til validering af en løsning](../undervisning/055-heoe-5-brugertest-til-validering-af-en-loesning-06-11-2026.md)
 
 ### Præsentationer
 

@@ -51,7 +51,7 @@ I dag giver vi AMAbotten persistens: vi bruger Node.js' File System API til at l
 - `node:fs/promises` — indbygget i Node.js, intet at installere
 - `fs.readFile()` og `fs.writeFile()` er asynchronous — derfor `async`/`await`
 - Mønstret: **read → modify → write**
-  - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
+    - læs filen (JSON-tekst) → `JSON.parse()` til JavaScript → ændr data → `JSON.stringify()` til tekst → skriv filen
 - Hvorfor er `push()` på et array alene ikke nok? Data ændres kun i memory, ikke i filen
 - Lav [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) som første anvendelse af read → modify → write — trin 1–7, og gå derefter videre til øvelse 5. Trin 8–11 er ekstraopgaver
 </details>
@@ -79,10 +79,10 @@ I dag giver vi AMAbotten persistens: vi bruger Node.js' File System API til at l
 ## Materialer
 
 - Slides:
-  - [RACE 4 · Persistens, JSON og File System](https://cederdorff.com/wu-e26a/persistens-json/)
+    - [RACE 4 · Persistens, JSON og File System](https://cederdorff.com/wu-e26a/persistens-json/)
 - Opgaver:
-  - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — trin 1–7 er obligatoriske og laves først: læs og opret studerende i en JSON-fil. Sletning, redigering, refaktorering og styling er ekstraopgaver
-  - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — trin 1–8 bygger videre på øvelse 4: gem historikken i en JSON-fil, og brug string parsing, metoder og funktioner til én forbedring af svarlogikken. Statistik og rydning af historik er ekstraopgaver
+    - [JSON-øvelse: Studerende i en JSON-fil](../opgaver/express-ejs-json-students.md) — trin 1–7 er obligatoriske og laves først: læs og opret studerende i en JSON-fil. Sletning, redigering, refaktorering og styling er ekstraopgaver
+    - [Øvelse 5 · Gem AMAbottens chathistorik i en JSON-fil](../opgaver/express-ejs-amabot-persistens.md) — trin 1–8 bygger videre på øvelse 4: gem historikken i en JSON-fil, og brug string parsing, metoder og funktioner til én forbedring af svarlogikken. Statistik og rydning af historik er ekstraopgaver
 
 ---
 
@@ -100,7 +100,7 @@ canvas_page_id: 200713
 canvas_page_slug: "plan-for-race-4-persistens-json-og-file-system"
 canvas_page_title: "Plan for RACE 4 - Persistens, JSON og File System"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T20:15:12Z"
+canvas_updated_at: "2026-09-10T07:07:58Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018700"
 local_status: mirrored
 ```
