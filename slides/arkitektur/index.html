@@ -105,74 +105,7 @@
               </div>
             </div>
           </div>
-          <p class="bottom-line">Uddybning: <a href="../rest-api/#/princip-url-navngivning" target="_blank" rel="noreferrer">RACE 5 · Semantisk URL ↗</a></p>
-        </section>
-
-        <section class="url-semantics-slide" data-accent="orange">
-          <span class="eyebrow">Konsistens · ny vane, ikke et princip</span>
-          <h2>Samme mønster, uanset hvilken ressource man kalder</h2>
-          <p class="concept-intro">Konsistens er ikke ét af de seks principper — det er vanen at holde de andre principper <b>ens</b>, på tværs af alle jeres routes.</p>
-          <div class="url-pattern-columns">
-            <div class="url-pattern-column url-pattern-avoid">
-              <span class="url-pattern-heading">Inkonsistent</span>
-              <div class="url-pattern-row">
-                <code>{ data: [...] }</code>
-                <small><code>GET /students</code> pakker listen ind i et objekt.</small>
-              </div>
-              <div class="url-pattern-row">
-                <code>200</code>
-                <small><code>POST /students</code> svarer 200, selvom den opretter noget nyt.</small>
-              </div>
-              <div class="url-pattern-row">
-                <code>fullName</code>
-                <small><code>/teachers</code> bruger <code>fullName</code>, men <code>/students</code> bruger blot <code>name</code> — for samme slags felt.</small>
-              </div>
-            </div>
-            <div class="url-pattern-column url-pattern-correct">
-              <span class="url-pattern-heading">Konsistent</span>
-              <div class="url-pattern-row">
-                <code>[...]</code>
-                <small>Alle GET-lister sender arrayet direkte — samme form, hver gang.</small>
-              </div>
-              <div class="url-pattern-row">
-                <code>201</code>
-                <small>Alle POST-routes svarer <code>201 Created</code>, på tværs af ressourcer.</small>
-              </div>
-              <div class="url-pattern-row">
-                <code>name</code>
-                <small>Samme feltnavn for samme slags data, i alle jeres JSON-filer.</small>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Det eneste, der reelt er nyt i dag — resten venter til <code>filtrering/sortering/paginering</code> (punkt 06) senere.</p>
-        </section>
-
-        <section class="tools-check-slide" data-accent="orange">
-          <span class="eyebrow">05, 07-09 · Nævnes kort, men ikke i dag</span>
-          <h2>Fire best practices mere — kort og konkret</h2>
-          <div class="example-grid">
-            <article>
-              <span>Nested resources</span>
-              <strong><code>/educations/:id/courses</code></strong>
-              <small>Henter alle kurser i én bestemt uddannelse — hold jer til maks. 2-3 niveauer</small>
-            </article>
-            <article>
-              <span>HTTPS</span>
-              <strong><code>https://</code></strong>
-              <small>Krypterer data mellem klient og server — sat op af hosting-platformen ved deployment</small>
-            </article>
-            <article>
-              <span>Versionering</span>
-              <strong><code>/v1/students</code></strong>
-              <small>API'et kan ændre sig uden at ødelægge klienter, der stadig bruger den gamle version</small>
-            </article>
-            <article>
-              <span>API-dokumentation</span>
-              <strong>Swagger/OpenAPI</strong>
-              <small>Beskriver hvert endpoint, eksempler og fejlkoder — så andre kan bruge API'et uden at læse koden</small>
-            </article>
-          </div>
-          <p class="bottom-line">Kilde: <a href="https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/" target="_blank" rel="noreferrer">freeCodeCamp — REST API Best Practices ↗</a></p>
+          <p class="bottom-line">Samme vane gælder også for statuskoder, respons-form og feltnavne, på tværs af alle ressourcer. Uddybning: <a href="../rest-api/#/princip-url-navngivning" target="_blank" rel="noreferrer">RACE 5 · Semantisk URL ↗</a></p>
         </section>
 
         <section class="activity-slide activity-slide-split" data-accent="orange">
@@ -260,35 +193,9 @@ app.get("/students", async (request, response) => {
         </section>
 
         <section class="code-focus-slide" data-accent="cyan">
-          <span class="eyebrow">Genkald, ikke nyt</span>
-          <h2>I har allerede importeret og eksporteret — hver dag</h2>
-          <p class="concept-intro">Hver gang I skrev <code>import express from "express"</code> eller <code>import fs from "node:fs/promises"</code>, brugte I præcis den samme <code>import</code>/<code>export</code>-syntaks, vi nu skal bruge mellem jeres <b>egne</b> filer.</p>
-          <div class="before-after">
-            <article>
-              <span>server.js</span>
-              <pre><code class="language-javascript">import express from "express";
-import fs from "node:fs/promises";
-
-const app = express();</code></pre>
-            </article>
-            <b aria-hidden="true">+</b>
-            <article>
-              <span>package.json</span>
-              <pre><code class="language-json">{
-  "type": "module",
-  "dependencies": {
-    "express": "^4.19.0"
-  }
-}</code></pre>
-            </article>
-          </div>
-          <p class="bottom-line"><code>"type": "module"</code> fortæller Node, at I skriver ES modules — uden den skulle I bruge <code>require()</code> i stedet for <code>import</code>.</p>
-        </section>
-
-        <section class="code-focus-slide" data-accent="cyan">
           <span class="eyebrow">Det nye: jeres egne filer</span>
           <h2><code>export</code> gør jeres egen kode tilgængelig for andre filer</h2>
-          <p class="concept-intro"><b>Hvad?</b> Samme <code>import</code>/<code>export</code> som lige før — men nu er det jeres egen funktion, ikke en pakke fra npm. <b>Hvorfor?</b> Uden det ville al kode skulle bo i samme fil.</p>
+          <p class="concept-intro">Samme <code>import</code>/<code>export</code>-syntaks, I allerede bruger med <code>import express from "express"</code> — men nu er det jeres egen funktion, ikke en pakke fra npm. Uden det ville al kode skulle bo i samme fil.</p>
           <div class="code-and-result">
             <pre><code class="language-javascript">// data-helpers.js
 export async function loadStudents() {
@@ -387,35 +294,7 @@ router.post("/", async (request, response) => {
 });</code></pre>
             </article>
           </div>
-          <p class="bottom-line">Tommelfingerregel: så snart samme kode skal bruges to steder, er det et tegn på, at den bør flyttes ud i en funktion.</p>
-        </section>
-
-        <section class="tradeoff-slide" data-accent="cyan">
-          <span class="eyebrow">Endnu en gentagelse</span>
-          <h2>DRY gælder også på tværs af ressourcer</h2>
-          <p class="concept-intro">Jeres ti routes skal ligne hinanden — det er REST, der er konsekvent, ikke en fejl. Den rigtige gentagelse sidder i load/save-funktionerne:</p>
-          <div class="before-after">
-            <article>
-              <span>loadStudents · saveStudents</span>
-              <pre><code class="language-javascript">async function loadStudents() {
-  const data = await fs.readFile(
-    "./data/students.json", "utf8"
-  );
-  return JSON.parse(data);
-}</code></pre>
-            </article>
-            <b aria-hidden="true">≈</b>
-            <article>
-              <span>loadTeachers · saveTeachers</span>
-              <pre><code class="language-javascript">async function loadTeachers() {
-  const data = await fs.readFile(
-    "./data/teachers.json", "utf8"
-  );
-  return JSON.parse(data);
-}</code></pre>
-            </article>
-          </div>
-          <p class="bottom-line">Kun ressourcens navn og filsti er forskellige — en oplagt kandidat til en generisk <code>loadData(file)</code>, hvis I arbejder videre. Express <code>Router</code> (næste kapitel) organiserer filerne i sig selv — men fjerner ikke denne gentagelse.</p>
+          <p class="bottom-line">Samme gentagelse opstår på tværs af ressourcer — <code>loadTeachers()</code> bliver næsten identisk med <code>loadStudents()</code>, kun navn og filsti er forskellige. En oplagt kandidat til en generisk <code>loadData(file)</code>, hvis I arbejder videre.</p>
         </section>
 
         <section id="router" class="chapter" data-accent="green">
@@ -665,13 +544,59 @@ export async function loadStudents() {
           <p class="bottom-line">Begreb: <b>Encapsulation</b> — routes-filen kalder blot <code>loadX()</code>/<code>saveX()</code>, uden at vide, hvor data faktisk bor.</p>
         </section>
 
-        <section class="tools-check-slide" data-accent="green">
-          <span class="eyebrow">Frivilligt · kort demo</span>
-          <h2>Får en route rigtig logik, kan den trækkes ud i en controller</h2>
+        <section class="definition-slide" data-accent="green">
+          <span class="eyebrow">Frivilligt · begreb</span>
+          <h2>Controller — logikken mellem routing og data</h2>
+          <div class="definition-pair">
+            <article>
+              <span>Hvad er det?</span>
+              <p>En funktion, der indeholder <b>forretningslogikken</b> for én handling — standardværdier, beregninger, eller regler som at afvise en dublet e-mail. Routen kalder den, og den kalder selv data-modulet.</p>
+            </article>
+            <article>
+              <span>Hvornår?</span>
+              <p>Ingen fast grænse — start i routen, og flyt logikken ud den dag flere trin og regler gør routen besværlig at læse.</p>
+            </article>
+          </div>
+          <p class="bottom-line">Kæden bliver længere: route → controller → data-modul — hvert lag med sit eget ansvar.</p>
+        </section>
+
+        <section class="code-focus-slide" data-accent="green">
+          <span class="eyebrow">Frivilligt · eksempel</span>
+          <h2>Routen kalder controlleren, som gør arbejdet</h2>
+          <div class="before-after">
+            <article>
+              <span>routes/students.js</span>
+              <pre><code class="language-javascript">router.post("/", async (request, response) => {
+  const student = await studentsController.create(
+    request.body
+  );
+  response.json(student);
+});</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>controllers/studentsController.js</span>
+              <pre><code class="language-javascript">export async function create(data) {
+  data.enrolledAt = new Date().toISOString();
+  data.active = true;
+
+  const students = await loadStudents();
+  students.push(data);
+  await saveStudents(students);
+  return data;
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">Routen er tynd og oversætter kun HTTP til ét kald — controlleren modtager og returnerer rene data, uden at kende til <code>request</code>/<code>response</code>.</p>
+        </section>
+
+        <section class="tools-check-slide controller-tree-slide" data-accent="green">
+          <span class="eyebrow">Frivilligt · mappestruktur</span>
+          <h2>Ét lag mere: controllers ved siden af routes og data</h2>
           <div class="project-tree">
             <pre><code class="language-text">students-rest-api/
 ├── controllers/
-│   └── studentsController.js   (logik: find, filtrér, sortér...)
+│   └── studentsController.js   (create, find, filtrér, sortér...)
 ├── data/
 │   └── students.js              (loadStudents()/saveStudents())
 ├── routes/
@@ -679,10 +604,19 @@ export async function loadStudents() {
 └── server.js                    (opsætning + montering af routere)</code></pre>
             <div class="project-rules">
               <p><b>Routen</b> kalder blot controlleren — routing og logik adskilles</p>
-              <p><b>Betaler sig</b> først, når en route reelt har noget værd at flytte</p>
+              <p><b>Data-modulet</b> rører controlleren kun via <code>loadX()</code>/<code>saveX()</code></p>
               <p><b>I dag:</b> I skal ikke nå at bygge controllers — kun vide, hvornår det giver mening</p>
             </div>
           </div>
+        </section>
+
+        <section class="recap-slide" data-accent="green">
+          <span class="eyebrow">Vejen igennem koden · med controller</span>
+          <h2>Sådan ser et request ud, hvis logikken vokser sig stor</h2>
+          <div class="recap-chain">
+            <span>Request</span><b>→</b><span>server.js</span><b>→</b><span>routes/students.js</span><b>→</b><span>controllers/studentsController.js</span><b>→</b><span>data/students.js</span>
+          </div>
+          <p class="bottom-line">Ét led længere end i dag — men samme princip: hvert lag videresender blot til det næste.</p>
         </section>
 
         <section id="query" class="chapter" data-accent="yellow">

@@ -21,8 +21,9 @@
   flex-direction: column;
   gap: 16px;
   padding: 28px 30px;
-  border-top: 5px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .export-compare article:last-child {
   border-top-color: var(--orange);
@@ -101,23 +102,29 @@
   grid-template-columns: 190px 300px 1fr;
 }
 
-/* Encapsulation reuses the soc-card grid, but with only one row per card
-   (no data/view/logic split) — taller, centered cards instead of cramped ones */
-.encaps-slide .soc-card {
+/* Encapsulation and the controller examples both reuse the soc-card grid
+   with only one row per card (no data/view/logic split) — taller, centered
+   cards instead of cramped ones */
+.encaps-slide .soc-card,
+.controller-examples-slide .soc-card {
   min-height: 340px;
   padding: 34px 36px;
   justify-content: center;
 }
-.encaps-slide .soc-card h3 {
+.encaps-slide .soc-card h3,
+.controller-examples-slide .soc-card h3 {
   font-size: 24px;
 }
-.encaps-slide .soc-row {
+.encaps-slide .soc-row,
+.controller-examples-slide .soc-row {
   padding: 22px 26px;
 }
-.encaps-slide .soc-row strong {
+.encaps-slide .soc-row strong,
+.controller-examples-slide .soc-row strong {
   font-size: 24px;
 }
-.encaps-slide .soc-row span {
+.encaps-slide .soc-row span,
+.controller-examples-slide .soc-row span {
   display: block;
   margin-top: 6px;
   font-size: 19px;
@@ -136,13 +143,56 @@
   min-height: 220px;
 }
 
+/* Controller "hvornår" cards: now hold a real code snippet + one-line
+   takeaway instead of bullets — center them, and shrink the code so the
+   longer "flyt til controller" lines don't overflow the narrower column */
+.controller-when-slide .two-sides {
+  margin: auto 0;
+}
+.controller-when-slide .two-sides article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  min-height: 280px;
+}
+.controller-when-slide .two-sides pre code {
+  font-size: 19px;
+}
+.controller-when-slide .two-sides p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+/* Controller mappestruktur: shorter tree + fewer rule cards than the router
+   split's tree, so the base top-anchored layout leaves dead air below it */
+.controller-tree-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.controller-tree-slide .project-tree {
+  margin: auto 0;
+}
+.controller-tree-slide .project-tree pre {
+  display: flex;
+  align-items: center;
+  min-height: 460px;
+}
+.controller-tree-slide .project-rules {
+  min-height: 460px;
+  align-content: space-between;
+}
+
 /* Principles recap: each card links out to its full RACE 5 explanation */
 .principles-grid a {
   display: block;
   min-height: 226px;
   padding: 22px 26px;
-  border-top: 5px solid var(--accent);
+  border-top: 3px solid var(--accent);
   background: var(--soft);
+  border-radius: var(--radius);
   color: inherit;
   text-decoration: none;
   transition: background 0.15s ease;
@@ -239,7 +289,8 @@
   flex-direction: column;
   gap: 3px;
   padding: 11px 16px;
-  border-left: 4px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--radius-sm);
   background: rgb(255 255 255 / 3%);
 }
 .soc-row strong {
@@ -286,8 +337,9 @@
   align-items: center;
   gap: 20px;
   padding: 9px 24px;
-  border-left: 5px solid var(--line);
+  border-left: 3px solid var(--line);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .bp-num {
   color: var(--muted);

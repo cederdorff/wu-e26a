@@ -60,6 +60,7 @@
 .client-server-flow article {
   padding: 28px 30px;
   border-block: 2px solid var(--accent);
+  border-radius: 0;
 }
 
 .client-server-flow article > span {
@@ -122,7 +123,7 @@
   grid-template-columns: 170px 1fr;
   align-items: stretch;
   padding: 26px 30px;
-  border-left: 6px solid var(--cyan);
+  border-left: 4px solid var(--cyan);
   background: linear-gradient(110deg, rgb(98 200 207 / 13%), var(--soft));
 }
 
@@ -199,6 +200,7 @@
 .recap-flow span {
   padding: 19px 16px;
   border: 1px solid var(--cyan);
+  border-radius: var(--radius-sm);
   background: rgb(98 200 207 / 8%);
   font-size: 20px;
   font-weight: 760;
@@ -219,8 +221,9 @@
 
 .flow-prompts p {
   padding: 22px 24px;
-  border-left: 4px solid var(--cyan);
+  border-left: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
   color: var(--muted);
   font-size: 23px;
 }
@@ -240,6 +243,7 @@
   margin: 0;
   border-bottom: 1px solid var(--line);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 
 .reflection-list b {
@@ -291,8 +295,9 @@
 .practice-loop article {
   min-height: 285px;
   padding: 30px 27px;
-  border-top: 5px solid var(--green);
+  border-top: 3px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .practice-loop article b,
 .practice-loop article strong,
@@ -420,8 +425,9 @@
 }
 .branch-cases article {
   padding: 25px 28px;
-  border-left: 4px solid var(--orange);
+  border-left: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .branch-cases article b,
 .branch-cases article span {
@@ -451,8 +457,9 @@
 .boolean-grid article {
   min-height: 170px;
   padding: 27px 30px;
-  border-top: 4px solid var(--orange);
+  border-top: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .boolean-grid article > code,
 .boolean-grid article > b,
@@ -494,8 +501,9 @@
   align-items: center;
   min-height: 126px;
   padding: 18px 22px;
-  border-left: 4px solid var(--orange);
+  border-left: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .validation-steps article > b {
   color: var(--orange);
@@ -531,8 +539,9 @@
 .trace-cases article {
   min-height: 335px;
   padding: 32px 34px;
-  border-top: 5px solid var(--orange);
+  border-top: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .trace-cases span,
 .trace-cases strong {
@@ -625,8 +634,9 @@
 .grouping-compare article {
   min-height: 370px;
   padding: 32px 36px;
-  border-top: 5px solid color-mix(in srgb, var(--cyan) 45%, var(--muted));
+  border-top: 3px solid color-mix(in srgb, var(--cyan) 45%, var(--muted));
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .grouping-compare article:last-child {
   border-color: var(--cyan);
@@ -674,8 +684,9 @@
 .property-formula p {
   min-height: 170px;
   padding: 28px 20px;
-  border-top: 4px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .property-formula span,
 .property-formula strong {
@@ -714,8 +725,9 @@
   min-height: 116px;
   padding: 34px 25px 22px;
   border: 1px solid var(--line);
-  border-top: 4px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .array-elements b {
   position: absolute;
@@ -775,8 +787,9 @@
   display: flex;
   gap: 8px;
   padding: 20px;
-  border-left: 4px solid var(--cyan);
+  border-left: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .array-change p code {
   flex: 1;
@@ -798,8 +811,9 @@
 .notation-pair article {
   min-height: 435px;
   padding: 32px 36px;
-  border-top: 5px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .notation-pair article > span {
   color: var(--cyan);
@@ -834,6 +848,7 @@
   padding: 20px 24px;
   border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .index-strip b,
 .index-strip span {
@@ -897,8 +912,9 @@
 .normalize-flow article {
   min-height: 190px;
   padding: 28px;
-  border-top: 5px solid var(--yellow);
+  border-top: 3px solid var(--yellow);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .normalize-flow span,
 .normalize-flow article > code,
@@ -1130,8 +1146,9 @@
 .rule-race article {
   min-height: 210px;
   padding: 28px;
-  border-top: 4px solid var(--orange);
+  border-top: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .rule-race article span,
 .rule-race article strong,
@@ -1175,8 +1192,9 @@
 .score-question-layout div {
   min-height: 245px;
   padding: 30px 34px;
-  border-top: 5px solid var(--yellow);
+  border-top: 3px solid var(--yellow);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .score-question-layout span,
 .score-question-layout strong,
@@ -1216,8 +1234,9 @@
 }
 .memory-model p {
   padding: 18px 20px;
-  border-left: 4px solid var(--green);
+  border-left: 3px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .memory-model span,
 .memory-model code {
@@ -1253,8 +1272,9 @@
 .tie-pair article {
   min-height: 340px;
   padding: 38px 42px;
-  border-top: 5px solid var(--orange);
+  border-top: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .tie-pair article > code,
 .tie-pair strong,
@@ -1283,8 +1303,9 @@
 .return-change article {
   min-height: 330px;
   padding: 32px 38px;
-  border-top: 5px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .return-change article > span,
 .return-change small {
@@ -1325,8 +1346,9 @@
 }
 .stats-example p {
   padding: 21px 24px;
-  border-left: 4px solid var(--cyan);
+  border-left: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .stats-example span,
 .stats-example strong {
@@ -1351,6 +1373,7 @@
 .stats-flow span {
   padding: 19px 14px;
   border: 1px solid var(--cyan);
+  border-radius: var(--radius-sm);
   background: rgb(98 200 207 / 8%);
   font-size: 17px;
   font-weight: 760;
@@ -1368,8 +1391,9 @@
 }
 .stats-questions p {
   padding: 23px;
-  border-left: 4px solid var(--cyan);
+  border-left: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
   color: var(--muted);
   font-size: 21px;
 }
@@ -1383,8 +1407,9 @@
 .fallback-paths a {
   min-height: 155px;
   padding: 29px 32px;
-  border-top: 4px solid var(--orange);
+  border-top: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .fallback-paths b,
 .fallback-paths span {
@@ -1411,8 +1436,9 @@
 .test-matrix article {
   min-height: 280px;
   padding: 27px 24px;
-  border-top: 5px solid var(--green);
+  border-top: 3px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .test-matrix span,
 .test-matrix strong,

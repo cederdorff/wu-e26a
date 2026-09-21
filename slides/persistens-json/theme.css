@@ -25,8 +25,9 @@
 }
 .flow-pair-row {
   padding: 30px 34px 34px;
-  border-top: 4px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .flow-pair-row:last-child {
   border-top-color: var(--accent);
@@ -68,6 +69,7 @@
   padding: 10px 18px;
   border-top: 3px solid var(--accent);
   background: var(--soft);
+  border-radius: var(--radius);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 23px;
   font-weight: 700;
@@ -90,8 +92,9 @@
 }
 .method-compare article {
   padding: 34px 36px 30px;
-  border-top: 5px solid var(--accent);
+  border-top: 3px solid var(--accent);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .method-compare article:last-child {
   border-color: color-mix(in srgb, var(--accent) 52%, var(--ink));

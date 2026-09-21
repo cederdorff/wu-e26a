@@ -14,6 +14,8 @@
   --line: rgb(255 255 255 / 14%);
   --soft: rgb(255 255 255 / 7%);
   --accent: var(--green);
+  --radius: 14px;
+  --radius-sm: 8px;
   --font: Inter, Aptos, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
   font-family: var(--font);
 }
@@ -142,13 +144,23 @@ body {
   color: var(--accent);
 }
 
+/* Default corner rounding for every card-like <article> — zero-specificity
+   so any component's own border-radius (pills, circles, the 18px terminal
+   window, ...) still wins without needing an override. Scoped to <article>
+   only: every article in this deck system is a fully-filled card, whereas
+   divs/p/li/a are also used for divider rules (border-top, no fill), which
+   would otherwise grow visible rounded end-caps on an otherwise straight line */
+:where(.reveal .slides section article) {
+  border-radius: var(--radius);
+}
+
 .eyebrow {
   display: inline-block;
   margin-bottom: 20px;
   color: var(--accent);
   font-size: 18px;
-  font-weight: 850;
-  letter-spacing: 0.13em;
+  font-weight: 750;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -261,7 +273,7 @@ body {
 .outcome-path article {
   min-height: 290px;
   padding: 30px 26px;
-  border-top: 4px solid var(--green);
+  border-top: 3px solid var(--green);
   background: linear-gradient(180deg, rgb(104 211 145 / 12%), var(--soft));
 }
 .outcome-path b {
@@ -331,8 +343,9 @@ body {
 .tools-check article {
   min-height: 320px;
   padding: 34px 30px;
-  border-top: 5px solid var(--green);
+  border-top: 3px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .tools-check span,
 .tools-check strong,
@@ -418,7 +431,7 @@ body {
 .build-stages article {
   min-height: 330px;
   padding: 30px 34px;
-  border-top: 5px solid var(--green);
+  border-top: 3px solid var(--green);
   background: linear-gradient(180deg, rgb(104 211 145 / 10%), var(--soft));
 }
 .build-stages article:nth-of-type(2) {
@@ -658,8 +671,9 @@ body {
 }
 .about-panels div {
   padding: 16px 20px;
-  border-left: 4px solid var(--green);
+  border-left: 3px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .about-panels strong {
   display: block;
@@ -765,8 +779,9 @@ body {
   grid-template-columns: 190px 1fr;
   align-items: baseline;
   padding: 18px 22px;
-  border-left: 4px solid var(--orange);
+  border-left: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .survey-links b {
   color: var(--ink);
@@ -953,8 +968,9 @@ body {
 .definition-pair article {
   min-height: 300px;
   padding: 38px 42px;
-  border-top: 5px solid var(--accent);
+  border-top: 3px solid var(--accent);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .definition-pair article:last-child {
   border-color: color-mix(in srgb, var(--accent) 52%, var(--ink));
@@ -1052,7 +1068,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0 46px 12px;
-  border-bottom: 4px solid var(--cyan);
+  border-bottom: 3px solid var(--cyan);
 }
 .request-arrow::after {
   position: absolute;
@@ -1096,8 +1112,9 @@ body {
 .two-sides article {
   min-height: 470px;
   padding: 44px 52px;
-  border-top: 5px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .two-sides article:last-child {
   border-color: var(--orange);
@@ -1180,6 +1197,7 @@ body {
   margin-top: 20px;
   padding: 15px 14px;
   border-top: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   background: rgb(255 255 255 / 4%);
 }
 .architecture-layer b,
@@ -1383,8 +1401,9 @@ body {
   gap: 36px;
   margin-top: 35px;
   padding: 23px 28px;
-  border-left: 5px solid var(--orange);
+  border-left: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .race-dialogue strong {
   color: var(--orange);
@@ -1407,8 +1426,9 @@ body {
 .cycle-steps li {
   min-height: 270px;
   padding: 24px 20px;
-  border-top: 4px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .cycle-steps b {
   display: grid;
@@ -1465,6 +1485,7 @@ body {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 48px;
   margin-top: 52px;
+  border-radius: var(--radius);
 }
 .message-layout dl {
   display: grid;
@@ -1475,8 +1496,9 @@ body {
   grid-template-columns: 135px 1fr;
   align-items: center;
   padding: 19px 22px;
-  border-left: 4px solid var(--orange);
+  border-left: 3px solid var(--orange);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .message-layout dt {
   color: var(--orange);
@@ -1505,8 +1527,9 @@ body {
 .status-list article {
   min-height: 320px;
   padding: 40px 34px;
-  border-top: 6px solid var(--green);
+  border-top: 4px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .status-list article:nth-child(2) {
   border-color: var(--orange);
@@ -1569,6 +1592,7 @@ body {
   min-height: 220px;
   place-items: center;
   border: 2px solid var(--accent);
+  border-radius: var(--radius);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   color: var(--accent) !important;
   font-size: 28px;
@@ -1590,6 +1614,7 @@ body {
   padding: 26px 30px;
   border: 1px solid var(--line);
   background: var(--soft);
+  border-radius: var(--radius);
   font-size: 27px;
 }
 .equation b {
@@ -1609,7 +1634,7 @@ body {
 }
 .compare-slide th {
   padding: 20px 28px;
-  border-bottom: 4px solid var(--green);
+  border-bottom: 3px solid var(--green);
   color: var(--green);
   font-size: 31px;
   text-align: left;
@@ -1656,6 +1681,7 @@ body {
   padding: 22px;
   border: 1px solid var(--line);
   background: var(--soft);
+  border-radius: var(--radius);
   font-size: 23px;
   font-weight: 750;
   text-align: center;
@@ -1818,8 +1844,9 @@ body {
 .npm-parts article {
   min-height: 330px;
   padding: 34px;
-  border-top: 5px solid var(--green);
+  border-top: 3px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .npm-parts b {
   display: block;
@@ -1851,6 +1878,7 @@ body {
 .project-rules p {
   padding: 25px;
   background: var(--soft);
+  border-radius: var(--radius);
   color: var(--muted);
   font-size: 22px;
 }
@@ -1879,8 +1907,9 @@ body {
   display: flex;
   align-items: center;
   padding: 20px 24px;
-  border-left: 4px solid var(--cyan);
+  border-left: 3px solid var(--cyan);
   background: var(--soft);
+  border-radius: var(--radius);
   color: var(--muted);
   font-size: 23px;
 }
@@ -1975,6 +2004,7 @@ body {
   padding: 24px;
   border: 2px solid var(--line);
   background: var(--soft);
+  border-radius: var(--radius);
   font:
     700 23px/1.25 "SFMono-Regular",
     monospace;
@@ -2006,6 +2036,7 @@ body {
   gap: 18px;
   padding: 22px 28px;
   border-top: 1px solid var(--line);
+  border-radius: 0;
 }
 .req-res strong {
   color: var(--yellow);
@@ -2030,6 +2061,7 @@ body {
   padding: 21px 28px;
   border: 1px solid var(--line);
   background: var(--soft);
+  border-radius: var(--radius);
   font:
     800 24px/1 "SFMono-Regular",
     monospace;
@@ -2070,8 +2102,9 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 24px;
-  border-top: 4px solid var(--yellow);
+  border-top: 3px solid var(--yellow);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .route-list code {
   color: var(--yellow);
@@ -2097,8 +2130,9 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 14px;
   padding: 26px 30px;
-  border-top: 4px solid var(--yellow);
+  border-top: 3px solid var(--yellow);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .input-paths article > code {
   grid-column: 1 / -1;
@@ -2137,6 +2171,7 @@ body {
   padding: 14px;
   border: 1px solid var(--line);
   background: var(--soft);
+  border-radius: var(--radius);
   font-size: 19px;
   font-weight: 750;
   text-align: center;
@@ -2157,8 +2192,9 @@ body {
   width: 1050px;
   margin: 40px auto 0;
   padding: 24px 30px;
-  border-left: 5px solid var(--yellow);
+  border-left: 3px solid var(--yellow);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .order-rule strong {
   color: var(--yellow);
@@ -2182,8 +2218,9 @@ body {
   align-items: center;
   gap: 18px;
   padding: 26px 30px;
-  border-left: 5px solid var(--green);
+  border-left: 3px solid var(--green);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .challenge-routes article:last-child:nth-child(odd) {
   grid-column: 1 / -1;
@@ -2260,6 +2297,7 @@ body {
 .recap-chain span {
   padding: 20px 24px;
   border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   font-size: 23px;
   font-weight: 750;
@@ -2275,8 +2313,9 @@ body {
 }
 .recap-questions p {
   padding: 18px 22px;
-  border-left: 4px solid var(--accent);
+  border-left: 3px solid var(--accent);
   background: var(--soft);
+  border-radius: var(--radius);
   color: var(--muted);
   font-size: 22px;
 }
@@ -2317,8 +2356,9 @@ body {
 .concept-trio article {
   min-height: 340px;
   padding: 34px 36px;
-  border-top: 5px solid var(--accent);
+  border-top: 3px solid var(--accent);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .concept-trio article:nth-child(2) {
   border-color: var(--cyan);
@@ -2360,8 +2400,9 @@ body {
 .tag-pair article {
   min-height: 260px;
   padding: 36px 40px;
-  border-top: 5px solid var(--yellow);
+  border-top: 3px solid var(--yellow);
   background: var(--soft);
+  border-radius: var(--radius);
 }
 .tag-pair article:last-child {
   border-color: var(--green);
@@ -2394,7 +2435,7 @@ body {
 }
 .form-server-table th {
   padding: 18px 24px;
-  border-bottom: 4px solid var(--yellow);
+  border-bottom: 3px solid var(--yellow);
   color: var(--yellow);
   font-size: 27px;
   text-align: left;
