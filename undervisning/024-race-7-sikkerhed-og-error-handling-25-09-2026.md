@@ -45,19 +45,25 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Hands-on: tilføj validering til `POST`/`PUT` for jeres egne ressourcer
 </details>
 <details>
-<summary><strong>5. Middleware, generelt — try/catch og en fælles fejl-middleware</strong></summary>
+<summary><strong>5. try/catch: fang selv en fejl, dér hvor den opstår</strong></summary>
 
-- Begreb, sat på noget I allerede har brugt uden at vide det: en middleware-funktion er kode, der kører imellem request og response — `express.json()` og `cors()` er begge middleware, monteret med `app.use()`
-- Kort intro til `try`/`catch`: JavaScripts generelle mekanisme til at fange en fejl, dér hvor den opstår — `try { ... } catch (error) { ... }`. Går noget galt inde i `try`-blokken, springer resten af den over, og `catch`-blokken kører i stedet, med selve fejlen i `error`
+- JavaScripts generelle mekanisme til at håndtere en fejl: `try { ... } catch (error) { ... }` — går noget galt inde i `try`-blokken, springer resten af den over, og `catch`-blokken kører i stedet, med selve fejlen i `error`
 - Konkret brug i dag: `loadStudents()`/`loadTeachers()` kan fejle, hvis JSON-filen mangler eller indeholder ugyldig JSON — pak `fs.readFile()`/`JSON.parse()` ind i `try`/`catch`, så I selv kan sende en tydelig fejlbesked i stedet for at lade fejlen poppe videre op uhåndteret
-- I skal ikke `try`/`catch` hver eneste route i dag — kun hvor I selv har brug for at reagere på en bestemt fejl. Mere om `try`/`catch` — denne gang omkring `fetch()` og fejl fra serveren i klienten — er emnet, [næste DOB-gang](./025-dob-7-client-side-error-handling-28-09-2026.md) tager fat på
-- En 404-catch-all: en sidste `app.use(...)` nederst i filen, der rammer enhver sti, ingen anden route matchede — noget andet end 404-tjekket fra før, som handler om et ugyldigt id på en sti, der ellers findes
-- Express' særlige fejl-middleware: fire parametre (`err, request, response, next`) i stedet for de sædvanlige tre — Express genkender den automatisk på antallet af parametre, og kalder den, når en fejl ikke selv er fanget med `try`/`catch` undervejs. Uden den svarer Express selv med sin egen HTML-fejlside — inklusive en fuld stack trace, som en rigtig klient aldrig bør se
-- I stedet: `response.status(500).json({ error: "..." })` — samme `{ error: "..." }`\-facon som `404`\- og `400`\-svarene, så alle fejl fra API'et ser ens ud, uanset hvor de opstår
-- Hands-on: tilføj `try`/`catch` omkring jeres `loadX()`\-funktioner, en 404-catch-all og en fælles fejl-middleware nederst i `server.js`, så en uventet fejl ét sted i systemet giver et rent, forudsigeligt JSON-svar i stedet for Express' standard-fejlside
+- I skal ikke `try`/`catch` hver eneste route i dag — kun hvor I selv har brug for at reagere på en bestemt fejl
+- Mere om `try`/`catch` — denne gang omkring `fetch()` og fejl fra serveren i klienten — er emnet, [næste DOB-gang](./025-dob-7-client-side-error-handling-28-09-2026.md) tager fat på
+- Hands-on: tilføj `try`/`catch` omkring jeres `loadX()`\-funktioner, og send selv en tydelig fejlbesked, hvis noget går galt
 </details>
 <details>
-<summary><strong>6. CORS: fra "tillad alt" til "tillad jeres egen frontend"</strong></summary>
+<summary><strong>6. Middleware, generelt — og en fælles fejl-middleware</strong></summary>
+
+- Begreb, sat på noget I allerede har brugt uden at vide det: en middleware-funktion er kode, der kører imellem request og response — `express.json()` og `cors()` er begge middleware, monteret med `app.use()`
+- En 404-catch-all: en sidste `app.use(...)` nederst i filen, der rammer enhver sti, ingen anden route matchede — noget andet end 404-tjekket fra før, som handler om et ugyldigt id på en sti, der ellers findes
+- Express' særlige fejl-middleware: fire parametre (`err, request, response, next`) i stedet for de sædvanlige tre — Express genkender den automatisk på antallet af parametre, og kalder den, når en fejl ikke selv er fanget med `try`/`catch` undervejs, som i sidste punkt
+- Uden en fejl-middleware svarer Express selv med sin egen HTML-fejlside — inklusive en fuld stack trace, som en rigtig klient aldrig bør se. I stedet: `response.status(500).json({ error: "..." })` — samme `{ error: "..." }`\-facon som `404`\- og `400`\-svarene, så alle fejl fra API'et ser ens ud, uanset hvor de opstår
+- Hands-on: tilføj en 404-catch-all og en fælles fejl-middleware nederst i `server.js`, så en uventet fejl ét sted i systemet giver et rent, forudsigeligt JSON-svar i stedet for Express' standard-fejlside
+</details>
+<details>
+<summary><strong>7. CORS: fra "tillad alt" til "tillad jeres egen frontend"</strong></summary>
 
 - Genopfrisk: browserens same-origin policy blokerer som udgangspunkt `fetch()` på tværs af origins — det er derfor AMAbottens frontend først virkede, da `cors()` blev tilføjet på serveren
 - `app.use(cors())` uden argumenter sætter HTTP-headeren `Access-Control-Allow-Origin: *` — enhver hjemmeside kan nu kalde jeres API fra en brugers browser, ikke kun jeres egen frontend
@@ -66,7 +72,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren, og bekræft at jeres egen frontend stadig virker
 </details>
 <details>
-<summary><strong>7. Sikkerhed i data: escape brugerens tekst på serveren (XSS)</strong></summary>
+<summary><strong>8. Sikkerhed i data: escape brugerens tekst på serveren (XSS)</strong></summary>
 
 - Genbesøg `POST /messages`: `request.body.text` gemmes i `data/messages.json` og sendes videre helt uredigeret — præcis som den blev modtaget, uanset hvad den indeholder
 - Demo: send et "spørgsmål" som `<img src=x onerror="alert('hacked')">` via Thunder Client — kig i `data/messages.json`, og se hvad der sker, når teksten senere vises i AMAbottens frontend
