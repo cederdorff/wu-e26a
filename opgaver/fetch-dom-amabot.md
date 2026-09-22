@@ -50,7 +50,7 @@ git push
 
 - Fjern EJS-tjekket for fejlbeskeden (`<% if (error) { %> ... <% } %>`) helt for nu — I bygger ikke fejlhåndtering i denne øvelse.
 - Giv din formular et id, fx `id="question-form"`. `method` og `action` betyder ikke længere noget — du opfanger submittet med JavaScript i stedet — men det er fint at lade dem stå.
-- Har du en "Ryd beskeder"-knap fra øvelse 3 (ekstraopgave 18)? Fjern `<form method="POST" action="/clear-messages">` omkring den, men behold selv knappen, og giv den et id, fx `id="clear-messages-button"`. Har du den ikke, så tilføj en nu, uden for spørgsmål-formularen:
+- Har du en "Ryd beskeder"-knap fra øvelse 3 (ekstraopgave 18)? Fjern `<form method="POST" action="/clear-messages">` omkring den, men behold selv knappen. Ret dens `type="submit"` til `type="button"` — uden en formular omkring den giver `submit` ikke længere mening — og giv den et id, fx `id="clear-messages-button"`. Har du den ikke, så tilføj en nu, uden for spørgsmål-formularen:
 
   ```html
   <button type="button" id="clear-messages-button">Ryd beskeder</button>
