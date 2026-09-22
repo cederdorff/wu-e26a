@@ -76,7 +76,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 <details>
 <summary><strong>8. Sikkerhed i data: escape brugerens tekst på serveren (XSS)</strong></summary>
 
-- Genbesøg `POST /messages`: `request.body.text` gemmes i `data/messages.json` og sendes videre helt uredigeret — præcis som den blev modtaget, uanset hvad den indeholder
+- Genbesøg `POST /messages`: `request.body.question` gemmes i `data/messages.json` og sendes videre helt uredigeret — præcis som den blev modtaget, uanset hvad den indeholder
 - Demo: send et "spørgsmål" som `<img src=x onerror="alert('hacked')">` via Thunder Client — kig i `data/messages.json`, og se hvad der sker, når teksten senere vises i AMAbottens frontend
 - Begreb: **Cross-Site Scripting (XSS)** — når en brugers egen tekst kan udføre kode i en andens browser, fordi den aldrig blev renset for HTML, før den blev gemt og sendt videre
 - Løsningen: en lille `escapeHtml()`\-funktion på serveren, der erstatter `<`, `>`, `&`, `"` og `'` med deres HTML-entities, kørt på brugerens tekst, før den gemmes
@@ -101,8 +101,9 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 ## Materialer
 
 - Slides: TBA
-- Opgaver: TBA
-- Kodeeksempler: TBA
+- Opgaver:
+  - Øvelse 9
+  - [Øvelse 8: AMAbotten får en frontend — fetch og DOM](../opgaver/fetch-dom-amabot.md) — byg en rigtig frontend til jeres AMAbot med `fetch()`, i eget tempo
 
 ---
 
