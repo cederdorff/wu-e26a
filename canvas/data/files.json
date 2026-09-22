@@ -143,6 +143,19 @@
     "local_path": "materialer/canvas-filer/AMAbot/DOB 6 - Promises og async await - slides - no quiz.pdf"
   },
   {
+    "id": 1702823,
+    "folder_id": 417309,
+    "display_name": "DOB 6 - Promises og async await - slides.pdf",
+    "filename": "DOB+6+-+Promises+og+async+await+-+slides.pdf",
+    "content_type": "application/pdf",
+    "size": 409205,
+    "created_at": "2026-09-22T09:29:29Z",
+    "updated_at": "2026-09-22T10:19:16Z",
+    "locked": false,
+    "hidden": false,
+    "local_path": "materialer/canvas-filer/AMAbot/DOB 6 - Promises og async await - slides.pdf"
+  },
+  {
     "id": 1678469,
     "folder_id": 417309,
     "display_name": "Intro - slides.pdf",

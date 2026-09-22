@@ -1404,7 +1404,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 4,
+    "items_count": 5,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178044/items",
     "items": [
       {
@@ -1459,8 +1459,27 @@
         }
       },
       {
-        "id": 1018714,
+        "id": 1057769,
         "position": 4,
+        "title": "DOB 6 - Promises og async await - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178044,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1057769",
+        "content_id": 1702823,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1702823",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 6 - Promises og async await - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018714,
+        "position": 5,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
