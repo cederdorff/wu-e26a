@@ -18,7 +18,8 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Kort oplæg: genopfrisk, hvad der bevidst er sprunget over indtil nu — ingen eksplicitte statuskoder ud over Express' standard-`200`, ingen `404` ved ugyldige id'er, ingen validering af `request.body`, `cors()` uden argumenter, og ingen sanering af brugerens tekst, før serveren gemmer og sender den videre
 - To og to: åbn jeres eget `/students`\- eller `/teachers`\-API, og prøv bevidst at ødelægge det — send et ugyldigt id, en tom body, et forkert felt-navn
 - Prøv konkret `PUT /students/999` (et id, der ikke findes) — hvad sker der i terminalen, og hvad får I tilbage i Thunder Client?
-- Kort opsamling i plenum: hvor mange forskellige måder viser "det gik galt" sig på lige nu — et tavst `null`, Express' egen fejlside med en fuld stack trace, eller bare et statuskode-tal, der ikke passer med, hvad der faktisk skete?
+- Prøv også: omdøb midlertidigt `data/students.json` (eller slet dens indhold), og send `GET /students` — hvad sker der nu, og hvor i koden går det galt? Giv filen dens rigtige navn og indhold tilbage bagefter
+- Kort opsamling i plenum: hvor mange forskellige måder viser "det gik galt" sig på lige nu — et tavst `null`, Express' egen fejlside med en fuld stack trace (både fra et ugyldigt id og fra en ødelagt datafil), eller bare et statuskode-tal, der ikke passer med, hvad der faktisk skete?
 </details>
 <details>
 <summary><strong>2. Statuskoder, for alvor denne gang</strong></summary>
@@ -48,7 +49,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 <summary><strong>5. try/catch: fang selv en fejl, dér hvor den opstår</strong></summary>
 
 - JavaScripts generelle mekanisme til at håndtere en fejl: `try { ... } catch (error) { ... }` — går noget galt inde i `try`-blokken, springer resten af den over, og `catch`-blokken kører i stedet, med selve fejlen i `error`
-- Konkret brug i dag: `loadStudents()`/`loadTeachers()` kan fejle, hvis JSON-filen mangler eller indeholder ugyldig JSON — pak `fs.readFile()`/`JSON.parse()` ind i `try`/`catch`, så I selv kan sende en tydelig fejlbesked i stedet for at lade fejlen poppe videre op uhåndteret
+- Konkret brug i dag: `loadStudents()`/`loadTeachers()` kan fejle, hvis JSON-filen mangler eller indeholder ugyldig JSON — præcis det, I selv fremprovokerede i opsamlingen. Pak `fs.readFile()`/`JSON.parse()` ind i `try`/`catch`, så I selv kan sende en tydelig fejlbesked i stedet for at lade fejlen poppe videre op uhåndteret
 - I skal ikke `try`/`catch` hver eneste route i dag — kun hvor I selv har brug for at reagere på en bestemt fejl
 - Mere om `try`/`catch` — denne gang omkring `fetch()` og fejl fra serveren i klienten — er emnet, [næste DOB-gang](./025-dob-7-client-side-error-handling-28-09-2026.md) tager fat på
 - Hands-on: tilføj `try`/`catch` omkring jeres `loadX()`\-funktioner, og send selv en tydelig fejlbesked, hvis noget går galt
