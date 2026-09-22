@@ -1303,4 +1303,4 @@ Når I er færdige, skal I gerne kunne forklare:
 
 ## Videre
 
-I har nu delt jeres REST API op i lag, og bygget den samme ressource-struktur op to gange — først for `/students`, så for `/teachers` — og tilføjet filtrering, sortering og paginering til `GET /students` med query parameters. Statuskoder og fejlhåndtering — som stadig mangler her, ligesom i den oprindelige students-øvelse — venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
+I har nu delt jeres REST API op i lag, og bygget den samme ressource-struktur op to gange — først for `/students`, så for `/teachers` — og tilføjet filtrering, sortering og paginering til `GET /students` med query parameters. Statuskoder og fejlhåndtering — som stadig mangler her, ligesom i den oprindelige students-øvelse — retter [REST API-øvelse: Fejlhåndtering](express-rest-api-fejlhaandtering.md) op på, som en del af [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).

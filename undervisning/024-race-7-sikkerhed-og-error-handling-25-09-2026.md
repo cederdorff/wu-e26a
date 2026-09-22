@@ -78,7 +78,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 
 - Genbesøg `POST /messages`: `request.body.question` gemmes i `data/messages.json` og sendes videre helt uredigeret — præcis som den blev modtaget, uanset hvad den indeholder
 - Demo: send et "spørgsmål" som `<img src=x onerror="alert('hacked')">` via Thunder Client — kig i `data/messages.json`, og se hvad der sker, når teksten senere vises i AMAbottens frontend
-- Begreb: **Cross-Site Scripting (XSS)** — når en brugers egen tekst kan udføre kode i en andens browser, fordi den aldrig blev renset for HTML, før den blev gemt og sendt videre
+- Begreb: **Cross-Site Scripting (XSS)** — når en brugers egen tekst kan udføre kode i en andens browser, fordi den aldrig blev renset for HTML, før den blev gemtx og sendt videre
 - Løsningen: en lille `escapeHtml()`\-funktion på serveren, der erstatter `<`, `>`, `&`, `"` og `'` med deres HTML-entities, kørt på brugerens tekst, før den gemmes
 - Hands-on: tilføj `escapeHtml()` til `POST /messages`, gentag angrebet fra demoen, og bekræft at `data/messages.json` nu indeholder den escapede tekst i stedet for rå HTML
 </details>
@@ -102,7 +102,8 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 
 - Slides: TBA
 - Opgaver:
-  - [Øvelse 9: AMAbotten bliver sikker og fejltolerant](../opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md) — statuskoder, `404`/`400`, `try`/`catch`, en fælles fejl-middleware, CORS og XSS, bygget direkte oven på øvelse 7
+  - [REST API-øvelse: Fejlhåndtering](../opgaver/express-rest-api-fejlhaandtering.md) — statuskoder, `404`/`400`, `try`/`catch` og en fælles fejl-middleware på `/students`/`/teachers`
+  - [Øvelse 9: AMAbotten bliver sikker og fejltolerant](../opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md) — overfør mønsteret selv til AMAbotten, og luk to sikkerhedshuller, der kun findes dér: CORS og XSS
   - [Øvelse 8: AMAbotten får en frontend — fetch og DOM](../opgaver/fetch-dom-amabot.md) — byg en rigtig frontend til jeres AMAbot med `fetch()`, i eget tempo
 
 ---
