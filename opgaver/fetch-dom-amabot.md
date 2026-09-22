@@ -68,6 +68,14 @@ Installer VS Codes **Live Server**-udvidelse (af Ritwick Dey), hvis du ikke alle
 
 > Live Server starter sin egen lille statiske webserver, typisk på `http://127.0.0.1:5500`, og genindlæser automatisk siden, hver gang du gemmer en ændring. Det er en **anden** server end dit Express-API. Fra nu af holder du to servere kørende samtidig: `npm run dev` i `server/` (API'et, port 3000) og Live Server (`client/`, port 5500) — hver i sin egen terminal/fane.
 
+> **Gotcha: Live Server genindlæser af sig selv, når du bruger AMAbotten.** Åbner du `client/index.html` fra roden af hele projektet (ikke kun `client/`-mappen), overvåger Live Server som udgangspunkt hele workspace'et — inklusive `server/data/messages.json`, som din server skriver til, hver gang nogen stiller et spørgsmål eller rydder historikken. Live Server opfatter det som en filændring og reloader siden, midt i det, Del 3 og 4 ellers skal bevise virker uden reload. Ret det ved at oprette `.vscode/settings.json` i projektets rod med:
+>
+> ```json
+> { "liveServer.settings.root": "/client" }
+> ```
+>
+> Det begrænser Live Server til kun at servere og overvåge `client/`-mappen — den ved slet ikke, at `server/` findes. Genstart Live Server (luk fanen, højreklik og "Open with Live Server" igen), efter du har gemt filen.
+
 #### Test trin 3
 
 Bekræft i adresselinjen, at siden nu kører på `http://127.0.0.1:5500` (eller den port, Live Server valgte) — ikke en `file://`-sti. Bekræft samtidig, at din API-server stadig kører for sig selv på `http://localhost:3000`.
@@ -131,14 +139,12 @@ Del 1 er gennemført, når:
 GET /messages -> response.json(messages) -> ét <article> pr. besked i #messages
 ```
 
-### 6. Skriv en funktion, der laver ét besked-element
+### 6. Skriv en funktion, der viser én besked
 
 ```js
-function createMessageElement(message) {
-  // TODO: Opret et <article>-element med document.createElement().
-  // TODO: Sæt dets class til message.type ("question" eller "answer") — det er den samme klasse, din CSS fra øvelse 3 allerede styler.
-  // TODO: Opret et <p>-element, og sæt dets textContent til message.text.
-  // TODO: Sæt <p> ind i <article> med appendChild(), og returnér <article>.
+function displayMessage(message) {
+  // TODO: Byg en HTML-streng med et template literal: et <article> med sin class sat til message.type ("question" eller "answer") — det er den samme klasse, din CSS fra øvelse 3 allerede styler — og et <p> inde i det, med message.text.
+  // TODO: Indsæt HTML-strengen sidst i messagesContainer med messagesContainer.insertAdjacentHTML("beforeend", html).
 }
 ```
 
@@ -146,14 +152,8 @@ function createMessageElement(message) {
 <summary>Hint</summary>
 
 ```text
-article = document.createElement("article")
-article.className = message.type
-
-paragraph = document.createElement("p")
-paragraph.textContent = message.text
-
-article.appendChild(paragraph)
-return article
+html = `<article class="${message.type}"><p>${message.text}</p></article>`
+messagesContainer.insertAdjacentHTML("beforeend", html)
 ```
 
 </details>
@@ -162,26 +162,23 @@ return article
 <summary>Se løsningsforslag</summary>
 
 ```js
-function createMessageElement(message) {
-  const article = document.createElement("article");
-  article.className = message.type;
+function displayMessage(message) {
+  const html = /*html*/ `
+    <article class="${message.type}">
+      <p>${message.text}</p>
+    </article>`;
 
-  const paragraph = document.createElement("p");
-  paragraph.textContent = message.text;
-
-  article.appendChild(paragraph);
-
-  return article;
+  messagesContainer.insertAdjacentHTML("beforeend", html);
 }
 ```
 
-> **`textContent`, ikke `innerHTML`.** `textContent` skriver `message.text` som ren tekst — akkurat som EJS' `<%= %>` escapede værdier tidligere. `innerHTML` ville i stedet tolke teksten som HTML, hvilket er en direkte åbning for XSS, hvis en bruger nogensinde kan skrive i et spørgsmål eller svar. Samme princip som saneringsafsnittet i øvelse 3, bare i browseren i stedet for på serveren.
+> **`insertAdjacentHTML`, ikke `appendChild`.** `insertAdjacentHTML("beforeend", html)` parser HTML-strengen og indsætter resultatet sidst inde i `messagesContainer`, uden at røre ved det, der allerede står der. `/*html*/`-kommentaren foran skabelonstrengen gør ingenting for JavaScript selv — det er et hint til din editor om at syntax-highlighte indholdet som HTML. **Bemærk:** fordi `message.text` sættes direkte ind i strengen, bliver den tolket som HTML, ikke som ren tekst — skriver nogen `<b>` i et spørgsmål, får du reelt fed skrift på siden. At undgå det (fx med `textContent` i stedet for `insertAdjacentHTML`, eller ved at escape strengen selv) er en bevidst forenkling her; I arbejder videre med input-sanering i [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
 </details>
 
 #### Test trin 6
 
-Kald midlertidigt funktionen direkte: `console.log(createMessageElement({ type: "question", text: "Test" }));`. Konsollen skal vise et `<article class="question"><p>Test</p></article>`-element. Fjern kaldet igen.
+Kald midlertidigt funktionen direkte, efter du har hentet DOM-elementerne: `displayMessage({ type: "question", text: "Test" });`. Genindlæs siden — der skal med det samme stå en boks med teksten "Test" i `#messages`, med samme styling som resten af historikken. Fjern kaldet igen.
 
 ---
 
@@ -196,12 +193,12 @@ const API_URL = "http://localhost:3000";
 Brug den i alle dine `fetch()`-kald fremover, fx `` `${API_URL}/messages` ``:
 
 ```js
-async function loadMessages() {
+async function getMessages() {
   // TODO: Hent `${API_URL}/messages` med fetch(), og await response.json() for at få messages-arrayet.
-  // TODO: Kør igennem messages med en for...of, og tilføj hvert element til messagesContainer med appendChild(createMessageElement(message)).
+  // TODO: Kør igennem messages med en for...of, og kald displayMessage(message) for hver.
 }
 
-loadMessages();
+getMessages();
 ```
 
 <details>
@@ -212,7 +209,7 @@ response = await fetch(`${API_URL}/messages`)
 messages = await response.json()
 
 for (const message of messages) {
-  messagesContainer.appendChild(createMessageElement(message))
+  displayMessage(message)
 }
 ```
 
@@ -222,19 +219,19 @@ for (const message of messages) {
 <summary>Se løsningsforslag</summary>
 
 ```js
-async function loadMessages() {
+async function getMessages() {
   const response = await fetch(`${API_URL}/messages`);
   const messages = await response.json();
 
   for (const message of messages) {
-    messagesContainer.appendChild(createMessageElement(message));
+    displayMessage(message);
   }
 }
 
-loadMessages();
+getMessages();
 ```
 
-> **`async`/`await` i stedet for `.then()`.** `fetch()` returnerer et promise — `await` sætter funktionen på pause, indtil requesten er færdig, uden at blokere resten af siden. `loadMessages()` selv skal derfor erklæres `async`, men kaldet nederst, `loadMessages();`, venter ikke på den — den kører bare i baggrunden, så snart siden er klar.
+> **`async`/`await` i stedet for `.then()`.** `fetch()` returnerer et promise — `await` sætter funktionen på pause, indtil requesten er færdig, uden at blokere resten af siden. `getMessages()` selv skal derfor erklæres `async`, men kaldet nederst, `getMessages();`, venter ikke på den — den kører bare i baggrunden, så snart siden er klar.
 
 </details>
 
@@ -335,7 +332,7 @@ questionForm.addEventListener("submit", async (event) => {
 
   // TODO: await response.json() for at få { question, answer } tilbage.
 
-  // TODO: Tilføj både data.question og data.answer til messagesContainer med createMessageElement() fra trin 6.
+  // TODO: Vis både data.question og data.answer med displayMessage() fra trin 6.
 
   // TODO: Ryd inputfeltet, questionInput.value = "", så det er klar til næste spørgsmål.
 });
@@ -353,8 +350,8 @@ response = await fetch(`${API_URL}/messages`, {
 
 data = await response.json()
 
-messagesContainer.appendChild(createMessageElement(data.question))
-messagesContainer.appendChild(createMessageElement(data.answer))
+displayMessage(data.question)
+displayMessage(data.answer)
 
 questionInput.value = ""
 ```
@@ -382,8 +379,8 @@ questionForm.addEventListener("submit", async (event) => {
 
   const data = await response.json();
 
-  messagesContainer.appendChild(createMessageElement(data.question));
-  messagesContainer.appendChild(createMessageElement(data.answer));
+  displayMessage(data.question);
+  displayMessage(data.answer);
 
   questionInput.value = "";
 });
@@ -434,7 +431,7 @@ clearMessagesButton.addEventListener("click", async () => {
 });
 ```
 
-> `messagesContainer.innerHTML = ""` er trygt at bruge her, fordi du selv sætter den tomme streng — det er ikke brugerdata, der indsættes som HTML (modsat trin 6, hvor `textContent` var vigtig for `message.text`).
+> `messagesContainer.innerHTML = ""` er trygt at bruge her, fordi du selv sætter den tomme streng — det er ikke brugerdata, der indsættes som HTML (modsat trin 6, hvor `message.text` ender direkte i den HTML, `insertAdjacentHTML()` indsætter).
 
 </details>
 
@@ -466,9 +463,9 @@ Del 4 er gennemført, når "Ryd beskeder"-knappen rydder både siden og den gemt
 2. Hvad betyder "origin" helt konkret for `client/`'et og `server/`'et i denne øvelse? Hvorfor blokerede browseren requesten, før du tilføjede `cors()`?
 3. `app.use(cors())` uden argumenter tillader alle origins. Hvad tror du, der ville ske, hvis en helt andens hjemmeside prøvede at kalde dit API lige nu — og hvorfor er det noget, RACE 7 tager fat på?
 4. `event.preventDefault()` i trin 9 — hvad ville der ske, hvis du fjernede den linje igen? Prøv det, og beskriv, hvad du ser.
-5. Hvor i din kode bruger du `textContent`, og hvor (om noget sted) bruger du `innerHTML`? Hvorfor er valget mellem dem ikke ligegyldigt?
+5. I trin 6 sætter `displayMessage()` `message.text` direkte ind i en HTML-streng, som `insertAdjacentHTML()` derefter indsætter. Hvad ville der ske, hvis nogen skrev `<b>hej</b>` som spørgsmål? Hvordan ville det se anderledes ud, hvis du i stedet havde brugt `textContent`?
 6. Peg på ét sted, hvor du bruger `await`. Hvad ville koden gøre forkert, hvis du glemte det ord der?
 
 ## Videre
 
-Din AMAbot har nu en rigtig frontend: `client/app.js` taler med dit REST API via `fetch()`, kører på sin egen origin med Live Server, og opdaterer DOM'en direkte i browseren, uden en eneste server-genereret HTML-side. Du har allerede mødt og løst en rigtig CORS-fejl undervejs — men lige nu antager koden ellers, at alt går godt: intet tjekker, om `fetch()` fejler af andre grunde, eller om serveren svarer med en fejl. Det er præcis emnet i [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md): `try`/`catch` og `response.ok` i din egen chatbot. `cors()` tillader lige nu alle origins — at afgrænse den til kun jeres egen frontend, samt statuskoder og fejlhåndtering på serversiden, venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md). En admin-frontend til `/answers` (opret/redigér/slet svarregler) er en oplagt øvelse at bygge selv, med præcis samme `fetch()`-mønster, når du har tid.
+Din AMAbot har nu en rigtig frontend: `client/app.js` taler med dit REST API via `fetch()`, kører på sin egen origin med Live Server, og opdaterer DOM'en direkte i browseren, uden en eneste server-genereret HTML-side. Du har allerede mødt og løst en rigtig CORS-fejl undervejs — men lige nu antager koden ellers, at alt går godt: intet tjekker, om `fetch()` fejler af andre grunde, eller om serveren svarer med en fejl. Det er præcis emnet i [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md): `try`/`catch` og `response.ok` i din egen chatbot. `cors()` tillader lige nu alle origins, og `displayMessage()` stoler blindt på, at `message.text` er ren tekst — at afgrænse origins, samt statuskoder, fejlhåndtering og input-sanering på serversiden, venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md). En admin-frontend til `/answers` (opret/redigér/slet svarregler) er en oplagt øvelse at bygge selv, med præcis samme `fetch()`-mønster, når du har tid.
