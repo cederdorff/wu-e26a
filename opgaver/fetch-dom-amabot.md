@@ -445,6 +445,116 @@ Del 4 er gennemført, når "Ryd beskeder"-knappen rydder både siden og den gemt
 
 ---
 
+## Del 5: Lidt finpudsning — automatisk scroll og en tydeligere "Ryd beskeder"-knap
+
+`.messages` har allerede `max-height` og `overflow-y: auto` fra øvelse 3 — historikken skal altså kunne scrolle. Men lige nu skal du selv scrolle ned for at se en ny besked, og "Ryd beskeder" ligner stadig en helt almindelig, umærket knap, der er svær at skelne fra "Send".
+
+### 12. Scroll automatisk ned til den seneste besked
+
+`displayMessage()` er den ene funktion, der indsætter beskeder i `#messages` — uanset om det sker ved load (trin 7), efter et nyt spørgsmål (trin 10) eller i princippet også en fremtidig brug. Retter du scrollet der, virker det alle steder.
+
+```js
+function displayMessage(message) {
+  const html = /*html*/ `
+    <article class="${message.type}">
+      <p>${message.text}</p>
+    </article>`;
+
+  messagesContainer.insertAdjacentHTML("beforeend", html);
+
+  // TODO: Scroll containeren ned til bunden, så den nyeste besked altid er synlig.
+}
+```
+
+<details>
+<summary>Hint</summary>
+
+```text
+messagesContainer.scrollTop = messagesContainer.scrollHeight
+```
+
+</details>
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```js
+function displayMessage(message) {
+  const html = /*html*/ `
+    <article class="${message.type}">
+      <p>${message.text}</p>
+    </article>`;
+
+  messagesContainer.insertAdjacentHTML("beforeend", html);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+```
+
+> **`scrollTop` og `scrollHeight`.** `scrollHeight` er hele containerens indhold i pixels, også den del, der er scrollet uden for syne. Sætter du `scrollTop` (hvor langt der er scrollet ned) til den værdi, hopper containeren helt ned i bunden — uanset hvor meget indhold der allerede står der. Fordi linjen står i `displayMessage()`, sker det efter *hver* besked, den viser: både historikken ved load og de to nye beskeder efter et spørgsmål.
+
+</details>
+
+#### Test trin 12
+
+Genindlæs siden, så der er nok historik til, at `#messages` rent faktisk scroller (har du ikke nok, så stil et par spørgsmål først). Siden skal med det samme vise den seneste besked nederst i containeren — ikke toppen af historikken. Stil derefter et nyt spørgsmål: svaret skal automatisk blive synligt, uden at du selv skal scrolle.
+
+---
+
+### 13. Giv "Ryd beskeder" sit eget udseende
+
+Knappen har allerede sit id fra trin 2 (`#clear-messages-button`) — det bruger du til at style den direkte i `client/styles.css`, uden at røre selve HTML'en.
+
+<details>
+<summary>Hint</summary>
+
+Brug id-selectoren `#clear-messages-button`, og genbrug de CSS-variabler, der allerede findes øverst i filen (`--border`, `--text-muted`, `--answer-bg`, `--primary`), så knappen matcher resten af designet — men tydeligt mindre fremtrædende end den lilla "Send"-knap.
+
+</details>
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```css
+#clear-messages-button {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.6rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+#clear-messages-button:hover {
+  background: var(--answer-bg);
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+#clear-messages-button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+```
+
+> Knappen bruger `background: transparent` og `var(--text-muted)` i stedet for `var(--primary)` — den skal kunne findes, men ikke konkurrere med "Send" om opmærksomheden. `:hover` og `:focus-visible` genbruger de samme farver som resten af siden, så den stadig føles som en del af samme design.
+
+</details>
+
+#### Test trin 13
+
+Genindlæs siden. "Ryd beskeder" skal nu se tydeligt anderledes ud end "Send" — en rolig, indrammet knap i stedet for en solid lilla en. Hold musen over den, og bekræft at den reagerer visuelt. Bekræft til sidst, at den stadig rydder historikken korrekt (trin 11 virker uændret).
+
+## Tjekpunkt: Del 5
+
+Del 5 er gennemført, når `#messages` automatisk scroller ned til den nyeste besked, hver gang en besked vises, og "Ryd beskeder" har sit eget, tydeligt adskilte udseende.
+
+---
+
 ## Tjekpunkt
 
 Øvelsen er gennemført, når din AMAbot:
@@ -452,7 +562,8 @@ Del 4 er gennemført, når "Ryd beskeder"-knappen rydder både siden og den gemt
 - viser sin fulde samtalehistorik ved load, hentet med `fetch()` fra `GET /messages`
 - lader dig stille et nyt spørgsmål gennem formularen, uden at siden genindlæser
 - viser både spørgsmål og svar på siden, med det samme svaret kommer tilbage fra `POST /messages`
-- kan rydde historikken, både på siden og på serveren, med `DELETE /messages`
+- scroller automatisk ned, så den nyeste besked altid er synlig
+- kan rydde historikken, både på siden og på serveren, med `DELETE /messages`, via en knap der tydeligt skiller sig ud fra "Send"
 - kører på sin egen origin via Live Server, adskilt fra API'et, uden CORS-fejl i konsollen
 
 ---
