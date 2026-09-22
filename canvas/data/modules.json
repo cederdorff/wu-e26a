@@ -322,10 +322,9 @@
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1037533",
         "content_id": 1677510,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1677510",
-        "published": false,
-        "unpublishable": false,
+        "published": true,
+        "unpublishable": true,
         "content_details": {
-          "locked": true,
           "display_name": "Bordgrupper uge 39.pdf",
           "thumbnail_url": null,
           "locked_for_user": false
@@ -1405,7 +1404,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178044/items",
     "items": [
       {
@@ -1434,15 +1433,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178044,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018714,
+        "id": 1057680,
         "position": 3,
+        "title": "DOB 6 - Promises og async await - slides - no quiz.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178044,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1057680",
+        "content_id": 1702725,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1702725",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 6 - Promises og async await - slides - no quiz.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018714,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,

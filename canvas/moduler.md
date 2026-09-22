@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-21T06:56:31.078Z
+Senest hentet: 2026-09-22T08:06:30.739Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -207,6 +207,8 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 - [Plan for DOB 6 - Promises og async/await](../undervisning/021-dob-6-promises-og-async-await-22-09-2026.md)
 
 ### Præsentationer
+
+- [DOB 6 - Promises og async await - slides - no quiz.pdf](../materialer/canvas-filer/AMAbot/DOB%206%20-%20Promises%20og%20async%20await%20-%20slides%20-%20no%20quiz.pdf)
 
 ### Opgaver
 

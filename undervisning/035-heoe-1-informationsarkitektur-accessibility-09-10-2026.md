@@ -20,9 +20,9 @@ TBA
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
-### Opgaver
+## Opgaver
 
 ---
 
@@ -40,7 +40,7 @@ canvas_page_id: 200725
 canvas_page_slug: "plan-for-nych-2-informationsarkitektur-and-accessibility"
 canvas_page_title: "Plan for NYCH 2 - Informationsarkitektur & accessibility"
 canvas_page_published: false
-canvas_updated_at: "2026-08-10T12:34:20Z"
+canvas_updated_at: "2026-09-21T06:58:24Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018736"
 local_status: mirrored
 ```

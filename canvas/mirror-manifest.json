@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-09-21T06:56:31.078Z",
+  "pulled_at": "2026-09-22T08:06:30.739Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "d4757cfbbf057b4e4dac48920ce816076b8df196b2f4a461dd540a532ffb9270",
@@ -47,56 +47,56 @@
       "canvas_hash": "bcb5f3a5fdacb7cd46eb4f60a68929465a5994c89cd999c32455097b8e2a0004"
     },
     "undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md": {
-      "local_hash": "94b99fefe179ff677fcf4c11264450ccfacad3b45842e5661ed9a845ed9328c4",
-      "canvas_hash": "94b99fefe179ff677fcf4c11264450ccfacad3b45842e5661ed9a845ed9328c4"
+      "local_hash": "ca93feb5c67629117aef871295c79b2d15d1919ba371a0b1bcaea85ad16b8bb0",
+      "canvas_hash": "ca93feb5c67629117aef871295c79b2d15d1919ba371a0b1bcaea85ad16b8bb0"
     },
     "undervisning/013-forberedelse-selvstudium-10-09-2026.md": {
       "local_hash": "8509e4484c2963b3d234d91c4155aa45edb765acd0dc1bc5ab509d1c37633614",
       "canvas_hash": "8509e4484c2963b3d234d91c4155aa45edb765acd0dc1bc5ab509d1c37633614"
     },
     "undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md": {
-      "local_hash": "47bd633b241679b46d994acad3bc2b15ae2b118a46350f8365c449315a1bcf05",
-      "canvas_hash": "47bd633b241679b46d994acad3bc2b15ae2b118a46350f8365c449315a1bcf05"
+      "local_hash": "e11ab8714fcb2d9f382fc8d47852b548c27c6a55a70f4d1c33a737c5826303f1",
+      "canvas_hash": "e11ab8714fcb2d9f382fc8d47852b548c27c6a55a70f4d1c33a737c5826303f1"
     },
     "undervisning/015-forberedelse-selvstudium-14-09-2026.md": {
       "local_hash": "bcbc7c3db1c033a295ebe336decd7f769b216506a5b8071ed65ba30657ceb071",
       "canvas_hash": "bcbc7c3db1c033a295ebe336decd7f769b216506a5b8071ed65ba30657ceb071"
     },
     "undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md": {
-      "local_hash": "0a0026cf82b2ada16e9f5c2c01942877edf74a7e5a66f9f6f861fde0293dce9d",
-      "canvas_hash": "0a0026cf82b2ada16e9f5c2c01942877edf74a7e5a66f9f6f861fde0293dce9d"
+      "local_hash": "7334ddfb42f695794b2a46cb5a883a58e523c66e55ebf93c8fc82a5c411890f5",
+      "canvas_hash": "7334ddfb42f695794b2a46cb5a883a58e523c66e55ebf93c8fc82a5c411890f5"
     },
     "undervisning/017-race-5-node-express-rest-api-16-09-2026.md": {
-      "local_hash": "965d7f900ed04ee147fa6c7b7b07861b99ec6a8619f823c9ede4f99a54880f8b",
-      "canvas_hash": "965d7f900ed04ee147fa6c7b7b07861b99ec6a8619f823c9ede4f99a54880f8b"
+      "local_hash": "ce96ff2e1a706150da4b68101251cea6d32357e46a74d76688d4363b1fd90c32",
+      "canvas_hash": "ce96ff2e1a706150da4b68101251cea6d32357e46a74d76688d4363b1fd90c32"
     },
     "undervisning/018-forberedelse-selvstudium-17-09-2026.md": {
       "local_hash": "75a72430ed7799c455a6bdb2b167ad2ab49f66a02db4e8b524f152dad4610759",
       "canvas_hash": "75a72430ed7799c455a6bdb2b167ad2ab49f66a02db4e8b524f152dad4610759"
     },
     "undervisning/019-dob-5-fetch-og-async-javascript-18-09-2026.md": {
-      "local_hash": "964b406e904a017a0a124873455a46253efdea1bc77240d734a3d35279e87c20",
-      "canvas_hash": "964b406e904a017a0a124873455a46253efdea1bc77240d734a3d35279e87c20"
+      "local_hash": "cfc1b3a4723483d4225dae556d009b0766c8917a95c78a4b3fa0008ca6b6f592",
+      "canvas_hash": "cfc1b3a4723483d4225dae556d009b0766c8917a95c78a4b3fa0008ca6b6f592"
     },
     "undervisning/020-forberedelse-selvstudium-21-09-2026.md": {
-      "local_hash": "159a40667549b817812d4b348f33f35d9e5d2481373de29b85c23084e55ab4ee",
-      "canvas_hash": "159a40667549b817812d4b348f33f35d9e5d2481373de29b85c23084e55ab4ee"
+      "local_hash": "786ca159b3bef12f1fed6fc6b29cd252786bc0857479c82eac17e9d485ad1b20",
+      "canvas_hash": "786ca159b3bef12f1fed6fc6b29cd252786bc0857479c82eac17e9d485ad1b20"
     },
     "undervisning/021-dob-6-promises-og-async-await-22-09-2026.md": {
-      "local_hash": "badb95e5dd58b628817ba1f321fb5751ca7273c2b64447f41701223ed7208b68",
-      "canvas_hash": "badb95e5dd58b628817ba1f321fb5751ca7273c2b64447f41701223ed7208b68"
+      "local_hash": "39172f3dcc9967fc8ad4e2ffe4cbcb82906673f5d9cb6ae7dddb6c214091b2b4",
+      "canvas_hash": "39172f3dcc9967fc8ad4e2ffe4cbcb82906673f5d9cb6ae7dddb6c214091b2b4"
     },
     "undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md": {
-      "local_hash": "bfb7697248f18dfca3a1519affe415435d833a70371cb516d9de28539b76df97",
-      "canvas_hash": "bfb7697248f18dfca3a1519affe415435d833a70371cb516d9de28539b76df97"
+      "local_hash": "7614dd8ee56c5aef9d7936220a7147f10af2e131a7b7e33b0084fea90f3b8475",
+      "canvas_hash": "7614dd8ee56c5aef9d7936220a7147f10af2e131a7b7e33b0084fea90f3b8475"
     },
     "undervisning/023-forberedelse-selvstudium-24-09-2026.md": {
       "local_hash": "c29036a0b0a35d962469e89c47f2ffe7f7b1eaa45a7c828fea3fb40b2f6b30b6",
       "canvas_hash": "c29036a0b0a35d962469e89c47f2ffe7f7b1eaa45a7c828fea3fb40b2f6b30b6"
     },
     "undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md": {
-      "local_hash": "b8b0913d356e4a6e3a270fe84233d9e6c9c8105d4d1978176adbed7a20578bc8",
-      "canvas_hash": "b8b0913d356e4a6e3a270fe84233d9e6c9c8105d4d1978176adbed7a20578bc8"
+      "local_hash": "f70a4239c77fbe7e81e6581263c1cf200dfec41a62fbdc4f388835c444e869eb",
+      "canvas_hash": "f70a4239c77fbe7e81e6581263c1cf200dfec41a62fbdc4f388835c444e869eb"
     },
     "undervisning/025-dob-7-client-side-error-handling-28-09-2026.md": {
       "local_hash": "c1d887b9322a421535943f7d8c5a0a0fc25ef06318dfe4e0202d82af87f85297",
@@ -107,8 +107,8 @@
       "canvas_hash": "6428ad0d9b334634e33c3234d2cfe6a901ea96b84ea0db1cf5a635b350cf1968"
     },
     "undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md": {
-      "local_hash": "add8b61718160780a0aca8f1f8029782db0604c87652700f6c178348c448b135",
-      "canvas_hash": "add8b61718160780a0aca8f1f8029782db0604c87652700f6c178348c448b135"
+      "local_hash": "1fc3414356acdf12ab98c75864bd52aaba59e91d8d31b54026d4f3f1fbcfbfac",
+      "canvas_hash": "1fc3414356acdf12ab98c75864bd52aaba59e91d8d31b54026d4f3f1fbcfbfac"
     },
     "undervisning/028-chatbot-uge-41-46.md": {
       "local_hash": "232c795b24c6b7781a8698340b6197bd5663ea089562821d237ac34a72a9e839",
@@ -119,8 +119,8 @@
       "canvas_hash": "58a2be0778c8539b6f6a90a35c4b5cde06bc5b74dfdd17c1eb4f161a2f49d321"
     },
     "undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md": {
-      "local_hash": "4870f2a3809f2a7bd8628cad3c431c86947d144625cecd2d4df59222085cbe9f",
-      "canvas_hash": "4870f2a3809f2a7bd8628cad3c431c86947d144625cecd2d4df59222085cbe9f"
+      "local_hash": "3cc8af1029ecd276bc70e37bf129ac3d3f8b8f36cd017ea3f602058873ca5656",
+      "canvas_hash": "3cc8af1029ecd276bc70e37bf129ac3d3f8b8f36cd017ea3f602058873ca5656"
     },
     "undervisning/031-forberedelse-selvstudium-05-10-2026.md": {
       "local_hash": "f51428588f9b94e977bb188c71dc202c8d06a12db19c2b3db800ad31d52ab466",
@@ -139,8 +139,8 @@
       "canvas_hash": "d73b3bcffd1651cc2fbb32a3dc57c95593778fa048fd33c01e88c54b2f6a3a27"
     },
     "undervisning/035-heoe-1-informationsarkitektur-accessibility-09-10-2026.md": {
-      "local_hash": "5970c4725886bb27c3f3e520e33ceae62db26b2882c8a9dff4727c19dfc445c0",
-      "canvas_hash": "5970c4725886bb27c3f3e520e33ceae62db26b2882c8a9dff4727c19dfc445c0"
+      "local_hash": "0dbaa7f82fbd611f58883ca9b26fce5d50c78374b7fa7a3c6032421d91345453",
+      "canvas_hash": "0dbaa7f82fbd611f58883ca9b26fce5d50c78374b7fa7a3c6032421d91345453"
     },
     "undervisning/036-forberedelse-selvstudium-12-10-2026.md": {
       "local_hash": "cba81bf457a5bb4680fe699c3f3ebd54f681c5c373154fbadb8fa7534e6ef045",
@@ -179,8 +179,8 @@
       "canvas_hash": "5d16f5735762e06f264f0a7bc32fb2c15863f93795e9ef3eb9af597bdd999b81"
     },
     "undervisning/045-heoe-3-design-tokens-og-theming-23-10-2026.md": {
-      "local_hash": "1896340663a099817dc88a9754fb8e6a8121f4cf364ed9d84a42ab04243caf69",
-      "canvas_hash": "1896340663a099817dc88a9754fb8e6a8121f4cf364ed9d84a42ab04243caf69"
+      "local_hash": "8a4332dbf941e96c06562210dd77244d10346fd7dc9ffb812345c176701d13bc",
+      "canvas_hash": "8a4332dbf941e96c06562210dd77244d10346fd7dc9ffb812345c176701d13bc"
     },
     "undervisning/046-forberedelse-selvstudium-26-10-2026.md": {
       "local_hash": "dad6314600ca20c41969f782966624029b937ca6b999e2f85696413f2e81a12a",
@@ -199,8 +199,8 @@
       "canvas_hash": "b6b961fa7e679bc6108809152c80a1eace04aa543349ced2c3bcf0fc42d2588d"
     },
     "undervisning/050-heoe-4-planlaegning-af-designprocesser-30-10-2026.md": {
-      "local_hash": "06e972c34c3809b5bcf5405e085d407035645851d2e4c1ac10878e01e1a54518",
-      "canvas_hash": "06e972c34c3809b5bcf5405e085d407035645851d2e4c1ac10878e01e1a54518"
+      "local_hash": "1afffe0622c896d870cb10fa76d560679c8f1045d5a232fdd42d54231b49145b",
+      "canvas_hash": "1afffe0622c896d870cb10fa76d560679c8f1045d5a232fdd42d54231b49145b"
     },
     "undervisning/051-forberedelse-selvstudium-02-11-2026.md": {
       "local_hash": "58e5e7c90f8b2081a602c69fd41f7f8fc065eaeae63a8726172d5d2f3d547d15",
@@ -219,8 +219,8 @@
       "canvas_hash": "0895648e15cfa874957162086e32d2d34fbe957eed8e3a57e2b5a91221d6a9df"
     },
     "undervisning/055-heoe-5-brugertest-til-validering-af-en-loesning-06-11-2026.md": {
-      "local_hash": "0943f536505706263904b213dcd6ae8f2518952a35710db736e61aa0e3413a0a",
-      "canvas_hash": "0943f536505706263904b213dcd6ae8f2518952a35710db736e61aa0e3413a0a"
+      "local_hash": "a16267e07e7a1e882af7ab0e62b172baef689a9f0108327bd77394019d67b99b",
+      "canvas_hash": "a16267e07e7a1e882af7ab0e62b172baef689a9f0108327bd77394019d67b99b"
     },
     "undervisning/056-forberedelse-selvstudium-09-11-2026.md": {
       "local_hash": "44730044c4f44e8b4cce9eb2e1277045791d275a20c79f329cccf95623a14da2",

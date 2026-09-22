@@ -20,9 +20,9 @@ TBA
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
-### Opgaver
+## Opgaver
 
 ---
 
@@ -40,7 +40,7 @@ canvas_page_id: 200722
 canvas_page_slug: "plan-for-nych-1-byg-et-chatbot-ui-i-figma"
 canvas_page_title: "Plan for NYCH 1 - Byg et chatbot UI i Figma"
 canvas_page_published: false
-canvas_updated_at: "2026-08-10T12:34:16Z"
+canvas_updated_at: "2026-09-21T06:58:24Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018727"
 local_status: mirrored
 ```

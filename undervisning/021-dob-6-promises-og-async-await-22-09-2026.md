@@ -34,6 +34,8 @@ Vi bygger videre på sidste uges introduktion til Fetch API'et og asynkron JavaS
 
 ### Præsentationer
 
+- [DOB 6 - Promises og async await - slides - no quiz.pdf](../materialer/canvas-filer/AMAbot/DOB%206%20-%20Promises%20og%20async%20await%20-%20slides%20-%20no%20quiz.pdf)
+
 ### Opgaver
 
 ---

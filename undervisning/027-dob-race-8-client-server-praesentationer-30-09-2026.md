@@ -29,9 +29,9 @@ Og så inddeles I i grupper, som hver får til opgave at forberede en præsentat
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
-### Opgaver
+## Opgaver
 
 ---
 
@@ -49,7 +49,7 @@ canvas_page_id: 200721
 canvas_page_slug: "plan-for-dob-+-race-8-client-slash-server-praesentationer"
 canvas_page_title: "Plan for DOB + RACE 8 - Client/Server præsentationer"
 canvas_page_published: true
-canvas_updated_at: "2026-09-16T16:07:28Z"
+canvas_updated_at: "2026-09-21T06:58:23Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018724"
 local_status: mirrored
 ```

@@ -110,7 +110,7 @@ canvas_page_id: 200718
 canvas_page_slug: "plan-for-race-6-arkitektur-og-rest-api-best-practices"
 canvas_page_title: "Plan for RACE 6 - Arkitektur og REST API Best Practices"
 canvas_page_published: true
-canvas_updated_at: "2026-09-17T11:25:00Z"
+canvas_updated_at: "2026-09-21T10:01:47Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018715"
 local_status: mirrored
 ```

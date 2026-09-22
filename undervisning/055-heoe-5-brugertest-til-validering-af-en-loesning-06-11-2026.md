@@ -20,9 +20,9 @@ TBA
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
-### Opgaver
+## Opgaver
 
 ---
 
@@ -40,7 +40,7 @@ canvas_page_id: 200737
 canvas_page_slug: "plan-for-nych-5-brugertest-til-validering-af-en-losning"
 canvas_page_title: "Plan for NYCH 5 - Brugertest til validering af en løsning"
 canvas_page_published: false
-canvas_updated_at: "2026-08-10T12:34:38Z"
+canvas_updated_at: "2026-09-21T06:58:27Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018772"
 local_status: mirrored
 ```
