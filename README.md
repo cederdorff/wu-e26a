@@ -129,9 +129,9 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 
 ## Vedligeholdelse
 
-Når du pusher til `main`, sender GitHub Actions kun ændrede Markdown-filer i `undervisning/` til deres eksisterende Canvas-sider. Der køres ingen fuld spejling og oprettes ingen bot-commits. Slides udgives separat til GitHub Pages, når du ændrer dem.
+Når du pusher til `main`, sender GitHub Actions kun ændrede RACE-sider i `undervisning/` til deres eksisterende Canvas-sider. En side regnes som RACE-materiale, når `RACE` står som et selvstændigt ord i filnavnet eller Canvas-titlen; alle andre underviseres sider springes over. Der køres ingen fuld spejling og oprettes ingen bot-commits. Slides udgives separat til GitHub Pages, når du ændrer dem.
 
-Repoet er styrende for indholdet på de sider, du sender. Push erstatter sidens indhold, også hvis nogen har redigeret den direkte i Canvas. Hent derfor Canvas-versionen først, hvis sådanne ændringer skal med. Titler, publiceringsstatus og modulrækkefølge ændres ikke. Nye sider skal oprettes i Canvas og hentes med pull; slettede lokale filer sletter ikke sider i Canvas.
+Repoet er styrende for indholdet på de RACE-sider, du sender. Push erstatter sidens indhold, også hvis nogen har redigeret den direkte i Canvas. Hent derfor Canvas-versionen først, hvis sådanne ændringer skal med. Titler, publiceringsstatus og modulrækkefølge ændres ikke. Nye sider skal oprettes i Canvas og hentes med pull; slettede lokale filer sletter ikke sider i Canvas.
 
 ### Send manuelt
 
@@ -152,4 +152,4 @@ Lokalt kræves `npm ci` og Canvas-oplysningerne fra `.env.example` i `.env` elle
 npm run canvas:pull
 ```
 
-Dette spejler hele kurset gennem Canvas API'et, inklusive upublicerede moduler, sider og filer. Det sker kun, når du selv starter kommandoen. Lokale ændringer overskrives ikke; ved konflikt lægges Canvas-versionen i `.canvas-incoming/`. Brug kun `npm run canvas:pull:force`, når Canvas bevidst skal overskrive lokale ændringer.
+Dette spejler hele kurset gennem Canvas API'et, inklusive upublicerede moduler, sider og filer. Pull læser kun fra Canvas; begrænsningen til RACE gælder for push tilbage til Canvas. Det sker kun, når du selv starter kommandoen. Lokale ændringer overskrives ikke; ved konflikt lægges Canvas-versionen i `.canvas-incoming/`. Brug kun `npm run canvas:pull:force`, når Canvas bevidst skal overskrive lokale ændringer.

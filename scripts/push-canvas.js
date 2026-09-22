@@ -77,6 +77,11 @@ for (const path of targets) {
   }
 
   const { metadata, bodyMarkdown } = parsed;
+  if (!isRacePage(relativePath, metadata)) {
+    console.log("  Springer over: kun RACE-sider må vedligeholdes fra repoet.");
+    skipped += 1;
+    continue;
+  }
   if (metadata.canvas_page_id === null || metadata.canvas_page_id === undefined) {
     console.log("  Springer over: intet Canvas-side tilknyttet (rent modul uden side).");
     skipped += 1;
@@ -148,6 +153,11 @@ function parseYamlValue(rawValue) {
   } catch {
     return rawValue;
   }
+}
+
+function isRacePage(relativePath, metadata) {
+  const pageIdentity = `${relativePath}\n${metadata.canvas_page_title ?? ""}`;
+  return /(^|[^a-z0-9])race([^a-z0-9]|$)/i.test(pageIdentity);
 }
 
 function renderBodyHtml(bodyMarkdown, currentPath, pathToPage, repoBlobRoot) {

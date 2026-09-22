@@ -27,8 +27,8 @@ test("push selects Git changes without requiring a Canvas mirror", async (t) => 
     };
   `);
   const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
-  const page = (id, body) => `# Lesson\n\n${body}\n\n---\n\n<details>\n<summary>Canvas-metadata</summary>\n\n\`\`\`yaml\ncanvas_page_id: ${id}\ncanvas_page_slug: "lesson-${id}"\ncanvas_updated_at: "old"\n\`\`\`\n</details>\n`;
-  const writePage = (id, body) => writeFile(resolve(root, `undervisning/${id}.md`), page(id, body));
+  const page = (id, body, title = "RACE lesson") => `# Lesson\n\n${body}\n\n---\n\n<details>\n<summary>Canvas-metadata</summary>\n\n\`\`\`yaml\ncanvas_page_id: ${id}\ncanvas_page_slug: "lesson-${id}"\ncanvas_page_title: ${JSON.stringify(title)}\ncanvas_updated_at: "old"\n\`\`\`\n</details>\n`;
+  const writePage = (id, body, title) => writeFile(resolve(root, `undervisning/${id}.md`), page(id, body, title));
   const commit = (message) => { git("add", "."); git("commit", "-qm", message); return git("rev-parse", "HEAD"); };
   const run = async (args, extraEnv = {}) => {
     await writeFile(resolve(root, "requests.jsonl"), "");
@@ -45,6 +45,7 @@ test("push selects Git changes without requiring a Canvas mirror", async (t) => 
   git("config", "user.email", "test@example.com");
   await writePage(1, "Old one");
   await writePage(2, "Old two");
+  await writePage(3, "Old three", "DOB lesson");
   const initial = commit("Initial pages");
   await writePage(1, "Changed [other page](./2.md)");
   commit("Change first page");
@@ -78,6 +79,12 @@ test("push selects Git changes without requiring a Canvas mirror", async (t) => 
   assert.match(local.puts[0].url, /page_id:2$/);
 
   git("checkout", "--", "undervisning/2.md");
+  await writePage(3, "Uncommitted DOB edit", "DOB lesson");
+  const nonRace = await run(["--apply"]);
+  assert.equal(nonRace.status, 0, nonRace.stderr);
+  assert.equal(nonRace.requests.length, 0, "non-RACE pages never call the Canvas API");
+  assert.match(nonRace.stdout, /kun RACE-sider/);
+  git("checkout", "--", "undervisning/3.md");
   git("rm", "undervisning/2.md");
   await writeFile(resolve(root, "undervisning/README.md"), "# Documentation\n");
   commit("Delete local page and update docs");
