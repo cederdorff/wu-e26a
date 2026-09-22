@@ -20,7 +20,7 @@ DOM event (submit/click)
 DOM opdateres
 ```
 
-> **To servere, to origins.** `client/index.html` åbner du med Live Server-udvidelsen (typisk `http://127.0.0.1:5500`), mens dit Express-API kører for sig selv med `npm run dev` (`http://localhost:3000`). Det er to forskellige origins — så du støder på en rigtig CORS-fejl i Del 2, første gang du kalder `fetch()` på tværs af dem. Det er ikke en fejl i din kode; det er browseren, der beskytter brugeren mod uautoriserede cross-origin requests. Du fikser den i denne øvelse med den simplest mulige rettelse; en mere præcis afgrænsning af, hvem der egentlig må kalde dit API, venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
+> **To servere, to origins.** `client/index.html` kører via Live Server (`http://127.0.0.1:5500`), mens Express-API'et kører for sig selv (`http://localhost:3000`) — to forskellige origins. Det giver en rigtig CORS-fejl i Del 2, første gang du kalder `fetch()` på tværs af dem; det er browseren, der beskytter brugeren, ikke en fejl i din kode. Du fikser den her med den simplest mulige rettelse — en mere præcis afgrænsning venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
 > Statuskoder og ordentlig fejlhåndtering — både i routen og i `fetch()` — venter stadig til en senere øvelse. I dag fokuserer du udelukkende på den lykkelige vej: et gyldigt spørgsmål, et svar, en opdateret side.
 
@@ -66,15 +66,15 @@ git push
 
 Installer VS Codes **Live Server**-udvidelse (af Ritwick Dey), hvis du ikke allerede har den. Højreklik derefter på `client/index.html`, og vælg **Open with Live Server**.
 
-> Live Server starter sin egen lille statiske webserver, typisk på `http://127.0.0.1:5500`, og genindlæser automatisk siden, hver gang du gemmer en ændring. Det er en **anden** server end dit Express-API. Fra nu af holder du to servere kørende samtidig: `npm run dev` i `server/` (API'et, port 3000) og Live Server (`client/`, port 5500) — hver i sin egen terminal/fane.
+> Live Server genindlæser automatisk siden, hver gang du gemmer en ændring. Fra nu af kører du to servere samtidig: `npm run dev` i `server/` og Live Server i `client/` — hver i sin egen terminal/fane.
 
-> **Gotcha: Live Server genindlæser af sig selv, når du bruger AMAbotten.** Åbner du `client/index.html` fra roden af hele projektet (ikke kun `client/`-mappen), overvåger Live Server som udgangspunkt hele workspace'et — inklusive `server/data/messages.json`, som din server skriver til, hver gang nogen stiller et spørgsmål eller rydder historikken. Live Server opfatter det som en filændring og reloader siden, midt i det, Del 3 og 4 ellers skal bevise virker uden reload. Ret det ved at oprette `.vscode/settings.json` i projektets rod med:
+> **Gotcha: Live Server genindlæser af sig selv, når du bruger AMAbotten.** Åbner du `client/index.html` fra roden af hele projektet, overvåger Live Server hele workspace'et — inklusive `server/data/messages.json`, som serveren skriver til ved hvert spørgsmål. Det udløser et reload midt i det, Del 3 og 4 skal bevise virker *uden* reload. Ret det med `.vscode/settings.json` i projektets rod:
 >
 > ```json
 > { "liveServer.settings.root": "/client" }
 > ```
 >
-> Det begrænser Live Server til kun at servere og overvåge `client/`-mappen — den ved slet ikke, at `server/` findes. Genstart Live Server (luk fanen, højreklik og "Open with Live Server" igen), efter du har gemt filen.
+> Genstart Live Server, efter du har gemt filen.
 
 #### Test trin 3
 
@@ -220,7 +220,7 @@ function displayMessage(message) {
 }
 ```
 
-> **`insertAdjacentHTML`, ikke `appendChild`.** `insertAdjacentHTML("beforeend", html)` parser HTML-strengen og indsætter resultatet sidst inde i `messagesContainer`, uden at røre ved det, der allerede står der. **Bemærk:** fordi `message.text` sættes direkte ind i strengen, bliver den tolket som HTML, ikke som ren tekst — skriver nogen `<b>` i et spørgsmål, får du reelt fed skrift på siden. At undgå det (fx med `textContent` i stedet for `insertAdjacentHTML`, eller ved at escape strengen selv) er en bevidst forenkling her; I arbejder videre med input-sanering i [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
+> **`insertAdjacentHTML`, ikke `appendChild`.** Den parser HTML-strengen og indsætter resultatet sidst i `messagesContainer`, uden at røre det, der allerede står der. **Bemærk:** `message.text` tolkes derfor som HTML, ikke ren tekst — skriver nogen `<b>` i et spørgsmål, bliver det fed skrift. Det er en bevidst forenkling; input-sanering venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
 </details>
 
@@ -275,7 +275,7 @@ async function getMessages() {
 getMessages();
 ```
 
-> **`async`/`await` i stedet for `.then()`.** `fetch()` returnerer et promise — `await` sætter funktionen på pause, indtil requesten er færdig, uden at blokere resten af siden. `getMessages()` selv skal derfor erklæres `async`, men kaldet nederst, `getMessages();`, venter ikke på den — den kører bare i baggrunden, så snart siden er klar.
+> **`async`/`await` i stedet for `.then()`.** `await` sætter funktionen på pause, indtil requesten er færdig, uden at blokere resten af siden — derfor skal `getMessages()` erklæres `async`. Kaldet nederst, `getMessages();`, venter ikke på den; det kører bare, så snart siden er klar.
 
 </details>
 
@@ -311,7 +311,7 @@ app.use(cors());
 <details>
 <summary>Hvorfor virker det?</summary>
 
-`app.use(cors())` uden argumenter tilføjer de HTTP-headers (bl.a. `Access-Control-Allow-Origin`), som fortæller browseren, at det er OK for en side på en anden origin at læse svaret — den tillader i praksis **alle** origins. Det er den simplest mulige rettelse, og fin, mens du udvikler lokalt. At begrænse den til kun jeres egen frontend er en sikkerhedsovervejelse, I tager fat på i [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
+`app.use(cors())` tilføjer HTTP-headeren `Access-Control-Allow-Origin`, som fortæller browseren, at en anden origin må læse svaret — i praksis **alle** origins. Fin, mens du udvikler lokalt; at begrænse den til kun jeres frontend venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
 </details>
 
@@ -393,7 +393,7 @@ questionForm.addEventListener("submit", async (event) => {
 });
 ```
 
-> **`event.preventDefault()`.** Uden denne linje gør formularen, hvad den altid har gjort: sender en almindelig request og genindlæser siden — præcis den opførsel, `fetch()` skal overtage. Det er den samme "intercept formularen"-teknik, dagens undervisning (DOB 6) handlede om.
+> **`event.preventDefault()`.** Uden den gør formularen, hvad den altid har gjort: sender en almindelig request og genindlæser siden — den opførsel skal `fetch()` overtage. Samme teknik som DOB 6 gennemgik.
 
 > Ingen tjek endnu af, om `question` er tom — det venter til [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md).
 
@@ -460,7 +460,7 @@ questionForm.addEventListener("submit", async (event) => {
 });
 ```
 
-> **`headers` og `body` hører sammen.** `JSON.stringify({ question })` laver JavaScript-objektet om til en JSON-tekststreng — det er den, der ryger i `body`. `"Content-Type": "application/json"` fortæller serveren, at teksten skal tolkes som JSON. Uden headeren læser `express.json()`-middlewaren på serveren ikke `request.body` korrekt, og `request.body.question` bliver `undefined`. Det er nøjagtig den samme aftale mellem klient og server, som `name="question"` og `express.urlencoded()` var i øvelse 3 — bare med JSON i stedet for en HTML-formular.
+> **`headers` og `body` hører sammen.** `JSON.stringify({ question })` laver objektet om til en JSON-streng til `body`; `"Content-Type": "application/json"` fortæller serveren, at den skal tolkes som JSON. Uden headeren læser `express.json()` ikke `request.body` korrekt, og `request.body.question` bliver `undefined` — samme aftale som `name="question"` og `express.urlencoded()` i øvelse 3, bare med JSON i stedet for en HTML-formular.
 
 </details>
 
@@ -728,7 +728,7 @@ function displayMessage(message) {
 }
 ```
 
-> **`scrollTop` og `scrollHeight`.** `scrollHeight` er hele containerens indhold i pixels, også den del, der er scrollet uden for syne. Sætter du `scrollTop` (hvor langt der er scrollet ned) til den værdi, hopper containeren helt ned i bunden — uanset hvor meget indhold der allerede står der. Fordi linjen står i `displayMessage()`, sker det efter *hver* besked, den viser: både historikken ved load og de to nye beskeder efter et spørgsmål.
+> **`scrollTop` og `scrollHeight`.** `scrollHeight` er hele containerens indhold i pixels, også det, der er scrollet uden for syne. Sætter du `scrollTop` til den værdi, hopper containeren ned i bunden. Fordi linjen står i `displayMessage()`, sker det efter *hver* besked — både ved load og efter et nyt spørgsmål.
 
 </details>
 
