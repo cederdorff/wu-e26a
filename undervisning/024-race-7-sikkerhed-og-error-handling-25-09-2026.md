@@ -70,6 +70,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Genopfrisk: browserens same-origin policy blokerer som udgangspunkt `fetch()` på tværs af origins — det er derfor AMAbottens frontend først virkede, da `cors()` blev tilføjet på serveren
 - `app.use(cors())` uden argumenter sætter HTTP-headeren `Access-Control-Allow-Origin: *` — enhver hjemmeside kan nu kalde jeres API fra en brugers browser, ikke kun jeres egen frontend
 - Diskutér: hvad kunne gå galt, hvis en helt fremmed hjemmeside kaldte jeres `/students`\- eller `/messages`\-API fra en brugers browser?
+- Send samtidig samme request i Thunder Client — den lykkes altid, uanset `cors()`-opsætningen. CORS er noget browseren håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på
 - Løsningen: begræns til den origin, I selv bruger — `cors({ origin: "http://127.0.0.1:5500" })`
 - Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren. Gentag demoens `fetch()` fra den fremmede side igen — den skal nu fejle med en CORS-fejl i konsollen. Bekræft til sidst, at jeres egen frontend stadig virker
 </details>
@@ -78,8 +79,9 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 
 - Genbesøg `POST /messages`: `request.body.question` gemmes i `data/messages.json` og sendes videre helt uredigeret — præcis som den blev modtaget, uanset hvad den indeholder
 - Demo: send et "spørgsmål" som `<img src=x onerror="alert('hacked')">` via Thunder Client — kig i `data/messages.json`, og se hvad der sker, når teksten senere vises i AMAbottens frontend
-- Begreb: **Cross-Site Scripting (XSS)** — når en brugers egen tekst kan udføre kode i en andens browser, fordi den aldrig blev renset for HTML, før den blev gemtx og sendt videre
-- Løsningen: en lille `escapeHtml()`\-funktion på serveren, der erstatter `<`, `>`, `&`, `"` og `'` med deres HTML-entities, kørt på brugerens tekst, før den gemmes
+- Begreb: **Cross-Site Scripting (XSS)** — når en brugers egen tekst kan udføre kode i en andens browser, fordi den aldrig blev renset for HTML, før den blev gemt og sendt videre
+- Værre endnu: AMAbottens eget svar har samme problem — og `/answers` har ingen adgangskontrol, så en plantet, ondsindet svarregel rammer *alle*, der senere stiller et matchende spørgsmål, ikke kun afsenderen selv
+- Løsningen: en lille `escapeHtml()`\-funktion på serveren, der erstatter `<`, `>`, `&`, `"` og `'` med deres HTML-entities, kørt på både spørgsmål og svar, før de gemmes
 - Hands-on: tilføj `escapeHtml()` til `POST /messages`, gentag angrebet fra demoen, og bekræft at `data/messages.json` nu indeholder den escapede tekst i stedet for rå HTML
 </details>
 
