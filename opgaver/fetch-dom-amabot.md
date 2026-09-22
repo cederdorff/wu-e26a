@@ -12,7 +12,7 @@ Du bygger videre på din egen AMAbot fra [øvelse 6](express-rest-api-amabot.md)
 - **Del 4** genopliver "Ryd beskeder"-knappen med et rigtigt `DELETE /messages`-kald.
 
 ```text
-Browser (client/index.js)          Server (server/server.js)
+Browser (client/app.js)            Server (server/server.js)
 http://127.0.0.1:5500              http://localhost:3000
 DOM event (submit/click)
    -> fetch(API_URL + ...)  --JSON-->   route (/messages)
@@ -74,18 +74,18 @@ Bekræft i adresselinjen, at siden nu kører på `http://127.0.0.1:5500` (eller 
 
 ---
 
-### 4. Opret client/index.js, og forbind den til siden
+### 4. Opret client/app.js, og forbind den til siden
 
 ```html
-<script src="index.js" defer></script>
+<script src="app.js" defer></script>
 ```
 
 Placér linjen i `<head>`. `defer` sikrer, at scriptet først kører, når HTML'en er færdigindlæst — ligesom I gennemgik i [DOB 4](../undervisning/016-dob-4-dom-manipulation-med-js-15-09-2026.md) — så du er sikker på, at `#messages`, formularen og knappen findes, når din kode leder efter dem.
 
-Opret den tomme fil `client/index.js`, og skriv midlertidigt:
+Opret den tomme fil `client/app.js`, og skriv midlertidigt:
 
 ```js
-console.log("index.js er forbundet");
+console.log("app.js er forbundet");
 ```
 
 #### Test trin 4
@@ -96,7 +96,7 @@ Genindlæs siden i Live Server, åbn DevTools' konsol, og bekræft at teksten vi
 
 ### 5. Hent dine DOM-elementer
 
-Øverst i `client/index.js`, over al anden kode:
+Øverst i `client/app.js`, over al anden kode:
 
 ```js
 const messagesContainer = document.querySelector("#messages");
@@ -109,7 +109,11 @@ const clearMessagesButton = document.querySelector("#clear-messages-button");
 
 #### Test trin 5
 
-Tilføj midlertidigt `console.log(messagesContainer, questionForm, questionInput, clearMessagesButton);` under de fire linjer. Genindlæs siden — ingen af de fire må logges som `null`. Er én `null`, passer id'et i JavaScript ikke med id'et i HTML. Fjern loggen igen.
+Tilføj midlertidigt `console.log(messagesContainer, questionForm, questionInput, clearMessagesButton);` under de fire linjer. Genindlæs siden — ingen af de fire må logges som `null`.
+
+Logges én af dem som `null`, passer det tilhørende id i JavaScript ikke med id'et i HTML. Dobbelttjek alle fire: `#messages`, `#question-form`, `#question` og `#clear-messages-button` — stemmer hvert enkelt overens, både i selectoren og i HTML-elementets `id`-attribut?
+
+Fjern loggen igen.
 
 ## Tjekpunkt: Del 1
 
@@ -117,7 +121,7 @@ Del 1 er gennemført, når:
 
 - `client/index.html` ikke længere indeholder EJS-tags
 - Live Server viser din side (fx `http://127.0.0.1:5500`), mens din API-server kører samtidig på `http://localhost:3000`
-- `client/index.js` er forbundet, og alle fire DOM-referencer finder deres element
+- `client/app.js` er forbundet, og alle fire DOM-referencer finder deres element
 
 ---
 
@@ -183,7 +187,7 @@ Kald midlertidigt funktionen direkte: `console.log(createMessageElement({ type: 
 
 ### 7. Hent historikken, og vis den
 
-Din side kører nu på en anden origin end API'et (Live Server vs. Express), så et relativt kald som `fetch("/messages")` ville gå til Live Server selv, ikke dit API. Definér derfor API'ets fulde adresse øverst i `client/index.js`, sammen med dine andre konstanter:
+Din side kører nu på en anden origin end API'et (Live Server vs. Express), så et relativt kald som `fetch("/messages")` ville gå til Live Server selv, ikke dit API. Definér derfor API'ets fulde adresse øverst i `client/app.js`, sammen med dine andre konstanter:
 
 ```js
 const API_URL = "http://localhost:3000";
@@ -458,7 +462,7 @@ Del 4 er gennemført, når "Ryd beskeder"-knappen rydder både siden og den gemt
 
 ## Reflektér over din læring
 
-1. Hvad gjorde `views/index.ejs` i øvelse 3, som `client/index.js` nu gør i stedet? Hvad er den samme opgave løst to forskellige steder — serveren dengang, browseren nu?
+1. Hvad gjorde `views/index.ejs` i øvelse 3, som `client/app.js` nu gør i stedet? Hvad er den samme opgave løst to forskellige steder — serveren dengang, browseren nu?
 2. Hvad betyder "origin" helt konkret for `client/`'et og `server/`'et i denne øvelse? Hvorfor blokerede browseren requesten, før du tilføjede `cors()`?
 3. `app.use(cors())` uden argumenter tillader alle origins. Hvad tror du, der ville ske, hvis en helt andens hjemmeside prøvede at kalde dit API lige nu — og hvorfor er det noget, RACE 7 tager fat på?
 4. `event.preventDefault()` i trin 9 — hvad ville der ske, hvis du fjernede den linje igen? Prøv det, og beskriv, hvad du ser.
@@ -467,4 +471,4 @@ Del 4 er gennemført, når "Ryd beskeder"-knappen rydder både siden og den gemt
 
 ## Videre
 
-Din AMAbot har nu en rigtig frontend: `client/index.js` taler med dit REST API via `fetch()`, kører på sin egen origin med Live Server, og opdaterer DOM'en direkte i browseren, uden en eneste server-genereret HTML-side. Du har allerede mødt og løst en rigtig CORS-fejl undervejs — men lige nu antager koden ellers, at alt går godt: intet tjekker, om `fetch()` fejler af andre grunde, eller om serveren svarer med en fejl. Det er præcis emnet i [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md): `try`/`catch` og `response.ok` i din egen chatbot. `cors()` tillader lige nu alle origins — at afgrænse den til kun jeres egen frontend, samt statuskoder og fejlhåndtering på serversiden, venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md). En admin-frontend til `/answers` (opret/redigér/slet svarregler) er en oplagt øvelse at bygge selv, med præcis samme `fetch()`-mønster, når du har tid.
+Din AMAbot har nu en rigtig frontend: `client/app.js` taler med dit REST API via `fetch()`, kører på sin egen origin med Live Server, og opdaterer DOM'en direkte i browseren, uden en eneste server-genereret HTML-side. Du har allerede mødt og løst en rigtig CORS-fejl undervejs — men lige nu antager koden ellers, at alt går godt: intet tjekker, om `fetch()` fejler af andre grunde, eller om serveren svarer med en fejl. Det er præcis emnet i [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md): `try`/`catch` og `response.ok` i din egen chatbot. `cors()` tillader lige nu alle origins — at afgrænse den til kun jeres egen frontend, samt statuskoder og fejlhåndtering på serversiden, venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md). En admin-frontend til `/answers` (opret/redigér/slet svarregler) er en oplagt øvelse at bygge selv, med præcis samme `fetch()`-mønster, når du har tid.
