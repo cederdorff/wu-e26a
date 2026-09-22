@@ -2,11 +2,11 @@
 
 ## Kort fortalt
 
-Denne øvelse bygger videre på jeres `students-rest-api`-projekt fra [REST API-øvelse: Studerende med CRUD](express-rest-api-students.md) (Del 1 og Del 2). I har allerede fuld CRUD for `/students`, med data persisteret i `data/students.json`.
+Denne øvelse bygger videre på jeres `students-rest-api`-projekt fra [REST API-øvelse: Studerende med CRUD](express-rest-api-students.md). I har allerede fuld CRUD for `/students`, persisteret i `data/students.json`.
 
-I dag tilføjer I en ny ressource, `/teachers`, med præcis samme mønster som `/students` — og bruger det som anledning til at mærke, hvor uoverskuelig `server.js` bliver med to ressourcer i samme fil. Det er motivationen for resten af øvelsen: at dele API'et op i lag.
+I dag tilføjer I `/teachers` med samme mønster som `/students` — og bruger det til at mærke, hvor uoverskuelig `server.js` bliver med to ressourcer i samme fil. Det er motivationen for resten af øvelsen: at dele API'et op i lag.
 
-Begreb: **Separation of Concerns** — når routes, logik og data-adgang alle bor i samme fil, har filen flere ansvar på én gang; det er det, lagene i denne øvelse retter op på.
+Begreb: **Separation of Concerns** — når routes, logik og data-adgang bor i samme fil, har filen flere ansvar på én gang; det retter lagene i denne øvelse op på.
 
 Øvelsen er delt i seks dele:
 
@@ -78,7 +78,7 @@ PUT    /teachers/:id   -> loadTeachers() -> find()       -> saveTeachers()  -> r
 DELETE /teachers/:id   -> loadTeachers() -> findIndex() -> splice() -> saveTeachers() -> response.send()
 ```
 
-> Del 1 er bevidst kort: hele mønsteret — `loadX()`/`saveX()` mod en JSON-fil, og de fem CRUD-routes — er identisk med det, I byggede for `/students` i [studerende-øvelsen fra sidst](express-rest-api-students.md). Der er ingen nye koncepter i Del 1, kun en ny ressource, `teachers`, gennemført med præcis de samme trin. I bygger derfor direkte oven på en JSON-fil denne gang, uden mellemtrinnet med et rent in-memory array — det kender I allerede.
+> Del 1 er bevidst kort: mønsteret — `loadX()`/`saveX()` mod en JSON-fil, og de fem CRUD-routes — er identisk med `/students` fra [sidste øvelse](express-rest-api-students.md). Ingen nye koncepter, kun en ny ressource. I går derfor direkte til JSON-filen, uden mellemtrinnet med et in-memory array.
 
 ### 1. Opret data/teachers.json
 
@@ -310,7 +310,7 @@ server.js                                 server.js
                                             └─ loadTeachers()/saveTeachers() + 5 routes
 ```
 
-Det, en `Router` konkret gør, er at lade jer definere routes uden at kende deres fulde sti — den fulde sti bliver først sat, når I "monterer" routeren i `server.js` med `app.use(sti, router)`. Express lægger simpelthen `sti` foran alt, hvad routeren selv definerer:
+En `Router` lader jer definere routes uden at kende deres fulde sti — stien sættes først, når I "monterer" routeren i `server.js` med `app.use(sti, router)`. Express lægger `sti` foran alt, routeren selv definerer:
 
 ```text
 server.js                                  routes/students.js
@@ -742,7 +742,7 @@ Kig i terminalen, hvor serveren kører, mens I sender disse requests fra Thunder
 - `GET /students?education=Datamatiker&sort=name` — læg mærke til, at begge query parameters havner i samme objekt, som hver sin property
 - `GET /students?page=2&limit=5` — kig nøje på værdierne af `page` og `limit` i terminalen: er det tal eller strings?
 
-`request.query` er altså bare et almindeligt JavaScript-objekt, bygget ud fra det, der står efter `?` i URL'en — én property pr. query parameter, og alle værdier er strings, uanset hvad de "ligner". Det er præcis den byggesten, filtrering, sortering og paginering i resten af Del 4 bruger.
+`request.query` er et almindeligt JavaScript-objekt, bygget af det der står efter `?` i URL'en — én property pr. query parameter, og alle værdier er strings, uanset hvad de "ligner". Det er byggestenen, resten af Del 4 bruger.
 
 Fjern `console.log(request.query)` igen, når I har set nok — den skal ikke blive stående i den route, I bygger videre på herfra.
 
@@ -895,7 +895,7 @@ console.log(start); // hvor mange elementer skal vi springe over?
 console.log(students.slice(start, start + limit));
 ```
 
-Prøv at ændre `page` og `limit` og se, hvordan `start` og resultatet ændrer sig. Det er præcis den udregning, `request.query.page` og `request.query.limit` skal bruges til nedenfor.
+Prøv at ændre `page` og `limit`, og se hvordan `start` og resultatet ændrer sig — det er den udregning, I skal bruge nedenfor.
 
 Fjern `console.log()`'erne igen, og byg nu pagineringen ind i routen fra trin 14 — pagineringen skal ske til sidst, efter filtrering og sortering:
 
@@ -981,9 +981,9 @@ Del 4 er gennemført, når `GET /students`:
 
 ## Del 5 (frivillig): Controllers
 
-I Del 4 fik `GET /students` for alvor noget at lave — filtrering, sortering og paginering, alt sammen direkte i routen. De øvrige routes (opret, hent én, opdatér, slet) er stadig tynde rene gennemløb, men `GET /students` er nu blevet stor nok til, at det gør en forskel at flytte logikken væk fra selve routingen. Det er derfor controllerlaget kommer her, efter Del 4 — det betaler sig først, når der reelt er noget værd at flytte.
+I Del 4 fik `GET /students` for alvor noget at lave — filtrering, sortering og paginering, alt sammen i routen. De øvrige routes er stadig tynde gennemløb, men `GET /students` er nu stor nok til, at det gør en forskel at flytte logikken ud. Derfor kommer controller-laget her, efter Del 4 — det betaler sig først, når der er noget værd at flytte.
 
-> **Hvorfor egentlig et controller-lag?** Delvist handler det om projektets størrelse: med fem tynde routes er der intet at vinde ved at splitte dem op, men jo mere logik en route samler på — som filtreringen, sorteringen og pagineringen i `getAllStudents` — jo sværere bliver den at overskue, når routing og logik ligger i samme funktion. Den konkrete gevinst her er, at `routes/students.js` bliver en ren liste over endpoints, mens controlleren rummer den logik, der faktisk er værd at læse for sig selv. Læg dog mærke til, at jeres controller-funktioner stadig tager `(request, response)` direkte fra Express — de er altså ikke fuldt afkoblet fra HTTP-laget. Skulle I for alvor genbruge logikken uden for én bestemt route, fx fra et script eller en helt anden slags endpoint, ville næste skridt være at trække selve logikken endnu længere ud, så den ikke rører `request`/`response` overhovedet — det ligger uden for denne øvelse.
+> **Hvorfor et controller-lag?** Med fem tynde routes er der intet at vinde ved at splitte dem op — men jo mere logik en route samler, som filtrering/sortering/paginering i `getAllStudents`, jo sværere er den at overskue. Gevinsten: `routes/students.js` bliver en ren liste over endpoints, og logikken bliver til at læse for sig selv. Bemærk dog at controller-funktionerne stadig tager `(request, response)` direkte fra Express — fuld afkobling fra HTTP-laget ligger uden for denne øvelse.
 
 Sådan ser en enkelt request igennem alle fire lag ud, når Del 5 er færdig:
 
