@@ -66,11 +66,12 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 <details>
 <summary><strong>7. CORS: fra "tillad alt" til "tillad jeres egen frontend"</strong></summary>
 
+- Demo: åbn DevTools-konsollen på en helt tilfældig side (ikke jeres egen), og kald `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)` direkte derfra — det virker, fordi `cors()` uden argumenter lige nu tillader alle origins
 - Genopfrisk: browserens same-origin policy blokerer som udgangspunkt `fetch()` på tværs af origins — det er derfor AMAbottens frontend først virkede, da `cors()` blev tilføjet på serveren
 - `app.use(cors())` uden argumenter sætter HTTP-headeren `Access-Control-Allow-Origin: *` — enhver hjemmeside kan nu kalde jeres API fra en brugers browser, ikke kun jeres egen frontend
 - Diskutér: hvad kunne gå galt, hvis en helt fremmed hjemmeside kaldte jeres `/students`\- eller `/messages`\-API fra en brugers browser?
 - Løsningen: begræns til den origin, I selv bruger — `cors({ origin: "http://127.0.0.1:5500" })`
-- Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren, og bekræft at jeres egen frontend stadig virker
+- Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren. Gentag demoens `fetch()` fra den fremmede side igen — den skal nu fejle med en CORS-fejl i konsollen. Bekræft til sidst, at jeres egen frontend stadig virker
 </details>
 <details>
 <summary><strong>8. Sikkerhed i data: escape brugerens tekst på serveren (XSS)</strong></summary>
