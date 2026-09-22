@@ -139,12 +139,12 @@ Del 1 er gennemført, når:
 GET /messages -> response.json(messages) -> ét <article> pr. besked i #messages
 ```
 
-### 6. Skriv en funktion, der viser én besked
+### 6. Byg HTML-strengen for én besked
 
 ```js
 function displayMessage(message) {
   // TODO: Byg en HTML-streng med et template literal: et <article> med sin class sat til message.type ("question" eller "answer") — det er den samme klasse, din CSS fra øvelse 3 allerede styler — og et <p> inde i det, med message.text.
-  // TODO: Indsæt HTML-strengen sidst i messagesContainer med messagesContainer.insertAdjacentHTML("beforeend", html).
+  // TODO: Log strengen med console.log(html), så du kan se, hvad den faktisk indeholder.
 }
 ```
 
@@ -153,6 +153,54 @@ function displayMessage(message) {
 
 ```text
 html = `<article class="${message.type}"><p>${message.text}</p></article>`
+console.log(html)
+```
+
+</details>
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```js
+function displayMessage(message) {
+  const html = /*html*/ `
+    <article class="${message.type}">
+      <p>${message.text}</p>
+    </article>`;
+
+  console.log(html);
+}
+```
+
+> Kommentaren `/*html*/` foran skabelonstrengen gør ingenting for JavaScript selv — det er et hint til din editor om at syntax-highlighte indholdet som HTML.
+
+</details>
+
+#### Test trin 6
+
+Kald midlertidigt funktionen direkte, efter du har hentet DOM-elementerne: `displayMessage({ type: "question", text: "Test" });`. Genindlæs siden, og åbn DevTools' konsol — der skal stå en HTML-streng i stil med `<article class="question"><p>Test</p></article>`. Intet vises endnu på selve siden; det kommer i næste trin.
+
+---
+
+### 7. Indsæt HTML-strengen på siden
+
+Byg videre på `displayMessage()` fra trin 6:
+
+```js
+function displayMessage(message) {
+  const html = /*html*/ `
+    <article class="${message.type}">
+      <p>${message.text}</p>
+    </article>`;
+
+  // TODO: Indsæt HTML-strengen sidst i messagesContainer med messagesContainer.insertAdjacentHTML("beforeend", html). Fjern console.log igen.
+}
+```
+
+<details>
+<summary>Hint</summary>
+
+```text
 messagesContainer.insertAdjacentHTML("beforeend", html)
 ```
 
@@ -172,17 +220,17 @@ function displayMessage(message) {
 }
 ```
 
-> **`insertAdjacentHTML`, ikke `appendChild`.** `insertAdjacentHTML("beforeend", html)` parser HTML-strengen og indsætter resultatet sidst inde i `messagesContainer`, uden at røre ved det, der allerede står der. `/*html*/`-kommentaren foran skabelonstrengen gør ingenting for JavaScript selv — det er et hint til din editor om at syntax-highlighte indholdet som HTML. **Bemærk:** fordi `message.text` sættes direkte ind i strengen, bliver den tolket som HTML, ikke som ren tekst — skriver nogen `<b>` i et spørgsmål, får du reelt fed skrift på siden. At undgå det (fx med `textContent` i stedet for `insertAdjacentHTML`, eller ved at escape strengen selv) er en bevidst forenkling her; I arbejder videre med input-sanering i [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
+> **`insertAdjacentHTML`, ikke `appendChild`.** `insertAdjacentHTML("beforeend", html)` parser HTML-strengen og indsætter resultatet sidst inde i `messagesContainer`, uden at røre ved det, der allerede står der. **Bemærk:** fordi `message.text` sættes direkte ind i strengen, bliver den tolket som HTML, ikke som ren tekst — skriver nogen `<b>` i et spørgsmål, får du reelt fed skrift på siden. At undgå det (fx med `textContent` i stedet for `insertAdjacentHTML`, eller ved at escape strengen selv) er en bevidst forenkling her; I arbejder videre med input-sanering i [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md).
 
 </details>
 
-#### Test trin 6
+#### Test trin 7
 
-Kald midlertidigt funktionen direkte, efter du har hentet DOM-elementerne: `displayMessage({ type: "question", text: "Test" });`. Genindlæs siden — der skal med det samme stå en boks med teksten "Test" i `#messages`, med samme styling som resten af historikken. Fjern kaldet igen.
+Kaldet fra trin 6 står stadig i din kode. Genindlæs siden — der skal med det samme stå en boks med teksten "Test" i `#messages`, med samme styling som resten af historikken. Fjern kaldet igen.
 
 ---
 
-### 7. Hent historikken, og se hvad du får tilbage
+### 8. Hent historikken, og se hvad du får tilbage
 
 Din side kører nu på en anden origin end API'et (Live Server vs. Express), så et relativt kald som `fetch("/messages")` ville gå til Live Server selv, ikke dit API. Definér derfor API'ets fulde adresse øverst i `client/app.js`, sammen med dine andre konstanter:
 
@@ -231,7 +279,7 @@ getMessages();
 
 </details>
 
-#### Test trin 7
+#### Test trin 8
 
 Genindlæs siden i Live Server, og åbn DevTools' konsol. Du skal se en fejl i stil med:
 
@@ -244,7 +292,7 @@ Det er **forventet** — ikke en fejl i din kode. Det retter du i næste trin.
 
 ---
 
-### 8. Fiks CORS-fejlen på serveren
+### 9. Fiks CORS-fejlen på serveren
 
 Installer `cors`-pakken i `server/`:
 
@@ -267,13 +315,13 @@ app.use(cors());
 
 </details>
 
-#### Test trin 8
+#### Test trin 9
 
 Genstart serveren, og genindlæs siden i Live Server igen. CORS-fejlen skal være væk fra konsollen. I stedet skal konsollen nu vise et array — har du spurgt AMAbotten om noget tidligere (fra Thunder Client-test i øvelse 6/7), ét objekt pr. besked, hver med et `type` (`"question"` eller `"answer"`) og en `text`. Kig på strukturen; det er den, du render'er i næste trin. Åbn DevTools' Network-fane, og bekræft at `GET /messages`-kaldet returnerer status `200`.
 
 ---
 
-### 9. Vis hver besked på siden
+### 10. Vis hver besked på siden
 
 Du har nu set formen på dataen — byg videre på `getMessages()`, og vis den i stedet for at logge den:
 
@@ -317,7 +365,7 @@ getMessages();
 
 </details>
 
-#### Test trin 9
+#### Test trin 10
 
 Genindlæs siden. Hele din eksisterende samtalehistorik skal nu stå på siden, med den styling `.question`/`.answer` allerede har fra øvelse 3.
 
@@ -333,7 +381,7 @@ Del 2 er gennemført, når hele din eksisterende samtalehistorik vises på siden
 submit -> preventDefault() -> POST /messages -> { question, answer } -> to nye <article>-elementer
 ```
 
-### 10. Opfang formularens submit
+### 11. Opfang formularens submit
 
 ```js
 questionForm.addEventListener("submit", async (event) => {
@@ -341,7 +389,7 @@ questionForm.addEventListener("submit", async (event) => {
 
   const question = questionInput.value.trim();
 
-  // Trin 11 fortsætter her
+  // Trin 12 fortsætter her
 });
 ```
 
@@ -349,15 +397,15 @@ questionForm.addEventListener("submit", async (event) => {
 
 > Ingen tjek endnu af, om `question` er tom — det venter til [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md).
 
-#### Test trin 10
+#### Test trin 11
 
 Sæt midlertidigt `console.log(question);` ind, hvor kommentaren står. Indsend formularen med et spørgsmål skrevet — konsollen skal vise teksten, og siden må **ikke** genindlæse (ingen blink, ingen ny URL). Fjern loggen igen.
 
 ---
 
-### 11. Send POST-kaldet, og se hvad du får tilbage
+### 12. Send POST-kaldet, og se hvad du får tilbage
 
-Byg videre på event listeneren fra trin 10:
+Byg videre på event listeneren fra trin 11:
 
 ```js
 questionForm.addEventListener("submit", async (event) => {
@@ -416,13 +464,13 @@ questionForm.addEventListener("submit", async (event) => {
 
 </details>
 
-#### Test trin 11
+#### Test trin 12
 
-Skriv et rigtigt spørgsmål i formularen, og send den. Åbn DevTools' konsol — der skal stå et objekt med `question` og `answer`, hver formet som beskederne fra trin 7 (`{ type, text }`). Åbn Network-fanen, og bekræft at `POST /messages` returnerer status `200`. Siden viser endnu ikke noget nyt — det kommer i næste trin.
+Skriv et rigtigt spørgsmål i formularen, og send den. Åbn DevTools' konsol — der skal stå et objekt med `question` og `answer`, hver formet som beskederne fra trin 8 (`{ type, text }`). Åbn Network-fanen, og bekræft at `POST /messages` returnerer status `200`. Siden viser endnu ikke noget nyt — det kommer i næste trin.
 
 ---
 
-### 12. Vis spørgsmål og svar på siden
+### 13. Vis spørgsmål og svar på siden
 
 Du har set formen på svaret — vis det nu i stedet for at logge det:
 
@@ -440,7 +488,7 @@ questionForm.addEventListener("submit", async (event) => {
 
   const data = await response.json();
 
-  // TODO: Vis både data.question og data.answer med displayMessage() fra trin 6. Fjern console.log igen.
+  // TODO: Vis både data.question og data.answer med displayMessage() fra trin 6-7. Fjern console.log igen.
 });
 ```
 
@@ -478,13 +526,13 @@ questionForm.addEventListener("submit", async (event) => {
 
 </details>
 
-#### Test trin 12
+#### Test trin 13
 
 Skriv et nyt spørgsmål, og send det. Uden at siden genindlæser, skal både dit spørgsmål og AMAbottens svar dukke op i `#messages`, med samme styling som resten af historikken.
 
 ---
 
-### 13. Ryd inputfeltet
+### 14. Ryd inputfeltet
 
 Formularen virker nu, men inputfeltet står stadig med det gamle spørgsmål i, efter du har sendt det.
 
@@ -544,9 +592,9 @@ questionForm.addEventListener("submit", async (event) => {
 
 </details>
 
-#### Test trin 13
+#### Test trin 14
 
-Skriv endnu et spørgsmål, og send det. Inputfeltet skal være tomt, lige så snart svaret er vist. Genindlæs siden bagefter, og bekræft at alle beskederne fra trin 11-13 stadig er der — de kom jo fra `saveMessages()` på serveren.
+Skriv endnu et spørgsmål, og send det. Inputfeltet skal være tomt, lige så snart svaret er vist. Genindlæs siden bagefter, og bekræft at alle beskederne fra trin 12-14 stadig er der — de kom jo fra `saveMessages()` på serveren.
 
 ## Tjekpunkt: Del 3
 
@@ -556,12 +604,11 @@ Del 3 er gennemført, når du kan stille AMAbotten et spørgsmål gennem formula
 
 ## Del 4: Ryd beskeder med et rigtigt DELETE-kald
 
-### 14. Forbind "Ryd beskeder"-knappen
+### 15. Send DELETE-kaldet
 
 ```js
 clearMessagesButton.addEventListener("click", async () => {
   // TODO: Send et DELETE-kald til `${API_URL}/messages` med fetch().
-  // TODO: Tøm messagesContainer for indhold, fx messagesContainer.innerHTML = "".
 });
 ```
 
@@ -570,6 +617,43 @@ clearMessagesButton.addEventListener("click", async () => {
 
 ```text
 await fetch(`${API_URL}/messages`, { method: "DELETE" })
+```
+
+</details>
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```js
+clearMessagesButton.addEventListener("click", async () => {
+  await fetch(`${API_URL}/messages`, { method: "DELETE" });
+});
+```
+
+</details>
+
+#### Test trin 15
+
+Klik på "Ryd beskeder". Siden ændrer sig ikke endnu — det kommer i næste trin. Åbn DevTools' Network-fane, og bekræft at `DELETE /messages` returnerer status `200`. Genindlæs siden bagefter: historikken er væk, fordi den er slettet på serveren, selvom UI'et ikke opdaterede sig med det samme.
+
+---
+
+### 16. Tøm siden med det samme
+
+Lige nu skal du genindlæse for at se, at historikken er ryddet. Byg videre på click-listeneren fra trin 15:
+
+```js
+clearMessagesButton.addEventListener("click", async () => {
+  await fetch(`${API_URL}/messages`, { method: "DELETE" });
+
+  // TODO: Tøm messagesContainer for indhold, fx messagesContainer.innerHTML = "".
+});
+```
+
+<details>
+<summary>Hint</summary>
+
+```text
 messagesContainer.innerHTML = ""
 ```
 
@@ -585,13 +669,13 @@ clearMessagesButton.addEventListener("click", async () => {
 });
 ```
 
-> `messagesContainer.innerHTML = ""` er trygt at bruge her, fordi du selv sætter den tomme streng — det er ikke brugerdata, der indsættes som HTML (modsat trin 6, hvor `message.text` ender direkte i den HTML, `insertAdjacentHTML()` indsætter).
+> `messagesContainer.innerHTML = ""` er trygt at bruge her, fordi du selv sætter den tomme streng — det er ikke brugerdata, der indsættes som HTML (modsat trin 7, hvor `message.text` ender direkte i den HTML, `insertAdjacentHTML()` indsætter).
 
 </details>
 
-#### Test trin 14
+#### Test trin 16
 
-Klik på "Ryd beskeder". Historikken skal forsvinde fra siden med det samme. Genindlæs siden bagefter, og bekræft at historikken forbliver tom — `DELETE /messages` har jo også ryddet `data/messages.json` på serveren.
+Klik på "Ryd beskeder". Historikken skal nu forsvinde fra siden med det samme, uden at du behøver genindlæse.
 
 ## Tjekpunkt: Del 4
 
@@ -603,9 +687,9 @@ Del 4 er gennemført, når "Ryd beskeder"-knappen rydder både siden og den gemt
 
 `.messages` har allerede `max-height` og `overflow-y: auto` fra øvelse 3 — historikken skal altså kunne scrolle. Men lige nu skal du selv scrolle ned for at se en ny besked, og "Ryd beskeder" ligner stadig en helt almindelig, umærket knap, der er svær at skelne fra "Send".
 
-### 15. Scroll automatisk ned til den seneste besked
+### 17. Scroll automatisk ned til den seneste besked
 
-`displayMessage()` er den ene funktion, der indsætter beskeder i `#messages` — uanset om det sker ved load (trin 9), efter et nyt spørgsmål (trin 12) eller i princippet også en fremtidig brug. Retter du scrollet der, virker det alle steder.
+`displayMessage()` er den ene funktion, der indsætter beskeder i `#messages` — uanset om det sker ved load (trin 10), efter et nyt spørgsmål (trin 13) eller i princippet også en fremtidig brug. Retter du scrollet der, virker det alle steder.
 
 ```js
 function displayMessage(message) {
@@ -648,13 +732,13 @@ function displayMessage(message) {
 
 </details>
 
-#### Test trin 15
+#### Test trin 17
 
 Genindlæs siden, så der er nok historik til, at `#messages` rent faktisk scroller (har du ikke nok, så stil et par spørgsmål først). Siden skal med det samme vise den seneste besked nederst i containeren — ikke toppen af historikken. Stil derefter et nyt spørgsmål: svaret skal automatisk blive synligt, uden at du selv skal scrolle.
 
 ---
 
-### 16. Giv "Ryd beskeder" sit eget udseende
+### 18. Giv "Ryd beskeder" sit eget udseende
 
 Knappen har allerede sit id fra trin 2 (`#clear-messages-button`) — det bruger du til at style den direkte i `client/styles.css`, uden at røre selve HTML'en.
 
@@ -699,9 +783,11 @@ Brug id-selectoren `#clear-messages-button`, og genbrug de CSS-variabler, der al
 
 </details>
 
-#### Test trin 16
+#### Test trin 18
 
-Genindlæs siden. "Ryd beskeder" skal nu se tydeligt anderledes ud end "Send" — en rolig, indrammet knap i stedet for en solid lilla en. Hold musen over den, og bekræft at den reagerer visuelt. Bekræft til sidst, at den stadig rydder historikken korrekt (trin 14 virker uændret).
+Genindlæs siden. "Ryd beskeder" skal nu se tydeligt anderledes ud end "Send" — en rolig, indrammet knap i stedet for en solid lilla en. Hold musen over den, og bekræft at den reagerer visuelt. Bekræft til sidst, at den stadig rydder historikken korrekt (trin 16 virker uændret).
+
+Du har nu rettet to konkrete ting: scroll og "Ryd beskeder"-knappen. Kig på resten af siden med friske øjne, nu hvor den er en rigtig, levende app og ikke bare en statisk formular — er der andet, der trænger til et servicetjek? Selve beskederne, tomme-tilstanden når historikken lige er ryddet, formularen, eller noget helt fjerde. Det er ikke en del af tjekpunktet, bare noget at tage med videre, hvis du har lyst og tid.
 
 ## Tjekpunkt: Del 5
 
@@ -727,8 +813,8 @@ Del 5 er gennemført, når `#messages` automatisk scroller ned til den nyeste be
 1. Hvad gjorde `views/index.ejs` i øvelse 3, som `client/app.js` nu gør i stedet? Hvad er den samme opgave løst to forskellige steder — serveren dengang, browseren nu?
 2. Hvad betyder "origin" helt konkret for `client/`'et og `server/`'et i denne øvelse? Hvorfor blokerede browseren requesten, før du tilføjede `cors()`?
 3. `app.use(cors())` uden argumenter tillader alle origins. Hvad tror du, der ville ske, hvis en helt andens hjemmeside prøvede at kalde dit API lige nu — og hvorfor er det noget, RACE 7 tager fat på?
-4. `event.preventDefault()` i trin 10 — hvad ville der ske, hvis du fjernede den linje igen? Prøv det, og beskriv, hvad du ser.
-5. I trin 6 sætter `displayMessage()` `message.text` direkte ind i en HTML-streng, som `insertAdjacentHTML()` derefter indsætter. Hvad ville der ske, hvis nogen skrev `<b>hej</b>` som spørgsmål? Hvordan ville det se anderledes ud, hvis du i stedet havde brugt `textContent`?
+4. `event.preventDefault()` i trin 11 — hvad ville der ske, hvis du fjernede den linje igen? Prøv det, og beskriv, hvad du ser.
+5. I trin 6-7 sætter `displayMessage()` `message.text` direkte ind i en HTML-streng, som `insertAdjacentHTML()` derefter indsætter. Hvad ville der ske, hvis nogen skrev `<b>hej</b>` som spørgsmål? Hvordan ville det se anderledes ud, hvis du i stedet havde brugt `textContent`?
 6. Peg på ét sted, hvor du bruger `await`. Hvad ville koden gøre forkert, hvis du glemte det ord der?
 
 ## Videre
