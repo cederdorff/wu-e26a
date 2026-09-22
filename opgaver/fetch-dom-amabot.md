@@ -182,7 +182,7 @@ Kald midlertidigt funktionen direkte, efter du har hentet DOM-elementerne: `disp
 
 ---
 
-### 7. Hent historikken, og vis den
+### 7. Hent historikken, og se hvad du får tilbage
 
 Din side kører nu på en anden origin end API'et (Live Server vs. Express), så et relativt kald som `fetch("/messages")` ville gå til Live Server selv, ikke dit API. Definér derfor API'ets fulde adresse øverst i `client/app.js`, sammen med dine andre konstanter:
 
@@ -195,7 +195,7 @@ Brug den i alle dine `fetch()`-kald fremover, fx `` `${API_URL}/messages` ``:
 ```js
 async function getMessages() {
   // TODO: Hent `${API_URL}/messages` med fetch(), og await response.json() for at få messages-arrayet.
-  // TODO: Kør igennem messages med en for...of, og kald displayMessage(message) for hver.
+  // TODO: Log messages til konsollen med console.log(messages) — se, hvordan dataen faktisk ser ud, før du render'er den.
 }
 
 getMessages();
@@ -208,9 +208,7 @@ getMessages();
 response = await fetch(`${API_URL}/messages`)
 messages = await response.json()
 
-for (const message of messages) {
-  displayMessage(message)
-}
+console.log(messages)
 ```
 
 </details>
@@ -223,9 +221,7 @@ async function getMessages() {
   const response = await fetch(`${API_URL}/messages`);
   const messages = await response.json();
 
-  for (const message of messages) {
-    displayMessage(message);
-  }
+  console.log(messages);
 }
 
 getMessages();
@@ -244,7 +240,7 @@ Access to fetch at 'http://localhost:3000/messages' from origin 'http://127.0.0.
 has been blocked by CORS policy...
 ```
 
-Det er **forventet** — ikke en fejl i din kode. Ingen beskeder vises endnu. Det retter du i næste trin.
+Det er **forventet** — ikke en fejl i din kode. Det retter du i næste trin.
 
 ---
 
@@ -273,7 +269,57 @@ app.use(cors());
 
 #### Test trin 8
 
-Genstart serveren, og genindlæs siden i Live Server igen. CORS-fejlen skal være væk fra konsollen. Har du spurgt AMAbotten om noget tidligere (fra Thunder Client-test i øvelse 6/7), skal den historik nu stå på siden, med den styling `.question`/`.answer` allerede har fra øvelse 3. Åbn DevTools' Network-fane, og bekræft at `GET /messages`-kaldet nu returnerer status `200`.
+Genstart serveren, og genindlæs siden i Live Server igen. CORS-fejlen skal være væk fra konsollen. I stedet skal konsollen nu vise et array — har du spurgt AMAbotten om noget tidligere (fra Thunder Client-test i øvelse 6/7), ét objekt pr. besked, hver med et `type` (`"question"` eller `"answer"`) og en `text`. Kig på strukturen; det er den, du render'er i næste trin. Åbn DevTools' Network-fane, og bekræft at `GET /messages`-kaldet returnerer status `200`.
+
+---
+
+### 9. Vis hver besked på siden
+
+Du har nu set formen på dataen — byg videre på `getMessages()`, og vis den i stedet for at logge den:
+
+```js
+async function getMessages() {
+  const response = await fetch(`${API_URL}/messages`);
+  const messages = await response.json();
+
+  // TODO: Kør igennem messages med en for...of, og kald displayMessage(message) for hver. Fjern console.log igen.
+}
+
+getMessages();
+```
+
+<details>
+<summary>Hint</summary>
+
+```text
+for (const message of messages) {
+  displayMessage(message)
+}
+```
+
+</details>
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```js
+async function getMessages() {
+  const response = await fetch(`${API_URL}/messages`);
+  const messages = await response.json();
+
+  for (const message of messages) {
+    displayMessage(message);
+  }
+}
+
+getMessages();
+```
+
+</details>
+
+#### Test trin 9
+
+Genindlæs siden. Hele din eksisterende samtalehistorik skal nu stå på siden, med den styling `.question`/`.answer` allerede har fra øvelse 3.
 
 ## Tjekpunkt: Del 2
 
@@ -287,7 +333,7 @@ Del 2 er gennemført, når hele din eksisterende samtalehistorik vises på siden
 submit -> preventDefault() -> POST /messages -> { question, answer } -> to nye <article>-elementer
 ```
 
-### 9. Opfang formularens submit
+### 10. Opfang formularens submit
 
 ```js
 questionForm.addEventListener("submit", async (event) => {
@@ -295,46 +341,36 @@ questionForm.addEventListener("submit", async (event) => {
 
   const question = questionInput.value.trim();
 
-  if (!question) {
-    return;
-  }
-
-  // Trin 10 fortsætter her
+  // Trin 11 fortsætter her
 });
 ```
 
 > **`event.preventDefault()`.** Uden denne linje gør formularen, hvad den altid har gjort: sender en almindelig request og genindlæser siden — præcis den opførsel, `fetch()` skal overtage. Det er den samme "intercept formularen"-teknik, dagens undervisning (DOB 6) handlede om.
 
-#### Test trin 9
+> Ingen tjek endnu af, om `question` er tom — det venter til [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md).
+
+#### Test trin 10
 
 Sæt midlertidigt `console.log(question);` ind, hvor kommentaren står. Indsend formularen med et spørgsmål skrevet — konsollen skal vise teksten, og siden må **ikke** genindlæse (ingen blink, ingen ny URL). Fjern loggen igen.
 
 ---
 
-### 10. Send spørgsmålet, og vis svaret
+### 11. Send POST-kaldet, og se hvad du får tilbage
 
-Byg videre på event listeneren fra trin 9:
+Byg videre på event listeneren fra trin 10:
 
 ```js
 questionForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const question = questionInput.value.trim();
-
-  if (!question) {
-    return;
-  }
 
   // TODO: Send et POST-kald til `${API_URL}/messages` med fetch(). Husk:
   //   - method: "POST"
   //   - headers: { "Content-Type": "application/json" }
   //   - body: JSON.stringify({ question })
 
-  // TODO: await response.json() for at få { question, answer } tilbage.
-
-  // TODO: Vis både data.question og data.answer med displayMessage() fra trin 6.
-
-  // TODO: Ryd inputfeltet, questionInput.value = "", så det er klar til næste spørgsmål.
+  // TODO: await response.json() for at få { question, answer } tilbage, og log det med console.log(data).
 });
 ```
 
@@ -350,10 +386,7 @@ response = await fetch(`${API_URL}/messages`, {
 
 data = await response.json()
 
-displayMessage(data.question)
-displayMessage(data.answer)
-
-questionInput.value = ""
+console.log(data)
 ```
 
 </details>
@@ -367,9 +400,132 @@ questionForm.addEventListener("submit", async (event) => {
 
   const question = questionInput.value.trim();
 
-  if (!question) {
-    return;
-  }
+  const response = await fetch(`${API_URL}/messages`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question })
+  });
+
+  const data = await response.json();
+
+  console.log(data);
+});
+```
+
+> **`headers` og `body` hører sammen.** `JSON.stringify({ question })` laver JavaScript-objektet om til en JSON-tekststreng — det er den, der ryger i `body`. `"Content-Type": "application/json"` fortæller serveren, at teksten skal tolkes som JSON. Uden headeren læser `express.json()`-middlewaren på serveren ikke `request.body` korrekt, og `request.body.question` bliver `undefined`. Det er nøjagtig den samme aftale mellem klient og server, som `name="question"` og `express.urlencoded()` var i øvelse 3 — bare med JSON i stedet for en HTML-formular.
+
+</details>
+
+#### Test trin 11
+
+Skriv et rigtigt spørgsmål i formularen, og send den. Åbn DevTools' konsol — der skal stå et objekt med `question` og `answer`, hver formet som beskederne fra trin 7 (`{ type, text }`). Åbn Network-fanen, og bekræft at `POST /messages` returnerer status `200`. Siden viser endnu ikke noget nyt — det kommer i næste trin.
+
+---
+
+### 12. Vis spørgsmål og svar på siden
+
+Du har set formen på svaret — vis det nu i stedet for at logge det:
+
+```js
+questionForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const question = questionInput.value.trim();
+
+  const response = await fetch(`${API_URL}/messages`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question })
+  });
+
+  const data = await response.json();
+
+  // TODO: Vis både data.question og data.answer med displayMessage() fra trin 6. Fjern console.log igen.
+});
+```
+
+<details>
+<summary>Hint</summary>
+
+```text
+displayMessage(data.question)
+displayMessage(data.answer)
+```
+
+</details>
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```js
+questionForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const question = questionInput.value.trim();
+
+  const response = await fetch(`${API_URL}/messages`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question })
+  });
+
+  const data = await response.json();
+
+  displayMessage(data.question);
+  displayMessage(data.answer);
+});
+```
+
+</details>
+
+#### Test trin 12
+
+Skriv et nyt spørgsmål, og send det. Uden at siden genindlæser, skal både dit spørgsmål og AMAbottens svar dukke op i `#messages`, med samme styling som resten af historikken.
+
+---
+
+### 13. Ryd inputfeltet
+
+Formularen virker nu, men inputfeltet står stadig med det gamle spørgsmål i, efter du har sendt det.
+
+```js
+questionForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const question = questionInput.value.trim();
+
+  const response = await fetch(`${API_URL}/messages`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question })
+  });
+
+  const data = await response.json();
+
+  displayMessage(data.question);
+  displayMessage(data.answer);
+
+  // TODO: Ryd inputfeltet, questionInput.value = "", så det er klar til næste spørgsmål.
+});
+```
+
+<details>
+<summary>Hint</summary>
+
+```text
+questionInput.value = ""
+```
+
+</details>
+
+<details>
+<summary>Se løsningsforslag</summary>
+
+```js
+questionForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const question = questionInput.value.trim();
 
   const response = await fetch(`${API_URL}/messages`, {
     method: "POST",
@@ -386,13 +542,11 @@ questionForm.addEventListener("submit", async (event) => {
 });
 ```
 
-> **`headers` og `body` hører sammen.** `JSON.stringify({ question })` laver JavaScript-objektet om til en JSON-tekststreng — det er den, der ryger i `body`. `"Content-Type": "application/json"` fortæller serveren, at teksten skal tolkes som JSON. Uden headeren læser `express.json()`-middlewaren på serveren ikke `request.body` korrekt, og `request.body.question` bliver `undefined`. Det er nøjagtig den samme aftale mellem klient og server, som `name="question"` og `express.urlencoded()` var i øvelse 3 — bare med JSON i stedet for en HTML-formular.
-
 </details>
 
-#### Test trin 10
+#### Test trin 13
 
-Skriv et rigtigt spørgsmål i formularen, og send den. Uden at siden genindlæser, skal både dit spørgsmål og AMAbottens svar dukke op i `#messages`, med samme styling som resten af historikken, og inputfeltet skal være tomt bagefter. Genindlæs siden bagefter, og bekræft at begge nye beskeder stadig er der — de kom jo fra `saveMessages()` på serveren.
+Skriv endnu et spørgsmål, og send det. Inputfeltet skal være tomt, lige så snart svaret er vist. Genindlæs siden bagefter, og bekræft at alle beskederne fra trin 11-13 stadig er der — de kom jo fra `saveMessages()` på serveren.
 
 ## Tjekpunkt: Del 3
 
@@ -402,7 +556,7 @@ Del 3 er gennemført, når du kan stille AMAbotten et spørgsmål gennem formula
 
 ## Del 4: Ryd beskeder med et rigtigt DELETE-kald
 
-### 11. Forbind "Ryd beskeder"-knappen
+### 14. Forbind "Ryd beskeder"-knappen
 
 ```js
 clearMessagesButton.addEventListener("click", async () => {
@@ -435,7 +589,7 @@ clearMessagesButton.addEventListener("click", async () => {
 
 </details>
 
-#### Test trin 11
+#### Test trin 14
 
 Klik på "Ryd beskeder". Historikken skal forsvinde fra siden med det samme. Genindlæs siden bagefter, og bekræft at historikken forbliver tom — `DELETE /messages` har jo også ryddet `data/messages.json` på serveren.
 
@@ -449,9 +603,9 @@ Del 4 er gennemført, når "Ryd beskeder"-knappen rydder både siden og den gemt
 
 `.messages` har allerede `max-height` og `overflow-y: auto` fra øvelse 3 — historikken skal altså kunne scrolle. Men lige nu skal du selv scrolle ned for at se en ny besked, og "Ryd beskeder" ligner stadig en helt almindelig, umærket knap, der er svær at skelne fra "Send".
 
-### 12. Scroll automatisk ned til den seneste besked
+### 15. Scroll automatisk ned til den seneste besked
 
-`displayMessage()` er den ene funktion, der indsætter beskeder i `#messages` — uanset om det sker ved load (trin 7), efter et nyt spørgsmål (trin 10) eller i princippet også en fremtidig brug. Retter du scrollet der, virker det alle steder.
+`displayMessage()` er den ene funktion, der indsætter beskeder i `#messages` — uanset om det sker ved load (trin 9), efter et nyt spørgsmål (trin 12) eller i princippet også en fremtidig brug. Retter du scrollet der, virker det alle steder.
 
 ```js
 function displayMessage(message) {
@@ -494,13 +648,13 @@ function displayMessage(message) {
 
 </details>
 
-#### Test trin 12
+#### Test trin 15
 
 Genindlæs siden, så der er nok historik til, at `#messages` rent faktisk scroller (har du ikke nok, så stil et par spørgsmål først). Siden skal med det samme vise den seneste besked nederst i containeren — ikke toppen af historikken. Stil derefter et nyt spørgsmål: svaret skal automatisk blive synligt, uden at du selv skal scrolle.
 
 ---
 
-### 13. Giv "Ryd beskeder" sit eget udseende
+### 16. Giv "Ryd beskeder" sit eget udseende
 
 Knappen har allerede sit id fra trin 2 (`#clear-messages-button`) — det bruger du til at style den direkte i `client/styles.css`, uden at røre selve HTML'en.
 
@@ -545,9 +699,9 @@ Brug id-selectoren `#clear-messages-button`, og genbrug de CSS-variabler, der al
 
 </details>
 
-#### Test trin 13
+#### Test trin 16
 
-Genindlæs siden. "Ryd beskeder" skal nu se tydeligt anderledes ud end "Send" — en rolig, indrammet knap i stedet for en solid lilla en. Hold musen over den, og bekræft at den reagerer visuelt. Bekræft til sidst, at den stadig rydder historikken korrekt (trin 11 virker uændret).
+Genindlæs siden. "Ryd beskeder" skal nu se tydeligt anderledes ud end "Send" — en rolig, indrammet knap i stedet for en solid lilla en. Hold musen over den, og bekræft at den reagerer visuelt. Bekræft til sidst, at den stadig rydder historikken korrekt (trin 14 virker uændret).
 
 ## Tjekpunkt: Del 5
 
@@ -573,7 +727,7 @@ Del 5 er gennemført, når `#messages` automatisk scroller ned til den nyeste be
 1. Hvad gjorde `views/index.ejs` i øvelse 3, som `client/app.js` nu gør i stedet? Hvad er den samme opgave løst to forskellige steder — serveren dengang, browseren nu?
 2. Hvad betyder "origin" helt konkret for `client/`'et og `server/`'et i denne øvelse? Hvorfor blokerede browseren requesten, før du tilføjede `cors()`?
 3. `app.use(cors())` uden argumenter tillader alle origins. Hvad tror du, der ville ske, hvis en helt andens hjemmeside prøvede at kalde dit API lige nu — og hvorfor er det noget, RACE 7 tager fat på?
-4. `event.preventDefault()` i trin 9 — hvad ville der ske, hvis du fjernede den linje igen? Prøv det, og beskriv, hvad du ser.
+4. `event.preventDefault()` i trin 10 — hvad ville der ske, hvis du fjernede den linje igen? Prøv det, og beskriv, hvad du ser.
 5. I trin 6 sætter `displayMessage()` `message.text` direkte ind i en HTML-streng, som `insertAdjacentHTML()` derefter indsætter. Hvad ville der ske, hvis nogen skrev `<b>hej</b>` som spørgsmål? Hvordan ville det se anderledes ud, hvis du i stedet havde brugt `textContent`?
 6. Peg på ét sted, hvor du bruger `await`. Hvad ville koden gøre forkert, hvis du glemte det ord der?
 
