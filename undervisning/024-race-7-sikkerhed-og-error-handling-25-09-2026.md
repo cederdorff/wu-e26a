@@ -91,10 +91,12 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Genopfrisk [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) på MDN, denne gang med fokus på `201`, `204` og `400`
 - Læs ["Cross-Origin Resource Sharing (CORS)"](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) på MDN, særligt afsnittet om `Access-Control-Allow-Origin`
 - Supplerende, hvis du har tid:
-    - ["Error handling"](https://expressjs.com/en/guide/error-handling.html) i Express.js-dokumentationen
-    - ["Writing middleware"](https://expressjs.com/en/guide/writing-middleware.html) i Express.js-dokumentationen — `express.json()` og `cors()` er begge eksempler, du allerede har brugt
-    - [`cors`-pakken på npm](https://www.npmjs.com/package/cors), særligt eksemplet med `origin` som en fast værdi i stedet for standardopsætningen
-    - ["Cross Site Scripting (XSS)"](https://owasp.org/www-community/attacks/xss/) hos OWASP som introduktion til begrebet
+  - ["Error handling"](https://expressjs.com/en/guide/error-handling.html) i Express.js-dokumentationen
+  - ["Writing middleware"](https://expressjs.com/en/guide/writing-middleware.html) i Express.js-dokumentationen — `express.json()` og `cors()` er begge eksempler, du allerede har brugt
+  - [`cors`-pakken på npm](https://www.npmjs.com/package/cors), særligt eksemplet med `origin` som en fast værdi i stedet for standardopsætningen
+  - ["Cross Site Scripting (XSS)"](https://owasp.org/www-community/attacks/xss/) hos OWASP som introduktion til begrebet
+
+---
 
 ## Materialer
 
