@@ -488,9 +488,13 @@ app.use((request, response) => {
 });
 ```
 
+> **Begreb: Middleware.** En middleware-funktion er kode, der kører imellem request og response. I har allerede brugt to eksempler uden at vide det: `express.json()` parser en JSON-body, før den når jeres routes, og `cors()` sætter en header, før responsen sendes. `app.use()` her gør nøjagtig det samme, bare med en funktion, I selv har skrevet.
+>
+> Denne middleware ligger sidst i filen, efter alle jeres routere — Express tjekker middleware og routes i den rækkefølge, de står i filen, og springer videre til den næste, hvis den nuværende ikke matcher. Kommer en request helt ned til bunden uden at være matchet af `/students` eller `/teachers`, ender den her. Send fx `GET /students/1` — den matcher `/students/:id`, og denne middleware ser den aldrig. Send `GET /noget-helt-andet` — intet matcher, og den lander her.
+
 #### Test trin 14
 
-Send `GET http://localhost:3000/noget-der-ikke-findes`. Du skal nu få `404` og `{ "error": "Ukendt sti." }` som JSON.
+Send `GET http://localhost:3000/noget-der-ikke-findes`. Du skal nu få `404` og `{ "error": "Ukendt sti." }` som JSON. Send derefter `GET /students/1` igen — den skal stadig give jer den rigtige studerende, ikke `404`\-svaret fra denne middleware.
 
 ---
 
@@ -504,6 +508,10 @@ app.use((error, request, response, next) => {
   response.status(500).json({ error: error.message });
 });
 ```
+
+> **Forskellen på punkt 14 og 15:** 404-catch-all'en fanger en **sti, der slet ikke findes** — ingen af jeres routes matcher `request.method` og `request.url`. Denne middleware fanger noget andet: en **fejl inde i en route, der faktisk matchede**. `GET /students` matcher fint, men hvis `loadStudents()` kaster en fejl undervejs (fx fordi `data/students.json` er ødelagt, som I byggede `try`/`catch` til i punkt 12), ender den fejl her — ikke i 404-catch-all'en.
+>
+> Det er netop derfor, denne middleware har fire parametre (`error, request, response, next`) i stedet for de sædvanlige to eller tre — det er sådan, Express kan skelne den fra en almindelig middleware som punkt 14's, og kun kalde den, når noget rent faktisk er kastet som en fejl.
 
 #### Test trin 15
 
