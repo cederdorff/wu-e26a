@@ -102,7 +102,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 
 - Slides: TBA
 - Opgaver:
-  - Øvelse 9
+  - [Øvelse 9: AMAbotten bliver sikker og fejltolerant](../opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md) — statuskoder, `404`/`400`, `try`/`catch`, en fælles fejl-middleware, CORS og XSS, bygget direkte oven på øvelse 7
   - [Øvelse 8: AMAbotten får en frontend — fetch og DOM](../opgaver/fetch-dom-amabot.md) — byg en rigtig frontend til jeres AMAbot med `fetch()`, i eget tempo
 
 ---
