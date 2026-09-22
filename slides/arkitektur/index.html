@@ -572,18 +572,18 @@ export async function loadStudents() {
 
         <section class="definition-slide" data-accent="green">
           <span class="eyebrow">Frivilligt · begreb</span>
-          <h2>Controller — logikken mellem routing og data</h2>
+          <h2>Controller — endnu et ansvar, endnu et lag</h2>
           <div class="definition-pair">
             <article>
               <span>Hvad er det?</span>
-              <p>En funktion, der indeholder <b>forretningslogikken</b> for én handling — standardværdier, beregninger, eller regler som at afvise en dublet e-mail. Routen kalder den, og den kalder selv data-modulet.</p>
+              <p>En funktion, der stadig tager <code>(request, response)</code> ligesom en route — men indeholder <b>forretningslogikken</b> for én handling: hente, filtrere, validere, gemme, og selv svare klienten.</p>
             </article>
             <article>
               <span>Hvornår?</span>
               <p>Ingen fast grænse — start i routen, og flyt logikken ud den dag flere trin og regler gør routen besværlig at læse.</p>
             </article>
           </div>
-          <p class="bottom-line">Kæden bliver længere: route → controller → data-modul — hvert lag med sit eget ansvar.</p>
+          <p class="bottom-line">Samme regel som ved Router-splittet: <b>Single Responsibility</b> — routen matcher kun sti til funktion, controlleren afgør hvad der skal ske.</p>
         </section>
 
         <section class="code-focus-slide" data-accent="green">
@@ -592,28 +592,31 @@ export async function loadStudents() {
           <div class="before-after">
             <article>
               <span>routes/students.js</span>
-              <pre><code class="language-javascript">router.post("/", async (request, response) => {
-  const student = await studentsController.create(
-    request.body
-  );
-  response.json(student);
-});</code></pre>
+              <pre><code class="language-javascript">import { createStudent } from
+  "../controllers/studentsController.js";
+
+router.post("/", createStudent);</code></pre>
             </article>
             <b aria-hidden="true">→</b>
             <article>
               <span>controllers/studentsController.js</span>
-              <pre><code class="language-javascript">export async function create(data) {
-  data.enrolledAt = new Date().toISOString();
-  data.active = true;
-
+              <pre><code class="language-javascript">export async function createStudent(
+  request, response
+) {
   const students = await loadStudents();
-  students.push(data);
+  const newStudent = {
+    id: Date.now(),
+    name: request.body.name,
+    education: request.body.education
+  };
+
+  students.push(newStudent);
   await saveStudents(students);
-  return data;
+  response.json(newStudent);
 }</code></pre>
             </article>
           </div>
-          <p class="bottom-line">Routen er tynd og oversætter kun HTTP til ét kald — controlleren modtager og returnerer rene data, uden at kende til <code>request</code>/<code>response</code>.</p>
+          <p class="bottom-line">Routen bliver til en ren "sti → funktion"-mapning — al logikken, inklusiv <code>request</code>/<code>response</code>, flytter med ind i controlleren.</p>
         </section>
 
         <section class="tools-check-slide controller-tree-slide" data-accent="green">
@@ -622,15 +625,16 @@ export async function loadStudents() {
           <div class="project-tree">
             <pre><code class="language-text">students-rest-api/
 ├── controllers/
-│   └── studentsController.js   (create, find, filtrér, sortér...)
+│   └── studentsController.js   (getAllStudents, createStudent...)
 ├── data/
 │   └── students.js              (loadStudents()/saveStudents())
 ├── routes/
 │   └── students.js              (kun routing: sti → controller-funktion)
 └── server.js                    (opsætning + montering af routere)</code></pre>
             <div class="project-rules">
-              <p><b>Routen</b> kalder blot controlleren — routing og logik adskilles</p>
-              <p><b>Data-modulet</b> rører controlleren kun via <code>loadX()</code>/<code>saveX()</code></p>
+              <p><b>Routen:</b> hvilken route matcher stien? — intet andet</p>
+              <p><b>Controlleren:</b> hent, filtrér, sortér, paginér, find/opdatér, gem</p>
+              <p><b>Data-modulet:</b> rører controlleren kun via <code>loadX()</code>/<code>saveX()</code></p>
               <p><b>I dag:</b> I skal ikke nå at bygge controllers — kun vide, hvornår det giver mening</p>
             </div>
           </div>
