@@ -232,7 +232,7 @@ Kaldet fra trin 6 står stadig i din kode. Genindlæs siden — der skal med det
 
 ### 8. Hent historikken, og se hvad du får tilbage
 
-Din side kører nu på en anden origin end API'et (Live Server vs. Express), så et relativt kald som `fetch("/messages")` ville gå til Live Server selv, ikke dit API. Definér derfor API'ets fulde adresse øverst i `client/app.js`, sammen med dine andre konstanter:
+Din side kører nu på en anden origin end API'et, så et relativt kald som `fetch("/messages")` ville ramme Live Server, ikke API'et. Definér derfor API'ets fulde adresse øverst i `client/app.js`, sammen med dine andre konstanter:
 
 ```js
 const API_URL = "http://localhost:3000";
@@ -787,7 +787,7 @@ Brug id-selectoren `#clear-messages-button`, og genbrug de CSS-variabler, der al
 
 Genindlæs siden. "Ryd beskeder" skal nu se tydeligt anderledes ud end "Send" — en rolig, indrammet knap i stedet for en solid lilla en. Hold musen over den, og bekræft at den reagerer visuelt. Bekræft til sidst, at den stadig rydder historikken korrekt (trin 16 virker uændret).
 
-Du har nu rettet to konkrete ting: scroll og "Ryd beskeder"-knappen. Kig på resten af siden med friske øjne, nu hvor den er en rigtig, levende app og ikke bare en statisk formular — er der andet, der trænger til et servicetjek? Selve beskederne, tomme-tilstanden når historikken lige er ryddet, formularen, eller noget helt fjerde. Det er ikke en del af tjekpunktet, bare noget at tage med videre, hvis du har lyst og tid.
+Du har rettet to konkrete ting: scroll og "Ryd beskeder"-knappen. Kig på resten af siden med friske øjne — er der andet, der trænger til et servicetjek? Beskederne selv, tomme-tilstanden, formularen, eller noget fjerde. Ikke en del af tjekpunktet — bare noget at tage med videre, hvis du har lyst.
 
 ## Tjekpunkt: Del 5
 
@@ -819,4 +819,4 @@ Del 5 er gennemført, når `#messages` automatisk scroller ned til den nyeste be
 
 ## Videre
 
-Din AMAbot har nu en rigtig frontend: `client/app.js` taler med dit REST API via `fetch()`, kører på sin egen origin med Live Server, og opdaterer DOM'en direkte i browseren, uden en eneste server-genereret HTML-side. Du har allerede mødt og løst en rigtig CORS-fejl undervejs — men lige nu antager koden ellers, at alt går godt: intet tjekker, om `fetch()` fejler af andre grunde, eller om serveren svarer med en fejl. Det er præcis emnet i [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md): `try`/`catch` og `response.ok` i din egen chatbot. `cors()` tillader lige nu alle origins, og `displayMessage()` stoler blindt på, at `message.text` er ren tekst — at afgrænse origins, samt statuskoder, fejlhåndtering og input-sanering på serversiden, venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md). En admin-frontend til `/answers` (opret/redigér/slet svarregler) er en oplagt øvelse at bygge selv, med præcis samme `fetch()`-mønster, når du har tid.
+Din AMAbot har nu en rigtig frontend: `client/app.js` taler med REST API'et via `fetch()`, kører på sin egen origin med Live Server, og opdaterer DOM'en direkte i browseren. Koden antager stadig, at alt går godt — intet tjekker, om `fetch()` fejler, eller om serveren svarer med en fejl. Det er emnet i [DOB 7](../undervisning/025-dob-7-client-side-error-handling-28-09-2026.md): `try`/`catch` og `response.ok`. `cors()` tillader lige nu alle origins, og `displayMessage()` stoler blindt på, at `message.text` er ren tekst — begge dele venter til [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md). En admin-frontend til `/answers` (opret/redigér/slet svarregler) er en oplagt øvelse at bygge selv, med samme `fetch()`-mønster.
