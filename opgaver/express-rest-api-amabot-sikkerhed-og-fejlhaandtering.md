@@ -76,6 +76,8 @@ Disse to rettelser er nye — der er intet at overføre fra `/students`/`/teache
 
 ### 4. CORS: begræns til jeres egen frontend
 
+**Prøv det først:** åbn DevTools-konsollen på en vilkårlig anden hjemmeside (ikke jeres egen), og kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)`. Den virker lige nu — I får jeres beskeder tilbage, selvom kaldet kommer fra et helt fremmed sted. Det er det, I retter i dette trin.
+
 **Har du allerede `cors()` installeret** (fra [øvelse 8](fetch-dom-amabot.md))? Find `app.use(cors());` i `server.js`, og ret den til:
 
 ```js
@@ -100,10 +102,15 @@ app.use(cors({ origin: "http://127.0.0.1:5500" }));
 
 #### Test trin 4
 
-1. **Genindlæs jeres frontend** (øvelse 8), og bekræft at den stadig henter og viser beskeder uden fejl i konsollen.
-2. **I Thunder Client** — send `GET http://localhost:3000/messages`, og kig i response-headers efter `Access-Control-Allow-Origin`. Værdien skal nu være `http://127.0.0.1:5500`, ikke `*`. Læg mærke til, at requesten stadig lykkes med `200` — Thunder Client bliver aldrig blokeret af `cors()`, uanset hvad den er sat til. Det er selve pointen: CORS er noget **browseren** håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på.
-3. **Ødelæg det med vilje:** sæt midlertidigt `origin` til noget forkert, fx `"http://example.com"`, genstart serveren, og genindlæs jeres rigtige frontend igen. Den skal nu selv fejle med en CORS-fejl i konsollen — selvom det er jeres egen frontend, og selvom I ikke har ændret en linje i den. Sæt `origin` tilbage til `"http://127.0.0.1:5500"`, genstart, og bekræft at frontenden virker igen.
-4. **Fra et fremmed sted:** åbn DevTools-konsollen på en vilkårlig anden hjemmeside, og kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)`. Den skal fejle med en CORS-fejl i konsollen — modsat Thunder Client i punkt 2, hvor den samme request lykkedes.
+Ingen af disse tests kræver, at I har bygget frontenden i øvelse 8 — kun at serveren kører.
+
+1. **I Thunder Client:** send `GET http://localhost:3000/messages`, og tilføj selv en header `Origin: http://127.0.0.1:5500` (den adresse, jeres frontend kører eller kommer til at køre på). Kig i response-headers efter `Access-Control-Allow-Origin` — den skal matche. Skift nu headeren til `Origin: http://example.com`, og send igen. `Access-Control-Allow-Origin` mangler nu i svaret, eller matcher ikke — men requesten lykkes stadig med `200` i Thunder Client, med præcis samme data som før. Det er selve pointen: CORS er noget **browseren** håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på — Thunder Client er ikke en browser, så den er ligeglad med, hvad headeren siger.
+2. **Gentag "Prøv det først" fra oven,** fra samme fremmede hjemmeside: kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)` igen. Den skal nu fejle med en CORS-fejl i konsollen — modsat før I rettede `cors()`\-opsætningen, hvor den samme request virkede. Og modsat Thunder Client i punkt 1, hvor requesten stadig altid lykkes.
+
+**Har du en frontend kørende fra øvelse 8?** Så også:
+
+3. Genindlæs den, og bekræft at den stadig henter og viser beskeder uden fejl i konsollen.
+4. Ødelæg det med vilje: sæt midlertidigt `origin` til noget forkert, fx `"http://example.com"`, genstart serveren, og genindlæs frontenden igen. Den skal nu selv fejle med en CORS-fejl — selvom det er jeres egen frontend, og selvom I ikke har ændret en linje i den. Sæt `origin` tilbage til `"http://127.0.0.1:5500"`, genstart, og bekræft at frontenden virker igen.
 
 ---
 
