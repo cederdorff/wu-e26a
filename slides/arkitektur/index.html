@@ -108,6 +108,34 @@
           <p class="bottom-line">Samme vane gælder også for statuskoder, respons-form og feltnavne, på tværs af alle ressourcer. Uddybning: <a href="../rest-api/#/princip-url-navngivning" target="_blank" rel="noreferrer">RACE 5 · Semantisk URL ↗</a></p>
         </section>
 
+        <section class="tools-check-slide" data-accent="orange">
+          <span class="eyebrow">05, 07-09 · Nævnes kort, men ikke i dag</span>
+          <h2>Fire best practices mere — kort og konkret</h2>
+          <div class="example-grid">
+            <article>
+              <span>Nested resources</span>
+              <strong><code>/educations/:id/courses</code></strong>
+              <small>Henter alle kurser i én bestemt uddannelse — hold jer til maks. 2-3 niveauer</small>
+            </article>
+            <article>
+              <span>HTTPS</span>
+              <strong><code>https://</code></strong>
+              <small>Krypterer data mellem klient og server — sat op af hosting-platformen ved deployment</small>
+            </article>
+            <article>
+              <span>Versionering</span>
+              <strong><code>/v1/students</code></strong>
+              <small>API'et kan ændre sig uden at ødelægge klienter, der stadig bruger den gamle version</small>
+            </article>
+            <article>
+              <span>API-dokumentation</span>
+              <strong>Swagger/OpenAPI</strong>
+              <small>Beskriver hvert endpoint, eksempler og fejlkoder — så andre kan bruge API'et uden at læse koden</small>
+            </article>
+          </div>
+          <p class="bottom-line">Kilde: <a href="https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/" target="_blank" rel="noreferrer">freeCodeCamp — REST API Best Practices ↗</a></p>
+        </section>
+
         <section class="activity-slide activity-slide-split" data-accent="orange">
           <span class="eyebrow">Gruppearbejde · to og to</span>
           <h2>Hold jeres eget <code>/students</code>-API op mod listen</h2>
