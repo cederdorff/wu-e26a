@@ -6,9 +6,9 @@ Du bygger videre på din egen AMAbot fra [øvelse 6](express-rest-api-amabot.md)
 
 Det er ingen tilfældighed, at jeres AMAbot blev brugt som eksempel på en fil, der var vokset sig stor, i RACE 6's opsamling — `server.js` har nu `/messages`, `/answers`, `loadMessages()`/`saveMessages()`, `loadAnswers()`/`saveAnswers()` og selve svarlogikken, alt sammen i én fil. Det er præcis den mangel på **Separation of Concerns**, du retter op på i denne øvelse: routing, data-adgang og forretningslogik skal ikke bo i samme fil, bare fordi de opstod der.
 
-Du har allerede bygget mønstret to gange — for `/students` og for `/teachers`. Denne øvelse har derfor **ingen TODO'er, hints eller løsningsforslag**: du kender allerede opskriften, og skal selv overføre den til `/messages` og `/answers`. Sidder du helt fast, så genbesøg [REST API-øvelse: Arkitektur](express-rest-api-arkitektur.md) trin 6-9 — det er nøjagtig det samme, du skal gøre her, bare med `messages`/`answers` i stedet for `students`/`teachers`.
+Du har allerede bygget mønstret to gange — for `/students` og for `/teachers`. Denne øvelse har derfor **ingen TODO'er, hints eller løsningsforslag**: du kender allerede opskriften, og skal selv overføre den til `/messages` og `/answers`. Sidder du helt fast, så genbesøg [REST API-øvelse: Arkitektur](express-rest-api-arkitektur.md) trin 6-10 — det er nøjagtig det samme, du skal gøre her, bare med `messages`/`answers` i stedet for `students`/`teachers`.
 
-> **Kun to lag denne gang:** routes og data-modul, ligesom Del 2-3 i arkitektur-øvelsen. Controllers (Del 4 der) er stadig frivilligt — spring dem over her, med mindre du selv har lyst.
+> **To lag er obligatoriske denne gang:** routes og data-modul, ligesom Del 2-3 i arkitektur-øvelsen. Controllers (Del 5 der) er stadig frivilligt — der er en kort valgfri sektion om det til sidst (punkt 5), spring den over med mindre du selv har lyst.
 
 ---
 
@@ -70,6 +70,20 @@ Spørg AMAbotten et rigtigt spørgsmål via `POST /messages`, og bekræft at den
 
 ---
 
+## 5. (Frivillig) Controllers
+
+Vil du gå hele vejen med lagdelingen, kan du trække selve route-logikken ud i controllers, ligesom Del 5 i arkitektur-øvelsen — denne gang for `/messages` og `/answers`.
+
+- Opret `controllers/messagesController.js` og `controllers/answersController.js`, med én eksporteret funktion pr. route.
+- `routes/messages.js` og `routes/answers.js` skal herefter kun importere controlleren og forbinde routes til de rigtige funktioner — al logik, inklusive kaldet til `findBestAnswer()`, flytter med ind i controlleren.
+- Samme mønster som resten af øvelsen: ingen TODO'er eller løsningsforslag her — du har set det i arkitektur-øvelsen.
+
+#### Test
+
+Kør hele CRUD- og svarlogik-flowet igennem én sidste gang.
+
+---
+
 ## Tjekpunkt
 
 Øvelsen er gennemført, når:
@@ -86,6 +100,7 @@ Spørg AMAbotten et rigtigt spørgsmål via `POST /messages`, og bekræft at den
 2. `/messages` og `/answers` har meget forskellige route-sæt (tre endpoints vs. fuld CRUD) — gjorde det opdelingen i routes/data-moduler sværere på nogen måde?
 3. Hvor endte du med at placere `findBestAnswer()`/`findAnswer()` — og hvorfor blev det den mest logiske placering for dig?
 4. Peg på ét konkret sted i din egen kode for hvert af disse fire begreber — Separation of Concerns, DRY, Single Responsibility, Encapsulation. Er det samme kodestykke et eksempel på mere end ét af dem?
+5. Hvis du lavede punkt 5 (controllers): hvad var forskellen på at flytte data-adgang ud (punkt 2-3) og at flytte selve logikken ud (punkt 5)? Er det samme slags problem, de to trin løser?
 
 ## Videre
 
