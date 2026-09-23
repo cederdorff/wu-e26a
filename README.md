@@ -123,9 +123,9 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 
 ## Om spejlet
 
-- [Canvas-moduloversigt](canvas/moduler.md) viser også de enkelte elementer i hvert modul.
-- [Undervisningsmappen](undervisning/README.md) beskriver filstruktur og metadata.
-- Canvas-filer som PDF'er og billeder ligger under `materialer/canvas-filer/`.
+- [Undervisningsmappen](undervisning/README.md) beskriver filstruktur og metadata. Kun RACE-sider kan sendes tilbage til Canvas herfra — se [vedligeholdelse](#vedligeholdelse).
+- [`canvas/`](canvas/README.md) er en rå spejling af moduler, sider og øvrige API-data — kun pull, aldrig push.
+- [`materialer/`](materialer/README.md) indeholder Canvas-filer som PDF'er og billeder, inklusive andre underviseres materiale — kun pull, aldrig push.
 
 ## Vedligeholdelse
 
@@ -153,3 +153,5 @@ npm run canvas:pull
 ```
 
 Dette spejler hele kurset gennem Canvas API'et, inklusive upublicerede moduler, sider og filer. Pull læser kun fra Canvas; begrænsningen til RACE gælder for push tilbage til Canvas. Det sker kun, når du selv starter kommandoen. Lokale ændringer overskrives ikke; ved konflikt lægges Canvas-versionen i `.canvas-incoming/`. Brug kun `npm run canvas:pull:force`, når Canvas bevidst skal overskrive lokale ændringer.
+
+Kun filer, der er RACE's (samme regel som for sider), downloades som lokale kopier til `materialer/canvas-filer/`. Andre underviseres filer refereres direkte til Canvas i stedet — se [`materialer/`](materialer/README.md).

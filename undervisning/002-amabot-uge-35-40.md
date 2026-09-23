@@ -23,11 +23,11 @@ Tech stack:
 
 ### Bordgrupper
 
-- [Bordgrupper uge 35-36.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2035-36.pdf)
-- [Bordgrupper uge 37.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2037.pdf)
-- [Bordgrupper uge 38.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2038.pdf)
-- [Bordgrupper uge 39.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2039.pdf)
-- [Bordgrupper uge 40.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2040.pdf)
+- [Bordgrupper uge 35-36.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037530)
+- [Bordgrupper uge 37.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037531)
+- [Bordgrupper uge 38.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037534)
+- [Bordgrupper uge 39.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037533)
+- [Bordgrupper uge 40.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037532)
 
 ---
 

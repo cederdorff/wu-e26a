@@ -44,7 +44,7 @@ Nu har I eksperimenteret med JavaScript på serveren og snust til Node og Expres
 
 ### Præsentationer
 
-- [DOB 1 - AMAbot & Git basics - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%201%20-%20AMAbot%20%26%20Git%20basics%20-%20slides.pdf)
+- [DOB 1 - AMAbot & Git basics - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1047095)
 
 ### Opgaver
 

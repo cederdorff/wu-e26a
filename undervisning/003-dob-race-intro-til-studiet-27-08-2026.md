@@ -31,12 +31,12 @@ Velkomst og introduktion til akademiet, til uddannelsen og til underviserne og h
 
 ### Præsentationer
 
-- [INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx](../materialer/canvas-filer/AMAbot/INTRO%20STUDIEVEJLEDNINGEN%20WU%202026%201.0.pptx)
-- [Intro - slides.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20slides.pdf)
+- [INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx](https://eaaa.instructure.com/courses/32059/modules/items/1038210)
+- [Intro - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1038208)
 
 ### Opgaver
 
-- [Intro - worksheet.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20worksheet.pdf)
+- [Intro - worksheet.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1038209)
 
 ---
 

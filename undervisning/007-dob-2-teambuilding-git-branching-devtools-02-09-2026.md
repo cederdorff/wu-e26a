@@ -43,7 +43,7 @@ Eftermiddag: Vi kigger grundigt på hvad der foregår i browseren når vi loader
 
 ### Præsentationer
 
-- [DOB 2 - Git branching & DevTools - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%202%20-%20Git%20branching%20%26%20DevTools%20-%20slides.pdf)
+- [DOB 2 - Git branching & DevTools - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1047496)
 
 ### Opgaver
 

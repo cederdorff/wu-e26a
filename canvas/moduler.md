@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-22T10:47:29.746Z
+Senest hentet: 2026-09-23T08:18:35.517Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -34,11 +34,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Bordgrupper
 
-- [Bordgrupper uge 35-36.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2035-36.pdf)
-- [Bordgrupper uge 37.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2037.pdf)
-- [Bordgrupper uge 38.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2038.pdf)
-- [Bordgrupper uge 39.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2039.pdf)
-- [Bordgrupper uge 40.pdf](../materialer/canvas-filer/Bordgrupper/Bordgrupper%20uge%2040.pdf)
+- [Bordgrupper uge 35-36.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037530)
+- [Bordgrupper uge 37.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037531)
+- [Bordgrupper uge 38.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037534)
+- [Bordgrupper uge 39.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037533)
+- [Bordgrupper uge 40.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037532)
 
 ## 003 · DOB + RACE - Intro til studiet - 27-08-2026
 
@@ -48,12 +48,12 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx](../materialer/canvas-filer/AMAbot/INTRO%20STUDIEVEJLEDNINGEN%20WU%202026%201.0.pptx)
-- [Intro - slides.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20slides.pdf)
+- [INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx](https://eaaa.instructure.com/courses/32059/modules/items/1038210)
+- [Intro - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1038208)
 
 ### Opgaver
 
-- [Intro - worksheet.pdf](../materialer/canvas-filer/AMAbot/Intro%20-%20worksheet.pdf)
+- [Intro - worksheet.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1038209)
 
 ## 004 · RACE 1 - Intro til Node og Express - 28-08-2026
 
@@ -75,7 +75,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [DOB 1 - AMAbot & Git basics - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%201%20-%20AMAbot%20%26%20Git%20basics%20-%20slides.pdf)
+- [DOB 1 - AMAbot & Git basics - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1047095)
 
 ### Opgaver
 
@@ -87,7 +87,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [DOB 2 - Git branching & DevTools - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%202%20-%20Git%20branching%20%26%20DevTools%20-%20slides.pdf)
+- [DOB 2 - Git branching & DevTools - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1047496)
 
 ### Opgaver
 
@@ -134,7 +134,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [DOB 3 - String parsing, metoder og funktioner - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%203%20-%20String%20parsing%2C%20metoder%20og%20funktioner%20-%20slides.pdf)
+- [DOB 3 - String parsing, metoder og funktioner - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1051517)
 
 ### Opgaver
 
@@ -165,7 +165,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [DOB 4 - DOM manipulation med JS - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%204%20-%20DOM%20manipulation%20med%20JS%20-%20slides.pdf)
+- [DOB 4 - DOM manipulation med JS - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1054382)
 
 ### Opgaver
 
@@ -189,7 +189,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [DOB 5 - Fetch & async JavaScript - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%205%20-%20Fetch%20%26%20async%20JavaScript%20-%20slides.pdf)
+- [DOB 5 - Fetch & async JavaScript - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1056054)
 
 ### Opgaver
 
@@ -208,8 +208,8 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [DOB 6 - Promises og async await - slides - no quiz.pdf](../materialer/canvas-filer/AMAbot/DOB%206%20-%20Promises%20og%20async%20await%20-%20slides%20-%20no%20quiz.pdf)
-- [DOB 6 - Promises og async await - slides.pdf](../materialer/canvas-filer/AMAbot/DOB%206%20-%20Promises%20og%20async%20await%20-%20slides.pdf)
+- [DOB 6 - Promises og async await - slides - no quiz.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1057680)
+- [DOB 6 - Promises og async await - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1057769)
 
 ### Opgaver
 

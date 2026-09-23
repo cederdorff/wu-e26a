@@ -84,6 +84,12 @@ export async function fileExists(path) {
   }
 }
 
+// Fælles ejerskabsregel for både sider (push-canvas.js) og filer (pull-canvas.js):
+// "race" skal stå som selvstændigt ord, så fx "terrace" ikke tæller med.
+export function isRaceOwned(text) {
+  return /(^|[^a-z0-9])race([^a-z0-9]|$)/i.test(text ?? "");
+}
+
 export async function readJsonIfPresent(path) {
   try {
     return JSON.parse(await readFile(path, "utf8"));

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, rm } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
@@ -11,6 +11,7 @@ import {
   canvasRequest,
   fileExists,
   hash,
+  isRaceOwned,
   loadLocalEnv,
   mapLimit,
   readJsonIfPresent,
@@ -68,7 +69,9 @@ const modulePageUrls = new Set();
 
 const folderById = new Map(folders.map((folder) => [folder.id, folder]));
 const fileRecords = await downloadFiles(files, folderById);
-const localFileById = new Map(fileRecords.map((file) => [file.id, file.local_path]));
+const localFileById = new Map(
+  fileRecords.filter((file) => file.local_path).map((file) => [file.id, file.local_path]),
+);
 
 const documents = [];
 const pageDocumentByUrl = new Map();
@@ -380,8 +383,29 @@ function moduleOverviewLine(module, document, label = module.name) {
 
 async function downloadFiles(canvasFiles, folderById) {
   const usedPaths = new Set();
+  const expectedPaths = new Set();
   const records = [];
   for (const file of canvasFiles) {
+    const record = {
+      id: file.id,
+      folder_id: file.folder_id,
+      display_name: file.display_name,
+      filename: file.filename,
+      content_type: file["content-type"],
+      size: file.size,
+      created_at: file.created_at,
+      updated_at: file.updated_at,
+      locked: file.locked,
+      hidden: file.hidden,
+      canvas_url: `${baseUrl}/courses/${courseId}/files/${file.id}`,
+      local_path: null,
+    };
+    records.push(record);
+
+    // Filer der ikke er RACE's, downloades ikke — de forbliver en ren reference til
+    // Canvas (canvas_url), så andre underviseres materiale ikke ligger som lokale kopier.
+    if (!isRaceOwned(file.display_name) && !isRaceOwned(file.filename)) continue;
+
     const folder = folderById.get(file.folder_id);
     const folderSegments = (folder?.full_name ?? "")
       .split("/")
@@ -405,21 +429,28 @@ async function downloadFiles(canvasFiles, folderById) {
       await atomicWrite(localPath, new Uint8Array(await response.arrayBuffer()));
     }
 
-    records.push({
-      id: file.id,
-      folder_id: file.folder_id,
-      display_name: file.display_name,
-      filename: file.filename,
-      content_type: file["content-type"],
-      size: file.size,
-      created_at: file.created_at,
-      updated_at: file.updated_at,
-      locked: file.locked,
-      hidden: file.hidden,
-      local_path: relative(projectRoot, localPath).replaceAll("\\", "/"),
-    });
+    record.local_path = relative(projectRoot, localPath).replaceAll("\\", "/");
+    expectedPaths.add(localPath);
   }
+
+  await pruneUnexpectedFiles(filesRoot, expectedPaths);
   return records;
+}
+
+// Fjerner alt under materialer/canvas-filer/, der ikke (længere) hører til en RACE-fil —
+// fx filer fra en tidligere kørsel, før ejerskabsreglen fandtes, eller filer der har
+// skiftet ejer eller navn i Canvas siden sidste pull.
+async function pruneUnexpectedFiles(dir, expectedPaths) {
+  if (!(await fileExists(dir))) return;
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const full = resolve(dir, entry.name);
+    if (entry.isDirectory()) {
+      await pruneUnexpectedFiles(full, expectedPaths);
+      if (!(await readdir(full)).length) await rm(full, { recursive: true, force: true });
+    } else if (!expectedPaths.has(full)) {
+      await rm(full, { force: true });
+    }
+  }
 }
 
 async function writeMirroredFile(path, contents) {

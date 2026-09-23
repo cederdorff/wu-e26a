@@ -1612,7 +1612,7 @@
         "page_url": "plan-for-race-7-sikkerhed-og-error-handling",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-7-sikkerhed-og-error-handling",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false

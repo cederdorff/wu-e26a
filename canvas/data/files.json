@@ -10,7 +10,8 @@
     "updated_at": "2026-09-01T15:57:49Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/Bordgrupper/Bordgrupper uge 35-36.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1677508",
+    "local_path": null
   },
   {
     "id": 1677509,
@@ -23,7 +24,8 @@
     "updated_at": "2026-09-07T08:08:13Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/Bordgrupper/Bordgrupper uge 37.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1677509",
+    "local_path": null
   },
   {
     "id": 1677512,
@@ -36,7 +38,8 @@
     "updated_at": "2026-09-16T09:29:47Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/Bordgrupper/Bordgrupper uge 38.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1677512",
+    "local_path": null
   },
   {
     "id": 1677510,
@@ -49,7 +52,8 @@
     "updated_at": "2026-09-22T05:02:00Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/Bordgrupper/Bordgrupper uge 39.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1677510",
+    "local_path": null
   },
   {
     "id": 1677511,
@@ -62,7 +66,8 @@
     "updated_at": "2026-08-26T11:40:36Z",
     "locked": true,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/Bordgrupper/Bordgrupper uge 40.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1677511",
+    "local_path": null
   },
   {
     "id": 1687923,
@@ -75,7 +80,8 @@
     "updated_at": "2026-09-01T20:49:46Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/DOB 1 - AMAbot & Git basics - slides.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1687923",
+    "local_path": null
   },
   {
     "id": 1688488,
@@ -88,7 +94,8 @@
     "updated_at": "2026-09-02T09:38:47Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/DOB 2 - Git branching & DevTools - slides.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1688488",
+    "local_path": null
   },
   {
     "id": 1693928,
@@ -101,7 +108,8 @@
     "updated_at": "2026-09-09T06:47:51Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/DOB 3 - String parsing, metoder og funktioner - slides.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1693928",
+    "local_path": null
   },
   {
     "id": 1697780,
@@ -114,7 +122,8 @@
     "updated_at": "2026-09-15T07:00:14Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/DOB 4 - DOM manipulation med JS - slides.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1697780",
+    "local_path": null
   },
   {
     "id": 1700538,
@@ -127,7 +136,8 @@
     "updated_at": "2026-09-18T10:58:05Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/DOB 5 - Fetch & async JavaScript - slides.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1700538",
+    "local_path": null
   },
   {
     "id": 1702725,
@@ -140,7 +150,8 @@
     "updated_at": "2026-09-22T08:00:14Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/DOB 6 - Promises og async await - slides - no quiz.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1702725",
+    "local_path": null
   },
   {
     "id": 1702823,
@@ -153,7 +164,8 @@
     "updated_at": "2026-09-22T10:19:16Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/DOB 6 - Promises og async await - slides.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1702823",
+    "local_path": null
   },
   {
     "id": 1678469,
@@ -166,7 +178,8 @@
     "updated_at": "2026-08-31T11:41:29Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/Intro - slides.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1678469",
+    "local_path": null
   },
   {
     "id": 1678470,
@@ -179,7 +192,8 @@
     "updated_at": "2026-08-31T12:38:15Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/Intro - worksheet.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1678470",
+    "local_path": null
   },
   {
     "id": 1678484,
@@ -192,7 +206,8 @@
     "updated_at": "2026-09-01T06:15:39Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/AMAbot/INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1678484",
+    "local_path": null
   },
   {
     "id": 1700939,
@@ -205,7 +220,8 @@
     "updated_at": "2026-09-18T10:54:30Z",
     "locked": false,
     "hidden": true,
-    "local_path": "materialer/canvas-filer/Uploaded Media/pairs-absent.webp"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1700939",
+    "local_path": null
   },
   {
     "id": 1700937,
@@ -218,7 +234,8 @@
     "updated_at": "2026-09-18T10:53:46Z",
     "locked": false,
     "hidden": true,
-    "local_path": "materialer/canvas-filer/Uploaded Media/pairs-present.webp"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1700937",
+    "local_path": null
   },
   {
     "id": 1694686,
@@ -231,7 +248,8 @@
     "updated_at": "2026-09-09T10:55:45Z",
     "locked": false,
     "hidden": true,
-    "local_path": "materialer/canvas-filer/Uploaded Media/regex-elvish.webp"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1694686",
+    "local_path": null
   },
   {
     "id": 1678067,
@@ -244,7 +262,8 @@
     "updated_at": "2026-08-27T07:30:34Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/unfiled/WU-E26a skema uge 35-40.pdf"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1678067",
+    "local_path": null
   },
   {
     "id": 1647951,
@@ -257,6 +276,7 @@
     "updated_at": "2026-08-04T10:37:58Z",
     "locked": false,
     "hidden": false,
-    "local_path": "materialer/canvas-filer/course_image/wu-e26a-canvas-thumbnail-optimized.jpg"
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1647951",
+    "local_path": null
   }
 ]
