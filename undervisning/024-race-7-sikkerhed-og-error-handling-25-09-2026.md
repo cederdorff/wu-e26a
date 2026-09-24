@@ -104,7 +104,8 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 
 ## Materialer
 
-- Slides: TBA
+- Slides:
+    - [RACE 7 · Sikkerhed og error handling](https://cederdorff.com/wu-e26a/fejlhaandtering-sikkerhed/)
 - Opgaver:
   - [REST API-øvelse: Fejlhåndtering](../opgaver/express-rest-api-fejlhaandtering.md) — statuskoder, `404`/`400`, `try`/`catch` og en fælles fejl-middleware på `/students`/`/teachers`
   - [Øvelse 9: AMAbotten bliver sikker og fejltolerant](../opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md) — overfør mønsteret selv til AMAbotten, og luk to sikkerhedshuller, der kun findes dér: CORS og XSS

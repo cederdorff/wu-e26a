@@ -1,0 +1,1861 @@
+@import "../arkitektur/theme.css";
+
+/* RACE 7 deck additions */
+
+:root {
+  --red: #ff6b6b;
+}
+.reveal .slides section[data-accent="red"] {
+  --accent: var(--red);
+}
+
+/* Generic "fill" slide: main content (.stage) is centered in the space left
+   between the heading and the absolutely-positioned bottom-line, so no slide
+   ends up clumped at the top with dead air below */
+.fill {
+  display: flex !important;
+  flex-direction: column;
+  padding-bottom: 150px !important;
+}
+.fill.no-bottom {
+  padding-bottom: 74px !important;
+}
+.fill > .stage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+.fill h2 {
+  font-size: 58px;
+}
+.fill .concept-intro {
+  margin-top: 16px;
+}
+
+/* Status code chips, colored by family */
+.sc {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.8em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.sc-2 {
+  background: color-mix(in srgb, var(--green) 18%, transparent);
+  color: var(--green);
+}
+.sc-4 {
+  background: color-mix(in srgb, var(--orange) 18%, transparent);
+  color: var(--orange);
+}
+.sc-5 {
+  background: color-mix(in srgb, var(--red) 18%, transparent);
+  color: var(--red);
+}
+
+/* Small reusable card */
+.card {
+  padding: 26px 30px;
+  border-top: 3px solid var(--accent);
+  background: var(--soft);
+  border-radius: var(--radius);
+}
+.card > span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.card p,
+.card li {
+  margin: 0;
+  color: var(--muted);
+  font-size: 23px;
+  line-height: 1.35;
+}
+.card p + p {
+  margin-top: 10px;
+}
+.card b,
+.card strong {
+  color: var(--ink);
+}
+.card pre code {
+  padding: 16px 20px;
+  font-size: 19px;
+  line-height: 1.4;
+}
+.card-good {
+  border-top-color: var(--green);
+}
+.card-good > span {
+  color: var(--green);
+}
+.card-bad {
+  border-top-color: var(--red);
+}
+.card-bad > span {
+  color: var(--red);
+}
+.card-warn {
+  border-top-color: var(--orange);
+}
+.card-warn > span {
+  color: var(--orange);
+}
+.cards-2,
+.cards-3,
+.cards-4 {
+  display: grid;
+  gap: 24px;
+}
+.cards-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.cards-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.cards-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Two columns, code on one side, explanation on the other */
+.split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+.split.even {
+  grid-template-columns: 1fr 1fr;
+}
+.split.code-wide {
+  grid-template-columns: 1.4fr 1fr;
+}
+.split pre code {
+  font-size: 21px;
+  line-height: 1.42;
+}
+.stage > pre code {
+  font-size: 22px;
+}
+.code-sm pre code,
+pre.code-sm code {
+  font-size: 19px !important;
+  line-height: 1.38 !important;
+}
+.pre-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 01 · Før/efter layers: one mixed server.js vs. three stacked layers */
+.layers-compare {
+  display: grid;
+  grid-template-columns: 1fr 80px 1.35fr;
+  align-items: center;
+  gap: 10px;
+}
+.layers-label {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--yellow);
+  font-size: 19px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.mono-file {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.mono-file > b {
+  margin-bottom: 4px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 24px;
+}
+.mono-file i {
+  padding: 10px 14px;
+  border-left: 4px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 4%);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 18px;
+  font-style: normal;
+}
+.chip-setup {
+  border-left-color: var(--yellow) !important;
+}
+.chip-route {
+  border-left-color: var(--orange) !important;
+}
+.chip-data {
+  border-left-color: var(--cyan) !important;
+}
+.layers-arrow {
+  color: var(--yellow);
+  font-size: 54px;
+  text-align: center;
+}
+.layers-after {
+  display: flex;
+  flex-direction: column;
+}
+.layer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 22px;
+  border-left: 5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+}
+.layer code {
+  font-size: 20px;
+  font-weight: 700;
+}
+.layer span {
+  color: var(--muted);
+  font-size: 19px;
+}
+.layer-setup {
+  border-left-color: var(--yellow);
+}
+.layer-route {
+  border-left-color: var(--orange);
+}
+.layer-data {
+  border-left-color: var(--cyan);
+}
+.layer-file {
+  border-left-color: var(--muted);
+  border-left-style: dashed;
+}
+.layer-link {
+  padding: 5px 0 5px 26px;
+  color: var(--muted);
+  font-size: 16px;
+  font-style: normal;
+}
+
+/* Request path, one step per layer, with a note under each step and a
+   return bar for the response */
+.path-chain {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 34px;
+}
+.path-chain article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 250px;
+  padding: 22px 20px;
+  border-top: 3px solid var(--accent);
+  background: var(--soft);
+}
+.path-chain article:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  color: var(--accent);
+  content: "→";
+  font-size: 30px;
+  font-weight: 800;
+  transform: translateY(-50%);
+}
+.path-chain b {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 19px;
+  word-break: break-word;
+}
+.path-chain small {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.35;
+}
+.path-chain small code {
+  font-size: 16px !important;
+}
+.path-return {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 26px;
+  padding: 16px 22px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 60%, transparent);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: 21px;
+}
+.path-return b {
+  color: var(--accent);
+  font-size: 28px;
+}
+.path-chain .path-error {
+  border-top-color: var(--red);
+  background: color-mix(in srgb, var(--red) 10%, var(--soft));
+}
+
+/* Techniques recap: 2x2 cards, each title + snippet + one-liner */
+.tech-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 26px;
+}
+.tech-grid article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 26px;
+  border-top: 3px solid var(--accent);
+  background: var(--soft);
+}
+.tech-grid h3 {
+  font-size: 25px;
+}
+.tech-grid pre code {
+  padding: 14px 18px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.tech-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 19px;
+}
+
+/* Concept slides: definition + test question left, concrete example right */
+.concept-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: stretch;
+  gap: 40px;
+}
+.concept-def {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px 38px;
+  border-left: 5px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--soft));
+  border-radius: var(--radius);
+}
+.concept-abbr {
+  color: var(--accent);
+  font-size: 76px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.concept-def h3 {
+  margin: 8px 0 22px;
+  color: var(--muted);
+  font-size: 26px;
+}
+.concept-one {
+  margin: 0 !important;
+  font-size: 31px !important;
+  font-weight: 700;
+  line-height: 1.25 !important;
+}
+.concept-test {
+  margin: 26px 0 0 !important;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 22px !important;
+}
+.concept-test b {
+  color: var(--accent);
+}
+.concept-example {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+.concept-example > span {
+  color: var(--accent);
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.concept-example .soc-row {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  align-items: center;
+  padding: 15px 20px;
+}
+.concept-example .soc-row code {
+  font-size: 18px !important;
+}
+.concept-example .soc-row span {
+  font-size: 19px;
+}
+.concept-example pre code {
+  padding: 16px 20px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.count-row {
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.count-row > b {
+  color: var(--accent);
+  font-size: 34px;
+  text-align: center;
+}
+.count-row .pre-label {
+  font-size: 15px;
+}
+
+/* Encapsulation: a visible facade around a hidden inside */
+.facade {
+  display: grid;
+  grid-template-columns: 1fr 60px 1.2fr;
+  align-items: center;
+  gap: 10px;
+}
+.facade-caller,
+.facade-box {
+  padding: 22px 24px;
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.facade-caller {
+  border-top: 3px solid var(--orange);
+}
+.facade-box {
+  border: 2px solid var(--accent);
+}
+.facade-box > code {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 21px !important;
+}
+.facade-hidden {
+  padding: 16px 18px;
+  border: 1px dashed var(--muted);
+  border-radius: var(--radius-sm);
+  opacity: 0.8;
+}
+.facade-hidden small {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.facade-hidden code {
+  display: block;
+  margin: 4px 0;
+  background: none !important;
+  border: 0 !important;
+  color: var(--muted) !important;
+  font-size: 17px !important;
+}
+.facade > b {
+  color: var(--accent);
+  font-size: 32px;
+  text-align: center;
+}
+.facade-caller .pre-label {
+  color: var(--orange);
+  font-size: 15px;
+}
+.facade-caller code {
+  font-size: 19px !important;
+}
+
+/* Reference architecture map: client, server.js, two routers, two data
+   modules, two JSON files — arrows labelled with what flows between them */
+.arch-map {
+  display: grid;
+  grid-template-columns: 170px 110px 160px 120px 220px 120px 210px 110px 180px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  row-gap: 26px;
+}
+.arch-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 110px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+  text-align: left;
+}
+.arch-box b {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 17px;
+}
+.arch-box small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.3;
+}
+.arch-tall {
+  grid-row: 1 / 3;
+  align-self: stretch;
+}
+.arch-client {
+  border-left-color: var(--green);
+}
+.arch-setup {
+  border-left-color: var(--yellow);
+}
+.arch-route {
+  border-left-color: var(--orange);
+}
+.arch-data {
+  border-left-color: var(--cyan);
+}
+.arch-file {
+  border-left-color: var(--muted);
+  border-left-style: dashed;
+}
+.arch-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.25;
+  text-align: center;
+}
+.arch-arrow b {
+  color: var(--accent);
+  font-size: 26px;
+  line-height: 1;
+}
+.arch-arrow code {
+  font-size: 12px !important;
+}
+.arch-legend {
+  display: flex;
+  gap: 28px;
+  margin-top: 34px;
+  color: var(--muted);
+  font-size: 18px;
+}
+.arch-legend span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.arch-legend i {
+  display: inline-block;
+  width: 22px;
+  height: 14px;
+  border-left: 4px solid;
+  background: var(--soft);
+}
+
+/* Failure map: request → how the API answers now → today's target */
+.fail-map {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fail-row {
+  display: grid;
+  grid-template-columns: 430px 1fr 1fr 110px;
+  align-items: center;
+  gap: 24px;
+  padding: 13px 24px;
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.fail-head {
+  padding-block: 4px;
+  background: none;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.fail-row code {
+  font-size: 19px !important;
+}
+.fail-row span {
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.3;
+}
+.fail-row span .sc {
+  margin-right: 8px;
+}
+.fail-row a {
+  color: var(--accent) !important;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: right;
+}
+.fail-row a:hover {
+  text-decoration: underline;
+}
+
+/* Status families: 2xx / 4xx / 5xx */
+.families {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+.families article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 30px 32px;
+  border-top: 5px solid var(--green);
+  background: var(--soft);
+}
+.families article:nth-child(2) {
+  border-top-color: var(--orange);
+}
+.families article:nth-child(3) {
+  border-top-color: var(--red);
+}
+.families strong {
+  font-size: 64px;
+  line-height: 1;
+}
+.families h3 {
+  font-size: 28px;
+}
+.families p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 21px;
+}
+.families ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.families li {
+  font-size: 21px;
+}
+.families .family-example {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+}
+
+/* Status matrix: route × success/failure codes */
+.status-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.status-matrix > div {
+  display: grid;
+  grid-template-columns: 380px 200px 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 26px;
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.status-matrix > .sm-head {
+  padding-block: 4px;
+  background: none;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.status-matrix code {
+  font-size: 22px !important;
+}
+.status-matrix .sc {
+  margin-right: 8px;
+  font-size: 20px;
+}
+.status-matrix small {
+  margin-left: 10px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+/* Browser-ish frame around a raw response (Express' HTML error page etc.) */
+.response-frame {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #090d0d;
+}
+.response-frame header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--line);
+  background: rgb(255 255 255 / 5%);
+  color: var(--muted);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 16px;
+}
+.response-frame header .sc {
+  font-size: 15px;
+}
+.response-frame pre {
+  margin: 0;
+}
+.response-frame pre code {
+  padding: 20px 22px;
+  border: 0;
+  border-radius: 0;
+  font-size: 18px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.response-frame.is-html pre code {
+  color: #e6d7d7;
+}
+
+/* Numbered problem list next to a code/frame */
+.problem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: problem;
+}
+.problem-list li {
+  position: relative;
+  padding: 18px 22px 18px 72px;
+  background: var(--soft);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 22px;
+  counter-increment: problem;
+}
+.problem-list li::before {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+  content: counter(problem);
+  font-size: 19px;
+  font-weight: 850;
+}
+.problem-list li b {
+  display: block;
+  color: var(--ink);
+}
+
+/* Expected vs. unexpected errors */
+.error-kinds {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.error-kinds article {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px 36px;
+  border-top: 5px solid var(--orange);
+  background: var(--soft);
+}
+.error-kinds article:last-child {
+  border-top-color: var(--red);
+}
+.error-kinds h3 {
+  font-size: 34px;
+}
+.error-kinds p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 23px;
+}
+.error-kinds ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 8px 0;
+  padding: 0;
+  list-style: none;
+}
+.error-kinds li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: rgb(255 255 255 / 4%);
+  border-radius: var(--radius-sm);
+  font-size: 21px;
+}
+.error-kinds .kind-tool {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 21px;
+}
+
+/* Guard clause flow: find → decision → stop / continue */
+.guard-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+.guard-step {
+  padding: 16px 20px;
+  border-left: 4px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+  font-size: 20px;
+}
+.guard-step code {
+  font-size: 17px !important;
+}
+.guard-arrow {
+  padding: 4px 0 4px 24px;
+  color: var(--muted);
+  font-size: 20px;
+}
+.guard-decision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.guard-decision .guard-step small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.guard-stop {
+  border-left-color: var(--orange);
+  background: color-mix(in srgb, var(--orange) 10%, var(--soft));
+}
+.guard-stop small {
+  color: var(--orange);
+}
+.guard-go {
+  border-left-color: var(--green);
+  background: color-mix(in srgb, var(--green) 9%, var(--soft));
+}
+.guard-go small {
+  color: var(--green);
+}
+.guard-q {
+  border-left-color: var(--accent);
+  font-weight: 750;
+}
+
+/* Horizontal ordered step strip (404 → 400 → gem → svar) */
+.order-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.order-strip span {
+  flex: 1;
+  padding: 14px 12px;
+  border-top: 3px solid var(--line);
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+  font-size: 19px;
+  font-weight: 750;
+  text-align: center;
+}
+.order-strip span small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+.order-strip b {
+  color: var(--accent);
+  font-size: 24px;
+}
+.order-strip .os-4 {
+  border-top-color: var(--orange);
+}
+.order-strip .os-2 {
+  border-top-color: var(--green);
+}
+
+/* splice(-1, 1) pitfall: array cells with the last one removed */
+.array-cells {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 6px;
+}
+.array-cells span {
+  flex: 1;
+  padding: 12px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 4%);
+  font-size: 18px;
+  text-align: center;
+}
+.array-cells span small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+.array-cells .gone {
+  border-color: var(--red);
+  background: color-mix(in srgb, var(--red) 14%, transparent);
+  color: var(--red);
+  text-decoration: line-through;
+}
+
+/* Validation ladder */
+.ladder {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ladder > div {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 170px;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 26px;
+  background: var(--soft);
+  border-radius: var(--radius);
+  opacity: 0.62;
+}
+.ladder > div.now {
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--soft));
+  opacity: 1;
+}
+.ladder b {
+  color: var(--accent);
+  font-size: 34px;
+}
+.ladder strong {
+  font-size: 24px;
+}
+.ladder code {
+  font-size: 18px !important;
+}
+.ladder small {
+  justify-self: end;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 7%);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ladder .now small {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+}
+
+/* try/catch: two tracks, happy path vs. throw */
+.tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.track {
+  display: grid;
+  grid-template-columns: 170px 1fr 40px 1fr 40px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+.track > strong {
+  font-size: 19px;
+}
+.track > b {
+  color: var(--muted);
+  text-align: center;
+}
+.track > span {
+  padding: 14px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+  font-size: 17px;
+  text-align: center;
+}
+.track > span code {
+  font-size: 15px !important;
+}
+.track .ok {
+  border-color: color-mix(in srgb, var(--green) 55%, transparent);
+}
+.track .bad {
+  border-color: var(--red);
+  background: color-mix(in srgb, var(--red) 12%, transparent);
+}
+.track .skip {
+  border-style: dashed;
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+.track .catch {
+  border-color: var(--orange);
+  background: color-mix(in srgb, var(--orange) 12%, transparent);
+}
+
+/* Middleware pipeline with a variable number of steps */
+.pipe {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.pipe > span {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 110px;
+  padding: 14px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--soft);
+  font-size: 19px;
+  font-weight: 750;
+  text-align: center;
+}
+.pipe > span small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.pipe > b {
+  align-self: center;
+  width: 38px;
+  color: var(--yellow);
+  font-size: 24px;
+  text-align: center;
+}
+.pipe .mw {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--soft));
+}
+.pipe .mw-err {
+  border-color: var(--red);
+  background: color-mix(in srgb, var(--red) 10%, var(--soft));
+}
+.pipe .endpoint-box {
+  border-style: dashed;
+}
+
+/* server.js order + three requests and where each one stops */
+.order-lanes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.order-lanes div {
+  padding: 16px 20px;
+  border-left: 4px solid var(--accent);
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.order-lanes code {
+  font-size: 18px !important;
+}
+.order-lanes p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 19px;
+}
+.order-lanes .lane-404 {
+  border-left-color: var(--orange);
+}
+.order-lanes .lane-500 {
+  border-left-color: var(--red);
+}
+.order-lanes .lane-ok {
+  border-left-color: var(--green);
+}
+
+/* Throw path: where a thrown error travels to */
+.throw-path {
+  display: grid;
+  grid-template-columns: 1fr 70px 1fr 70px 1fr 70px 1fr;
+  align-items: stretch;
+}
+.throw-path article {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 20px;
+  border-top: 3px solid var(--line);
+  background: var(--soft);
+}
+.throw-path article > span {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.throw-path article b {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 18px;
+}
+.throw-path article p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.35;
+}
+.throw-path article p code {
+  font-size: 15px !important;
+}
+.throw-path > i {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+}
+.throw-path > i small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+.throw-path .tp-origin {
+  border-top-color: var(--red);
+}
+.throw-path .tp-end {
+  border-top-color: var(--green);
+  background: color-mix(in srgb, var(--green) 8%, var(--soft));
+}
+
+/* JSON error shape, identical across status codes */
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.shape-grid article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  border-top: 3px solid var(--orange);
+  background: var(--soft);
+}
+.shape-grid article.s5 {
+  border-top-color: var(--red);
+}
+.shape-grid small {
+  color: var(--muted);
+  font-size: 16px;
+}
+.shape-grid pre code {
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.shape-grid .sc {
+  align-self: flex-start;
+  font-size: 22px;
+}
+
+/* Origin anatomy */
+.origin-url {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 50px;
+  font-weight: 700;
+}
+.origin-url span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px 10px;
+  border-bottom: 5px solid;
+}
+.origin-url small {
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.origin-url .o-scheme {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.origin-url .o-host {
+  border-color: var(--green);
+  color: var(--green);
+}
+.origin-url .o-port {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+.origin-url .o-path {
+  border-color: var(--line);
+  color: var(--muted);
+  opacity: 0.6;
+}
+.origin-url .o-path small {
+  color: var(--muted);
+}
+.origin-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 40px;
+}
+.origin-table div {
+  display: grid;
+  grid-template-columns: 470px 150px 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 24px;
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.origin-table code {
+  font-size: 21px !important;
+}
+.origin-table b {
+  font-size: 19px;
+}
+.origin-table .same b {
+  color: var(--green);
+}
+.origin-table .diff b {
+  color: var(--orange);
+}
+.origin-table span {
+  color: var(--muted);
+  font-size: 19px;
+}
+
+/* CORS sequence diagram (inline SVG) */
+.seq svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.seq .lane-title {
+  fill: var(--ink);
+  font-family: var(--font);
+  font-size: 22px;
+  font-weight: 800;
+}
+.seq .lane-sub {
+  fill: var(--muted);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 16px;
+}
+.seq .lane-line {
+  stroke: var(--line);
+  stroke-dasharray: 6 8;
+  stroke-width: 2;
+}
+.seq .lane-head {
+  fill: rgb(255 255 255 / 6%);
+  stroke: var(--line);
+}
+.seq .msg {
+  stroke: var(--accent);
+  stroke-width: 3;
+  fill: none;
+}
+.seq .msg-back {
+  stroke: var(--cyan);
+}
+.seq .msg-label {
+  fill: var(--ink);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 17px;
+}
+.seq .msg-note {
+  fill: var(--muted);
+  font-family: var(--font);
+  font-size: 16px;
+}
+.seq .step-num {
+  fill: var(--accent);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 850;
+}
+.seq .check-box {
+  fill: color-mix(in srgb, var(--yellow) 12%, transparent);
+  stroke: var(--yellow);
+}
+.seq .ok-text {
+  fill: var(--green);
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 750;
+}
+.seq .bad-text {
+  fill: var(--red);
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 750;
+}
+.seq .arrowhead {
+  fill: var(--accent);
+}
+.seq .arrowhead-back {
+  fill: var(--cyan);
+}
+
+/* XSS flow: payload travelling through five stations */
+.xss-flow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px;
+}
+.xss-flow article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 250px;
+  padding: 20px 18px;
+  border-top: 3px solid var(--line);
+  background: var(--soft);
+}
+.xss-flow article:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -26px;
+  color: var(--accent);
+  content: "→";
+  font-size: 26px;
+  font-weight: 800;
+  transform: translateY(-50%);
+}
+.xss-flow article > span {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.xss-flow b {
+  font-size: 21px;
+}
+.xss-flow p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.35;
+}
+.xss-flow p code {
+  font-size: 14px !important;
+  word-break: break-all;
+}
+.xss-flow .xss-hit {
+  border-top-color: var(--red);
+  background: color-mix(in srgb, var(--red) 12%, var(--soft));
+}
+.payload {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 18px 24px;
+  border: 1px solid var(--red);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--red) 8%, transparent);
+}
+.payload small {
+  color: var(--red);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.payload code {
+  background: none !important;
+  border: 0 !important;
+  color: var(--ink) !important;
+  font-size: 24px !important;
+}
+
+/* Escape table */
+.escape-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.escape-table div {
+  display: grid;
+  grid-template-columns: 70px 50px 150px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.escape-table code {
+  font-size: 22px !important;
+}
+.escape-table b {
+  color: var(--accent);
+  text-align: center;
+}
+.escape-table span {
+  color: var(--muted);
+  font-size: 17px;
+}
+.escape-table .esc-first {
+  outline: 2px solid var(--yellow);
+}
+
+/* Rendered-result strip under a before/after */
+.rendered {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f5f5f3;
+  color: #1a1a1a;
+  font-size: 20px;
+}
+.rendered small {
+  display: block;
+  margin-bottom: 6px;
+  color: #666;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.rendered .alert-box {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgb(0 0 0 / 18%);
+  font-family: var(--font);
+}
+.rendered code {
+  background: none !important;
+  border: 0 !important;
+  color: #1a1a1a !important;
+  font-size: 18px !important;
+}
+
+/* Hands-on slides with two exercise links */
+.exercise-links {
+  display: flex;
+  gap: 12px;
+}
+
+/* Activity split tweaks for this deck: slightly smaller text, more items */
+.draw-slide .two-sides article {
+  min-height: 0;
+  padding: 34px 40px;
+}
+.draw-slide .two-sides li {
+  font-size: 23px;
+  line-height: 1.38;
+}
+
+/* Fragment answers on discussion cards */
+.reveal .answers li.fragment {
+  margin-top: 10px;
+}
+
+.agenda-slide .agenda-grid b {
+  font-size: 23px;
+}
+.agenda-slide .agenda-grid a {
+  padding: 8px 0;
+}
+
+/* ---------- Pass 2: scale content up so slides use their full height,
+   and stop inline code from stretching when it is a direct grid item ---------- */
+.reveal h2 code {
+  padding: 0 0.18em;
+  font-size: 0.78em;
+}
+.fail-row > code,
+.status-matrix > div > code,
+.origin-table > div > code,
+.ladder > div > code,
+.escape-table > div > code,
+.layer > code {
+  justify-self: start;
+}
+.layer code {
+  border: 0 !important;
+  background: none !important;
+  font-size: 19px !important;
+}
+.reveal .exercise-link {
+  align-self: flex-start;
+}
+.exercise-links {
+  margin-bottom: 8px;
+}
+.exercise-links .exercise-link {
+  margin-bottom: 0;
+}
+
+.fill pre code {
+  font-size: 23px;
+}
+.fill .before-after pre code {
+  min-height: 0;
+  font-size: 22px;
+}
+.fill pre.code-sm code,
+.fill .code-sm pre code {
+  font-size: 21px !important;
+  line-height: 1.4 !important;
+}
+.fill pre.code-xs code {
+  padding: 18px 26px;
+  font-size: 19px;
+  line-height: 1.36;
+}
+pre.wrap code {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.fail-row {
+  padding: 11px 24px;
+}
+.fail-row .req {
+  color: var(--ink);
+  font-size: 19px;
+}
+.fail-row .req code {
+  font-size: 18px !important;
+}
+
+.card > span {
+  font-size: 18px;
+}
+.card p,
+.card li {
+  font-size: 25px;
+}
+.card pre code {
+  font-size: 21px;
+}
+.cards-2 .card,
+.cards-3 .card {
+  min-height: 280px;
+}
+.response-frame header {
+  font-size: 17px;
+}
+.response-frame pre code {
+  font-size: 21px;
+}
+
+.path-chain article {
+  min-height: 200px;
+}
+.path-chain b {
+  font-size: 21px;
+}
+.path-chain small {
+  font-size: 20px;
+}
+.path-chain small code {
+  font-size: 17px !important;
+}
+.path-return {
+  font-size: 23px;
+}
+
+.tech-grid h3 {
+  font-size: 28px;
+}
+.tech-grid pre code {
+  font-size: 19px;
+}
+.tech-grid p {
+  font-size: 21px;
+}
+
+.concept-one {
+  font-size: 34px !important;
+}
+.concept-example .soc-row {
+  grid-template-columns: 300px 1fr;
+  padding: 20px 22px;
+}
+.concept-example .soc-row code {
+  font-size: 20px !important;
+}
+.concept-example .soc-row span {
+  font-size: 21px;
+}
+.concept-example pre code {
+  font-size: 20px;
+}
+.facade-box > code,
+.facade-caller code {
+  font-size: 22px !important;
+}
+.facade-hidden code {
+  font-size: 19px !important;
+}
+.facade-caller .pre-label,
+.facade-hidden small {
+  font-size: 16px;
+}
+
+.arch-map {
+  grid-template-columns: 150px 100px 150px 90px 230px 110px 220px 100px 170px;
+  row-gap: 34px;
+}
+.arch-box {
+  min-height: 150px;
+  padding: 18px 18px;
+}
+.arch-box b {
+  font-size: 20px;
+}
+.arch-box small {
+  font-size: 16px;
+}
+.arch-arrow {
+  font-size: 15px;
+}
+.arch-arrow code {
+  font-size: 13px !important;
+}
+.arch-arrow b {
+  font-size: 30px;
+}
+
+.status-matrix > div {
+  padding: 18px 28px;
+}
+.status-matrix code {
+  font-size: 24px !important;
+}
+.error-kinds li {
+  font-size: 24px;
+}
+.problem-list li {
+  font-size: 24px;
+}
+.guard-step {
+  font-size: 23px;
+}
+.guard-step code {
+  font-size: 20px !important;
+}
+.track > strong {
+  font-size: 21px;
+}
+.track > span {
+  font-size: 20px;
+  padding: 18px 12px;
+}
+.track > span code {
+  font-size: 18px !important;
+}
+.throw-path article {
+  min-height: 280px;
+}
+.throw-path article b {
+  font-size: 20px;
+}
+.throw-path article p {
+  font-size: 20px;
+}
+.throw-path article p code {
+  font-size: 17px !important;
+}
+.shape-grid pre code {
+  font-size: 19px;
+}
+.shape-grid small {
+  font-size: 18px;
+}
+.origin-table div {
+  padding: 16px 24px;
+}
+.origin-table code {
+  font-size: 23px !important;
+}
+.origin-table span,
+.origin-table b {
+  font-size: 21px;
+}
+.xss-flow article {
+  min-height: 280px;
+}
+.xss-flow b {
+  font-size: 23px;
+}
+.xss-flow p {
+  font-size: 19px;
+}
+.xss-flow p code {
+  font-size: 16px !important;
+}
+.escape-table div {
+  grid-template-columns: 80px 50px 170px 1fr;
+  padding: 14px 22px;
+}
+.escape-table code {
+  font-size: 26px !important;
+}
+.escape-table span {
+  font-size: 20px;
+}
+.pipe > span {
+  min-height: 140px;
+  font-size: 22px;
+}
+.pipe > span small {
+  font-size: 16px;
+}
+.order-lanes div {
+  padding: 20px 24px;
+}
+.order-lanes code {
+  font-size: 21px !important;
+}
+.order-lanes p {
+  font-size: 21px;
+}
+.ladder > div {
+  padding: 22px 28px;
+}
+.ladder strong {
+  font-size: 26px;
+}
+.ladder code {
+  font-size: 20px !important;
+}
+.rendered {
+  font-size: 24px;
+}
+.rendered code {
+  font-size: 21px !important;
+}
+.mono-file i {
+  font-size: 20px;
+}
+.layer {
+  padding: 20px 24px;
+}
+.layer span {
+  font-size: 21px;
+}
+
+/* Pass 3 */
+.tech-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.tech-grid pre code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.reveal .activity-slide .exercise-link,
+.reveal .activity-slide .exercise-links {
+  margin-top: 16px;
+}
+.throw-path {
+  grid-template-columns: 1fr 90px 1fr 90px 1fr 90px 1fr;
+}
+.throw-path > i small {
+  font-size: 14px;
+  line-height: 1.25;
+}
+.fill .before-after pre code {
+  font-size: 24px;
+}
+.fill .before-after pre.code-sm code {
+  font-size: 21px !important;
+}
+.tech-grid {
+  gap: 18px 24px;
+}
+.tech-grid article {
+  gap: 10px;
+  padding: 18px 24px;
+}
+.tech-grid h3 {
+  font-size: 25px;
+}
+.tech-grid pre code {
+  font-size: 17px;
+}
+.tech-grid p {
+  font-size: 20px;
+}

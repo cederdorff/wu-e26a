@@ -15,7 +15,8 @@ export default defineConfig({
         dataLogik: resolve("slides/data-logik/index.html"),
         persistensJson: resolve("slides/persistens-json/index.html"),
         restApi: resolve("slides/rest-api/index.html"),
-        arkitektur: resolve("slides/arkitektur/index.html")
+        arkitektur: resolve("slides/arkitektur/index.html"),
+        fejlhaandteringSikkerhed: resolve("slides/fejlhaandtering-sikkerhed/index.html")
       }
     }
   }
