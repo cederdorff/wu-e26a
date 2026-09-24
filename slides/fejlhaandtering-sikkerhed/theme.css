@@ -1859,3 +1859,458 @@ pre.wrap code {
 .tech-grid p {
   font-size: 20px;
 }
+
+/* Opening joke: requests revealed one by one, punchline last */
+.joke-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.joke-list li {
+  display: grid;
+  grid-template-columns: 560px 1fr 110px;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 26px;
+  border-left: 4px solid var(--yellow);
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.joke-list li code {
+  justify-self: start;
+  font-size: 23px !important;
+}
+.joke-list li > span {
+  color: var(--muted);
+  font-size: 23px;
+}
+.joke-list li > b {
+  justify-self: end;
+  font-size: 22px;
+}
+.joke-list .happy {
+  border-left-color: var(--green);
+}
+.joke-q {
+  color: var(--yellow);
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+.joke-list .joke-punch {
+  grid-template-columns: 1fr 110px;
+  margin-top: 12px;
+  padding: 22px 26px;
+  border-left-color: var(--red);
+  background: color-mix(in srgb, var(--red) 12%, var(--soft));
+}
+.joke-list .joke-punch > span {
+  color: var(--ink);
+  font-size: 27px;
+  font-weight: 700;
+}
+.joke-list .joke-punch > b {
+  font-size: 44px;
+}
+.joke-list {
+  gap: 7px;
+}
+.joke-list li {
+  padding: 9px 26px;
+}
+.joke-list .joke-punch {
+  margin-top: 8px;
+  padding: 16px 26px;
+}
+
+/* Combined draw + break exercise: three numbered step cards */
+.draw-break-slide .steps .card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 460px;
+}
+.draw-break-slide .steps .card p + p {
+  margin-top: 0;
+}
+.break-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.break-list li {
+  color: var(--muted);
+  font-size: 20px !important;
+}
+.break-list code {
+  font-size: 18px !important;
+}
+.draw-break-slide .steps {
+  gap: 32px;
+}
+.draw-break-slide .steps .card {
+  gap: 20px;
+  min-height: 480px;
+  padding: 34px 40px;
+}
+.draw-break-slide .steps .card > span {
+  font-size: 20px;
+}
+.draw-break-slide .steps .card p {
+  font-size: 28px;
+}
+.draw-break-slide .break-list {
+  gap: 12px;
+}
+.draw-break-slide .break-list li {
+  font-size: 25px !important;
+}
+.draw-break-slide .break-list code {
+  font-size: 23px !important;
+}
+.concept-hunt {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-hunt li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: baseline;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 23px !important;
+  line-height: 1.3;
+}
+.concept-hunt b {
+  color: var(--orange);
+  font-size: 24px;
+  font-weight: 850;
+}
+.draw-break-slide .steps .card:first-child p {
+  font-size: 26px;
+}
+.draw-break-slide .steps .card p.fallback {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 21px;
+}
+.draw-break-slide .fallback a {
+  color: var(--accent) !important;
+  font-weight: 750;
+}
+.draw-break-slide .card p code {
+  white-space: nowrap;
+}
+.fail-row .req-cond {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 16px;
+}
+.fail-map-dense {
+  gap: 6px;
+}
+.fail-map-dense .fail-row {
+  grid-template-columns: 430px 1fr 1fr 190px;
+  padding: 8px 24px;
+}
+.fail-map-dense .fail-row > span:last-child {
+  font-size: 16px;
+  text-align: right;
+}
+
+/* Expected vs. unexpected errors: one deciding question, two answers */
+.kinds-question {
+  align-self: center;
+  margin-bottom: 24px;
+  padding: 14px 30px;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-size: 28px;
+  font-weight: 750;
+}
+.kinds-question b {
+  color: var(--accent);
+}
+.kinds {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.kind {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px 32px;
+  border-top: 5px solid var(--orange);
+  background: var(--soft);
+}
+.kind-unexpected {
+  border-top-color: var(--red);
+}
+.kind header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.kind h3 {
+  font-size: 34px;
+}
+.kind-answer {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--orange) 20%, transparent);
+  color: var(--orange);
+  font-size: 18px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.kind-unexpected .kind-answer {
+  background: color-mix(in srgb, var(--red) 20%, transparent);
+  color: var(--red);
+}
+.kind dl {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+.kind dl div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: baseline;
+  gap: 14px;
+}
+.kind dt {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.kind dd {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.45;
+}
+.kind dd .sc {
+  margin-left: 6px;
+  font-size: 16px;
+}
+.kind pre code {
+  padding: 14px 18px;
+  font-size: 18px !important;
+  line-height: 1.4;
+}
+.kind small {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 750;
+}
+.kinds-question {
+  margin: 10px 0 26px;
+  font-size: 26px;
+}
+.kind {
+  gap: 14px;
+}
+
+/* try/catch intro: the two blocks labelled, like an anatomy drawing */
+.tc-anatomy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.tc-block {
+  padding: 14px 16px 16px;
+  border-left: 5px solid var(--green);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--green) 7%, var(--soft));
+}
+.tc-catch {
+  border-left-color: var(--orange);
+  background: color-mix(in srgb, var(--orange) 8%, var(--soft));
+}
+.tc-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--green);
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tc-catch .tc-label {
+  color: var(--orange);
+}
+.tc-anatomy pre code {
+  padding: 14px 20px;
+  font-size: 21px !important;
+}
+.tc-after code {
+  opacity: 0.75;
+}
+.tc-intro-slide .response-frame pre code {
+  font-size: 19px;
+}
+.tc-intro-slide .card p {
+  font-size: 22px;
+}
+.tc-intro-slide .tc-anatomy pre code {
+  font-size: 24px !important;
+}
+.tc-intro-slide .card p {
+  font-size: 25px;
+}
+.no-response-slide .card pre code {
+  font-size: 18px;
+}
+.no-response-slide .card p {
+  font-size: 23px;
+}
+.no-response-slide .response-frame pre code {
+  color: var(--red);
+}
+.no-response-slide .stage > .split > .stack {
+  gap: 14px;
+}
+.fill .before-after pre.code-xs code {
+  min-height: 0;
+  font-size: 19px;
+}
+
+/* throw new Error(): one line split into labelled parts */
+.throw-anatomy {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6px;
+}
+.throw-anatomy > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 5px solid var(--line);
+  text-align: center;
+}
+.throw-anatomy code {
+  background: none !important;
+  border: 0 !important;
+  font-size: 34px !important;
+  font-weight: 700;
+}
+.throw-anatomy small {
+  max-width: 300px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.3;
+}
+.throw-anatomy small b {
+  color: var(--ink);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 16px;
+}
+.throw-anatomy .ta-throw {
+  border-color: var(--red);
+}
+.throw-anatomy .ta-throw code {
+  color: var(--red) !important;
+}
+.throw-anatomy .ta-new {
+  border-color: var(--orange);
+}
+.throw-anatomy .ta-new code {
+  color: var(--orange) !important;
+}
+.throw-anatomy .ta-msg {
+  border-color: var(--green);
+}
+.throw-anatomy .ta-msg code {
+  color: var(--green) !important;
+}
+.throw-anatomy .ta-end {
+  border-color: transparent;
+}
+.throw-anatomy .ta-end code {
+  color: var(--orange) !important;
+}
+.throw-intro-slide .split pre code {
+  font-size: 21px !important;
+}
+.throw-intro-slide .response-frame pre code {
+  font-size: 22px;
+  color: var(--green);
+}
+.throw-intro-slide .split pre code {
+  padding: 22px 28px;
+  font-size: 24px !important;
+  line-height: 1.45 !important;
+}
+.throw-intro-slide .response-frame pre code {
+  font-size: 24px;
+}
+.throw-intro-slide .throw-anatomy small {
+  font-size: 20px;
+}
+.catch-throw-slide .catch-throw {
+  align-items: start;
+}
+.catch-throw-slide .catch-throw pre code {
+  font-size: 18px !important;
+}
+.catch-throw-slide .problem-list {
+  gap: 10px;
+}
+.catch-throw-slide .problem-list li {
+  padding: 12px 18px 12px 64px;
+  font-size: 19px;
+}
+.catch-throw-slide .problem-list li::before {
+  top: 12px;
+  width: 32px;
+  height: 32px;
+  font-size: 17px;
+}
+.throw-intro-slide .throw-anatomy code {
+  font-size: 30px !important;
+}
+.throw-intro-slide .throw-anatomy small {
+  font-size: 18px;
+}
+.throw-intro-slide .split {
+  margin-top: 28px !important;
+}
+.throw-intro-slide .split pre code {
+  padding: 16px 24px;
+  font-size: 20px !important;
+  line-height: 1.38 !important;
+}
+.throw-intro-slide .throw-anatomy code {
+  font-size: 38px !important;
+}
+.throw-intro-slide .throw-anatomy small {
+  font-size: 20px;
+}
+.throw-effects {
+  margin-top: 56px;
+}
+.throw-effects .card {
+  min-height: 0;
+}
+.throw-effects .card p {
+  font-size: 26px;
+}
+.throw-effects .card p code {
+  white-space: nowrap;
+}

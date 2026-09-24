@@ -13,23 +13,87 @@
         <section class="title-slide" data-accent="red">
           <div class="title-copy">
             <span class="eyebrow">WU-E26A · RACE 7 · 25. september 2026</span>
-            <h1>Når noget<br /><span>går galt</span></h1>
-            <p class="lead">Statuskoder, fejlhåndtering, validering og middleware. Og to sikkerhedshuller i AMAbotten: CORS og XSS.</p>
+            <h1>Fra happy path<br /><span>til virkeligheden</span></h1>
+            <p class="lead">
+              Statuskoder, fejlhåndtering, validering og middleware. Og to sikkerhedshuller i AMAbotten: CORS og XSS.
+            </p>
           </div>
+        </section>
+
+        <section class="fill joke-slide" data-accent="yellow">
+          <span class="eyebrow">Inden vi går i gang</span>
+          <h2>En tester går ind i jeres API ...</h2>
+          <div class="stage">
+            <ol class="joke-list">
+              <li class="happy">
+                <code>GET /students/1</code><span>Får en studerende</span><b class="sc sc-2">200</b>
+              </li>
+              <li class="fragment"><code>GET /students/0</code><span>Får ingenting</span><b class="joke-q">200?</b></li>
+              <li class="fragment">
+                <code>GET /students/-1</code><span>Får ingenting</span><b class="joke-q">200?</b>
+              </li>
+              <li class="fragment">
+                <code>GET /students/banan</code><span>Får ingenting</span><b class="joke-q">200?</b>
+              </li>
+              <li class="fragment">
+                <code>POST /students { "name": "" }</code><span>Opretter en studerende uden navn</span
+                ><b class="joke-q">200?</b>
+              </li>
+              <li class="fragment">
+                <code>POST /students { "name": "🦎" }</code><span>Opretter en firben</span><b class="joke-q">200?</b>
+              </li>
+              <li class="fragment joke-punch">
+                <span>Den første rigtige bruger sender <code>POST /students</code> helt uden body.</span><b>🔥</b>
+              </li>
+            </ol>
+          </div>
+          <p class="bottom-line">
+            Frit efter Brenan Kellers QA-joke. Jeres API er bygget til happy path. I dag lærer det at klare resten.
+          </p>
         </section>
 
         <section id="agenda" class="agenda-slide" data-accent="cyan">
           <span class="eyebrow">Agenda</span>
           <h2>Fra den lykkelige vej til et API, der tåler fejl</h2>
           <ol class="agenda-grid">
-            <li><a href="#/opsamling"><b>Opsamling: Hvor efterlod vi API'et?</b><small>arkitektur, fire begreber, tegn jeres egen, og ødelæg den</small></a></li>
-            <li><a href="#/statuskoder"><b>Statuskoder, for alvor denne gang</b><small><code>201</code>, <code>204</code>, <code>400</code>, <code>404</code>, <code>500</code></small></a></li>
-            <li><a href="#/fejlhaandtering"><b>Fejlhåndtering: 404 ved ugyldige id'er</b><small>tjek, svar, stop</small></a></li>
-            <li><a href="#/validering"><b>Validering: 400 ved ugyldigt input</b><small>stol aldrig på <code>request.body</code></small></a></li>
-            <li><a href="#/try-catch"><b>try/catch</b><small>fang fejlen, dér hvor den opstår</small></a></li>
-            <li><a href="#/middleware"><b>Middleware og en fælles fejl-middleware</b><small>ét sted, der svarer på alle fejl</small></a></li>
-            <li><a href="#/cors"><b>CORS</b><small>fra "tillad alt" til "tillad jeres egen frontend"</small></a></li>
-            <li><a href="#/xss"><b>XSS</b><small>escape brugerens tekst på serveren</small></a></li>
+            <li>
+              <a href="#/opsamling"
+                ><b>Opsamling: Hvor efterlod vi API'et?</b
+                ><small>arkitektur, fire begreber og en skitse af jeres eget API</small></a
+              >
+            </li>
+            <li>
+              <a href="#/statuskoder"
+                ><b>Statuskoder</b
+                ><small
+                  ><code>201</code>, <code>204</code>, <code>400</code>, <code>404</code>, <code>500</code></small
+                ></a
+              >
+            </li>
+            <li>
+              <a href="#/fejlhaandtering"
+                ><b>Fejlhåndtering: 404 ved ugyldige id'er</b><small>tjek, svar, stop</small></a
+              >
+            </li>
+            <li>
+              <a href="#/validering"
+                ><b>Validering: 400 ved ugyldigt input</b><small>stol aldrig på <code>request.body</code></small></a
+              >
+            </li>
+            <li>
+              <a href="#/try-catch"><b>try/catch</b><small>fang fejlen, dér hvor den opstår</small></a>
+            </li>
+            <li>
+              <a href="#/middleware"
+                ><b>Middleware og en fælles fejl-middleware</b><small>ét sted, der svarer på alle fejl</small></a
+              >
+            </li>
+            <li>
+              <a href="#/cors"><b>CORS</b><small>fra "tillad alt" til "tillad jeres egen frontend"</small></a>
+            </li>
+            <li>
+              <a href="#/xss"><b>XSS</b><small>escape brugerens tekst på serveren</small></a>
+            </li>
           </ol>
         </section>
 
@@ -39,12 +103,15 @@
           <span class="chapter-number">01</span>
           <span class="eyebrow">Opsamling</span>
           <h2>Hvor efterlod<br />vi API'et?</h2>
-          <p>Arkitekturen fra sidste gang og fire begreber. Så tegner I jeres egen, og bagefter prøver I at ødelægge den.</p>
+          <p>
+            Arkitekturen fra sidste gang og fire begreber. Så skitserer I jeres eget API og finder begreberne i jeres
+            kode.
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
           <span class="eyebrow">Sidste gang</span>
-          <h2>Fra én fil til tre lag</h2>
+          <h2>Fra én fil til flere lag</h2>
           <div class="stage">
             <div class="layers-compare">
               <article>
@@ -64,15 +131,23 @@
                 <span class="layers-label">Efter</span>
                 <div class="layer layer-setup"><code>server.js</code><span>Opsætning og montering</span></div>
                 <i class="layer-link">↓ importerer routerne</i>
-                <div class="layer layer-route"><code>routes/students.js · routes/teachers.js</code><span>HTTP ind og ud</span></div>
+                <div class="layer layer-route">
+                  <code>routes/students.js · routes/teachers.js</code><span>HTTP ind og ud</span>
+                </div>
                 <i class="layer-link">↓ importerer loadX() / saveX()</i>
-                <div class="layer layer-data"><code>data/students.js · data/teachers.js</code><span>Læser og skriver filer</span></div>
+                <div class="layer layer-data">
+                  <code>data/students.js · data/teachers.js</code><span>Læser og skriver filer</span>
+                </div>
                 <i class="layer-link">↓ fs.readFile() / fs.writeFile()</i>
-                <div class="layer layer-file"><code>data/students.json · data/teachers.json</code><span>Selve data</span></div>
+                <div class="layer layer-file">
+                  <code>data/students.json · data/teachers.json</code><span>Selve data</span>
+                </div>
               </div>
             </div>
           </div>
-          <p class="bottom-line">Samme kode, samme adfærd udadtil. Det eneste, der har flyttet sig, er <b>hvor</b> koden bor.</p>
+          <p class="bottom-line">
+            Samme kode, samme adfærd udadtil. Det eneste, der har flyttet sig, er <b>hvor</b> koden bor.
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -80,13 +155,26 @@
           <h2>Vejen for <code>GET /students/2</code></h2>
           <div class="stage">
             <div class="path-chain">
-              <article><b>Request</b><small><code>GET /students/2</code> fra Thunder Client eller jeres frontend</small></article>
-              <article><b>server.js</b><small><code>app.use("/students", studentsRouter)</code> sender videre</small></article>
-              <article><b>routes/students.js</b><small><code>router.get("/:id")</code> matcher og kalder <code>loadStudents()</code></small></article>
-              <article><b>data/students.js</b><small><code>fs.readFile()</code> + <code>JSON.parse()</code>, returnerer et array</small></article>
+              <article>
+                <b>Request</b><small><code>GET /students/2</code> fra Thunder Client eller jeres frontend</small>
+              </article>
+              <article>
+                <b>server.js</b><small><code>app.use("/students", studentsRouter)</code> sender videre</small>
+              </article>
+              <article>
+                <b>routes/students.js</b
+                ><small><code>router.get("/:id")</code> matcher og kalder <code>loadStudents()</code></small>
+              </article>
+              <article>
+                <b>data/students.js</b
+                ><small><code>fs.readFile()</code> + <code>JSON.parse()</code>, returnerer et array</small>
+              </article>
               <article><b>students.json</b><small>Teksten på disken</small></article>
             </div>
-            <div class="path-return"><b>←</b> Routen finder den studerende med <code>find()</code> og sender den tilbage med <code>response.json(student)</code></div>
+            <div class="path-return">
+              <b>←</b> Routen finder den studerende med <code>find()</code> og sender den tilbage med
+              <code>response.json(student)</code>
+            </div>
           </div>
           <p class="bottom-line">Hvert lag kender kun det næste. Routen ved ikke, at data ligger i en JSON-fil.</p>
         </section>
@@ -123,7 +211,9 @@ export async function saveStudents(students) { /* ... */ }</code></pre>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Frivilligt: <code>controllers/</code>. Routen matcher kun sti til funktion, controlleren gør arbejdet.</p>
+          <p class="bottom-line">
+            Frivilligt: <code>controllers/</code>. Routen matcher kun sti til funktion, controlleren gør arbejdet.
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -139,15 +229,30 @@ export async function saveStudents(students) { /* ... */ }</code></pre>
               </div>
               <div class="concept-example">
                 <span>I jeres /students-API</span>
-                <div class="soc-row soc-row-view"><strong><code>server.js</code></strong><span>Opsætning: middleware og montering af routere</span></div>
-                <div class="soc-row soc-row-logic"><strong><code>routes/students.js</code></strong><span>HTTP: læser request, sender response</span></div>
-                <div class="soc-row soc-row-data"><strong><code>data/students.js</code></strong><span>Filsystem: læser og skriver JSON</span></div>
+                <div class="soc-row soc-row-view">
+                  <strong><code>server.js</code></strong
+                  ><span>Opsætning: middleware og montering af routere</span>
+                </div>
+                <div class="soc-row soc-row-logic">
+                  <strong><code>routes/students.js</code></strong
+                  ><span>HTTP: læser request, sender response</span>
+                </div>
+                <div class="soc-row soc-row-data">
+                  <strong><code>data/students.js</code></strong
+                  ><span>Filsystem: læser og skriver JSON</span>
+                </div>
                 <span style="margin-top: 14px">I AMAbotten</span>
-                <div class="soc-row soc-row-later"><strong><code>findBestAnswer()</code></strong><span>Forretningslogik: finder svaret. Hverken route eller data</span></div>
+                <div class="soc-row soc-row-later">
+                  <strong><code>findBestAnswer()</code></strong
+                  ><span>Forretningslogik: finder svaret. Hverken route eller data</span>
+                </div>
               </div>
             </div>
           </div>
-          <p class="bottom-line"><b>I dag:</b> fejlsvar får deres eget sted, en fælles fejl-middleware. Routerne handler kun om den lykkelige vej.</p>
+          <p class="bottom-line">
+            <b>I dag:</b> fejlsvar får deres eget sted, en fælles fejl-middleware. Routerne handler kun om den lykkelige
+            vej.
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -181,7 +286,10 @@ const students = JSON.parse(data);</code></pre>
               </div>
             </div>
           </div>
-          <p class="bottom-line"><b>I dag:</b> én fejl-middleware i stedet for ti <code>try</code>/<code>catch</code>, og én <code>escapeHtml()</code>. Seks korte 404-tjek er fint.</p>
+          <p class="bottom-line">
+            <b>I dag:</b> én fejl-middleware i stedet for ti <code>try</code>/<code>catch</code>, og én
+            <code>escapeHtml()</code>. Seks korte 404-tjek er fint.
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -197,14 +305,28 @@ const students = JSON.parse(data);</code></pre>
               </div>
               <div class="concept-example">
                 <span>Filen ændrer sig, når ...</span>
-                <div class="soc-row soc-row-logic"><strong><code>routes/students.js</code></strong><span>... students får et nyt felt eller en ny route</span></div>
-                <div class="soc-row soc-row-logic"><strong><code>routes/teachers.js</code></strong><span>... teachers ændrer sig. Rører I ikke ved students</span></div>
-                <div class="soc-row soc-row-data"><strong><code>data/students.js</code></strong><span>... JSON-filen skiftes ud med en database</span></div>
-                <div class="soc-row soc-row-view"><strong><code>server.js</code></strong><span>... der kommer en ny router eller ny middleware</span></div>
+                <div class="soc-row soc-row-logic">
+                  <strong><code>routes/students.js</code></strong
+                  ><span>... students får et nyt felt eller en ny route</span>
+                </div>
+                <div class="soc-row soc-row-logic">
+                  <strong><code>routes/teachers.js</code></strong
+                  ><span>... teachers ændrer sig. Rører I ikke ved students</span>
+                </div>
+                <div class="soc-row soc-row-data">
+                  <strong><code>data/students.js</code></strong
+                  ><span>... JSON-filen skiftes ud med en database</span>
+                </div>
+                <div class="soc-row soc-row-view">
+                  <strong><code>server.js</code></strong
+                  ><span>... der kommer en ny router eller ny middleware</span>
+                </div>
               </div>
             </div>
           </div>
-          <p class="bottom-line"><b>I dag:</b> data-modulet opdager en fejl, fejl-middlewaren svarer på den. To ansvar, to steder.</p>
+          <p class="bottom-line">
+            <b>I dag:</b> data-modulet opdager en fejl, fejl-middlewaren svarer på den. To ansvar, to steder.
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -240,57 +362,92 @@ const students = JSON.parse(data);</code></pre>
               </div>
             </div>
           </div>
-          <p class="bottom-line"><b>I dag:</b> <code>loadStudents()</code> skjuler også sine fejl. <code>ENOENT</code> bliver til "Kunne ikke hente studerende".</p>
+          <p class="bottom-line">
+            <b>I dag:</b> <code>loadStudents()</code> skjuler også sine fejl. <code>ENOENT</code> bliver til "Kunne ikke
+            hente studerende".
+          </p>
         </section>
 
-        <section class="activity-slide activity-slide-split draw-slide" data-accent="orange">
-          <span class="eyebrow">Øvelse · to og to · 10 min</span>
-          <h2>Tegn jeres egen arkitektur</h2>
-          <div class="two-sides">
-            <article>
-              <h3>1 · Tegn delene</h3>
-              <ul>
-                <li>Papir, tavle eller Excalidraw. Åbn jeres kode, mens I tegner</li>
-                <li>Én boks pr. fil: <code>server.js</code>, hver routes-fil, hvert data-modul, hver JSON-fil</li>
-                <li>Én boks for klienten: Thunder Client eller jeres frontend</li>
-                <li>En pil for hvert <code>import</code> eller kald. Skriv på pilen, hvad der sendes</li>
-              </ul>
-            </article>
-            <article>
-              <h3>2 · Følg ét request</h3>
-              <ul>
-                <li>Tegn vejen for <code>PUT /students/2</code> med en anden farve</li>
-                <li>Markér: hvor læses <code>request.body</code>? Hvor bruges <code>fs</code>? Hvor sendes svaret?</li>
-                <li>AMAbot: hvor bor <code>findBestAnswer()</code>, og hvem kalder den?</li>
-                <li>Hvor ville I sætte en fejlbesked, hvis id'et ikke findes?</li>
-              </ul>
-            </article>
+        <section class="fill draw-break-slide" data-accent="orange">
+          <span class="eyebrow">Øvelse · to og to · 15 min</span>
+          <h2>Skitsér jeres API, og find de fire begreber</h2>
+          <div class="stage">
+            <div class="cards-2 steps">
+              <article class="card">
+                <span>1 · Skitsér · 7 min</span>
+                <p>
+                  Tegn jeres <code>/students</code>-API, som I forstår det. Bokse, pile, farver, stikord: det er op til
+                  jer.
+                </p>
+                <p>
+                  Skitsen skal vise, hvilke dele der findes, hvordan de hænger sammen, og hvad der sker, når
+                  <code>PUT /students/2</code> kommer ind.
+                </p>
+                <p class="fallback">
+                  Ikke i mål med opdelingen fra sidst? Skitsér
+                  <a
+                    href="https://github.com/cederdorff/express-rest-api-students/tree/data-module"
+                    target="_blank"
+                    rel="noreferrer"
+                    >løsningen på GitHub ↗</a
+                  >
+                </p>
+              </article>
+              <article class="card card-warn">
+                <span>2 · Find begreberne · 8 min</span>
+                <p>Find et eksempel i jeres egen kode for hvert begreb, og skriv det på skitsen:</p>
+                <ul class="concept-hunt">
+                  <li><b>SoC</b>Hvilke filer laver hver sin slags arbejde?</li>
+                  <li><b>DRY</b>Hvilken funktion sparer jer for gentaget kode?</li>
+                  <li><b>SRP</b>Hvad kunne få routes-filen til at ændre sig? Og data-modulet?</li>
+                  <li><b>Encaps.</b>Hvad skjuler data-modulet for routen?</li>
+                </ul>
+              </article>
+            </div>
           </div>
-          <p class="bottom-line">Tegn det, I faktisk har, ikke det, I tror, I har. Næste slide viser et eksempel.</p>
+          <p class="bottom-line">
+            Der er ingen rigtig måde at tegne det på. Men tegn det, I faktisk har: åbn filerne. Gem skitsen.
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Sådan kunne den se ud</span>
+          <span class="eyebrow">Én måde at tegne den på</span>
           <h2>/students og /teachers, tegnet</h2>
           <div class="stage">
             <div class="arch-map">
-              <div class="arch-box arch-client arch-tall"><b>Klient</b><small>Thunder Client eller frontend</small></div>
+              <div class="arch-box arch-client arch-tall">
+                <b>Klient</b><small>Thunder Client eller frontend</small>
+              </div>
               <div class="arch-arrow" style="grid-row: 1 / 3"><b>⇄</b>HTTP request<br />JSON response</div>
-              <div class="arch-box arch-setup arch-tall"><b>server.js</b><small>express.json()<br />app.use(...)</small></div>
+              <div class="arch-box arch-setup arch-tall">
+                <b>server.js</b><small>express.json()<br />app.use(...)</small>
+              </div>
 
               <div class="arch-arrow"><b>→</b><code>/students</code></div>
-              <div class="arch-box arch-route"><b>routes/<br />students.js</b><small>request.params, request.body</small></div>
+              <div class="arch-box arch-route">
+                <b>routes/<br />students.js</b><small>request.params, request.body</small>
+              </div>
               <div class="arch-arrow"><b>→</b><code>loadStudents()</code><br />array ←</div>
-              <div class="arch-box arch-data"><b>data/<br />students.js</b><small>fs + JSON.parse</small></div>
+              <div class="arch-box arch-data">
+                <b>data/<br />students.js</b><small>fs + JSON.parse</small>
+              </div>
               <div class="arch-arrow"><b>→</b>fs.readFile<br />tekst ←</div>
-              <div class="arch-box arch-file"><b>students<br />.json</b></div>
+              <div class="arch-box arch-file">
+                <b>students<br />.json</b>
+              </div>
 
               <div class="arch-arrow"><b>→</b><code>/teachers</code></div>
-              <div class="arch-box arch-route"><b>routes/<br />teachers.js</b><small>request.params, request.body</small></div>
+              <div class="arch-box arch-route">
+                <b>routes/<br />teachers.js</b><small>request.params, request.body</small>
+              </div>
               <div class="arch-arrow"><b>→</b><code>loadTeachers()</code><br />array ←</div>
-              <div class="arch-box arch-data"><b>data/<br />teachers.js</b><small>fs + JSON.parse</small></div>
+              <div class="arch-box arch-data">
+                <b>data/<br />teachers.js</b><small>fs + JSON.parse</small>
+              </div>
               <div class="arch-arrow"><b>→</b>fs.readFile<br />tekst ←</div>
-              <div class="arch-box arch-file"><b>teachers<br />.json</b></div>
+              <div class="arch-box arch-file">
+                <b>teachers<br />.json</b>
+              </div>
             </div>
             <div class="arch-legend">
               <span><i style="border-color: var(--yellow)"></i>Opsætning</span>
@@ -299,36 +456,59 @@ const students = JSON.parse(data);</code></pre>
               <span><i style="border-color: var(--muted)"></i>Filer på disken</span>
             </div>
           </div>
-          <p class="bottom-line">Sammenlign med jeres egen tegning. Hvor er der pile, der ikke burde være der?</p>
-        </section>
-
-        <section class="activity-slide" data-accent="orange">
-          <span class="eyebrow">Øvelse · to og to · ødelæg jeres eget API</span>
-          <h2>Prøv bevidst at få det til at gå galt</h2>
-          <ul class="checklist">
-            <li><code>GET /students/999</code> og <code>PUT /students/999</code> med en body. Hvad svarer serveren? Hvad står i terminalen?</li>
-            <li><code>POST /students</code> med <code>{ "name": "Test" }</code>. Kig i <code>data/students.json</code> bagefter</li>
-            <li>Omdøb <code>data/students.json</code>, og send <code>GET /students</code>. Giv filen navnet tilbage bagefter</li>
-            <li><code>GET /noget-der-ikke-findes</code></li>
-          </ul>
-          <p class="bottom-line">Skriv ned for hvert request: statuskoden, og hvad I fik tilbage. Vi samler op om lidt.</p>
+          <p class="bottom-line">
+            Én måde, ikke den rigtige. Kan I forklare jeres egen skitse til gruppen ved siden af på ét minut?
+          </p>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Opsamling i plenum</span>
+          <span class="eyebrow">Dagens plan · testeren fra baren, i jeres API</span>
           <h2>Sådan svarer API'et, når det går galt, lige nu</h2>
           <div class="stage">
             <div class="fail-map">
-              <div class="fail-row fail-head"><span>Request</span><span>Svar lige nu</span><span>Dagens mål</span><span></span></div>
-              <div class="fail-row"><span class="req"><code>POST /students</code> · <code>DELETE</code></span><span><span class="sc sc-2">200</span>OK, altid</span><span><span class="sc sc-2">201</span><span class="sc sc-2">204</span></span><a href="#/statuskoder">Kap. 02</a></div>
-              <div class="fail-row"><span class="req"><code>GET /students/999</code></span><span><span class="sc sc-2">200</span>Tomt svar</span><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><a href="#/fejlhaandtering">Kap. 03</a></div>
-              <div class="fail-row"><span class="req"><code>PUT /students/999</code></span><span><span class="sc sc-5">500</span>HTML-fejlside, stack trace</span><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><a href="#/fejlhaandtering">Kap. 03</a></div>
-              <div class="fail-row"><span class="req"><code>POST { "name": "Test" }</code></span><span><span class="sc sc-2">200</span>Halv studerende gemt</span><span><span class="sc sc-4">400</span>+ JSON-fejlbesked</span><a href="#/validering">Kap. 04</a></div>
-              <div class="fail-row"><span class="req"><code>GET /students</code> · fil mangler</span><span><span class="sc sc-5">500</span>HTML-fejlside, <code>ENOENT</code></span><span><span class="sc sc-5">500</span>+ JSON-fejlbesked</span><a href="#/try-catch">Kap. 05-06</a></div>
-              <div class="fail-row"><span class="req"><code>GET /noget-der-ikke-findes</code></span><span><span class="sc sc-4">404</span>HTML: "Cannot GET"</span><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><a href="#/middleware">Kap. 06</a></div>
+              <div class="fail-row fail-head">
+                <span>Request</span><span>Svar lige nu</span><span>Dagens mål</span><span></span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>POST /students</code></span
+                ><span><span class="sc sc-2">200</span>OK</span><span><span class="sc sc-2">201</span>Created</span
+                ><a href="#/statuskoder">Kap. 02</a>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>DELETE /students/:id</code></span
+                ><span><span class="sc sc-2">200</span>OK</span><span><span class="sc sc-2">204</span>No Content</span
+                ><a href="#/statuskoder">Kap. 02</a>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>GET /students/999</code></span
+                ><span><span class="sc sc-2">200</span>Tomt svar</span
+                ><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><a href="#/fejlhaandtering">Kap. 03</a>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>PUT /students/999</code></span
+                ><span><span class="sc sc-5">500</span>HTML-fejlside, stack trace</span
+                ><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><a href="#/fejlhaandtering">Kap. 03</a>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>POST /students</code> <small class="req-cond">kun name</small></span
+                ><span><span class="sc sc-2">200</span>Halv studerende gemt</span
+                ><span><span class="sc sc-4">400</span>+ JSON-fejlbesked</span><a href="#/validering">Kap. 04</a>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>GET /students</code> <small class="req-cond">fil mangler</small></span
+                ><span><span class="sc sc-5">500</span>HTML-fejlside, <code>ENOENT</code></span
+                ><span><span class="sc sc-5">500</span>+ JSON-fejlbesked</span><a href="#/try-catch">Kap. 05-06</a>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>GET /noget-der-ikke-findes</code></span
+                ><span><span class="sc sc-4">404</span>HTML: "Cannot GET"</span
+                ><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><a href="#/middleware">Kap. 06</a>
+              </div>
             </div>
           </div>
-          <p class="bottom-line">Fire forskellige måder at sige "det gik galt" på. Det er dagens plan: hver række er et kapitel.</p>
+          <p class="bottom-line">
+            Fire forskellige måder at sige "det gik galt" på. Det er dagens plan: hver række er et kapitel.
+          </p>
         </section>
 
         <!-- ============ 02 STATUSKODER ============ -->
@@ -336,13 +516,17 @@ const students = JSON.parse(data);</code></pre>
         <section id="statuskoder" class="chapter" data-accent="cyan">
           <span class="chapter-number">02</span>
           <span class="eyebrow">Statuskoder</span>
-          <h2>Statuskoder,<br />for alvor</h2>
+          <h2>Statuskoder</h2>
           <p>Tallet i svaret fortæller klienten, hvad der skete, før den har læst et eneste ord.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
           <span class="eyebrow">Hvad</span>
           <h2>Tre familier: hvem skal rette fejlen?</h2>
+          <p class="concept-intro">
+            <b>En statuskode</b> er et tal på tre cifre, som serveren sender med i hvert svar. Det fortæller klienten,
+            hvordan det gik, før den læser selve indholdet.
+          </p>
           <div class="stage">
             <div class="families">
               <article>
@@ -374,7 +558,9 @@ const students = JSON.parse(data);</code></pre>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Første ciffer er nok: 4xx betyder "ret din request", 5xx betyder "vi har et problem".</p>
+          <p class="bottom-line">
+            Første ciffer er nok: 4xx betyder "ret din request", 5xx betyder "vi har et problem".
+          </p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -397,16 +583,25 @@ const student = await response.json();</code></pre>
               <div class="stack">
                 <article class="card card-bad">
                   <span>Uden statuskode</span>
-                  <p><span class="sc sc-2">200</span> og et tomt svar. <code>response.ok</code> er <b>true</b>, så frontenden prøver at vise en studerende, der ikke findes.</p>
+                  <p>
+                    <span class="sc sc-2">200</span> og et tomt svar. <code>response.ok</code> er <b>true</b>, så
+                    frontenden prøver at vise en studerende, der ikke findes.
+                  </p>
                 </article>
                 <article class="card card-good">
                   <span>Med statuskode</span>
-                  <p><span class="sc sc-4">404</span>. <code>response.ok</code> er <b>false</b>, så frontenden kan vise "Studerende ikke fundet".</p>
+                  <p>
+                    <span class="sc sc-4">404</span>. <code>response.ok</code> er <b>false</b>, så frontenden kan vise
+                    "Studerende ikke fundet".
+                  </p>
                 </article>
               </div>
             </div>
           </div>
-          <p class="bottom-line"><code>response.ok</code> er <code>true</code> for alle 2xx. Samme tal ses i Thunder Client og i browserens Network-fane.</p>
+          <p class="bottom-line">
+            <code>response.ok</code> er <code>true</code> for alle 2xx. Samme tal ses i Thunder Client og i browserens
+            Network-fane.
+          </p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -415,18 +610,41 @@ const student = await response.json();</code></pre>
           <div class="stage">
             <div class="status-matrix">
               <div class="sm-head"><span>Route</span><span>Lykkes</span><span>Kan fejle med</span></div>
-              <div><code>GET /students</code><span><span class="sc sc-2">200</span></span><span><span class="sc sc-5">500</span></span></div>
-              <div><code>GET /students/:id</code><span><span class="sc sc-2">200</span></span><span><span class="sc sc-4">404</span><span class="sc sc-5">500</span></span></div>
-              <div><code>POST /students</code><span><span class="sc sc-2">201</span></span><span><span class="sc sc-4">400</span><span class="sc sc-5">500</span></span></div>
-              <div><code>PUT /students/:id</code><span><span class="sc sc-2">200</span></span><span><span class="sc sc-4">404</span><span class="sc sc-4">400</span><span class="sc sc-5">500</span></span></div>
-              <div><code>DELETE /students/:id</code><span><span class="sc sc-2">204</span></span><span><span class="sc sc-4">404</span><span class="sc sc-5">500</span><small>204 har ingen body</small></span></div>
+              <div>
+                <code>GET /students</code><span><span class="sc sc-2">200</span></span
+                ><span><span class="sc sc-5">500</span></span>
+              </div>
+              <div>
+                <code>GET /students/:id</code><span><span class="sc sc-2">200</span></span
+                ><span><span class="sc sc-4">404</span><span class="sc sc-5">500</span></span>
+              </div>
+              <div>
+                <code>POST /students</code><span><span class="sc sc-2">201</span></span
+                ><span><span class="sc sc-4">400</span><span class="sc sc-5">500</span></span>
+              </div>
+              <div>
+                <code>PUT /students/:id</code><span><span class="sc sc-2">200</span></span
+                ><span
+                  ><span class="sc sc-4">404</span><span class="sc sc-4">400</span
+                  ><span class="sc sc-5">500</span></span
+                >
+              </div>
+              <div>
+                <code>DELETE /students/:id</code><span><span class="sc sc-2">204</span></span
+                ><span
+                  ><span class="sc sc-4">404</span><span class="sc sc-5">500</span
+                  ><small>204 har ingen body</small></span
+                >
+              </div>
             </div>
           </div>
-          <p class="bottom-line">Seks koder dækker hele jeres API. <code>500</code> kan ske overalt, og den håndterer vi ét sted i kapitel 6.</p>
+          <p class="bottom-line">
+            Seks koder dækker hele jeres API. <code>500</code> kan ske overalt, og den håndterer vi ét sted i kapitel 6.
+          </p>
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Hvordan</span>
+          <span class="eyebrow">Hvordan · vis det live i Thunder Client</span>
           <h2><code>.status()</code> før <code>.json()</code> eller <code>.send()</code></h2>
           <div class="stage">
             <div class="before-after">
@@ -449,52 +667,32 @@ response.status(204).send();</code></pre>
               </article>
             </div>
           </div>
-          <p class="bottom-line"><code>.status()</code> sætter kun tallet. Det er <code>.json()</code> eller <code>.send()</code>, der sender svaret afsted.</p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Demo · Thunder Client</span>
-          <h2>Samme request, før og efter</h2>
-          <div class="stage">
-            <div class="split even">
-              <div class="stack">
-                <span class="pre-label">Før</span>
-                <div class="response-frame">
-                  <header>POST /students <span class="sc sc-2">200 OK</span></header>
-                  <pre><code class="language-json">{ "id": 1758792000000, "name": "Aisha", "education": "Datamatiker" }</code></pre>
-                </div>
-                <div class="response-frame">
-                  <header>DELETE /students/1758792000000 <span class="sc sc-2">200 OK</span></header>
-                  <pre><code class="language-text">(tomt)</code></pre>
-                </div>
-              </div>
-              <div class="stack">
-                <span class="pre-label">Efter</span>
-                <div class="response-frame">
-                  <header>POST /students <span class="sc sc-2">201 Created</span></header>
-                  <pre><code class="language-json">{ "id": 1758792000000, "name": "Aisha", "education": "Datamatiker" }</code></pre>
-                </div>
-                <div class="response-frame">
-                  <header>DELETE /students/1758792000000 <span class="sc sc-2">204 No Content</span></header>
-                  <pre><code class="language-text">(tomt, og det er meningen)</code></pre>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Samme data. Kun tallet er ændret, og nu passer det med, hvad der skete.</p>
+          <p class="bottom-line">
+            <code>.status()</code> sætter kun tallet. Det er <code>.json()</code> eller <code>.send()</code>, der sender
+            svaret afsted.
+          </p>
         </section>
 
         <section class="activity-slide" data-accent="cyan">
           <span class="eyebrow">Hands-on · Fejlhåndtering, trin 1-4</span>
           <h2>Gør statuskoderne eksplicitte</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <a
+            class="exercise-link"
+            href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md"
+            target="_blank"
+            rel="noreferrer"
+            >Åbn øvelsen på GitHub ↗</a
+          >
           <ul class="checklist">
             <li>Commit udgangspunktet, før I ændrer noget</li>
             <li><code>POST /students</code> svarer med <code>201</code></li>
             <li><code>DELETE /students/:id</code> svarer med <code>204</code></li>
             <li>Gør det samme for <code>/teachers</code>, uden hints</li>
           </ul>
-          <p class="bottom-line"><code>GET</code> og <code>PUT</code> beholder <code>200</code>. Det er Express' standard, og det er korrekt her.</p>
+          <p class="bottom-line">
+            <code>GET</code> og <code>PUT</code> beholder <code>200</code>. Det er Express' standard, og det er korrekt
+            her.
+          </p>
         </section>
 
         <!-- ============ 03 FEJLHÅNDTERING ============ -->
@@ -506,32 +704,72 @@ response.status(204).send();</code></pre>
           <p>Hvad gør API'et, når en request ikke kan lykkes? Vi starter med 404 ved id'er, der ikke findes.</p>
         </section>
 
-        <section class="fill" data-accent="green">
+        <section class="fill kinds-slide" data-accent="green">
           <span class="eyebrow">Hvad</span>
           <h2>To slags fejl, to slags værktøj</h2>
           <div class="stage">
-            <div class="error-kinds">
-              <article>
-                <h3>Forventede fejl</h3>
-                <p>Du kan forudse dem og tjekke for dem med et <code>if</code>.</p>
-                <ul>
-                  <li>Id'et findes ikke <span class="sc sc-4">404</span></li>
-                  <li>Et felt mangler i body'en <span class="sc sc-4">400</span></li>
-                </ul>
-                <p class="kind-tool"><code>if</code> + <code>return</code> · kapitel 3 og 4</p>
+            <div class="kinds-question">Kan I tjekke for fejlen med et <code>if</code>, <b>før</b> den sker?</div>
+            <div class="kinds">
+              <article class="kind kind-expected">
+                <header>
+                  <span class="kind-answer">Ja</span>
+                  <h3>Forventet fejl</h3>
+                </header>
+                <dl>
+                  <div>
+                    <dt>Hvem</dt>
+                    <dd>Klienten bad om noget forkert</dd>
+                  </div>
+                  <div>
+                    <dt>Fx</dt>
+                    <dd>
+                      Id'et findes ikke <span class="sc sc-4">404</span><br />Et felt mangler
+                      <span class="sc sc-4">400</span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Værktøj</dt>
+                    <dd><code>if</code> + <code>return</code> i routen</dd>
+                  </div>
+                </dl>
+                <pre><code class="language-javascript">if (!student) {
+  response.status(404).json({ error: "..." });
+  return;
+}</code></pre>
               </article>
-              <article>
-                <h3>Uventede fejl</h3>
-                <p>Du ved først, at de sker, når de sker.</p>
-                <ul>
-                  <li>Datafilen mangler eller er ugyldig <span class="sc sc-5">500</span></li>
-                  <li>En bug, I ikke har set <span class="sc sc-5">500</span></li>
-                </ul>
-                <p class="kind-tool"><code>try</code>/<code>catch</code> + fejl-middleware · kapitel 5 og 6</p>
+              <article class="kind kind-unexpected">
+                <header>
+                  <span class="kind-answer">Nej</span>
+                  <h3>Uventet fejl</h3>
+                </header>
+                <dl>
+                  <div>
+                    <dt>Hvem</dt>
+                    <dd>Serveren fejlede selv</dd>
+                  </div>
+                  <div>
+                    <dt>Fx</dt>
+                    <dd>
+                      Datafilen mangler <span class="sc sc-5">500</span><br />En bug, I ikke har set
+                      <span class="sc sc-5">500</span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Værktøj</dt>
+                    <dd><code>try</code>/<code>catch</code> + fejl-middleware</dd>
+                  </div>
+                </dl>
+                <pre><code class="language-javascript">try {
+  return JSON.parse(data);
+} catch (error) {
+  throw new Error("Kunne ikke hente studerende");
+}</code></pre>
               </article>
             </div>
           </div>
-          <p class="bottom-line"><b>Fejlhåndtering:</b> hver fejl giver et tydeligt, forudsigeligt svar, og ingen fejl vælter serveren.</p>
+          <p class="bottom-line">
+            Forventede fejl er 4xx, uventede er 5xx. Uanset hvad: et tydeligt svar, og serveren kører videre.
+          </p>
         </section>
 
         <section class="fill" data-accent="green">
@@ -546,18 +784,28 @@ response.status(204).send();</code></pre>
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)</code></pre>
               </div>
               <ol class="problem-list">
-                <li><b>Forkert tal</b><span class="sc sc-5">500</span> siger "serverens skyld". Det var klientens id, der var forkert.</li>
+                <li>
+                  <b>Forkert tal</b><span class="sc sc-5">500</span> siger "serverens skyld". Det var klientens id, der
+                  var forkert.
+                </li>
                 <li><b>HTML, ikke JSON</b>Frontendens <code>response.json()</code> fejler.</li>
                 <li><b>Afslører detaljer</b>Filstier, mappenavne og linjenumre fra jeres server.</li>
               </ol>
             </div>
           </div>
-          <p class="bottom-line"><code>find()</code> gav <code>undefined</code>, og routen prøvede alligevel at sætte <code>student.name</code>.</p>
+          <p class="bottom-line">
+            <code>find()</code> gav <code>undefined</code>, og routen prøvede alligevel at sætte
+            <code>student.name</code>.
+          </p>
         </section>
 
         <section class="fill" data-accent="green">
           <span class="eyebrow">Hvordan · guard clause</span>
           <h2>Tjek. Svar. Stop.</h2>
+          <p class="concept-intro">
+            <b>Guard clause:</b> et <code>if</code> øverst i routen, der fanger fejlen, svarer, og stopper routen med
+            <code>return</code>. Så handler resten kun om den lykkelige vej.
+          </p>
           <div class="stage">
             <div class="split" style="grid-template-columns: 0.75fr 1.25fr">
               <div class="guard-flow">
@@ -566,11 +814,13 @@ response.status(204).send();</code></pre>
                 <div class="guard-step guard-q">Fandt vi en studerende?</div>
                 <div class="guard-arrow">↓</div>
                 <div class="guard-decision">
-                  <div class="guard-step guard-stop"><small>Nej</small><code>404</code> + <code>return</code><br />routen stopper</div>
+                  <div class="guard-step guard-stop">
+                    <small>Nej</small><code>404</code> + <code>return</code><br />routen stopper
+                  </div>
                   <div class="guard-step guard-go"><small>Ja</small>fortsæt til<br /><code>response.json()</code></div>
                 </div>
               </div>
-              <pre class="code-sm"><code class="language-javascript">router.get("/:id", async (request, response) => {
+              <pre class="code-xs"><code class="language-javascript">router.get("/:id", async (request, response) => {
   const students = await loadStudents();
   const student = students.find(
     (student) => student.id === Number(request.params.id)
@@ -587,29 +837,9 @@ response.status(204).send();</code></pre>
 });</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Tjek fejlen først, så resten af routen kun handler om den lykkelige vej. Det kaldes en <b>guard clause</b>.</p>
-        </section>
-
-        <section class="fill" data-accent="green">
-          <span class="eyebrow">Hvorfor <code>return</code>?</span>
-          <h2>Én request, ét svar</h2>
-          <div class="stage">
-            <div class="code-and-result" style="margin-top: 0">
-              <pre><code class="language-javascript">if (!student) {
-  response.status(404).json({ error: "..." });
-  // glemt return
-}
-
-response.json(student); // kører alligevel</code></pre>
-              <div class="response-frame">
-                <header>Terminalen</header>
-                <pre><code class="language-text">Error [ERR_HTTP_HEADERS_SENT]:
-Cannot set headers after they are sent
-to the client</code></pre>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line"><code>response.json()</code> sender svaret, men stopper ikke funktionen. Det gør <code>return</code>.</p>
+          <p class="bottom-line">
+            Husk <code>return</code>: <code>response.json()</code> sender svaret, men stopper ikke funktionen.
+          </p>
         </section>
 
         <section class="fill" data-accent="green">
@@ -623,12 +853,18 @@ to the client</code></pre>
                   <p><code>GET /students/:id</code></p>
                   <p><code>PUT /students/:id</code></p>
                   <p><code>DELETE /students/:id</code></p>
-                  <p style="margin-top: 12px">Alle finder én bestemt ressource ud fra id'et. Mønsteret er det samme: <code>find()</code> først, så <code>if (!student)</code>.</p>
+                  <p style="margin-top: 12px">
+                    Alle finder én bestemt ressource ud fra id'et. Mønsteret er det samme: <code>find()</code> først, så
+                    <code>if (!student)</code>.
+                  </p>
                 </div>
               </article>
               <article class="card card-bad">
                 <span><code>DELETE /students/999</code> uden tjek</span>
-                <p><code>findIndex()</code> finder ikke noget og giver <code>-1</code>. <code>splice(-1, 1)</code> sletter det <b>sidste</b> element.</p>
+                <p>
+                  <code>findIndex()</code> finder ikke noget og giver <code>-1</code>.
+                  <code>splice(-1, 1)</code> sletter det <b>sidste</b> element.
+                </p>
                 <div class="array-cells">
                   <span>Aisha<small>[0]</small></span>
                   <span>Noah<small>[1]</small></span>
@@ -644,11 +880,20 @@ to the client</code></pre>
         <section class="activity-slide" data-accent="green">
           <span class="eyebrow">Hands-on · Fejlhåndtering, trin 5-8</span>
           <h2>Tilføj 404-tjek</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <a
+            class="exercise-link"
+            href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md"
+            target="_blank"
+            rel="noreferrer"
+            >Åbn øvelsen på GitHub ↗</a
+          >
           <ul class="checklist">
             <li><code>GET /students/:id</code>: <code>404</code> og en JSON-fejlbesked, når id'et ikke findes</li>
             <li><code>PUT /students/:id</code> og <code>DELETE /students/:id</code>: samme tjek</li>
-            <li>Gentag <code>PUT /students/999</code> fra opsamlingen. Nu skal I få <code>404</code> i stedet for Express' fejlside</li>
+            <li>
+              Send <code>PUT /students/999</code> med en body. Nu skal I få <code>404</code> i stedet for Express'
+              fejlside
+            </li>
             <li>Gør det samme for <code>/teachers</code>, uden hints</li>
           </ul>
           <p class="bottom-line">Test også et id, der findes. Tjekket må ikke ødelægge den lykkelige vej.</p>
@@ -666,7 +911,10 @@ to the client</code></pre>
         <section class="fill" data-accent="yellow">
           <span class="eyebrow">Hvad og hvorfor</span>
           <h2>API'et gemmer alt, hvad det får</h2>
-          <p class="concept-intro"><b>Validering</b> betyder at tjekke, at input er brugbart, før du bruger det. Klienten kan være hvem som helst: jeres frontend, Thunder Client, <code>curl</code> eller et script. Stol aldrig på input.</p>
+          <p class="concept-intro">
+            <b>Validering</b> betyder at tjekke, at input er brugbart, før du bruger det. Klienten kan være hvem som
+            helst: jeres frontend, Thunder Client, <code>curl</code> eller et script. Stol aldrig på input.
+          </p>
           <div class="stage">
             <div class="code-and-result" style="margin-top: 0">
               <div class="response-frame">
@@ -683,64 +931,58 @@ to the client</code></pre>
               </div>
             </div>
           </div>
-          <p class="bottom-line">I AMAbotten: <code>POST /answers</code> med kun <code>{ "category": "test" }</code> giver en halv svarregel.</p>
+          <p class="bottom-line">
+            I AMAbotten: <code>POST /answers</code> med kun <code>{ "category": "test" }</code> giver en halv svarregel.
+          </p>
         </section>
 
         <section class="fill" data-accent="yellow">
           <span class="eyebrow">Hvordan</span>
           <h2>Samme guard clause, nu på <code>request.body</code></h2>
           <div class="stage">
-            <div class="order-strip">
-              <span>find()</span><b>→</b>
-              <span class="os-4">Findes den? <small>ellers 404</small></span><b>→</b>
-              <span class="os-4">Er body'en udfyldt? <small>ellers 400</small></span><b>→</b>
-              <span class="os-2">Gem <small>saveStudents()</small></span><b>→</b>
-              <span class="os-2">Svar <small>200</small></span>
-            </div>
-            <pre class="code-xs"><code class="language-javascript">router.put("/:id", async (request, response) => {
+            <pre class="code-xs"><code class="language-javascript">router.post("/", async (request, response) => {
   const students = await loadStudents();
-  const student = students.find((student) => student.id === Number(request.params.id));
-  if (!student) {
-    response.status(404).json({ error: "Ingen studerende med det id findes." });
-    return;
-  }
+
   if (!request.body.name || !request.body.education) {
     response.status(400).json({ error: "name og education skal begge udfyldes." });
     return;
   }
-  student.name = request.body.name;
-  student.education = request.body.education;
+
+  const newStudent = {
+    id: Date.now(),
+    name: request.body.name,
+    education: request.body.education
+  };
+  students.push(newStudent);
   await saveStudents(students);
-  response.json(student);
+  response.status(201).json(newStudent);
 });</code></pre>
           </div>
-          <p class="bottom-line">404 før 400: findes studerenden ikke, er der ingen grund til at tjekke body'en.</p>
-        </section>
-
-        <section class="fill" data-accent="yellow">
-          <span class="eyebrow">Hvor grundigt?</span>
-          <h2>I dag: findes feltet, og er det ikke tomt?</h2>
-          <div class="stage">
-            <div class="ladder">
-              <div class="now"><b>1</b><strong>Findes feltet, og er det ikke tomt?</strong><code>!request.body.name</code><small>I dag</small></div>
-              <div><b>2</b><strong>Har det den rigtige type?</strong><code>typeof name !== "string"</code><small>Senere</small></div>
-              <div><b>3</b><strong>Længde og format</strong><span style="color: var(--muted); font-size: 19px">e-mail, telefonnummer, min./maks. længde</span><small>Senere</small></div>
-              <div><b>4</b><strong>Et valideringsbibliotek</strong><span style="color: var(--muted); font-size: 19px">fx zod eller express-validator</span><small>Større projekter</small></div>
-            </div>
-          </div>
-          <p class="bottom-line"><code>!request.body.name</code> er sand for <code>undefined</code>, <code>""</code> og <code>null</code>. Det fanger de fleste fejl.</p>
+          <p class="bottom-line">
+            I <code>PUT</code> står 400-tjekket efter 404-tjekket: findes studerenden ikke, er der intet at validere.
+          </p>
         </section>
 
         <section class="activity-slide" data-accent="yellow">
           <span class="eyebrow">Hands-on · Fejlhåndtering, trin 9-11</span>
           <h2>Tilføj validering til POST og PUT</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <a
+            class="exercise-link"
+            href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md"
+            target="_blank"
+            rel="noreferrer"
+            >Åbn øvelsen på GitHub ↗</a
+          >
           <ul class="checklist">
-            <li><code>POST /students</code>: <code>400</code>, hvis <code>name</code> eller <code>education</code> mangler</li>
+            <li>
+              <code>POST /students</code>: <code>400</code>, hvis <code>name</code> eller <code>education</code> mangler
+            </li>
             <li><code>PUT /students/:id</code>: samme tjek, efter 404-tjekket</li>
             <li>Gør det samme for <code>/teachers</code>. Her er det <code>name</code> og <code>subject</code></li>
           </ul>
-          <p class="bottom-line">Test med <code>{ "name": "Test" }</code>, og test bagefter, at en fuldt udfyldt body stadig virker.</p>
+          <p class="bottom-line">
+            Test med <code>{ "name": "Test" }</code>, og test bagefter, at en fuldt udfyldt body stadig virker.
+          </p>
         </section>
 
         <!-- ============ 05 TRY/CATCH ============ -->
@@ -749,11 +991,44 @@ to the client</code></pre>
           <span class="chapter-number">05</span>
           <span class="eyebrow">try / catch</span>
           <h2>Fang fejlen,<br />dér hvor den opstår</h2>
-          <p>Nogle fejl kan I ikke tjekke jer ud af med et <code>if</code>. Dem fanger I med <code>try</code>/<code>catch</code>.</p>
+          <p>
+            Nogle fejl kan I ikke tjekke jer ud af med et <code>if</code>. Dem fanger I med
+            <code>try</code>/<code>catch</code>.
+          </p>
+        </section>
+
+        <section class="fill tc-intro-slide" data-accent="orange">
+          <span class="eyebrow">Hvad · helt enkelt først</span>
+          <h2>Prøv det her. Går det galt, så fang det her.</h2>
+          <div class="stage">
+            <div class="split even">
+              <div class="tc-anatomy">
+                <div class="tc-block tc-try">
+                  <span class="tc-label">try · prøv det her</span>
+                  <pre><code class="language-javascript">try {
+  // kode, der måske fejler
+}</code></pre>
+                </div>
+                <div class="tc-block tc-catch">
+                  <span class="tc-label">catch · hvis det går galt, fang det her</span>
+                  <pre><code class="language-javascript">catch (error) {
+  // kører kun, hvis noget i try fejlede
+}</code></pre>
+                </div>
+                <pre class="tc-after"><code class="language-javascript">// programmet kører videre herfra</code></pre>
+              </div>
+              <div class="stack">
+                <article class="card card-good"><span>Går det godt</span><p>Al koden i <code>try</code> kører. <code>catch</code> springes over.</p></article>
+                <article class="card card-warn"><span>Går det galt</span><p>Resten af <code>try</code> springes over, og <code>catch</code> kører i stedet.</p></article>
+                <article class="card"><span><code>error</code></span><p>Selve fejlen. <code>error.message</code> er beskeden.</p></article>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Uden <code>try</code>/<code>catch</code> ryger fejlen bare videre. Med <code>try</code>/<code>catch</code> bestemmer I selv, hvad der skal ske.</p>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Hvad</span>
+          <span class="eyebrow">Samme idé i loadStudents()</span>
           <h2>Prøv. Går det galt, så plan B.</h2>
           <div class="stage">
             <div class="split" style="grid-template-columns: 0.9fr 1.1fr">
@@ -763,8 +1038,7 @@ to the client</code></pre>
   );
   return JSON.parse(data);
 } catch (error) {
-  // kører kun, hvis noget i try fejlede
-  console.log(error.message);
+  // hvad skal der stå her?
 }</code></pre>
               <div class="tracks">
                 <div class="track">
@@ -776,7 +1050,8 @@ to the client</code></pre>
                 <div class="track">
                   <strong>Filen mangler</strong>
                   <span class="bad"><code>readFile</code> ✗</span><b>→</b>
-                  <span class="skip"><code>JSON.parse</code></span><b>→</b>
+                  <span class="skip"><code>JSON.parse</code></span
+                  ><b>→</b>
                   <span class="catch"><code>catch (error)</code></span>
                 </div>
                 <div class="track">
@@ -788,62 +1063,102 @@ to the client</code></pre>
               </div>
             </div>
           </div>
-          <p class="bottom-line">Fejler en linje i <code>try</code>, springes resten over, og <code>catch</code> kører med selve fejlen i <code>error</code>.</p>
+          <p class="bottom-line">
+            Fejler en linje i <code>try</code>, springer JavaScript til <code>catch</code>. Et <code>if</code> kan ikke
+            se, om filen er i orden, før I prøver.
+          </p>
         </section>
 
-        <section class="fill" data-accent="orange">
-          <span class="eyebrow">Hvorfor</span>
-          <h2>Et <code>if</code> kan ikke se ind i filen</h2>
+        <section class="fill no-response-slide" data-accent="orange">
+          <span class="eyebrow">Men hvad skal der stå i catch?</span>
+          <h2>Data-modulet kan ikke svare klienten</h2>
           <div class="stage">
-            <div class="cards-2">
-              <article class="card card-bad">
-                <span>Filen mangler</span>
-                <pre><code class="language-text">Error: ENOENT: no such file or directory,
-open './data/students.json'</code></pre>
-                <p style="margin-top: 16px">Filen er omdøbt, slettet eller ligger et andet sted.</p>
-              </article>
-              <article class="card card-bad">
-                <span>Filen er ugyldig</span>
-                <pre><code class="language-text">SyntaxError: Expected ',' or '}' after
-property value in JSON at position 42</code></pre>
-                <p style="margin-top: 16px">Filen findes, men indholdet er ikke gyldig JSON. Fx et komma for meget.</p>
-              </article>
-            </div>
-          </div>
-          <p class="bottom-line">I ved først, om læsningen lykkes, når I prøver. Derfor <code>try</code>.</p>
-        </section>
-
-        <section class="fill" data-accent="orange">
-          <span class="eyebrow">Hvordan · data/students.js</span>
-          <h2>Fang den tekniske fejl, kast en tydelig</h2>
-          <div class="stage">
-            <div class="before-after">
-              <article>
-                <span>Før</span>
-                <pre class="code-sm"><code class="language-javascript">export async function loadStudents() {
-  const data = await fs.readFile(
-    "./data/students.json", "utf8"
-  );
-  return JSON.parse(data);
-}</code></pre>
-              </article>
-              <b aria-hidden="true">→</b>
-              <article>
-                <span>Efter</span>
-                <pre class="code-sm"><code class="language-javascript">export async function loadStudents() {
+            <div class="split even">
+              <div class="stack">
+                <span class="pre-label">Fristende, men virker ikke · data/students.js</span>
+                <pre class="code-xs"><code class="language-javascript">export async function loadStudents() {
   try {
     const data = await fs.readFile(
       "./data/students.json", "utf8"
     );
     return JSON.parse(data);
   } catch (error) {
-    throw new Error(
-      "Kunne ikke hente studerende. " +
-      "data/students.json mangler eller er ugyldig."
-    );
+    response.status(500).json({ error: "..." });
   }
 }</code></pre>
-              </article>
+                <div class="response-frame">
+                  <header>Terminalen</header>
+                  <pre><code class="language-text">ReferenceError: response is not defined</code></pre>
+                </div>
+              </div>
+              <div class="stack">
+                <article class="card card-good">
+                  <span><code>response</code> findes kun i routen</span>
+                  <pre><code class="language-javascript">router.get("/", async (request, response) => {</code></pre>
+                  <p style="margin-top: 12px">Express giver routen <code>request</code> og <code>response</code> som parametre.</p>
+                </article>
+                <article class="card card-bad">
+                  <span><code>loadStudents()</code> får ingen</span>
+                  <pre><code class="language-javascript">export async function loadStudents() {</code></pre>
+                  <p style="margin-top: 12px">Og det skal den heller ikke. Data-modulet handler om filer, ikke om HTTP.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Data-modulet kan ikke svare. Det kan kun sige "det gik galt" til den, der kaldte det. Det gør man med <code>throw</code>.</p>
+        </section>
+
+        <section class="fill throw-intro-slide" data-accent="orange">
+          <span class="eyebrow">Nyt · throw new Error()</span>
+          <h2>Kast jeres egen fejl</h2>
+          <div class="stage">
+            <div class="throw-anatomy">
+              <span class="ta-throw"><code>throw</code><small>stop her, og send fejlen op til den, der kaldte</small></span>
+              <span class="ta-new"><code>new Error(</code><small>opret en fejl</small></span>
+              <span class="ta-msg"><code>"Kunne ikke hente studerende"</code><small>beskeden, der bliver til <b>error.message</b></small></span>
+              <span class="ta-end"><code>);</code></span>
+            </div>
+            <div class="cards-3 throw-effects">
+              <article class="card card-bad"><span>1 · Funktionen stopper</span><p>Linjerne efter <code>throw</code> kører ikke.</p></article>
+              <article class="card card-warn"><span>2 · Fejlen ryger op</span><p>Til den, der kaldte funktionen.</p></article>
+              <article class="card card-good"><span>3 · Den kan fanges</span><p>Af den, der kaldte, med <code>catch (error)</code>. Beskeden står i <code>error.message</code>.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">I jeres API er det routen, der kalder <code>loadStudents()</code>. Så det er dér, fejlen lander.</p>
+        </section>
+
+        <section class="fill catch-throw-slide" data-accent="orange">
+          <span class="eyebrow">Løsningen · throw i catch</span>
+          <h2>Fang den tekniske fejl, kast en tydelig fejl</h2>
+          <div class="stage">
+            <div class="split even catch-throw">
+              <div>
+                <span class="pre-label">data/students.js</span>
+                <pre class="code-xs"><code class="language-javascript">export async function loadStudents() {
+  try {
+    const data = await fs.readFile(
+      "./data/students.json", "utf8"
+    );
+    return JSON.parse(data);
+  } catch (error) {
+    throw new Error("Kunne ikke hente studerende");
+  }
+}</code></pre>
+              </div>
+              <div class="stack">
+                <div>
+                  <span class="pre-label">routes/students.js · den, der kaldte</span>
+                  <pre class="code-xs"><code class="language-javascript">router.get("/", async (request, response) => {
+  const students = await loadStudents(); // ← fejlen lander her
+  response.json(students);               // kører ikke
+});</code></pre>
+                </div>
+                <ol class="problem-list">
+                  <li><b>catch fanger den tekniske fejl</b><code>ENOENT</code> eller <code>SyntaxError</code></li>
+                  <li><b>throw kaster en ny, tydelig fejl</b>Den ryger ud af <code>loadStudents()</code></li>
+                  <li><b>Routen, der kaldte, får den</b>Routen stopper, og Express tager over</li>
+                </ol>
+              </div>
             </div>
           </div>
           <p class="bottom-line"><b>Encapsulation:</b> routen skal ikke kende <code>ENOENT</code>. Den får samme besked, også den dag data ligger i en database.</p>
@@ -851,13 +1166,13 @@ property value in JSON at position 42</code></pre>
 
         <section class="fill" data-accent="orange">
           <span class="eyebrow">Hvor ender fejlen?</span>
-          <h2>Data-modulet kender ikke <code>response</code></h2>
+          <h2>Fra <code>throw</code> til et svar til klienten</h2>
           <div class="stage">
             <div class="throw-path">
               <article class="tp-origin">
                 <span>1 · Opdager</span>
                 <b>data/students.js</b>
-                <p><code>throw new Error("Kunne ikke hente studerende...")</code></p>
+                <p><code>throw new Error("Kunne ikke hente studerende")</code></p>
               </article>
               <i>→<small>kastes op</small></i>
               <article>
@@ -879,38 +1194,35 @@ property value in JSON at position 42</code></pre>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Routen behøver ikke selv <code>try</code>/<code>catch</code>. Express 5 sender fejl fra <code>async</code> routes videre af sig selv.</p>
-        </section>
-
-        <section class="fill" data-accent="orange">
-          <span class="eyebrow">Hvornår, og hvornår ikke</span>
-          <h2>Brug <code>try</code>/<code>catch</code>, hvor I kan gøre noget ved fejlen</h2>
-          <div class="stage">
-            <div class="cards-2">
-              <article class="card card-good">
-                <span>Gør</span>
-                <p>Omkring det, der kan fejle, og hvor I kan gøre noget: give en bedre besked, prøve igen eller bruge en standardværdi.</p>
-                <p><code>loadStudents()</code>, <code>loadTeachers()</code>, <code>loadMessages()</code>, <code>loadAnswers()</code></p>
-              </article>
-              <article class="card card-bad">
-                <span>Undgå</span>
-                <p>En tom <code>catch</code>. Fejlen forsvinder, <code>loadStudents()</code> returnerer <code>undefined</code>, og det crasher et andet sted, der er sværere at finde.</p>
-                <pre style="margin-top: 14px"><code class="language-javascript">} catch (error) {}   // fejlen er væk</code></pre>
-                <p style="margin-top: 14px"><code>try</code>/<code>catch</code> i hver route "for en sikkerheds skyld".</p>
-              </article>
-            </div>
-          </div>
-          <p class="bottom-line">På klienten møder I <code>try</code>/<code>catch</code> igen, omkring <code>fetch()</code>.</p>
+          <p class="bottom-line">
+            Routen behøver ikke selv <code>try</code>/<code>catch</code>. Express 5 sender fejl fra
+            <code>async</code> routes videre af sig selv.
+          </p>
         </section>
 
         <section class="activity-slide" data-accent="orange">
           <span class="eyebrow">Hands-on · Fejlhåndtering, trin 12-13</span>
           <h2>Tilføj try/catch til loadX()</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <a
+            class="exercise-link"
+            href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md"
+            target="_blank"
+            rel="noreferrer"
+            >Åbn øvelsen på GitHub ↗</a
+          >
           <ul class="checklist">
-            <li>Pak <code>fs.readFile()</code> og <code>JSON.parse()</code> i <code>loadStudents()</code> ind i <code>try</code>/<code>catch</code></li>
-            <li>Kast en ny, tydelig fejl på dansk i <code>catch</code></li>
-            <li>Omdøb <code>data/students.json</code>, og send <code>GET /students</code>. Øverst på fejlsiden står nu jeres egen besked</li>
+            <li>
+              Pak <code>fs.readFile()</code> og <code>JSON.parse()</code> i <code>loadStudents()</code> ind i
+              <code>try</code>/<code>catch</code>
+            </li>
+            <li>
+              Kast en ny, tydelig fejl på dansk i <code>catch</code>. Aldrig en tom <code>catch</code>: så forsvinder
+              fejlen
+            </li>
+            <li>
+              Omdøb <code>data/students.json</code>, og send <code>GET /students</code>. Øverst på fejlsiden står nu
+              jeres egen besked
+            </li>
             <li>Gør det samme for <code>loadTeachers()</code></li>
           </ul>
           <p class="bottom-line">Express' HTML-fejlside er her stadig. Den fjerner I i næste kapitel.</p>
@@ -928,20 +1240,27 @@ property value in JSON at position 42</code></pre>
         <section class="fill" data-accent="cyan">
           <span class="eyebrow">Hvad</span>
           <h2>Middleware kører mellem request og response</h2>
-          <p class="concept-intro"><b>Middleware</b> er en funktion, som Express kører på vejen fra request til route. Fælles arbejde løses ét sted, i stedet for i hver route.</p>
+          <p class="concept-intro">
+            <b>Middleware</b> er en funktion, som Express kører på vejen fra request til route. Fælles arbejde løses ét
+            sted, i stedet for i hver route.
+          </p>
           <div class="stage">
             <div class="pipe">
               <span class="endpoint-box">request</span><b>→</b>
-              <span class="mw">express.json()<small>læser body'en ind i <code>request.body</code></small></span><b>→</b>
-              <span class="mw">cors()<small>sætter CORS-headers (AMAbot)</small></span><b>→</b>
-              <span>studentsRouter<small>jeres routes</small></span><b>→</b>
+              <span class="mw"
+                >express.json()<small>læser body'en ind i <code>request.body</code></small></span
+              ><b>→</b> <span class="mw">cors()<small>sætter CORS-headers (AMAbot)</small></span
+              ><b>→</b> <span>studentsRouter<small>jeres routes</small></span
+              ><b>→</b>
               <span class="endpoint-box">response</span>
             </div>
             <pre style="margin-top: 36px"><code class="language-javascript">app.use(express.json());   // middleware
 app.use(cors());           // middleware
 app.use("/students", studentsRouter);</code></pre>
           </div>
-          <p class="bottom-line">I har brugt middleware siden første REST-API: <code>app.use()</code> er måden, man tilføjer den på.</p>
+          <p class="bottom-line">
+            I har brugt middleware siden første REST-API: <code>app.use()</code> er måden, man tilføjer den på.
+          </p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -964,9 +1283,18 @@ GET /students/999</code></pre>
                 </div>
               </div>
               <div class="stack">
-                <article class="card"><span><code>request</code>, <code>response</code></span><p>De samme objekter, som jeres routes får.</p></article>
-                <article class="card"><span><code>next()</code></span><p>"Send videre til den næste i rækken."</p></article>
-                <article class="card card-warn"><span>Glemmer I <code>next()</code></span><p>Og svarer ikke? Så hænger requesten, og klienten venter for evigt.</p></article>
+                <article class="card">
+                  <span><code>request</code>, <code>response</code></span>
+                  <p>De samme objekter, som jeres routes får.</p>
+                </article>
+                <article class="card">
+                  <span><code>next()</code></span>
+                  <p>"Send videre til den næste i rækken."</p>
+                </article>
+                <article class="card card-warn">
+                  <span>Glemmer I <code>next()</code></span>
+                  <p>Og svarer ikke? Så hænger requesten, og klienten venter for evigt.</p>
+                </article>
               </div>
             </div>
           </div>
@@ -982,77 +1310,65 @@ GET /students/999</code></pre>
   response.status(500).json({ error: error.message });   // kort besked, til klienten
 });</code></pre>
             <div class="cards-3" style="margin-top: 30px">
-              <article class="card"><span>Fire parametre</span><p><code>error</code> først. Det er sådan, Express kender forskel på den og en almindelig middleware.</p></article>
-              <article class="card"><span>Kun ved fejl</span><p>Kaldes, når en route eller et modul har kastet en fejl. Ellers springes den over.</p></article>
-              <article class="card"><span>Står sidst</span><p>Nederst i <code>server.js</code>, efter routerne. Den fanger kun fejl fra det, der står over den.</p></article>
+              <article class="card">
+                <span>Fire parametre</span>
+                <p>
+                  <code>error</code> først. Det er sådan, Express kender forskel på den og en almindelig middleware.
+                </p>
+              </article>
+              <article class="card">
+                <span>Kun ved fejl</span>
+                <p>Kaldes, når en route eller et modul har kastet en fejl. Ellers springes den over.</p>
+              </article>
+              <article class="card">
+                <span>Står sidst</span>
+                <p>Nederst i <code>server.js</code>, efter routerne. Den fanger kun fejl fra det, der står over den.</p>
+              </article>
             </div>
           </div>
-          <p class="bottom-line"><code>next</code> skal stå der, selvom I ikke bruger den. Ellers har funktionen kun tre parametre.</p>
+          <p class="bottom-line">
+            <code>next</code> skal stå der, selvom I ikke bruger den. Ellers har funktionen kun tre parametre.
+          </p>
         </section>
 
         <section class="fill" data-accent="cyan">
           <span class="eyebrow">Før / efter</span>
-          <h2>Samme ødelagte datafil, to forskellige svar</h2>
+          <h2>Ét JSON-svar, i samme form for alle fejl</h2>
           <div class="stage">
-            <div class="before-after">
+            <div class="split even merged-errors">
+              <div class="response-frame is-html">
+                <header>Uden · GET /students <span class="sc sc-5">500</span> text/html</header>
+                <pre><code class="language-text">Error: Kunne ikke hente studerende
+    at loadStudents (file:///Users/aisha/students-rest-api/data/students.js:9:11)</code></pre>
+              </div>
+              <div class="response-frame">
+                <header>Med · GET /students <span class="sc sc-5">500</span> application/json</header>
+                <pre><code class="language-json">{ "error": "Kunne ikke hente studerende" }</code></pre>
+              </div>
+            </div>
+            <div class="shape-grid" style="margin-top: 30px">
               <article>
-                <span>Uden fejl-middleware</span>
-                <div class="response-frame is-html">
-                  <header>GET /students <span class="sc sc-5">500</span> text/html</header>
-                  <pre><code class="language-text">Error: Kunne ikke hente studerende. data/students.json mangler eller er ugyldig.
-    at loadStudents (file:///Users/aisha/students-rest-api/data/students.js:9:11)
-    at async file:///Users/aisha/.../routes/students.js:8:20</code></pre>
-                </div>
+                <span class="sc sc-4">404</span><small><code>GET /students/999</code></small>
+                <pre><code class="language-json">{ "error": "Ingen studerende med det id findes." }</code></pre>
               </article>
-              <b aria-hidden="true">→</b>
               <article>
-                <span>Med fejl-middleware</span>
-                <div class="response-frame">
-                  <header>GET /students <span class="sc sc-5">500</span> application/json</header>
-                  <pre><code class="language-json">{
-  "error": "Kunne ikke hente studerende. data/students.json mangler eller er ugyldig."
-}</code></pre>
-                </div>
+                <span class="sc sc-4">400</span><small><code>POST { "name": "Test" }</code></small>
+                <pre><code class="language-json">{ "error": "name og education skal begge udfyldes." }</code></pre>
+              </article>
+              <article>
+                <span class="sc sc-4">404</span><small><code>GET /noget-der-ikke-findes</code></small>
+                <pre><code class="language-json">{ "error": "Ukendt sti." }</code></pre>
+              </article>
+              <article class="s5">
+                <span class="sc sc-5">500</span><small>Datafilen er i stykker</small>
+                <pre><code class="language-json">{ "error": "Kunne ikke hente studerende" }</code></pre>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Klienten får JSON, den kan læse. Jeres stack trace står stadig i terminalen, hvor kun I ser den.</p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Én form for alle fejl</span>
-          <h2>Alle fejl fra API'et ser ens ud</h2>
-          <div class="stage">
-            <div class="shape-grid">
-              <article><span class="sc sc-4">404</span><small><code>GET /students/999</code></small><pre><code class="language-json">{ "error": "Ingen studerende med det id findes." }</code></pre></article>
-              <article><span class="sc sc-4">400</span><small><code>POST { "name": "Test" }</code></small><pre><code class="language-json">{ "error": "name og education skal begge udfyldes." }</code></pre></article>
-              <article><span class="sc sc-4">404</span><small><code>GET /noget-der-ikke-findes</code></small><pre><code class="language-json">{ "error": "Ukendt sti." }</code></pre></article>
-              <article class="s5"><span class="sc sc-5">500</span><small>Datafilen er i stykker</small><pre><code class="language-json">{ "error": "Kunne ikke hente studerende. ..." }</code></pre></article>
-            </div>
-          </div>
-          <p class="bottom-line">Frontenden skal kun kende én måde at læse en fejl på: statuskoden og <code>data.error</code>.</p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">To slags 404</span>
-          <h2>404-tjek i routen eller 404-catch-all?</h2>
-          <div class="stage">
-            <div class="cards-2">
-              <article class="card">
-                <span><code>GET /students/999</code></span>
-                <p>Stien passer på <code>router.get("/:id")</code>. Id'et findes bare ikke.</p>
-                <p><b>Routens eget 404-tjek</b> svarer. Kapitel 3.</p>
-              </article>
-              <article class="card card-warn">
-                <span><code>GET /noget-der-ikke-findes</code></span>
-                <p>Ingen route passer. Requesten falder igennem til bunden af <code>server.js</code>.</p>
-                <pre style="margin-top: 14px"><code class="language-javascript">app.use((request, response) => {
-  response.status(404).json({ error: "Ukendt sti." });
-});</code></pre>
-              </article>
-            </div>
-          </div>
-          <p class="bottom-line">Catch-all'en er en almindelig middleware med to parametre. Den er ikke en fejl-middleware, for der er ikke kastet nogen fejl.</p>
+          <p class="bottom-line">
+            Frontenden læser alle fejl på samme måde: <code>data.error</code>. <b>DRY:</b> én fejl-middleware i stedet
+            for <code>try</code>/<code>catch</code> i ti routes.
+          </p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -1060,7 +1376,9 @@ GET /students/999</code></pre>
           <h2>Express læser <code>server.js</code> oppefra</h2>
           <div class="stage">
             <div class="split code-wide">
-              <pre class="code-sm"><code class="language-javascript">app.use(express.json());                // 1 før alle routes
+              <pre
+                class="code-sm"
+              ><code class="language-javascript">app.use(express.json());                // 1 før alle routes
 
 app.use("/students", studentsRouter);   // 2 jeres routes
 app.use("/teachers", teachersRouter);
@@ -1074,64 +1392,72 @@ app.use((error, request, response, next) => {  // 4 altid sidst
   response.status(500).json({ error: error.message });
 });</code></pre>
               <div class="order-lanes">
-                <div class="lane-ok"><code>GET /students/1</code><p>Rammer 2 og svarer. Når aldrig længere ned.</p></div>
-                <div class="lane-404"><code>GET /noget-der-ikke-findes</code><p>Falder forbi 2 og lander i 3.</p></div>
-                <div class="lane-500"><code>loadStudents()</code> kaster<p>Springer fra 2 direkte til 4.</p></div>
+                <div class="lane-ok">
+                  <code>GET /students/1</code>
+                  <p>Rammer 2 og svarer. Når aldrig længere ned.</p>
+                </div>
+                <div class="lane-404">
+                  <code>GET /noget-der-ikke-findes</code>
+                  <p>Falder forbi 2 og lander i 3.</p>
+                </div>
+                <div class="lane-500">
+                  <code>loadStudents()</code> kaster
+                  <p>Springer fra 2 direkte til 4.</p>
+                </div>
               </div>
             </div>
           </div>
-          <p class="bottom-line">Én catch-all og én fejl-middleware, uanset hvor mange routere I har.</p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Hvem gør hvad</span>
-          <h2>Når datafilen er i stykker</h2>
-          <div class="stage">
-            <div class="cards-3">
-              <article class="card card-bad"><span><code>data/students.js</code></span><p><b>Opdager og beskriver</b> fejlen.</p><p><code>throw new Error("Kunne ikke hente studerende...")</code></p></article>
-              <article class="card"><span><code>routes/students.js</code></span><p><b>Gør ingenting.</b></p><p>Handler stadig kun om den lykkelige vej.</p></article>
-              <article class="card card-good"><span>Fejl-middleware</span><p><b>Svarer</b> klienten.</p><p><code>500</code> + <code>{ error }</code>, samme form som alle andre fejl.</p></article>
-            </div>
-          </div>
-          <p class="bottom-line"><b>SoC</b>: tre ansvar, tre steder. <b>DRY</b>: uden fejl-middleware skulle I have <code>try</code>/<code>catch</code> i ti routes.</p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Den fejl, ingen havde forudset</span>
-          <h2><code>POST /students</code> helt uden body</h2>
-          <div class="stage">
-            <div class="path-chain">
-              <article><b>Request</b><small>Ingen body. Heller ikke <code>{}</code></small></article>
-              <article><b>express.json()</b><small>Intet at læse. <code>request.body</code> er <code>undefined</code></small></article>
-              <article class="path-error"><b>400-tjekket</b><small><code>!request.body.name</code> crasher, før det når at tjekke noget</small></article>
-              <article><b>Express</b><small><code>TypeError: Cannot read properties of undefined (reading 'name')</code></small></article>
-              <article><b>Fejl-middleware</b><small><span class="sc sc-5">500</span> + JSON i stedet for Express' fejlside</small></article>
-            </div>
-          </div>
-          <p class="bottom-line">Det er derfor, I har en fejl-middleware: den fanger også de fejl, I ikke har tænkt på.</p>
+          <p class="bottom-line">
+            Catch-all'en (3) har to parametre: der er ingen fejl, bare ingen route. Fejl-middlewaren (4) har fire.
+          </p>
         </section>
 
         <section class="recap-slide" data-accent="cyan">
           <span class="eyebrow">Vejen igennem koden · når noget går galt</span>
           <h2>Sådan finder en fejl vej ud af API'et</h2>
           <div class="recap-chain">
-            <span>Request</span><b>→</b><span>server.js</span><b>→</b><span>routes/students.js</span><b>→</b><span style="border-color: var(--red); color: var(--red)">data/students.js ✗</span><b>→</b><span>fejl-middleware</span><b>→</b><span>500 + JSON</span>
+            <span>Request</span><b>→</b><span>server.js</span><b>→</b><span>routes/students.js</span><b>→</b
+            ><span style="border-color: var(--red); color: var(--red)">data/students.js ✗</span><b>→</b
+            ><span>fejl-middleware</span><b>→</b><span>500 + JSON</span>
           </div>
-          <p class="bottom-line">Samme vej ind som altid. Fejlen springer bare direkte fra data-modulet til fejl-middlewaren.</p>
+          <p class="bottom-line">
+            Samme vej ind som altid. Fejlen springer bare direkte fra data-modulet til fejl-middlewaren.
+          </p>
         </section>
 
         <section class="activity-slide" data-accent="cyan">
           <span class="eyebrow">Hands-on · Fejlhåndtering, trin 14-15 · derefter øvelse 9, Del 1</span>
           <h2>Fejl-middleware og 404-catch-all</h2>
           <div class="exercise-links">
-            <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md" target="_blank" rel="noreferrer">Fejlhåndtering ↗</a>
-            <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md" target="_blank" rel="noreferrer">Øvelse 9 · AMAbot ↗</a>
+            <a
+              class="exercise-link"
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md"
+              target="_blank"
+              rel="noreferrer"
+              >Fejlhåndtering ↗</a
+            >
+            <a
+              class="exercise-link"
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md"
+              target="_blank"
+              rel="noreferrer"
+              >Øvelse 9 · AMAbot ↗</a
+            >
           </div>
           <ul class="checklist">
-            <li>Tilføj en fejl-middleware nederst i <code>server.js</code>. Omdøb datafilen: nu skal I få <code>500</code> som JSON</li>
+            <li>
+              Tilføj en fejl-middleware nederst i <code>server.js</code>. Omdøb datafilen: nu skal I få
+              <code>500</code> som JSON
+            </li>
             <li>Send <code>POST /students</code> helt uden body. Også <code>500</code> som JSON</li>
-            <li>Tilføj en 404-catch-all over fejl-middlewaren. <code>GET /noget-der-ikke-findes</code> giver <code>404</code> som JSON</li>
-            <li>Overfør derefter hele mønsteret til <code>/messages</code> og <code>/answers</code> i jeres AMAbot, i eget tempo</li>
+            <li>
+              Tilføj en 404-catch-all over fejl-middlewaren. <code>GET /noget-der-ikke-findes</code> giver
+              <code>404</code> som JSON
+            </li>
+            <li>
+              Overfør derefter hele mønsteret til <code>/messages</code> og <code>/answers</code> i jeres AMAbot, i eget
+              tempo
+            </li>
           </ul>
           <p class="bottom-line">Rækkefølgen: routerne, så 404-catch-all'en, og fejl-middlewaren til sidst.</p>
         </section>
@@ -1156,23 +1482,59 @@ app.use((error, request, response, next) => {  // 4 altid sidst
               <span class="o-path">/index.html<small>sti · ikke en del</small></span>
             </div>
             <div class="origin-table">
-              <div class="same"><code>http://127.0.0.1:5500/about.html</code><b>Samme</b><span>Kun stien er anderledes</span></div>
-              <div class="diff"><code>http://localhost:5500</code><b>Anden</b><span>Værten er anderledes, selvom det er samme computer</span></div>
-              <div class="diff"><code>http://127.0.0.1:3000</code><b>Anden</b><span>Porten er anderledes. Det er jeres API</span></div>
-              <div class="diff"><code>https://127.0.0.1:5500</code><b>Anden</b><span>Protokollen er anderledes</span></div>
+              <div class="same">
+                <code>http://127.0.0.1:5500/about.html</code><b>Samme</b><span>Kun stien er anderledes</span>
+              </div>
+              <div class="diff">
+                <code>http://localhost:5500</code><b>Anden</b
+                ><span>Værten er anderledes, selvom det er samme computer</span>
+              </div>
+              <div class="diff">
+                <code>http://127.0.0.1:3000</code><b>Anden</b><span>Porten er anderledes. Det er jeres API</span>
+              </div>
+              <div class="diff">
+                <code>https://127.0.0.1:5500</code><b>Anden</b><span>Protokollen er anderledes</span>
+              </div>
             </div>
           </div>
-          <p class="bottom-line">Browseren sammenligner origins som tekst. Frontend på <code>:5500</code> og API på <code>:3000</code> er altid to origins.</p>
+          <p class="bottom-line">
+            Browseren sammenligner origins som tekst. Frontend på <code>:5500</code> og API på <code>:3000</code> er
+            altid to origins.
+          </p>
         </section>
 
         <section class="fill" data-accent="green">
           <span class="eyebrow">Same-origin policy og CORS</span>
           <h2>Serveren svarer altid. Browseren bestemmer.</h2>
           <div class="stage seq">
-            <svg viewBox="0 0 1384 470" role="img" aria-label="Sekvensdiagram: JavaScript kalder fetch, browseren sender request med Origin-header, serveren svarer med Access-Control-Allow-Origin, browseren tjekker headeren">
+            <svg
+              viewBox="0 0 1384 470"
+              role="img"
+              aria-label="Sekvensdiagram: JavaScript kalder fetch, browseren sender request med Origin-header, serveren svarer med Access-Control-Allow-Origin, browseren tjekker headeren"
+            >
               <defs>
-                <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z" /></marker>
-                <marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="arrowhead-back" d="M0,0 L10,5 L0,10 z" /></marker>
+                <marker
+                  id="ah"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="8"
+                  markerHeight="8"
+                  orient="auto-start-reverse"
+                >
+                  <path class="arrowhead" d="M0,0 L10,5 L0,10 z" />
+                </marker>
+                <marker
+                  id="ahb"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="8"
+                  markerHeight="8"
+                  orient="auto-start-reverse"
+                >
+                  <path class="arrowhead-back" d="M0,0 L10,5 L0,10 z" />
+                </marker>
               </defs>
               <rect class="lane-head" x="40" y="0" width="300" height="74" rx="12" />
               <text class="lane-title" x="190" y="32" text-anchor="middle">JavaScript på siden</text>
@@ -1188,7 +1550,9 @@ app.use((error, request, response, next) => {  // 4 altid sidst
               <line class="lane-line" x1="1194" y1="80" x2="1194" y2="460" />
 
               <text class="step-num" x="200" y="120">1</text>
-              <text class="msg-label" x="441" y="120" text-anchor="middle">fetch("http://localhost:3000/messages")</text>
+              <text class="msg-label" x="441" y="120" text-anchor="middle">
+                fetch("http://localhost:3000/messages")
+              </text>
               <line class="msg" x1="190" y1="136" x2="686" y2="136" marker-end="url(#ah)" />
 
               <text class="step-num" x="702" y="190">2</text>
@@ -1209,7 +1573,10 @@ app.use((error, request, response, next) => {  // 4 altid sidst
               <line class="msg msg-back" x1="542" y1="404" x2="196" y2="404" marker-end="url(#ahb)" />
             </svg>
           </div>
-          <p class="bottom-line"><b>Same-origin policy:</b> browseren blokerer som udgangspunkt <code>fetch()</code> på tværs af origins. CORS er serverens måde at give lov.</p>
+          <p class="bottom-line">
+            <b>Same-origin policy:</b> browseren blokerer som udgangspunkt <code>fetch()</code> på tværs af origins.
+            CORS er serverens måde at give lov.
+          </p>
         </section>
 
         <section class="fill" data-accent="green">
@@ -1217,17 +1584,26 @@ app.use((error, request, response, next) => {  // 4 altid sidst
           <h2><code>cors()</code> uden argumenter tillader alle</h2>
           <div class="stage">
             <div class="split even">
-              <div class="stack">
+              <div class="stack" style="gap: 14px">
                 <pre><code class="language-javascript">app.use(cors());</code></pre>
                 <div class="response-frame">
                   <header>Response-header, uanset hvem der spørger</header>
                   <pre><code class="language-http">Access-Control-Allow-Origin: *</code></pre>
                 </div>
-                <p style="color: var(--muted); font-size: 23px"><code>*</code> betyder alle origins. Enhver hjemmeside, en bruger besøger, kan kalde jeres API fra brugerens browser og læse svaret.</p>
+                <span class="pre-label" style="margin: 4px 0 -8px">Demo · konsollen på http://localhost:5500</span>
+                <pre><code class="language-javascript">fetch("http://localhost:3000/messages")
+  .then((r) => r.json()).then(console.log);</code></pre>
+                <p style="color: var(--muted); font-size: 22px">
+                  Virker, for <code>*</code> betyder alle origins. Thunder Client virker altid: den er ikke en browser.
+                </p>
               </div>
               <article class="card card-warn">
                 <span>Diskutér to og to</span>
-                <p><b>Hvad kunne en fremmed hjemmeside gøre med jeres <code>/messages</code> og <code>/answers</code>?</b></p>
+                <p>
+                  <b
+                    >Hvad kunne en fremmed hjemmeside gøre med jeres <code>/messages</code> og <code>/answers</code>?</b
+                  >
+                </p>
                 <ul class="answers" style="margin-top: 14px; padding-left: 1em">
                   <li class="fragment">Læse alle beskeder: <code>GET /messages</code></li>
                   <li class="fragment">Slette dem: <code>DELETE /messages</code></li>
@@ -1236,21 +1612,9 @@ app.use((error, request, response, next) => {  // 4 altid sidst
               </article>
             </div>
           </div>
-          <p class="bottom-line"><code>/students</code> har aldrig fået <code>cors()</code>. Dér blokerer browseren allerede.</p>
-        </section>
-
-        <section class="fill" data-accent="green">
-          <span class="eyebrow">Demo · fremmed origin, samme computer</span>
-          <h2>Samme side, anden origin</h2>
-          <div class="stage">
-            <span class="pre-label">DevTools-konsollen på http://localhost:5500</span>
-            <pre><code class="language-javascript">fetch("http://localhost:3000/messages").then((r) => r.json()).then(console.log);</code></pre>
-            <div class="cards-2" style="margin-top: 28px">
-              <article class="card card-bad"><span>Browseren · lige nu</span><p>Virker. <code>cors()</code> tillader alle origins, også en side, I ikke selv har bestemt.</p></article>
-              <article class="card"><span>Thunder Client · altid</span><p>Virker, uanset <code>cors()</code>-opsætningen. Thunder Client er ikke en browser, så ingen håndhæver CORS.</p></article>
-            </div>
-          </div>
-          <p class="bottom-line">En vilkårlig offentlig side virker også, men Chrome spørger om adgang til lokalnetværket. Det forstyrrer pointen.</p>
+          <p class="bottom-line">
+            <code>/students</code> har aldrig fået <code>cors()</code>. Dér blokerer browseren allerede.
+          </p>
         </section>
 
         <section class="fill" data-accent="green">
@@ -1267,7 +1631,9 @@ app.use((error, request, response, next) => {  // 4 altid sidst
               <b aria-hidden="true">→</b>
               <article>
                 <span>Efter · kun jeres frontend</span>
-                <pre class="code-sm"><code class="language-javascript">app.use(cors({ origin: "http://127.0.0.1:5500" }));
+                <pre
+                  class="code-sm"
+                ><code class="language-javascript">app.use(cors({ origin: "http://127.0.0.1:5500" }));
 
 // Access-Control-Allow-Origin: http://127.0.0.1:5500</code></pre>
               </article>
@@ -1278,40 +1644,34 @@ app.use((error, request, response, next) => {  // 4 altid sidst
 The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' that is not equal to the supplied origin.</code></pre>
             </div>
           </div>
-          <p class="bottom-line"><code>http://127.0.0.1:5500</code> er Live Servers standardadresse. Kører jeres frontend et andet sted, så brug den.</p>
-        </section>
-
-        <section class="fill" data-accent="green">
-          <span class="eyebrow">Præcist</span>
-          <h2>Hvad CORS er, og hvad det ikke er</h2>
-          <div class="stage">
-            <div class="cards-2">
-              <article class="card card-good">
-                <span>Beskytter</span>
-                <p>Jeres brugere mod, at fremmede hjemmesider bruger jeres API gennem deres browser.</p>
-                <p>Uden at jeres egen frontend mærker noget.</p>
-              </article>
-              <article class="card card-bad">
-                <span>Beskytter ikke</span>
-                <p>Mod Thunder Client, <code>curl</code> eller et script. Serveren svarer dem stadig.</p>
-                <p>Det er ikke login eller adgangskontrol. <code>/answers</code> er stadig åben for alle, der kender URL'en.</p>
-              </article>
-            </div>
-          </div>
-          <p class="bottom-line">CORS er en regel i browseren, ikke en lås på serveren.</p>
+          <p class="bottom-line">
+            CORS er en regel i browseren, ikke en lås. Thunder Client og <code>curl</code> får stadig svar, og
+            <code>/answers</code> er stadig åben.
+          </p>
         </section>
 
         <section class="activity-slide" data-accent="green">
           <span class="eyebrow">Hands-on · Øvelse 9, trin 6</span>
           <h2>Stram cors() op i AMAbotten</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <a
+            class="exercise-link"
+            href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md"
+            target="_blank"
+            rel="noreferrer"
+            >Åbn øvelsen på GitHub ↗</a
+          >
           <ul class="checklist">
             <li>Prøv først: <code>fetch()</code> fra <code>http://localhost:5500</code>. Det virker</li>
-            <li>Ret til <code>cors({ origin: "http://127.0.0.1:5500" })</code>. Ingen <code>cors()</code> endnu? Så <code>npm install cors</code> først</li>
+            <li>
+              Ret til <code>cors({ origin: "http://127.0.0.1:5500" })</code>. Ingen <code>cors()</code> endnu? Så
+              <code>npm install cors</code> først
+            </li>
             <li>Gentag <code>fetch()</code>. Nu skal I få en CORS-fejl i konsollen</li>
             <li>Har I en frontend fra øvelse 8? Tjek, at den stadig virker</li>
           </ul>
-          <p class="bottom-line">Test også i Thunder Client med headeren <code>Origin: http://example.com</code>. Serveren svarer stadig.</p>
+          <p class="bottom-line">
+            Test også i Thunder Client med headeren <code>Origin: http://example.com</code>. Serveren svarer stadig.
+          </p>
         </section>
 
         <!-- ============ 08 XSS ============ -->
@@ -1327,13 +1687,32 @@ The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' tha
           <span class="eyebrow">Demo · angrebet</span>
           <h2>Et spørgsmål, der i virkeligheden er HTML</h2>
           <div class="stage">
-            <div class="payload"><small>Spørgsmålet</small><code>&lt;img src=x onerror="alert('hacked')"&gt;</code></div>
+            <div class="payload">
+              <small>Spørgsmålet</small><code>&lt;img src=x onerror="alert('hacked')"&gt;</code>
+            </div>
             <div class="xss-flow">
-              <article><span>1 · Thunder Client</span><b>POST /messages</b><p>Sender teksten som <code>question</code></p></article>
-              <article><span>2 · Serveren</span><b>Gemmer uredigeret</b><p>Tjekker kun, at spørgsmålet ikke er tomt</p></article>
-              <article><span>3 · messages.json</span><b>Rå HTML på disken</b><p><code>"text": "&lt;img src=x onerror=...&gt;"</code></p></article>
-              <article><span>4 · Frontenden</span><b><code style="font-size: 17px">insertAdjacentHTML()</code></b><p>Læser teksten som HTML, ikke som tekst</p></article>
-              <article class="xss-hit"><span>5 · Browseren</span><b>Koden kører</b><p>Billedet <code>x</code> fejler med vilje, så <code>onerror</code> kører <code>alert('hacked')</code></p></article>
+              <article>
+                <span>1 · Thunder Client</span><b>POST /messages</b>
+                <p>Sender teksten som <code>question</code></p>
+              </article>
+              <article>
+                <span>2 · Serveren</span><b>Gemmer uredigeret</b>
+                <p>Tjekker kun, at spørgsmålet ikke er tomt</p>
+              </article>
+              <article>
+                <span>3 · messages.json</span><b>Rå HTML på disken</b>
+                <p><code>"text": "&lt;img src=x onerror=...&gt;"</code></p>
+              </article>
+              <article>
+                <span>4 · Frontenden</span><b><code style="font-size: 17px">insertAdjacentHTML()</code></b>
+                <p>Læser teksten som HTML, ikke som tekst</p>
+              </article>
+              <article class="xss-hit">
+                <span>5 · Browseren</span><b>Koden kører</b>
+                <p>
+                  Billedet <code>x</code> fejler med vilje, så <code>onerror</code> kører <code>alert('hacked')</code>
+                </p>
+              </article>
             </div>
           </div>
           <p class="bottom-line">Beskeden er gemt på serveren. Det sker igen for alle, der åbner siden, hver gang.</p>
@@ -1344,9 +1723,27 @@ The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' tha
           <h2>Cross-Site Scripting (XSS)</h2>
           <div class="stage">
             <div class="cards-3">
-              <article class="card"><span>Hvad</span><p>En brugers tekst bliver udført som <b>kode i en andens browser</b>, fordi den aldrig blev renset for HTML.</p></article>
-              <article class="card card-warn"><span>Hvorfor farligt</span><p><code>alert()</code> er harmløs. Samme hul kan køre et hvilket som helst script: læse alt på siden, sende requests i brugerens navn, eller sende brugeren videre til en falsk side.</p></article>
-              <article class="card card-bad"><span>Værst i AMAbotten</span><p>Svaret. <code>/answers</code> har ingen adgangskontrol, så en plantet svarregel rammer <b>alle</b>, der stiller et matchende spørgsmål.</p></article>
+              <article class="card">
+                <span>Hvad</span>
+                <p>
+                  En brugers tekst bliver udført som <b>kode i en andens browser</b>, fordi den aldrig blev renset for
+                  HTML.
+                </p>
+              </article>
+              <article class="card card-warn">
+                <span>Hvorfor farligt</span>
+                <p>
+                  <code>alert()</code> er harmløs. Samme hul kan køre et hvilket som helst script: læse alt på siden,
+                  sende requests i brugerens navn, eller sende brugeren videre til en falsk side.
+                </p>
+              </article>
+              <article class="card card-bad">
+                <span>Værst i AMAbotten</span>
+                <p>
+                  Svaret. <code>/answers</code> har ingen adgangskontrol, så en plantet svarregel rammer <b>alle</b>,
+                  der stiller et matchende spørgsmål.
+                </p>
+              </article>
             </div>
           </div>
           <p class="bottom-line">"Cross-site": angriberens kode kører på jeres side, i jeres brugeres browsere.</p>
@@ -1374,7 +1771,10 @@ The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' tha
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line"><code>&amp;</code> først, ellers escaper I jeres egne entities igen. Browseren viser <code>&amp;lt;</code> som tegnet <code>&lt;</code>, men læser det ikke som et tag.</p>
+          <p class="bottom-line">
+            <code>&amp;</code> først, ellers escaper I jeres egne entities igen. Browseren viser
+            <code>&amp;lt;</code> som tegnet <code>&lt;</code>, men læser det ikke som et tag.
+          </p>
         </section>
 
         <section class="fill" data-accent="red">
@@ -1384,56 +1784,54 @@ The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' tha
             <div class="before-after">
               <article>
                 <span>Uden escapeHtml()</span>
-                <pre class="code-sm wrap"><code class="language-json">"text": "&lt;img src=x onerror=\"alert('hacked')\"&gt;"</code></pre>
+                <pre
+                  class="code-sm wrap"
+                ><code class="language-json">"text": "&lt;img src=x onerror=\"alert('hacked')\"&gt;"</code></pre>
                 <div class="rendered"><small>Browseren viser</small><span class="alert-box">⚠ hacked</span></div>
               </article>
               <b aria-hidden="true">→</b>
               <article>
                 <span>Med escapeHtml()</span>
-                <pre class="code-sm wrap"><code class="language-json">"text": "&amp;lt;img src=x onerror=&amp;quot;alert(&amp;#039;hacked&amp;#039;)&amp;quot;&amp;gt;"</code></pre>
-                <div class="rendered"><small>Browseren viser</small><code>&lt;img src=x onerror="alert('hacked')"&gt;</code></div>
+                <pre
+                  class="code-sm wrap"
+                ><code class="language-json">"text": "&amp;lt;img src=x onerror=&amp;quot;alert(&amp;#039;hacked&amp;#039;)&amp;quot;&amp;gt;"</code></pre>
+                <div class="rendered">
+                  <small>Browseren viser</small><code>&lt;img src=x onerror="alert('hacked')"&gt;</code>
+                </div>
               </article>
             </div>
+            <span class="pre-label" style="margin-top: 30px">I POST /messages: escape både spørgsmål og svar</span>
+            <pre
+              class="code-sm"
+            ><code class="language-javascript">const message = { type: "question", text: escapeHtml(question), createdAt: ... };
+const answerMessage = { type: "answer", text: escapeHtml(result.answer), createdAt: ... };</code></pre>
           </div>
-          <p class="bottom-line">Teksten er den samme for brugeren. Den bliver bare vist som tekst i stedet for at blive kørt.</p>
-        </section>
-
-        <section class="fill" data-accent="red">
-          <span class="eyebrow">Hvor</span>
-          <h2>Escape både spørgsmål og svar i <code>POST /messages</code></h2>
-          <div class="stage">
-            <div class="split">
-            <pre class="code-sm"><code class="language-javascript">const message = {
-  type: "question",
-  text: escapeHtml(question),
-  createdAt: new Date().toISOString()
-};
-
-const answerMessage = {
-  type: "answer",
-  text: escapeHtml(result.answer),
-  createdAt: new Date().toISOString()
-};</code></pre>
-            <div class="stack">
-              <article class="card card-warn"><span>Gamle beskeder</span><p><code>escapeHtml()</code> beskytter kun det, der gemmes fra nu af. Ryd demoen med <code>DELETE /messages</code>.</p></article>
-              <article class="card"><span>På klienten</span><p><code>textContent</code> i stedet for <code>insertAdjacentHTML()</code> er det andet værn. Begge dele er bedst.</p></article>
-            </div>
-            </div>
-          </div>
-          <p class="bottom-line">Escapes det på serveren, er alle klienter beskyttet, også en frontend, I ikke selv har skrevet.</p>
+          <p class="bottom-line">
+            <code>escapeHtml()</code> beskytter kun det, der gemmes fra nu af. Ryd gamle beskeder med
+            <code>DELETE /messages</code>.
+          </p>
         </section>
 
         <section class="activity-slide" data-accent="red">
           <span class="eyebrow">Hands-on · Øvelse 9, trin 7</span>
           <h2>Luk XSS-hullet i AMAbotten</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <a
+            class="exercise-link"
+            href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md"
+            target="_blank"
+            rel="noreferrer"
+            >Åbn øvelsen på GitHub ↗</a
+          >
           <ul class="checklist">
             <li>Prøv først angrebet, og kig i <code>data/messages.json</code></li>
             <li>Skriv <code>escapeHtml()</code>, og brug den på både spørgsmål og svar</li>
             <li>Ryd den gamle besked med <code>DELETE /messages</code>, og gentag angrebet</li>
             <li>Opret en svarregel med <code>&lt;b&gt;hej&lt;/b&gt;</code> i svaret, og tjek, at den også escapes</li>
           </ul>
-          <p class="bottom-line">Test til sidst et almindeligt spørgsmål. Det skal stadig virke.</p>
+          <p class="bottom-line">
+            Test til sidst et almindeligt spørgsmål. På klienten er <code>textContent</code> i stedet for
+            <code>insertAdjacentHTML()</code> det andet værn.
+          </p>
         </section>
 
         <!-- ============ AFSLUTNING ============ -->
@@ -1442,18 +1840,58 @@ const answerMessage = {
           <span class="eyebrow">Opsamling</span>
           <h2>Sådan svarer API'et nu</h2>
           <div class="stage">
-            <div class="fail-map">
-              <div class="fail-row fail-head"><span>Request</span><span>Før i dag</span><span>Nu</span><span></span></div>
-              <div class="fail-row"><span class="req"><code>POST /students</code> · <code>DELETE</code></span><span><span class="sc sc-2">200</span>OK, altid</span><span><span class="sc sc-2">201</span><span class="sc sc-2">204</span></span><span>.status()</span></div>
-              <div class="fail-row"><span class="req"><code>GET/PUT/DELETE /students/999</code></span><span><span class="sc sc-2">200</span>eller HTML-fejlside</span><span><span class="sc sc-4">404</span>+ JSON</span><span>if + return</span></div>
-              <div class="fail-row"><span class="req"><code>POST { "name": "Test" }</code></span><span><span class="sc sc-2">200</span>Halv studerende</span><span><span class="sc sc-4">400</span>+ JSON</span><span>if + return</span></div>
-              <div class="fail-row"><span class="req"><code>GET /students</code> · fil mangler</span><span><span class="sc sc-5">500</span>HTML, <code>ENOENT</code></span><span><span class="sc sc-5">500</span>+ JSON</span><span>try/catch</span></div>
-              <div class="fail-row"><span class="req"><code>GET /noget-der-ikke-findes</code></span><span><span class="sc sc-4">404</span>HTML</span><span><span class="sc sc-4">404</span>+ JSON</span><span>catch-all</span></div>
-              <div class="fail-row"><span class="req"><code>fetch()</code> fra fremmed origin</span><span>Virker</span><span>CORS-fejl</span><span>cors({ origin })</span></div>
-              <div class="fail-row"><span class="req"><code>&lt;img onerror=...&gt;</code> som spørgsmål</span><span>Kører i browseren</span><span>Vises som tekst</span><span>escapeHtml()</span></div>
+            <div class="fail-map fail-map-dense">
+              <div class="fail-row fail-head">
+                <span>Request</span><span>Før i dag</span><span>Nu</span><span></span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>POST /students</code></span
+                ><span><span class="sc sc-2">200</span>OK</span><span><span class="sc sc-2">201</span>Created</span
+                ><span>.status()</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>DELETE /students/:id</code></span
+                ><span><span class="sc sc-2">200</span>OK</span><span><span class="sc sc-2">204</span>No Content</span
+                ><span>.status()</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>GET /students/999</code></span
+                ><span><span class="sc sc-2">200</span>Tomt svar</span
+                ><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><span>if + return</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>PUT /students/999</code></span
+                ><span><span class="sc sc-5">500</span>HTML-fejlside, stack trace</span
+                ><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><span>if + return</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>POST /students</code> <small class="req-cond">kun name</small></span
+                ><span><span class="sc sc-2">200</span>Halv studerende gemt</span
+                ><span><span class="sc sc-4">400</span>+ JSON-fejlbesked</span><span>if + return</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>GET /students</code> <small class="req-cond">fil mangler</small></span
+                ><span><span class="sc sc-5">500</span>HTML-fejlside, <code>ENOENT</code></span
+                ><span><span class="sc sc-5">500</span>+ JSON-fejlbesked</span><span>try/catch + fejl-mw</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>GET /noget-der-ikke-findes</code></span
+                ><span><span class="sc sc-4">404</span>HTML: "Cannot GET"</span
+                ><span><span class="sc sc-4">404</span>+ JSON-fejlbesked</span><span>catch-all</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>fetch()</code> <small class="req-cond">fremmed origin</small></span
+                ><span>Virker</span><span>CORS-fejl</span><span>cors({ origin })</span>
+              </div>
+              <div class="fail-row">
+                <span class="req"><code>POST /messages</code> <small class="req-cond">&lt;img onerror&gt;</small></span
+                ><span>Kører i browseren</span><span>Vises som tekst</span><span>escapeHtml()</span>
+              </div>
             </div>
           </div>
-          <p class="bottom-line">Tag mønstrene med ind i jeres eget projekt: samme fejlform, samme middleware, samme escaping.</p>
+          <p class="bottom-line">
+            Find jeres skitse frem: hvor endte hver rettelse? Tag samme mønstre med ind i jeres eget projekt.
+          </p>
         </section>
 
         <section class="materials-slide">
@@ -1475,10 +1913,16 @@ const answerMessage = {
             <a href="https://owasp.org/www-community/attacks/xss/" target="_blank" rel="noreferrer"
               ><strong>Cross Site Scripting (XSS)</strong><span>OWASP ↗</span></a
             >
-            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md" target="_blank" rel="noreferrer"
+            <a
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-fejlhaandtering.md"
+              target="_blank"
+              rel="noreferrer"
               ><strong>REST API-øvelse · Fejlhåndtering</strong><span>GitHub ↗</span></a
             >
-            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md" target="_blank" rel="noreferrer"
+            <a
+              href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md"
+              target="_blank"
+              rel="noreferrer"
               ><strong>Øvelse 9 · AMAbotten bliver sikker</strong><span>GitHub ↗</span></a
             >
           </div>

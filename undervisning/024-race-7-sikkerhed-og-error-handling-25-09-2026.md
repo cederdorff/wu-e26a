@@ -15,14 +15,16 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 <details>
 <summary><strong>1. Opsamling: Hvor efterlod vi API'et?</strong></summary>
 
-- Kort oplæg: genopfrisk, hvad der bevidst er sprunget over indtil nu — ingen eksplicitte statuskoder ud over Express' standard-`200`, ingen `404` ved ugyldige id'er, ingen validering af `request.body`, `cors()` uden argumenter, og ingen sanering af brugerens tekst, før serveren gemmer og sender den videre
-- To og to: åbn jeres eget `/students`\- eller `/teachers`\-API, og prøv bevidst at ødelægge det — send et ugyldigt id, en tom body, et forkert felt-navn
-- Prøv konkret `PUT /students/999` (et id, der ikke findes) — hvad sker der i terminalen, og hvad får I tilbage i Thunder Client?
-- Prøv også: omdøb midlertidigt `data/students.json` (eller slet dens indhold), og send `GET /students` — hvad sker der nu, og hvor i koden går det galt? Giv filen dens rigtige navn og indhold tilbage bagefter
-- Kort opsamling i plenum: hvor mange forskellige måder viser "det gik galt" sig på lige nu — et tomt svar med `200 OK`, Express' egen fejlside med en fuld stack trace (fra et ugyldigt id, en manglende body og en ødelagt datafil), eller bare et statuskode-tal, der ikke passer med, hvad der faktisk skete?
+- Kort oplæg: arkitekturen fra sidste gang — fra én stor `server.js` til routes-filer og data-moduler, og den vej et request tager gennem koden
+- Genopfrisk de teknikker, der gjorde opdelingen mulig: `import`/`export`, `express.Router()`, data-modulet og `request.query`
+- Genopfrisk de fire begreber, hver med et eksempel fra jeres eget `/students`\-API: Separation of Concerns, DRY, Single Responsibility og Encapsulation
+- To og to: skitsér jeres eget `/students`\-API, som I forstår det. Hvilke dele findes der, hvordan hænger de sammen, og hvad sker der, når en request kommer ind? Følg fx `PUT /students/2`. Tegn frit, men brug jeres kode, ikke hukommelsen. Ikke i mål med opdelingen fra sidst? Brug i stedet [cederdorff/express-rest-api-students (branch `data-module`)](https://github.com/cederdorff/express-rest-api-students/tree/data-module)
+- Find et eksempel i jeres egen kode for hvert af de fire begreber, og skriv det på skitsen
+- Sammenlign med en eksempeltegning, og forklar jeres skitse til gruppen ved siden af på ét minut
+- Kort oplæg: API'et har indtil nu kun kørt den lykkelige vej. Hvad sker der ved et id, der ikke findes, en halv body, en manglende datafil eller en ukendt sti? Det er dagens plan
 </details>
 <details>
-<summary><strong>2. Statuskoder, for alvor denne gang</strong></summary>
+<summary><strong>2. Statuskoder</strong></summary>
 
 - Genopfrisk kort: statuskoder falder i familier — 2xx (success), 4xx (fejl hos klienten), 5xx (fejl hos serveren) — I kender allerede `200`, `201` og `404`, men har endnu ikke sat dem eksplicit nogen steder
 - Lige nu sender alle jeres routes `response.json(...)` eller `response.send()` uden `.status(...)` — Express sætter altid `200 OK` som standard, også ved `POST` (burde være `201 Created`) og `DELETE` (burde være `204 No Content`, uden body)
@@ -35,7 +37,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Mønster: efter `.find()`, tjek om resultatet er `undefined` — er det, `response.status(404).json({ error: "..." })` og `return`; ellers fortsætter routen som normalt
 - `return` er nødvendigt her — glemmer I det, forsøger Express at sende to responses på samme request, og fejler
 - Gælder alle routes, der finder én bestemt ressource ud fra `:id` — `GET /:id`, `PUT /:id`, `DELETE /:id`
-- Hands-on: tilføj 404-tjek til jeres egne routes. Gentag `PUT /students/999` fra opsamlingen, og bekræft at I nu får en ordentlig `404`\-fejlbesked i stedet for Express' egen fejlside
+- Hands-on: tilføj 404-tjek til jeres egne routes. Send `PUT /students/999` med en body, og bekræft at I nu får en ordentlig `404`\-fejlbesked i stedet for Express' egen fejlside
 </details>
 <details>
 <summary><strong>4. Validering: 400 ved ugyldigt input</strong></summary>
@@ -49,7 +51,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 <summary><strong>5. try/catch: fang selv en fejl, dér hvor den opstår</strong></summary>
 
 - JavaScripts generelle mekanisme til at håndtere en fejl: `try { ... } catch (error) { ... }` — går noget galt inde i `try`-blokken, springer resten af den over, og `catch`-blokken kører i stedet, med selve fejlen i `error`
-- Konkret brug i dag: `loadStudents()`/`loadTeachers()` kan fejle, hvis JSON-filen mangler eller indeholder ugyldig JSON — præcis det, I selv fremprovokerede i opsamlingen. Pak `fs.readFile()`/`JSON.parse()` ind i `try`/`catch`, og kast en ny, tydelig fejl videre i `catch`-blokken, i stedet for en teknisk `ENOENT`/`SyntaxError`. Data-modulet kender ikke `response` — det er fejl-middlewaren i næste punkt, der sender selve svaret
+- Konkret brug i dag: `loadStudents()`/`loadTeachers()` kan fejle, hvis JSON-filen mangler eller indeholder ugyldig JSON. Prøv selv: omdøb filen midlertidigt, og send `GET /students`. Pak `fs.readFile()`/`JSON.parse()` ind i `try`/`catch`, og kast en ny, tydelig fejl videre i `catch`-blokken, i stedet for en teknisk `ENOENT`/`SyntaxError`. Data-modulet kender ikke `response` — det er fejl-middlewaren i næste punkt, der sender selve svaret
 - I skal ikke `try`/`catch` hver eneste route i dag — kun hvor I selv har brug for at reagere på en bestemt fejl
 - Mere om `try`/`catch` — denne gang omkring `fetch()` og fejl fra serveren i klienten — er emnet, [næste DOB-gang](./025-dob-7-client-side-error-handling-28-09-2026.md) tager fat på
 - Hands-on: tilføj `try`/`catch` omkring jeres `loadX()`\-funktioner, og kast en tydelig fejlbesked videre, hvis noget går galt
@@ -61,7 +63,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - En 404-catch-all: en sidste `app.use(...)` nederst i filen, der rammer enhver sti, ingen anden route matchede — noget andet end 404-tjekket fra før, som handler om et ugyldigt id på en sti, der ellers findes
 - Express' særlige fejl-middleware: fire parametre (`error, request, response, next`) i stedet for de sædvanlige tre — Express genkender den automatisk på antallet af parametre, og kalder den kun, når en fejl er kastet og ikke håndteret færdigt undervejs — både de fejl, I selv kaster videre fra `catch` i sidste punkt, og dem, I slet ikke har forudset
 - Uden en fejl-middleware svarer Express selv med sin egen HTML-fejlside — inklusive en fuld stack trace, som en rigtig klient aldrig bør se. I stedet: `response.status(500).json({ error: "..." })` — samme `{ error: "..." }`\-facon som `404`\- og `400`\-svarene, så alle fejl fra API'et ser ens ud, uanset hvor de opstår
-- Godt eksempel på en fejl, ingen har forudset: `POST /students` helt uden body fra opsamlingen — `request.body` er `undefined`, så selv 400-tjekket crasher. Med fejl-middlewaren bliver det et rent `500`\-svar
+- Godt eksempel på en fejl, ingen har forudset: `POST /students` helt uden body — `request.body` er `undefined`, så selv 400-tjekket crasher. Med fejl-middlewaren bliver det et rent `500`\-svar
 - Hands-on: tilføj en 404-catch-all og en fælles fejl-middleware nederst i `server.js`, så en uventet fejl ét sted i systemet giver et rent, forudsigeligt JSON-svar i stedet for Express' standard-fejlside
 - Overfør derefter selv hele mønsteret fra punkt 2-6 til `/messages` og `/answers` i jeres AMAbot — [øvelse 9, Del 1](../opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md), i eget tempo. CORS og XSS i punkt 7-8 er Del 2, og kan laves uafhængigt af Del 1
 </details>
