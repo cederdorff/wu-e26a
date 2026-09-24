@@ -74,7 +74,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Diskutér: hvad kunne gå galt, hvis en helt fremmed hjemmeside kaldte jeres `/messages`\- eller `/answers`\-API fra en brugers browser? (`/students` har aldrig fået `cors()`, så dér blokerer browseren allerede)
 - Send samtidig samme request i Thunder Client — den lykkes altid, uanset `cors()`-opsætningen. CORS er noget browseren håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på
 - Løsningen: begræns til den origin, I selv bruger — `cors({ origin: "http://127.0.0.1:5500" })`
-- Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren. Gentag demoens `fetch()` fra `http://localhost:5500` igen — den skal nu fejle med en CORS-fejl i konsollen. Bekræft til sidst, at jeres egen frontend stadig virker
+- Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren. Gentag demoens `fetch()` fra `http://localhost:5500` igen — den skal nu fejle med en CORS-fejl i konsollen. Har I en frontend fra øvelse 8, så bekræft til sidst, at den stadig virker
 </details>
 <details>
 <summary><strong>8. Sikkerhed i data: escape brugerens tekst på serveren (XSS)</strong></summary>
@@ -84,7 +84,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Begreb: **Cross-Site Scripting (XSS)** — når en brugers egen tekst kan udføre kode i en andens browser, fordi den aldrig blev renset for HTML, før den blev gemt og sendt videre
 - Værre endnu: AMAbottens eget svar har samme problem — og `/answers` har ingen adgangskontrol, så en plantet, ondsindet svarregel rammer *alle*, der senere stiller et matchende spørgsmål, ikke kun afsenderen selv
 - Løsningen: en lille `escapeHtml()`\-funktion på serveren, der erstatter `<`, `>`, `&`, `"` og `'` med deres HTML-entities, kørt på både spørgsmål og svar, før de gemmes
-- Hands-on: tilføj `escapeHtml()` til `POST /messages`, gentag angrebet fra demoen, og bekræft at `data/messages.json` nu indeholder den escapede tekst i stedet for rå HTML. Ryd først den gamle besked fra demoen med `DELETE /messages` — `escapeHtml()` beskytter kun det, der gemmes fra nu af
+- Hands-on: tilføj `escapeHtml()` til `POST /messages`, og ryd den gamle besked fra demoen med `DELETE /messages` — `escapeHtml()` beskytter kun det, der gemmes fra nu af. Gentag derefter angrebet, og bekræft at `data/messages.json` nu indeholder den escapede tekst i stedet for rå HTML
 </details>
 
 ---
