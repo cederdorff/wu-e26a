@@ -4,6 +4,8 @@
 
 Du bygger videre på [REST API-øvelse: Arkitektur](express-rest-api-arkitektur.md) — Del 1-4 skal være gennemført: `/students` og `/teachers` i hver sin routes-fil, med data-adgangen i sit eget modul, og filtrering/sortering/paginering på `GET /students`.
 
+> **Lavede du den frivillige Del 5 (controllers)?** Så bor route-logikken i `controllers/studentsController.js` og `controllers/teachersController.js`, ikke i `routes/`. Alle rettelserne i Del 1 laves dér i stedet — koden er den samme, kun filen er en anden.
+
 Denne øvelse implementerer direkte det, [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) gennemgår om fejlhåndtering: eksplicitte statuskoder, fejlhåndtering af ugyldige id'er og manglende input, `try`/`catch` om jeres data-funktioner, og en fælles fejl-middleware. Bagefter overfører du selv det samme mønster til din egen AMAbot i [øvelse 9](express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md), som også tilføjer de to sikkerhedsrettelser, der kun giver mening dér: en strammere `cors()`-opsætning, og en rettelse af XSS-hullet i `POST /messages`.
 
 Øvelsen er delt i to dele:
@@ -505,7 +507,7 @@ app.use((request, response) => {
 });
 ```
 
-> **Begreb: Middleware.** En middleware-funktion er kode, der kører imellem request og response. I har allerede brugt to eksempler uden at vide det: `express.json()` parser en JSON-body, før den når jeres routes, og `cors()` sætter en header, før responsen sendes. `app.use()` her gør nøjagtig det samme, bare med en funktion, I selv har skrevet.
+> **Begreb: Middleware.** En middleware-funktion er kode, der kører imellem request og response. I har allerede brugt en uden at vide det: `express.json()` parser en JSON-body, før den når jeres routes. Har du lavet [øvelse 8](fetch-dom-amabot.md), er `cors()` i AMAbotten et andet eksempel — den sætter en header, før responsen sendes. `app.use()` her gør nøjagtig det samme, bare med en funktion, I selv har skrevet.
 >
 > Denne middleware ligger sidst i filen, efter alle jeres routere — Express tjekker middleware og routes i den rækkefølge, de står i filen, og springer videre til den næste, hvis den nuværende ikke matcher. Kommer en request helt ned til bunden uden at være matchet af `/students` eller `/teachers`, ender den her. Send fx `GET /students/1` — den matcher `/students/:id`, og denne middleware ser den aldrig. Send `GET /noget-helt-andet` — intet matcher, og den lander her.
 
