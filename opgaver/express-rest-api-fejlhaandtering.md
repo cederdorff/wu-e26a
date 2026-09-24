@@ -77,11 +77,11 @@ Slet en studerende. Statuslinjen skal nu vise `204 No Content`.
 
 ### 4. Gør det samme for /teachers
 
-Ret `POST /teachers` til `response.status(201).json(newTeacher)`, og `DELETE /teachers/:id` til `response.status(204).send()`, i `routes/teachers.js` — præcis samme rettelser som punkt 2-3.
+Ret `POST` og `DELETE` på `/teachers` i `routes/teachers.js` — selv, uden hints.
 
 #### Test trin 4
 
-Opret og slet en lærer. Bekræft `201` på oprettelsen, og `204` på sletningen.
+Gentag testene fra punkt 2-3, denne gang for `/teachers`.
 
 ## Tjekpunkt: statuskoder
 
@@ -271,7 +271,9 @@ Send `DELETE http://localhost:3000/students/999999`. Du skal få `404`. Bekræft
 
 ### 8. Gør det samme for /teachers
 
-Tilføj samme 404-tjek til `GET`, `PUT` og `DELETE` på `/teachers/:id`, i `routes/teachers.js` — selv, uden hints.
+Tilføj 404-tjekkene til `/teachers/:id` i `routes/teachers.js` — selv, uden hints.
+
+> **Begreb: DRY (Don't Repeat Yourself).** Læg mærke til, at det samme 404-tjek — `if (!student)` og `if (!teacher)` — nu står tre steder i `routes/students.js`, og tre steder mere i `routes/teachers.js`. Det er bevidst her — hvert tjek er kort og tydeligt — men det er samme slags gentagelse, I så, da I kopierede students til teachers i [arkitektur-øvelsen](express-rest-api-arkitektur.md). I punkt 14 fjerner I en gentagelse af den slags for første gang.
 
 #### Test trin 8
 
@@ -479,9 +481,11 @@ export async function loadStudents() {
 
 </details>
 
+> **Begreb: Encapsulation.** Fra arkitektur-øvelsen: routes-filen skal ikke vide, om data ligger i en JSON-fil, en database eller et array. Det samme gælder fejlene. `ENOENT` og `SyntaxError` er detaljer om, *hvordan* data er gemt — dem gemmer `loadStudents()` nu på, og kaster i stedet en fejl, der giver mening for alle udenfor: "Kunne ikke hente studerende". Skifter I en dag JSON-filen ud med en database, ændrer fejlbeskeden sig ikke.
+
 #### Test trin 12
 
-Omdøb midlertidigt `data/students.json` (eller ødelæg dens indhold), og send `GET http://localhost:3000/students`. Du får stadig Express' egen fejlside — men kig øverst på siden: står der nu jeres egen, tydelige fejlbesked i stedet for `ENOENT` fra "Prøv det først"? Fejlsiden selv forsvinder først i punkt 15. Giv filen dens rigtige navn og indhold tilbage bagefter.
+Omdøb midlertidigt `data/students.json` (eller ødelæg dens indhold), og send `GET http://localhost:3000/students`. Du får stadig Express' egen fejlside — men kig øverst på siden: står der nu jeres egen, tydelige fejlbesked i stedet for `ENOENT` fra "Prøv det først"? Fejlsiden selv forsvinder først i punkt 14. Giv filen dens rigtige navn og indhold tilbage bagefter.
 
 ---
 
@@ -495,31 +499,11 @@ Gentag testen fra punkt 12, denne gang med `data/teachers.json` og `GET /teacher
 
 ---
 
-### 14. En 404-catch-all i server.js
+### 14. En fælles fejl-middleware i server.js
 
-**Prøv det først:** send `GET http://localhost:3000/noget-der-ikke-findes`. Du får `404` — men som en lille HTML-side med teksten `Cannot GET /noget-der-ikke-findes`, ikke som JSON, som resten af jeres API svarer med.
+Fejlen, I kaster fra `catch`-blokken i punkt 12-13, skal fanges et sted, der kan sende et ordentligt svar. Data-modulet kender ikke `response` — det gør en fejl-middleware.
 
 Tilføj nederst i `server.js`, efter begge routere er monteret:
-
-```js
-app.use((request, response) => {
-  response.status(404).json({ error: "Ukendt sti." });
-});
-```
-
-> **Begreb: Middleware.** En middleware-funktion er kode, der kører imellem request og response. I har allerede brugt en uden at vide det: `express.json()` parser en JSON-body, før den når jeres routes. Har du lavet [øvelse 8](fetch-dom-amabot.md), er `cors()` i AMAbotten et andet eksempel — den sætter en header, før responsen sendes. `app.use()` her gør nøjagtig det samme, bare med en funktion, I selv har skrevet.
->
-> Denne middleware ligger sidst i filen, efter alle jeres routere — Express tjekker middleware og routes i den rækkefølge, de står i filen, og springer videre til den næste, hvis den nuværende ikke matcher. Kommer en request helt ned til bunden uden at være matchet af `/students` eller `/teachers`, ender den her. Send fx `GET /students/1` — den matcher `/students/:id`, og denne middleware ser den aldrig. Send `GET /noget-helt-andet` — intet matcher, og den lander her.
-
-#### Test trin 14
-
-Send `GET http://localhost:3000/noget-der-ikke-findes`. Du skal nu få `404` og `{ "error": "Ukendt sti." }` som JSON. Send derefter `GET /students/1` igen — den skal stadig give jer den rigtige studerende, ikke `404`\-svaret fra denne middleware.
-
----
-
-### 15. En fælles fejl-middleware i server.js
-
-Tilføj helt nederst i `server.js`, efter 404-catch-all'en fra punkt 14. Express kører middleware og routes i den rækkefølge, de står i filen — en fejl-middleware fanger kun fejl fra det, der står *over* den, så den skal stå efter alle jeres routere:
 
 ```js
 app.use((error, request, response, next) => {
@@ -528,23 +512,67 @@ app.use((error, request, response, next) => {
 });
 ```
 
-> **Forskellen på punkt 14 og 15:** 404-catch-all'en fanger en **sti, der slet ikke findes** — ingen af jeres routes matcher `request.method` og `request.url`. Denne middleware fanger noget andet: en **fejl inde i en route, der faktisk matchede**. `GET /students` matcher fint, men hvis `loadStudents()` kaster en fejl undervejs (fx fordi `data/students.json` er ødelagt, som I byggede `try`/`catch` til i punkt 12), ender den fejl her — ikke i 404-catch-all'en.
+> **Begreb: Middleware.** En middleware-funktion er kode, der kører imellem request og response. I har allerede brugt en uden at vide det: `express.json()` parser en JSON-body, før den når jeres routes. Har du lavet [øvelse 8](fetch-dom-amabot.md), er `cors()` i AMAbotten et andet eksempel — den sætter en header, før responsen sendes. `app.use()` her gør nøjagtig det samme, bare med en funktion, I selv har skrevet.
 >
-> Det er netop derfor, denne middleware har fire parametre (`error, request, response, next`) i stedet for de sædvanlige to eller tre — det er sådan, Express kan skelne den fra en almindelig middleware som punkt 14's, og kun kalde den, når noget rent faktisk er kastet som en fejl.
+> Express kører middleware og routes i den rækkefølge, de står i filen. En fejl-middleware fanger kun fejl fra det, der står *over* den — derfor skal den stå efter alle jeres routere. Den har fire parametre (`error, request, response, next`) i stedet for de sædvanlige to eller tre — det er sådan, Express kan skelne den fra en almindelig middleware, og kun kalde den, når noget rent faktisk er kastet som en fejl. `GET /students` matcher fint, men kaster `loadStudents()` en fejl undervejs, ender den her.
 
-#### Test trin 15
+> **Begreb: Separation of Concerns.** Skal routerne så ikke også have `try`/`catch`? Nej. Når `await loadStudents()` kaster en fejl inde i en `async` route, sender Express selv fejlen videre til fejl-middlewaren. Hver del har nu ét ansvar: data-modulet *opdager* fejlen og beskriver den (men kender ikke `response`), fejl-middlewaren *sender svaret*, og routerne kan blive ved med kun at beskrive den lykkelige vej.
+
+<details>
+<summary>Sådan ville det se ud uden en fejl-middleware</summary>
+
+Uden fejl-middlewaren skulle hver eneste route selv fange fejlen og sende `500`:
+
+```js
+router.get("/", async (request, response) => {
+  try {
+    const students = await loadStudents();
+    response.json(students);
+  } catch (error) {
+    response.status(500).json({ error: error.message });
+  }
+});
+```
+
+Og præcis det samme `try`/`catch` i `GET /:id`, `POST`, `PUT` og `DELETE` — på både `/students` og `/teachers`.
+
+</details>
+
+> **Begreb: DRY — denne gang løst.** Uden fejl-middlewaren (se togglen ovenfor) ville I have ti kopier af den samme fejlhåndtering, som alle skulle rettes, hvis I fx ville ændre fejlbeskedens facon. Med fejl-middlewaren er der én. Det er det, DRY handler om: ikke at al gentagelse er forbudt — 404-tjekkene fra punkt 8 er fine — men at logik, der skal være ens overalt, bor ét sted.
+
+#### Test trin 14
 
 Gentag testen fra punkt 12 (omdøb `data/students.json` midlertidigt, send `GET /students`). Får I nu et rent JSON-svar — `{ "error": "Kunne ikke hente studerende — ..." }` med status `500` — i stedet for Express' fejlside? Giv filen dens rigtige navn og indhold tilbage bagefter.
 
-Prøv til sidst at sende `POST http://localhost:3000/students` helt **uden** body — slå body'en fra i Thunder Client, i stedet for at sende `{}`. Du får `500` med beskeden `Cannot read properties of undefined (reading 'name')`, ikke `400`. Uden en body er `request.body` slet ikke et objekt, men `undefined` — så jeres `if`-tjek fra punkt 9 crasher, før det overhovedet når at tjekke noget. Det er præcis den slags uforudsete fejl, fejl-middlewaren er til: I har ikke tænkt på den, men klienten får stadig et rent JSON-svar i stedet for Express' fejlside.
+Prøv derefter at sende `POST http://localhost:3000/students` helt **uden** body — slå body'en fra i Thunder Client, i stedet for at sende `{}`. Du får `500` med beskeden `Cannot read properties of undefined (reading 'name')`, ikke `400`. Uden en body er `request.body` slet ikke et objekt, men `undefined` — så jeres `if`-tjek fra punkt 9 crasher, før det overhovedet når at tjekke noget. Det er præcis den slags uforudsete fejl, fejl-middlewaren er til: I har ikke tænkt på den, men klienten får stadig et rent JSON-svar i stedet for Express' fejlside.
+
+---
+
+### 15. En 404-catch-all i server.js
+
+**Prøv det først:** send `GET http://localhost:3000/noget-der-ikke-findes`. Du får `404` — men som en lille HTML-side med teksten `Cannot GET /noget-der-ikke-findes`, ikke som JSON, som resten af jeres API svarer med. Fejl-middlewaren fra punkt 14 fanger den ikke, for der er ikke kastet nogen fejl — ingen route matchede bare.
+
+Tilføj en almindelig middleware i `server.js`, efter begge routere, men *over* fejl-middlewaren fra punkt 14 — fejl-middlewaren skal altid stå allersidst:
+
+```js
+app.use((request, response) => {
+  response.status(404).json({ error: "Ukendt sti." });
+});
+```
+
+> **Forskellen på punkt 14 og 15:** Fejl-middlewaren fanger en **fejl inde i en route, der faktisk matchede**. 404-catch-all'en fanger en **sti, der slet ikke findes** — Express springer videre fra middleware til middleware, og kommer en request helt ned til bunden uden at være matchet af `/students` eller `/teachers`, ender den her. Send fx `GET /students/1` — den matcher `/students/:id`, og denne middleware ser den aldrig. Send `GET /noget-helt-andet` — intet matcher, og den lander her.
+
+#### Test trin 15
+
+Send `GET http://localhost:3000/noget-der-ikke-findes`. Du skal nu få `404` og `{ "error": "Ukendt sti." }` som JSON. Send derefter `GET /students/1` igen — den skal stadig give jer den rigtige studerende, ikke `404`\-svaret fra denne middleware.
 
 ## Tjekpunkt: Del 2
 
 Del 2 er gennemført, når:
 
 - `loadStudents()` og `loadTeachers()` fanger deres egne fejl og kaster en tydelig, dansk fejlbesked videre
-- en ukendt sti svarer med `404` og JSON, i stedet for Express' standardtekst
 - en uventet fejl (fx en ødelagt datafil) svarer med `500` og jeres egen fejlbesked som JSON, i stedet for Express' HTML-fejlside
+- en ukendt sti svarer med `404` og JSON, i stedet for Express' standardtekst
 
 ## Reflektér over din læring
 
