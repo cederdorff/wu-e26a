@@ -2,22 +2,20 @@
 
 ## Kort fortalt
 
-Du bygger videre på din egen AMAbot fra [øvelse 7](express-rest-api-amabot-arkitektur.md) og på det, du lige har lært i [REST API-øvelse: Fejlhåndtering](express-rest-api-fejlhaandtering.md) fra [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md): statuskoder, `404`/`400`\-tjek, `try`/`catch` og en fælles fejl-middleware.
+Du bygger videre på din egen AMAbot fra [øvelse 7](express-rest-api-amabot-arkitektur.md) og bruger det, du lige har lavet i [REST API-øvelse: Fejlhåndtering](express-rest-api-fejlhaandtering.md): statuskoder, `404`/`400`\-tjek, `try`/`catch` og en fælles fejl-middleware.
 
-Øvelsen er delt i to dele:
-
-- **Del 1** overfører alt det fra `/students`/`/teachers` til `/messages` og `/answers` i din egen AMAbot — uden TODO'er, hints eller løsningsforslag. Du kender mønsteret; det er den samme øvelse, du selv skal genkende, ligesom du overførte routes/data-modul-opdelingen i øvelse 7.
-- **Del 2** tilføjer to sikkerhedsrettelser, der er nye for AMAbotten specifikt: en strammere `cors()`-opsætning, og en rettelse af XSS-hullet i `POST /messages`. Her er der scaffolding igen — det er ikke en overførsel, men noget nyt.
+- **Del 1** overfører fejlhåndteringen fra `/students` og `/teachers` til `/messages` og `/answers`. Der er ingen TODO'er, hints eller løsningsforslag. Du kender mønsteret, ligesom du kendte routes/data-modul-opdelingen, da du overførte den i øvelse 7.
+- **Del 2** er nyt: en strammere `cors()`-opsætning og en rettelse af XSS-hullet i `POST /messages`. Her får du hints og løsningsforslag igen.
 
 <details>
 <summary>💡 Sidder du fast undervejs? Sådan bruger du hjælpen i denne øvelse</summary>
 
-Samme fremgangsmåde som altid: prøv selv først. Går det ikke:
+Prøv selv først. Går det ikke:
 
-1. Åbn **Hint**-toggle'n under trinnet — den peger på de rigtige metoder og egenskaber, uden at give dig koden.
-2. Åbn først **Løsningsforslag**-toggle'n, når hintet ikke er nok, eller du vil sammenligne med din egen kode.
+1. Åbn **Hint**-toggle'n under trinnet. Den peger dig i den rigtige retning uden at give dig koden.
+2. Åbn **Løsningsforslag**-toggle'n, når hintet ikke er nok, eller når du vil sammenligne med din egen kode.
 
-Spring aldrig en test over, selv når den virker oplagt.
+Spring aldrig en test over, heller ikke når den virker oplagt.
 
 </details>
 
@@ -25,16 +23,7 @@ Spring aldrig en test over, selv når den virker oplagt.
 
 ## Del 1: Overfør fejlhåndteringen til AMAbotten
 
-Ingen TODO'er, hints eller løsningsforslag herfra — du har lige bygget hele mønsteret to gange, for `/students` og `/teachers`. Nu overfører du det selv til `/messages` og `/answers`.
-
-Et par ting, der er anderledes end på `/students`/`/teachers`, og som du selv skal tage stilling til:
-
-- `/messages` har ingen `:id`\-baserede routes — kun `GET`, `POST` og `DELETE` på hele samlingen. `404`\-mønsteret giver derfor kun mening på `/answers/:category`, ikke på `/messages`.
-- `/answers/:category` bruger `category` (en string) i stedet for et numerisk id — men selve `404`\-tjekket (`find()`, så `if (!x) { ... }`) er identisk.
-- `POST /messages` har allerede et valideringstjek for et tomt spørgsmål, fra øvelse 6 — det skal bare have `.status(400)` tilføjet.
-- `POST /answers` og `PUT /answers/:category` har ingen validering endnu — tilføj den.
-- `try`/`catch` skal om `loadMessages()` og `loadAnswers()` i deres respektive data-moduler.
-- 404-catch-all'en og fejl-middlewaren tilføjes i AMAbot-serverens `server.js` — der er kun én af hver, uanset hvor mange routere der er monteret.
+Du har bygget hele mønsteret to gange, for `/students` og `/teachers`. Nu gør du det selv for `/messages` og `/answers`, i samme rækkefølge. Under hvert trin står det, der er anderledes i AMAbotten.
 
 ### 1. Gem udgangspunktet i Git
 
@@ -46,62 +35,100 @@ git push
 
 ---
 
-### 2. Statuskoder, 404 og 400 på /messages og /answers
+### 2. Statuskoder
 
-**Prøv det først:** send `PUT http://localhost:3000/answers/findes-ikke` med en body, og `POST http://localhost:3000/answers` med `{ "category": "test" }` — uden `keywords` og `answer`. Den første giver Express' HTML-fejlside, den anden opretter en halv regel. Slet den igen med `DELETE /answers/test`.
+**Prøv det først:** send `POST http://localhost:3000/messages` med et spørgsmål. Statuslinjen viser `200 OK`.
 
-Gennemgå `/messages` og `/answers` med samme blik som `/students`/`/teachers`: hvor mangler en eksplicit `201`/`204`? Hvor kan `find()` returnere `undefined`? Hvor mangler der et tjek for, om `request.body` faktisk indeholder det nødvendige?
+Find de routes i `/messages` og `/answers`, der opretter eller sletter noget, og giv dem `201` og `204`.
 
 #### Test trin 2
 
-Kør hele `/messages`\- og `/answers`\-flowet igennem i Thunder Client, inklusive et ugyldigt `category` og en ufuldstændig body. Bekræft `201`/`204`/`404`/`400`, hvor de hører hjemme.
+Opret og slet både en besked og en svarregel. Du skal få `201` på oprettelse og `204` på sletning.
 
-> Har du en frontend fra [øvelse 8](fetch-dom-amabot.md), viser Network-fanen nu `201` på `POST /messages` og `204` på `DELETE /messages`, hvor øvelse 8 bad dig bekræfte `200`. Det er forventet — frontenden virker uændret, fordi `fetch()` behandler alle 2xx-koder som succes.
+> Har du en frontend fra [øvelse 8](fetch-dom-amabot.md), viser Network-fanen nu `201` og `204` på `/messages`, hvor øvelse 8 bad dig tjekke for `200`. Det er forventet. Frontenden virker stadig, fordi `fetch()` regner alle 2xx-koder som succes.
 
 ---
 
-### 3. try/catch og fejl-middleware i AMAbotten
+### 3. 404 på /answers/:category
 
-**Prøv det først:** omdøb midlertidigt `data/messages.json`, send `GET /messages`, og se Express' fejlside med `ENOENT`. Send også `GET /noget-der-ikke-findes`. Giv filen dens rigtige navn tilbage.
+**Prøv det først:** send `PUT http://localhost:3000/answers/findes-ikke` med en body. Du får Express' HTML-fejlside.
 
-Tilføj `try`/`catch` om `loadMessages()` og `loadAnswers()`, og montér en 404-catch-all og en fælles fejl-middleware nederst i AMAbot-serverens `server.js`.
+Tilføj 404-tjekket, hvor det giver mening. Det er lidt anderledes end på `/students`:
+
+- `/messages` har ingen routes med `:id`. Der er kun `GET`, `POST` og `DELETE` på hele samlingen, så 404-tjekket hører kun til på `/answers/:category`.
+- `/answers/:category` bruger `category`, som er en string, i stedet for et numerisk id. Selve tjekket er det samme: `find()` og så `if (!answerRule) { ... }`.
+- `DELETE /answers/:category` bruger `filter()`, så den svarer `204`, selvom reglen ikke findes. Find reglen med `find()` først, ligesom i punkt 7 i fejlhåndteringsøvelsen.
 
 #### Test trin 3
 
-Omdøb midlertidigt en af jeres datafiler, og bekræft at I får et rent JSON-fejlsvar med `500`, i stedet for Express' fejlside. Giv filen dens rigtige navn og indhold tilbage bagefter.
+Send `GET`, `PUT` og `DELETE` på `/answers/findes-ikke`. Du skal få `404` og en fejlbesked som JSON. Tjek bagefter, at en kategori, der findes, stadig virker.
+
+---
+
+### 4. 400 på POST og PUT
+
+**Prøv det først:** send `POST http://localhost:3000/answers` med `{ "category": "test" }`, altså uden `keywords` og `answer`. Der bliver oprettet en halv regel. Slet den igen med `DELETE /answers/test`.
+
+- `POST /messages` har allerede et tjek for et tomt spørgsmål fra øvelse 6. Det mangler bare `.status(400)`.
+- `POST /answers` og `PUT /answers/:category` har ingen validering endnu. Tilføj den.
+
+#### Test trin 4
+
+Send `POST /messages` med et tomt spørgsmål, og `POST /answers` og `PUT /answers/:category` med en body, hvor der mangler felter. Du skal få `400` alle tre steder. Tjek bagefter, at en fuldt udfyldt body stadig virker.
+
+---
+
+### 5. try/catch, fejl-middleware og 404-catch-all
+
+**Prøv det først:** omdøb midlertidigt `data/messages.json`, send `GET /messages`, og se Express' fejlside med `ENOENT`. Send også `GET /noget-der-ikke-findes`. Giv filen dens rigtige navn tilbage.
+
+- Tilføj `try`/`catch` om `loadMessages()` og `loadAnswers()` i deres data-moduler.
+- Tilføj en fejl-middleware og en 404-catch-all i `server.js`. Der skal kun være én af hver, uanset hvor mange routere der er. Husk rækkefølgen: routerne, så 404-catch-all'en, og fejl-middlewaren til sidst.
+
+#### Test trin 5
+
+1. Omdøb `data/messages.json` midlertidigt, og send `GET /messages`. Du skal få `500` og din egen fejlbesked som JSON. Gør det samme med `data/answers.json` og `GET /answers`. Giv filerne deres navn tilbage bagefter.
+2. Send `POST /messages` helt uden body. Du skal få `500` som JSON og ikke Express' fejlside.
+3. Send `GET /noget-der-ikke-findes`. Du skal få `404` og JSON.
 
 ## Tjekpunkt: Del 1
 
-Del 1 er gennemført, når din AMAbot håndterer statuskoder, `404`, `400`, `try`/`catch` og en fælles fejl-middleware på præcis samme måde, som `/students` og `/teachers` gør i [REST API-øvelse: Fejlhåndtering](express-rest-api-fejlhaandtering.md).
+Din AMAbot håndterer statuskoder, `404`, `400`, `try`/`catch`, fejl-middleware og 404-catch-all på samme måde som `/students` og `/teachers` i [REST API-øvelse: Fejlhåndtering](express-rest-api-fejlhaandtering.md).
 
 ---
 
 ## Del 2: Sikkerhed — CORS og XSS
 
-Disse to rettelser er nye — der er intet at overføre fra `/students`/`/teachers`, som hverken har en frontend eller gemmer fri tekst fra en bruger.
+De to rettelser her er nye. `/students` og `/teachers` har hverken en frontend eller gemmer fri tekst fra brugere, så der er ikke noget at overføre.
 
-### 4. CORS: begræns til jeres egen frontend
+### 6. CORS: kun din egen frontend
 
-**Prøv det først** — men kun hvis du har `app.use(cors())` fra [øvelse 8](fetch-dom-amabot.md). Har du ikke, blokerer browseren allerede alle andre origins, og der er intet at ødelægge endnu; spring direkte videre.
+**Prøv det først.** Spring det over, hvis du ikke har `app.use(cors())` fra [øvelse 8](fetch-dom-amabot.md). Så blokerer browseren allerede kald fra andre origins.
 
-Åbn en side på en *anden* origin end jeres frontend, åbn DevTools-konsollen dér, og kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)`. Den virker — I får jeres beskeder tilbage, selvom kaldet kommer fra et helt fremmed sted. Det er det, I retter i dette trin.
+Åbn en side på en *anden* origin end din frontend, åbn DevTools-konsollen dér, og kør:
 
-- **Den nemmeste fremmede origin:** åbn jeres frontend på `http://localhost:5500` i stedet for `http://127.0.0.1:5500`. Det er samme side og samme computer — men en **anden origin**, fordi værtsnavnet er et andet. Browseren sammenligner origins som tekst, ikke som "hvor peger det hen".
-- **Alternativt:** brug en vilkårlig offentlig hjemmeside. Spørger Chrome, om siden må få adgang til enheder på dit lokale netværk, så klik *Tillad* — ellers fejler kaldet af en helt anden grund end CORS.
+```js
+fetch("http://localhost:3000/messages").then((r) => r.json()).then(console.log);
+```
 
-**Har du allerede `cors()` installeret** (fra [øvelse 8](fetch-dom-amabot.md))? Find `app.use(cors());` i `server.js`, og ret den til:
+Du får dine beskeder tilbage, selvom kaldet kommer fra en fremmed side. Det er det, du retter nu.
+
+- **Nemmest:** åbn din frontend på `http://localhost:5500` i stedet for `http://127.0.0.1:5500`. Det er samme side på samme computer, men en **anden origin**, fordi værtsnavnet er et andet. Browseren sammenligner origins som tekst.
+- **Alternativt:** brug en offentlig hjemmeside. Spørger Chrome, om siden må få adgang til enheder på dit lokale netværk, så klik *Tillad*. Ellers fejler kaldet af en anden grund end CORS.
+
+**Har du `cors()` fra øvelse 8?** Find `app.use(cors());` i `server.js`, og ret den til:
 
 ```js
 app.use(cors({ origin: "http://127.0.0.1:5500" }));
 ```
 
-**Har du ikke lavet øvelse 8 endnu?** Installér pakken først:
+**Har du ikke lavet øvelse 8?** Installér pakken:
 
 ```bash
 npm install cors
 ```
 
-Importér den øverst i `server.js`, og montér den direkte med den begrænsede opsætning:
+Importér den øverst i `server.js`, og brug den med det samme med en begrænset origin:
 
 ```js
 import cors from "cors";
@@ -109,29 +136,27 @@ import cors from "cors";
 app.use(cors({ origin: "http://127.0.0.1:5500" }));
 ```
 
-> `http://127.0.0.1:5500` er standard-adressen for VS Codes Live Server-udvidelse — den samme, `client/index.html` kører på i øvelse 8. Kører din frontend på en anden adresse eller port, brug den i stedet.
+> `http://127.0.0.1:5500` er standardadressen for VS Codes Live Server, som `client/index.html` kører på i øvelse 8. Kører din frontend et andet sted, så brug den adresse.
 
-#### Test trin 4
+#### Test trin 6
 
-Ingen af disse tests kræver, at I har bygget frontenden i øvelse 8 — kun at serveren kører.
+Du behøver ikke en frontend til test 1 og 2, bare en server, der kører.
 
-1. **I Thunder Client:** send `GET http://localhost:3000/messages`, og tilføj selv en header `Origin: http://127.0.0.1:5500` (den adresse, jeres frontend kører eller kommer til at køre på). Kig i response-headers efter `Access-Control-Allow-Origin` — den skal matche. Skift nu headeren til `Origin: http://example.com`, og send igen. `Access-Control-Allow-Origin` står der stadig — men den siger `http://127.0.0.1:5500`, ikke `http://example.com`. Serveren fortæller altså, hvilken origin der må læse svaret, og en browser på `example.com` ville afvise det. Alligevel lykkes requesten stadig med `200` i Thunder Client, med præcis samme data som før. Det er selve pointen: CORS er noget **browseren** håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på — Thunder Client er ikke en browser, så den er ligeglad med, hvad headeren siger.
-2. **Gentag "Prøv det først" fra oven,** fra en fremmed origin — `http://localhost:5500` eller en offentlig hjemmeside, som beskrevet under "Prøv det først": kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)` igen. Den skal nu fejle med en CORS-fejl i konsollen — havde du `cors()` fra øvelse 8, er det modsat før, hvor den samme request virkede. Og modsat Thunder Client i punkt 1, hvor requesten stadig altid lykkes.
+1. **I Thunder Client:** send `GET http://localhost:3000/messages` med headeren `Origin: http://127.0.0.1:5500`. Kig i response-headers: `Access-Control-Allow-Origin` er `http://127.0.0.1:5500`. Skift headeren til `Origin: http://example.com`, og send igen. Du får stadig `200` og de samme data, og `Access-Control-Allow-Origin` er stadig `http://127.0.0.1:5500`. Serveren svarer altså alle. Den fortæller bare, hvilken origin der må læse svaret. Det er **browseren**, der håndhæver CORS, og Thunder Client er ikke en browser.
+2. **I browseren:** kør `fetch()`-kaldet fra "Prøv det først" igen fra den fremmede origin. Nu skal du få en CORS-fejl i konsollen.
 
-**Har du en frontend kørende fra øvelse 8?** Så også:
+**Har du en frontend fra øvelse 8?** Så test også:
 
-3. Genindlæs den, og bekræft at den stadig henter og viser beskeder uden fejl i konsollen.
-4. Ødelæg det med vilje: sæt midlertidigt `origin` til noget forkert, fx `"http://example.com"`, genstart serveren, og genindlæs frontenden igen. Den skal nu selv fejle med en CORS-fejl — selvom det er jeres egen frontend, og selvom I ikke har ændret en linje i den. Sæt `origin` tilbage til `"http://127.0.0.1:5500"`, genstart, og bekræft at frontenden virker igen.
+3. Genindlæs den, og tjek, at den stadig viser beskeder uden fejl i konsollen.
+4. Sæt midlertidigt `origin` til `"http://example.com"`, genstart serveren, og genindlæs frontenden. Nu får din egen frontend en CORS-fejl, selvom du ikke har rørt den. Sæt `origin` tilbage, genstart, og tjek, at den virker igen.
 
 ---
 
-### 5. XSS: escapeHtml() i POST /messages
+### 7. XSS: escapeHtml() i POST /messages
 
-Lige nu gemmer og sender `POST /messages` både `question` og AMAbottens svar helt uredigeret. Svaret er lige så vigtigt at rense som spørgsmålet: `/answers` har ingen adgangskontrol, så enhver, der kan kalde `POST /answers`/`PUT /answers/:category`, kan lige nu plante et svar med HTML i — og det svar bliver vist til *alle*, der senere stiller et spørgsmål, der matcher, ikke kun den, der oprettede det. Det gør det til et endnu mere alvorligt hul end selve spørgsmålet, som kun rammer afsenderen selv.
+**Prøv det først:** send `POST http://localhost:3000/messages` med body `{ "question": "<img src=x onerror=\"alert('hacked')\">" }`. Åbn `data/messages.json`. Teksten er gemt som rå HTML. Har du en frontend fra [øvelse 8](fetch-dom-amabot.md), så genindlæs den: `insertAdjacentHTML()` læser teksten som HTML, billedet fejler med vilje, og `alert('hacked')` kører. Det sker igen, hver gang siden genindlæses, fordi beskeden er gemt på serveren.
 
-**Prøv det først:** send `POST http://localhost:3000/messages` i Thunder Client med body `{ "question": "<img src=x onerror=\"alert('hacked')\">" }`. Åbn `data/messages.json` — teksten ligger der præcis, som den blev sendt, som rå HTML. Har du en frontend fra [øvelse 8](fetch-dom-amabot.md), så genindlæs den: `insertAdjacentHTML()` tolker teksten som HTML, billedet fejler med vilje, og `alert('hacked')` kører — i din browser, selvom det var "bare" et spørgsmål. Og den kører igen, hver gang siden genindlæses, fordi beskeden nu er gemt på serveren.
-
-Tilføj en lille hjælpefunktion i den fil, hvor jeres `POST /messages`\-logik bor (`routes/messages.js`, eller `controllers/messagesController.js`, hvis du lavede det valgfrie punkt 5 i øvelse 7):
+Tilføj en hjælpefunktion i den fil, hvor din `POST /messages`\-logik ligger (`routes/messages.js`, eller `controllers/messagesController.js`, hvis du lavede den frivillige Del 5 i øvelse 7):
 
 ```js
 function escapeHtml(text) {
@@ -143,7 +168,7 @@ function escapeHtml(text) {
 <details>
 <summary>Hint</summary>
 
-`String.prototype.replaceAll()` kan kædes efter hinanden — én linje pr. tegn, du skal erstatte. Erstat `&` allerførst, ellers escaper du jeres egne entities igen.
+`replaceAll()` kan kædes efter hinanden med én linje pr. tegn. Erstat `&` først, ellers escaper du dine egne entities igen.
 
 </details>
 
@@ -163,7 +188,7 @@ function escapeHtml(text) {
 
 </details>
 
-Brug den nu på **både** spørgsmål- og svar-beskeden i `POST /messages`. Find:
+Brug den på spørgsmålet i `POST /messages`. Find:
 
 ```js
 const message = { type: "question", text: question, createdAt: new Date().toISOString() };
@@ -175,7 +200,7 @@ og ret den til:
 const message = { type: "question", text: escapeHtml(question), createdAt: new Date().toISOString() };
 ```
 
-Find derefter, hvor svar-beskeden oprettes — noget i stil med:
+Svaret skal også escapes, og det er faktisk det største hul. `/answers` har ingen adgangskontrol, så alle kan oprette en svarregel med HTML i via `POST /answers` eller `PUT /answers/:category`. Det svar bliver vist til alle, der stiller et spørgsmål, der matcher, og ikke kun til den, der oprettede det. Find, hvor svar-beskeden bliver oprettet, noget i stil med:
 
 ```js
 const answerMessage = { type: "answer", text: result.answer, createdAt: new Date().toISOString() };
@@ -187,30 +212,29 @@ og ret den til:
 const answerMessage = { type: "answer", text: escapeHtml(result.answer), createdAt: new Date().toISOString() };
 ```
 
-#### Test trin 5
+#### Test trin 7
 
-Ryd først den gamle, uescapede besked fra "Prøv det først" med `DELETE http://localhost:3000/messages` — ellers ligger den stadig i `data/messages.json` og kører igen i frontenden, selvom rettelsen virker. `escapeHtml()` beskytter kun det, der gemmes fra nu af.
-
-Send derefter samme angreb igen: `POST http://localhost:3000/messages` med body `{ "question": "<img src=x onerror=\"alert('hacked')\">" }`. Åbn `data/messages.json`, og bekræft at teksten nu er gemt som `&lt;img src=x onerror=...&gt;` i stedet for rå HTML. Har du en frontend, så genindlæs den: spørgsmålet vises nu som almindelig tekst, præcis som det blev skrevet, og der kommer ingen `alert`. Send til sidst et almindeligt spørgsmål, og bekræft at det stadig fungerer som før.
-
-Test derefter den anden vej: opret en ny svarregel via `POST /answers` med HTML i `answer`, fx `{ "category": "test", "keywords": ["test"], "answer": "<b>hej</b>" }`. Spørg AMAbotten om noget, der matcher (`POST /messages` med `"question": "test"`), og bekræft at svaret i `data/messages.json` også er escapet. Slet testreglen igen med `DELETE /answers/test` bagefter.
+1. Ryd den gamle besked fra "Prøv det først" med `DELETE http://localhost:3000/messages`. `escapeHtml()` beskytter kun det, der bliver gemt fra nu af, så den gamle besked ville stadig køre i frontenden.
+2. Send samme angreb igen. I `data/messages.json` skal teksten nu være gemt som `&lt;img src=x onerror=...&gt;`. Har du en frontend, så genindlæs den: spørgsmålet vises som almindelig tekst, og der kommer ingen `alert`.
+3. Send et almindeligt spørgsmål, og tjek, at det stadig virker.
+4. Opret en svarregel med HTML i svaret: `POST /answers` med `{ "category": "test", "keywords": ["test"], "answer": "<b>hej</b>" }`. Send `POST /messages` med `"question": "test"`, og tjek, at svaret i `data/messages.json` også er escapet. Slet reglen igen med `DELETE /answers/test`.
 
 ## Tjekpunkt: Del 2
 
-Del 2 er gennemført, når `cors()` kun tillader jeres egen frontends origin, og `POST /messages` escaper både `question` og AMAbottens svar, før de gemmes.
+`cors()` tillader kun din egen frontends origin, og `POST /messages` escaper både spørgsmålet og AMAbottens svar, før de bliver gemt.
 
 ---
 
 ## Reflektér over din læring
 
-Når du er færdig, skal du gerne kunne forklare:
+Når du er færdig, skal du kunne forklare:
 
-1. Hvor meget af mønsteret fra `/students`/`/teachers` kunne du genbruge uændret på `/messages` og `/answers`, og hvor meget skulle du selv tilpasse?
-2. `/messages` fik intet `404`\-tjek, mens `/answers/:category` fik. Hvad var det ved `/messages`, der gjorde den forskel indlysende?
-3. Hvorfor betyder `cors({ origin: "..." })` noget for en browser, men intet for Thunder Client eller en almindelig `curl`\-kommando?
-4. `escapeHtml()` kører på både `question` og svaret, før de gemmes på serveren — hvorfor er svaret mindst lige så vigtigt at rense, når `/answers` ikke har nogen adgangskontrol? Hvad ville der ske, hvis I i stedet ventede med at rense teksten, til den blev vist i en klient? Er der en fordel ved at gøre det på serveren?
-5. Peg på ét sted i din kode, hvor en fejl nu ender som `{ error: "..." }`, uanset om den kom fra et `404`\-, `400`\- eller `500`\-svar.
+1. Hvor meget af mønsteret fra `/students` og `/teachers` kunne du bruge uændret på `/messages` og `/answers`, og hvad skulle du tilpasse?
+2. `/answers/:category` fik et 404-tjek, men `/messages` fik ikke. Hvorfor?
+3. Hvorfor betyder `cors({ origin: "..." })` noget for en browser, men ikke for Thunder Client eller `curl`?
+4. Hvorfor er det vigtigere at escape svaret end spørgsmålet?
+5. Du escaper teksten på serveren, før den bliver gemt. Hvad ville der ske, hvis du i stedet ventede, til den blev vist i frontenden? Hvad er fordelen ved at gøre det på serveren?
 
 ## Videre
 
-Din AMAbot håndterer nu de samme typer fejl, et rigtigt REST API bør: forudsigelige tjek (`404`/`400`), uventede fejl (`try`/`catch` og en fælles fejl-middleware), og to sikkerhedshuller lukket (`cors()` begrænset til jeres egen frontend, og både spørgsmål og svar renset for HTML, før de gemmes). Brug gerne de samme mønstre — eksplicitte statuskoder, tjek før I handler, `try`/`catch` om det, der kan fejle uforudsigeligt — når I snart går videre til jeres eget projekt.
+Din AMAbot håndterer nu både de fejl, du kan forudse (`404`/`400`), og dem, du ikke kan (`try`/`catch` og fejl-middleware). Og du har lukket to sikkerhedshuller: `cors()` er begrænset til din egen frontend, og både spørgsmål og svar bliver renset for HTML, før de bliver gemt. Tag de samme mønstre med, når du går i gang med dit eget projekt.
