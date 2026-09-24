@@ -2,26 +2,26 @@
 
 ## Kort fortalt
 
-Du bygger videre på [REST API-øvelse: Arkitektur](express-rest-api-arkitektur.md) — Del 1-4 skal være gennemført: `/students` og `/teachers` i hver sin routes-fil, med data-adgangen i sit eget modul, og filtrering/sortering/paginering på `GET /students`.
+Du bygger videre på [REST API-øvelse: Arkitektur](express-rest-api-arkitektur.md). Del 1-4 skal være gennemført: `/students` og `/teachers` i hver sin routes-fil, data-adgangen i sit eget modul, og filtrering/sortering/paginering på `GET /students`.
 
-> **Lavede du den frivillige Del 5 (controllers)?** Så bor route-logikken i `controllers/studentsController.js` og `controllers/teachersController.js`, ikke i `routes/`. Alle rettelserne i Del 1 laves dér i stedet — koden er den samme, kun filen er en anden.
+> **Lavede du den frivillige Del 5 (controllers)?** Så ligger route-logikken i `controllers/studentsController.js` og `controllers/teachersController.js` i stedet for i `routes/`. Lav rettelserne i Del 1 dér. Koden er den samme, det er bare en anden fil.
 
-Denne øvelse implementerer direkte det, [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) gennemgår om fejlhåndtering: eksplicitte statuskoder, fejlhåndtering af ugyldige id'er og manglende input, `try`/`catch` om jeres data-funktioner, og en fælles fejl-middleware. Bagefter overfører du selv det samme mønster til din egen AMAbot i [øvelse 9](express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md), som også tilføjer de to sikkerhedsrettelser, der kun giver mening dér: en strammere `cors()`-opsætning, og en rettelse af XSS-hullet i `POST /messages`.
+Indtil nu har dit API kun håndteret den lykkelige vej: gyldige id'er og udfyldte felter. I denne øvelse retter du det, [RACE 7](../undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) gennemgår:
 
-Øvelsen er delt i to dele:
+- **Del 1** gør statuskoderne eksplicitte og tilføjer `404`\- og `400`\-tjek til `/students` og `/teachers`.
+- **Del 2** tilføjer `try`/`catch` om dine `loadX()`\-funktioner og en fælles fejl-middleware i `server.js`.
 
-- **Del 1** gør alle statuskoder eksplicitte, og tilføjer `404`\- og `400`\-tjek til `/students` og `/teachers`, hvor de mangler.
-- **Del 2** tilføjer `try`/`catch` om jeres `loadX()`\-funktioner, og en fælles fejl-middleware i `server.js`.
+Bagefter overfører du det hele til din egen AMAbot i [øvelse 9](express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md).
 
 <details>
 <summary>💡 Sidder du fast undervejs? Sådan bruger du hjælpen i denne øvelse</summary>
 
-Samme fremgangsmåde som altid: prøv selv først. Går det ikke:
+Prøv selv først. Går det ikke:
 
-1. Åbn **Hint**-toggle'n under trinnet — den peger på de rigtige metoder og egenskaber, uden at give dig koden.
-2. Åbn først **Løsningsforslag**-toggle'n, når hintet ikke er nok, eller du vil sammenligne med din egen kode.
+1. Åbn **Hint**-toggle'n under trinnet. Den peger dig i den rigtige retning uden at give dig koden.
+2. Åbn **Løsningsforslag**-toggle'n, når hintet ikke er nok, eller når du vil sammenligne med din egen kode.
 
-Spring aldrig en test over, selv når den virker oplagt.
+Spring aldrig en test over, heller ikke når den virker oplagt.
 
 </details>
 
@@ -41,9 +41,9 @@ git push
 
 ### 2. Statuskoder: POST /students opretter noget — 201
 
-**Prøv det først:** send `POST http://localhost:3000/students` med en ny studerende, og kig i Thunder Clients statuslinje. Der står `200 OK` — selvom der netop er oprettet noget nyt.
+**Prøv det først:** send `POST http://localhost:3000/students` med en ny studerende, og kig i Thunder Clients statuslinje. Der står `200 OK`, selvom der er oprettet noget nyt.
 
-`POST /students` svarer med Express' standard-`200`, fordi I aldrig selv har sat en statuskode. Find sidste linje i `router.post("/", ...)` i `routes/students.js`:
+Express svarer med `200`, når du ikke selv sætter en statuskode. Find sidste linje i `router.post("/", ...)` i `routes/students.js`:
 
 ```js
 response.json(newStudent);
@@ -57,13 +57,15 @@ response.status(201).json(newStudent);
 
 #### Test trin 2
 
-Send `POST http://localhost:3000/students` med en ny studerende. Kig i Thunder Clients statuslinje — står der nu `201 Created` i stedet for `200 OK`?
+Send `POST http://localhost:3000/students` med en ny studerende. Står der nu `201 Created` i statuslinjen?
 
 ---
 
-### 3. Statuskoder: DELETE /students/:id rydder noget — 204
+### 3. Statuskoder: DELETE /students/:id sletter noget — 204
 
-`DELETE /students/:id` sender intet indhold tilbage — det er netop, hvad `204 No Content` betyder. Find `response.send();` i `router.delete("/:id", ...)`, og ret den til:
+**Prøv det først:** slet en studerende, og kig i statuslinjen. Igen `200 OK`.
+
+`DELETE` sender ikke noget indhold tilbage, og det er det, `204 No Content` betyder. Find `response.send();` i `router.delete("/:id", ...)`, og ret den til:
 
 ```js
 response.status(204).send();
@@ -77,7 +79,7 @@ Slet en studerende. Statuslinjen skal nu vise `204 No Content`.
 
 ### 4. Gør det samme for /teachers
 
-Ret `POST` og `DELETE` på `/teachers` i `routes/teachers.js` — selv, uden hints.
+Ret `POST` og `DELETE` i `routes/teachers.js` selv, uden hints.
 
 #### Test trin 4
 
@@ -91,7 +93,7 @@ Gentag testene fra punkt 2-3, denne gang for `/teachers`.
 
 ### 5. 404: GET /students/:id
 
-**Prøv det først:** send `GET http://localhost:3000/students/999999`. Du får `200 OK` og et helt tomt svar — Thunder Client viser ingen body overhovedet. En fejl, der ser ud som en succes.
+**Prøv det først:** send `GET http://localhost:3000/students/999999`. Du får `200 OK` og et helt tomt svar. Det ligner en succes, men det er en fejl.
 
 Byg videre på `GET /students/:id` i `routes/students.js`:
 
@@ -139,15 +141,15 @@ router.get("/:id", async (request, response) => {
 
 #### Test trin 5
 
-Send `GET http://localhost:3000/students/999999`. Du skal nu få `404` og en tydelig fejlbesked som JSON, i stedet for et tomt svar med `200`. Bekræft bagefter, at et id, der faktisk findes, stadig virker som før.
+Send `GET http://localhost:3000/students/999999`. Du skal nu få `404` og en fejlbesked som JSON. Tjek bagefter, at et id, der findes, stadig virker.
 
 ---
 
 ### 6. 404: PUT /students/:id
 
-**Prøv det først:** send `PUT http://localhost:3000/students/999999` med en body. Denne gang får I ikke et tomt svar, men Express' egen HTML-fejlside med `Cannot set properties of undefined (setting 'name')` og en fuld stack trace — `find()` gav `undefined`, og routen prøvede alligevel at sætte `student.name`.
+**Prøv det først:** send `PUT http://localhost:3000/students/999999` med en body. Nu får du ikke et tomt svar, men Express' egen HTML-fejlside med `Cannot set properties of undefined (setting 'name')` og en lang stack trace. `find()` gav `undefined`, og routen prøvede alligevel at sætte `student.name`.
 
-Samme mønster som i punkt 5, denne gang før opdateringen — I skal ikke kunne opdatere en studerende, der ikke findes:
+Brug samme tjek som i punkt 5, før du opdaterer:
 
 ```js
 router.put("/:id", async (request, response) => {
@@ -191,18 +193,18 @@ router.put("/:id", async (request, response) => {
 
 #### Test trin 6
 
-Send `PUT http://localhost:3000/students/999999` med en body. Du skal få `404`. Bekræft bagefter, at `PUT` på et rigtigt id stadig opdaterer det som før.
+Send `PUT http://localhost:3000/students/999999` med en body. Du skal få `404`. Tjek bagefter, at `PUT` på et rigtigt id stadig opdaterer.
 
 ---
 
 ### 7. 404: DELETE /students/:id
 
-**Prøv det først:** send `GET /students`, og læg mærke til, hvem der står sidst. Send derefter `DELETE http://localhost:3000/students/999999`, og `GET /students` igen.
+**Prøv det først:** send `GET /students`, og læg mærke til, hvem der står sidst. Send derefter `DELETE http://localhost:3000/students/999999`, og så `GET /students` igen.
 
-- Bruger du `findIndex()`/`splice()`, er den **sidste** studerende nu væk — `findIndex()` returnerer `-1`, og `splice(-1, 1)` fjerner det sidste element. Du så det samme i [REST API-øvelsen](express-rest-api-students.md). Hent den slettede studerende tilbage med `git checkout data/students.json`.
-- Bruger du `filter()`, sker der ingenting — men svaret er stadig `204`, som om sletningen lykkedes.
+- Bruger du `findIndex()`/`splice()`, er den **sidste** studerende væk. `findIndex()` returnerer `-1`, og `splice(-1, 1)` fjerner det sidste element. Du så det samme i [REST API-øvelsen](express-rest-api-students.md). Hent den studerende tilbage med `git checkout data/students.json`.
+- Bruger du `filter()`, sker der ingenting, men du får stadig `204`, som om sletningen lykkedes.
 
-Ingen af dem fortæller dig, om der overhovedet var noget at slette. Tilføj et tjek, før du sletter:
+I begge tilfælde får du ikke at vide, at der ikke var noget at slette. Tilføj et tjek, før du sletter:
 
 ```js
 router.delete("/:id", async (request, response) => {
@@ -265,15 +267,15 @@ router.delete("/:id", async (request, response) => {
 
 #### Test trin 7
 
-Send `DELETE http://localhost:3000/students/999999`. Du skal få `404`. Bekræft bagefter, at `DELETE` på et rigtigt id stadig sletter det, med `204` som i punkt 3.
+Send `DELETE http://localhost:3000/students/999999`. Du skal få `404`. Tjek bagefter, at `DELETE` på et rigtigt id stadig sletter og svarer med `204`.
 
 ---
 
 ### 8. Gør det samme for /teachers
 
-Tilføj 404-tjekkene til `/teachers/:id` i `routes/teachers.js` — selv, uden hints.
+Tilføj 404-tjekket til `GET`, `PUT` og `DELETE` i `routes/teachers.js` selv, uden hints.
 
-> **Begreb: DRY (Don't Repeat Yourself).** Læg mærke til, at det samme 404-tjek — `if (!student)` og `if (!teacher)` — nu står tre steder i `routes/students.js`, og tre steder mere i `routes/teachers.js`. Det er bevidst her — hvert tjek er kort og tydeligt — men det er samme slags gentagelse, I så, da I kopierede students til teachers i [arkitektur-øvelsen](express-rest-api-arkitektur.md). I punkt 14 fjerner I en gentagelse af den slags for første gang.
+> **Begreb: DRY (Don't Repeat Yourself).** Du har nu skrevet det samme 404-tjek seks gange: tre gange med `student` og tre gange med `teacher`. Det er i orden her, for hvert tjek er kort og let at læse. Men det er samme slags gentagelse, som da du kopierede students til teachers i [arkitektur-øvelsen](express-rest-api-arkitektur.md). Hold øje med den. I punkt 14 slipper du for en gentagelse af den slags.
 
 #### Test trin 8
 
@@ -281,13 +283,13 @@ Gentag testene fra punkt 5-7, denne gang for `/teachers`.
 
 ## Tjekpunkt: 404
 
-`GET`, `PUT` og `DELETE` på både `/students/:id` og `/teachers/:id` svarer med `404` og en tydelig fejlbesked, når id'et ikke findes — og fungerer uændret, når det gør.
+`GET`, `PUT` og `DELETE` på både `/students/:id` og `/teachers/:id` svarer med `404` og en fejlbesked, når id'et ikke findes, og virker som før, når det findes.
 
 ---
 
 ### 9. 400: POST /students uden validering
 
-**Prøv det først:** send `POST http://localhost:3000/students` med `{ "name": "Test" }` — uden `education`. Du får `201 Created`, og i `data/students.json` ligger der nu en studerende uden uddannelse. Slet den igen bagefter.
+**Prøv det først:** send `POST http://localhost:3000/students` med `{ "name": "Test" }`, altså uden `education`. Du får `201 Created`, og i `data/students.json` ligger der nu en studerende uden uddannelse. Slet den igen bagefter.
 
 `POST /students` opretter en studerende, uanset hvad der står i body'en. Byg videre på routen:
 
@@ -352,13 +354,13 @@ router.post("/", async (request, response) => {
 
 #### Test trin 9
 
-Send `POST http://localhost:3000/students` med `{ "name": "Test" }` (uden `education`) — du skal få `400`. Bekræft bagefter, at en fuldt udfyldt body stadig opretter en studerende som før.
+Send `POST http://localhost:3000/students` med `{ "name": "Test" }`. Du skal få `400`. Tjek bagefter, at en fuldt udfyldt body stadig opretter en studerende.
 
 ---
 
 ### 10. 400: PUT /students/:id uden validering
 
-Samme princip, denne gang efter 404-tjekket fra punkt 6:
+Samme tjek i `PUT`. Det skal stå efter 404-tjekket fra punkt 6, for der er ingen grund til at validere body'en, hvis studerenden ikke findes:
 
 ```js
 router.put("/:id", async (request, response) => {
@@ -412,13 +414,13 @@ router.put("/:id", async (request, response) => {
 
 #### Test trin 10
 
-Send `PUT` på et rigtigt id med `{ "name": "Test" }` (uden `education`) — du skal få `400`. Bekræft bagefter, at en fuldt udfyldt body stadig opdaterer studerenden som før.
+Send `PUT` på et rigtigt id med `{ "name": "Test" }`. Du skal få `400`. Tjek bagefter, at en fuldt udfyldt body stadig opdaterer studerenden.
 
 ---
 
 ### 11. Gør det samme for /teachers
 
-Tilføj samme validering til `POST` og `PUT` på `/teachers` (`name` og `subject` skal begge udfyldes), i `routes/teachers.js` — selv, uden hints.
+Tilføj valideringen til `POST` og `PUT` i `routes/teachers.js` selv, uden hints. For lærere er det `name` og `subject`, der skal udfyldes.
 
 #### Test trin 11
 
@@ -428,20 +430,22 @@ Gentag testene fra punkt 9-10, denne gang for `/teachers`.
 
 Del 1 er gennemført, når:
 
-- `POST` og `DELETE` svarer med `201`/`204` i stedet for standard-`200`, på både `/students` og `/teachers`
-- `GET`, `PUT` og `DELETE` på et enkelt id svarer med `404`, når id'et ikke findes, på begge ressourcer
-- `POST` og `PUT` svarer med `400`, når nødvendige felter mangler, på begge ressourcer
-- alt det, der virkede før, stadig virker uændret
+- `POST` svarer med `201` og `DELETE` med `204` på både `/students` og `/teachers`
+- `GET`, `PUT` og `DELETE` på et id, der ikke findes, svarer med `404` på begge ressourcer
+- `POST` og `PUT` svarer med `400`, når felter mangler, på begge ressourcer
+- alt, hvad der virkede før, stadig virker
 
 ---
 
 ## Del 2: Uventede fejl — try/catch og en fælles fejl-middleware
 
+Fejlene i Del 1 kunne du forudse og tjekke for med et `if`. I Del 2 handler det om fejl, du ikke kan tjekke dig ud af på forhånd, fx en datafil, der mangler eller er i stykker.
+
 ### 12. try/catch: loadStudents()
 
-**Prøv det først:** omdøb midlertidigt `data/students.json`, og send `GET http://localhost:3000/students`. Du får Express' egen HTML-fejlside, med en teknisk `ENOENT: no such file or directory` øverst og en fuld stack trace. Giv filen dens rigtige navn tilbage.
+**Prøv det først:** omdøb midlertidigt `data/students.json`, og send `GET http://localhost:3000/students`. Du får Express' HTML-fejlside med `ENOENT: no such file or directory` øverst og en lang stack trace. Giv filen dens rigtige navn tilbage.
 
-I modsætning til `404`/`400` fra Del 1 — som I selv tjekker for på forhånd — kan `loadStudents()` fejle på en måde, I ikke kan tjekke jer frem til: JSON-filen kan mangle, eller indeholde ugyldig JSON. Byg videre på `data/students.js`:
+`loadStudents()` kan fejle, hvis filen mangler, eller hvis den indeholder ugyldig JSON. Byg videre på `data/students.js`:
 
 ```js
 export async function loadStudents() {
@@ -474,36 +478,36 @@ export async function loadStudents() {
     const data = await fs.readFile("./data/students.json", "utf8");
     return JSON.parse(data);
   } catch (error) {
-    throw new Error("Kunne ikke hente studerende — data/students.json mangler eller er ugyldig.");
+    throw new Error("Kunne ikke hente studerende. data/students.json mangler eller er ugyldig.");
   }
 }
 ```
 
 </details>
 
-> **Begreb: Encapsulation.** Fra arkitektur-øvelsen: routes-filen skal ikke vide, om data ligger i en JSON-fil, en database eller et array. Det samme gælder fejlene. `ENOENT` og `SyntaxError` er detaljer om, *hvordan* data er gemt — dem gemmer `loadStudents()` nu på, og kaster i stedet en fejl, der giver mening for alle udenfor: "Kunne ikke hente studerende". Skifter I en dag JSON-filen ud med en database, ændrer fejlbeskeden sig ikke.
+> **Begreb: Encapsulation.** I arkitektur-øvelsen skulle routes-filen ikke vide, om data ligger i en JSON-fil, en database eller et array. Det gælder også fejlene. `ENOENT` og `SyntaxError` fortæller, *hvordan* data er gemt. Nu holder `loadStudents()` den detalje for sig selv og kaster i stedet en fejl, som alle kan forstå: "Kunne ikke hente studerende". Skifter du senere JSON-filen ud med en database, er fejlbeskeden den samme.
 
 #### Test trin 12
 
-Omdøb midlertidigt `data/students.json` (eller ødelæg dens indhold), og send `GET http://localhost:3000/students`. Du får stadig Express' egen fejlside — men kig øverst på siden: står der nu jeres egen, tydelige fejlbesked i stedet for `ENOENT` fra "Prøv det først"? Fejlsiden selv forsvinder først i punkt 14. Giv filen dens rigtige navn og indhold tilbage bagefter.
+Omdøb `data/students.json` midlertidigt (eller ødelæg indholdet), og send `GET http://localhost:3000/students`. Du får stadig Express' fejlside, men øverst står din egen fejlbesked i stedet for `ENOENT`. Selve fejlsiden fjerner du i punkt 14. Giv filen dens navn og indhold tilbage bagefter.
 
 ---
 
 ### 13. Gør det samme for loadTeachers()
 
-Tilføj samme `try`/`catch` til `loadTeachers()` i `data/teachers.js` — selv, uden hints.
+Tilføj `try`/`catch` til `loadTeachers()` i `data/teachers.js` selv, uden hints.
 
 #### Test trin 13
 
-Gentag testen fra punkt 12, denne gang med `data/teachers.json` og `GET /teachers`.
+Gentag testen fra punkt 12 med `data/teachers.json` og `GET /teachers`.
 
 ---
 
 ### 14. En fælles fejl-middleware i server.js
 
-Fejlen, I kaster fra `catch`-blokken i punkt 12-13, skal fanges et sted, der kan sende et ordentligt svar. Data-modulet kender ikke `response` — det gør en fejl-middleware.
+Fejlen, du kaster fra `catch` i punkt 12-13, skal fanges et sted, hvor der kan sendes et svar. Data-modulet kender ikke `response`, så det kan ikke ske dér. Det er det, en fejl-middleware er til.
 
-Tilføj nederst i `server.js`, efter begge routere er monteret:
+Tilføj nederst i `server.js`, efter begge routere:
 
 ```js
 app.use((error, request, response, next) => {
@@ -512,16 +516,16 @@ app.use((error, request, response, next) => {
 });
 ```
 
-> **Begreb: Middleware.** En middleware-funktion er kode, der kører imellem request og response. I har allerede brugt en uden at vide det: `express.json()` parser en JSON-body, før den når jeres routes. Har du lavet [øvelse 8](fetch-dom-amabot.md), er `cors()` i AMAbotten et andet eksempel — den sætter en header, før responsen sendes. `app.use()` her gør nøjagtig det samme, bare med en funktion, I selv har skrevet.
+> **Begreb: Middleware.** En middleware er en funktion, der kører mellem request og response. Du har allerede brugt en: `express.json()` læser JSON-body'en, før den når dine routes. Har du lavet [øvelse 8](fetch-dom-amabot.md), er `cors()` i AMAbotten også en middleware. Med `app.use()` tilføjer du din egen.
 >
-> Express kører middleware og routes i den rækkefølge, de står i filen. En fejl-middleware fanger kun fejl fra det, der står *over* den — derfor skal den stå efter alle jeres routere. Den har fire parametre (`error, request, response, next`) i stedet for de sædvanlige to eller tre — det er sådan, Express kan skelne den fra en almindelig middleware, og kun kalde den, når noget rent faktisk er kastet som en fejl. `GET /students` matcher fint, men kaster `loadStudents()` en fejl undervejs, ender den her.
+> Express kører middleware og routes i den rækkefølge, de står i filen. En fejl-middleware fanger kun fejl fra det, der står over den, så den skal stå efter dine routere. Den har fire parametre (`error, request, response, next`). Det er sådan, Express kan kende forskel på den og en almindelig middleware, og den bliver kun kaldt, når der er kastet en fejl.
 
-> **Begreb: Separation of Concerns.** Skal routerne så ikke også have `try`/`catch`? Nej. Når `await loadStudents()` kaster en fejl inde i en `async` route, sender Express selv fejlen videre til fejl-middlewaren. Hver del har nu ét ansvar: data-modulet *opdager* fejlen og beskriver den (men kender ikke `response`), fejl-middlewaren *sender svaret*, og routerne kan blive ved med kun at beskrive den lykkelige vej.
+> **Begreb: Separation of Concerns.** Skal routerne så også have `try`/`catch`? Nej. Når `await loadStudents()` kaster en fejl i en `async` route, sender Express selv fejlen videre til fejl-middlewaren. Hver del har sit eget ansvar: data-modulet opdager fejlen og beskriver den, fejl-middlewaren sender svaret, og routerne handler stadig kun om den lykkelige vej.
 
 <details>
 <summary>Sådan ville det se ud uden en fejl-middleware</summary>
 
-Uden fejl-middlewaren skulle hver eneste route selv fange fejlen og sende `500`:
+Uden fejl-middlewaren skulle hver route selv fange fejlen og sende `500`:
 
 ```js
 router.get("/", async (request, response) => {
@@ -534,25 +538,25 @@ router.get("/", async (request, response) => {
 });
 ```
 
-Og præcis det samme `try`/`catch` i `GET /:id`, `POST`, `PUT` og `DELETE` — på både `/students` og `/teachers`.
+Og det samme `try`/`catch` i `GET /:id`, `POST`, `PUT` og `DELETE` på både `/students` og `/teachers`.
 
 </details>
 
-> **Begreb: DRY — denne gang løst.** Uden fejl-middlewaren (se togglen ovenfor) ville I have ti kopier af den samme fejlhåndtering, som alle skulle rettes, hvis I fx ville ændre fejlbeskedens facon. Med fejl-middlewaren er der én. Det er det, DRY handler om: ikke at al gentagelse er forbudt — 404-tjekkene fra punkt 8 er fine — men at logik, der skal være ens overalt, bor ét sted.
+> **Begreb: DRY igen.** Uden fejl-middlewaren ville du have ti kopier af den samme fejlhåndtering, og vil du ændre, hvordan fejlsvaret ser ud, skal du rette alle ti. Med fejl-middlewaren er der én. Så DRY betyder ikke, at al gentagelse er forbudt. 404-tjekkene fra punkt 8 er fine. Det betyder, at logik, der skal være ens overalt, skal ligge ét sted.
 
 #### Test trin 14
 
-Gentag testen fra punkt 12 (omdøb `data/students.json` midlertidigt, send `GET /students`). Får I nu et rent JSON-svar — `{ "error": "Kunne ikke hente studerende — ..." }` med status `500` — i stedet for Express' fejlside? Giv filen dens rigtige navn og indhold tilbage bagefter.
+Gentag testen fra punkt 12: omdøb `data/students.json` midlertidigt, og send `GET /students`. Nu skal du få status `500` og `{ "error": "Kunne ikke hente studerende. ..." }` som JSON i stedet for Express' fejlside. Giv filen dens navn og indhold tilbage bagefter.
 
-Prøv derefter at sende `POST http://localhost:3000/students` helt **uden** body — slå body'en fra i Thunder Client, i stedet for at sende `{}`. Du får `500` med beskeden `Cannot read properties of undefined (reading 'name')`, ikke `400`. Uden en body er `request.body` slet ikke et objekt, men `undefined` — så jeres `if`-tjek fra punkt 9 crasher, før det overhovedet når at tjekke noget. Det er præcis den slags uforudsete fejl, fejl-middlewaren er til: I har ikke tænkt på den, men klienten får stadig et rent JSON-svar i stedet for Express' fejlside.
+Send derefter `POST http://localhost:3000/students` helt **uden** body. Slå body'en fra i Thunder Client, send ikke bare `{}`. Du får `500` med `Cannot read properties of undefined (reading 'name')` og ikke `400`. Uden body er `request.body` `undefined`, så dit `if`-tjek fra punkt 9 crasher, før det når at tjekke noget. Den fejl havde du ikke tænkt på, men klienten får alligevel et JSON-svar. Det er derfor, du har en fejl-middleware.
 
 ---
 
 ### 15. En 404-catch-all i server.js
 
-**Prøv det først:** send `GET http://localhost:3000/noget-der-ikke-findes`. Du får `404` — men som en lille HTML-side med teksten `Cannot GET /noget-der-ikke-findes`, ikke som JSON, som resten af jeres API svarer med. Fejl-middlewaren fra punkt 14 fanger den ikke, for der er ikke kastet nogen fejl — ingen route matchede bare.
+**Prøv det først:** send `GET http://localhost:3000/noget-der-ikke-findes`. Du får `404`, men som en lille HTML-side med teksten `Cannot GET /noget-der-ikke-findes` og ikke som JSON. Fejl-middlewaren fanger den ikke, for der er ikke kastet nogen fejl. Der er bare ingen route, der passer.
 
-Tilføj en almindelig middleware i `server.js`, efter begge routere, men *over* fejl-middlewaren fra punkt 14 — fejl-middlewaren skal altid stå allersidst:
+Tilføj en almindelig middleware i `server.js` efter dine routere, men over fejl-middlewaren. Fejl-middlewaren skal altid stå sidst:
 
 ```js
 app.use((request, response) => {
@@ -560,29 +564,30 @@ app.use((request, response) => {
 });
 ```
 
-> **Forskellen på punkt 14 og 15:** Fejl-middlewaren fanger en **fejl inde i en route, der faktisk matchede**. 404-catch-all'en fanger en **sti, der slet ikke findes** — Express springer videre fra middleware til middleware, og kommer en request helt ned til bunden uden at være matchet af `/students` eller `/teachers`, ender den her. Send fx `GET /students/1` — den matcher `/students/:id`, og denne middleware ser den aldrig. Send `GET /noget-helt-andet` — intet matcher, og den lander her.
+> **Forskellen på punkt 14 og 15:** Fejl-middlewaren fanger **fejl i en route, der passede**. 404-catch-all'en fanger **stier, som ingen route passer på**. Express går ned gennem filen, og når en request når bunden uden at have ramt `/students` eller `/teachers`, lander den her. `GET /students/1` rammer `/students/:id` og når aldrig herned. `GET /noget-helt-andet` rammer ingenting og lander her.
 
 #### Test trin 15
 
-Send `GET http://localhost:3000/noget-der-ikke-findes`. Du skal nu få `404` og `{ "error": "Ukendt sti." }` som JSON. Send derefter `GET /students/1` igen — den skal stadig give jer den rigtige studerende, ikke `404`\-svaret fra denne middleware.
+Send `GET http://localhost:3000/noget-der-ikke-findes`. Du skal nu få `404` og `{ "error": "Ukendt sti." }` som JSON. Send derefter `GET /students/1`. Den skal stadig give dig den studerende og ikke `404`.
 
 ## Tjekpunkt: Del 2
 
 Del 2 er gennemført, når:
 
 - `loadStudents()` og `loadTeachers()` fanger deres egne fejl og kaster en tydelig, dansk fejlbesked videre
-- en uventet fejl (fx en ødelagt datafil) svarer med `500` og jeres egen fejlbesked som JSON, i stedet for Express' HTML-fejlside
-- en ukendt sti svarer med `404` og JSON, i stedet for Express' standardtekst
+- en uventet fejl, fx en ødelagt datafil, giver `500` og din egen fejlbesked som JSON i stedet for Express' HTML-fejlside
+- en ukendt sti giver `404` og JSON i stedet for Express' standardtekst
 
 ## Reflektér over din læring
 
-Når du er færdig, skal du gerne kunne forklare:
+Når du er færdig, skal du kunne forklare:
 
-1. Hvad er forskellen på en fejl, I selv tjekker for med et `if` (som `404`/`400` i Del 1), og en fejl, I fanger med `try`/`catch` (som i Del 2)? Hvorfor duer et `if`-tjek ikke til en ødelagt datafil?
-2. Hvor meget af Del 1-2 tror du, du kan genbruge uændret, når du snart overfører det til `/messages` og `/answers` i din egen AMAbot?
-3. I punkt 12 kastede I en ny, tydelig fejl i `catch`-blokken i stedet for bare at fange og ignorere den oprindelige. Hvad ville der være sket, hvis I i stedet havde ladet `catch`-blokken være tom?
-4. Peg på ét sted i din kode, hvor en fejl nu ender som `{ error: "..." }`, uanset om den kom fra et `404`\-, `400`\- eller `500`\-svar.
+1. Hvad er forskellen på en fejl, du tjekker for med et `if` (`404`/`400` i Del 1), og en fejl, du fanger med `try`/`catch` (Del 2)? Hvorfor kan et `if` ikke klare en ødelagt datafil?
+2. I punkt 12 kastede du en ny fejl i `catch`-blokken. Hvad ville der ske, hvis du i stedet lod `catch`-blokken være tom? Prøv det, hvis du er i tvivl.
+3. Hvem gør hvad, når datafilen er i stykker: data-modulet, routen og fejl-middlewaren?
+4. Alle dine fejlsvar har nu samme form: `{ error: "..." }`. Hvorfor er det en fordel for den, der bruger dit API, fx din frontend?
+5. Hvor meget af det her kan du genbruge uændret, når du skal lave det samme for `/messages` og `/answers` i din AMAbot?
 
 ## Videre
 
-`/students` og `/teachers` håndterer nu de samme typer fejl, et rigtigt REST API bør: forudsigelige tjek (`404`/`400`) og uventede fejl (`try`/`catch` og en fælles fejl-middleware). Brug gerne de samme mønstre — eksplicitte statuskoder, tjek før I handler, `try`/`catch` om det, der kan fejle uforudsigeligt — når I snart går videre til jeres eget projekt. Overfør dem først selv til jeres egen AMAbot i [øvelse 9](express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md), som også lukker to sikkerhedshuller, der kun findes dér: `cors()` og XSS i `POST /messages`.
+`/students` og `/teachers` håndterer nu både de fejl, du kan forudse (`404`/`400`), og dem, du ikke kan (`try`/`catch` og fejl-middleware). Næste skridt er at gøre det samme i din egen AMAbot i [øvelse 9](express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md). Der lukker du også to sikkerhedshuller, som kun findes i AMAbotten: `cors()` og XSS i `POST /messages`. Tag de samme mønstre med, når du senere går i gang med dit eget projekt.
