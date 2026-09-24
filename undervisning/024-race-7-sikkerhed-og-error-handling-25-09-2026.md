@@ -19,7 +19,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - To og to: åbn jeres eget `/students`\- eller `/teachers`\-API, og prøv bevidst at ødelægge det — send et ugyldigt id, en tom body, et forkert felt-navn
 - Prøv konkret `PUT /students/999` (et id, der ikke findes) — hvad sker der i terminalen, og hvad får I tilbage i Thunder Client?
 - Prøv også: omdøb midlertidigt `data/students.json` (eller slet dens indhold), og send `GET /students` — hvad sker der nu, og hvor i koden går det galt? Giv filen dens rigtige navn og indhold tilbage bagefter
-- Kort opsamling i plenum: hvor mange forskellige måder viser "det gik galt" sig på lige nu — et tavst `null`, Express' egen fejlside med en fuld stack trace (både fra et ugyldigt id og fra en ødelagt datafil), eller bare et statuskode-tal, der ikke passer med, hvad der faktisk skete?
+- Kort opsamling i plenum: hvor mange forskellige måder viser "det gik galt" sig på lige nu — et tomt svar med `200 OK`, Express' egen fejlside med en fuld stack trace (fra et ugyldigt id, en manglende body og en ødelagt datafil), eller bare et statuskode-tal, der ikke passer med, hvad der faktisk skete?
 </details>
 <details>
 <summary><strong>2. Statuskoder, for alvor denne gang</strong></summary>
@@ -49,30 +49,32 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 <summary><strong>5. try/catch: fang selv en fejl, dér hvor den opstår</strong></summary>
 
 - JavaScripts generelle mekanisme til at håndtere en fejl: `try { ... } catch (error) { ... }` — går noget galt inde i `try`-blokken, springer resten af den over, og `catch`-blokken kører i stedet, med selve fejlen i `error`
-- Konkret brug i dag: `loadStudents()`/`loadTeachers()` kan fejle, hvis JSON-filen mangler eller indeholder ugyldig JSON — præcis det, I selv fremprovokerede i opsamlingen. Pak `fs.readFile()`/`JSON.parse()` ind i `try`/`catch`, så I selv kan sende en tydelig fejlbesked i stedet for at lade fejlen poppe videre op uhåndteret
+- Konkret brug i dag: `loadStudents()`/`loadTeachers()` kan fejle, hvis JSON-filen mangler eller indeholder ugyldig JSON — præcis det, I selv fremprovokerede i opsamlingen. Pak `fs.readFile()`/`JSON.parse()` ind i `try`/`catch`, og kast en ny, tydelig fejl videre i `catch`-blokken, i stedet for en teknisk `ENOENT`/`SyntaxError`. Data-modulet kender ikke `response` — det er fejl-middlewaren i næste punkt, der sender selve svaret
 - I skal ikke `try`/`catch` hver eneste route i dag — kun hvor I selv har brug for at reagere på en bestemt fejl
 - Mere om `try`/`catch` — denne gang omkring `fetch()` og fejl fra serveren i klienten — er emnet, [næste DOB-gang](./025-dob-7-client-side-error-handling-28-09-2026.md) tager fat på
-- Hands-on: tilføj `try`/`catch` omkring jeres `loadX()`\-funktioner, og send selv en tydelig fejlbesked, hvis noget går galt
+- Hands-on: tilføj `try`/`catch` omkring jeres `loadX()`\-funktioner, og kast en tydelig fejlbesked videre, hvis noget går galt
 </details>
 <details>
 <summary><strong>6. Middleware, generelt — og en fælles fejl-middleware</strong></summary>
 
 - Begreb, sat på noget I allerede har brugt uden at vide det: en middleware-funktion er kode, der kører imellem request og response — `express.json()` og `cors()` er begge middleware, monteret med `app.use()`
 - En 404-catch-all: en sidste `app.use(...)` nederst i filen, der rammer enhver sti, ingen anden route matchede — noget andet end 404-tjekket fra før, som handler om et ugyldigt id på en sti, der ellers findes
-- Express' særlige fejl-middleware: fire parametre (`err, request, response, next`) i stedet for de sædvanlige tre — Express genkender den automatisk på antallet af parametre, og kalder den, når en fejl ikke selv er fanget med `try`/`catch` undervejs, som i sidste punkt
+- Express' særlige fejl-middleware: fire parametre (`error, request, response, next`) i stedet for de sædvanlige tre — Express genkender den automatisk på antallet af parametre, og kalder den kun, når en fejl er kastet og ikke håndteret færdigt undervejs — både de fejl, I selv kaster videre fra `catch` i sidste punkt, og dem, I slet ikke har forudset
 - Uden en fejl-middleware svarer Express selv med sin egen HTML-fejlside — inklusive en fuld stack trace, som en rigtig klient aldrig bør se. I stedet: `response.status(500).json({ error: "..." })` — samme `{ error: "..." }`\-facon som `404`\- og `400`\-svarene, så alle fejl fra API'et ser ens ud, uanset hvor de opstår
+- Godt eksempel på en fejl, ingen har forudset: `POST /students` helt uden body fra opsamlingen — `request.body` er `undefined`, så selv 400-tjekket crasher. Med fejl-middlewaren bliver det et rent `500`\-svar
 - Hands-on: tilføj en 404-catch-all og en fælles fejl-middleware nederst i `server.js`, så en uventet fejl ét sted i systemet giver et rent, forudsigeligt JSON-svar i stedet for Express' standard-fejlside
+- Overfør derefter selv hele mønsteret fra punkt 2-6 til `/messages` og `/answers` i jeres AMAbot — [øvelse 9, Del 1](../opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md), i eget tempo. CORS og XSS i punkt 7-8 er Del 2, og kan laves uafhængigt af Del 1
 </details>
 <details>
 <summary><strong>7. CORS: fra "tillad alt" til "tillad jeres egen frontend"</strong></summary>
 
-- Demo: åbn DevTools-konsollen på en helt tilfældig side (ikke jeres egen), og kald `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)` direkte derfra — det virker, fordi `cors()` uden argumenter lige nu tillader alle origins
+- Demo: åbn AMAbottens frontend på `http://localhost:5500` i stedet for `http://127.0.0.1:5500` — samme side, men en anden origin — og kald `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)` direkte fra DevTools-konsollen — det virker, fordi `cors()` uden argumenter lige nu tillader alle origins. (En vilkårlig offentlig hjemmeside virker også, men Chrome spørger så om adgang til det lokale netværk, hvilket forstyrrer pointen)
 - Genopfrisk: browserens same-origin policy blokerer som udgangspunkt `fetch()` på tværs af origins — det er derfor AMAbottens frontend først virkede, da `cors()` blev tilføjet på serveren
 - `app.use(cors())` uden argumenter sætter HTTP-headeren `Access-Control-Allow-Origin: *` — enhver hjemmeside kan nu kalde jeres API fra en brugers browser, ikke kun jeres egen frontend
-- Diskutér: hvad kunne gå galt, hvis en helt fremmed hjemmeside kaldte jeres `/students`\- eller `/messages`\-API fra en brugers browser?
+- Diskutér: hvad kunne gå galt, hvis en helt fremmed hjemmeside kaldte jeres `/messages`\- eller `/answers`\-API fra en brugers browser? (`/students` har aldrig fået `cors()`, så dér blokerer browseren allerede)
 - Send samtidig samme request i Thunder Client — den lykkes altid, uanset `cors()`-opsætningen. CORS er noget browseren håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på
 - Løsningen: begræns til den origin, I selv bruger — `cors({ origin: "http://127.0.0.1:5500" })`
-- Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren. Gentag demoens `fetch()` fra den fremmede side igen — den skal nu fejle med en CORS-fejl i konsollen. Bekræft til sidst, at jeres egen frontend stadig virker
+- Hands-on: ret `cors()`\-opsætningen i AMAbot-serveren. Gentag demoens `fetch()` fra `http://localhost:5500` igen — den skal nu fejle med en CORS-fejl i konsollen. Bekræft til sidst, at jeres egen frontend stadig virker
 </details>
 <details>
 <summary><strong>8. Sikkerhed i data: escape brugerens tekst på serveren (XSS)</strong></summary>
@@ -82,7 +84,7 @@ Til sidst lukker vi to konkrete sikkerhedshuller, I allerede har mødt uden at l
 - Begreb: **Cross-Site Scripting (XSS)** — når en brugers egen tekst kan udføre kode i en andens browser, fordi den aldrig blev renset for HTML, før den blev gemt og sendt videre
 - Værre endnu: AMAbottens eget svar har samme problem — og `/answers` har ingen adgangskontrol, så en plantet, ondsindet svarregel rammer *alle*, der senere stiller et matchende spørgsmål, ikke kun afsenderen selv
 - Løsningen: en lille `escapeHtml()`\-funktion på serveren, der erstatter `<`, `>`, `&`, `"` og `'` med deres HTML-entities, kørt på både spørgsmål og svar, før de gemmes
-- Hands-on: tilføj `escapeHtml()` til `POST /messages`, gentag angrebet fra demoen, og bekræft at `data/messages.json` nu indeholder den escapede tekst i stedet for rå HTML
+- Hands-on: tilføj `escapeHtml()` til `POST /messages`, gentag angrebet fra demoen, og bekræft at `data/messages.json` nu indeholder den escapede tekst i stedet for rå HTML. Ryd først den gamle besked fra demoen med `DELETE /messages` — `escapeHtml()` beskytter kun det, der gemmes fra nu af
 </details>
 
 ---

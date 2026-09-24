@@ -31,7 +31,7 @@ Et par ting, der er anderledes end på `/students`/`/teachers`, og som du selv s
 
 - `/messages` har ingen `:id`\-baserede routes — kun `GET`, `POST` og `DELETE` på hele samlingen. `404`\-mønsteret giver derfor kun mening på `/answers/:category`, ikke på `/messages`.
 - `/answers/:category` bruger `category` (en string) i stedet for et numerisk id — men selve `404`\-tjekket (`find()`, så `if (!x) { ... }`) er identisk.
-- `POST /messages` har allerede en valideringstjek for et tomt spørgsmål, fra øvelse 6 — den skal bare have `.status(400)` tilføjet.
+- `POST /messages` har allerede et valideringstjek for et tomt spørgsmål, fra øvelse 6 — det skal bare have `.status(400)` tilføjet.
 - `POST /answers` og `PUT /answers/:category` har ingen validering endnu — tilføj den.
 - `try`/`catch` skal om `loadMessages()` og `loadAnswers()` i deres respektive data-moduler.
 - 404-catch-all'en og fejl-middlewaren tilføjes i AMAbot-serverens `server.js` — der er kun én af hver, uanset hvor mange routere der er monteret.
@@ -48,15 +48,21 @@ git push
 
 ### 2. Statuskoder, 404 og 400 på /messages og /answers
 
+**Prøv det først:** send `PUT http://localhost:3000/answers/findes-ikke` med en body, og `POST http://localhost:3000/answers` med `{ "category": "test" }` — uden `keywords` og `answer`. Den første giver Express' HTML-fejlside, den anden opretter en halv regel. Slet den igen med `DELETE /answers/test`.
+
 Gennemgå `/messages` og `/answers` med samme blik som `/students`/`/teachers`: hvor mangler en eksplicit `201`/`204`? Hvor kan `find()` returnere `undefined`? Hvor mangler der et tjek for, om `request.body` faktisk indeholder det nødvendige?
 
 #### Test trin 2
 
 Kør hele `/messages`\- og `/answers`\-flowet igennem i Thunder Client, inklusive et ugyldigt `category` og en ufuldstændig body. Bekræft `201`/`204`/`404`/`400`, hvor de hører hjemme.
 
+> Har du en frontend fra [øvelse 8](fetch-dom-amabot.md), viser Network-fanen nu `201` på `POST /messages` og `204` på `DELETE /messages`, hvor øvelse 8 bad dig bekræfte `200`. Det er forventet — frontenden virker uændret, fordi `fetch()` behandler alle 2xx-koder som succes.
+
 ---
 
 ### 3. try/catch og fejl-middleware i AMAbotten
+
+**Prøv det først:** omdøb midlertidigt `data/messages.json`, send `GET /messages`, og se Express' fejlside med `ENOENT`. Send også `GET /noget-der-ikke-findes`. Giv filen dens rigtige navn tilbage.
 
 Tilføj `try`/`catch` om `loadMessages()` og `loadAnswers()`, og montér en 404-catch-all og en fælles fejl-middleware nederst i AMAbot-serverens `server.js`.
 
@@ -76,7 +82,12 @@ Disse to rettelser er nye — der er intet at overføre fra `/students`/`/teache
 
 ### 4. CORS: begræns til jeres egen frontend
 
-**Prøv det først:** åbn DevTools-konsollen på en vilkårlig anden hjemmeside (ikke jeres egen), og kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)`. Den virker lige nu — I får jeres beskeder tilbage, selvom kaldet kommer fra et helt fremmed sted. Det er det, I retter i dette trin.
+**Prøv det først** — men kun hvis du har `app.use(cors())` fra [øvelse 8](fetch-dom-amabot.md). Har du ikke, blokerer browseren allerede alle andre origins, og der er intet at ødelægge endnu; spring direkte videre.
+
+Åbn en side på en *anden* origin end jeres frontend, åbn DevTools-konsollen dér, og kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)`. Den virker — I får jeres beskeder tilbage, selvom kaldet kommer fra et helt fremmed sted. Det er det, I retter i dette trin.
+
+- **Den nemmeste fremmede origin:** åbn jeres frontend på `http://localhost:5500` i stedet for `http://127.0.0.1:5500`. Det er samme side og samme computer — men en **anden origin**, fordi værtsnavnet er et andet. Browseren sammenligner origins som tekst, ikke som "hvor peger det hen".
+- **Alternativt:** brug en vilkårlig offentlig hjemmeside. Spørger Chrome, om siden må få adgang til enheder på dit lokale netværk, så klik *Tillad* — ellers fejler kaldet af en helt anden grund end CORS.
 
 **Har du allerede `cors()` installeret** (fra [øvelse 8](fetch-dom-amabot.md))? Find `app.use(cors());` i `server.js`, og ret den til:
 
@@ -104,8 +115,8 @@ app.use(cors({ origin: "http://127.0.0.1:5500" }));
 
 Ingen af disse tests kræver, at I har bygget frontenden i øvelse 8 — kun at serveren kører.
 
-1. **I Thunder Client:** send `GET http://localhost:3000/messages`, og tilføj selv en header `Origin: http://127.0.0.1:5500` (den adresse, jeres frontend kører eller kommer til at køre på). Kig i response-headers efter `Access-Control-Allow-Origin` — den skal matche. Skift nu headeren til `Origin: http://example.com`, og send igen. `Access-Control-Allow-Origin` mangler nu i svaret, eller matcher ikke — men requesten lykkes stadig med `200` i Thunder Client, med præcis samme data som før. Det er selve pointen: CORS er noget **browseren** håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på — Thunder Client er ikke en browser, så den er ligeglad med, hvad headeren siger.
-2. **Gentag "Prøv det først" fra oven,** fra samme fremmede hjemmeside: kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)` igen. Den skal nu fejle med en CORS-fejl i konsollen — modsat før I rettede `cors()`\-opsætningen, hvor den samme request virkede. Og modsat Thunder Client i punkt 1, hvor requesten stadig altid lykkes.
+1. **I Thunder Client:** send `GET http://localhost:3000/messages`, og tilføj selv en header `Origin: http://127.0.0.1:5500` (den adresse, jeres frontend kører eller kommer til at køre på). Kig i response-headers efter `Access-Control-Allow-Origin` — den skal matche. Skift nu headeren til `Origin: http://example.com`, og send igen. `Access-Control-Allow-Origin` står der stadig — men den siger `http://127.0.0.1:5500`, ikke `http://example.com`. Serveren fortæller altså, hvilken origin der må læse svaret, og en browser på `example.com` ville afvise det. Alligevel lykkes requesten stadig med `200` i Thunder Client, med præcis samme data som før. Det er selve pointen: CORS er noget **browseren** håndhæver på selve JavaScript-kaldet, ikke noget serveren nogensinde nægter at svare på — Thunder Client er ikke en browser, så den er ligeglad med, hvad headeren siger.
+2. **Gentag "Prøv det først" fra oven,** fra samme fremmede side (fx `http://localhost:5500`): kør `fetch("http://localhost:3000/messages").then(r => r.json()).then(console.log)` igen. Den skal nu fejle med en CORS-fejl i konsollen — havde du `cors()` fra øvelse 8, er det modsat før, hvor den samme request virkede. Og modsat Thunder Client i punkt 1, hvor requesten stadig altid lykkes.
 
 **Har du en frontend kørende fra øvelse 8?** Så også:
 
@@ -117,6 +128,8 @@ Ingen af disse tests kræver, at I har bygget frontenden i øvelse 8 — kun at 
 ### 5. XSS: escapeHtml() i POST /messages
 
 Lige nu gemmer og sender `POST /messages` både `question` og AMAbottens svar helt uredigeret. Svaret er lige så vigtigt at rense som spørgsmålet: `/answers` har ingen adgangskontrol, så enhver, der kan kalde `POST /answers`/`PUT /answers/:category`, kan lige nu plante et svar med HTML i — og det svar bliver vist til *alle*, der senere stiller et spørgsmål, der matcher, ikke kun den, der oprettede det. Det gør det til et endnu mere alvorligt hul end selve spørgsmålet, som kun rammer afsenderen selv.
+
+**Prøv det først:** send `POST http://localhost:3000/messages` i Thunder Client med body `{ "question": "<img src=x onerror=\"alert('hacked')\">" }`. Åbn `data/messages.json` — teksten ligger der præcis, som den blev sendt, som rå HTML. Har du en frontend fra [øvelse 8](fetch-dom-amabot.md), så genindlæs den: `insertAdjacentHTML()` tolker teksten som HTML, billedet fejler med vilje, og `alert('hacked')` kører — i din browser, selvom det var "bare" et spørgsmål. Og den kører igen, hver gang siden genindlæses, fordi beskeden nu er gemt på serveren.
 
 Tilføj en lille hjælpefunktion i den fil, hvor jeres `POST /messages`\-logik bor (`routes/messages.js`, eller `controllers/messagesController.js`, hvis du lavede det valgfrie punkt 5 i øvelse 7):
 
@@ -176,7 +189,9 @@ const answerMessage = { type: "answer", text: escapeHtml(result.answer), created
 
 #### Test trin 5
 
-Send `POST http://localhost:3000/messages` med body `{ "question": "<img src=x onerror=\"alert('hacked')\">" }`. Åbn `data/messages.json`, og bekræft at teksten nu er gemt som `&lt;img src=x onerror=...&gt;` i stedet for rå HTML. Send derefter et almindeligt spørgsmål igen, og bekræft at det stadig fungerer som før.
+Ryd først den gamle, uescapede besked fra "Prøv det først" med `DELETE http://localhost:3000/messages` — ellers ligger den stadig i `data/messages.json` og kører igen i frontenden, selvom rettelsen virker. `escapeHtml()` beskytter kun det, der gemmes fra nu af.
+
+Send derefter samme angreb igen: `POST http://localhost:3000/messages` med body `{ "question": "<img src=x onerror=\"alert('hacked')\">" }`. Åbn `data/messages.json`, og bekræft at teksten nu er gemt som `&lt;img src=x onerror=...&gt;` i stedet for rå HTML. Har du en frontend, så genindlæs den: spørgsmålet vises nu som almindelig tekst, præcis som det blev skrevet, og der kommer ingen `alert`. Send til sidst et almindeligt spørgsmål, og bekræft at det stadig fungerer som før.
 
 Test derefter den anden vej: opret en ny svarregel via `POST /answers` med HTML i `answer`, fx `{ "category": "test", "keywords": ["test"], "answer": "<b>hej</b>" }`. Spørg AMAbotten om noget, der matcher (`POST /messages` med `"question": "test"`), og bekræft at svaret i `data/messages.json` også er escapet. Slet testreglen igen med `DELETE /answers/test` bagefter.
 

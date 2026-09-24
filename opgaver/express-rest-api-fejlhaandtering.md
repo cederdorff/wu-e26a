@@ -39,7 +39,9 @@ git push
 
 ### 2. Statuskoder: POST /students opretter noget — 201
 
-`POST /students` opretter en ny studerende, men svarer stadig med Express' standard-`200`. Find sidste linje i `router.post("/", ...)` i `routes/students.js`:
+**Prøv det først:** send `POST http://localhost:3000/students` med en ny studerende, og kig i Thunder Clients statuslinje. Der står `200 OK` — selvom der netop er oprettet noget nyt.
+
+`POST /students` svarer med Express' standard-`200`, fordi I aldrig selv har sat en statuskode. Find sidste linje i `router.post("/", ...)` i `routes/students.js`:
 
 ```js
 response.json(newStudent);
@@ -87,7 +89,9 @@ Opret og slet en lærer. Bekræft `201` på oprettelsen, og `204` på sletningen
 
 ### 5. 404: GET /students/:id
 
-Beder du om et id, der ikke findes, får du i dag `null` tilbage med `200 OK` — en fejl, der ser ud som en succes. Byg videre på `GET /students/:id` i `routes/students.js`:
+**Prøv det først:** send `GET http://localhost:3000/students/999999`. Du får `200 OK` og et helt tomt svar — Thunder Client viser ingen body overhovedet. En fejl, der ser ud som en succes.
+
+Byg videre på `GET /students/:id` i `routes/students.js`:
 
 ```js
 router.get("/:id", async (request, response) => {
@@ -133,13 +137,15 @@ router.get("/:id", async (request, response) => {
 
 #### Test trin 5
 
-Send `GET http://localhost:3000/students/999999`. Du skal nu få `404` og en tydelig fejlbesked som JSON, i stedet for `null` med `200`. Bekræft bagefter, at et id, der faktisk findes, stadig virker som før.
+Send `GET http://localhost:3000/students/999999`. Du skal nu få `404` og en tydelig fejlbesked som JSON, i stedet for et tomt svar med `200`. Bekræft bagefter, at et id, der faktisk findes, stadig virker som før.
 
 ---
 
 ### 6. 404: PUT /students/:id
 
-Samme mønster, denne gang før opdateringen — I skal ikke kunne opdatere en studerende, der ikke findes:
+**Prøv det først:** send `PUT http://localhost:3000/students/999999` med en body. Denne gang får I ikke et tomt svar, men Express' egen HTML-fejlside med `Cannot set properties of undefined (setting 'name')` og en fuld stack trace — `find()` gav `undefined`, og routen prøvede alligevel at sætte `student.name`.
+
+Samme mønster som i punkt 5, denne gang før opdateringen — I skal ikke kunne opdatere en studerende, der ikke findes:
 
 ```js
 router.put("/:id", async (request, response) => {
@@ -189,7 +195,12 @@ Send `PUT http://localhost:3000/students/999999` med en body. Du skal få `404`.
 
 ### 7. 404: DELETE /students/:id
 
-Uanset om du bruger `findIndex()`/`splice()` eller `filter()` til selve sletningen, fortæller ingen af dem dig, om der overhovedet var noget at slette. Tilføj et tjek, før du sletter:
+**Prøv det først:** send `GET /students`, og læg mærke til, hvem der står sidst. Send derefter `DELETE http://localhost:3000/students/999999`, og `GET /students` igen.
+
+- Bruger du `findIndex()`/`splice()`, er den **sidste** studerende nu væk — `findIndex()` returnerer `-1`, og `splice(-1, 1)` fjerner det sidste element. Du så det samme i [REST API-øvelsen](express-rest-api-students.md). Hent den slettede studerende tilbage med `git checkout data/students.json`.
+- Bruger du `filter()`, sker der ingenting — men svaret er stadig `204`, som om sletningen lykkedes.
+
+Ingen af dem fortæller dig, om der overhovedet var noget at slette. Tilføj et tjek, før du sletter:
 
 ```js
 router.delete("/:id", async (request, response) => {
@@ -272,7 +283,9 @@ Gentag testene fra punkt 5-7, denne gang for `/teachers`.
 
 ### 9. 400: POST /students uden validering
 
-Lige nu opretter `POST /students` en studerende, uanset hvad — selv en helt tom body. Byg videre på routen:
+**Prøv det først:** send `POST http://localhost:3000/students` med `{ "name": "Test" }` — uden `education`. Du får `201 Created`, og i `data/students.json` ligger der nu en studerende uden uddannelse. Slet den igen bagefter.
+
+`POST /students` opretter en studerende, uanset hvad der står i body'en. Byg videre på routen:
 
 ```js
 router.post("/", async (request, response) => {
@@ -422,6 +435,8 @@ Del 1 er gennemført, når:
 
 ### 12. try/catch: loadStudents()
 
+**Prøv det først:** omdøb midlertidigt `data/students.json`, og send `GET http://localhost:3000/students`. Du får Express' egen HTML-fejlside, med en teknisk `ENOENT: no such file or directory` øverst og en fuld stack trace. Giv filen dens rigtige navn tilbage.
+
 I modsætning til `404`/`400` fra Del 1 — som I selv tjekker for på forhånd — kan `loadStudents()` fejle på en måde, I ikke kan tjekke jer frem til: JSON-filen kan mangle, eller indeholde ugyldig JSON. Byg videre på `data/students.js`:
 
 ```js
@@ -464,7 +479,7 @@ export async function loadStudents() {
 
 #### Test trin 12
 
-Omdøb midlertidigt `data/students.json` (eller ødelæg dens indhold), og send `GET http://localhost:3000/students`. Du får stadig Express' egen fejlside — men kig øverst på siden: står der nu jeres egen, tydelige fejlbesked i stedet for en teknisk `ENOENT`/`SyntaxError`? Giv filen dens rigtige navn og indhold tilbage bagefter.
+Omdøb midlertidigt `data/students.json` (eller ødelæg dens indhold), og send `GET http://localhost:3000/students`. Du får stadig Express' egen fejlside — men kig øverst på siden: står der nu jeres egen, tydelige fejlbesked i stedet for `ENOENT` fra "Prøv det først"? Fejlsiden selv forsvinder først i punkt 15. Giv filen dens rigtige navn og indhold tilbage bagefter.
 
 ---
 
@@ -480,7 +495,9 @@ Gentag testen fra punkt 12, denne gang med `data/teachers.json` og `GET /teacher
 
 ### 14. En 404-catch-all i server.js
 
-Lige nu svarer en ukendt sti (fx `GET /noget-der-ikke-findes`) med Express' egen "Cannot GET ..."-tekst. Tilføj nederst i `server.js`, efter begge routere er monteret:
+**Prøv det først:** send `GET http://localhost:3000/noget-der-ikke-findes`. Du får `404` — men som en lille HTML-side med teksten `Cannot GET /noget-der-ikke-findes`, ikke som JSON, som resten af jeres API svarer med.
+
+Tilføj nederst i `server.js`, efter begge routere er monteret:
 
 ```js
 app.use((request, response) => {
@@ -500,7 +517,7 @@ Send `GET http://localhost:3000/noget-der-ikke-findes`. Du skal nu få `404` og 
 
 ### 15. En fælles fejl-middleware i server.js
 
-Tilføj helt nederst i `server.js`, efter 404-catch-all'en fra punkt 14 — rækkefølgen betyder noget, Express bruger den sidst tilføjede matchende middleware:
+Tilføj helt nederst i `server.js`, efter 404-catch-all'en fra punkt 14. Express kører middleware og routes i den rækkefølge, de står i filen — en fejl-middleware fanger kun fejl fra det, der står *over* den, så den skal stå efter alle jeres routere:
 
 ```js
 app.use((error, request, response, next) => {
@@ -517,6 +534,8 @@ app.use((error, request, response, next) => {
 
 Gentag testen fra punkt 12 (omdøb `data/students.json` midlertidigt, send `GET /students`). Får I nu et rent JSON-svar — `{ "error": "Kunne ikke hente studerende — ..." }` med status `500` — i stedet for Express' fejlside? Giv filen dens rigtige navn og indhold tilbage bagefter.
 
+Prøv til sidst at sende `POST http://localhost:3000/students` helt **uden** body — slå body'en fra i Thunder Client, i stedet for at sende `{}`. Du får `500` med beskeden `Cannot read properties of undefined (reading 'name')`, ikke `400`. Uden en body er `request.body` slet ikke et objekt, men `undefined` — så jeres `if`-tjek fra punkt 9 crasher, før det overhovedet når at tjekke noget. Det er præcis den slags uforudsete fejl, fejl-middlewaren er til: I har ikke tænkt på den, men klienten får stadig et rent JSON-svar i stedet for Express' fejlside.
+
 ## Tjekpunkt: Del 2
 
 Del 2 er gennemført, når:
@@ -532,7 +551,7 @@ Når du er færdig, skal du gerne kunne forklare:
 1. Hvad er forskellen på en fejl, I selv tjekker for med et `if` (som `404`/`400` i Del 1), og en fejl, I fanger med `try`/`catch` (som i Del 2)? Hvorfor duer et `if`-tjek ikke til en ødelagt datafil?
 2. Hvor meget af Del 1-2 tror du, du kan genbruge uændret, når du snart overfører det til `/messages` og `/answers` i din egen AMAbot?
 3. I punkt 12 kastede I en ny, tydelig fejl i `catch`-blokken i stedet for bare at fange og ignorere den oprindelige. Hvad ville der være sket, hvis I i stedet havde ladet `catch`-blokken være tom?
-4. Peg på ét sted i din kode, hvor en fejl nu ender som `{ error: "..." }`, uanset om den kom fra et `404`\- eller `400`\-svar.
+4. Peg på ét sted i din kode, hvor en fejl nu ender som `{ error: "..." }`, uanset om den kom fra et `404`\-, `400`\- eller `500`\-svar.
 
 ## Videre
 
