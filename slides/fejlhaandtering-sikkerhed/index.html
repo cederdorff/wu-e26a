@@ -1029,7 +1029,7 @@ response.status(204).send();</code></pre>
 
         <section class="fill" data-accent="orange">
           <span class="eyebrow">Samme idé i loadStudents()</span>
-          <h2>Prøv. Går det galt, så plan B.</h2>
+          <h2>Hvad kan gå galt i <code>loadStudents()</code>?</h2>
           <div class="stage">
             <div class="split" style="grid-template-columns: 0.9fr 1.1fr">
               <pre><code class="language-javascript">try {
@@ -1258,47 +1258,7 @@ response.status(204).send();</code></pre>
 app.use(cors());           // middleware
 app.use("/students", studentsRouter);</code></pre>
           </div>
-          <p class="bottom-line">
-            I har brugt middleware siden første REST-API: <code>app.use()</code> er måden, man tilføjer den på.
-          </p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Demo · jeres egen middleware</span>
-          <h2><code>(request, response, next)</code></h2>
-          <div class="stage">
-            <div class="split code-wide">
-              <div class="stack">
-                <pre><code class="language-javascript">app.use((request, response, next) => {
-  console.log(request.method, request.url);
-  next();
-});
-
-app.use("/students", studentsRouter);</code></pre>
-                <div class="response-frame">
-                  <header>Terminalen</header>
-                  <pre><code class="language-text">GET /students
-POST /students
-GET /students/999</code></pre>
-                </div>
-              </div>
-              <div class="stack">
-                <article class="card">
-                  <span><code>request</code>, <code>response</code></span>
-                  <p>De samme objekter, som jeres routes får.</p>
-                </article>
-                <article class="card">
-                  <span><code>next()</code></span>
-                  <p>"Send videre til den næste i rækken."</p>
-                </article>
-                <article class="card card-warn">
-                  <span>Glemmer I <code>next()</code></span>
-                  <p>Og svarer ikke? Så hænger requesten, og klienten venter for evigt.</p>
-                </article>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">En logger kører for hver eneste request, uden at en eneste route er ændret.</p>
+          <p class="bottom-line">Hver middleware kalder <code>next()</code> for at sende requesten videre til den næste i rækken.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -1331,8 +1291,59 @@ GET /students/999</code></pre>
           </p>
         </section>
 
+        <section class="fill mw-saves-slide" data-accent="cyan">
+          <span class="eyebrow">Hvad sparer fejl-middlewaren os for?</span>
+          <h2>Ingen <code>try</code>/<code>catch</code> i hver route</h2>
+          <div class="stage">
+            <div class="before-after">
+              <article>
+                <span>Uden · i hver eneste route</span>
+                <pre class="code-xs"><code class="language-javascript">router.get("/", async (request, response) => {
+  try {
+    const students = await loadStudents();
+    response.json(students);
+  } catch (error) {
+    response.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/:id", async (request, response) => {
+  try {
+    const students = await loadStudents();
+    // ...
+  } catch (error) {
+    response.status(500).json({ error: error.message });
+  }
+});
+
+// + POST, PUT, DELETE, og igen i teachers.js</code></pre>
+              </article>
+              <b aria-hidden="true">→</b>
+              <article>
+                <span>Med · ét sted</span>
+                <pre class="code-xs"><code class="language-javascript">// routes/students.js
+router.get("/", async (request, response) => {
+  const students = await loadStudents();
+  response.json(students);
+});
+
+router.get("/:id", async (request, response) => {
+  const students = await loadStudents();
+  // ...
+});
+
+// server.js, én gang
+app.use((error, request, response, next) => {
+  response.status(500).json({ error: error.message });
+});</code></pre>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Ti kopier af den samme fejlhåndtering bliver til én. Vil I ændre fejlsvaret, retter I ét sted.</p>
+        </section>
+
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Før / efter</span>
+          <span class="eyebrow">Løsningen · før og efter</span>
           <h2>Ét JSON-svar, i samme form for alle fejl</h2>
           <div class="stage">
             <div class="split even merged-errors">
@@ -1365,10 +1376,7 @@ GET /students/999</code></pre>
               </article>
             </div>
           </div>
-          <p class="bottom-line">
-            Frontenden læser alle fejl på samme måde: <code>data.error</code>. <b>DRY:</b> én fejl-middleware i stedet
-            for <code>try</code>/<code>catch</code> i ti routes.
-          </p>
+          <p class="bottom-line">Frontenden læser alle fejl på samme måde: statuskoden og <code>data.error</code>.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -1410,6 +1418,36 @@ app.use((error, request, response, next) => {  // 4 altid sidst
           <p class="bottom-line">
             Catch-all'en (3) har to parametre: der er ingen fejl, bare ingen route. Fejl-middlewaren (4) har fire.
           </p>
+        </section>
+
+        <section class="fill mw-concepts-slide" data-accent="cyan">
+          <span class="eyebrow">Begreberne igen</span>
+          <h2>Middleware og de fire begreber</h2>
+          <div class="stage">
+            <div class="mw-concepts">
+              <div>
+                <b>SoC</b>
+                <strong>Fælles opgaver ligger uden for routerne</strong>
+                <span>Routerne handler kun om students. Body, CORS og fejlsvar klares af middleware.</span>
+              </div>
+              <div>
+                <b>DRY</b>
+                <strong>Skrives én gang, gælder for alle routes</strong>
+                <span><code>app.use(express.json())</code> én gang. Én fejl-middleware i stedet for <code>try</code>/<code>catch</code> i ti routes.</span>
+              </div>
+              <div>
+                <b>SRP</b>
+                <strong>Hver middleware gør én ting</strong>
+                <span><code>express.json()</code> læser body'en. <code>cors()</code> sætter headers. Fejl-middlewaren svarer på fejl.</span>
+              </div>
+              <div>
+                <b>Encaps.</b>
+                <strong>Brug den uden at vide, hvordan den virker</strong>
+                <span>I skriver <code>app.use(express.json())</code> og får <code>request.body</code>. Resten er skjult.</span>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Samme fire begreber som i opsamlingen, nu i jeres <code>server.js</code>.</p>
         </section>
 
         <section class="recap-slide" data-accent="cyan">
@@ -1468,11 +1506,30 @@ app.use((error, request, response, next) => {  // 4 altid sidst
           <span class="chapter-number">07</span>
           <span class="eyebrow">CORS</span>
           <h2>Tillad kun jeres<br />egen frontend</h2>
-          <p>Lige nu må enhver hjemmeside kalde AMAbottens API fra en brugers browser. Det lukker vi.</p>
+          <p>Lige nu må enhver hjemmeside kalde AMAbottens API og læse svaret fra en brugers browser. Det lukker vi.</p>
         </section>
 
+        <section class="fill cors-def-slide" data-accent="green">
+          <span class="eyebrow">Definition</span>
+          <h2>Hvad er CORS?</h2>
+          <div class="stage">
+            <div class="throw-anatomy cors-name">
+              <span class="cn-cross"><code>Cross-Origin</code><small>på tværs af origins</small></span>
+              <span class="cn-share"><code>Resource Sharing</code><small>deling af data</small></span>
+            </div>
+            <p class="cors-definition">CORS er den måde, en server giver en <b>anden origin</b> lov til at læse sine svar <b>i browseren</b>. Det sker med HTTP-headeren <code>Access-Control-Allow-Origin</code>.</p>
+            <div class="cards-3 cors-facts">
+              <article class="card card-bad"><span>1 · Browseren blokerer</span><p>Som udgangspunkt må JavaScript kun læse svar fra sin egen origin. Det hedder <b>same-origin policy</b>.</p></article>
+              <article class="card card-good"><span>2 · Serveren giver lov</span><p>Med en header i svaret. Det er det, <code>cors()</code> sætter.</p></article>
+              <article class="card card-warn"><span>3 · Kun i browseren</span><p>Thunder Client og <code>curl</code> er ikke browsere. De får svar uanset.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">To ord at forstå: <b>origin</b> og <b>lov</b>. Dem tager vi ét ad gangen.</p>
+        </section>
+
+
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Hvad er en origin?</span>
+          <span class="eyebrow">Definitionen · origin</span>
           <h2>Protokol + vært + port</h2>
           <div class="stage">
             <div class="origin-url">
@@ -1490,21 +1547,18 @@ app.use((error, request, response, next) => {  // 4 altid sidst
                 ><span>Værten er anderledes, selvom det er samme computer</span>
               </div>
               <div class="diff">
-                <code>http://127.0.0.1:3000</code><b>Anden</b><span>Porten er anderledes. Det er jeres API</span>
+                <code>http://127.0.0.1:3000</code><b>Anden</b><span>Porten er anderledes</span>
               </div>
               <div class="diff">
                 <code>https://127.0.0.1:5500</code><b>Anden</b><span>Protokollen er anderledes</span>
               </div>
             </div>
           </div>
-          <p class="bottom-line">
-            Browseren sammenligner origins som tekst. Frontend på <code>:5500</code> og API på <code>:3000</code> er
-            altid to origins.
-          </p>
+          <p class="bottom-line">Browseren sammenligner som tekst. Frontend på <code>127.0.0.1:5500</code> og API på <code>localhost:3000</code> er to origins.</p>
         </section>
 
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Same-origin policy og CORS</span>
+          <span class="eyebrow">Definitionen · lov, trin for trin</span>
           <h2>Serveren svarer altid. Browseren bestemmer.</h2>
           <div class="stage seq">
             <svg
@@ -1573,14 +1627,11 @@ app.use((error, request, response, next) => {  // 4 altid sidst
               <line class="msg msg-back" x1="542" y1="404" x2="196" y2="404" marker-end="url(#ahb)" />
             </svg>
           </div>
-          <p class="bottom-line">
-            <b>Same-origin policy:</b> browseren blokerer som udgangspunkt <code>fetch()</code> på tværs af origins.
-            CORS er serverens måde at give lov.
-          </p>
+          <p class="bottom-line">Står jeres origin i <code>Access-Control-Allow-Origin</code>, får JavaScript svaret. Ellers ikke.</p>
         </section>
 
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Problemet</span>
+          <span class="eyebrow">Problemet · lov til alle</span>
           <h2><code>cors()</code> uden argumenter tillader alle</h2>
           <div class="stage">
             <div class="split even">
@@ -1608,6 +1659,7 @@ app.use((error, request, response, next) => {  // 4 altid sidst
                   <li class="fragment">Læse alle beskeder: <code>GET /messages</code></li>
                   <li class="fragment">Slette dem: <code>DELETE /messages</code></li>
                   <li class="fragment">Plante svarregler: <code>POST /answers</code></li>
+                  <li class="fragment preflight-note"><code>DELETE</code> og <code>POST</code> med JSON: browseren spørger serveren om lov først. Uden lov bliver de slet ikke sendt.</li>
                 </ul>
               </article>
             </div>
@@ -1618,7 +1670,7 @@ app.use((error, request, response, next) => {  // 4 altid sidst
         </section>
 
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Løsningen</span>
+          <span class="eyebrow">Løsningen · lov til én</span>
           <h2>Tillad kun den origin, I selv bruger</h2>
           <div class="stage">
             <div class="before-after">
@@ -1644,10 +1696,7 @@ app.use((error, request, response, next) => {  // 4 altid sidst
 The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' that is not equal to the supplied origin.</code></pre>
             </div>
           </div>
-          <p class="bottom-line">
-            CORS er en regel i browseren, ikke en lås. Thunder Client og <code>curl</code> får stadig svar, og
-            <code>/answers</code> er stadig åben.
-          </p>
+          <p class="bottom-line">CORS virker kun i browseren. Thunder Client og <code>curl</code> får stadig svar, og <code>/answers</code> er stadig åben for alle.</p>
         </section>
 
         <section class="activity-slide" data-accent="green">
@@ -1680,77 +1729,118 @@ The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' tha
           <span class="chapter-number">08</span>
           <span class="eyebrow">XSS · Cross-Site Scripting</span>
           <h2>Når tekst<br />bliver til kode</h2>
-          <p><code>POST /messages</code> gemmer brugerens tekst helt uredigeret. Det kan misbruges.</p>
+          <p>Et spørgsmål kan indeholde HTML. Lige nu gemmer AMAbotten det, og frontenden kører det.</p>
         </section>
 
-        <section class="fill" data-accent="red">
-          <span class="eyebrow">Demo · angrebet</span>
-          <h2>Et spørgsmål, der i virkeligheden er HTML</h2>
+        <section class="fill cors-def-slide xss-def-slide" data-accent="red">
+          <span class="eyebrow">Definition</span>
+          <h2>Hvad er XSS?</h2>
+          <div class="stage">
+            <div class="throw-anatomy cors-name xss-name">
+              <span class="cn-cross"><code>Cross-Site</code><small>i en anden brugers browser</small></span>
+              <span class="cn-share"><code>Scripting</code><small>JavaScript, der kører</small></span>
+            </div>
+            <p class="cors-definition">XSS er, når en brugers tekst bliver <b>kørt som kode</b> på jeres side, <b>i en anden brugers browser</b>. Vi prøver det i tre trin.</p>
+            <div class="cards-3 cors-facts">
+              <article class="card"><span>1 · Brugeren skriver</span><p>Et spørgsmål med HTML-tags i stedet for almindelig tekst.</p></article>
+              <article class="card card-warn"><span>2 · Serveren gemmer</span><p>Uredigeret i <code>messages.json</code>. Nu er det en del af jeres data.</p></article>
+              <article class="card card-bad"><span>3 · Frontenden viser</span><p>Med <code>insertAdjacentHTML()</code>. Browseren kan ikke se forskel på jeres kode og angriberens.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">X i stedet for C, så det ikke forveksles med CSS.</p>
+        </section>
+
+        <section class="fill xss-text-slide" data-accent="red">
+          <span class="eyebrow">Trin 1 · tekst bliver til HTML</span>
+          <h2><code>&lt;b&gt;hej&lt;/b&gt;</code> som spørgsmål</h2>
           <div class="stage">
             <div class="payload">
-              <small>Spørgsmålet</small><code>&lt;img src=x onerror="alert('hacked')"&gt;</code>
+              <small>POST /messages · question</small><code>&lt;b&gt;hej&lt;/b&gt;</code>
             </div>
-            <div class="xss-flow">
+            <div class="before-after">
               <article>
-                <span>1 · Thunder Client</span><b>POST /messages</b>
-                <p>Sender teksten som <code>question</code></p>
+                <span>Som HTML</span>
+                <pre class="code-sm"><code class="language-javascript">list.insertAdjacentHTML(
+  "beforeend", `&lt;li&gt;${message.text}&lt;/li&gt;`
+);</code></pre>
+                <div class="rendered"><small>Browseren viser</small><b>hej</b></div>
+                <p class="ba-note">Browseren læser <code>&lt;b&gt;</code> som et tag. Harmløst, men det er hullet.</p>
               </article>
+              <b aria-hidden="true">≠</b>
               <article>
-                <span>2 · Serveren</span><b>Gemmer uredigeret</b>
-                <p>Tjekker kun, at spørgsmålet ikke er tomt</p>
-              </article>
-              <article>
-                <span>3 · messages.json</span><b>Rå HTML på disken</b>
-                <p><code>"text": "&lt;img src=x onerror=...&gt;"</code></p>
-              </article>
-              <article>
-                <span>4 · Frontenden</span><b><code style="font-size: 17px">insertAdjacentHTML()</code></b>
-                <p>Læser teksten som HTML, ikke som tekst</p>
-              </article>
-              <article class="xss-hit">
-                <span>5 · Browseren</span><b>Koden kører</b>
-                <p>
-                  Billedet <code>x</code> fejler med vilje, så <code>onerror</code> kører <code>alert('hacked')</code>
-                </p>
+                <span>Som tekst</span>
+                <pre class="code-sm"><code class="language-javascript">const li = document.createElement("li");
+li.textContent = message.text;
+list.append(li);</code></pre>
+                <div class="rendered"><small>Browseren viser</small><code>&lt;b&gt;hej&lt;/b&gt;</code></div>
+                <p class="ba-note">Tegnene vises, som de er. Intet bliver til et tag.</p>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Beskeden er gemt på serveren. Det sker igen for alle, der åbner siden, hver gang.</p>
+          <p class="bottom-line">Tegnene <code>&lt;</code> og <code>&gt;</code> gør tekst til tags. Kan browseren ikke læse dem som tags, er der intet at køre.</p>
         </section>
 
-        <section class="fill" data-accent="red">
-          <span class="eyebrow">Begreb</span>
-          <h2>Cross-Site Scripting (XSS)</h2>
+        <section class="fill xss-demo-slide" data-accent="red">
+          <span class="eyebrow">Trin 2 · HTML, der kører kode</span>
+          <h2>Samme hul, nu med <code>onerror</code></h2>
           <div class="stage">
-            <div class="cards-3">
-              <article class="card">
-                <span>Hvad</span>
-                <p>
-                  En brugers tekst bliver udført som <b>kode i en andens browser</b>, fordi den aldrig blev renset for
-                  HTML.
-                </p>
-              </article>
-              <article class="card card-warn">
-                <span>Hvorfor farligt</span>
-                <p>
-                  <code>alert()</code> er harmløs. Samme hul kan køre et hvilket som helst script: læse alt på siden,
-                  sende requests i brugerens navn, eller sende brugeren videre til en falsk side.
-                </p>
-              </article>
-              <article class="card card-bad">
-                <span>Værst i AMAbotten</span>
-                <p>
-                  Svaret. <code>/answers</code> har ingen adgangskontrol, så en plantet svarregel rammer <b>alle</b>,
-                  der stiller et matchende spørgsmål.
-                </p>
-              </article>
+            <div class="xss-demo">
+              <div>
+                <span class="pre-label">1 · Thunder Client · POST /messages</span>
+                <pre class="code-sm"><code class="language-json">{ "question": "&lt;img src=x onerror=\"alert('hacked')\"&gt;" }</code></pre>
+                <p class="demo-note">Billedet <code>x</code> findes ikke, så <code>onerror</code> kører. <code>&lt;script&gt;</code> virker ikke her: browseren kører ikke script-tags fra <code>insertAdjacentHTML()</code>.</p>
+              </div>
+              <div class="split even">
+                <div class="fragment">
+                  <span class="pre-label">2 · data/messages.json</span>
+                  <pre class="code-sm"><code class="language-json">"text": "&lt;img src=x onerror=..."</code></pre>
+                  <p class="demo-note">Gemt præcis, som den kom.</p>
+                </div>
+                <div class="fragment">
+                  <span class="pre-label">3 · Genindlæs frontenden</span>
+                  <div class="rendered"><small>Browseren viser</small><span class="alert-box">⚠ hacked</span></div>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="bottom-line">"Cross-site": angriberens kode kører på jeres side, i jeres brugeres browsere.</p>
+          <p class="bottom-line">Beskeden ligger på serveren. Alle, der åbner siden, får alerten. Hver gang.</p>
         </section>
 
         <section class="fill" data-accent="red">
-          <span class="eyebrow">Løsningen</span>
+          <span class="eyebrow">Trin 3 · koden gør skade</span>
+          <h2><code>alert()</code> er kun beviset</h2>
+          <div class="stage">
+            <div class="split even">
+              <div class="stack" style="gap: 14px">
+                <span class="pre-label" style="margin: 0 0 -8px">Samme hul, værre spørgsmål</span>
+                <pre class="code-sm"><code class="language-html">&lt;img src=x onerror="
+  fetch('http://localhost:3000/messages',
+    { method: 'DELETE' })"&gt;</code></pre>
+                <article class="card card-bad">
+                  <span>Værst i AMAbotten · svaret</span>
+                  <p>
+                    <code>/answers</code> er stadig åben for alle. En plantet svarregel rammer <b>alle</b>, der stiller et
+                    matchende spørgsmål, og ikke kun den, der oprettede den.
+                  </p>
+                </article>
+              </div>
+              <article class="card card-warn">
+                <span>Diskutér to og to</span>
+                <p><b>Hvad kan et script gøre, når det kører på jeres side?</b></p>
+                <ul class="answers" style="margin-top: 14px; padding-left: 1em">
+                  <li class="fragment">Læse alt, brugeren kan se på siden</li>
+                  <li class="fragment">Sende requests i brugerens navn: slette alle beskeder</li>
+                  <li class="fragment">Skifte siden ud med en falsk login-formular</li>
+                  <li class="fragment preflight-note">CORS hjælper ikke. Scriptet kører på jeres frontend, og den origin har I selv givet lov.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">"Cross-site": angriberens kode, jeres side, jeres brugeres browsere.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Løsningen · escape</span>
           <h2>Escape HTML-tegn, før I gemmer</h2>
           <div class="stage">
             <div class="split" style="grid-template-columns: 0.8fr 1.2fr">
@@ -1763,11 +1853,11 @@ The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' tha
               </div>
               <pre><code class="language-javascript">function escapeHtml(text) {
   return text
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll("&amp;", "&amp;amp;")
+    .replaceAll("&lt;", "&amp;lt;")
+    .replaceAll("&gt;", "&amp;gt;")
+    .replaceAll('"', "&amp;quot;")
+    .replaceAll("'", "&amp;#039;");
 }</code></pre>
             </div>
           </div>
@@ -1778,7 +1868,7 @@ The 'Access-Control-Allow-Origin' header has a value 'http://127.0.0.1:5500' tha
         </section>
 
         <section class="fill" data-accent="red">
-          <span class="eyebrow">Før / efter</span>
+          <span class="eyebrow">Løsningen · før og efter</span>
           <h2>Samme angreb, gemt to forskellige måder</h2>
           <div class="stage">
             <div class="before-after">

@@ -1370,56 +1370,6 @@ pre.code-sm code {
   fill: var(--cyan);
 }
 
-/* XSS flow: payload travelling through five stations */
-.xss-flow {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 30px;
-}
-.xss-flow article {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 250px;
-  padding: 20px 18px;
-  border-top: 3px solid var(--line);
-  background: var(--soft);
-}
-.xss-flow article:not(:last-child)::after {
-  position: absolute;
-  top: 50%;
-  right: -26px;
-  color: var(--accent);
-  content: "→";
-  font-size: 26px;
-  font-weight: 800;
-  transform: translateY(-50%);
-}
-.xss-flow article > span {
-  color: var(--accent);
-  font-size: 15px;
-  font-weight: 850;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.xss-flow b {
-  font-size: 21px;
-}
-.xss-flow p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.35;
-}
-.xss-flow p code {
-  font-size: 14px !important;
-  word-break: break-all;
-}
-.xss-flow .xss-hit {
-  border-top-color: var(--red);
-  background: color-mix(in srgb, var(--red) 12%, var(--soft));
-}
 .payload {
   display: flex;
   align-items: center;
@@ -1754,18 +1704,6 @@ pre.wrap code {
 .origin-table span,
 .origin-table b {
   font-size: 21px;
-}
-.xss-flow article {
-  min-height: 280px;
-}
-.xss-flow b {
-  font-size: 23px;
-}
-.xss-flow p {
-  font-size: 19px;
-}
-.xss-flow p code {
-  font-size: 16px !important;
 }
 .escape-table div {
   grid-template-columns: 80px 50px 170px 1fr;
@@ -2312,5 +2250,146 @@ pre.wrap code {
   font-size: 26px;
 }
 .throw-effects .card p code {
+  white-space: nowrap;
+}
+
+/* Middleware mapped to the four concepts: abbr · rule · concrete example */
+.mw-concepts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mw-concepts > div {
+  display: grid;
+  grid-template-columns: 150px 440px 1fr;
+  align-items: center;
+  gap: 28px;
+  padding: 22px 30px;
+  border-left: 5px solid var(--accent);
+  background: var(--soft);
+  border-radius: var(--radius);
+}
+.mw-concepts b {
+  color: var(--accent);
+  font-size: 34px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+.mw-concepts strong {
+  font-size: 25px;
+  line-height: 1.25;
+}
+.mw-concepts span {
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1.4;
+}
+.mw-concepts code {
+  font-size: 19px !important;
+  white-space: nowrap;
+}
+.reveal .mw-saves-slide .before-after pre.code-xs code {
+  min-height: 0;
+  padding: 14px 18px;
+  font-size: 16px !important;
+  line-height: 1.35 !important;
+}
+.reveal .mw-saves-slide .before-after {
+  grid-template-columns: minmax(0, 1fr) 50px minmax(0, 1fr);
+}
+
+/* CORS definition: name split in two, one-sentence definition, three facts */
+.cors-name {
+  gap: 40px;
+}
+.cors-name code {
+  font-size: 44px !important;
+}
+.cors-name small {
+  font-size: 21px;
+}
+.cors-name .cn-cross {
+  border-color: var(--green);
+}
+.cors-name .cn-cross code {
+  color: var(--green) !important;
+}
+.cors-name .cn-share {
+  border-color: var(--cyan);
+}
+.cors-name .cn-share code {
+  color: var(--cyan) !important;
+}
+.cors-definition {
+  max-width: 1200px;
+  margin: 34px auto 30px !important;
+  padding: 20px 30px;
+  border-left: 5px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--soft));
+  border-radius: var(--radius);
+  font-size: 27px !important;
+  line-height: 1.4 !important;
+}
+.cors-definition b {
+  color: var(--accent);
+}
+.cors-facts .card {
+  min-height: 0;
+}
+.cors-facts .card p {
+  font-size: 22px;
+}
+.reveal .answers li.preflight-note {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  margin-left: -1em;
+  font-size: 19px;
+}
+
+/* XSS definition: reuses the CORS layout, in the chapter's red/orange */
+.xss-name .cn-cross {
+  border-color: var(--red);
+}
+.xss-name .cn-cross code {
+  color: var(--red) !important;
+}
+.xss-name .cn-share {
+  border-color: var(--orange);
+}
+.xss-name .cn-share code {
+  color: var(--orange) !important;
+}
+.before-after .ba-note {
+  margin: 12px 0 0 !important;
+  color: var(--muted);
+  font-size: 20px !important;
+  line-height: 1.35 !important;
+}
+.xss-text-slide .before-after {
+  align-items: start;
+  margin-top: 34px;
+}
+.xss-text-slide .before-after > b {
+  align-self: center;
+}
+.xss-demo {
+  display: grid;
+  gap: 34px;
+}
+.xss-demo-slide .split {
+  align-items: start;
+}
+.xss-demo-slide .demo-note {
+  margin: 12px 0 0 !important;
+  color: var(--muted);
+  font-size: 21px !important;
+}
+.xss-demo-slide .rendered {
+  margin-top: 0;
+  padding: 22px 24px;
+}
+.xss-def-slide .cors-facts code {
   white-space: nowrap;
 }
