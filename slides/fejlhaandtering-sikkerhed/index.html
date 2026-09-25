@@ -1801,7 +1801,7 @@ list.append(li);</code></pre>
           <div class="stage">
             <div class="xss-demo">
               <div>
-                <span class="pre-label">1 · Skriv det som spørgsmål i AMAbotten</span>
+                <span class="pre-label">1 · Send det som spørgsmål fra Thunder Client</span>
                 <pre class="code-sm" data-copy><code class="language-html">&lt;img src=x onerror="alert('hacked')"&gt;</code></pre>
                 <p class="demo-note">Billedet <code>x</code> findes ikke, så <code>onerror</code> kører. <code>&lt;script&gt;</code> virker ikke her: browseren kører ikke script-tags fra <code>insertAdjacentHTML()</code>.</p>
               </div>
@@ -1822,7 +1822,7 @@ list.append(li);</code></pre>
               </div>
             </div>
           </div>
-          <p class="bottom-line">Alerten kommer, så snart I sender. Beskeden ligger nu på serveren, så alle, der åbner siden, får den. Hver gang.</p>
+          <p class="bottom-line">Alerten kommer, så snart frontenden viser beskeden. Den ligger nu på serveren, så alle, der åbner siden, får den. Hver gang.</p>
         </section>
 
         <section class="fill" data-accent="red">

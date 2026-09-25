@@ -5,7 +5,7 @@
 Du bygger videre på din egen AMAbot fra [øvelse 7](express-rest-api-amabot-arkitektur.md) og bruger det, du lige har lavet i [REST API-øvelse: Fejlhåndtering](express-rest-api-fejlhaandtering.md): statuskoder, `404`/`400`\-tjek, `try`/`catch` og en fælles fejl-middleware.
 
 - **Del 1** overfører fejlhåndteringen fra `/students` og `/teachers` til `/messages` og `/answers`. Der er ingen TODO'er, hints eller løsningsforslag. Du kender mønsteret, ligesom du kendte routes/data-modul-opdelingen, da du overførte den i øvelse 7.
-- **Del 2** er nyt: en strammere `cors()`-opsætning og en rettelse af XSS-hullet i `POST /messages`. Her får du hints og løsningsforslag igen.
+- **Del 2** er nyt: en strammere `cors()`-opsætning og en rettelse af XSS-hullet i `POST /messages`. Her får du mere hjælp igen: koden til `cors()` og hint og løsningsforslag til `escapeHtml()`.
 
 <details>
 <summary>💡 Sidder du fast undervejs? Sådan bruger du hjælpen i denne øvelse</summary>
@@ -69,12 +69,12 @@ Send `GET`, `PUT` og `DELETE` på `/answers/findes-ikke`. Du skal få `404` og e
 
 **Prøv det først:** send `POST http://localhost:3000/answers` med `{ "category": "test" }`, altså uden `keywords` og `answer`. Der bliver oprettet en halv regel. Slet den igen med `DELETE /answers/test`.
 
-- `POST /messages` har allerede et tjek for et tomt spørgsmål fra øvelse 6. Det mangler bare `.status(400)`.
+- `POST /messages` har allerede et tjek for et tomt spørgsmål fra øvelse 6. Det mangler bare `.status(400)`. Tjekket fanger `{ "question": "" }`. Sender du `{}` uden `question`, crasher `request.body.question.trim()`, før tjekket når at køre. Den fejl fanger fejl-middlewaren i trin 5.
 - `POST /answers` og `PUT /answers/:category` har ingen validering endnu. Tilføj den.
 
 #### Test trin 4
 
-Send `POST /messages` med et tomt spørgsmål, og `POST /answers` og `PUT /answers/:category` med en body, hvor der mangler felter. Du skal få `400` alle tre steder. Tjek bagefter, at en fuldt udfyldt body stadig virker.
+Send `POST /messages` med `{ "question": "" }`, og `POST /answers` og `PUT /answers/:category` med en body, hvor der mangler felter. Du skal få `400` alle tre steder. Tjek bagefter, at en fuldt udfyldt body stadig virker.
 
 ---
 
@@ -88,7 +88,7 @@ Send `POST /messages` med et tomt spørgsmål, og `POST /answers` og `PUT /answe
 #### Test trin 5
 
 1. Omdøb `data/messages.json` midlertidigt, og send `GET /messages`. Du skal få `500` og din egen fejlbesked som JSON. Gør det samme med `data/answers.json` og `GET /answers`. Giv filerne deres navn tilbage bagefter.
-2. Send `POST /messages` helt uden body. Du skal få `500` som JSON og ikke Express' fejlside.
+2. Send `POST /messages` helt uden body, og derefter med `{}`. Du skal få `500` som JSON begge gange og ikke Express' fejlside.
 3. Send `GET /noget-der-ikke-findes`. Du skal få `404` og JSON.
 
 ## Tjekpunkt: Del 1

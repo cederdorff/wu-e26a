@@ -93,7 +93,7 @@ Gentag testene fra punkt 2-3, denne gang for `/teachers`.
 
 ### 5. 404: GET /students/:id
 
-**Prøv det først:** send `GET http://localhost:3000/students/999999`. Du får `200 OK` og et helt tomt svar. Det ligner en succes, men det er en fejl.
+**Prøv det først:** send `GET http://localhost:3000/students/999`. Du får `200 OK` og et helt tomt svar. Det ligner en succes, men det er en fejl.
 
 Byg videre på `GET /students/:id` i `routes/students.js`:
 
@@ -141,13 +141,13 @@ router.get("/:id", async (request, response) => {
 
 #### Test trin 5
 
-Send `GET http://localhost:3000/students/999999`. Du skal nu få `404` og en fejlbesked som JSON. Tjek bagefter, at et id, der findes, stadig virker.
+Send `GET http://localhost:3000/students/999`. Du skal nu få `404` og en fejlbesked som JSON. Tjek bagefter, at et id, der findes, stadig virker.
 
 ---
 
 ### 6. 404: PUT /students/:id
 
-**Prøv det først:** send `PUT http://localhost:3000/students/999999` med en body. Nu får du ikke et tomt svar, men Express' egen HTML-fejlside med `Cannot set properties of undefined (setting 'name')` og en lang stack trace. `find()` gav `undefined`, og routen prøvede alligevel at sætte `student.name`.
+**Prøv det først:** send `PUT http://localhost:3000/students/999` med en body. Nu får du ikke et tomt svar, men Express' egen HTML-fejlside med `Cannot set properties of undefined (setting 'name')` og en lang stack trace. `find()` gav `undefined`, og routen prøvede alligevel at sætte `student.name`.
 
 Brug samme tjek som i punkt 5, før du opdaterer:
 
@@ -193,13 +193,13 @@ router.put("/:id", async (request, response) => {
 
 #### Test trin 6
 
-Send `PUT http://localhost:3000/students/999999` med en body. Du skal få `404`. Tjek bagefter, at `PUT` på et rigtigt id stadig opdaterer.
+Send `PUT http://localhost:3000/students/999` med en body. Du skal få `404`. Tjek bagefter, at `PUT` på et rigtigt id stadig opdaterer.
 
 ---
 
 ### 7. 404: DELETE /students/:id
 
-**Prøv det først:** send `GET /students`, og læg mærke til, hvem der står sidst. Send derefter `DELETE http://localhost:3000/students/999999`, og så `GET /students` igen.
+**Prøv det først:** send `GET /students`, og læg mærke til, hvem der står sidst. Send derefter `DELETE http://localhost:3000/students/999`, og så `GET /students` igen.
 
 - Bruger du `findIndex()`/`splice()`, er den **sidste** studerende væk. `findIndex()` returnerer `-1`, og `splice(-1, 1)` fjerner det sidste element. Du så det samme i [REST API-øvelsen](express-rest-api-students.md). Hent den studerende tilbage med `git checkout data/students.json`.
 - Bruger du `filter()`, sker der ingenting, men du får stadig `204`, som om sletningen lykkedes.
@@ -267,7 +267,7 @@ router.delete("/:id", async (request, response) => {
 
 #### Test trin 7
 
-Send `DELETE http://localhost:3000/students/999999`. Du skal få `404`. Tjek bagefter, at `DELETE` på et rigtigt id stadig sletter og svarer med `204`.
+Send `DELETE http://localhost:3000/students/999`. Du skal få `404`. Tjek bagefter, at `DELETE` på et rigtigt id stadig sletter og svarer med `204`.
 
 ---
 
