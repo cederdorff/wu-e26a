@@ -7,6 +7,10 @@ Velkommen til det lokale spejl af Canvas-kurset [WU-E26A](https://eaaa.instructu
 - [RACE 1 · Intro til Node.js og Express.js](https://cederdorff.com/wu-e26a/node-express/)
 - [RACE 2 · EJS templating, form handling og svar logik](https://cederdorff.com/wu-e26a/express-ejs/)
 
+## Opgaver
+
+- [Alle opgaver i rækkefølge](./opgaver/README.md) — AMAbot-øvelser 1-9 og students-opgaverne
+
 ## Undervisningsforløbet
 
 Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerende i Canvas. Indhold og rækkefølge kan derfor stadig ændre sig.
