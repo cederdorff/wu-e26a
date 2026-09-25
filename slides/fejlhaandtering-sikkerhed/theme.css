@@ -2393,3 +2393,80 @@ pre.wrap code {
 .xss-def-slide .cors-facts code {
   white-space: nowrap;
 }
+
+/* Dedicated video slides: responsive 16:9 YouTube embed */
+.video-embed {
+  position: relative;
+  width: 100%;
+  max-width: 950px;
+  aspect-ratio: 16 / 9;
+  margin: 24px auto 0;
+  border: 1px solid var(--line);
+  background: #000;
+  box-shadow: 0 28px 80px rgb(0 0 0 / 38%);
+  overflow: hidden;
+}
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-slide .exercise-link {
+  display: block;
+  width: fit-content;
+  margin: 22px auto 0;
+}
+
+/* XSS demo: mock of Chrome's native alert() dialog */
+.browser-alert {
+  width: min(100%, 440px);
+  padding: 22px 24px 18px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 36px rgb(0 0 0 / 45%);
+  color: #1f1f1f;
+  font-family: system-ui, sans-serif;
+}
+.browser-alert b {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+}
+.browser-alert p {
+  margin: 14px 0 22px !important;
+  font-size: 18px !important;
+  color: #1f1f1f !important;
+}
+.browser-alert span {
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: #0b57d0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Copy button on code blocks marked data-copy (added by deck.js) */
+.reveal pre[data-copy] {
+  position: relative;
+}
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 8%);
+  color: var(--ink);
+  font: 700 14px var(--font);
+  cursor: pointer;
+}
+.copy-button:hover {
+  background: rgb(255 255 255 / 16%);
+}

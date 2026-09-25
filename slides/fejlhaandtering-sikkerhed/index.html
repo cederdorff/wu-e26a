@@ -1509,6 +1509,21 @@ app.use((error, request, response, next) => {  // 4 altid sidst
           <p>Lige nu må enhver hjemmeside kalde AMAbottens API og læse svaret fra en brugers browser. Det lukker vi.</p>
         </section>
 
+        <section class="video-slide" data-accent="green">
+          <span class="eyebrow">Video · Fireship · 2,5 min</span>
+          <h2>CORS på 100 sekunder</h2>
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/4KHiSt0oLJ0"
+              title="CORS in 100 Seconds"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a class="exercise-link" href="https://www.youtube.com/watch?v=4KHiSt0oLJ0" target="_blank" rel="noreferrer">Åbn på YouTube ↗</a>
+        </section>
+
         <section class="fill cors-def-slide" data-accent="green">
           <span class="eyebrow">Definition</span>
           <h2>Hvad er CORS?</h2>
@@ -1786,8 +1801,8 @@ list.append(li);</code></pre>
           <div class="stage">
             <div class="xss-demo">
               <div>
-                <span class="pre-label">1 · Thunder Client · POST /messages</span>
-                <pre class="code-sm"><code class="language-json">{ "question": "&lt;img src=x onerror=\"alert('hacked')\"&gt;" }</code></pre>
+                <span class="pre-label">1 · Skriv det som spørgsmål i AMAbotten</span>
+                <pre class="code-sm" data-copy><code class="language-html">&lt;img src=x onerror="alert('hacked')"&gt;</code></pre>
                 <p class="demo-note">Billedet <code>x</code> findes ikke, så <code>onerror</code> kører. <code>&lt;script&gt;</code> virker ikke her: browseren kører ikke script-tags fra <code>insertAdjacentHTML()</code>.</p>
               </div>
               <div class="split even">
@@ -1798,12 +1813,16 @@ list.append(li);</code></pre>
                 </div>
                 <div class="fragment">
                   <span class="pre-label">3 · Genindlæs frontenden</span>
-                  <div class="rendered"><small>Browseren viser</small><span class="alert-box">⚠ hacked</span></div>
+                  <div class="browser-alert" role="img" aria-label="Browserens alert-dialog: 127.0.0.1:5500 siger hacked">
+                    <b>127.0.0.1:5500 siger</b>
+                    <p>hacked</p>
+                    <span>OK</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <p class="bottom-line">Beskeden ligger på serveren. Alle, der åbner siden, får alerten. Hver gang.</p>
+          <p class="bottom-line">Alerten kommer, så snart I sender. Beskeden ligger nu på serveren, så alle, der åbner siden, får den. Hver gang.</p>
         </section>
 
         <section class="fill" data-accent="red">

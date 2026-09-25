@@ -36,4 +36,17 @@ if (agenda) {
   sync();
 }
 
+for (const pre of document.querySelectorAll("pre[data-copy]")) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "copy-button";
+  button.textContent = "Kopiér";
+  button.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(pre.querySelector("code").textContent);
+    button.textContent = "Kopieret ✓";
+    setTimeout(() => { button.textContent = "Kopiér"; }, 1500);
+  });
+  pre.append(button);
+}
+
 document.documentElement.classList.add("deck-ready");
