@@ -6,9 +6,9 @@
 
 I dag starter vi på frontend-delen af Chatbot-forløbet med React, helt forfra med et nyt projekt. Hvad er React, hvorfor bruger så mange det, og hvordan tænker man, når man bygger en brugerflade i React?
 
-Først gennemgår vi imperativ vs. deklarativ og Virtual DOM, og I laver jeres første React-projekt med Vite. Derefter bruger vi "Thinking in React" på et rigtigt chatbot-UI og gennemgår JSX, components og props. Resten af dagen går I i gang med [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres), som resten af forløbet bygger videre på.
+Først gennemgår vi imperativ vs. deklarativ og Virtual DOM, og I laver jeres første React-projekt med Vite. Derefter bruger vi "Thinking in React" på et rigtigt chatbot-UI og gennemgår JSX, components og props. Resten af dagen går I i gang med chatbot-tutorialen, som hele forløbet bygger videre på.
 
-Når dagen er slut, kan I selv lave [step 1](https://github.com/bewildergeist/chatbot-react-postgres/pull/1) og [step 2](https://github.com/bewildergeist/chatbot-react-postgres/pull/2) i tutorialen. Det betyder, at I kan dele et stort component op i mindre, sende data ned med props og vise lister med `.map()`.
+Når dagen er slut, har I jeres eget React-projekt kørende og er godt i gang med [step 1](https://github.com/bewildergeist/chatbot-react-postgres/pull/1) og [step 2](https://github.com/bewildergeist/chatbot-react-postgres/pull/2) i [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres).
 
 ---
 
@@ -67,12 +67,12 @@ Når dagen er slut, kan I selv lave [step 1](https://github.com/bewildergeist/ch
 - Opret et nyt, tomt repository til jeres chatbot, og klon det ned
 - Hent startpunktet i roden af repoet med `npx degit --force bewildergeist/chatbot-react-postgres#pr-1-start`, og commit det med det samme
 - `cd frontend`, `npm install` og `npm run dev`. Sikkerhedsadvarslerne fra `npm install` er forventede. Læs tutorialens note om dem
-- Tutorialen er på engelsk. Hvert trin har en opgave, hints, en reference-commit og test-punkter
+- Tutorialen er på engelsk. Hvert step består af små delopgaver med hints, en reference-commit og test-punkter
 - Bemærk: projektet er sat op med React Router, så filerne ligger i `app/routes/` i stedet for `src/`. Det er stadig Vite og React, og routing er emnet i morgen
 - Hands-on: følg [step 1](https://github.com/bewildergeist/chatbot-react-postgres/pull/1). I deler de to store components op i mindre, bruger props og `children` og flytter components til egne filer. UI'et skal se ens ud hele vejen
 - Hands-on: fortsæt med [step 2](https://github.com/bewildergeist/chatbot-react-postgres/pull/2). I flytter data ud i arrays, viser dem med `.map()` og `key` og løfter arrays op til den component, hvor de hører til
-- Commit efter hvert trin, og sammenlign med tutorialens reference-commits
-- I når forskelligt langt. Det, I ikke når, laver I færdigt som forberedelse til i morgen, hvor step 3 bygger videre på step 2
+- Commit efter hver delopgave, og sammenlign med tutorialens reference-commits
+- I når forskelligt langt. Step 1 og 2 skal være færdige til i morgen, hvor step 3 bygger videre på step 2. Det, I ikke når i dag, laver I færdigt hjemme
 </details>
 
 ---
@@ -94,7 +94,7 @@ Når dagen er slut, kan I selv lave [step 1](https://github.com/bewildergeist/ch
 ## Materialer
 
 - Slides: TBA
-- [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres):
+- [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
   - [Chatbot-tutorial, step 1: Component-arkitektur](https://github.com/bewildergeist/chatbot-react-postgres/pull/1)
   - [Chatbot-tutorial, step 2: Rendering lists](https://github.com/bewildergeist/chatbot-react-postgres/pull/2)
 
