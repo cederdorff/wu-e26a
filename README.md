@@ -1,15 +1,41 @@
 # WU-E26A · Webudvikling · efterår 2026
 
-Velkommen til det lokale spejl af Canvas-kurset [WU-E26A](https://eaaa.instructure.com/courses/32059). Her finder du undervisningsplaner, forberedelse, slides, opgaver og øvrige materialer i samme rækkefølge som i Canvas.
+Et spejl af Canvas-kurset [WU-E26A](https://eaaa.instructure.com/courses/32059) på 1. semester webudvikling på EAAA. Repoet samler undervisningsplaner, forberedelse, slides og opgaver ét sted og i samme rækkefølge som i Canvas, så du kan følge forløbet uden at klikke rundt i Canvas.
 
-## Slides
+Semestret har tre forløb:
 
-- [RACE 1 · Intro til Node.js og Express.js](https://cederdorff.com/wu-e26a/node-express/)
-- [RACE 2 · EJS templating, form handling og svar logik](https://cederdorff.com/wu-e26a/express-ejs/)
+| Forløb | Uger | Indhold |
+| --- | --- | --- |
+| **AMAbot** | 35-40 | Node, Express, EJS, JSON-persistens, REST API, arkitektur, fetch og sikkerhed. De studerende bygger deres egen AMAbot hele vejen. |
+| **Chatbot** | 41-46 | React, Figma, Supabase/SQL, AI via Mistral API, login og JWT. |
+| **Semesterprojekt** | 47-51 | Gruppeprojekt med vejledning. Aflevering 17-12-2026 og præsentation 18-12-2026. |
 
-## Opgaver
+Underviserne står med initialer i titlerne: RACE, DOB, MAGL, HEOE, NKKR og NYCH. RACE er Rasmus Cederdorff, som vedligeholder repoet.
 
-- [Alle opgaver i rækkefølge](./opgaver/README.md) — AMAbot-øvelser 1-9 og students-opgaverne
+## Genveje
+
+- [Alle slides](https://cederdorff.com/wu-e26a/)
+- [Alle opgaver i rækkefølge](./opgaver/README.md): AMAbot-øvelse 1-9, students-opgaverne og opvarmningen fra første gang
+- [Hele undervisningsforløbet](#undervisningsforløbet): alle moduler fra Canvas i rækkefølge
+
+## RACE-lektioner
+
+| # | Dato | Emne | Plan | Slides | Øvelser |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 28-08 | Intro til Node og Express | [plan](./undervisning/004-race-1-intro-til-node-og-express-28-08-2026.md) | [slides](https://cederdorff.com/wu-e26a/node-express/) | [Kom i gang](./opgaver/README.md#kom-i-gang-med-node-og-express) |
+| 2 | 03-09 | EJS templating, form handling og svarlogik | [plan](./undervisning/008-race-2-ejs-templating-form-handling-og-svar-logik-03-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/express-ejs/) | [1](./opgaver/express-ejs-formular.md), [2](./opgaver/express-ejs-formhaandtering-svarlogik.md), [3](./opgaver/express-ejs-amabot.md) |
+| 3 | 07-09 | Data, logik, arrays og objekter | [plan](./undervisning/010-race-3-data-logik-arrays-og-objekter-07-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/data-logik/) | [4](./opgaver/express-ejs-amabot-statistik.md), [JS-øvelser](./opgaver/javascript-oevelser-amabot.md) |
+| 4 | 11-09 | Persistens, JSON og File System | [plan](./undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/persistens-json/) | [JSON-students](./opgaver/express-ejs-json-students.md), [5](./opgaver/express-ejs-amabot-persistens.md) |
+| 5 | 16-09 | Node/Express REST API | [plan](./undervisning/017-race-5-node-express-rest-api-16-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/rest-api/) | [REST-students](./opgaver/express-rest-api-students.md), [6](./opgaver/express-rest-api-amabot.md) |
+| 6 | 23-09 | Arkitektur og REST API best practices | [plan](./undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/arkitektur/) | [Arkitektur](./opgaver/express-rest-api-arkitektur.md), [7](./opgaver/express-rest-api-amabot-arkitektur.md), [8](./opgaver/fetch-dom-amabot.md) |
+| 7 | 25-09 | Sikkerhed og error handling | [plan](./undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/fejlhaandtering-sikkerhed/) | [Fejlhåndtering](./opgaver/express-rest-api-fejlhaandtering.md), [9](./opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md) |
+| 8 | 30-09 | Client/Server-præsentationer (med DOB) | [plan](./undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md) | — | — |
+| 8 | 06-10 | Thinking in React | [plan](./undervisning/032-race-8-thinking-in-react-06-10-2026.md) | — | — |
+| 9 | 28-10 | User authentication og login | [plan](./undervisning/048-race-9-user-authentication-og-login-28-10-2026.md) | — | — |
+| 10 | 03-11 | JWT tokens fra frontend | [plan](./undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md) | — | — |
+| 11 | 11-11 | Session expiration handling i frontend | [plan](./undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) | — | — |
+
+Tal i øvelseskolonnen er AMAbot-øvelsens nummer. Lektioner fra og med 06-10 er stadig kladder i Canvas.
 
 ## Undervisningsforløbet
 
@@ -125,11 +151,18 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [091 · Test element](./undervisning/091-test-element.md) — *kladde i Canvas*
 <!-- CANVAS_OVERSIGT_SLUT -->
 
-## Om spejlet
+## Repoets indhold
 
-- [Undervisningsmappen](undervisning/README.md) beskriver filstruktur og metadata. Kun RACE-sider kan sendes tilbage til Canvas herfra — se [vedligeholdelse](#vedligeholdelse).
-- [`canvas/`](canvas/README.md) er en rå spejling af moduler, sider og øvrige API-data — kun pull, aldrig push.
-- [`materialer/`](materialer/README.md) indeholder Canvas-filer som PDF'er og billeder, inklusive andre underviseres materiale — kun pull, aldrig push.
+| Mappe | Indhold |
+| --- | --- |
+| [`undervisning/`](undervisning/README.md) | Én Markdown-fil pr. Canvas-modul, nummereret i Canvas-rækkefølge. Filstruktur og metadata er beskrevet i mappens README. |
+| [`opgaver/`](opgaver/README.md) | Alle opgaver og øvelser med billeder og startkode. |
+| [`slides/`](slides/index.html) | reveal.js-slides bygget med Vite og udgivet på [cederdorff.com/wu-e26a](https://cederdorff.com/wu-e26a/). |
+| [`canvas/`](canvas/README.md) | Rå spejling af moduler, sider og øvrige API-data. Kun pull, aldrig push. |
+| [`materialer/`](materialer/README.md) | Canvas-filer som PDF'er og billeder, også andre underviseres materiale. Kun pull, aldrig push. |
+| [`scripts/`](scripts/) | Pull fra og push til Canvas. |
+
+Kun RACE-sider kan sendes tilbage til Canvas herfra. Se [vedligeholdelse](#vedligeholdelse).
 
 ## Vedligeholdelse
 
