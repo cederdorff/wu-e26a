@@ -6,7 +6,7 @@
 
 I dag starter vi på frontend-delen af Chatbot-forløbet med React, helt forfra med et nyt projekt. Hvad er React, hvorfor bruger så mange det, og hvordan tænker man, når man bygger en brugerflade i React?
 
-Først gennemgår vi imperativ vs. deklarativ og Virtual DOM, og I laver jeres første React-projekt med Vite. Derefter bruger vi "Thinking in React" på et rigtigt chatbot-UI og gennemgår JSX, components og props. Resten af dagen går I i gang med chatbot-tutorialen, som hele forløbet bygger videre på.
+Vi taler om imperativ vs. deklarativ og Virtual DOM, og I laver jeres første React-projekt med Vite. Derefter arbejder vi hands-on ud fra tankegangen "Thinking in React" og gennemgår JSX, components og props. Vi skal også i gang med chatbot-tutorialen, som hele forløbet bygger videre på.
 
 Når dagen er slut, har I jeres eget React-projekt kørende og er godt i gang med [step 1](https://github.com/bewildergeist/chatbot-react-postgres/pull/1) og [step 2](https://github.com/bewildergeist/chatbot-react-postgres/pull/2) i [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres).
 
