@@ -31,7 +31,10 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 
 - Vite er et build-værktøj og en udviklingsserver. Den forstår JSX og opdaterer siden, så snart I gemmer
 - Tjek jeres Node-version med `node -v`. Vite kræver mindst Node 20.19 eller 22.12. Er jeres ældre, så installér den nyeste LTS-version fra [nodejs.org](https://nodejs.org/)
-- Øvelse 1: `npm create vite@latest my-first-react-app`, vælg React og JavaScript, og sig ja til at installere og starte
+- Øvelse 1: opret mappen `my-first-react-app` der, hvor I har jeres kodeprojekter, og åbn kun den mappe i VS Code
+- Åbn terminalen i VS Code. På Windows skal I vælge Command Prompt, fordi PowerShell ofte blokerer npm
+- Kør `npm create vite@latest .`, vælg React, JavaScript og Oxlint, og sig ja til at installere og starte. Punktummet betyder, at projektet bliver lavet i den mappe, I står i
+- Åbn den URL, terminalen viser ved `Local`. Er port 5173 optaget, vælger Vite selv den næste, fx 5174
 - Gennemgå sammen mappestrukturen: `index.html` med `<div id="root">`, `src/main.jsx`, der monterer appen, og `src/App.jsx`, der er jeres første component
 - Øvelse 2: ret teksten i `App.jsx`, gem, og se siden opdatere. Åbn DevTools' Elements-panel, og tryk på tæller-knappen. Kun tallet i knappen blinker. Det er Virtual DOM i praksis
 </details>
@@ -66,7 +69,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 
 - **Lister:** `.map()` over et array giver ét element pr. objekt, og hvert element skal have en unik `key`, så React kan holde styr på dem mellem to renders
 - Øvelse 8: læg 3-4 users i et array i `App`, og vis dem med `users.map()` og `key={user.id}`. Fjern `key`, læs advarslen i Console, og sæt den ind igen
-- Øvelse 9: gør listen til et grid med `className` og almindelig CSS
+- Øvelse 9 i fire små trin med `className` og almindelig CSS: 9a et mørkt tema med CSS-variabler, 9b en header med tydelig ramme, 9c et grid af kort og 9d finpudsning med tekst, link og hover
 </details>
 <details>
 <summary><strong>7. Hent rigtige data: øvelse 10-11</strong></summary>

@@ -167,25 +167,62 @@ for (const user of users) {
         <section class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 1 · Opret projektet</span>
           <h2>Nyt React-projekt med Vite</h2>
-          <div class="step-layout">
+          <div class="step-layout step-wide-steps">
             <ol class="steps">
-              <li>Tjek Node: <code>node -v</code>. I skal have mindst 20.19 eller 22.12</li>
-              <li>Gå til den mappe, hvor I har jeres projekter</li>
-              <li>Opret projektet og vælg <b>React</b>, så <b>JavaScript</b></li>
-              <li>Svar <b>Yes</b> til at installere og starte nu</li>
-              <li>Åbn <code>http://localhost:5173</code> i browseren</li>
-              <li>Åbn mappen <code>my-first-react-app</code> i VS Code. Kun den mappe</li>
+              <li>Opret mappen <code>my-first-react-app</code>, der hvor du har dine kodeprojekter</li>
+              <li>Åbn kun den mappe i VS Code: <b>File › Open Folder</b></li>
+              <li><b>Terminal › New Terminal</b>. På Windows: vælg <b>Command Prompt</b></li>
+              <li>Tjek Node: <code>node -v</code>. Mindst 20.19 eller 22.12</li>
+              <li>Kør kommandoen, og vælg <b>React</b>, <b>JavaScript</b> og <b>Oxlint</b></li>
+              <li>Svar <b>Yes</b> til at installere og starte. Åbn den URL, terminalen viser</li>
             </ol>
             <div class="step-code">
-              <span class="file">Terminal</span>
-              <pre data-copy><code class="language-bash">npm create vite@latest my-first-react-app</code></pre>
-              <span class="file">Bagefter, hvis serveren ikke kører</span>
-              <pre data-copy><code class="language-bash">cd my-first-react-app
-npm install
-npm run dev</code></pre>
+              <span class="file">Terminal i VS Code</span>
+              <pre data-copy><code class="language-bash">npm create vite@latest .</code></pre>
+              <p class="step-note">Punktummet betyder: lav projektet i den mappe, du står i.</p>
+              <span class="file">Næste gang du vil starte serveren</span>
+              <pre data-copy><code class="language-bash">npm run dev</code></pre>
             </div>
           </div>
           <p class="bottom-line">Lad være med at overtænke alle de nye ting. Gør det, og følg trinene.</p>
+        </section>
+
+        <section class="shot-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 1 · Sådan ser det ud</span>
+          <h2>Kun projektmappen er åben i VS Code</h2>
+          <div class="shot-layout">
+            <figure><img src="../assets/react/vite-01-terminal.jpg" alt="VS Code med kun mappen my-first-react-app åben i Explorer og kommandoen npm create vite@latest . i terminalen" /></figure>
+            <div class="shot-side">
+              <ol>
+                <li>Explorer viser kun <code>my-first-react-app</code>, og mappen er tom</li>
+                <li>Terminalen står allerede i mappen. Intet <code>cd</code></li>
+                <li>Kør <code>npm create vite@latest .</code></li>
+              </ol>
+            </div>
+          </div>
+          <p class="bottom-line">Står der en anden mappe i Explorer, så åbn den rigtige med <b>File › Open Folder</b>.</p>
+        </section>
+
+        <section class="shots-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 1 · Sådan ser det ud</span>
+          <h2>Tre valg i terminalen</h2>
+          <div class="shot-grid three">
+            <figure><img src="../assets/react/vite-02-framework.jpg" alt="Terminalen spørger Select a framework, React er valgt" /><figcaption><b>1</b>Framework: <strong>React</strong></figcaption></figure>
+            <figure><img src="../assets/react/vite-03-variant.jpg" alt="Terminalen spørger Select a variant, JavaScript er valgt" /><figcaption><b>2</b>Variant: <strong>JavaScript</strong></figcaption></figure>
+            <figure><img src="../assets/react/vite-04-linter.jpg" alt="Terminalen spørger Which linter to use, Oxlint er valgt" /><figcaption><b>3</b>Linter: <strong>Oxlint</strong></figcaption></figure>
+          </div>
+          <p class="bottom-line">Piletasterne flytter valget. Enter bekræfter.</p>
+        </section>
+
+        <section class="shots-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 1 · Sådan ser det ud</span>
+          <h2>Installér, start og åbn i browseren</h2>
+          <div class="shot-grid three wide">
+            <figure><img src="../assets/react/vite-05-install.jpg" alt="Terminalen spørger Install with npm and start now, Yes er valgt" /><figcaption><b>4</b>Install and start now: <strong>Yes</strong></figcaption></figure>
+            <figure><img src="../assets/react/vite-07-dev-server.jpg" alt="Vite-serveren kører og viser Local: http://localhost:5174" /><figcaption><b>5</b>Åbn URL'en ved <strong>Local</strong></figcaption></figure>
+            <figure><img src="../assets/react/vite-08-browser.jpg" alt="Vites startside med Get started og tæller-knappen Count is 0" /><figcaption><b>6</b>Vites startside. Klar til øvelse 2</figcaption></figure>
+          </div>
+          <p class="bottom-line">Er port 5173 optaget, vælger Vite selv den næste, fx 5174. Brug altid den URL, terminalen viser.</p>
         </section>
 
         <section class="vite-tree-slide" data-accent="green">
@@ -451,7 +488,7 @@ export default function App() {
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Billedet fylder hele bredden indtil videre. Det retter vi med CSS i øvelse 9.</p>
+          <p class="bottom-line">Billedet fylder hele bredden indtil videre. Det retter vi med CSS i øvelse 9c.</p>
         </section>
 
         <section class="compare-code-slide" data-accent="orange">
@@ -547,7 +584,7 @@ export default function User({ name, title, mail, image }) {
           <span class="chapter-number">06</span>
           <span class="eyebrow">Lister og styling</span>
           <h2>Ét array,<br />én <code>.map()</code></h2>
-          <p>Tre <code>&lt;User /&gt;</code> skrevet i hånden holder ikke, når der er ni. Eller 900.</p>
+          <p>Tre <code>&lt;User /&gt;</code> skrevet i hånden holder ikke, når der kommer flere. Eller 900.</p>
         </section>
 
         <section class="compare-code-slide short-code" data-accent="green">
@@ -615,21 +652,93 @@ export default function User({ name, title, mail, image }) {
         </section>
 
         <section class="step-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 9 · Styling</span>
-          <h2>Gør listen til et grid</h2>
+          <span class="eyebrow">Øvelse 9a · Styling</span>
+          <h2>Et mørkt tema med CSS-variabler</h2>
+          <div class="step-layout pair-layout">
+            <ol class="steps">
+              <li>Erstat alt i <code>index.css</code> med koden til højre</li>
+              <li>Pak alt i <code>App</code> ind i <code>&lt;main className="app"&gt;</code> i stedet for <code>&lt;&gt;</code></li>
+              <li>Tilføj <code>.app</code> i <code>App.css</code></li>
+              <li>Gem. Siden er mørk, og indholdet står i midten</li>
+            </ol>
+            <div class="step-code code-pair">
+              <div>
+              <span class="file">src/index.css</span>
+              <pre data-copy class="tiny"><code class="language-css">:root {
+  color-scheme: dark;
+  --bg: #16171d;
+  --surface: #1f2028;
+  --border: #2e303a;
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --accent: #c084fc;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+}</code></pre>
+              </div>
+              <div>
+              <span class="file">src/App.css</span>
+              <pre data-copy class="tiny"><code class="language-css">.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Farverne er de samme som i Vites startside. <code>var(--accent)</code> bruger en variabel fra <code>:root</code>.</p>
+        </section>
+
+        <section class="step-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 9b · Styling</span>
+          <h2>Giv headeren en tydelig ramme</h2>
           <div class="step-layout">
             <ol class="steps">
-              <li>Pak <code>users.map(...)</code> ind i en <code>&lt;section className="grid"&gt;</code></li>
-              <li>Pak alt i <code>App</code> ind i <code>&lt;main className="app"&gt;</code> i stedet for <code>&lt;&gt;</code></li>
-              <li>Kopiér CSS'en til højre ind i <code>App.css</code></li>
-              <li>Giv <code>body</code> <code>margin: 0</code> og en <code>font-family</code> i <code>index.css</code></li>
-              <li>Style det, som I har lyst til</li>
+              <li>Tilføj koden til højre i bunden af <code>App.css</code></li>
+              <li>Gem. Headeren står nu i sin egen boks med en lilla kant</li>
+              <li>Prøv en anden farve i <code>--accent</code> i <code>index.css</code>. Hvad ændrer sig?</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.css</span>
-              <pre data-copy class="tiny"><code class="language-css">.app { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+              <pre data-copy class="small"><code class="language-css">header {
+  margin-bottom: 32px;
+  padding: 28px 32px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 16px;
+  background: var(--surface);
+}
 
-.grid {
+header h1 {
+  margin: 0;
+  color: var(--text-h);
+}
+
+header p {
+  margin: 6px 0 0;
+}</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Det er almindelig CSS. <code>header</code> rammer det <code>&lt;header&gt;</code>-tag, som jeres <code>Header</code>-component returnerer.</p>
+        </section>
+
+        <section class="step-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 9c · Styling</span>
+          <h2>Gør listen til et grid af kort</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Pak <code>users.map(...)</code> ind i en <code>&lt;section className="grid"&gt;</code></li>
+              <li>Tilføj koden til højre i bunden af <code>App.css</code></li>
+              <li>Gem. Gør browservinduet smallere og bredere. Hvad sker der med kolonnerne?</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.css</span>
+              <pre data-copy class="tiny"><code class="language-css">.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
@@ -637,20 +746,59 @@ export default function User({ name, title, mail, image }) {
 
 .user-card {
   padding: 20px;
-  border-radius: 12px;
-  background: #f4f4f5;
-  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
 }
 
 .user-card img {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Det er stadig <code>className</code>, ikke <code>class</code>. CSS'en er helt almindelig CSS.</p>
+          <p class="bottom-line">Det er stadig <code>className</code>, ikke <code>class</code>.</p>
+        </section>
+
+        <section class="step-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 9d · Styling</span>
+          <h2>Finpuds kortene</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Tilføj <code>transition</code> i jeres <code>.user-card</code></li>
+              <li>Tilføj resten af koden i bunden af <code>App.css</code></li>
+              <li>Gem. Hold musen over et kort</li>
+              <li>Style det, som I har lyst til</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.css</span>
+              <pre data-copy class="tiny"><code class="language-css">.user-card {
+  /* ...det, der allerede står... */
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.user-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.user-card h2 {
+  margin: 14px 0 4px;
+  color: var(--text-h);
+  font-size: 1.1rem;
+}
+
+.user-card p { margin: 0 0 10px; }
+
+.user-card a {
+  color: var(--accent);
+  text-decoration: none;
+}</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Test: navn, titel og mail står pænt, og kortet løfter sig, når musen er over det.</p>
         </section>
 
         <!-- 07 Data -->
@@ -694,7 +842,7 @@ export default function User({ name, title, mail, image }) {
               <li>Importér <code>useState</code> og <code>useEffect</code> fra <code>"react"</code></li>
               <li>Erstat jeres <code>const users = [...]</code> med <code>useState([])</code></li>
               <li>Tilføj <code>useEffect</code> med <code>fetchUsers()</code> lige under</li>
-              <li>Åbn Console. Kan I se et array med ni users?</li>
+              <li>Åbn Console. Kan I se et array med users?</li>
               <li>Står det der to gange? Det er normalt under udvikling</li>
             </ol>
             <div class="step-code">
@@ -717,7 +865,7 @@ export default function App() {
   // return (...) som før</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Siden er tom lige nu. <code>users</code> er stadig et tomt array.</p>
+          <p class="bottom-line">Kun headeren vises lige nu. <code>users</code> er stadig et tomt array.</p>
         </section>
 
         <section class="step-slide" data-accent="yellow">
@@ -726,7 +874,7 @@ export default function App() {
           <div class="step-layout">
             <ol class="steps">
               <li>Erstat <code>console.log(data)</code> med <code>setUsers(data)</code></li>
-              <li>Gem. Nu viser grid'et alle ni users</li>
+              <li>Gem. Nu viser grid'et alle users fra filen</li>
               <li>Åbn Elements-panelet. Ét <code>&lt;article&gt;</code> pr. user</li>
             </ol>
             <div class="step-code">
@@ -751,7 +899,7 @@ export default function App() {
           <ol class="flow dense">
             <li><b>01</b><strong><code>fetch(url)</code></strong><span>Effecten henter JSON, efter første render</span></li>
             <li><b>02</b><strong><code>setUsers(data)</code></strong><span>State ændrer sig</span></li>
-            <li><b>03</b><strong><code>App</code> kører igen</strong><span>Nu med ni users i stedet for nul</span></li>
+            <li><b>03</b><strong><code>App</code> kører igen</strong><span>Nu med alle users i stedet for nul</span></li>
             <li><b>04</b><strong><code>users.map()</code></strong><span>Én <code>&lt;User /&gt;</code> pr. objekt</span></li>
             <li><b>05</b><strong>Props</strong><span><code>name</code>, <code>title</code>, <code>mail</code>, <code>image</code> ned i <code>User</code></span></li>
             <li><b>06</b><strong>DOM</strong><span>React indsætter kun det, der er nyt</span></li>

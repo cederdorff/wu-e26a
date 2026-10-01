@@ -459,3 +459,89 @@
   font-size: 16px;
   line-height: 1.34;
 }
+
+.step-note {
+  margin: -4px 0 6px !important;
+  color: var(--muted);
+  font-size: 22px !important;
+}
+
+/* Step-by-step screenshots of the Vite prompts (exercise 1) */
+.shots-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.shot-grid {
+  display: grid;
+  flex: 1;
+  align-content: center;
+  gap: 22px;
+  margin: 18px 0 80px;
+}
+.shot-grid.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.shot-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.shot-grid figure {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+}
+.shot-grid img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.shot-grid.four img {
+  height: 300px;
+  object-fit: cover;
+  object-position: left top;
+}
+.shot-grid.three img {
+  height: 420px;
+  object-fit: cover;
+  object-position: left top;
+}
+.shot-grid figcaption {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 23px;
+  line-height: 1.3;
+}
+.shot-grid figcaption b {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+  font-size: 17px;
+}
+.shot-grid figcaption strong {
+  color: var(--accent);
+}
+.shot-grid.three.wide img {
+  height: 340px;
+}
+
+/* Exercise 9a: two short CSS files side by side instead of stacked */
+.step-layout.pair-layout {
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+}
+.step-code.code-pair {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+.step-code.code-pair > div {
+  display: grid;
+  gap: 16px;
+}
