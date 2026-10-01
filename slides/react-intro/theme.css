@@ -1,0 +1,461 @@
+@import "../fejlhaandtering-sikkerhed/theme.css";
+
+/* RACE 8 deck additions: React intro built around one running project,
+   my-first-react-app, so most slides are either a short concept or a
+   hands-on step in that project */
+
+/* Title slide: the finished users grid as the "mark" on the right */
+.title-shot {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 45%);
+  transform: rotate(2deg);
+}
+.title-shot img {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+/* Screenshot + text side by side (goal, draw-boxes and "vores bud" slides) */
+.shot-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.shot-layout {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 56px;
+  margin-top: 30px;
+  margin-bottom: 70px;
+}
+.shot-layout figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.shot-layout img {
+  display: block;
+  width: 100%;
+  max-height: 560px;
+  margin: 0;
+  object-fit: cover;
+  object-position: top;
+}
+.shot-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.shot-side ol,
+.shot-side ul {
+  display: grid;
+  gap: 16px;
+  padding-left: 1.1em;
+}
+.shot-side li {
+  font-size: 30px;
+  line-height: 1.35;
+}
+
+/* Component tree next to the annotated screenshot */
+.tree {
+  margin: 0;
+  padding: 26px 30px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #090d0d;
+  font: 600 26px/1.6 "SFMono-Regular", Consolas, monospace;
+  white-space: pre;
+}
+.tree .t-app { color: var(--orange); }
+.tree .t-header { color: var(--cyan); }
+.tree .t-user { color: var(--green); }
+.tree small {
+  color: var(--muted);
+  font-size: 19px;
+}
+
+/* Hands-on step: numbered steps on the left, code to copy on the right */
+.step-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.step-layout {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 48px;
+  margin-top: 24px;
+  margin-bottom: 78px;
+}
+.step-layout.step-wide-steps {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.steps {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+.steps li {
+  position: relative;
+  padding: 12px 0 12px 58px;
+  border-top: 1px solid var(--line);
+  font-size: 25px;
+  line-height: 1.35;
+  counter-increment: step;
+}
+.steps li::before {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+  content: counter(step);
+  font-size: 19px;
+  font-weight: 850;
+}
+.steps li.break {
+  color: var(--yellow);
+}
+.steps li.break::before {
+  background: color-mix(in srgb, var(--yellow) 22%, transparent);
+  color: var(--yellow);
+  content: "!";
+}
+.step-code {
+  display: grid;
+  gap: 16px;
+}
+.step-code .file {
+  display: block;
+  margin-bottom: -8px;
+  color: var(--muted);
+  font: 700 17px/1 "SFMono-Regular", Consolas, monospace;
+}
+.step-code pre code {
+  padding: 20px 26px;
+  font-size: 21px;
+  line-height: 1.42;
+}
+.step-code pre code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.step-code pre.small code {
+  font-size: 18px;
+  line-height: 1.38;
+}
+.step-code pre {
+  position: relative;
+}
+
+/* Three cards in a row: Hvad/Hvorfor/Hvordan and Components/Props/State */
+.three-cards {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: center;
+  gap: 26px;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+.three-cards article {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 470px;
+  padding: 40px 36px;
+  border-top: 4px solid var(--accent);
+  background: var(--soft);
+}
+.three-cards article > span {
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.three-cards h3 {
+  font-size: 40px;
+}
+.three-cards p {
+  color: var(--muted);
+  font-size: 27px;
+}
+.three-cards p b,
+.three-cards p code {
+  color: var(--ink);
+}
+.three-cards .known {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 22px;
+}
+.three-cards article.c-cyan { border-top-color: var(--cyan); }
+.three-cards article.c-cyan > span { color: var(--cyan); }
+.three-cards article.c-orange { border-top-color: var(--orange); }
+.three-cards article.c-orange > span { color: var(--orange); }
+.three-cards article.c-green { border-top-color: var(--green); }
+.three-cards article.c-green > span { color: var(--green); }
+.cards-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+
+/* Flow chain: Virtual DOM and the data path from URL to DOM */
+.flow-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.flow {
+  display: grid;
+  flex: 1;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  align-content: center;
+  gap: 18px;
+  margin: 20px 0 80px;
+  padding: 0;
+  list-style: none;
+}
+.flow li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 360px;
+  padding: 32px 24px;
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.flow li:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -17px;
+  z-index: 2;
+  color: var(--accent);
+  content: "→";
+  font-size: 26px;
+  font-weight: 900;
+  transform: translateY(-50%);
+}
+.flow b {
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+.flow strong {
+  font-size: 30px;
+  line-height: 1.2;
+}
+.flow span {
+  color: var(--muted);
+  font-size: 23px;
+  line-height: 1.35;
+}
+.flow code {
+  font-size: 0.85em !important;
+}
+.flow.dense li {
+  min-height: 340px;
+  padding: 28px 20px;
+}
+.flow.dense strong {
+  font-size: 25px;
+}
+.flow.dense span {
+  font-size: 21px;
+}
+
+/* Project tree: Vite folder structure with a short note per file */
+.vite-tree-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.vite-tree {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 50px;
+  margin: 24px 0 80px;
+}
+.vite-tree .tree {
+  font-size: 27px;
+}
+.file-notes {
+  display: grid;
+  gap: 16px;
+}
+.file-notes div {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  align-items: baseline;
+  padding: 20px 24px;
+  border-left: 3px solid var(--line);
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.file-notes div.hot {
+  border-left-color: var(--accent);
+}
+.file-notes code {
+  font-size: 20px !important;
+}
+.file-notes span {
+  color: var(--muted);
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+/* JSX rules: code on the left, rule rows on the right */
+.rules-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.rules-layout {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  margin: 20px 0 80px;
+}
+.rules-layout pre code {
+  font-size: 25px;
+}
+.rule-list {
+  display: grid;
+  gap: 16px;
+}
+.rule-list div {
+  padding: 20px 26px;
+  border-left: 3px solid var(--accent);
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+}
+.rule-list strong {
+  display: block;
+  font-size: 27px;
+}
+.rule-list span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+/* Imperative vs declarative: fill the slide height */
+.compare-code-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.compare-code-slide .before-after {
+  flex: 1;
+  align-content: center;
+  margin-top: 10px;
+  margin-bottom: 80px;
+}
+.compare-code-slide .before-after pre code {
+  font-size: 20px;
+  line-height: 1.42;
+}
+
+/* Tutorial mapping: what they did today -> which tutorial step it matches */
+.map-rows {
+  display: grid;
+  flex: 1;
+  align-content: center;
+  gap: 14px;
+  margin: 20px 0 80px;
+}
+.map-row {
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+  align-items: center;
+  gap: 20px;
+}
+.map-row > div {
+  padding: 20px 26px;
+  border-radius: var(--radius);
+  background: var(--soft);
+  font-size: 23px;
+  line-height: 1.35;
+}
+.map-row > div small {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.map-row > b {
+  color: var(--accent);
+  font-size: 30px;
+  text-align: center;
+}
+.map-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+
+/* Statement slide: keep the support lines readable when they hold code */
+.statement-support code {
+  font-size: 0.95em;
+}
+
+/* Question slide: center the four questions in the leftover height */
+.question-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.question-slide .question-grid {
+  margin: auto 0;
+}
+.question-slide .question-grid li {
+  font-size: 30px;
+}
+
+/* Compare-code slides with short snippets: slightly larger code */
+.compare-code-slide.short-code .before-after pre code {
+  font-size: 24px;
+}
+
+/* Slides without a bottom-line don't need the space reserved for it */
+.three-cards:last-child,
+.map-rows:last-child {
+  margin-bottom: 0;
+}
+.three-cards:last-child article {
+  min-height: 540px;
+}
+.question-slide .question-grid {
+  flex: 1;
+  align-content: center;
+  margin: 0;
+}
+.step-code pre.tiny code {
+  padding: 18px 24px;
+  font-size: 16px;
+  line-height: 1.34;
+}

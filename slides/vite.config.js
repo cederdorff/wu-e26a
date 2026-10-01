@@ -16,7 +16,8 @@ export default defineConfig({
         persistensJson: resolve("slides/persistens-json/index.html"),
         restApi: resolve("slides/rest-api/index.html"),
         arkitektur: resolve("slides/arkitektur/index.html"),
-        fejlhaandteringSikkerhed: resolve("slides/fejlhaandtering-sikkerhed/index.html")
+        fejlhaandteringSikkerhed: resolve("slides/fejlhaandtering-sikkerhed/index.html"),
+        reactIntro: resolve("slides/react-intro/index.html")
       }
     }
   }

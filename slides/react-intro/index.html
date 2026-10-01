@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RACE 8 · Thinking in React · WU-E26A · 6. oktober 2026" />
+    <title>Thinking in React · WU-E26A</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-accent="cyan">
+          <div class="title-copy">
+            <span class="eyebrow">WU-E26A · RACE 8 · 6. oktober 2026</span>
+            <h1>Thinking<br /><span>in React</span></h1>
+            <p class="lead">Fra nyt Vite-projekt til et grid af users. Components, props og state i jeres egen <code>my-first-react-app</code>.</p>
+          </div>
+          <div class="title-shot" aria-hidden="true">
+            <img src="../assets/react/users-grid.jpg" alt="" />
+          </div>
+        </section>
+
+        <section id="agenda" class="agenda-slide" data-accent="cyan">
+          <span class="eyebrow">Agenda</span>
+          <h2>Ét projekt hele dagen: <code>my-first-react-app</code></h2>
+          <ol class="agenda-grid">
+            <li><a href="#/intro"><b>Intro til React</b><small>hvad, hvorfor, imperativ vs. deklarativ, Virtual DOM</small></a></li>
+            <li><a href="#/vite"><b>Nyt projekt med Vite</b><small>øvelse 1-2: opret, kør og kig rundt</small></a></li>
+            <li><a href="#/jsx"><b>JSX</b><small>øvelse 3: ryd op og skriv jeres første JSX</small></a></li>
+            <li><a href="#/thinking"><b>Thinking in React</b><small>øvelse 4: tegn kasser om UI'et</small></a></li>
+            <li><a href="#/components"><b>Components og props</b><small>øvelse 5-7: <code>Header</code> og <code>User</code></small></a></li>
+            <li><a href="#/lister"><b>Lister og styling</b><small>øvelse 8-9: <code>.map()</code>, <code>key</code> og et grid</small></a></li>
+            <li><a href="#/data"><b>Hent rigtige data</b><small>øvelse 10-11: just do it, og push til GitHub</small></a></li>
+            <li><a href="#/tutorial"><b>Chatbot-tutorialen</b><small>step 1 og 2: det samme igen, i chatbotten</small></a></li>
+          </ol>
+        </section>
+
+        <section class="shot-slide" data-accent="cyan">
+          <span class="eyebrow">Dagens mål</span>
+          <h2>Det her har I bygget, når dagen er slut</h2>
+          <div class="shot-layout">
+            <figure><img src="../assets/react/users-grid.jpg" alt="Færdig React-app med overskriften Users og et grid af kort med billede, navn, titel og mail" /></figure>
+            <div class="shot-side">
+              <ol>
+                <li>Et React-projekt med Vite</li>
+                <li>En <code>Header</code>-component</li>
+                <li>En <code>User</code>-component, der får data via props</li>
+                <li>Et grid med én <code>User</code> pr. person</li>
+                <li>Data hentet fra en rigtig URL</li>
+              </ol>
+            </div>
+          </div>
+          <p class="bottom-line">Hver del af dagen ender med en øvelse i jeres eget projekt. Byg med, mens vi går.</p>
+        </section>
+
+        <!-- 01 Intro -->
+        <section id="intro" class="chapter" data-accent="cyan">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Intro til React</span>
+          <h2>Hvad, hvorfor<br />og hvordan?</h2>
+          <p>Et JavaScript-bibliotek til at bygge brugerflader. Lavet af Meta og brugt af Facebook, Instagram, Netflix og Airbnb.</p>
+        </section>
+
+        <section class="cards-slide" data-accent="cyan">
+          <span class="eyebrow">React på tre kort</span>
+          <h2>Et bibliotek til UI, der kører i browseren</h2>
+          <div class="three-cards">
+            <article class="c-cyan">
+              <span>Hvad</span>
+              <h3>Kun UI'et</h3>
+              <p>React bygger det, brugeren ser og klikker på. Ikke server, database eller routing.</p>
+            </article>
+            <article class="c-orange">
+              <span>Hvorfor</span>
+              <h3>Components</h3>
+              <p>UI'et bygges af små, genbrugelige dele. Siden opdateres selv, når data ændrer sig. Stort økosystem og stort jobmarked.</p>
+            </article>
+            <article class="c-green">
+              <span>Hvordan</span>
+              <h3>I browseren</h3>
+              <p>React bygger siden i browseren med JavaScript. Det er <b>client-side rendering</b>, som I præsenterede i sidste uge.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="compare-code-slide" data-accent="cyan">
+          <span class="eyebrow">Imperativ vs. deklarativ</span>
+          <h2>Den samme liste af users, to måder</h2>
+          <div class="before-after">
+            <article>
+              <span>Imperativ · sådan har I gjort det indtil nu</span>
+              <pre><code class="language-javascript">const grid = document.querySelector("#grid");
+
+for (const user of users) {
+  grid.insertAdjacentHTML(
+    "beforeend",
+    `&lt;article&gt;
+      &lt;h2&gt;${user.name}&lt;/h2&gt;
+      &lt;p&gt;${user.title}&lt;/p&gt;
+    &lt;/article&gt;`
+  );
+}</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>Deklarativ · React</span>
+              <pre><code class="language-javascript">function App() {
+  return (
+    &lt;section className="grid"&gt;
+      {users.map(user =&gt; (
+        &lt;article key={user.id}&gt;
+          &lt;h2&gt;{user.name}&lt;/h2&gt;
+          &lt;p&gt;{user.title}&lt;/p&gt;
+        &lt;/article&gt;
+      ))}
+    &lt;/section&gt;
+  );
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">Imperativt beskriver I <b>hvordan</b>, trin for trin. Deklarativt beskriver I <b>hvad</b> siden skal vise, og React finder selv ud af DOM'en.</p>
+        </section>
+
+        <section class="question-slide" data-accent="cyan">
+          <span class="eyebrow">To og to · 3 minutter</span>
+          <h2>Der kommer en ny user. Hvad skal I selv huske?</h2>
+          <ol class="question-grid">
+            <li>I den imperative version: hvad skal I gøre for at få den nye user vist?</li>
+            <li>Skal I tømme grid'et først, eller kun tilføje den nye? Hvad hvis en user bliver slettet?</li>
+            <li>I den deklarative version: hvad skal I gøre?</li>
+            <li>Hvor kan der opstå fejl, hvis data og DOM ikke passer sammen?</li>
+          </ol>
+        </section>
+
+        <section class="statement-slide" data-accent="cyan">
+          <span class="eyebrow">Kerneidéen</span>
+          <h2>UI = f(data)</h2>
+          <div class="statement-support">
+            <span>I skriver en funktion, der viser data</span>
+            <span>data ændrer sig, og funktionen kører igen</span>
+            <span>React sørger for, at DOM'en passer</span>
+          </div>
+        </section>
+
+        <section class="flow-slide" data-accent="cyan">
+          <span class="eyebrow">Virtual DOM</span>
+          <h2>React ændrer kun det, der faktisk er forskelligt</h2>
+          <ol class="flow">
+            <li><b>01</b><strong>Byg et træ</strong><span>React bygger siden som et letvægts-træ af JavaScript-objekter.</span></li>
+            <li><b>02</b><strong>Data ændrer sig</strong><span>Fx en ny user eller et nyt tal på en knap.</span></li>
+            <li><b>03</b><strong>Nyt træ</strong><span>React bygger et nyt træ ud fra de nye data.</span></li>
+            <li><b>04</b><strong>Sammenlign</strong><span>Det nye træ sammenlignes med det forrige.</span></li>
+            <li><b>05</b><strong>Ret DOM'en</strong><span>Kun forskellen bliver ændret i den rigtige DOM.</span></li>
+          </ol>
+          <p class="bottom-line">I ser det i praksis om lidt i DevTools.</p>
+        </section>
+
+        <!-- 02 Vite -->
+        <section id="vite" class="chapter" data-accent="green">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Nyt projekt med Vite</span>
+          <h2>my-first-<br />react-app</h2>
+          <p>Vite er et build-værktøj og en udviklingsserver. Den forstår JSX og opdaterer siden, så snart I gemmer.</p>
+        </section>
+
+        <section class="step-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 1 · Opret projektet</span>
+          <h2>Nyt React-projekt med Vite</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Tjek Node: <code>node -v</code>. I skal have mindst 20.19 eller 22.12</li>
+              <li>Gå til den mappe, hvor I har jeres projekter</li>
+              <li>Opret projektet og vælg <b>React</b>, så <b>JavaScript</b></li>
+              <li>Svar <b>Yes</b> til at installere og starte nu</li>
+              <li>Åbn <code>http://localhost:5173</code> i browseren</li>
+              <li>Åbn mappen <code>my-first-react-app</code> i VS Code. Kun den mappe</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">Terminal</span>
+              <pre data-copy><code class="language-bash">npm create vite@latest my-first-react-app</code></pre>
+              <span class="file">Bagefter, hvis serveren ikke kører</span>
+              <pre data-copy><code class="language-bash">cd my-first-react-app
+npm install
+npm run dev</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Lad være med at overtænke alle de nye ting. Gør det, og følg trinene.</p>
+        </section>
+
+        <section class="vite-tree-slide" data-accent="green">
+          <span class="eyebrow">En tur rundt i projektet</span>
+          <h2>Tre filer er vigtige i dag</h2>
+          <div class="vite-tree">
+            <pre class="tree">my-first-react-app/
+├── node_modules/
+├── public/
+├── src/
+│   ├── App.css
+│   ├── <span class="t-user">App.jsx</span>
+│   ├── index.css
+│   └── <span class="t-user">main.jsx</span>
+├── <span class="t-user">index.html</span>
+├── package.json
+└── vite.config.js</pre>
+            <div class="file-notes">
+              <div class="hot"><code>index.html</code><span>Én tom <code>&lt;div id="root"&gt;</code>. Her bygger React siden</span></div>
+              <div class="hot"><code>src/main.jsx</code><span>Starter appen og monterer <code>&lt;App /&gt;</code> i <code>#root</code></span></div>
+              <div class="hot"><code>src/App.jsx</code><span>Jeres første component. Her skriver I koden i dag</span></div>
+              <div><code>node_modules/</code><span>Installerede pakker. Rør den ikke</span></div>
+              <div><code>package.json</code><span>Projektets pakker og scripts, fx <code>npm run dev</code></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 2 · Kig og prøv</span>
+          <h2>Ret, gem og se Virtual DOM arbejde</h2>
+          <ul class="checklist">
+            <li>Ret teksten <i>Get started</i> i <code>src/App.jsx</code>, og gem. Siden opdaterer uden genindlæsning</li>
+            <li>Åbn <code>src/main.jsx</code>. Find stedet, hvor <code>&lt;App /&gt;</code> bliver vist i <code>#root</code></li>
+            <li>Åbn DevTools, og vælg <b>Elements</b>-panelet</li>
+            <li>Tryk på tæller-knappen. Kun tallet i knappen blinker. Resten af siden bliver ikke rørt</li>
+          </ul>
+          <p class="bottom-line">Det blink er Virtual DOM: React ændrer kun den ene tekst, der er forskellig.</p>
+        </section>
+
+        <!-- 03 JSX -->
+        <section id="jsx" class="chapter" data-accent="yellow">
+          <span class="chapter-number">03</span>
+          <span class="eyebrow">JSX</span>
+          <h2>Ligner HTML,<br />er JavaScript</h2>
+          <p>Det, en component returnerer. Vite oversætter det til almindelig JavaScript, som browseren forstår.</p>
+        </section>
+
+        <section class="rules-slide" data-accent="yellow">
+          <span class="eyebrow">JSX-regler</span>
+          <h2>Fire ting, der er anderledes end HTML</h2>
+          <div class="rules-layout">
+            <pre><code class="language-javascript">export default function App() {
+  const name = "Rasmus";
+
+  return (
+    &lt;&gt;
+      &lt;h1 className="title"&gt;Users&lt;/h1&gt;
+      &lt;h2&gt;Hello, {name}&lt;/h2&gt;
+      &lt;img src="logo.png" alt="" /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+            <div class="rule-list">
+              <div><strong><code>className</code> i stedet for <code>class</code></strong><span><code>class</code> er et reserveret ord i JavaScript</span></div>
+              <div><strong>Alle tags skal lukkes</strong><span><code>&lt;img /&gt;</code>, <code>&lt;br /&gt;</code>, <code>&lt;input /&gt;</code></span></div>
+              <div><strong>Ét rod-element</strong><span>Pak flere elementer ind i et fragment <code>&lt;&gt;...&lt;/&gt;</code></span></div>
+              <div><strong><code>{ }</code> indsætter JavaScript</strong><span>En variabel, en template literal eller en <code>.map()</code></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step-slide" data-accent="yellow">
+          <span class="eyebrow">Øvelse 3 · Ryd op</span>
+          <h2>Jeres første JSX</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Erstat alt i <code>src/App.jsx</code> med koden til højre</li>
+              <li>Slet alt indhold i <code>App.css</code> og <code>index.css</code>. Behold filerne</li>
+              <li>Skriv jeres eget navn i <code>name</code>, og gem</li>
+              <li>Tilføj selv et par elementer mere, fx en <code>&lt;p&gt;</code> eller et link</li>
+              <li class="break">Fjern <code>&lt;&gt;</code> og <code>&lt;/&gt;</code>. Læs fejlen. Sæt dem ind igen</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.jsx</span>
+              <pre data-copy><code class="language-javascript">import "./App.css";
+
+export default function App() {
+  const name = "Rasmus";
+
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Users&lt;/h1&gt;
+      &lt;h2&gt;Hello, {name}&lt;/h2&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Test: siden viser kun jeres overskrift og jeres navn.</p>
+        </section>
+
+        <!-- 04 Thinking in React -->
+        <section id="thinking" class="chapter" data-accent="orange">
+          <span class="chapter-number">04</span>
+          <span class="eyebrow">Thinking in React</span>
+          <h2>UI'et er bygget<br />af components</h2>
+          <p>Components, der får data via props og husker data i state. Det er hele tankegangen.</p>
+        </section>
+
+        <section class="cards-slide" data-accent="orange">
+          <span class="eyebrow">Thinking in React</span>
+          <h2>Tre begreber bærer resten af forløbet</h2>
+          <div class="three-cards">
+            <article class="c-cyan">
+              <span>Components</span>
+              <h3>Byggeklodser</h3>
+              <p>En funktion, der returnerer JSX. Små dele, som sættes sammen til hele siden.</p>
+              <p class="known">I kender: en funktion, I kalder igen og igen</p>
+            </article>
+            <article class="c-orange">
+              <span>Props</span>
+              <h3>Data ind udefra</h3>
+              <p>Forælderen sender data ned til barnet. Samme component, forskellige data.</p>
+              <p class="known">I kender: <code>&lt;img src="..." alt="..."&gt;</code> og argumenter til en funktion</p>
+            </article>
+            <article class="c-green">
+              <span>State</span>
+              <h3>Data, der ændrer sig</h3>
+              <p>Data, som componenten husker, mens siden er åben. Ændrer state sig, tegnes UI'et igen.</p>
+              <p class="known">I dag: just do it. I morgen: forstå det</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="shot-slide" data-accent="orange">
+          <span class="eyebrow">Øvelse 4 · To og to · 10 minutter</span>
+          <h2>Tegn kasser om de dele, der hører sammen</h2>
+          <div class="shot-layout">
+            <figure><img src="../assets/react/users-grid.jpg" alt="Den færdige users-app uden markeringer" /></figure>
+            <div class="shot-side">
+              <ol>
+                <li>Tegn kasser om dele, der hører sammen. Giv hver kasse et navn</li>
+                <li>Hvilke kasser går igen?</li>
+                <li>Tegn kasserne som et træ: hvem ligger inden i hvem?</li>
+                <li>Hvilke data skal hver kasse bruge?</li>
+              </ol>
+            </div>
+          </div>
+          <p class="bottom-line">Papir, iPad eller et screenshot. Sammenlign med jeres sidemakker: hvor har I skåret forskelligt?</p>
+        </section>
+
+        <section class="shot-slide" data-accent="orange">
+          <span class="eyebrow">Vores bud</span>
+          <h2>Tre components, og én af dem går igen</h2>
+          <div class="shot-layout">
+            <figure><img src="../assets/react/users-grid-components.jpg" alt="Den samme app med farvede kasser: App om det hele, Header om overskriften og User om hvert kort" /></figure>
+            <div class="shot-side">
+              <pre class="tree"><span class="t-app">App</span>
+├── <span class="t-header">Header</span>
+└── <span class="t-user">User</span> <small>× én pr. person</small></pre>
+              <ul>
+                <li><code>User</code> skal bruge <code>name</code>, <code>title</code>, <code>mail</code> og <code>image</code></li>
+                <li><code>App</code> har listen af users og sender dem videre</li>
+              </ul>
+            </div>
+          </div>
+          <p class="bottom-line">Det er det træ, I bygger resten af dagen. Der findes ikke ét rigtigt svar.</p>
+        </section>
+
+        <!-- 05 Components & props -->
+        <section id="components" class="chapter" data-accent="cyan">
+          <span class="chapter-number">05</span>
+          <span class="eyebrow">Components og props</span>
+          <h2>En funktion,<br />der returnerer JSX</h2>
+          <p>Navnet starter med stort bogstav, så React kan kende forskel på jeres components og almindelige HTML-tags.</p>
+        </section>
+
+        <section class="compare-code-slide" data-accent="cyan">
+          <span class="eyebrow">Component</span>
+          <h2>Én fil pr. component, brugt som et tag</h2>
+          <div class="before-after">
+            <article>
+              <span>src/components/Header.jsx</span>
+              <pre><code class="language-javascript">export default function Header() {
+  return (
+    &lt;header&gt;
+      &lt;h1&gt;Users&lt;/h1&gt;
+      &lt;p&gt;Mine første React components&lt;/p&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>src/App.jsx</span>
+              <pre><code class="language-javascript">import Header from "./components/Header";
+import "./App.css";
+
+export default function App() {
+  return (
+    &lt;&gt;
+      &lt;Header /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line"><code>export default</code> i den ene fil, <code>import</code> i den anden. Samme moduler, som I brugte i jeres Express-routes.</p>
+        </section>
+
+        <section class="step-slide" data-accent="cyan">
+          <span class="eyebrow">Øvelse 5 · Første component</span>
+          <h2>Flyt overskriften ud i en <code>Header</code></h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Opret mappen <code>src/components</code></li>
+              <li>Opret <code>Header.jsx</code> i mappen</li>
+              <li>Flyt <code>&lt;h1&gt;</code> fra <code>App.jsx</code> over i <code>Header</code>, og tilføj en <code>&lt;p&gt;</code></li>
+              <li>Importér <code>Header</code> i <code>App.jsx</code>, og brug den som <code>&lt;Header /&gt;</code></li>
+              <li>Slet <code>&lt;h2&gt;Hello...&lt;/h2&gt;</code> og <code>name</code> i <code>App.jsx</code></li>
+              <li class="break">Omdøb til <code>&lt;header /&gt;</code> med lille h. Hvad sker der?</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/components/Header.jsx</span>
+              <pre data-copy><code class="language-javascript">export default function Header() {
+  return (
+    &lt;header&gt;
+      &lt;h1&gt;Users&lt;/h1&gt;
+      &lt;p&gt;Mine første React components&lt;/p&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Test: overskriften står præcis som før. Nu kommer den bare fra sin egen component.</p>
+        </section>
+
+        <section class="step-slide" data-accent="cyan">
+          <span class="eyebrow">Øvelse 6 · User-component</span>
+          <h2>Ét kort med én person</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Opret <code>src/components/User.jsx</code> med koden til højre</li>
+              <li>Importér <code>User</code> i <code>App.jsx</code></li>
+              <li>Brug <code>&lt;User /&gt;</code> under <code>&lt;Header /&gt;</code></li>
+              <li>Brug den to gange mere. Nu har I tre kort</li>
+              <li class="break">Hvad er problemet med de tre kort?</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/components/User.jsx</span>
+              <pre data-copy class="small"><code class="language-javascript">export default function User() {
+  return (
+    &lt;article className="user-card"&gt;
+      &lt;img
+        src="https://raw.githubusercontent.com/cederdorff/race/master/images/users/race.webp"
+        alt="Rasmus Cederdorff"
+      /&gt;
+      &lt;h2&gt;Rasmus Cederdorff&lt;/h2&gt;
+      &lt;p&gt;Senior Lecturer&lt;/p&gt;
+      &lt;a href="mailto:race@eaaa.dk"&gt;race@eaaa.dk&lt;/a&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Billedet fylder hele bredden indtil videre. Det retter vi med CSS i øvelse 9.</p>
+        </section>
+
+        <section class="compare-code-slide" data-accent="orange">
+          <span class="eyebrow">Props</span>
+          <h2>Samme component, forskellige data</h2>
+          <div class="before-after">
+            <article>
+              <span>Forælderen sender props som attributter</span>
+              <pre><code class="language-javascript">// App.jsx
+&lt;User
+  name="Rasmus Cederdorff"
+  title="Senior Lecturer"
+  mail="race@eaaa.dk"
+  image="https://.../race.webp"
+/&gt;</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>Barnet læser dem som parametre</span>
+              <pre><code class="language-javascript">// User.jsx
+export default function User({ name, title, mail, image }) {
+  return (
+    &lt;article className="user-card"&gt;
+      &lt;img src={image} alt={name} /&gt;
+      &lt;h2&gt;{name}&lt;/h2&gt;
+      &lt;p&gt;{title}&lt;/p&gt;
+      &lt;a href={`mailto:${mail}`}&gt;{mail}&lt;/a&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line"><code>{ name, title }</code> henter felterne ud af ét <code>props</code>-objekt. Props går kun nedad, fra forælder til barn.</p>
+        </section>
+
+        <section class="step-slide" data-accent="orange">
+          <span class="eyebrow">Øvelse 7 · Props</span>
+          <h2>Giv hver <code>User</code> sine egne data</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Tilføj <code>{ name, title, mail, image }</code> i <code>User</code>-funktionen</li>
+              <li>Erstat de faste værdier i JSX'en med <code>{name}</code>, <code>{title}</code> osv.</li>
+              <li>Åbn <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a> i browseren</li>
+              <li>Send props til de tre <code>&lt;User /&gt;</code> i <code>App.jsx</code> med tre forskellige personer</li>
+              <li class="break">Fjern <code>title</code> fra én af dem. Hvad viser kortet?</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.jsx</span>
+              <pre data-copy class="small"><code class="language-javascript">&lt;&gt;
+  &lt;Header /&gt;
+  &lt;User
+    name="Rasmus Cederdorff"
+    title="Senior Lecturer"
+    mail="race@eaaa.dk"
+    image="https://raw.githubusercontent.com/cederdorff/race/master/images/users/race.webp"
+  /&gt;
+  &lt;User name="..." title="..." mail="..." image="..." /&gt;
+  &lt;User name="..." title="..." mail="..." image="..." /&gt;
+&lt;/&gt;</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Test: tre kort med tre forskellige personer. Én component, tre gange.</p>
+        </section>
+
+        <section class="compare-code-slide short-code" data-accent="orange">
+          <span class="eyebrow">Props · <code>children</code></span>
+          <h2>Det mellem tags er også en prop</h2>
+          <div class="before-after">
+            <article>
+              <span>Forælderen skriver indhold mellem tags</span>
+              <pre><code class="language-javascript">&lt;Header&gt;
+  Mine første React components
+&lt;/Header&gt;</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>Barnet får det som <code>children</code></span>
+              <pre><code class="language-javascript">export default function Header({ children }) {
+  return (
+    &lt;header&gt;
+      &lt;h1&gt;Users&lt;/h1&gt;
+      &lt;p&gt;{children}&lt;/p&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">Prøv det på jeres <code>Header</code>, hvis I vil. I bruger <code>children</code> i chatbot-tutorialens step 1.</p>
+        </section>
+
+        <!-- 06 Lister -->
+        <section id="lister" class="chapter" data-accent="green">
+          <span class="chapter-number">06</span>
+          <span class="eyebrow">Lister og styling</span>
+          <h2>Ét array,<br />én <code>.map()</code></h2>
+          <p>Tre <code>&lt;User /&gt;</code> skrevet i hånden holder ikke, når der er ni. Eller 900.</p>
+        </section>
+
+        <section class="compare-code-slide short-code" data-accent="green">
+          <span class="eyebrow">Lister</span>
+          <h2>Data i et array, ét element pr. objekt</h2>
+          <div class="before-after">
+            <article>
+              <span>Før · skrevet i hånden</span>
+              <pre><code class="language-javascript">&lt;User name="Rasmus" ... /&gt;
+&lt;User name="Maria" ... /&gt;
+&lt;User name="Dan" ... /&gt;</code></pre>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>Efter · data styrer, hvad der vises</span>
+              <pre><code class="language-javascript">const users = [
+  { id: "fTs8...", name: "Rasmus", ... },
+  { id: "ZfPT...", name: "Maria", ... }
+];
+
+{users.map(user =&gt; (
+  &lt;User key={user.id} name={user.name} ... /&gt;
+))}</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line"><code>key</code> skal være unik, så React kan holde styr på hvert element mellem to renders. Brug <code>id</code>.</p>
+        </section>
+
+        <section class="step-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 8 · Lister</span>
+          <h2>Fra tre <code>&lt;User /&gt;</code> til <code>users.map()</code></h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Opret et <code>users</code>-array i <code>App</code>. Kopiér 3-4 objekter fra <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a></li>
+              <li>Slet de tre <code>&lt;User /&gt;</code></li>
+              <li>Vis i stedet én <code>User</code> pr. objekt med <code>users.map()</code></li>
+              <li>Tilføj et objekt mere i arrayet. Det dukker op af sig selv</li>
+              <li class="break">Fjern <code>key</code>. Læs advarslen i Console. Sæt den ind igen</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.jsx</span>
+              <pre data-copy class="small"><code class="language-javascript">export default function App() {
+  const users = [
+    // kopiér objekter fra users.json herind
+  ];
+
+  return (
+    &lt;&gt;
+      &lt;Header /&gt;
+      {users.map(user =&gt; (
+        &lt;User
+          key={user.id}
+          name={user.name}
+          title={user.title}
+          mail={user.mail}
+          image={user.image}
+        /&gt;
+      ))}
+    &lt;/&gt;
+  );
+}</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Det er trin 2 i Thinking in React: en statisk version med faste data.</p>
+        </section>
+
+        <section class="step-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 9 · Styling</span>
+          <h2>Gør listen til et grid</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Pak <code>users.map(...)</code> ind i en <code>&lt;section className="grid"&gt;</code></li>
+              <li>Pak alt i <code>App</code> ind i <code>&lt;main className="app"&gt;</code> i stedet for <code>&lt;&gt;</code></li>
+              <li>Kopiér CSS'en til højre ind i <code>App.css</code></li>
+              <li>Giv <code>body</code> <code>margin: 0</code> og en <code>font-family</code> i <code>index.css</code></li>
+              <li>Style det, som I har lyst til</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.css</span>
+              <pre data-copy class="tiny"><code class="language-css">.app { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: #f4f4f5;
+  text-align: center;
+}
+
+.user-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+}</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Det er stadig <code>className</code>, ikke <code>class</code>. CSS'en er helt almindelig CSS.</p>
+        </section>
+
+        <!-- 07 Data -->
+        <section id="data" class="chapter" data-accent="yellow">
+          <span class="chapter-number">07</span>
+          <span class="eyebrow">Hent rigtige data</span>
+          <h2>Just do it.<br />Forstå det i morgen.</h2>
+          <p>Data fra en URL kræver <code>useState</code> og <code>useEffect</code>. I dag skriver I dem. I morgen ser vi på, hvad de gør.</p>
+        </section>
+
+        <section class="cards-slide" data-accent="yellow">
+          <span class="eyebrow">To nye ting, kort</span>
+          <h2>State husker data. En effect henter dem.</h2>
+          <div class="three-cards">
+            <article class="c-green">
+              <span>useState</span>
+              <h3>Huskede data</h3>
+              <p><code>const [users, setUsers] = useState([])</code> giver jer <code>users</code> og en funktion til at ændre dem.</p>
+              <p class="known">Kald <code>setUsers</code>, og UI'et tegnes igen. UI = f(data)</p>
+            </article>
+            <article class="c-cyan">
+              <span>useEffect</span>
+              <h3>Kode efter render</h3>
+              <p>Kører, efter componenten er vist. Med <code>[]</code> til sidst kører den kun én gang.</p>
+              <p class="known">Godt sted til at hente data</p>
+            </article>
+            <article class="c-orange">
+              <span>fetch</span>
+              <h3>Det kender I</h3>
+              <p>Samme <code>fetch</code>, <code>await</code> og <code>response.json()</code>, som I har brugt før.</p>
+              <p class="known">Det eneste nye er, hvor koden står</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="step-slide" data-accent="yellow">
+          <span class="eyebrow">Øvelse 10 · Hent data · del 1</span>
+          <h2>Hent data, og log dem i Console</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Importér <code>useState</code> og <code>useEffect</code> fra <code>"react"</code></li>
+              <li>Erstat jeres <code>const users = [...]</code> med <code>useState([])</code></li>
+              <li>Tilføj <code>useEffect</code> med <code>fetchUsers()</code> lige under</li>
+              <li>Åbn Console. Kan I se et array med ni users?</li>
+              <li>Står det der to gange? Det er normalt under udvikling</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.jsx · øverst</span>
+              <pre data-copy class="small"><code class="language-javascript">import { useEffect, useState } from "react";
+
+export default function App() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() =&gt; {
+    async function fetchUsers() {
+      const url = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json";
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+    }
+    fetchUsers();
+  }, []);
+
+  // return (...) som før</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Siden er tom lige nu. <code>users</code> er stadig et tomt array.</p>
+        </section>
+
+        <section class="step-slide" data-accent="yellow">
+          <span class="eyebrow">Øvelse 10 · Hent data · del 2</span>
+          <h2>Gem data i state, og se grid'et fyldes</h2>
+          <div class="step-layout">
+            <ol class="steps">
+              <li>Erstat <code>console.log(data)</code> med <code>setUsers(data)</code></li>
+              <li>Gem. Nu viser grid'et alle ni users</li>
+              <li>Åbn Elements-panelet. Ét <code>&lt;article&gt;</code> pr. user</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">src/App.jsx</span>
+              <pre data-copy><code class="language-javascript">useEffect(() =&gt; {
+  async function fetchUsers() {
+    const url = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json";
+    const response = await fetch(url);
+    const data = await response.json();
+    setUsers(data);
+  }
+  fetchUsers();
+}, []);</code></pre>
+            </div>
+          </div>
+          <p class="bottom-line"><code>Header</code> og <code>User</code> er ikke ændret. Kun stedet, data kommer fra.</p>
+        </section>
+
+        <section class="flow-slide" data-accent="yellow">
+          <span class="eyebrow">Hele vejen</span>
+          <h2>Fra URL til kort på skærmen</h2>
+          <ol class="flow dense">
+            <li><b>01</b><strong><code>fetch(url)</code></strong><span>Effecten henter JSON, efter første render</span></li>
+            <li><b>02</b><strong><code>setUsers(data)</code></strong><span>State ændrer sig</span></li>
+            <li><b>03</b><strong><code>App</code> kører igen</strong><span>Nu med ni users i stedet for nul</span></li>
+            <li><b>04</b><strong><code>users.map()</code></strong><span>Én <code>&lt;User /&gt;</code> pr. objekt</span></li>
+            <li><b>05</b><strong>Props</strong><span><code>name</code>, <code>title</code>, <code>mail</code>, <code>image</code> ned i <code>User</code></span></li>
+            <li><b>06</b><strong>DOM</strong><span>React indsætter kun det, der er nyt</span></li>
+          </ol>
+          <p class="bottom-line">Components, props og state. Det er Thinking in React i én app.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="yellow">
+          <span class="eyebrow">Øvelse 11 · GitHub</span>
+          <h2>Commit og push jeres første React-app</h2>
+          <ul class="checklist">
+            <li>Åbn <b>Source Control</b> i VS Code, og klik <b>Initialize Repository</b></li>
+            <li>Skriv en commit-besked, fx <i>My first React app</i>, og klik <b>Commit</b></li>
+            <li>Klik <b>Publish Branch</b>, og vælg et public repository</li>
+            <li>Ret noget i appen, commit igen, og klik <b>Sync Changes</b></li>
+          </ul>
+          <p class="bottom-line"><code>node_modules</code> kommer ikke med. Den står allerede i <code>.gitignore</code>.</p>
+        </section>
+
+        <!-- 08 Tutorial -->
+        <section id="tutorial" class="chapter" data-accent="cyan">
+          <span class="chapter-number">08</span>
+          <span class="eyebrow">Chatbot-tutorialen</span>
+          <h2>Det samme igen,<br />i chatbotten</h2>
+          <p>Step 1 og 2 i tutorialen bruger præcis det, I lige har lavet. Nu i et større projekt.</p>
+        </section>
+
+        <section class="map-slide" data-accent="cyan">
+          <span class="eyebrow">Fra my-first-react-app til chatbotten</span>
+          <h2>I har allerede prøvet det hele</h2>
+          <div class="map-rows">
+            <div class="map-row"><div><small>I dag</small><code>Header</code> og <code>User</code> i egne filer</div><b>→</b><div><small>Step 1</small>Del to store components op i mindre, i egne filer</div></div>
+            <div class="map-row"><div><small>I dag</small>Props og <code>children</code></div><b>→</b><div><small>Step 1</small>Send data og indhold ned til de nye components</div></div>
+            <div class="map-row"><div><small>I dag</small><code>users</code>-array, <code>.map()</code> og <code>key</code></div><b>→</b><div><small>Step 2</small>Beskeder og samtaler i arrays, vist med <code>.map()</code></div></div>
+            <div class="map-row"><div><small>I dag</small>Data i <code>App</code>, sendt ned via props</div><b>→</b><div><small>Step 2</small>Løft arrays op til den component, hvor de hører til</div></div>
+          </div>
+        </section>
+
+        <section class="step-slide" data-accent="cyan">
+          <span class="eyebrow">Hands-on · Chatbot step 1 og 2</span>
+          <h2>Kom i gang med tutorialen</h2>
+          <div class="step-layout step-wide-steps">
+            <ol class="steps">
+              <li>Opret et nyt, tomt repository til jeres chatbot, og klon det ned</li>
+              <li>Hent startpunktet i roden af repoet, og commit det med det samme</li>
+              <li><code>cd frontend</code>, <code>npm install</code> og <code>npm run dev</code>. Advarslerne fra <code>npm install</code> er forventede</li>
+              <li>Følg <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/1" target="_blank" rel="noreferrer">step 1 ↗</a> og <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/2" target="_blank" rel="noreferrer">step 2 ↗</a>. Commit efter hver delopgave</li>
+            </ol>
+            <div class="step-code">
+              <span class="file">I roden af jeres nye repo</span>
+              <pre data-copy><code class="language-bash">npx degit --force bewildergeist/chatbot-react-postgres#pr-1-start</code></pre>
+              <span class="file">Bemærk</span>
+              <p>Projektet bruger React Router, så filerne ligger i <code>app/routes/</code> i stedet for <code>src/</code>. Det er stadig Vite og React. Routing kommer i morgen.</p>
+            </div>
+          </div>
+          <p class="bottom-line">Step 1 og 2 skal være færdige til i morgen. Det, I ikke når i dag, laver I hjemme.</p>
+        </section>
+
+        <section class="materials-slide" data-accent="cyan">
+          <span class="eyebrow">Arbejd videre</span>
+          <h2>Opslagsværker og tutorial</h2>
+          <div class="material-links">
+            <a href="https://react.dev/learn" target="_blank" rel="noreferrer"><strong>Quick Start</strong><span>react.dev ↗</span></a>
+            <a href="https://react.dev/learn/thinking-in-react" target="_blank" rel="noreferrer"><strong>Thinking in React</strong><span>react.dev ↗</span></a>
+            <a href="https://react.dev/learn/writing-markup-with-jsx" target="_blank" rel="noreferrer"><strong>Writing Markup with JSX</strong><span>react.dev ↗</span></a>
+            <a href="https://react.dev/learn/passing-props-to-a-component" target="_blank" rel="noreferrer"><strong>Passing Props to a Component</strong><span>react.dev ↗</span></a>
+            <a href="https://react.dev/learn/rendering-lists" target="_blank" rel="noreferrer"><strong>Rendering Lists</strong><span>react.dev ↗</span></a>
+            <a href="https://www.notion.so/0fd48b8ae90a438bb6ec8dc95628f13f" target="_blank" rel="noreferrer"><strong>Getting started with React</strong><span>Notion ↗</span></a>
+            <a href="https://vite.dev/guide/" target="_blank" rel="noreferrer"><strong>Getting Started</strong><span>Vite ↗</span></a>
+            <a href="https://github.com/bewildergeist/chatbot-react-postgres" target="_blank" rel="noreferrer"><strong>Chatbot React Postgres</strong><span>GitHub ↗</span></a>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="../shared/deck.js"></script>
+  </body>
+</html>
