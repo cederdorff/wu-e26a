@@ -55,6 +55,18 @@
           </ol>
         </section>
 
+        <section id="skriv-selv" class="activity-slide" data-accent="cyan">
+          <span class="eyebrow">Sådan arbejder vi i dag</span>
+          <h2>Skriv koden selv</h2>
+          <ul class="checklist">
+            <li>Slå Copilot fra: klik på Copilot-ikonet nederst til højre i VS Code, og fjern fluebenet ved <b>Ghost text suggestions</b> og <b>Next edit suggestions</b></li>
+            <li>Skriv koden fra slides selv. Kopiér den ikke</li>
+            <li>Laver I en fejl, så læs fejlbeskeden, og ret den</li>
+            <li>Kopiér kun kommandoer, CSS og data fra <code>users.json</code></li>
+          </ul>
+          <p class="bottom-line">Koden skal ind gennem fingrene. Det er sådan, I lærer den.</p>
+        </section>
+
         <section class="shot-slide" data-accent="cyan">
           <span class="eyebrow">Dagens mål</span>
           <h2>Det her har I bygget, når dagen er slut</h2>
@@ -606,7 +618,7 @@ const element = React.createElement(
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
-              <pre data-copy><code class="language-javascript">export default function App() {
+              <pre><code class="language-javascript">export default function App() {
   const name = "Rasmus";
 
   return (
@@ -791,7 +803,7 @@ export default function App() {
             </ol>
             <div class="step-code">
               <span class="file">src/components/Header.jsx</span>
-              <pre data-copy><code class="language-javascript">export default function Header() {
+              <pre><code class="language-javascript">export default function Header() {
   return (
     &lt;header&gt;
       &lt;h1&gt;Users&lt;/h1&gt;
@@ -817,7 +829,7 @@ export default function App() {
             </ol>
             <div class="step-code">
               <span class="file">src/components/User.jsx</span>
-              <pre data-copy class="small"><code class="language-javascript">export default function User() {
+              <pre class="small"><code class="language-javascript">export default function User() {
   return (
     &lt;article className="user-card"&gt;
       &lt;img
@@ -922,7 +934,7 @@ export default function App() {
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
-              <pre data-copy class="small"><code class="language-javascript">&lt;main className="app"&gt;
+              <pre class="small"><code class="language-javascript">&lt;main className="app"&gt;
   &lt;Header /&gt;
   &lt;section className="grid"&gt;
     &lt;User
@@ -1011,7 +1023,7 @@ export default function App() {
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
-              <pre data-copy class="tiny"><code class="language-javascript">export default function App() {
+              <pre class="tiny"><code class="language-javascript">export default function App() {
   const users = [
     // kopiér objekter fra users.json herind
   ];
@@ -1086,7 +1098,7 @@ export default function App() {
             <div class="step-code code-pair">
               <div>
               <span class="file">src/components/UserList.jsx</span>
-              <pre data-copy class="tiny"><code class="language-javascript">import User from "./User";
+              <pre class="tiny"><code class="language-javascript">import User from "./User";
 
 export default function UserList({ users }) {
   return (
@@ -1106,7 +1118,7 @@ export default function UserList({ users }) {
               </div>
               <div>
               <span class="file">src/App.jsx · return</span>
-              <pre data-copy class="tiny"><code class="language-javascript">return (
+              <pre class="tiny"><code class="language-javascript">return (
   &lt;main className="app"&gt;
     &lt;Header /&gt;
     &lt;UserList users={users} /&gt;
@@ -1166,13 +1178,14 @@ const data = await response.json();</code></pre>
             <ol class="steps">
               <li>Importér <code>useState</code> og <code>useEffect</code> fra <code>"react"</code></li>
               <li>Erstat jeres <code>const users = [...]</code> med <code>useState([])</code></li>
-              <li>Tilføj <code>useEffect</code> med <code>fetchUsers()</code> lige under</li>
+              <li>Tilføj <code>useEffect</code> med <code>fetchUsers()</code> lige under. URL'en må I kopiere fra <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a></li>
               <li>Åbn Console. Kan I se et array med users?</li>
               <li>Står det der to gange? Det er normalt under udvikling</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx · øverst</span>
-              <pre data-copy class="small"><code class="language-javascript">import { useEffect, useState } from "react";
+              <pre class="small"><code class="language-javascript">import { useEffect, useState } from "react";
+// import Header og UserList som før
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -1205,7 +1218,7 @@ export default function App() {
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
-              <pre data-copy><code class="language-javascript">useEffect(() =&gt; {
+              <pre><code class="language-javascript">useEffect(() =&gt; {
   async function fetchUsers() {
     const url = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json";
     const response = await fetch(url);

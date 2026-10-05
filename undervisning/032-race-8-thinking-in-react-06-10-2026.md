@@ -32,6 +32,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 <details>
 <summary><strong>2. Nyt projekt med Vite: øvelse 1-2</strong></summary>
 
+- I dag skriver I koden selv og slår Copilot fra. Kopiér kun kommandoer, CSS og data fra `users.json`
 - Vite er et build-værktøj og en udviklingsserver. Den forstår JSX og opdaterer siden, så snart I gemmer
 - Tjek jeres Node-version med `node -v`. Vite kræver mindst Node 20.19 eller 22.12. Er jeres ældre, så installér den nyeste LTS-version fra [nodejs.org](https://nodejs.org/)
 - Øvelse 1: opret mappen `my-first-react-app` der, hvor I har jeres kodeprojekter, og åbn kun den mappe i VS Code
