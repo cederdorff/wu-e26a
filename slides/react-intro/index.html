@@ -1150,7 +1150,7 @@ header p {
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Test: kortene står i et grid, og billedet fylder ikke længere hele bredden. Husk <code>className</code>, ikke <code>class</code>.</p>
+          <p class="bottom-line">Test: kortene står i et grid, og billedet fylder ikke længere hele bredden.</p>
         </section>
 
         <section class="fill viz" data-accent="green">
@@ -1299,26 +1299,33 @@ export default function UserList({ users }) {
           <p>Data fra en URL kræver <code>useState</code> og <code>useEffect</code>. I dag skriver I dem. I morgen ser vi på, hvad de gør.</p>
         </section>
 
-        <section class="cards-slide" data-accent="yellow">
+        <section class="cards-slide concept-cards data-cards" data-accent="yellow">
           <span class="eyebrow">To nye ting, kort</span>
           <h2>State husker data. En effect henter dem.</h2>
           <div class="three-cards">
             <article class="c-green">
               <span>useState</span>
               <h3>Huskede data</h3>
-              <p><code>const [users, setUsers] = useState([])</code> giver jer <code>users</code> og en funktion til at ændre dem.</p>
-              <p class="known">Kald <code>setUsers</code>, og UI'et tegnes igen. UI = f(data)</p>
+              <p>Giver jer <code>users</code> og en funktion, der ændrer dem.</p>
+              <pre><code class="language-javascript">const [users, setUsers] =
+  useState([]);</code></pre>
+              <p class="known">Kald <code>setUsers</code>, og UI'et tegnes igen</p>
             </article>
             <article class="c-cyan">
               <span>useEffect</span>
               <h3>Kode efter render</h3>
-              <p>Kører, efter componenten er vist. Med <code>[]</code> til sidst kører den kun én gang.</p>
-              <p class="known">Godt sted til at hente data</p>
+              <p>Kører, efter componenten er vist. Med <code>[]</code> kun én gang.</p>
+              <pre><code class="language-javascript">useEffect(() =&gt; {
+  // hent data her
+}, []);</code></pre>
+              <p class="known">Et godt sted at hente data</p>
             </article>
             <article class="c-orange">
               <span>fetch</span>
               <h3>Det kender I</h3>
-              <p>Samme <code>fetch</code>, <code>await</code> og <code>response.json()</code>, som I har brugt før.</p>
+              <p>Samme <code>fetch</code> og <code>await</code>, som I har brugt før.</p>
+              <pre><code class="language-javascript">const response = await fetch(url);
+const data = await response.json();</code></pre>
               <p class="known">Det eneste nye er, hvor koden står</p>
             </article>
           </div>
@@ -1328,7 +1335,7 @@ export default function UserList({ users }) {
         <section id="ex-11" class="step-slide" data-accent="yellow">
           <span class="eyebrow">Øvelse 11 · Hent data · del 1</span>
           <h2>Hent data, og log dem i Console</h2>
-          <div class="step-layout">
+          <div class="step-layout url-layout ex11-layout">
             <ol class="steps">
               <li>Importér <code>useState</code> og <code>useEffect</code> fra <code>"react"</code></li>
               <li>Erstat jeres <code>const users = [...]</code> med <code>useState([])</code></li>
@@ -1356,17 +1363,18 @@ export default function App() {
   // return (...) som før</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Kun headeren vises lige nu. <code>users</code> er stadig et tomt array.</p>
+          <p class="bottom-line">Test: Console viser et array med users. Siden viser kun headeren, for <code>users</code> er stadig et tomt array.</p>
         </section>
 
         <section class="step-slide" data-accent="yellow">
           <span class="eyebrow">Øvelse 11 · Hent data · del 2</span>
           <h2>Gem data i state, og se grid'et fyldes</h2>
-          <div class="step-layout">
+          <div class="step-layout url-layout ex11-layout">
             <ol class="steps">
               <li>Erstat <code>console.log(data)</code> med <code>setUsers(data)</code></li>
               <li>Gem. Nu viser grid'et alle users fra filen</li>
               <li>Åbn Elements-panelet. Ét <code>&lt;article&gt;</code> pr. user</li>
+              <li class="break">Stav URL'en forkert, fx <code>users.jsn</code>. Læs fejlen i Console. Ret den igen</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
@@ -1381,21 +1389,37 @@ export default function App() {
 }, []);</code></pre>
             </div>
           </div>
-          <p class="bottom-line"><code>Header</code>, <code>UserList</code> og <code>User</code> er ikke ændret. Kun stedet, data kommer fra.</p>
+          <p class="bottom-line">Test: grid'et viser alle users fra filen. <code>Header</code>, <code>UserList</code> og <code>User</code> er ikke ændret.</p>
         </section>
 
-        <section class="flow-slide" data-accent="yellow">
+        <section class="loop-slide data-loop" data-accent="yellow">
           <span class="eyebrow">Hele vejen</span>
           <h2>Fra URL til kort på skærmen</h2>
-          <ol class="flow dense">
-            <li><b>01</b><strong><code>fetch(url)</code></strong><span>Effecten henter JSON, efter første render</span></li>
-            <li><b>02</b><strong><code>setUsers(data)</code></strong><span>State ændrer sig</span></li>
-            <li><b>03</b><strong><code>App</code> kører igen</strong><span>Sender alle users ned til <code>UserList</code></span></li>
-            <li><b>04</b><strong><code>users.map()</code></strong><span>I <code>UserList</code>: én <code>&lt;User /&gt;</code> pr. objekt</span></li>
-            <li><b>05</b><strong>Props</strong><span><code>name</code>, <code>title</code>, <code>mail</code>, <code>image</code> ned i <code>User</code></span></li>
-            <li><b>06</b><strong>DOM</strong><span>React indsætter kun det, der er nyt</span></li>
-          </ol>
-          <p class="bottom-line">Components, props og state. Det er Thinking in React i én app.</p>
+          <div class="loop-layout">
+            <div class="loop-start">
+              <b>1</b>
+              <strong>Første render</strong>
+              <span><code>users</code> er <code>[]</code>, så kun headeren vises. Bagefter kører effecten <code>fetch(url)</code>.</span>
+            </div>
+            <span class="loop-in" aria-hidden="true">→</span>
+            <div class="loop-ring">
+              <svg viewBox="0 0 880 500" aria-hidden="true">
+                <defs><marker id="loop-arrow-2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" /></marker></defs>
+                <path d="M 167 150 A 330 195 0 0 1 201 122" marker-end="url(#loop-arrow-2)" />
+                <path d="M 524 60 A 330 195 0 0 1 579 71" marker-end="url(#loop-arrow-2)" />
+                <path d="M 779 233 A 330 195 0 0 1 779 267" marker-end="url(#loop-arrow-2)" />
+                <path d="M 579 429 A 330 195 0 0 1 524 440" marker-end="url(#loop-arrow-2)" />
+                <path d="M 201 378 A 330 195 0 0 1 167 350" marker-end="url(#loop-arrow-2)" />
+              </svg>
+              <div class="loop-center"><i>↻</i>Hver gang<br />state ændrer sig</div>
+              <div class="loop-node" style="left: 120px; top: 250px"><b>2</b><strong><code>setUsers(data)</code></strong><span>State ændrer sig</span></div>
+              <div class="loop-node" style="left: 348px; top: 65px"><b>3</b><strong><code>App</code> kører igen</strong><span>Sender users ned til <code>UserList</code></span></div>
+              <div class="loop-node" style="left: 717px; top: 135px"><b>4</b><strong><code>users.map()</code></strong><span>Én <code>&lt;User /&gt;</code> pr. objekt</span></div>
+              <div class="loop-node" style="left: 717px; top: 365px"><b>5</b><strong>Props</strong><span><code>name</code>, <code>title</code> … ned i <code>User</code></span></div>
+              <div class="loop-node" style="left: 348px; top: 435px"><b>6</b><strong>DOM</strong><span>React indsætter kun det, der er nyt</span></div>
+            </div>
+          </div>
+          <p class="bottom-line">Trin 1 sker én gang. Trin 2 til 6 sker, hver gang <code>setUsers</code> bliver kaldt. Components, props og state i én app.</p>
         </section>
 
         <section id="ex-12" class="activity-slide" data-accent="yellow">
