@@ -1180,7 +1180,7 @@ const data = await response.json();</code></pre>
               <li>Erstat jeres <code>const users = [...]</code> med <code>useState([])</code></li>
               <li>Tilføj <code>useEffect</code> med <code>fetchUsers()</code> lige under. URL'en må I kopiere fra <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a></li>
               <li>Åbn Console. Kan I se et array med users?</li>
-              <li>To gange? Det er <code>&lt;StrictMode&gt;</code> fra øvelse 2</li>
+              <li>Står det der to gange? Det er normalt under udvikling</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx · øverst</span>
@@ -1202,6 +1202,7 @@ export default function App() {
 
   // return (...) som før</code></pre>
               <p class="step-note"><code>setUsers</code> bruger I først i del 2. Viser VS Code en advarsel om den, er det derfor.</p>
+              <p class="step-note">To gange i Console kommer fra <code>&lt;StrictMode&gt;</code> i <code>main.jsx</code>, som I så i øvelse 2.</p>
             </div>
           </div>
           <p class="bottom-line">Test: Console viser et array med users. Siden viser kun headeren, for <code>users</code> er stadig et tomt array.</p>
