@@ -189,7 +189,7 @@ body {
   position: absolute;
   top: auto;
   bottom: 20px;
-  left: 38px;
+  left: 108px;
   z-index: 20;
   pointer-events: auto;
   padding: 8px 13px;
@@ -211,7 +211,7 @@ body {
   display: none;
 }
 .reveal .agenda-link.exercises-link {
-  left: 142px;
+  left: 212px;
 }
 .reveal .controls {
   color: var(--green) !important;
