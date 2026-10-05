@@ -546,3 +546,1530 @@
   display: grid;
   gap: 16px;
 }
+
+/* ===================================================================
+   Visualizations: small diagrams built from HTML so they share the
+   deck's colors. Component colors match the annotated screenshot:
+   App orange, Header cyan, UserList yellow, User green
+   =================================================================== */
+.viz .stage {
+  gap: 0;
+}
+.viz-code {
+  margin: 0;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #090d0d;
+  color: var(--ink);
+  font: 600 18px/1.45 "SFMono-Regular", Consolas, monospace;
+  white-space: pre;
+  text-align: left;
+}
+.viz-code .k { color: var(--orange); }
+.viz-code .s { color: var(--yellow); }
+.viz-code .t { color: var(--cyan); }
+.viz-code .c { color: var(--muted); }
+.viz-code .hl {
+  margin: 0 -6px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--green) 22%, transparent);
+  color: var(--green);
+}
+.viz-label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.viz-label b {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  font-size: 15px;
+}
+.viz-note {
+  margin: 12px 0 0 !important;
+  color: var(--muted);
+  font-size: 20px !important;
+  line-height: 1.35;
+}
+.viz-note code {
+  font-size: 0.9em !important;
+}
+.v-arrow {
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  color: var(--accent);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+}
+.v-arrow small {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+.vchip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c, var(--accent)) 18%, transparent);
+  color: var(--c, var(--accent));
+  font: 800 16px/1.3 "SFMono-Regular", Consolas, monospace;
+  white-space: nowrap;
+}
+.vchip.green { --c: var(--green); }
+.vchip.orange { --c: var(--orange); }
+.vchip.yellow { --c: var(--yellow); }
+.vchip.cyan { --c: var(--cyan); }
+.vchip.muted { --c: var(--muted); }
+
+/* A browser window with the users app in miniature (same colors as the
+   app the students build: --bg #16171d, --surface #1f2028, purple accent) */
+.screen {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #16171d;
+  box-shadow: 0 18px 40px rgb(0 0 0 / 35%);
+}
+.screen > i {
+  display: block;
+  height: 26px;
+  border-bottom: 1px solid #2e303a;
+  background: #1f2028;
+}
+.screen > i::before {
+  display: block;
+  width: 9px;
+  height: 9px;
+  margin: 8px 0 0 12px;
+  border-radius: 50%;
+  background: #ff6b6b;
+  box-shadow: 15px 0 #f7cf55, 30px 0 #68d391;
+  content: "";
+}
+.s-body {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+.s-head {
+  padding: 8px 12px;
+  border: 1px solid #2e303a;
+  border-left: 3px solid #c084fc;
+  border-radius: 8px;
+  background: #1f2028;
+  color: #f3f4f6;
+  font-size: 15px;
+  font-weight: 800;
+}
+.s-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: 8px;
+}
+.s-empty {
+  display: grid;
+  place-items: center;
+  min-height: 92px;
+  border: 2px dashed #2e303a;
+  border-radius: 8px;
+  color: #6b7280;
+  font: 700 15px/1.3 "SFMono-Regular", Consolas, monospace;
+}
+.mc {
+  display: grid;
+  align-content: start;
+  gap: 1px;
+  padding: 6px;
+  border: 1px solid #2e303a;
+  border-radius: 8px;
+  background: #1f2028;
+  transition: none;
+}
+.reveal .mc img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
+  margin: 0 0 4px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.mc b {
+  overflow: hidden;
+  color: #f3f4f6;
+  font-size: 13px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mc small {
+  color: #9ca3af;
+  font-size: 11px;
+  line-height: 1.25;
+}
+.mc.new {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 40%, transparent);
+}
+.mc.changed {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange) 40%, transparent);
+}
+.mc.dim {
+  opacity: 0.4;
+}
+
+/* UI = f(data): two rows, same function, different data */
+.f-rows {
+  display: grid;
+  gap: 26px;
+}
+.f-row {
+  display: grid;
+  grid-template-columns: 300px 56px 220px 56px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+.f-row .viz-code {
+  font-size: 19px;
+}
+.f-fn {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  height: 140px;
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.f-fn code {
+  background: none !important;
+  color: var(--ink) !important;
+  font-size: 34px !important;
+  font-weight: 800;
+}
+.f-fn small {
+  color: var(--muted);
+  font-size: 16px;
+}
+.f-row .screen .s-body {
+  padding: 10px 12px;
+}
+.f-row .screen .mc b {
+  font-size: 12px;
+}
+
+/* Virtual DOM: previous tree, new tree, the real DOM */
+.vdom3 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr) 70px minmax(0, 1.05fr);
+  align-items: center;
+}
+.panel {
+  padding: 24px 26px;
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.vtree,
+.vtree ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.vtree ul {
+  margin: 8px 0 0 18px;
+  padding-left: 26px;
+  border-left: 2px solid var(--line);
+}
+.vtree li {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+.vtree ul > li::before {
+  position: absolute;
+  top: 22px;
+  left: -26px;
+  width: 22px;
+  border-top: 2px solid var(--line);
+  content: "";
+}
+.vtree li > ul {
+  flex-basis: 100%;
+}
+.vn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0d1413;
+  color: var(--ink);
+  font: 700 19px/1.3 "SFMono-Regular", Consolas, monospace;
+}
+.vn em {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 600;
+}
+.vn.new {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 30%, transparent);
+}
+.vn.changed {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange) 30%, transparent);
+}
+.vn.same {
+  opacity: 0.6;
+}
+.vdom3 .screen .s-body {
+  padding: 10px;
+}
+
+/* How <App /> ends up in #root: index.html -> main.jsx -> App.jsx -> screen */
+.mount-flow,
+.jsx-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1.2fr) 54px minmax(0, 1fr) 54px minmax(0, 0.85fr);
+  align-items: center;
+}
+.mount-flow .viz-code,
+.jsx-flow .viz-code {
+  font-size: 17px;
+}
+.dom-nest div {
+  margin-top: 8px;
+  padding: 10px 12px 12px;
+  border: 2px solid #2e303a;
+  border-radius: 10px;
+}
+.dom-nest > div {
+  margin-top: 0;
+}
+.dom-nest span {
+  display: block;
+  color: var(--muted);
+  font: 700 15px/1.2 "SFMono-Regular", Consolas, monospace;
+}
+.dom-nest .root {
+  border-color: var(--accent);
+  border-style: dashed;
+}
+.dom-nest .root > span {
+  color: var(--accent);
+}
+.dom-nest .app {
+  border-color: var(--orange);
+  background: color-mix(in srgb, var(--orange) 8%, transparent);
+}
+.dom-nest .app > span {
+  color: var(--orange);
+}
+.dom-nest strong {
+  display: block;
+  margin-top: 6px;
+  color: #f3f4f6;
+  font-size: 24px;
+}
+.jsx-flow {
+  grid-template-columns: minmax(0, 0.9fr) 54px minmax(0, 1.15fr) 54px minmax(0, 1.1fr) 54px minmax(0, 0.95fr);
+}
+.jsx-out {
+  display: grid;
+  gap: 12px;
+}
+.jsx-out .screen .s-body {
+  min-height: 110px;
+  align-content: center;
+}
+.jsx-out .screen strong {
+  color: #f3f4f6;
+  font-size: 30px;
+}
+
+/* Props: one component template, three sets of props, three cards */
+.props-viz {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 56px minmax(0, 0.8fr) 56px minmax(0, 1fr);
+  grid-template-rows: repeat(3, auto);
+  align-items: center;
+  row-gap: 16px;
+}
+.props-viz .viz-code {
+  padding: 12px 18px;
+  font-size: 17px;
+}
+.props-viz .tmpl {
+  grid-row: 1 / 4;
+  grid-column: 3;
+}
+.props-viz .v-arrow.in {
+  grid-column: 2;
+}
+.props-viz .v-arrow.out {
+  grid-column: 4;
+}
+.tmpl-card {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border: 2px solid var(--green);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--green) 8%, transparent);
+}
+.tmpl-card > div {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  border: 2px dashed color-mix(in srgb, var(--green) 50%, transparent);
+  border-radius: 8px;
+}
+.tmpl-card .vchip {
+  justify-self: start;
+  font-size: 18px;
+}
+.tmpl-card > div .vchip {
+  justify-self: center;
+}
+.hcard {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 8px;
+  border: 1px solid #2e303a;
+  border-radius: 10px;
+  background: #1f2028;
+}
+.reveal .hcard img {
+  display: block;
+  width: 130px;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.hcard div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.hcard b {
+  color: #f3f4f6;
+  font-size: 18px;
+  line-height: 1.2;
+}
+.hcard small {
+  color: #9ca3af;
+  font-size: 14px;
+}
+.hcard small:last-child {
+  color: #c084fc;
+}
+
+/* .map(): array -> one <User /> per object -> one card per element */
+.map-viz {
+  display: grid;
+  grid-template-columns: 150px repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 14px 22px;
+}
+.map-viz > .row-label {
+  color: var(--muted);
+  font: 800 17px/1.25 "SFMono-Regular", Consolas, monospace;
+  text-align: right;
+}
+.map-viz .viz-code {
+  padding: 12px 16px;
+  font-size: 17px;
+}
+.map-viz .map-fn {
+  grid-column: 2 / 5;
+  padding: 12px 20px;
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font: 700 19px/1.3 "SFMono-Regular", Consolas, monospace;
+  text-align: center;
+}
+.map-viz .down {
+  color: var(--accent);
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+}
+
+/* key: inserting a user first, compared by position vs. by id */
+.key-viz {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px;
+}
+.key-viz .panel {
+  display: grid;
+  gap: 12px;
+}
+.key-viz .panel > p {
+  margin: 4px 0 0 !important;
+  font-size: 22px !important;
+  font-weight: 800;
+}
+.key-rows {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) 30px minmax(0, 1fr) 120px;
+  align-items: center;
+  gap: 10px 12px;
+}
+.key-rows > small {
+  color: var(--muted);
+  font: 700 15px/1.2 "SFMono-Regular", Consolas, monospace;
+}
+.key-rows > i {
+  color: var(--muted);
+  font-style: normal;
+  text-align: center;
+}
+.who {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 5px 12px 5px 5px;
+  border: 1px solid #2e303a;
+  border-radius: 10px;
+  background: #1f2028;
+  color: #f3f4f6;
+  font-size: 19px;
+  font-weight: 700;
+}
+.reveal .who img {
+  width: 58px;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.who.none {
+  justify-content: center;
+  border-style: dashed;
+  background: transparent;
+  color: #6b7280;
+}
+.who.new {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 35%, transparent);
+}
+.who.changed {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange) 35%, transparent);
+}
+
+/* CSS grid auto-fill: the same four cards in a wide and a narrow window */
+.grid-viz {
+  display: grid;
+  gap: 26px;
+}
+.grid-viz .windows {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 0.75fr);
+  align-items: end;
+  gap: 40px;
+}
+.grid-viz figure {
+  margin: 0;
+}
+.grid-viz figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 20px;
+}
+.grid-viz figcaption b {
+  color: var(--ink);
+}
+.grid-explain {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.grid-explain div {
+  padding: 14px 20px;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.35;
+}
+.grid-explain code {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 19px !important;
+}
+
+/* Props flow down the tree: before and after exercise 10 */
+.tree-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px;
+}
+.tree-pair .panel {
+  min-height: 380px;
+}
+.tree-pair .vn {
+  font-size: 22px;
+}
+.tree-pair .vtree li {
+  margin: 14px 0;
+}
+.tree-pair .vtree ul > li::before {
+  top: 24px;
+}
+.vn.app { border-color: var(--orange); color: var(--orange); }
+.vn.header { border-color: var(--cyan); color: var(--cyan); }
+.vn.list { border-color: var(--yellow); color: var(--yellow); }
+.vn.user { border-color: var(--green); color: var(--green); }
+.vn small {
+  color: var(--muted);
+  font-size: 15px;
+}
+.prop-in {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* Render timeline: first render with [], effect, setUsers, second render */
+.timeline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46px minmax(0, 1fr) 46px minmax(0, 1fr) 46px minmax(0, 1fr);
+  align-items: start;
+}
+.timeline .v-arrow {
+  margin-top: 150px;
+}
+.tl-step {
+  display: grid;
+  gap: 12px;
+}
+.tl-step .viz-code {
+  padding: 10px 14px;
+  font-size: 16px;
+}
+.tl-step .screen .s-body {
+  min-height: 210px;
+  align-content: start;
+  padding: 10px;
+}
+.tl-step .screen .mc {
+  padding: 4px;
+}
+.tl-step .screen .mc b {
+  font-size: 10px;
+}
+.tl-step .screen .mc small {
+  display: none;
+}
+.tl-busy {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  border: 2px dashed color-mix(in srgb, var(--accent) 60%, transparent);
+  border-radius: 8px;
+  color: var(--accent);
+  font: 800 16px/1.3 "SFMono-Regular", Consolas, monospace;
+  text-align: center;
+}
+
+/* Fixes after first render */
+.f-fn code {
+  padding: 0 !important;
+  border: 0 !important;
+}
+.vdom3 {
+  align-items: stretch;
+}
+.vdom3 .v-arrow {
+  align-self: center;
+}
+.mount-flow,
+.jsx-flow {
+  align-items: start;
+}
+.mount-flow {
+  grid-template-columns: minmax(0, 1fr) 92px minmax(0, 1.3fr) 92px minmax(0, 1fr) 72px minmax(0, 0.8fr);
+}
+.jsx-flow {
+  grid-template-columns: minmax(0, 0.95fr) 92px minmax(0, 1.05fr) 72px minmax(0, 1.05fr) 92px minmax(0, 0.95fr);
+}
+.mount-flow .v-arrow,
+.jsx-flow .v-arrow {
+  margin-top: 110px;
+}
+.mount-flow .viz-code,
+.jsx-flow .viz-code {
+  font-size: 19px;
+}
+.mount-flow .viz-code {
+  min-height: 210px;
+}
+.jsx-flow .viz-code {
+  min-height: 290px;
+}
+.jsx-flow .jsx-out .viz-code {
+  min-height: 0;
+}
+.reveal .who img {
+  width: 60px;
+  height: 34px;
+}
+.key-rows > .vchip {
+  justify-self: start;
+}
+.grid-viz .windows {
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 0.62fr);
+}
+.mount-flow {
+  grid-template-columns: minmax(0, 0.95fr) 86px minmax(0, 1.5fr) 86px minmax(0, 0.95fr) 66px minmax(0, 0.8fr);
+}
+.mount-flow .viz-code {
+  min-height: 250px;
+  padding: 18px 18px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.mount-flow .v-arrow {
+  margin-top: 130px;
+}
+.mount-flow .dom-nest > div {
+  min-height: 250px;
+}
+.mount-flow .dom-nest .app {
+  padding: 14px;
+}
+.mount-flow .dom-nest strong {
+  font-size: 30px;
+}
+
+/* ===================================================================
+   Chatbot tutorial: an HTML mock of the tutorial's starting UI (same
+   light colors and markup as frontend/app/app.css), optionally with
+   component boxes in the same role colors as the users app:
+   page orange, section purple, simple part cyan, list yellow, item green
+   =================================================================== */
+:root {
+  --purple: #c084fc;
+}
+.tree .t-sec { color: var(--purple); }
+.vn.sec { border-color: var(--purple); color: var(--purple); }
+.vchip.purple { --c: var(--purple); }
+
+.cb {
+  display: flex;
+  overflow: hidden;
+  height: 540px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  color: #0d0d0d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  text-align: left;
+}
+.cb-side {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  width: 250px;
+  border-right: 1px solid #e5e5e5;
+  background: #f9f9f9;
+}
+.cb-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.cb-head b {
+  flex: 1;
+  font-size: 17px;
+}
+.cb-head span {
+  padding: 5px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.cb-threads {
+  flex: 1;
+  margin: 0;
+  padding: 8px;
+  overflow: hidden;
+  list-style: none;
+}
+.cb-threads li {
+  overflow: hidden;
+  margin: 0 0 3px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cb-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-top: 1px solid #e5e5e5;
+  font-size: 13px;
+  font-weight: 500;
+}
+.cb-foot i {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #0d0d0d;
+}
+.cb-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+.cb-msgs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  padding: 20px 22px;
+}
+.cb-msg {
+  display: flex;
+}
+.cb-msg.user {
+  justify-content: flex-end;
+}
+.cb-msg p {
+  display: -webkit-box;
+  max-width: 72%;
+  margin: 0 !important;
+  overflow: hidden;
+  padding: 9px 14px;
+  border-radius: 16px;
+  font-size: 13px !important;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.cb-msg.user p {
+  border: 1px solid #e5e5e5;
+  border-bottom-right-radius: 4px;
+  background: #f1f3f5;
+}
+.cb-msg.bot p {
+  padding-left: 0;
+}
+.cb-input {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #e5e5e5;
+}
+.cb-input span {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  color: #9ca3af;
+  font-size: 13px;
+}
+.cb-input b {
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: #4b5563;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Component boxes drawn on top of the mock */
+.cb.boxed [data-c],
+.cb.boxed .o-item {
+  position: relative;
+  outline: 3px solid var(--cc);
+  outline-offset: -3px;
+}
+.cb.boxed .o-item {
+  outline-width: 2px;
+  outline-offset: -2px;
+}
+.cb.boxed [data-c]::before {
+  position: absolute;
+  z-index: 3;
+  top: 3px;
+  right: 3px;
+  padding: 2px 7px;
+  border-radius: 0 0 0 6px;
+  background: var(--cc);
+  color: #0b1110;
+  content: attr(data-c);
+  font: 800 11px/1.3 "SFMono-Regular", Consolas, monospace;
+  white-space: nowrap;
+}
+.cb.boxed .k-page { --cc: var(--orange); }
+.cb.boxed .k-sec { --cc: var(--purple); }
+.cb.boxed .k-part { --cc: var(--cyan); }
+.cb.boxed .k-list { --cc: var(--yellow); }
+.cb.boxed .k-item { --cc: var(--green); }
+.cb.boxed .cb-side,
+.cb.boxed .cb-main {
+  margin: 6px;
+}
+.cb.boxed {
+  padding: 4px;
+}
+.cb.boxed .cb-threads,
+.cb.boxed .cb-msgs {
+  margin: 4px;
+}
+.cb.boxed .cb-threads li,
+.cb.boxed .cb-msg {
+  margin: 4px 2px;
+}
+.cb.boxed .cb-msg {
+  padding: 3px;
+}
+.cb.boxed .k-page::before,
+.cb.boxed .k-sec::before {
+  top: auto;
+  right: auto;
+  bottom: 3px;
+  left: 3px;
+  border-radius: 0 6px 0 0;
+}
+/* Tutorial step numbers on top of the boxes */
+.cb [data-s]::after {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: -2px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #0b1110;
+  border-radius: 50%;
+  background: var(--cc, var(--accent));
+  color: #0b1110;
+  content: attr(data-s);
+  font: 900 14px/1 "SFMono-Regular", Consolas, monospace;
+  transform: translate(-40%, -50%);
+}
+
+/* Mock + text side by side */
+.cb-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  align-items: center;
+  gap: 44px;
+}
+.cb-layout .tree {
+  font-size: 21px;
+  line-height: 1.55;
+}
+.cb-layout .tree small {
+  font-size: 15px;
+}
+.cb-layout .shot-side li {
+  font-size: 26px;
+}
+.cb-steps {
+  display: grid;
+  gap: 16px;
+}
+.cb-steps div {
+  padding: 14px 20px;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+}
+.cb-steps strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 21px;
+}
+.cb-steps ol {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding-left: 1.6em;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.35;
+}
+.cb-steps ol code {
+  font-size: 0.9em !important;
+}
+
+/* Container + item: the same shape in three places */
+.shape-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.shape-trio .panel {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+.shape-trio .vn {
+  font-size: 20px;
+}
+.shape-trio .prev {
+  display: grid;
+  gap: 6px;
+  min-height: 150px;
+  padding: 12px;
+  border-radius: 10px;
+}
+.shape-trio .prev.dark {
+  background: #16171d;
+}
+.shape-trio .prev.light {
+  background: #f9f9f9;
+}
+.prev .hcard {
+  grid-template-columns: 80px 1fr;
+  padding: 5px;
+}
+.reveal .prev .hcard img {
+  width: 80px;
+}
+.prev .hcard b {
+  font-size: 14px;
+}
+.prev .hcard small {
+  font-size: 11px;
+}
+.prev .t-link {
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: #0d0d0d;
+  font-size: 14px;
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
+}
+.prev .cb-msg p {
+  max-width: 85%;
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
+  color: #0d0d0d;
+}
+.prev .cb-msg.bot p {
+  padding-left: 14px;
+}
+
+/* Starting point vs. after step 1: files and the components in them */
+.files-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) 70px minmax(0, 1.15fr);
+  align-items: center;
+}
+.files-pair .panel {
+  display: grid;
+  gap: 12px;
+}
+.file-row {
+  display: grid;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0d1413;
+}
+.file-row > code {
+  justify-self: start;
+  background: none !important;
+  color: var(--ink) !important;
+  font-size: 19px !important;
+}
+.file-row > code small {
+  color: var(--muted);
+  font-size: 15px;
+}
+.file-row > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.file-row .fat {
+  display: grid;
+  gap: 5px;
+}
+.file-row .fat i {
+  display: block;
+  height: 9px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--muted) 35%, transparent);
+}
+.file-row .fat i.many {
+  height: 40px;
+  background: repeating-linear-gradient(to bottom, color-mix(in srgb, var(--muted) 35%, transparent) 0 6px, transparent 6px 10px);
+}
+.file-row .fat small {
+  color: var(--muted);
+  font: 700 14px/1.2 "SFMono-Regular", Consolas, monospace;
+}
+
+/* Message: type changes the look, children is the content */
+.msg-viz {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) 60px minmax(0, 0.85fr);
+  align-items: center;
+  gap: 18px 0;
+}
+.msg-viz .viz-code {
+  font-size: 18px;
+}
+.msg-viz .viz-code .hl-o {
+  margin: 0 -4px;
+  padding: 1px 4px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--orange) 22%, transparent);
+  color: var(--orange);
+}
+.msg-viz .chat-prev {
+  grid-row: 1 / 3;
+  grid-column: 3;
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+}
+.msg-viz .chat-prev .cb-msg p {
+  max-width: 85%;
+  font-size: 16px !important;
+  -webkit-line-clamp: 4;
+}
+.msg-viz .chat-prev small {
+  color: #6b7280;
+  font: 700 13px/1 "SFMono-Regular", Consolas, monospace;
+}
+.msg-viz .chat-prev .user-row {
+  justify-self: end;
+  text-align: right;
+}
+.msg-viz .v-arrow {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+/* Boxed mock: each label sits in its own strip at the top of its box */
+.cb {
+  height: 500px;
+}
+.cb.boxed {
+  padding: 24px 4px 4px;
+}
+.cb.boxed [data-c] {
+  padding-top: 22px;
+}
+.cb.boxed .cb-msg[data-c],
+.cb.boxed li[data-c] {
+  padding-top: 20px;
+}
+.cb.boxed [data-c]::before,
+.cb.boxed .k-page::before,
+.cb.boxed .k-sec::before {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  border-radius: 0 0 6px 0;
+}
+.cb.boxed .cb-head {
+  padding-bottom: 8px;
+}
+.cb.boxed .cb-msgs {
+  gap: 6px;
+  padding: 22px 10px 8px;
+}
+.cb.boxed .cb-msg p {
+  -webkit-line-clamp: 2;
+}
+.cb-msg p {
+  max-height: calc(1.4em * 3 + 18px);
+}
+.cb.boxed .cb-msg p {
+  max-height: calc(1.4em * 2 + 18px);
+}
+.cb.boxed .cb-threads {
+  padding: 22px 6px 6px;
+}
+.cb.boxed .cb-threads li {
+  padding: 6px 8px;
+}
+.cb.boxed .cb-threads li[data-c] {
+  padding-top: 20px;
+}
+.cb.boxed .cb-input {
+  padding: 24px 10px 8px;
+}
+.cb.boxed .cb-foot {
+  padding: 24px 10px 8px;
+}
+.cb [data-s]::after {
+  top: 2px;
+  right: 4px;
+  left: auto;
+  width: 24px;
+  height: 24px;
+  border-width: 0;
+  font-size: 13px;
+  transform: none;
+}
+.cb.boxed .cb-msg[data-s]::after,
+.cb.boxed li[data-s]::after {
+  top: 1px;
+}
+.cb-steps li {
+  font-size: 19px;
+}
+.cb-steps li::marker {
+  color: var(--accent);
+  font-weight: 800;
+}
+.cb.boxed .cb-threads li:nth-child(n + 9) {
+  display: none;
+}
+.msg-viz .chat-prev .cb-msg p,
+.cb .cb-msg p {
+  color: #0d0d0d;
+}
+
+/* Goal slide for the chatbot tutorial: step cards with links */
+.goal-steps div {
+  padding: 22px 26px;
+}
+.goal-steps strong {
+  font-size: 26px;
+}
+.goal-steps strong a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.goal-steps div p {
+  margin: 0 !important;
+  color: var(--muted);
+  font-size: 22px !important;
+  line-height: 1.4;
+}
+.goal-steps .viz-note {
+  font-size: 21px !important;
+}
+
+/* Chapter 01: the React logo next to the intro text */
+.react-logo {
+  position: absolute;
+  top: 50%;
+  right: 120px;
+  width: 440px;
+  height: auto;
+  color: #61dafb;
+  filter: drop-shadow(0 0 40px rgb(97 218 251 / 35%));
+  transform: translateY(-38%);
+}
+.react-logo g {
+  transform-origin: 0 0;
+  animation: react-spin 30s linear infinite;
+}
+@keyframes react-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .react-logo g { animation: none; }
+}
+#intro p {
+  max-width: 760px;
+}
+.react-logo {
+  overflow: visible;
+}
+
+/* "React på tre kort": full-bleed photo as the reveal.js slide background
+   (data-background-image, faded with data-background-opacity) so it fills
+   the whole viewport, not just the 1600x900 slide. Photo from Unsplash (photo-1633356122544) */
+.reveal .slides section.photo-bg {
+  background: none !important;
+}
+.photo-bg .three-cards article {
+  background: rgb(11 17 16 / 90%);
+  backdrop-filter: blur(6px);
+}
+
+/* "React på tre kort": a small illustration at the bottom of each card */
+.card-viz {
+  margin-top: auto;
+  padding-top: 18px;
+}
+.card-viz.layers {
+  display: grid;
+  gap: 8px;
+}
+.card-viz.layers div {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: color-mix(in srgb, var(--muted) 60%, transparent);
+  font-size: 19px;
+  font-weight: 700;
+}
+.card-viz.layers div.on {
+  border: 2px solid var(--cyan);
+  background: color-mix(in srgb, var(--cyan) 14%, transparent);
+  color: var(--ink);
+}
+.card-viz.layers b {
+  color: var(--cyan);
+}
+.card-viz.blocks {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 2px solid var(--orange);
+  border-radius: 10px;
+  margin-top: auto;
+}
+.card-viz.blocks div {
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  font: 800 15px/1 "SFMono-Regular", Consolas, monospace;
+}
+.card-viz.blocks .b-head {
+  height: 38px;
+  border: 2px solid var(--cyan);
+  color: var(--cyan);
+}
+.card-viz.blocks .b-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  place-items: stretch;
+}
+.card-viz.blocks .b-row div {
+  height: 74px;
+  border: 2px solid var(--green);
+  color: var(--green);
+}
+.card-viz.csr {
+  display: grid;
+  justify-items: stretch;
+  gap: 4px;
+}
+.card-viz.csr > b {
+  color: var(--green);
+  font-size: 22px;
+  text-align: center;
+}
+.c-box {
+  display: grid;
+  gap: 4px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #090d0d;
+}
+.c-box small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.c-box code {
+  justify-self: start;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  font-size: 15px !important;
+}
+.c-box.filled {
+  border-color: var(--green);
+}
+.c-box.filled > i {
+  display: block;
+  height: 12px;
+  border-left: 3px solid #c084fc;
+  border-radius: 3px;
+  background: #1f2028;
+}
+.c-box.filled span {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+.c-box.filled span i {
+  height: 26px;
+  border-radius: 4px;
+  background: #1f2028;
+  border: 1px solid #2e303a;
+}
+.photo-bg .statement-support span {
+  background: rgb(11 17 16 / 90%);
+  backdrop-filter: blur(6px);
+}
+
+/* UI = f(data): the formula split into three labelled, colored parts */
+.statement-slide h2.formula {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  max-width: none;
+  margin: 10px 0 0;
+  font-size: 190px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.formula .f-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formula .f-part small {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 4px solid currentColor;
+  color: var(--ink);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.formula .f-ui { color: var(--cyan); }
+.formula .f-fn { color: var(--orange); font-style: italic; }
+.formula .f-data { color: var(--green); }
+.formula .f-op {
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+  font-weight: 500;
+}
+.statement-support.formula-steps {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 54px;
+  margin: 70px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.formula-steps li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px 16px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgb(11 17 16 / 90%);
+  backdrop-filter: blur(6px);
+  color: var(--ink);
+  font-size: 25px;
+}
+.formula-steps li:not(:last-child)::after {
+  position: absolute;
+  right: -42px;
+  color: var(--accent);
+  content: "→";
+  font-size: 30px;
+  font-weight: 900;
+}
+.formula-steps b {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+  font-size: 18px;
+}
+.statement-slide h2.formula span {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.formula .f-part small {
+  border-top-color: var(--fc);
+  font-style: normal;
+}
+.formula .f-ui { --fc: var(--cyan); }
+.formula .f-fn { --fc: var(--orange); }
+.formula .f-data { --fc: var(--green); }
+.statement-support.formula-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: stretch;
+}
+.formula-steps li {
+  border-radius: 18px;
+  padding: 18px 22px;
+}
+.formula .f-fn small {
+  margin-top: 16px;
+}
+
+/* Embedded intro video: 16:9, as large as the space under the heading allows */
+.video-slide .stage {
+  align-items: center;
+}
+.video-frame {
+  overflow: hidden;
+  height: 100%;
+  max-height: 560px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #000;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 45%);
+}
+.video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-frame {
+  max-height: 520px;
+  margin-top: 16px;
+}

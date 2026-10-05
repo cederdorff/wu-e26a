@@ -10,7 +10,7 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="title-slide" data-accent="cyan">
+        <section class="title-slide photo-bg" data-accent="cyan" data-background-image="../assets/react/react-code-bg.jpg" data-background-size="cover" data-background-color="#050908" data-background-opacity="0.3">
           <div class="title-copy">
             <span class="eyebrow">WU-E26A · RACE 8 · 6. oktober 2026</span>
             <h1>Thinking<br /><span>in React</span></h1>
@@ -54,15 +54,49 @@
           <p class="bottom-line">Hver del af dagen ender med en øvelse i jeres eget projekt. Byg med, mens vi går.</p>
         </section>
 
+        <section class="fill viz" data-accent="cyan">
+          <span class="eyebrow">Dagens mål · del 2</span>
+          <h2>Og så i gang med chatbot-tutorialen</h2>
+          <div class="stage">
+            <div class="cb-layout">
+              <div class="cb" aria-hidden="true"><aside class="cb-side"><div class="cb-head"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads"><li>How to learn programming?</li><li>What are the best pizza toppings?</li><li>Can you explain quantum physics?</li><li>Help me create a morning routine</li><li>What should I do this weekend?</li><li>Why is the sky blue?</li><li>How do I learn a new language?</li><li>What's the meaning of life?</li><li>Tell me a funny joke</li><li>What's a healthy dinner idea?</li><li>Recommend me a good book</li><li>Give me a creative writing prompt</li></ul><div class="cb-foot"><i></i>Batman</div></aside><div class="cb-main"><div class="cb-msgs"><div class="cb-msg user"><p>Hello! Can you help me understand React Router v7?</p></div><div class="cb-msg bot"><p>Of course! React Router v7 is the latest version, with better data loading and nested routing.</p></div><div class="cb-msg user"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot"><p>Nested routes let you build hierarchical UI. A parent route shows child routes in an &lt;Outlet /&gt;.</p></div><div class="cb-msg user"><p>What's the difference between route() and layout() helpers?</p></div><div class="cb-msg bot"><p>Great question! route() adds URL segments, while layout() only adds UI structure.</p></div></div><div class="cb-input"><span>Type your message here...</span><b>Send</b></div></div></div>
+              <div class="cb-steps goal-steps">
+                <div><strong><a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/1" target="_blank" rel="noreferrer">Step 1 · Component-arkitektur ↗</a></strong><p>Del to store filer op i små components, i egne filer. Med props.</p></div>
+                <div><strong><a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/2" target="_blank" rel="noreferrer">Step 2 · Rendering lists ↗</a></strong><p>Beskeder og tråde i arrays, vist med <code>.map()</code> og <code>key</code>.</p></div>
+                <p class="viz-note">Samme ting, som I laver i <code>my-first-react-app</code>. Bare i et større projekt.</p>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Det er den app, I bygger videre på resten af forløbet. Step 1 og 2 skal være færdige til i morgen.</p>
+        </section>
+
         <!-- 01 Intro -->
         <section id="intro" class="chapter" data-accent="cyan">
           <span class="chapter-number">01</span>
           <span class="eyebrow">Intro til React</span>
           <h2>Hvad, hvorfor<br />og hvordan?</h2>
           <p>Et JavaScript-bibliotek til at bygge brugerflader. Lavet af Meta og brugt af Facebook, Instagram, Netflix og Airbnb.</p>
+          <svg class="react-logo" viewBox="-11.5 -10.23 23 20.46" role="img" aria-label="React-logoet">
+            <circle r="2.05" fill="currentColor" />
+            <g fill="none" stroke="currentColor" stroke-width="1">
+              <ellipse rx="11" ry="4.2" />
+              <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+              <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+            </g>
+          </svg>
+        </section>
+        <section class="fill video-slide" data-accent="cyan">
+          <span class="eyebrow">Video · Fireship · på engelsk</span>
+          <h2>React in 100 Seconds</h2>
+          <div class="stage">
+            <div class="video-frame">
+              <iframe data-src="https://www.youtube-nocookie.com/embed/Tn6-PIqc4UM?rel=0" title="React in 100 Seconds" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+          <p class="bottom-line">Hold øje med tre ord, der kommer igen hele dagen: <b>components</b>, <b>JSX</b> og <b>state</b>.</p>
         </section>
 
-        <section class="cards-slide" data-accent="cyan">
+        <section class="cards-slide photo-bg" data-accent="cyan" data-background-image="../assets/react/react-code-bg.jpg" data-background-size="cover" data-background-color="#050908" data-background-opacity="0.3">
           <span class="eyebrow">React på tre kort</span>
           <h2>Et bibliotek til UI, der kører i browseren</h2>
           <div class="three-cards">
@@ -70,16 +104,19 @@
               <span>Hvad</span>
               <h3>Kun UI'et</h3>
               <p>React bygger det, brugeren ser og klikker på. Ikke server, database eller routing.</p>
+              <div class="card-viz layers" aria-hidden="true"><div class="on">UI <b>React</b></div><div>Routing</div><div>Server</div><div>Database</div></div>
             </article>
             <article class="c-orange">
               <span>Hvorfor</span>
               <h3>Components</h3>
               <p>UI'et bygges af små, genbrugelige dele. Siden opdateres selv, når data ændrer sig. Stort økosystem og stort jobmarked.</p>
+              <div class="card-viz blocks" aria-hidden="true"><div class="b-head">Header</div><div class="b-row"><div>User</div><div>User</div><div>User</div></div></div>
             </article>
             <article class="c-green">
               <span>Hvordan</span>
               <h3>I browseren</h3>
               <p>React bygger siden i browseren med JavaScript. Det er <b>client-side rendering</b>, som I præsenterede i sidste uge.</p>
+              <div class="card-viz csr" aria-hidden="true"><div class="c-box"><small>server sender</small><code>&lt;div id="root"&gt;&lt;/div&gt;</code><code>+ JavaScript</code></div><b>↓</b><div class="c-box filled"><small>browseren bygger</small><i></i><span><i></i><i></i><i></i></span></div></div>
             </article>
           </div>
         </section>
@@ -133,14 +170,54 @@ for (const user of users) {
           </ol>
         </section>
 
-        <section class="statement-slide" data-accent="cyan">
+        <section class="statement-slide photo-bg" data-accent="cyan" data-background-image="../assets/react/react-code-bg.jpg" data-background-size="cover" data-background-color="#050908" data-background-opacity="0.3">
           <span class="eyebrow">Kerneidéen</span>
-          <h2>UI = f(data)</h2>
-          <div class="statement-support">
-            <span>I skriver en funktion, der viser data</span>
-            <span>data ændrer sig, og funktionen kører igen</span>
-            <span>React sørger for, at DOM'en passer</span>
+          <h2 class="formula" aria-label="UI = f(data)">
+            <span class="f-part f-ui">UI<small>det, brugeren ser</small></span>
+            <span class="f-op">=</span>
+            <span class="f-part f-fn">f<small>jeres component</small></span>
+            <span class="f-op">(</span>
+            <span class="f-part f-data">data<small>fx jeres users</small></span>
+            <span class="f-op">)</span>
+          </h2>
+          <ol class="statement-support formula-steps">
+            <li><b>1</b>I skriver en funktion, der viser data</li>
+            <li><b>2</b>Data ændrer sig, og funktionen kører igen</li>
+            <li><b>3</b>React sørger for, at DOM'en passer</li>
+          </ol>
+        </section>
+
+        <section class="fill viz" data-accent="cyan">
+          <span class="eyebrow">UI = f(data) · i billeder</span>
+          <h2>Samme funktion. Nye data. Nyt UI.</h2>
+          <div class="stage">
+            <div class="f-rows">
+              <div class="f-row">
+                <pre class="viz-code">[
+  { name: <span class="s">"Dan"</span> },
+  { name: <span class="s">"Magnus"</span> },
+  { name: <span class="s">"Rasmus"</span> }
+]</pre>
+                <b class="v-arrow">→</b>
+                <div class="f-fn"><code>App()</code><small>jeres funktion</small></div>
+                <b class="v-arrow">→</b>
+                <div class="screen"><i></i><div class="s-body"><div class="s-head">Users</div><div class="s-grid" style="--cols: 4"><div class="mc"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div><div class="mc"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small></div></div></div></div>
+              </div>
+              <div class="f-row">
+                <pre class="viz-code">[
+  { name: <span class="s">"Dan"</span> },
+  { name: <span class="s">"Magnus"</span> },
+  { name: <span class="s">"Rasmus"</span> },
+  <span class="hl">{ name: "Anne" }</span>
+]</pre>
+                <b class="v-arrow">→</b>
+                <div class="f-fn"><code>App()</code><small>kører igen</small></div>
+                <b class="v-arrow">→</b>
+                <div class="screen"><i></i><div class="s-body"><div class="s-head">Users</div><div class="s-grid" style="--cols: 4"><div class="mc"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div><div class="mc"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small></div><div class="mc new"><img src="../assets/react/users/anki.webp" alt="" /><b>Anne Kirketerp</b><small>Head of Department</small></div></div></div></div>
+              </div>
+            </div>
           </div>
+          <p class="bottom-line">I rører aldrig DOM'en. I ændrer <b>data</b>, og React kører funktionen igen.</p>
         </section>
 
         <section class="flow-slide" data-accent="cyan">
@@ -154,6 +231,31 @@ for (const user of users) {
             <li><b>05</b><strong>Ret DOM'en</strong><span>Kun forskellen bliver ændret i den rigtige DOM.</span></li>
           </ol>
           <p class="bottom-line">I ser det i praksis om lidt i DevTools.</p>
+        </section>
+
+        <section class="fill viz" data-accent="cyan">
+          <span class="eyebrow">Virtual DOM · i billeder</span>
+          <h2>Der kommer en ny user. Hvad ændrer React?</h2>
+          <div class="stage">
+            <div class="vdom3">
+              <div class="panel">
+                <span class="viz-label"><b>1</b>Forrige træ</span>
+                <ul class="vtree"><li><span class="vn">section.grid</span><ul><li><span class="vn ">article <em>Dan</em></span></li><li><span class="vn ">article <em>Magnus</em></span></li><li><span class="vn ">article <em>Rasmus</em></span></li></ul></li></ul>
+              </div>
+              <b class="v-arrow">→<small>sammenlign</small></b>
+              <div class="panel">
+                <span class="viz-label"><b>2</b>Nyt træ</span>
+                <ul class="vtree"><li><span class="vn">section.grid</span><ul><li><span class="vn same">article <em>Dan</em></span></li><li><span class="vn same">article <em>Magnus</em></span></li><li><span class="vn same">article <em>Rasmus</em></span></li><li><span class="vn new">article <em>Anne</em> <span class="vchip green">ny</span></span></li></ul></li></ul>
+              </div>
+              <b class="v-arrow">→<small>ret kun<br />forskellen</small></b>
+              <div class="panel">
+                <span class="viz-label"><b>3</b>Rigtig DOM</span>
+                <div class="screen"><i></i><div class="s-body"><div class="s-head">Users</div><div class="s-grid" style="--cols: 2"><div class="mc dim"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div><div class="mc dim"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div><div class="mc dim"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small></div><div class="mc new"><img src="../assets/react/users/anki.webp" alt="" /><b>Anne Kirketerp</b><small>Head of Department</small></div></div></div></div>
+                <p class="viz-note">Tre kort bliver ikke rørt. Ét nyt <code>&lt;article&gt;</code> bliver sat ind.</p>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Træerne er bare JavaScript-objekter. At sammenligne dem er hurtigt. At røre DOM'en er langsomt.</p>
         </section>
 
         <!-- 02 Vite -->
@@ -250,6 +352,59 @@ for (const user of users) {
           </div>
         </section>
 
+        <section class="fill viz" data-accent="green">
+          <span class="eyebrow">Sådan kommer App på skærmen</span>
+          <h2>Fra en tom <code>#root</code> til en hel side</h2>
+          <div class="stage">
+            <div class="mount-flow">
+              <div>
+                <span class="viz-label"><b>1</b>index.html</span>
+                <pre class="viz-code">&lt;body&gt;
+  <span class="hl">&lt;div id="root"&gt;&lt;/div&gt;</span>
+  &lt;script
+    type="module"
+    src="/src/main.jsx"
+  &gt;&lt;/script&gt;
+&lt;/body&gt;</pre>
+                <p class="viz-note">En tom kasse og et script</p>
+              </div>
+              <b class="v-arrow">→<small>indlæser</small></b>
+              <div>
+                <span class="viz-label"><b>2</b>src/main.jsx</span>
+                <pre class="viz-code"><span class="k">import</span> App <span class="k">from</span> <span class="s">"./App.jsx"</span>;
+
+createRoot(
+  document.getElementById(<span class="hl">"root"</span>)
+).render(<span class="t">&lt;App /&gt;</span>);</pre>
+                <p class="viz-note">Find <code>#root</code>, og vis <code>&lt;App /&gt;</code> i den</p>
+              </div>
+              <b class="v-arrow">→<small>importerer</small></b>
+              <div>
+                <span class="viz-label"><b>3</b>src/App.jsx</span>
+                <pre class="viz-code"><span class="k">export default</span>
+<span class="k">function</span> App() {
+  <span class="k">return</span> (
+    <span class="t">&lt;h1&gt;</span>Users<span class="t">&lt;/h1&gt;</span>
+  );
+}</pre>
+                <p class="viz-note">Returnerer det, der skal vises</p>
+              </div>
+              <b class="v-arrow">→<small>vises</small></b>
+              <div>
+                <span class="viz-label"><b>4</b>Elements</span>
+                <div class="dom-nest">
+                  <div><span>&lt;body&gt;</span>
+                    <div class="root"><span>&lt;div id="root"&gt;</span>
+                      <div class="app"><span>fra App</span><strong>Users</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">I dag skriver I kun i <code>App.jsx</code> og jeres egne components. <code>index.html</code> og <code>main.jsx</code> rører I ikke.</p>
+        </section>
+
         <section class="activity-slide" data-accent="green">
           <span class="eyebrow">Øvelse 2 · Kig og prøv</span>
           <h2>Ret, gem og se Virtual DOM arbejde</h2>
@@ -293,6 +448,7 @@ for (const user of users) {
             </div>
           </div>
         </section>
+
 
         <section class="step-slide" data-accent="yellow">
           <span class="eyebrow">Øvelse 3 · Ryd op</span>
@@ -392,6 +548,45 @@ export default function App() {
             </div>
           </div>
           <p class="bottom-line">Det er det træ, I bygger resten af dagen. Der findes ikke ét rigtigt svar.</p>
+        </section>
+
+        <section class="fill viz" data-accent="orange">
+          <span class="eyebrow">Øvelse 4 · Samme øvelse, en anden app</span>
+          <h2>Chatbotten: hvor tegner I kasserne her?</h2>
+          <div class="stage">
+            <div class="cb-layout">
+              <div class="cb" aria-hidden="true"><aside class="cb-side"><div class="cb-head"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads"><li>How to learn programming?</li><li>What are the best pizza toppings?</li><li>Can you explain quantum physics?</li><li>Help me create a morning routine</li><li>What should I do this weekend?</li><li>Why is the sky blue?</li><li>How do I learn a new language?</li><li>What's the meaning of life?</li><li>Tell me a funny joke</li><li>What's a healthy dinner idea?</li><li>Recommend me a good book</li><li>Give me a creative writing prompt</li></ul><div class="cb-foot"><i></i>Batman</div></aside><div class="cb-main"><div class="cb-msgs"><div class="cb-msg user"><p>Hello! Can you help me understand React Router v7?</p></div><div class="cb-msg bot"><p>Of course! React Router v7 is the latest version, with better data loading and nested routing.</p></div><div class="cb-msg user"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot"><p>Nested routes let you build hierarchical UI. A parent route shows child routes in an &lt;Outlet /&gt;.</p></div><div class="cb-msg user"><p>What's the difference between route() and layout() helpers?</p></div><div class="cb-msg bot"><p>Great question! route() adds URL segments, while layout() only adds UI structure.</p></div></div><div class="cb-input"><span>Type your message here...</span><b>Send</b></div></div></div>
+              <div class="shot-side">
+                <ol>
+                  <li>Tegn kasser, og giv dem navne</li>
+                  <li>Hvilke kasser går igen?</li>
+                  <li>Hvilken kasse svarer til <code>UserList</code>? Og til <code>User</code>?</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Det er chatbotten fra tutorialen. I bygger videre på den resten af forløbet.</p>
+        </section>
+
+        <section class="fill viz" data-accent="orange">
+          <span class="eyebrow">Vores bud · chatbotten</span>
+          <h2>Ti components, og to af dem går igen</h2>
+          <div class="stage">
+            <div class="cb-layout">
+              <div class="cb boxed k-page" data-c="Layout" aria-hidden="true"><aside class="cb-side k-sec" data-c="Sidebar"><div class="cb-head k-part" data-c="SidebarHeader"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads k-list" data-c="ChatThreadsList"><li class=" k-item" data-c="ChatThreadItem">How to learn programming?</li><li class="o-item k-item">What are the best pizza toppings?</li><li class="o-item k-item">Can you explain quantum physics?</li><li class="o-item k-item">Help me create a morning routine</li><li class="o-item k-item">What should I do this weekend?</li><li class="o-item k-item">Why is the sky blue?</li><li class="o-item k-item">How do I learn a new language?</li><li class="o-item k-item">What's the meaning of life?</li><li class="o-item k-item">Tell me a funny joke</li><li class="o-item k-item">What's a healthy dinner idea?</li><li class="o-item k-item">Recommend me a good book</li><li class="o-item k-item">Give me a creative writing prompt</li></ul><div class="cb-foot k-part" data-c="SidebarFooter"><i></i>Batman</div></aside><div class="cb-main k-sec" data-c="Home"><div class="cb-msgs k-list" data-c="ChatMessages"><div class="cb-msg user k-item" data-c="Message"><p>Hello! Can you help me understand React Router v7?</p></div><div class="cb-msg bot o-item k-item"><p>Of course! React Router v7 is the latest version, with better data loading and nested routing.</p></div><div class="cb-msg user o-item k-item"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot o-item k-item"><p>Nested routes let you build hierarchical UI. A parent route shows child routes in an &lt;Outlet /&gt;.</p></div><div class="cb-msg user o-item k-item"><p>What's the difference between route() and layout() helpers?</p></div><div class="cb-msg bot o-item k-item"><p>Great question! route() adds URL segments, while layout() only adds UI structure.</p></div></div><div class="cb-input k-part" data-c="ChatInput"><span>Type your message here...</span><b>Send</b></div></div></div>
+              <pre class="tree"><span class="t-app">Layout</span>
+├── <span class="t-sec">Sidebar</span>
+│   ├── <span class="t-header">SidebarHeader</span>
+│   ├── <span class="t-list">ChatThreadsList</span>
+│   │   └── <span class="t-user">ChatThreadItem</span> <small>× 14</small>
+│   └── <span class="t-header">SidebarFooter</span>
+└── <span class="t-sec">Home</span>
+    ├── <span class="t-list">ChatMessages</span>
+    │   └── <span class="t-user">Message</span> <small>× 10</small>
+    └── <span class="t-header">ChatInput</span></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Samme farver som users-appen: <b style="color: var(--yellow)">gul</b> holder en liste, <b style="color: var(--green)">grøn</b> går igen.</p>
         </section>
 
         <!-- 05 Components & props -->
@@ -526,6 +721,35 @@ export default function User({ name, title, mail, image }) {
           <p class="bottom-line"><code>{ name, title }</code> henter felterne ud af ét <code>props</code>-objekt. Props går kun nedad, fra forælder til barn.</p>
         </section>
 
+        <section class="fill viz" data-accent="orange">
+          <span class="eyebrow">Props · i billeder</span>
+          <h2>Én component, tre sæt props, tre kort</h2>
+          <div class="stage">
+            <div class="props-viz">
+              <div style="grid-row: 1; grid-column: 1"><pre class="viz-code">&lt;User
+  name=<span class="s">"Dan Okkels Brendstrup"</span>
+  title=<span class="s">"Senior Lecturer"</span>
+  ... /&gt;</pre></div><b class="v-arrow in" style="grid-row: 1">→</b><b class="v-arrow out" style="grid-row: 1">→</b><div style="grid-row: 1; grid-column: 5"><div class="hcard"><img src="../assets/react/users/dob.webp" alt="" /><div><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div></div></div><div style="grid-row: 2; grid-column: 1"><pre class="viz-code">&lt;User
+  name=<span class="s">"Magnus Lindholm Nielsen"</span>
+  title=<span class="s">"Lecturer"</span>
+  ... /&gt;</pre></div><b class="v-arrow in" style="grid-row: 2">→</b><b class="v-arrow out" style="grid-row: 2">→</b><div style="grid-row: 2; grid-column: 5"><div class="hcard"><img src="../assets/react/users/magl.webp" alt="" /><div><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div></div></div><div style="grid-row: 3; grid-column: 1"><pre class="viz-code">&lt;User
+  name=<span class="s">"Rasmus Cederdorff"</span>
+  title=<span class="s">"Senior Lecturer"</span>
+  ... /&gt;</pre></div><b class="v-arrow in" style="grid-row: 3">→</b><b class="v-arrow out" style="grid-row: 3">→</b><div style="grid-row: 3; grid-column: 5"><div class="hcard"><img src="../assets/react/users/race.webp" alt="" /><div><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div></div></div>
+              <div class="tmpl">
+                <span class="viz-label">User.jsx · skrevet én gang</span>
+                <div class="tmpl-card">
+                  <div><span class="vchip green">{image}</span></div>
+                  <span class="vchip green">{name}</span>
+                  <span class="vchip green">{title}</span>
+                  <span class="vchip green">{mail}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Componenten er skabelonen. Props er de data, der bliver sat ind i hullerne.</p>
+        </section>
+
         <section class="step-slide" data-accent="orange">
           <span class="eyebrow">Øvelse 7 · Props</span>
           <h2>Giv hver <code>User</code> sine egne data</h2>
@@ -555,31 +779,6 @@ export default function User({ name, title, mail, image }) {
           <p class="bottom-line">Test: tre kort med tre forskellige personer. Én component, tre gange.</p>
         </section>
 
-        <section class="compare-code-slide short-code" data-accent="orange">
-          <span class="eyebrow">Props · <code>children</code></span>
-          <h2>Det mellem tags er også en prop</h2>
-          <div class="before-after">
-            <article>
-              <span>Forælderen skriver indhold mellem tags</span>
-              <pre><code class="language-javascript">&lt;Header&gt;
-  Mine første React components
-&lt;/Header&gt;</code></pre>
-            </article>
-            <b aria-hidden="true">→</b>
-            <article>
-              <span>Barnet får det som <code>children</code></span>
-              <pre><code class="language-javascript">export default function Header({ children }) {
-  return (
-    &lt;header&gt;
-      &lt;h1&gt;Users&lt;/h1&gt;
-      &lt;p&gt;{children}&lt;/p&gt;
-    &lt;/header&gt;
-  );
-}</code></pre>
-            </article>
-          </div>
-          <p class="bottom-line">Prøv det på jeres <code>Header</code>, hvis I vil. I bruger <code>children</code> i chatbot-tutorialens step 1.</p>
-        </section>
 
         <!-- 06 Lister -->
         <section id="lister" class="chapter" data-accent="green">
@@ -614,6 +813,29 @@ export default function User({ name, title, mail, image }) {
           </div>
           <p class="bottom-line"><code>key</code> skal være unik, så React kan holde styr på hvert element mellem to renders. Brug <code>id</code>.</p>
         </section>
+
+        <section class="fill viz" data-accent="green">
+          <span class="eyebrow"><code>.map()</code> · i billeder</span>
+          <h2>Ét objekt ind, ét element ud</h2>
+          <div class="stage">
+            <div class="map-viz">
+              <span class="row-label">users</span><pre class="viz-code">{ id: <span class="s">"HlvR…"</span>,
+  name: <span class="s">"Dan"</span> }</pre><pre class="viz-code">{ id: <span class="s">"esCq…"</span>,
+  name: <span class="s">"Magnus"</span> }</pre><pre class="viz-code">{ id: <span class="s">"fTs8…"</span>,
+  name: <span class="s">"Rasmus"</span> }</pre>
+              <span class="row-label"></span>
+              <div class="map-fn">users.map(user =&gt; <span class="t">&lt;User</span> key={user.id} name={user.name} … <span class="t">/&gt;</span>)</div>
+              <span class="row-label">JSX</span><pre class="viz-code"><span class="t">&lt;User</span> <span class="hl">key="HlvR…"</span>
+  name=<span class="s">"Dan"</span> <span class="t">/&gt;</span></pre><pre class="viz-code"><span class="t">&lt;User</span> <span class="hl">key="esCq…"</span>
+  name=<span class="s">"Magnus"</span> <span class="t">/&gt;</span></pre><pre class="viz-code"><span class="t">&lt;User</span> <span class="hl">key="fTs8…"</span>
+  name=<span class="s">"Rasmus"</span> <span class="t">/&gt;</span></pre>
+              <span class="row-label"></span><b class="down">↓</b><b class="down">↓</b><b class="down">↓</b>
+              <span class="row-label">skærm</span><div class="hcard"><img src="../assets/react/users/dob.webp" alt="" /><div><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div></div><div class="hcard"><img src="../assets/react/users/magl.webp" alt="" /><div><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div></div><div class="hcard"><img src="../assets/react/users/race.webp" alt="" /><div><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Tre objekter giver tre <code>&lt;User /&gt;</code>. 900 objekter giver 900. Koden er den samme.</p>
+        </section>
+
 
         <section class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 8 · Lister</span>
@@ -764,6 +986,25 @@ header p {
           <p class="bottom-line">Det er stadig <code>className</code>, ikke <code>class</code>.</p>
         </section>
 
+        <section class="fill viz" data-accent="green">
+          <span class="eyebrow">Øvelse 9c · Hvad gør grid'et?</span>
+          <h2>Samme fire kort, to vinduesbredder</h2>
+          <div class="stage">
+            <div class="grid-viz">
+              <div class="windows">
+                <figure><div class="screen"><i></i><div class="s-body"><div class="s-head">Users</div><div class="s-grid" style="--cols: 4"><div class="mc"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div><div class="mc"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/anki.webp" alt="" /><b>Anne Kirketerp</b><small>Head of Department</small></div></div></div></div><figcaption><b>Bredt vindue:</b> plads til fire kolonner</figcaption></figure>
+                <figure><div class="screen"><i></i><div class="s-body"><div class="s-head">Users</div><div class="s-grid" style="--cols: 2"><div class="mc"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div><div class="mc"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/anki.webp" alt="" /><b>Anne Kirketerp</b><small>Head of Department</small></div></div></div></div><figcaption><b>Smalt vindue:</b> kun plads til to</figcaption></figure>
+              </div>
+              <div class="grid-explain">
+                <div><code>repeat(auto-fill, ...)</code>Lav så mange kolonner, der er plads til</div>
+                <div><code>minmax(220px, ...)</code>Hver kolonne er mindst 220px bred</div>
+                <div><code>minmax(..., 1fr)</code>Resten af pladsen deles ligeligt</div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Ingen media queries. Grid'et finder selv antallet af kolonner.</p>
+        </section>
+
         <section class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 9d · Styling</span>
           <h2>Finpuds kortene</h2>
@@ -801,6 +1042,40 @@ header p {
             </div>
           </div>
           <p class="bottom-line">Test: navn, titel og mail står pænt, og kortet løfter sig, når musen er over det.</p>
+        </section>
+
+        <section class="fill viz" data-accent="green">
+          <span class="eyebrow">Øvelse 10 · Før og efter</span>
+          <h2>Data flyder nedad gennem træet</h2>
+          <div class="stage">
+            <div class="tree-pair">
+              <div class="panel">
+                <span class="viz-label">Nu · efter øvelse 9</span>
+                <ul class="vtree"><li><span class="vn app">App <small>har users</small></span>
+                  <ul>
+                    <li><span class="vn header">Header</span></li>
+                    <li><span class="vn user">User <small>× én pr. person</small></span><span class="prop-in">← <span class="vchip green">name</span> <span class="vchip green">title</span> <span class="vchip green">mail</span> <span class="vchip green">image</span></span></li>
+                  </ul>
+                </li></ul>
+                <p class="viz-note"><code>App</code> laver både data og <code>.map()</code></p>
+              </div>
+              <div class="panel">
+                <span class="viz-label">Efter øvelse 10</span>
+                <ul class="vtree"><li><span class="vn app">App <small>har users</small></span>
+                  <ul>
+                    <li><span class="vn header">Header</span></li>
+                    <li><span class="vn list">UserList</span><span class="prop-in">← <span class="vchip yellow">users</span></span>
+                      <ul>
+                        <li><span class="vn user">User <small>× én pr. person</small></span><span class="prop-in">← <span class="vchip green">name</span> <span class="vchip green">title</span> <span class="vchip green">mail</span> <span class="vchip green">image</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li></ul>
+                <p class="viz-note"><code>App</code> har data. <code>UserList</code> laver <code>.map()</code></p>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Props går kun nedad: fra forælder til barn, ét niveau ad gangen.</p>
         </section>
 
         <section class="step-slide" data-accent="green">
@@ -881,6 +1156,7 @@ export default function UserList({ users }) {
             </article>
           </div>
         </section>
+
 
         <section class="step-slide" data-accent="yellow">
           <span class="eyebrow">Øvelse 11 · Hent data · del 1</span>
@@ -975,15 +1251,111 @@ export default function App() {
           <p>Step 1 og 2 i tutorialen bruger præcis det, I lige har lavet. Nu i et større projekt.</p>
         </section>
 
-        <section class="map-slide" data-accent="cyan">
-          <span class="eyebrow">Fra my-first-react-app til chatbotten</span>
-          <h2>I har allerede prøvet det hele</h2>
-          <div class="map-rows">
-            <div class="map-row"><div><small>I dag</small><code>Header</code>, <code>UserList</code> og <code>User</code> i egne filer</div><b>→</b><div><small>Step 1</small>Del to store components op i mindre, i egne filer</div></div>
-            <div class="map-row"><div><small>I dag</small>Props og <code>children</code></div><b>→</b><div><small>Step 1</small>Send data og indhold ned til de nye components</div></div>
-            <div class="map-row"><div><small>I dag</small><code>users</code>-array, <code>.map()</code> og <code>key</code></div><b>→</b><div><small>Step 2</small>Beskeder og samtaler i arrays, vist med <code>.map()</code></div></div>
-            <div class="map-row"><div><small>I dag</small>Data i <code>App</code>, sendt ned via props</div><b>→</b><div><small>Step 2</small>Løft arrays op til den component, hvor de hører til</div></div>
+
+        <section class="fill viz" data-accent="cyan">
+          <span class="eyebrow">Chatbot step 1 · før og efter</span>
+          <h2>Fra to store filer til små components</h2>
+          <div class="stage">
+            <div class="files-pair">
+              <div class="panel">
+                <span class="viz-label">Startpunktet</span>
+                <div class="file-row"><code>app/routes/layout.jsx</code><div><span class="vchip orange">Layout</span></div>
+                  <div class="fat"><i style="width: 70%"></i><small>&lt;aside&gt; header</small><i class="many"></i><small>14 × &lt;li&gt; skrevet i hånden</small><i style="width: 55%"></i><small>footer &lt;/aside&gt;</small></div></div>
+                <div class="file-row"><code>app/routes/home.jsx</code><div><span class="vchip purple">Home</span></div>
+                  <div class="fat"><i class="many"></i><small>10 × &lt;div className="message"&gt;</small><i style="width: 60%"></i><small>&lt;textarea&gt; og Send</small></div></div>
+              </div>
+              <b class="v-arrow">→<small>step 1</small></b>
+              <div class="panel">
+                <span class="viz-label">Efter step 1</span>
+                <div class="file-row"><code>app/components/Sidebar.jsx</code><div><span class="vchip purple">Sidebar</span><span class="vchip cyan">SidebarHeader</span><span class="vchip yellow">ChatThreadsList</span><span class="vchip green">ChatThreadItem</span><span class="vchip cyan">SidebarFooter</span></div></div>
+                <div class="file-row"><code>app/components/Chat.jsx</code><div><span class="vchip yellow">ChatMessages</span><span class="vchip green">Message</span><span class="vchip cyan">ChatInput</span></div></div>
+                <div class="file-row"><code>app/routes/layout.jsx</code><div><span class="vchip orange">Layout</span><span class="prop-in">→ bruger <code>&lt;Sidebar /&gt;</code></span></div></div>
+                <div class="file-row"><code>app/routes/home.jsx</code><div><span class="vchip purple">Home</span><span class="prop-in">→ bruger <code>&lt;ChatMessages /&gt;</code> og <code>&lt;ChatInput /&gt;</code></span></div></div>
+              </div>
+            </div>
           </div>
+          <p class="bottom-line">Samme træk som jeres <code>src/components</code>. Her hedder mappen <code>app/components</code>, og siden ser ud præcis som før.</p>
+        </section>
+
+        <section class="fill viz" data-accent="cyan">
+          <span class="eyebrow">Container og item</span>
+          <h2>Samme form tre steder</h2>
+          <div class="stage">
+            <div class="shape-trio">
+              <div class="panel">
+                <span class="viz-label">my-first-react-app</span>
+                <ul class="vtree"><li><span class="vn list">UserList</span><ul><li><span class="vn user">User <small>× 11</small></span></li></ul></li></ul>
+                <div class="prev dark"><div class="hcard"><img src="../assets/react/users/dob.webp" alt="" /><div><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div></div><div class="hcard"><img src="../assets/react/users/magl.webp" alt="" /><div><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div></div></div>
+                <p class="viz-note">Props: <code>name</code>, <code>title</code>, <code>mail</code>, <code>image</code></p>
+              </div>
+              <div class="panel">
+                <span class="viz-label">Chatbot · sidebaren</span>
+                <ul class="vtree"><li><span class="vn list">ChatThreadsList</span><ul><li><span class="vn user">ChatThreadItem <small>× 14</small></span></li></ul></li></ul>
+                <div class="prev light"><div class="t-link">How to learn programming?</div><div class="t-link">What are the best pizza toppings?</div><div class="t-link">Can you explain quantum physics?</div></div>
+                <p class="viz-note">Props: <code>href</code>, <code>title</code></p>
+              </div>
+              <div class="panel">
+                <span class="viz-label">Chatbot · chatten</span>
+                <ul class="vtree"><li><span class="vn list">ChatMessages</span><ul><li><span class="vn user">Message <small>× 10</small></span></li></ul></li></ul>
+                <div class="prev light"><div class="cb-msg user"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot"><p>Nested routes allow you to create hierarchical UI structures.</p></div></div>
+                <p class="viz-note">Props: <code>type</code> og teksten</p>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">En <b>container</b> holder listen. Et <b>item</b> viser ét element og går igen. Det har I allerede bygget i dag.</p>
+        </section>
+
+        <section class="fill viz" data-accent="cyan">
+          <span class="eyebrow">Chatbot step 1 · på ét billede</span>
+          <h2>Udefra og ind, én kasse ad gangen</h2>
+          <div class="stage">
+            <div class="cb-layout">
+              <div class="cb boxed k-page" data-c="Layout" aria-hidden="true"><aside class="cb-side k-sec" data-c="Sidebar" data-s="1"><div class="cb-head k-part" data-c="SidebarHeader" data-s="2"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads k-list" data-c="ChatThreadsList" data-s="4"><li class=" k-item" data-c="ChatThreadItem" data-s="5">How to learn programming?</li><li class="o-item k-item">What are the best pizza toppings?</li><li class="o-item k-item">Can you explain quantum physics?</li><li class="o-item k-item">Help me create a morning routine</li><li class="o-item k-item">What should I do this weekend?</li><li class="o-item k-item">Why is the sky blue?</li><li class="o-item k-item">How do I learn a new language?</li><li class="o-item k-item">What's the meaning of life?</li><li class="o-item k-item">Tell me a funny joke</li><li class="o-item k-item">What's a healthy dinner idea?</li><li class="o-item k-item">Recommend me a good book</li><li class="o-item k-item">Give me a creative writing prompt</li></ul><div class="cb-foot k-part" data-c="SidebarFooter" data-s="3"><i></i>Batman</div></aside><div class="cb-main k-sec" data-c="Home"><div class="cb-msgs k-list" data-c="ChatMessages" data-s="8"><div class="cb-msg user k-item" data-c="Message" data-s="7"><p>Hello! Can you help me understand React Router v7?</p></div><div class="cb-msg bot o-item k-item"><p>Of course! React Router v7 is the latest version, with better data loading and nested routing.</p></div><div class="cb-msg user o-item k-item"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot o-item k-item"><p>Nested routes let you build hierarchical UI. A parent route shows child routes in an &lt;Outlet /&gt;.</p></div><div class="cb-msg user o-item k-item"><p>What's the difference between route() and layout() helpers?</p></div><div class="cb-msg bot o-item k-item"><p>Great question! route() adds URL segments, while layout() only adds UI structure.</p></div></div><div class="cb-input k-part" data-c="ChatInput" data-s="9"><span>Type your message here...</span><b>Send</b></div></div></div>
+              <div class="cb-steps">
+                <div><strong>Sidebaren · delopgave 1-6</strong><ol>
+                  <li><code>Sidebar</code></li><li><code>SidebarHeader</code></li><li><code>SidebarFooter</code></li><li><code>ChatThreadsList</code></li><li><code>ChatThreadItem</code> med props</li><li>Flyt til <code>Sidebar.jsx</code></li></ol></div>
+                <div><strong>Chatten · delopgave 7-10</strong><ol start="7">
+                  <li><code>Message</code> med props</li><li><code>ChatMessages</code></li><li><code>ChatInput</code></li><li>Flyt til <code>Chat.jsx</code></li></ol></div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Siden skal se ens ud efter hver delopgave. Commit hver gang.</p>
+        </section>
+
+
+        <section class="fill viz" data-accent="cyan">
+          <span class="eyebrow">Chatbot step 2 · data flyttes op</span>
+          <h2>Arrays op i træet, props ned</h2>
+          <div class="stage">
+            <div class="tree-pair">
+              <div class="panel">
+                <span class="viz-label">Beskeder · delopgave 1-2</span>
+                <ul class="vtree"><li><span class="vn sec">Home <small>har messages</small></span>
+                  <ul>
+                    <li><span class="vn list">ChatMessages</span><span class="prop-in">← <span class="vchip yellow">messages</span></span>
+                      <ul><li><span class="vn user">Message <small>× 10</small></span><span class="prop-in">← <span class="vchip green">type</span> <span class="vchip green">content</span></span></li></ul>
+                    </li>
+                    <li><span class="vn header">ChatInput</span></li>
+                  </ul>
+                </li></ul>
+                <p class="viz-note">Samme form som <code>App</code> → <code>UserList</code> → <code>User</code></p>
+              </div>
+              <div class="panel">
+                <span class="viz-label">Tråde · delopgave 3-4</span>
+                <ul class="vtree"><li><span class="vn app">Layout <small>har threads</small></span>
+                  <ul>
+                    <li><span class="vn sec">Sidebar</span><span class="prop-in">← <span class="vchip yellow">threads</span> <small>sender bare videre</small></span>
+                      <ul><li><span class="vn list">ChatThreadsList</span><span class="prop-in">← <span class="vchip yellow">threads</span></span>
+                        <ul><li><span class="vn user">ChatThreadItem <small>× 14</small></span><span class="prop-in">← <span class="vchip green">href</span> <span class="vchip green">title</span></span></li></ul>
+                      </li></ul>
+                    </li>
+                  </ul>
+                </li></ul>
+                <p class="viz-note"><code>threads</code> skal ned gennem <code>Sidebar</code> for at nå <code>ChatThreadsList</code></p>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Først <code>.map()</code> over et array i componenten. Bagefter flytter I arrayet op til den component, der ejer det.</p>
         </section>
 
         <section class="step-slide" data-accent="cyan">

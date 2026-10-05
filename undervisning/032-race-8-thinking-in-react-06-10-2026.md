@@ -51,6 +51,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - Thinking in React: UI'et er bygget af **components**, der får data via **props** og husker data i **state**
 - Øvelse 4, to og to: tag et screenshot af den færdige users-app. Tegn kasser om de dele, der hører sammen, og navngiv dem. Hvilke kasser går igen? Tegn hierarkiet som et træ, og skriv, hvilke data hver kasse skal bruge
 - Sammenlign med jeres sidemakker. Bagefter ser vi vores bud i plenum: `App` med en `Header` og en `UserList`, der viser én `User` pr. person
+- Samme øvelse på chatbotten fra tutorialen: hvilke kasser svarer til `UserList` og `User`? Vores bud er ti components, hvor `ChatThreadItem` og `Message` går igen
 - Se også de fem trin i ["Thinking in React"](https://react.dev/learn/thinking-in-react) på react.dev
 </details>
 <details>
@@ -62,7 +63,6 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - Øvelse 6: lav en `User`-component med én fast person, og brug den tre gange. Hvad er problemet?
 - **Props:** data sendes ned fra forælder til barn som attributter, `<User name="..." />`, og læses i barnet som parametre, `function User({ name })`. Props går kun nedad
 - Øvelse 7: giv hver `User` sine egne data via props, med tre forskellige personer fra [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json)
-- **`children`:** det, der står mellem start- og slut-tagget, sendes med som `props.children`. I bruger det i tutorialens step 1
 </details>
 <details>
 <summary><strong>6. Lister og styling: øvelse 8-10</strong></summary>
@@ -83,7 +83,8 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 <details>
 <summary><strong>8. Kom i gang med chatbot-tutorialen: step 1 og 2</strong></summary>
 
-- Step 1 og 2 bruger det, I lige har lavet i `my-first-react-app`: components i egne filer, props, `children`, arrays, `.map()` og `key`
+- Step 1 og 2 bruger det, I lige har lavet i `my-first-react-app`: components i egne filer, props, arrays, `.map()` og `key`
+- Vi ser sammen, hvordan step 1 deler to store filer op i små components udefra og ind, og hvordan step 2 flytter arrays op i træet. `ChatThreadsList` og `ChatThreadItem` har samme form som `UserList` og `User`
 - Opret et nyt, tomt repository til jeres chatbot, og klon det ned
 - Hent startpunktet i roden af repoet med `npx degit --force bewildergeist/chatbot-react-postgres#pr-1-start`, og commit det med det samme
 - `cd frontend`, `npm install` og `npm run dev`. Sikkerhedsadvarslerne fra `npm install` er forventede. Læs tutorialens note om dem
