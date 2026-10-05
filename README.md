@@ -30,7 +30,7 @@ Underviserne står med initialer i titlerne: RACE, DOB, MAGL, HEOE, NKKR og NYCH
 | 6 | 23-09 | Arkitektur og REST API best practices | [plan](./undervisning/022-race-6-arkitektur-og-rest-api-best-practices-23-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/arkitektur/) | [Arkitektur](./opgaver/express-rest-api-arkitektur.md), [7](./opgaver/express-rest-api-amabot-arkitektur.md), [8](./opgaver/fetch-dom-amabot.md) |
 | 7 | 25-09 | Sikkerhed og error handling | [plan](./undervisning/024-race-7-sikkerhed-og-error-handling-25-09-2026.md) | [slides](https://cederdorff.com/wu-e26a/fejlhaandtering-sikkerhed/) | [Fejlhåndtering](./opgaver/express-rest-api-fejlhaandtering.md), [9](./opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md) |
 | 8 | 30-09 | Client/Server-præsentationer (med DOB) | [plan](./undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md) | — | — |
-| 8 | 06-10 | Thinking in React | [plan](./undervisning/032-race-8-thinking-in-react-06-10-2026.md) | — | — |
+| 8 | 06-10 | Thinking in React | [plan](./undervisning/032-race-8-thinking-in-react-06-10-2026.md) | [slides](https://cederdorff.com/wu-e26a/react-intro/) | [1-11](https://cederdorff.com/wu-e26a/react-intro/#/ovelser), [løsning](https://github.com/cederdorff/my-first-react-app) |
 | 9 | 28-10 | User authentication og login | [plan](./undervisning/048-race-9-user-authentication-og-login-28-10-2026.md) | — | — |
 | 10 | 03-11 | JWT tokens fra frontend | [plan](./undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md) | — | — |
 | 11 | 11-11 | Session expiration handling i frontend | [plan](./undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) | — | — |

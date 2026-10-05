@@ -548,7 +548,7 @@
   color: var(--accent);
 }
 
-/* Exercise 9a: two short CSS files side by side instead of stacked */
+/* Two short code files side by side instead of stacked */
 .step-layout.pair-layout {
   grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
 }
@@ -1149,48 +1149,6 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange) 35%, transparent);
 }
 
-/* CSS grid auto-fill: the same four cards in a wide and a narrow window */
-.grid-viz {
-  display: grid;
-  gap: 26px;
-}
-.grid-viz .windows {
-  display: grid;
-  grid-template-columns: minmax(0, 1.75fr) minmax(0, 0.75fr);
-  align-items: end;
-  gap: 40px;
-}
-.grid-viz figure {
-  margin: 0;
-}
-.grid-viz figcaption {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 20px;
-}
-.grid-viz figcaption b {
-  color: var(--ink);
-}
-.grid-explain {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-.grid-explain div {
-  padding: 14px 20px;
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius-sm);
-  background: var(--soft);
-  color: var(--muted);
-  font-size: 20px;
-  line-height: 1.35;
-}
-.grid-explain code {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 19px !important;
-}
-
 /* Props flow down the tree: before and after exercise 10 */
 .tree-pair {
   display: grid;
@@ -1308,9 +1266,6 @@
 }
 .key-rows > .vchip {
   justify-self: start;
-}
-.grid-viz .windows {
-  grid-template-columns: minmax(0, 1.9fr) minmax(0, 0.62fr);
 }
 .mount-flow {
   grid-template-columns: minmax(0, 0.95fr) 86px minmax(0, 1.5fr) 86px minmax(0, 0.95fr) 66px minmax(0, 0.8fr);
@@ -2570,27 +2525,27 @@
   width: 250px;
 }
 
-/* Exercise 10: more room for the two code files */
-.ex10-layout.step-layout.pair-layout {
+/* Exercise 9 (UserList): more room for the two code files */
+.userlist-layout.step-layout.pair-layout {
   grid-template-columns: minmax(0, 0.58fr) minmax(0, 1.42fr);
   gap: 40px;
 }
-.ex10-layout .steps li {
+.userlist-layout .steps li {
   font-size: 22px;
 }
-.ex10-layout .step-code.code-pair {
+.userlist-layout .step-code.code-pair {
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
 }
-.ex10-layout .step-code pre code {
+.userlist-layout .step-code pre code {
   font-size: 16px;
   white-space: pre;
 }
 
-/* Exercise 11: the fetch URL is longer than in exercises 6-7 */
-.ex11-layout.step-layout.url-layout {
+/* Exercise 10 (fetch): the fetch URL is longer than in exercises 6-7 */
+.fetch-layout.step-layout.url-layout {
   grid-template-columns: minmax(0, 0.48fr) minmax(0, 1.52fr);
 }
-.ex11-layout .step-code pre code {
+.fetch-layout .step-code pre code {
   font-size: 15px;
 }
 

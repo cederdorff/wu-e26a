@@ -27,11 +27,11 @@
           <ol class="agenda-grid">
             <li><a href="#/intro"><b>Intro til React</b><small>hvad, hvorfor, imperativ vs. deklarativ, Virtual DOM</small></a></li>
             <li><a href="#/vite"><b>Nyt projekt med Vite</b><small>øvelse 1-2: opret, kør og kig rundt</small></a></li>
-            <li><a href="#/jsx"><b>JSX</b><small>øvelse 3: ryd op og skriv jeres første JSX</small></a></li>
+            <li><a href="#/jsx"><b>JSX</b><small>øvelse 3: ryd op, hent CSS og skriv jeres første JSX</small></a></li>
             <li><a href="#/thinking"><b>Thinking in React</b><small>øvelse 4: tegn kasser om UI'et</small></a></li>
             <li><a href="#/components"><b>Components og props</b><small>øvelse 5-7: <code>Header</code> og <code>User</code></small></a></li>
-            <li><a href="#/lister"><b>Lister og styling</b><small>øvelse 8-10: <code>.map()</code>, <code>key</code>, et grid og <code>UserList</code></small></a></li>
-            <li><a href="#/data"><b>Hent rigtige data</b><small>øvelse 11-12: just do it, og push til GitHub</small></a></li>
+            <li><a href="#/lister"><b>Lister</b><small>øvelse 8-9: <code>.map()</code>, <code>key</code> og <code>UserList</code></small></a></li>
+            <li><a href="#/data"><b>Hent rigtige data</b><small>øvelse 10-11: just do it, og push til GitHub</small></a></li>
             <li><a href="#/tutorial"><b>Chatbot-tutorialen</b><small>step 1 og 2: det samme igen, i chatbotten</small></a></li>
           </ol>
         </section>
@@ -42,19 +42,15 @@
           <ol class="exercise-grid">
             <li data-accent="green"><a href="#/ex-1"><i>1</i><b>Opret projektet</b><small>Vite</small></a></li>
             <li data-accent="green"><a href="#/ex-2"><i>2</i><b>Kig og prøv</b><small>Vite</small></a></li>
-            <li data-accent="yellow"><a href="#/ex-3"><i>3</i><b>Ryd op</b><small>JSX</small></a></li>
+            <li data-accent="yellow"><a href="#/ex-3"><i>3</i><b>Ryd op og CSS</b><small>JSX</small></a></li>
             <li data-accent="orange"><a href="#/ex-4"><i>4</i><b>Tegn kasser om UI'et</b><small>Thinking in React</small></a></li>
             <li data-accent="cyan"><a href="#/ex-5"><i>5</i><b>Første component</b><small>Components og props</small></a></li>
             <li data-accent="cyan"><a href="#/ex-6"><i>6</i><b><code>User</code>-component</b><small>Components og props</small></a></li>
             <li data-accent="orange"><a href="#/ex-7"><i>7</i><b>Props</b><small>Components og props</small></a></li>
-            <li data-accent="green"><a href="#/ex-8"><i>8</i><b>Lister</b><small>Lister og styling</small></a></li>
-            <li data-accent="green" class="split">
-              <a href="#/ex-9a"><i>9</i><b>Styling</b><small>Lister og styling</small></a>
-              <span class="parts"><a href="#/ex-9a">a</a><a href="#/ex-9b">b</a><a href="#/ex-9c">c</a><a href="#/ex-9d">d</a></span>
-            </li>
-            <li data-accent="green"><a href="#/ex-10"><i>10</i><b><code>UserList</code></b><small>Lister og styling</small></a></li>
-            <li data-accent="yellow"><a href="#/ex-11"><i>11</i><b>Hent data</b><small>Hent rigtige data</small></a></li>
-            <li data-accent="yellow"><a href="#/ex-12"><i>12</i><b>GitHub</b><small>Hent rigtige data</small></a></li>
+            <li data-accent="green"><a href="#/ex-8"><i>8</i><b>Lister</b><small>Lister</small></a></li>
+            <li data-accent="green"><a href="#/ex-9"><i>9</i><b><code>UserList</code></b><small>Lister</small></a></li>
+            <li data-accent="yellow"><a href="#/ex-10"><i>10</i><b>Hent data</b><small>Hent rigtige data</small></a></li>
+            <li data-accent="yellow"><a href="#/ex-11"><i>11</i><b>GitHub</b><small>Hent rigtige data</small></a></li>
             <li data-accent="cyan"><a href="#/ex-tutorial"><i>→</i><b>Chatbot step 1 og 2</b><small>Chatbot-tutorialen</small></a></li>
           </ol>
         </section>
@@ -598,33 +594,31 @@ const element = React.createElement(
 
 
         <section id="ex-3" class="step-slide" data-accent="yellow">
-          <span class="eyebrow">Øvelse 3 · Ryd op</span>
+          <span class="eyebrow">Øvelse 3 · Ryd op og CSS</span>
           <h2>Jeres første JSX</h2>
           <div class="step-layout">
             <ol class="steps">
               <li>Erstat alt i <code>src/App.jsx</code> med koden til højre</li>
-              <li>Slet alt indhold i <code>App.css</code> og <code>index.css</code>. Behold filerne</li>
-              <li>Skriv jeres eget navn i <code>name</code>, og gem</li>
-              <li>Tilføj selv et par elementer mere, fx en <code>&lt;p&gt;</code> eller et link</li>
-              <li class="break">Fjern <code>&lt;&gt;</code> og <code>&lt;/&gt;</code>. Læs fejlen. Sæt dem ind igen</li>
+              <li>Slet filen <code>src/App.css</code></li>
+              <li>Åbn <a href="./index.css" target="_blank" rel="noreferrer">index.css ↗</a>, kopiér alt, og erstat indholdet i <code>src/index.css</code>. Så er stylingen klar til resten af dagen</li>
+              <li>Skriv jeres eget navn i <code>name</code>, og tilføj selv et par elementer, fx en <code>&lt;p&gt;</code></li>
+              <li class="break">Fjern <code>&lt;main&gt;</code> og <code>&lt;/main&gt;</code>. Læs fejlen. Sæt dem ind igen</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
-              <pre data-copy><code class="language-javascript">import "./App.css";
-
-export default function App() {
+              <pre data-copy><code class="language-javascript">export default function App() {
   const name = "Rasmus";
 
   return (
-    &lt;&gt;
+    &lt;main className="app"&gt;
       &lt;h1&gt;Users&lt;/h1&gt;
       &lt;h2&gt;Hello, {name}&lt;/h2&gt;
-    &lt;/&gt;
+    &lt;/main&gt;
   );
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Test: siden viser kun jeres overskrift og jeres navn.</p>
+          <p class="bottom-line">Test: siden er mørk og viser kun jeres overskrift og jeres navn. CSS'en rører I ikke mere i dag.</p>
         </section>
 
         <!-- 04 Thinking in React -->
@@ -770,13 +764,12 @@ export default function App() {
             <article>
               <span>src/App.jsx</span>
               <pre><code class="language-javascript">import Header from "./components/Header";
-import "./App.css";
 
 export default function App() {
   return (
-    &lt;&gt;
+    &lt;main className="app"&gt;
       &lt;Header /&gt;
-    &lt;/&gt;
+    &lt;/main&gt;
   );
 }</code></pre>
             </article>
@@ -818,7 +811,7 @@ export default function App() {
             <ol class="steps">
               <li>Opret <code>src/components/User.jsx</code> med koden til højre</li>
               <li>Importér <code>User</code> i <code>App.jsx</code></li>
-              <li>Brug <code>&lt;User /&gt;</code> under <code>&lt;Header /&gt;</code></li>
+              <li>Brug <code>&lt;User /&gt;</code> under <code>&lt;Header /&gt;</code>, inde i en <code>&lt;section className="grid"&gt;</code></li>
               <li>Brug den to gange mere. Nu har I tre kort</li>
               <li class="break">Hvad er problemet med de tre kort?</li>
             </ol>
@@ -839,7 +832,7 @@ export default function App() {
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Billedet fylder hele bredden indtil videre. Det retter vi med CSS i øvelse 9c.</p>
+          <p class="bottom-line">Test: kortene står i et grid. Udseendet kommer fra CSS'en i øvelse 3, via <code>className</code>.</p>
         </section>
 
         <section class="compare-code-slide" data-accent="orange">
@@ -929,17 +922,19 @@ export default function App() {
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
-              <pre data-copy class="small"><code class="language-javascript">&lt;&gt;
+              <pre data-copy class="small"><code class="language-javascript">&lt;main className="app"&gt;
   &lt;Header /&gt;
-  &lt;User
-    name="Rasmus Cederdorff"
-    title="Senior Lecturer"
-    mail="race@eaaa.dk"
-    image="https://raw.githubusercontent.com/cederdorff/race/master/images/users/race.webp"
-  /&gt;
-  &lt;User name="..." title="..." mail="..." image="..." /&gt;
-  &lt;User name="..." title="..." mail="..." image="..." /&gt;
-&lt;/&gt;</code></pre>
+  &lt;section className="grid"&gt;
+    &lt;User
+      name="Rasmus Cederdorff"
+      title="Senior Lecturer"
+      mail="race@eaaa.dk"
+      image="https://raw.githubusercontent.com/cederdorff/race/master/images/users/race.webp"
+    /&gt;
+    &lt;User name="..." title="..." mail="..." image="..." /&gt;
+    &lt;User name="..." title="..." mail="..." image="..." /&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
             </div>
           </div>
           <p class="bottom-line">Test: tre kort med tre forskellige personer. Én component, tre gange.</p>
@@ -949,7 +944,7 @@ export default function App() {
         <!-- 06 Lister -->
         <section id="lister" class="chapter" data-accent="green">
           <span class="chapter-number">06</span>
-          <span class="eyebrow">Lister og styling</span>
+          <span class="eyebrow">Lister</span>
           <h2>Ét array,<br />én <code>.map()</code></h2>
           <p>Tre <code>&lt;User /&gt;</code> skrevet i hånden holder ikke, når der kommer flere. Eller 900.</p>
         </section>
@@ -1009,31 +1004,33 @@ export default function App() {
           <div class="step-layout">
             <ol class="steps">
               <li>Opret et <code>users</code>-array i <code>App</code>. Kopiér 3-4 objekter fra <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a></li>
-              <li>Slet de tre <code>&lt;User /&gt;</code></li>
+              <li>Slet de tre <code>&lt;User /&gt;</code> i <code>&lt;section className="grid"&gt;</code></li>
               <li>Vis i stedet én <code>User</code> pr. objekt med <code>users.map()</code></li>
               <li>Tilføj et objekt mere i arrayet. Det dukker op af sig selv</li>
               <li class="break">Fjern <code>key</code>. Læs advarslen i Console. Sæt den ind igen</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
-              <pre data-copy class="small"><code class="language-javascript">export default function App() {
+              <pre data-copy class="tiny"><code class="language-javascript">export default function App() {
   const users = [
     // kopiér objekter fra users.json herind
   ];
 
   return (
-    &lt;&gt;
+    &lt;main className="app"&gt;
       &lt;Header /&gt;
-      {users.map(user =&gt; (
-        &lt;User
-          key={user.id}
-          name={user.name}
-          title={user.title}
-          mail={user.mail}
-          image={user.image}
-        /&gt;
-      ))}
-    &lt;/&gt;
+      &lt;section className="grid"&gt;
+        {users.map(user =&gt; (
+          &lt;User
+            key={user.id}
+            name={user.name}
+            title={user.title}
+            mail={user.mail}
+            image={user.image}
+          /&gt;
+        ))}
+      &lt;/section&gt;
+    &lt;/main&gt;
   );
 }</code></pre>
             </div>
@@ -1041,183 +1038,13 @@ export default function App() {
           <p class="bottom-line">Test: ét kort pr. objekt i arrayet. Koden er den samme, uanset hvor mange objekter der er.</p>
         </section>
 
-        <section id="ex-9a" class="step-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 9a · Styling</span>
-          <h2>Et mørkt tema med CSS-variabler</h2>
-          <div class="step-layout pair-layout">
-            <ol class="steps">
-              <li>Erstat alt i <code>index.css</code> med koden til højre</li>
-              <li>Pak alt i <code>App</code> ind i <code>&lt;main className="app"&gt;</code> i stedet for <code>&lt;&gt;</code></li>
-              <li>Tilføj <code>.app</code> i <code>App.css</code></li>
-              <li>Gem. <code>var(--bg)</code> henter farven fra <code>:root</code></li>
-            </ol>
-            <div class="step-code code-pair">
-              <div>
-              <span class="file">src/index.css</span>
-              <pre data-copy class="tiny"><code class="language-css">:root {
-  color-scheme: dark;
-  --bg: #16171d;
-  --surface: #1f2028;
-  --border: #2e303a;
-  --text: #9ca3af;
-  --text-h: #f3f4f6;
-  --accent: #c084fc;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, sans-serif;
-}</code></pre>
-              </div>
-              <div>
-              <span class="file">src/App.css</span>
-              <pre data-copy class="tiny"><code class="language-css">.app {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}</code></pre>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Test: siden er mørk, og indholdet står i midten. Farverne er de samme som i Vites startside.</p>
-        </section>
-
-        <section id="ex-9b" class="step-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 9b · Styling</span>
-          <h2>Giv headeren en tydelig ramme</h2>
-          <div class="step-layout">
-            <ol class="steps">
-              <li>Tilføj koden til højre i bunden af <code>App.css</code></li>
-              <li>Gem. <code>header</code> rammer det <code>&lt;header&gt;</code>-tag, som <code>Header</code> returnerer</li>
-              <li>Prøv en anden farve i <code>--accent</code> i <code>index.css</code>. Hvad ændrer sig?</li>
-            </ol>
-            <div class="step-code">
-              <span class="file">src/App.css</span>
-              <pre data-copy class="small"><code class="language-css">header {
-  margin-bottom: 32px;
-  padding: 28px 32px;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: 16px;
-  background: var(--surface);
-}
-
-header h1 {
-  margin: 0;
-  color: var(--text-h);
-}
-
-header p {
-  margin: 6px 0 0;
-}</code></pre>
-            </div>
-          </div>
-          <p class="bottom-line">Test: headeren står i sin egen boks med en lilla kant.</p>
-        </section>
-
-        <section id="ex-9c" class="step-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 9c · Styling</span>
-          <h2>Gør listen til et grid af kort</h2>
-          <div class="step-layout">
-            <ol class="steps">
-              <li>Pak <code>users.map(...)</code> ind i en <code>&lt;section className="grid"&gt;</code></li>
-              <li>Tilføj koden til højre i bunden af <code>App.css</code></li>
-              <li>Gem. Gør browservinduet smallere og bredere. Hvad sker der med kolonnerne?</li>
-              <li class="break">Skift <code>220px</code> til <code>400px</code>. Hvor mange kolonner er der nu? Sæt det tilbage</li>
-            </ol>
-            <div class="step-code">
-              <span class="file">src/App.css</span>
-              <pre data-copy class="tiny"><code class="language-css">.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.user-card {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface);
-}
-
-.user-card img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 10px;
-}</code></pre>
-            </div>
-          </div>
-          <p class="bottom-line">Test: kortene står i et grid, og billedet fylder ikke længere hele bredden.</p>
-        </section>
-
-        <section class="fill viz" data-accent="green">
-          <span class="eyebrow">Øvelse 9c · Hvad gør grid'et?</span>
-          <h2>Samme fire kort, to vinduesbredder</h2>
-          <div class="stage">
-            <div class="grid-viz">
-              <div class="windows">
-                <figure><div class="screen"><i></i><div class="s-body"><div class="s-head">Users</div><div class="s-grid" style="--cols: 4"><div class="mc"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div><div class="mc"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/anki.webp" alt="" /><b>Anne Kirketerp</b><small>Head of Department</small></div></div></div></div><figcaption><b>Bredt vindue:</b> plads til fire kolonner</figcaption></figure>
-                <figure><div class="screen"><i></i><div class="s-body"><div class="s-head">Users</div><div class="s-grid" style="--cols: 2"><div class="mc"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small></div><div class="mc"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small></div><div class="mc"><img src="../assets/react/users/anki.webp" alt="" /><b>Anne Kirketerp</b><small>Head of Department</small></div></div></div></div><figcaption><b>Smalt vindue:</b> kun plads til to</figcaption></figure>
-              </div>
-              <div class="grid-explain">
-                <div><code>repeat(auto-fill, ...)</code>Lav så mange kolonner, der er plads til</div>
-                <div><code>minmax(220px, ...)</code>Hver kolonne er mindst 220px bred</div>
-                <div><code>minmax(..., 1fr)</code>Resten af pladsen deles ligeligt</div>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Ingen media queries. Grid'et finder selv antallet af kolonner.</p>
-        </section>
-
-        <section id="ex-9d" class="step-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 9d · Styling</span>
-          <h2>Finpuds kortene</h2>
-          <div class="step-layout">
-            <ol class="steps">
-              <li>Tilføj <code>transition</code> i jeres <code>.user-card</code></li>
-              <li>Tilføj resten af koden i bunden af <code>App.css</code></li>
-              <li>Gem. Hold musen over et kort</li>
-              <li>Style det, som I har lyst til</li>
-            </ol>
-            <div class="step-code">
-              <span class="file">src/App.css</span>
-              <pre data-copy class="tiny"><code class="language-css">.user-card {
-  /* ...det, der allerede står... */
-  transition: border-color 0.2s, transform 0.2s;
-}
-
-.user-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-}
-
-.user-card h2 {
-  margin: 14px 0 4px;
-  color: var(--text-h);
-  font-size: 1.1rem;
-}
-
-.user-card p { margin: 0 0 10px; }
-
-.user-card a {
-  color: var(--accent);
-  text-decoration: none;
-}</code></pre>
-            </div>
-          </div>
-          <p class="bottom-line">Test: navn, titel og mail står pænt, og kortet løfter sig, når musen er over det.</p>
-        </section>
-
-        <section id="ex-10" class="fill viz" data-accent="green">
-          <span class="eyebrow">Øvelse 10 · Før og efter</span>
+        <section id="ex-9" class="fill viz" data-accent="green">
+          <span class="eyebrow">Øvelse 9 · Før og efter</span>
           <h2>Data flyder nedad gennem træet</h2>
           <div class="stage">
             <div class="tree-pair">
               <div class="panel">
-                <span class="viz-label">Nu · efter øvelse 9</span>
+                <span class="viz-label">Nu · efter øvelse 8</span>
                 <ul class="vtree"><li><span class="vn app">App <small>har users</small></span>
                   <ul>
                     <li><span class="vn header">Header</span></li>
@@ -1227,7 +1054,7 @@ header p {
                 <p class="viz-note"><code>App</code> laver både data og <code>.map()</code></p>
               </div>
               <div class="panel">
-                <span class="viz-label">Efter øvelse 10</span>
+                <span class="viz-label">Efter øvelse 9</span>
                 <ul class="vtree"><li><span class="vn app">App <small>har users</small></span>
                   <ul>
                     <li><span class="vn header">Header</span></li>
@@ -1246,9 +1073,9 @@ header p {
         </section>
 
         <section class="step-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 10 · UserList</span>
+          <span class="eyebrow">Øvelse 9 · UserList</span>
           <h2>Flyt listen ud i en <code>UserList</code></h2>
-          <div class="step-layout pair-layout ex10-layout">
+          <div class="step-layout pair-layout userlist-layout">
             <ol class="steps">
               <li>Opret <code>UserList.jsx</code> i <code>src/components</code></li>
               <li>Flyt grid'et med <code>users.map()</code> fra <code>App</code> over i <code>UserList</code></li>
@@ -1332,10 +1159,10 @@ const data = await response.json();</code></pre>
         </section>
 
 
-        <section id="ex-11" class="step-slide" data-accent="yellow">
-          <span class="eyebrow">Øvelse 11 · Hent data · del 1</span>
+        <section id="ex-10" class="step-slide" data-accent="yellow">
+          <span class="eyebrow">Øvelse 10 · Hent data · del 1</span>
           <h2>Hent data, og log dem i Console</h2>
-          <div class="step-layout url-layout ex11-layout">
+          <div class="step-layout url-layout fetch-layout">
             <ol class="steps">
               <li>Importér <code>useState</code> og <code>useEffect</code> fra <code>"react"</code></li>
               <li>Erstat jeres <code>const users = [...]</code> med <code>useState([])</code></li>
@@ -1367,9 +1194,9 @@ export default function App() {
         </section>
 
         <section class="step-slide" data-accent="yellow">
-          <span class="eyebrow">Øvelse 11 · Hent data · del 2</span>
+          <span class="eyebrow">Øvelse 10 · Hent data · del 2</span>
           <h2>Gem data i state, og se grid'et fyldes</h2>
-          <div class="step-layout url-layout ex11-layout">
+          <div class="step-layout url-layout fetch-layout">
             <ol class="steps">
               <li>Erstat <code>console.log(data)</code> med <code>setUsers(data)</code></li>
               <li>Gem. Nu viser grid'et alle users fra filen</li>
@@ -1422,8 +1249,8 @@ export default function App() {
           <p class="bottom-line">Trin 1 sker én gang. Trin 2 til 6 sker, hver gang <code>setUsers</code> bliver kaldt. Components, props og state i én app.</p>
         </section>
 
-        <section id="ex-12" class="activity-slide" data-accent="yellow">
-          <span class="eyebrow">Øvelse 12 · GitHub</span>
+        <section id="ex-11" class="activity-slide" data-accent="yellow">
+          <span class="eyebrow">Øvelse 11 · GitHub</span>
           <h2>Commit og push jeres første React-app</h2>
           <ul class="checklist">
             <li>Åbn <b>Source Control</b> i VS Code, og klik <b>Initialize Repository</b></li>
@@ -1555,7 +1382,7 @@ export default function App() {
           <div class="step-layout step-wide-steps">
             <ol class="steps">
               <li>Opret en tom mappe til chatbotten, åbn den i VS Code, og klik <strong>Initialize Repository</strong></li>
-              <li>Hent startpunktet med kommandoen til højre. Commit det, før I ændrer noget, og publish som i øvelse 12</li>
+              <li>Hent startpunktet med kommandoen til højre. Commit det, før I ændrer noget, og publish som i øvelse 11</li>
               <li><code>cd frontend</code>, <code>npm install</code> og <code>npm audit fix</code>. De 8 advarsler, der er tilbage, er forventede. Lad dem være</li>
               <li><code>npm run dev</code>, og åbn den URL, terminalen viser</li>
               <li>Følg <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/1" target="_blank" rel="noreferrer">step 1 ↗</a> og <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/2" target="_blank" rel="noreferrer">step 2 ↗</a>. Commit efter hver delopgave</li>

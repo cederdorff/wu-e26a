@@ -46,7 +46,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 
 - **JSX** ligner HTML, men er JavaScript. `className` i stedet for `class`, alle tags skal lukkes (`<img />`), og en component returnerer ét rod-element eller et fragment `<>...</>`
 - `{ }` indsætter et JavaScript-udtryk: en variabel, en template literal eller en `.map()`
-- Øvelse 3: ryd Vites startside. Erstat alt i `App.jsx`, og slet indholdet i `App.css` og `index.css`, men behold filerne. Skriv `<h1>Users</h1>` og `<h2>Hello, {name}</h2>` med jeres eget navn, og tilføj selv et par elementer. Fjern fragmentet, læs fejlen, og sæt det ind igen
+- Øvelse 3: ryd Vites startside. Erstat alt i `App.jsx`, og slet `App.css`. Kopiér [index.css](https://cederdorff.com/wu-e26a/react-intro/index.css) ind i `src/index.css`. Så er stylingen klar til resten af dagen, og I rører den ikke mere. Skriv `<h1>Users</h1>` og `<h2>Hello, {name}</h2>` i `<main className="app">` med jeres eget navn, og tilføj selv et par elementer. Fjern `<main>`, læs fejlen, og sæt det ind igen
 </details>
 <details>
 <summary><strong>4. Thinking in React: øvelse 4</strong></summary>
@@ -63,25 +63,24 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - **Component:** en funktion, der returnerer JSX. Navnet starter med stort bogstav, så React kan kende forskel på jeres components og almindelige HTML-tags. Den bruges som et tag: `<Header />`
 - Én fil pr. component i `src/components/` med `export default` og `import`, ligesom modulerne i jeres Express-routes
 - Øvelse 5: flyt overskriften ud i en `Header`-component i `src/components/Header.jsx`, og slet `<h2>` og `name` i `App.jsx`. Omdøb `<Header />` til `<header />` med lille h. Hvad sker der?
-- Øvelse 6: lav en `User`-component med én fast person, og brug den tre gange. Hvad er problemet?
+- Øvelse 6: lav en `User`-component med én fast person, og brug den tre gange i en `<section className="grid">`. Hvad er problemet?
 - **Props:** `App` sender data ned til `User` som attributter, `<User name="..." />`, og `User` læser dem som parametre, `function User({ name })`. Én component, forskellige data. Props går kun nedad i træet
 - Øvelse 7: giv hver `User` sine egne data via props, med tre forskellige personer fra [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json). Fjern `title` fra én af dem. Hvad viser kortet?
 </details>
 <details>
-<summary><strong>6. Lister og styling: øvelse 8-10</strong></summary>
+<summary><strong>6. Lister: øvelse 8-9</strong></summary>
 
 - **Lister:** `.map()` over et array giver ét element pr. objekt, og hvert element skal have en unik `key`, så React kan holde styr på dem mellem to renders
 - Øvelse 8: læg 3-4 users i et array i `App`, og vis dem med `users.map()` og `key={user.id}`. Tilføj et objekt mere, og se det dukke op af sig selv. Fjern `key`, læs advarslen i Console, og sæt den ind igen
-- Øvelse 9 i fire små trin med `className` og almindelig CSS: 9a et mørkt tema med CSS-variabler, 9b en header med tydelig ramme, 9c et grid af kort og 9d finpudsning med tekst, link og hover
-- Øvelse 10: flyt grid'et og `users.map()` ud i en `UserList`-component. `App` beholder arrayet og sender det ned med `users={users}`. Fjern prop'en, læs fejlen, og sæt den ind igen. Nu har I alle fire kasser fra øvelse 4
+- Øvelse 9: flyt grid'et og `users.map()` ud i en `UserList`-component. `App` beholder arrayet og sender det ned med `users={users}`. Fjern prop'en, læs fejlen, og sæt den ind igen. Nu har I alle fire kasser fra øvelse 4
 </details>
 <details>
-<summary><strong>7. Hent rigtige data: øvelse 11-12</strong></summary>
+<summary><strong>7. Hent rigtige data: øvelse 10-11</strong></summary>
 
 - Just do it, og forstå det i morgen: `useState` husker data, og `useEffect` kører kode, efter componenten er vist. Det er et godt sted at hente data med `fetch`
-- Øvelse 11 i to dele. Del 1: erstat jeres array med `useState([])`, hent [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json) i en `useEffect`, og log data i Console. Står det der to gange, er det normalt under udvikling. Del 2: erstat `console.log(data)` med `setUsers(data)`. Nu viser grid'et alle users. Stav URL'en forkert, læs fejlen, og ret den igen. `Header`, `UserList` og `User` er ikke ændret
+- Øvelse 10 i to dele. Del 1: erstat jeres array med `useState([])`, hent [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json) i en `useEffect`, og log data i Console. Står det der to gange, er det normalt under udvikling. Del 2: erstat `console.log(data)` med `setUsers(data)`. Nu viser grid'et alle users. Stav URL'en forkert, læs fejlen, og ret den igen. `Header`, `UserList` og `User` er ikke ændret
 - Hele vejen: `fetch` → `setUsers` → `App` kører igen → `UserList` får users → `users.map()` → props → DOM
-- Øvelse 12: commit og push `my-first-react-app` til GitHub fra VS Code
+- Øvelse 11: commit og push `my-first-react-app` til GitHub fra VS Code
 </details>
 <details>
 <summary><strong>8. Kom i gang med chatbot-tutorialen: step 1 og 2</strong></summary>
@@ -89,7 +88,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - Step 1 og 2 bruger det, I lige har lavet i `my-first-react-app`: components i egne filer, props, arrays, `.map()` og `key`
 - Vi ser sammen, hvordan step 1 deler to store filer op i små components udefra og ind, og hvordan step 2 flytter arrays op i træet. `ChatThreadsList` og `ChatThreadItem` har samme form som `UserList` og `User`
 - Opret en tom mappe til chatbotten, åbn den i VS Code, og klik Initialize Repository
-- Hent startpunktet i roden af repoet med `npx degit --force bewildergeist/chatbot-react-postgres#pr-1-start`. Commit det, før I ændrer noget, og publish som i øvelse 12
+- Hent startpunktet i roden af repoet med `npx degit --force bewildergeist/chatbot-react-postgres#pr-1-start`. Commit det, før I ændrer noget, og publish som i øvelse 11
 - `cd frontend`, `npm install` og `npm audit fix`. De 8 advarsler, der er tilbage, er forventede. Lad dem være, ellers går tutorialens kode i stykker
 - `npm run dev`, og åbn den URL, terminalen viser
 - Tutorialen er på engelsk. Hvert step består af små delopgaver med hints, en reference-commit og test-punkter
@@ -119,7 +118,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - Slides:
   - [RACE 8 · Thinking in React](https://cederdorff.com/wu-e26a/react-intro/)
 - Opgaver:
-  - [my-first-react-app](https://cederdorff.com/wu-e26a/react-intro/#/ovelser): øvelse 1-12 i slides. Byg en users-app med Vite, components, props og `.map()`, og hent data fra en rigtig URL
+  - [my-first-react-app](https://cederdorff.com/wu-e26a/react-intro/#/ovelser): øvelse 1-11 i slides. Byg en users-app med Vite, components, props og `.map()`, og hent data fra en rigtig URL
     - [Løsning til my-first-react-app](https://github.com/cederdorff/my-first-react-app): én branch pr. øvelse. Prøv selv først
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
     - [Chatbot-tutorial, step 1: Component-arkitektur](https://github.com/bewildergeist/chatbot-react-postgres/pull/1)
