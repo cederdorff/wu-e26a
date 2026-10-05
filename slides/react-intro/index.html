@@ -535,7 +535,7 @@ createRoot(
           <h2>Ret, gem og se Virtual DOM arbejde</h2>
           <ul class="checklist">
             <li>Ret teksten <i>Get started</i> i <code>src/App.jsx</code>, og gem. Siden opdaterer uden genindlæsning</li>
-            <li>Åbn <code>src/main.jsx</code>. Find stedet, hvor <code>&lt;App /&gt;</code> bliver vist i <code>#root</code></li>
+            <li>Åbn <code>src/main.jsx</code>. Find stedet, hvor <code>&lt;App /&gt;</code> bliver vist i <code>#root</code>. <code>&lt;StrictMode&gt;</code> omkring den er en hjælper under udvikling. Den kører noget af jeres kode to gange</li>
             <li>Åbn DevTools, og vælg <b>Elements</b>-panelet</li>
             <li>Tryk på tæller-knappen. Kun tallet i knappen blinker. Resten af siden bliver ikke rørt</li>
           </ul>
@@ -799,7 +799,7 @@ export default function App() {
               <li>Flyt <code>&lt;h1&gt;</code> fra <code>App.jsx</code> over i <code>Header</code>, og tilføj en <code>&lt;p&gt;</code></li>
               <li>Importér <code>Header</code> i <code>App.jsx</code>, og brug den som <code>&lt;Header /&gt;</code></li>
               <li>Slet <code>&lt;h2&gt;Hello...&lt;/h2&gt;</code> og <code>name</code> i <code>App.jsx</code></li>
-              <li class="break">Omdøb til <code>&lt;header /&gt;</code> med lille h. Hvad sker der?</li>
+              <li class="break">Omdøb <code>&lt;Header /&gt;</code> i <code>App.jsx</code> til <code>&lt;header /&gt;</code> med lille h. Hvad sker der?</li>
             </ol>
             <div class="step-code">
               <span class="file">src/components/Header.jsx</span>
@@ -1180,7 +1180,7 @@ const data = await response.json();</code></pre>
               <li>Erstat jeres <code>const users = [...]</code> med <code>useState([])</code></li>
               <li>Tilføj <code>useEffect</code> med <code>fetchUsers()</code> lige under. URL'en må I kopiere fra <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a></li>
               <li>Åbn Console. Kan I se et array med users?</li>
-              <li>Står det der to gange? Det er normalt under udvikling</li>
+              <li>To gange? Det er <code>&lt;StrictMode&gt;</code> fra øvelse 2</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx · øverst</span>
@@ -1215,7 +1215,7 @@ export default function App() {
               <li>Erstat <code>console.log(data)</code> med <code>setUsers(data)</code></li>
               <li>Gem. Nu viser grid'et alle users fra filen</li>
               <li>Åbn Elements-panelet. Ét <code>&lt;article&gt;</code> pr. user</li>
-              <li class="break">Stav URL'en forkert, fx <code>users.jsn</code>. Læs fejlen i Console. Ret den igen</li>
+              <li class="break">Stav URL'en forkert, fx <code>users.jsn</code>. Læs begge fejl i Console: en 404 og en JSON-fejl. Ret den igen</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.jsx</span>
