@@ -1439,7 +1439,7 @@ export default function App() {
           <span class="chapter-number">08</span>
           <span class="eyebrow">Chatbot-tutorialen</span>
           <h2>Det samme igen,<br />i chatbotten</h2>
-          <p>Step 1 og 2 i tutorialen bruger præcis det, I lige har lavet. Nu i et større projekt.</p>
+          <p>Step 1 og 2 i tutorialen bruger det, I lige har lavet. Nu i et større projekt.</p>
         </section>
 
 
@@ -1505,8 +1505,8 @@ export default function App() {
               <div class="cb-steps">
                 <div><strong>Sidebaren · delopgave 1-6</strong><ol>
                   <li><code>Sidebar</code></li><li><code>SidebarHeader</code></li><li><code>SidebarFooter</code></li><li><code>ChatThreadsList</code></li><li><code>ChatThreadItem</code> med props</li><li>Flyt til <code>Sidebar.jsx</code></li></ol></div>
-                <div><strong>Chatten · delopgave 7-10</strong><ol start="7">
-                  <li><code>Message</code> med props</li><li><code>ChatMessages</code></li><li><code>ChatInput</code></li><li>Flyt til <code>Chat.jsx</code></li></ol></div>
+                <div><strong>Chatten · delopgave 7-11</strong><ol start="7">
+                  <li><code>Message</code> med props</li><li><code>ChatMessages</code></li><li><code>ChatInput</code></li><li>Flyt til <code>Chat.jsx</code></li><li>Teksten mellem tags</li></ol></div>
               </div>
             </div>
           </div>
@@ -1524,7 +1524,7 @@ export default function App() {
                 <ul class="vtree"><li><span class="vn sec">Home <small>har messages</small></span>
                   <ul>
                     <li><span class="vn list">ChatMessages</span><span class="prop-in">← <span class="vchip yellow">messages</span></span>
-                      <ul><li><span class="vn user">Message <small>× 10</small></span><span class="prop-in">← <span class="vchip green">type</span> <span class="vchip green">content</span></span></li></ul>
+                      <ul><li><span class="vn user">Message <small>× 10</small></span><span class="prop-in">← <span class="vchip green">type</span> <small>+ teksten mellem tags</small></span></li></ul>
                     </li>
                     <li><span class="vn header">ChatInput</span></li>
                   </ul>
@@ -1554,13 +1554,13 @@ export default function App() {
           <h2>Kom i gang med tutorialen</h2>
           <div class="step-layout step-wide-steps">
             <ol class="steps">
-              <li>Opret et nyt, tomt repository til jeres chatbot, og klon det ned</li>
-              <li>Hent startpunktet i roden af repoet, og commit det med det samme</li>
-              <li><code>cd frontend</code>, <code>npm install</code> og <code>npm run dev</code>. Advarslerne fra <code>npm install</code> er forventede</li>
+              <li>Opret en tom mappe til chatbotten, og åbn den i VS Code</li>
+              <li>Hent startpunktet i mappen. Commit og publish det med det samme, som i øvelse 12</li>
+              <li><code>cd frontend</code>, <code>npm install</code> og <code>npm run dev</code>. Kør <code>npm audit fix</code>, aldrig <code>--force</code></li>
               <li>Følg <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/1" target="_blank" rel="noreferrer">step 1 ↗</a> og <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/2" target="_blank" rel="noreferrer">step 2 ↗</a>. Commit efter hver delopgave</li>
             </ol>
             <div class="step-code">
-              <span class="file">I roden af jeres nye repo</span>
+              <span class="file">I jeres nye, tomme mappe</span>
               <pre data-copy><code class="language-bash">npx degit --force bewildergeist/chatbot-react-postgres#pr-1-start</code></pre>
               <span class="file">Bemærk</span>
               <p>Projektet bruger React Router, så filerne ligger i <code>app/routes/</code> i stedet for <code>src/</code>. Det er stadig Vite og React. Routing kommer i morgen.</p>
