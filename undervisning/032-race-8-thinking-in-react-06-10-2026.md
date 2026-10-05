@@ -63,9 +63,9 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - **Component:** en funktion, der returnerer JSX. Navnet starter med stort bogstav, så React kan kende forskel på jeres components og almindelige HTML-tags. Den bruges som et tag: `<Header />`
 - Én fil pr. component i `src/components/` med `export default` og `import`, ligesom modulerne i jeres Express-routes
 - Øvelse 5: flyt overskriften ud i en `Header`-component i `src/components/Header.jsx`, og slet `<h2>` og `name` i `App.jsx`. Omdøb `<Header />` til `<header />` med lille h. Hvad sker der?
-- Øvelse 6: lav en `User`-component med én fast person, og brug den tre gange i en `<section className="grid">`. Hvad er problemet?
+- Øvelse 6: lav en `User`-component med én fast person, og brug den tre gange. Hvad er problemet?
 - **Props:** `App` sender data ned til `User` som attributter, `<User name="..." />`, og `User` læser dem som parametre, `function User({ name })`. Én component, forskellige data. Props går kun nedad i træet
-- Øvelse 7: giv hver `User` sine egne data via props, med tre forskellige personer fra [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json). Fjern `title` fra én af dem. Hvad viser kortet?
+- Øvelse 7: giv hver `User` sine egne data via props, med tre forskellige personer fra [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json), og pak dem ind i en `<section className="grid">`, så kortene står ved siden af hinanden. Fjern `title` fra én af dem. Hvad viser kortet?
 </details>
 <details>
 <summary><strong>6. Lister: øvelse 8-9</strong></summary>

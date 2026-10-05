@@ -811,7 +811,7 @@ export default function App() {
             <ol class="steps">
               <li>Opret <code>src/components/User.jsx</code> med koden til højre</li>
               <li>Importér <code>User</code> i <code>App.jsx</code></li>
-              <li>Brug <code>&lt;User /&gt;</code> under <code>&lt;Header /&gt;</code>, inde i en <code>&lt;section className="grid"&gt;</code></li>
+              <li>Brug <code>&lt;User /&gt;</code> under <code>&lt;Header /&gt;</code></li>
               <li>Brug den to gange mere. Nu har I tre kort</li>
               <li class="break">Hvad er problemet med de tre kort?</li>
             </ol>
@@ -832,7 +832,7 @@ export default function App() {
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Test: kortene står i et grid. Udseendet kommer fra CSS'en i øvelse 3, via <code>className</code>.</p>
+          <p class="bottom-line">Test: tre ens kort under headeren. De fylder hele bredden indtil videre. Det retter I i øvelse 7.</p>
         </section>
 
         <section class="compare-code-slide" data-accent="orange">
@@ -916,8 +916,8 @@ export default function App() {
             <ol class="steps">
               <li>Tilføj <code>{ name, title, mail, image }</code> i <code>User</code>-funktionen</li>
               <li>Erstat de faste værdier i JSX'en med <code>{name}</code>, <code>{title}</code> osv.</li>
-              <li>Åbn <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a> i browseren</li>
-              <li>Send props til de tre <code>&lt;User /&gt;</code> i <code>App.jsx</code> med tre forskellige personer</li>
+              <li>Send props til de tre <code>&lt;User /&gt;</code> i <code>App.jsx</code> med tre personer fra <a href="https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json" target="_blank" rel="noreferrer">users.json ↗</a></li>
+              <li>Pak de tre <code>&lt;User /&gt;</code> ind i en <code>&lt;section className="grid"&gt;</code>. <code>.grid</code> står allerede i jeres CSS</li>
               <li class="break">Fjern <code>title</code> fra én af dem. Hvad viser kortet?</li>
             </ol>
             <div class="step-code">
@@ -937,7 +937,7 @@ export default function App() {
 &lt;/main&gt;</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Test: tre kort med tre forskellige personer. Én component, tre gange.</p>
+          <p class="bottom-line">Test: tre forskellige personer ved siden af hinanden i et grid. Én component, tre gange.</p>
         </section>
 
 
