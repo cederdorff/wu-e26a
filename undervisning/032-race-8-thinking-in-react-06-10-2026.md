@@ -111,11 +111,12 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 ## Materialer
 
 - Slides:
-    - [RACE 8 · Thinking in React](https://cederdorff.com/wu-e26a/react-intro/)
-- [Getting started with React](https://www.notion.so/0fd48b8ae90a438bb6ec8dc95628f13f), samme slags app som `my-first-react-app`, trin for trin med screenshots
-- [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
-  - [Chatbot-tutorial, step 1: Component-arkitektur](https://github.com/bewildergeist/chatbot-react-postgres/pull/1)
-  - [Chatbot-tutorial, step 2: Rendering lists](https://github.com/bewildergeist/chatbot-react-postgres/pull/2)
+  - [RACE 8 · Thinking in React](https://cederdorff.com/wu-e26a/react-intro/)
+- Opgaver:
+  - [my-first-react-app](https://cederdorff.com/wu-e26a/react-intro/#/vite): øvelse 1-11 i slides. Byg en users-app med Vite, components, props og `.map()`, og hent data fra en rigtig URL
+  - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
+    - [Chatbot-tutorial, step 1: Component-arkitektur](https://github.com/bewildergeist/chatbot-react-postgres/pull/1)
+    - [Chatbot-tutorial, step 2: Rendering lists](https://github.com/bewildergeist/chatbot-react-postgres/pull/2)
 
 ---
 
