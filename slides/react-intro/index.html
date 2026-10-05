@@ -121,15 +121,52 @@
           </div>
         </section>
 
-        <section class="compare-code-slide" data-accent="cyan">
+        <section class="shots-slide survey-slide" data-accent="cyan">
+          <span class="eyebrow">Hvorfor React? · Stack Overflow Developer Survey 2025</span>
+          <h2>Det mest brugte frontend-værktøj. Og det, flest vil arbejde med</h2>
+          <div class="shot-grid two">
+            <figure>
+              <a href="https://survey.stackoverflow.co/2025/technology#1-web-frameworks-and-technologies" target="_blank"><img src="../assets/react/so-2025-used.jpg" alt="Søjlediagram over web frameworks brugt det seneste år: Node.js 48,7 %, React 44,7 %, jQuery 23,4 %, Next.js 20,8 %, Express 19,9 %" /></a>
+              <figcaption><b>1</b><span>Brugt det seneste år: React er nr. 2 med <strong>44,7 %</strong>. Kun Node.js er større, og det kører på serveren.</span></figcaption>
+            </figure>
+            <figure>
+              <a href="https://survey.stackoverflow.co/2025/technology#2-web-frameworks-and-technologies" target="_blank"><img src="../assets/react/so-2025-desired.jpg" alt="Diagram over desired og admired web frameworks: React øverst med 30,7 % desired og 52,1 % admired, derefter Node.js, Vue.js og Next.js" /></a>
+              <figcaption><b>2</b><span>Vil arbejde med næste år: React er nr. 1 med <strong>30,7 %</strong> (blå). Rød er dem, der bruger det og vil blive ved.</span></figcaption>
+            </figure>
+          </div>
+          <p class="bottom-line">React er det, I møder i jobopslag og i praktikken. Kilde: <a href="https://survey.stackoverflow.co/2025/technology#1-web-frameworks-and-technologies" target="_blank">survey.stackoverflow.co/2025</a>, 23.678 svar.</p>
+        </section>
+
+        <section class="compare-code-slide short-code analogy-slide" data-accent="cyan">
           <span class="eyebrow">Imperativ vs. deklarativ</span>
-          <h2>Den samme liste af users, to måder</h2>
+          <h2>Den samme overskrift, to måder</h2>
           <div class="before-after">
             <article>
-              <span>Imperativ · sådan har I gjort det indtil nu</span>
-              <pre><code class="language-javascript">const grid = document.querySelector("#grid");
+              <span>Imperativ · I siger hvordan, trin for trin</span>
+              <p class="analogy">🚕 "Ligeud. Til venstre ved lyset. Stop her."</p>
+              <pre><code class="language-javascript">const h1 = document.createElement("h1");
+h1.textContent = "Users";
+document.body.append(h1);</code></pre>
+              <div class="mini-result"><small>I browseren</small><strong>Users</strong></div>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article>
+              <span>Deklarativ · I siger hvad, browseren gør resten</span>
+              <p class="analogy">🚕 "Aarhus C, tak."</p>
+              <pre class="one-line"><code class="language-html">&lt;h1&gt;Users&lt;/h1&gt;</code></pre>
+              <div class="mini-result"><small>I browseren</small><strong>Users</strong></div>
+            </article>
+          </div>
+          <p class="bottom-line">I kender allerede begge dele. <b>HTML</b> og <b>CSS</b> er deklarativt. DOM-kode i <b>JavaScript</b> er imperativt.</p>
+        </section>
 
-for (const user of users) {
+        <section class="compare-code-slide three-way" data-accent="cyan">
+          <span class="eyebrow">Imperativ vs. deklarativ</span>
+          <h2>Den samme liste af users, tre måder</h2>
+          <div class="before-after three">
+            <article>
+              <span>Imperativ · insertAdjacentHTML</span>
+              <pre><code class="language-javascript">for (const user of users) {
   grid.insertAdjacentHTML(
     "beforeend",
     `&lt;article&gt;
@@ -139,8 +176,19 @@ for (const user of users) {
   );
 }</code></pre>
             </article>
-            <b aria-hidden="true">→</b>
             <article>
+              <span>Imperativ · createElement</span>
+              <pre><code class="language-javascript">for (const user of users) {
+  const card = document.createElement("article");
+  const h2 = document.createElement("h2");
+  h2.textContent = user.name;
+  const p = document.createElement("p");
+  p.textContent = user.title;
+  card.append(h2, p);
+  grid.append(card);
+}</code></pre>
+            </article>
+            <article class="is-react">
               <span>Deklarativ · React</span>
               <pre><code class="language-javascript">function App() {
   return (
@@ -156,18 +204,49 @@ for (const user of users) {
 }</code></pre>
             </article>
           </div>
-          <p class="bottom-line">Imperativt beskriver I <b>hvordan</b>, trin for trin. Deklarativt beskriver I <b>hvad</b> siden skal vise, og React finder selv ud af DOM'en.</p>
+          <p class="bottom-line">I de to første bygger I selv DOM'en i <code>grid</code>, trin for trin. I React beskriver I, hvordan listen skal se ud. React sætter den ind.</p>
         </section>
 
-        <section class="question-slide" data-accent="cyan">
+        <section class="question-slide code-question-slide" data-accent="cyan">
           <span class="eyebrow">To og to · 3 minutter</span>
-          <h2>Der kommer en ny user. Hvad skal I selv huske?</h2>
-          <ol class="question-grid">
-            <li>I den imperative version: hvad skal I gøre for at få den nye user vist?</li>
-            <li>Skal I tømme grid'et først, eller kun tilføje den nye? Hvad hvis en user bliver slettet?</li>
-            <li>I den deklarative version: hvad skal I gøre?</li>
-            <li>Hvor kan der opstå fejl, hvis data og DOM ikke passer sammen?</li>
-          </ol>
+          <h2>Hvad sker der, når users ændrer sig?</h2>
+          <div class="cq-layout">
+            <div class="cq-col">
+              <span class="cq-label"><b>A</b>Imperativ · insertAdjacentHTML</span>
+              <pre><code class="language-javascript">for (const user of users) {
+  grid.insertAdjacentHTML(
+    "beforeend",
+    `&lt;article&gt;
+      &lt;h2&gt;${user.name}&lt;/h2&gt;
+      &lt;p&gt;${user.title}&lt;/p&gt;
+    &lt;/article&gt;`
+  );
+}</code></pre>
+              <ol class="question-list">
+                <li>Anne bliver tilføjet til <code>users</code>. Hvad skal I skrive i <b>A</b>, før hun dukker op på siden?</li>
+                <li>I kører løkken i <b>A</b> én gang til. Hvad står der nu i grid'et?</li>
+                <li>Dan bliver slettet fra <code>users</code>. Hvordan får I hans kort væk i <b>A</b>?</li>
+              </ol>
+            </div>
+            <div class="cq-col is-react">
+              <span class="cq-label"><b>B</b>Deklarativ · React</span>
+              <pre><code class="language-javascript">function App() {
+  return (
+    &lt;section className="grid"&gt;
+      {users.map(user =&gt; (
+        &lt;article key={user.id}&gt;
+          &lt;h2&gt;{user.name}&lt;/h2&gt;
+          &lt;p&gt;{user.title}&lt;/p&gt;
+        &lt;/article&gt;
+      ))}
+    &lt;/section&gt;
+  );
+}</code></pre>
+              <ol class="question-list" start="4">
+                <li>Samme tre tilfælde i <b>B</b>: Anne kommer til, koden kører igen, Dan bliver slettet. Hvad skal I skrive her?</li>
+              </ol>
+            </div>
+          </div>
         </section>
 
         <section class="statement-slide photo-bg" data-accent="cyan" data-background-image="../assets/react/react-code-bg.jpg" data-background-size="cover" data-background-color="#050908" data-background-opacity="0.3">
@@ -220,17 +299,32 @@ for (const user of users) {
           <p class="bottom-line">I rører aldrig DOM'en. I ændrer <b>data</b>, og React kører funktionen igen.</p>
         </section>
 
-        <section class="flow-slide" data-accent="cyan">
+        <section class="loop-slide" data-accent="cyan">
           <span class="eyebrow">Virtual DOM</span>
-          <h2>React ændrer kun det, der faktisk er forskelligt</h2>
-          <ol class="flow">
-            <li><b>01</b><strong>Byg et træ</strong><span>React bygger siden som et letvægts-træ af JavaScript-objekter.</span></li>
-            <li><b>02</b><strong>Data ændrer sig</strong><span>Fx en ny user eller et nyt tal på en knap.</span></li>
-            <li><b>03</b><strong>Nyt træ</strong><span>React bygger et nyt træ ud fra de nye data.</span></li>
-            <li><b>04</b><strong>Sammenlign</strong><span>Det nye træ sammenlignes med det forrige.</span></li>
-            <li><b>05</b><strong>Ret DOM'en</strong><span>Kun forskellen bliver ændret i den rigtige DOM.</span></li>
-          </ol>
-          <p class="bottom-line">I ser det i praksis om lidt i DevTools.</p>
+          <h2>React ændrer kun det, der er forskelligt</h2>
+          <div class="loop-layout">
+            <div class="loop-start">
+              <b>1</b>
+              <strong>Første gang</strong>
+              <span>React bygger et træ af JavaScript-objekter og sætter hele siden ind i DOM'en.</span>
+            </div>
+            <span class="loop-in" aria-hidden="true">→</span>
+            <div class="loop-ring">
+              <svg viewBox="0 0 780 460" aria-hidden="true">
+                <defs><marker id="loop-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" /></marker></defs>
+                <path d="M 164 135 A 270 175 0 0 1 243 83" marker-end="url(#loop-arrow)" />
+                <path d="M 537 83 A 270 175 0 0 1 616 135" marker-end="url(#loop-arrow)" />
+                <path d="M 616 325 A 270 175 0 0 1 537 377" marker-end="url(#loop-arrow)" />
+                <path d="M 243 377 A 270 175 0 0 1 164 325" marker-end="url(#loop-arrow)" />
+              </svg>
+              <div class="loop-center"><i>↻</i>Hver gang<br />data ændrer sig</div>
+              <div class="loop-node n-left"><b>2</b><strong>Data ændrer sig</strong><span>Fx kommer der en ny user.</span></div>
+              <div class="loop-node n-top"><b>3</b><strong>Nyt træ</strong><span>Jeres component kører igen.</span></div>
+              <div class="loop-node n-right"><b>4</b><strong>Sammenlign</strong><span>Nyt træ mod forrige træ. Hvad er forskelligt?</span></div>
+              <div class="loop-node n-bottom"><b>5</b><strong>Ret DOM'en</strong><span>Kun forskellen bliver ændret på siden.</span></div>
+            </div>
+          </div>
+          <p class="bottom-line">Trin 1 sker én gang. Trin 2 til 5 sker igen, hver gang data ændrer sig. I ser det i praksis om lidt i DevTools.</p>
         </section>
 
         <section class="fill viz" data-accent="cyan">
