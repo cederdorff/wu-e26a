@@ -210,6 +210,9 @@ body {
 .agenda-link[hidden] {
   display: none;
 }
+.reveal .agenda-link.exercises-link {
+  left: 142px;
+}
 .reveal .controls {
   color: var(--green) !important;
 }

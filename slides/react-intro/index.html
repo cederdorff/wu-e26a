@@ -36,6 +36,29 @@
           </ol>
         </section>
 
+        <section id="ovelser" class="exercises-slide" data-accent="cyan">
+          <span class="eyebrow">Øvelser</span>
+          <h2>Alle dagens øvelser</h2>
+          <ol class="exercise-grid">
+            <li data-accent="green"><a href="#/ex-1"><i>1</i><b>Opret projektet</b><small>Vite</small></a></li>
+            <li data-accent="green"><a href="#/ex-2"><i>2</i><b>Kig og prøv</b><small>Vite</small></a></li>
+            <li data-accent="yellow"><a href="#/ex-3"><i>3</i><b>Ryd op</b><small>JSX</small></a></li>
+            <li data-accent="orange"><a href="#/ex-4"><i>4</i><b>Tegn kasser om UI'et</b><small>Thinking in React</small></a></li>
+            <li data-accent="cyan"><a href="#/ex-5"><i>5</i><b>Første component</b><small>Components og props</small></a></li>
+            <li data-accent="cyan"><a href="#/ex-6"><i>6</i><b><code>User</code>-component</b><small>Components og props</small></a></li>
+            <li data-accent="orange"><a href="#/ex-7"><i>7</i><b>Props</b><small>Components og props</small></a></li>
+            <li data-accent="green"><a href="#/ex-8"><i>8</i><b>Lister</b><small>Lister og styling</small></a></li>
+            <li data-accent="green" class="split">
+              <a href="#/ex-9a"><i>9</i><b>Styling</b><small>Lister og styling</small></a>
+              <span class="parts"><a href="#/ex-9a">a</a><a href="#/ex-9b">b</a><a href="#/ex-9c">c</a><a href="#/ex-9d">d</a></span>
+            </li>
+            <li data-accent="green"><a href="#/ex-10"><i>10</i><b><code>UserList</code></b><small>Lister og styling</small></a></li>
+            <li data-accent="yellow"><a href="#/ex-11"><i>11</i><b>Hent data</b><small>Hent rigtige data</small></a></li>
+            <li data-accent="yellow"><a href="#/ex-12"><i>12</i><b>GitHub</b><small>Hent rigtige data</small></a></li>
+            <li data-accent="cyan"><a href="#/ex-tutorial"><i>→</i><b>Chatbot step 1 og 2</b><small>Chatbot-tutorialen</small></a></li>
+          </ol>
+        </section>
+
         <section class="shot-slide" data-accent="cyan">
           <span class="eyebrow">Dagens mål</span>
           <h2>Det her har I bygget, når dagen er slut</h2>
@@ -360,7 +383,7 @@ document.body.append(h1);</code></pre>
           <p>Vite er et build-værktøj og en udviklingsserver. Den forstår JSX og opdaterer siden, så snart I gemmer.</p>
         </section>
 
-        <section class="step-slide" data-accent="green">
+        <section id="ex-1" class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 1 · Opret projektet</span>
           <h2>Nyt React-projekt med Vite</h2>
           <div class="step-layout step-wide-steps">
@@ -499,7 +522,7 @@ createRoot(
           <p class="bottom-line">I dag skriver I kun i <code>App.jsx</code> og jeres egne components. <code>index.html</code> og <code>main.jsx</code> rører I ikke.</p>
         </section>
 
-        <section class="activity-slide" data-accent="green">
+        <section id="ex-2" class="activity-slide" data-accent="green">
           <span class="eyebrow">Øvelse 2 · Kig og prøv</span>
           <h2>Ret, gem og se Virtual DOM arbejde</h2>
           <ul class="checklist">
@@ -517,6 +540,36 @@ createRoot(
           <span class="eyebrow">JSX</span>
           <h2>Ligner HTML,<br />er JavaScript</h2>
           <p>Det, en component returnerer. Vite oversætter det til almindelig JavaScript, som browseren forstår.</p>
+        </section>
+
+        <section class="compare-code-slide short-code jsx-what-slide" data-accent="yellow">
+          <span class="eyebrow">Hvad er JSX?</span>
+          <h2>HTML-lignende tags i JavaScript</h2>
+          <div class="before-after">
+            <article>
+              <span>I skriver · JSX</span>
+              <pre><code class="language-javascript">const name = "Rasmus";
+
+const element = (
+  &lt;h2 className="title"&gt;
+    Hello, {name}
+  &lt;/h2&gt;
+);</code></pre>
+            </article>
+            <b aria-hidden="true">→<small>Vite</small></b>
+            <article>
+              <span>Browseren får · almindelig JavaScript</span>
+              <pre><code class="language-javascript">const name = "Rasmus";
+
+const element = React.createElement(
+  "h2",
+  { className: "title" },
+  "Hello, ",
+  name
+);</code></pre>
+            </article>
+          </div>
+          <p class="bottom-line">JSX står for JavaScript XML. Hvert tag bliver til et funktionskald. Det hele er JavaScript, så I kan sætte værdier ind med <code>{ }</code>.</p>
         </section>
 
         <section class="rules-slide" data-accent="yellow">
@@ -544,7 +597,7 @@ createRoot(
         </section>
 
 
-        <section class="step-slide" data-accent="yellow">
+        <section id="ex-3" class="step-slide" data-accent="yellow">
           <span class="eyebrow">Øvelse 3 · Ryd op</span>
           <h2>Jeres første JSX</h2>
           <div class="step-layout">
@@ -582,32 +635,39 @@ export default function App() {
           <p>Components, der får data via props og husker data i state. Det er hele tankegangen.</p>
         </section>
 
-        <section class="cards-slide" data-accent="orange">
+        <section class="cards-slide concept-cards" data-accent="orange">
           <span class="eyebrow">Thinking in React</span>
           <h2>Tre begreber bærer resten af forløbet</h2>
           <div class="three-cards">
             <article class="c-cyan">
               <span>Components</span>
               <h3>Byggeklodser</h3>
-              <p>En funktion, der returnerer JSX. Små dele, som sættes sammen til hele siden.</p>
+              <p>En funktion, der returnerer JSX. Små dele, der sættes sammen til hele siden.</p>
+              <pre><code class="language-javascript">function User() {
+  return &lt;article&gt;…&lt;/article&gt;;
+}</code></pre>
               <p class="known">I kender: en funktion, I kalder igen og igen</p>
             </article>
             <article class="c-orange">
               <span>Props</span>
               <h3>Data ind udefra</h3>
-              <p>Forælderen sender data ned til barnet. Samme component, forskellige data.</p>
-              <p class="known">I kender: <code>&lt;img src="..." alt="..."&gt;</code> og argumenter til en funktion</p>
+              <p><code>App</code> sender data ned til <code>User</code>. Samme component, forskellige data.</p>
+              <pre><code class="language-html">&lt;User name="Anne" /&gt;
+&lt;User name="Dan" /&gt;</code></pre>
+              <p class="known">I kender: attributter i HTML, fx <code>src</code></p>
             </article>
             <article class="c-green">
               <span>State</span>
               <h3>Data, der ændrer sig</h3>
-              <p>Data, som componenten husker, mens siden er åben. Ændrer state sig, tegnes UI'et igen.</p>
-              <p class="known">I dag: just do it. I morgen: forstå det</p>
+              <p>Data, som componenten husker. Ændrer state sig, tegnes UI'et igen.</p>
+              <pre><code class="language-javascript">const [users, setUsers] =
+  useState([]);</code></pre>
+              <p class="known">I kender: en variabel. Mere i morgen</p>
             </article>
           </div>
         </section>
 
-        <section class="shot-slide" data-accent="orange">
+        <section id="ex-4" class="shot-slide" data-accent="orange">
           <span class="eyebrow">Øvelse 4 · To og to · 10 minutter</span>
           <h2>Tegn kasser om de dele, der hører sammen</h2>
           <div class="shot-layout">
@@ -724,7 +784,7 @@ export default function App() {
           <p class="bottom-line"><code>export default</code> i den ene fil, <code>import</code> i den anden. Samme moduler, som I brugte i jeres Express-routes.</p>
         </section>
 
-        <section class="step-slide" data-accent="cyan">
+        <section id="ex-5" class="step-slide" data-accent="cyan">
           <span class="eyebrow">Øvelse 5 · Første component</span>
           <h2>Flyt overskriften ud i en <code>Header</code></h2>
           <div class="step-layout">
@@ -751,7 +811,7 @@ export default function App() {
           <p class="bottom-line">Test: overskriften står præcis som før. Nu kommer den bare fra sin egen component.</p>
         </section>
 
-        <section class="step-slide" data-accent="cyan">
+        <section id="ex-6" class="step-slide" data-accent="cyan">
           <span class="eyebrow">Øvelse 6 · User-component</span>
           <h2>Ét kort med én person</h2>
           <div class="step-layout">
@@ -787,7 +847,7 @@ export default function App() {
           <h2>Samme component, forskellige data</h2>
           <div class="before-after">
             <article>
-              <span>Forælderen sender props som attributter</span>
+              <span>App sender props som attributter</span>
               <pre><code class="language-javascript">// App.jsx
 &lt;User
   name="Rasmus Cederdorff"
@@ -798,7 +858,7 @@ export default function App() {
             </article>
             <b aria-hidden="true">→</b>
             <article>
-              <span>Barnet læser dem som parametre</span>
+              <span>User læser dem som parametre</span>
               <pre><code class="language-javascript">// User.jsx
 export default function User({ name, title, mail, image }) {
   return (
@@ -812,7 +872,7 @@ export default function User({ name, title, mail, image }) {
 }</code></pre>
             </article>
           </div>
-          <p class="bottom-line"><code>{ name, title }</code> henter felterne ud af ét <code>props</code>-objekt. Props går kun nedad, fra forælder til barn.</p>
+          <p class="bottom-line"><code>{ name, title }</code> henter felterne ud af ét <code>props</code>-objekt. Props går kun nedad, fra <code>App</code> til <code>User</code>.</p>
         </section>
 
         <section class="fill viz" data-accent="orange">
@@ -823,15 +883,20 @@ export default function User({ name, title, mail, image }) {
               <div style="grid-row: 1; grid-column: 1"><pre class="viz-code">&lt;User
   name=<span class="s">"Dan Okkels Brendstrup"</span>
   title=<span class="s">"Senior Lecturer"</span>
-  ... /&gt;</pre></div><b class="v-arrow in" style="grid-row: 1">→</b><b class="v-arrow out" style="grid-row: 1">→</b><div style="grid-row: 1; grid-column: 5"><div class="hcard"><img src="../assets/react/users/dob.webp" alt="" /><div><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div></div></div><div style="grid-row: 2; grid-column: 1"><pre class="viz-code">&lt;User
+  ... /&gt;</pre></div>
+              <b class="v-arrow in" style="grid-row: 1">→</b>
+              <div style="grid-row: 2; grid-column: 1"><pre class="viz-code">&lt;User
   name=<span class="s">"Magnus Lindholm Nielsen"</span>
   title=<span class="s">"Lecturer"</span>
-  ... /&gt;</pre></div><b class="v-arrow in" style="grid-row: 2">→</b><b class="v-arrow out" style="grid-row: 2">→</b><div style="grid-row: 2; grid-column: 5"><div class="hcard"><img src="../assets/react/users/magl.webp" alt="" /><div><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div></div></div><div style="grid-row: 3; grid-column: 1"><pre class="viz-code">&lt;User
+  ... /&gt;</pre></div>
+              <b class="v-arrow in" style="grid-row: 2">→</b>
+              <div style="grid-row: 3; grid-column: 1"><pre class="viz-code">&lt;User
   name=<span class="s">"Rasmus Cederdorff"</span>
   title=<span class="s">"Senior Lecturer"</span>
-  ... /&gt;</pre></div><b class="v-arrow in" style="grid-row: 3">→</b><b class="v-arrow out" style="grid-row: 3">→</b><div style="grid-row: 3; grid-column: 5"><div class="hcard"><img src="../assets/react/users/race.webp" alt="" /><div><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div></div></div>
+  ... /&gt;</pre></div>
+              <b class="v-arrow in" style="grid-row: 3">→</b>
               <div class="tmpl">
-                <span class="viz-label">User.jsx · skrevet én gang</span>
+                <span class="viz-label">User.jsx · én gang</span>
                 <div class="tmpl-card">
                   <div><span class="vchip green">{image}</span></div>
                   <span class="vchip green">{name}</span>
@@ -839,12 +904,21 @@ export default function User({ name, title, mail, image }) {
                   <span class="vchip green">{mail}</span>
                 </div>
               </div>
+              <b class="v-arrow out">→</b>
+              <div class="vcards">
+                <span class="viz-label">Tre kort på siden</span>
+                <div class="vcards-row">
+                <div class="vcard"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div>
+                <div class="vcard"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div>
+                <div class="vcard"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div>
+                </div>
+              </div>
             </div>
           </div>
           <p class="bottom-line">Componenten er skabelonen. Props er de data, der bliver sat ind i hullerne.</p>
         </section>
 
-        <section class="step-slide" data-accent="orange">
+        <section id="ex-7" class="step-slide" data-accent="orange">
           <span class="eyebrow">Øvelse 7 · Props</span>
           <h2>Giv hver <code>User</code> sine egne data</h2>
           <div class="step-layout">
@@ -931,7 +1005,7 @@ export default function User({ name, title, mail, image }) {
         </section>
 
 
-        <section class="step-slide" data-accent="green">
+        <section id="ex-8" class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 8 · Lister</span>
           <h2>Fra tre <code>&lt;User /&gt;</code> til <code>users.map()</code></h2>
           <div class="step-layout">
@@ -969,7 +1043,7 @@ export default function User({ name, title, mail, image }) {
           <p class="bottom-line">Det er trin 2 i Thinking in React: en statisk version med faste data.</p>
         </section>
 
-        <section class="step-slide" data-accent="green">
+        <section id="ex-9a" class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 9a · Styling</span>
           <h2>Et mørkt tema med CSS-variabler</h2>
           <div class="step-layout pair-layout">
@@ -1012,7 +1086,7 @@ body {
           <p class="bottom-line">Farverne er de samme som i Vites startside. <code>var(--accent)</code> bruger en variabel fra <code>:root</code>.</p>
         </section>
 
-        <section class="step-slide" data-accent="green">
+        <section id="ex-9b" class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 9b · Styling</span>
           <h2>Giv headeren en tydelig ramme</h2>
           <div class="step-layout">
@@ -1045,7 +1119,7 @@ header p {
           <p class="bottom-line">Det er almindelig CSS. <code>header</code> rammer det <code>&lt;header&gt;</code>-tag, som jeres <code>Header</code>-component returnerer.</p>
         </section>
 
-        <section class="step-slide" data-accent="green">
+        <section id="ex-9c" class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 9c · Styling</span>
           <h2>Gør listen til et grid af kort</h2>
           <div class="step-layout">
@@ -1099,7 +1173,7 @@ header p {
           <p class="bottom-line">Ingen media queries. Grid'et finder selv antallet af kolonner.</p>
         </section>
 
-        <section class="step-slide" data-accent="green">
+        <section id="ex-9d" class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 9d · Styling</span>
           <h2>Finpuds kortene</h2>
           <div class="step-layout">
@@ -1138,7 +1212,7 @@ header p {
           <p class="bottom-line">Test: navn, titel og mail står pænt, og kortet løfter sig, når musen er over det.</p>
         </section>
 
-        <section class="fill viz" data-accent="green">
+        <section id="ex-10" class="fill viz" data-accent="green">
           <span class="eyebrow">Øvelse 10 · Før og efter</span>
           <h2>Data flyder nedad gennem træet</h2>
           <div class="stage">
@@ -1169,7 +1243,7 @@ header p {
               </div>
             </div>
           </div>
-          <p class="bottom-line">Props går kun nedad: fra forælder til barn, ét niveau ad gangen.</p>
+          <p class="bottom-line">Props går kun nedad i træet: <code>App</code> → <code>UserList</code> → <code>User</code>, ét niveau ad gangen.</p>
         </section>
 
         <section class="step-slide" data-accent="green">
@@ -1252,7 +1326,7 @@ export default function UserList({ users }) {
         </section>
 
 
-        <section class="step-slide" data-accent="yellow">
+        <section id="ex-11" class="step-slide" data-accent="yellow">
           <span class="eyebrow">Øvelse 11 · Hent data · del 1</span>
           <h2>Hent data, og log dem i Console</h2>
           <div class="step-layout">
@@ -1325,7 +1399,7 @@ export default function App() {
           <p class="bottom-line">Components, props og state. Det er Thinking in React i én app.</p>
         </section>
 
-        <section class="activity-slide" data-accent="yellow">
+        <section id="ex-12" class="activity-slide" data-accent="yellow">
           <span class="eyebrow">Øvelse 12 · GitHub</span>
           <h2>Commit og push jeres første React-app</h2>
           <ul class="checklist">
@@ -1452,7 +1526,7 @@ export default function App() {
           <p class="bottom-line">Først <code>.map()</code> over et array i componenten. Bagefter flytter I arrayet op til den component, der ejer det.</p>
         </section>
 
-        <section class="step-slide" data-accent="cyan">
+        <section id="ex-tutorial" class="step-slide" data-accent="cyan">
           <span class="eyebrow">Hands-on · Chatbot step 1 og 2</span>
           <h2>Kom i gang med tutorialen</h2>
           <div class="step-layout step-wide-steps">

@@ -23,17 +23,19 @@ const deck = new Reveal({
 
 await deck.initialize();
 
-const agenda = document.querySelector("section#agenda");
-if (agenda) {
+// Pill buttons that always jump back to the overview slides (if the deck has them)
+for (const [id, label, aria, extra] of [
+  ["agenda", "Agenda", "Gå til agendaen", ""],
+  ["ovelser", "Øvelser", "Gå til oversigten over øvelser", "exercises-link"]
+]) {
+  const target = document.querySelector(`section#${id}`);
+  if (!target) continue;
   const link = document.createElement("a");
-  link.className = "agenda-link";
-  link.href = "#/agenda";
-  link.textContent = "Agenda";
-  link.setAttribute("aria-label", "Gå til agendaen");
+  link.className = `agenda-link ${extra}`.trim();
+  link.href = `#/${id}`;
+  link.textContent = label;
+  link.setAttribute("aria-label", aria);
   document.querySelector(".reveal .slides")?.append(link);
-  const sync = () => { link.hidden = deck.getCurrentSlide() === agenda; };
-  deck.on("slidechanged", sync);
-  sync();
 }
 
 for (const pre of document.querySelectorAll("pre[data-copy]")) {

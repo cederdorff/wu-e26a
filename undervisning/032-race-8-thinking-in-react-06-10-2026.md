@@ -61,7 +61,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - Én fil pr. component i `src/components/` med `export default` og `import`, ligesom modulerne i jeres Express-routes
 - Øvelse 5: flyt overskriften ud i en `Header`-component
 - Øvelse 6: lav en `User`-component med én fast person, og brug den tre gange. Hvad er problemet?
-- **Props:** data sendes ned fra forælder til barn som attributter, `<User name="..." />`, og læses i barnet som parametre, `function User({ name })`. Props går kun nedad
+- **Props:** `App` sender data ned til `User` som attributter, `<User name="..." />`, og `User` læser dem som parametre, `function User({ name })`. Én component, forskellige data. Props går kun nedad i træet
 - Øvelse 7: giv hver `User` sine egne data via props, med tre forskellige personer fra [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json)
 </details>
 <details>

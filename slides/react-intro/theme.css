@@ -926,24 +926,68 @@
 /* Props: one component template, three sets of props, three cards */
 .props-viz {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 56px minmax(0, 0.8fr) 56px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.05fr) 48px 270px 48px minmax(0, 1.35fr);
   grid-template-rows: repeat(3, auto);
   align-items: center;
   row-gap: 16px;
 }
 .props-viz .viz-code {
   padding: 12px 18px;
-  font-size: 17px;
+  font-size: 16px;
+}
+.props-viz .tmpl,
+.props-viz .vcards {
+  grid-row: 1 / 4;
 }
 .props-viz .tmpl {
-  grid-row: 1 / 4;
   grid-column: 3;
 }
 .props-viz .v-arrow.in {
   grid-column: 2;
 }
 .props-viz .v-arrow.out {
+  grid-row: 1 / 4;
   grid-column: 4;
+}
+.props-viz .vcards {
+  grid-column: 5;
+}
+.vcards-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+/* Same shape as the template and the real app: image on top, then name, title, mail */
+.vcard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 10px 14px;
+  border: 1px solid #2e303a;
+  border-radius: 12px;
+  background: #1f2028;
+}
+.reveal .vcard img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0 0 8px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.vcard b {
+  color: #f3f4f6;
+  font-size: 16px;
+  line-height: 1.2;
+}
+.vcard small {
+  color: #9ca3af;
+  font-size: 13px;
+}
+.vcard small:last-child {
+  color: #c084fc;
 }
 .tmpl-card {
   display: grid;
@@ -2342,4 +2386,161 @@
   font-size: 56px;
   font-style: normal;
   line-height: 1;
+}
+
+/* What is JSX: the same tag before and after Vite */
+.jsx-what-slide .before-after {
+  align-items: stretch;
+}
+.jsx-what-slide .before-after article {
+  display: flex;
+  flex-direction: column;
+}
+.jsx-what-slide .before-after pre {
+  flex: 1;
+  margin: 0;
+}
+.jsx-what-slide .before-after > b {
+  align-self: center;
+}
+.jsx-what-slide .before-after > b {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.jsx-what-slide .before-after > b small {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.jsx-what-slide .before-after pre code {
+  font-size: 26px;
+}
+
+/* Components / props / state: a small code example in each card */
+.concept-cards .three-cards {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.concept-cards .three-cards article {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  min-height: 0;
+  padding: 34px 32px;
+}
+.concept-cards .three-cards h3 {
+  font-size: 36px;
+}
+.concept-cards .three-cards p {
+  min-height: 3lh;
+  font-size: 24px;
+  line-height: 1.4;
+}
+.concept-cards .three-cards pre {
+  align-self: start;
+  margin: 8px 0 0;
+  width: 100%;
+}
+.concept-cards .three-cards pre code {
+  height: 150px;
+  padding: 26px 22px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.concept-cards .three-cards .known {
+  min-height: 0;
+  margin-top: 18px;
+  font-size: 20px;
+}
+
+/* Compare slides: both code columns start at the same height */
+.compare-code-slide:not(.analogy-slide, .jsx-what-slide, .three-way) .before-after {
+  align-items: start;
+}
+.compare-code-slide .before-after > b {
+  align-self: center;
+}
+
+/* Exercise overview: one card per exercise, linked from the "Øvelser" button */
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 130px;
+  gap: 18px;
+  margin-top: 48px !important;
+  padding: 0;
+  list-style: none;
+}
+.exercise-grid li {
+  position: relative;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, transparent), var(--soft));
+}
+.exercise-grid li[data-accent="green"] { --accent: var(--green); }
+.exercise-grid li[data-accent="cyan"] { --accent: var(--cyan); }
+.exercise-grid li[data-accent="orange"] { --accent: var(--orange); }
+.exercise-grid li[data-accent="yellow"] { --accent: var(--yellow); }
+.exercise-grid a {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  grid-template-rows: auto auto;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px 22px;
+  color: var(--ink) !important;
+}
+.exercise-grid i {
+  grid-row: 1 / 3;
+  color: var(--accent);
+  font: 800 38px/1 var(--font);
+  font-style: normal;
+}
+.exercise-grid b {
+  font-size: 25px;
+  line-height: 1.15;
+}
+.exercise-grid small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.exercise-grid li:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+.exercise-grid li:hover b {
+  color: var(--accent);
+}
+.exercise-grid .parts {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 6px;
+}
+.exercise-grid .parts a {
+  display: block;
+  height: auto;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted) !important;
+  font: 750 15px/1 var(--font);
+}
+.exercise-grid .parts a:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
+}
+.exercise-grid li.split {
+  display: block;
+}
+.exercise-grid li.split > a {
+  width: 100%;
+  box-sizing: border-box;
 }
