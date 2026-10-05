@@ -814,7 +814,7 @@ export default function App() {
         <section id="ex-6" class="step-slide" data-accent="cyan">
           <span class="eyebrow">Øvelse 6 · User-component</span>
           <h2>Ét kort med én person</h2>
-          <div class="step-layout">
+          <div class="step-layout url-layout">
             <ol class="steps">
               <li>Opret <code>src/components/User.jsx</code> med koden til højre</li>
               <li>Importér <code>User</code> i <code>App.jsx</code></li>
@@ -847,9 +847,8 @@ export default function App() {
           <h2>Samme component, forskellige data</h2>
           <div class="before-after">
             <article>
-              <span>App sender props som attributter</span>
-              <pre><code class="language-javascript">// App.jsx
-&lt;User
+              <span>src/App.jsx · sender props som attributter</span>
+              <pre><code class="language-javascript">&lt;User
   name="Rasmus Cederdorff"
   title="Senior Lecturer"
   mail="race@eaaa.dk"
@@ -858,9 +857,8 @@ export default function App() {
             </article>
             <b aria-hidden="true">→</b>
             <article>
-              <span>User læser dem som parametre</span>
-              <pre><code class="language-javascript">// User.jsx
-export default function User({ name, title, mail, image }) {
+              <span>src/components/User.jsx · læser dem som parametre</span>
+              <pre><code class="language-javascript">export default function User({ name, title, mail, image }) {
   return (
     &lt;article className="user-card"&gt;
       &lt;img src={image} alt={name} /&gt;
@@ -872,7 +870,7 @@ export default function User({ name, title, mail, image }) {
 }</code></pre>
             </article>
           </div>
-          <p class="bottom-line"><code>{ name, title }</code> henter felterne ud af ét <code>props</code>-objekt. Props går kun nedad, fra <code>App</code> til <code>User</code>.</p>
+          <p class="bottom-line"><code>{ name, title, mail, image }</code> henter felterne ud af ét <code>props</code>-objekt. Props går kun nedad, fra <code>App</code> til <code>User</code>.</p>
         </section>
 
         <section class="fill viz" data-accent="orange">
@@ -921,7 +919,7 @@ export default function User({ name, title, mail, image }) {
         <section id="ex-7" class="step-slide" data-accent="orange">
           <span class="eyebrow">Øvelse 7 · Props</span>
           <h2>Giv hver <code>User</code> sine egne data</h2>
-          <div class="step-layout">
+          <div class="step-layout url-layout">
             <ol class="steps">
               <li>Tilføj <code>{ name, title, mail, image }</code> i <code>User</code>-funktionen</li>
               <li>Erstat de faste værdier i JSX'en med <code>{name}</code>, <code>{title}</code> osv.</li>
@@ -998,7 +996,7 @@ export default function User({ name, title, mail, image }) {
   name=<span class="s">"Magnus"</span> <span class="t">/&gt;</span></pre><pre class="viz-code"><span class="t">&lt;User</span> <span class="hl">key="fTs8…"</span>
   name=<span class="s">"Rasmus"</span> <span class="t">/&gt;</span></pre>
               <span class="row-label"></span><b class="down">↓</b><b class="down">↓</b><b class="down">↓</b>
-              <span class="row-label">skærm</span><div class="hcard"><img src="../assets/react/users/dob.webp" alt="" /><div><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div></div><div class="hcard"><img src="../assets/react/users/magl.webp" alt="" /><div><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div></div><div class="hcard"><img src="../assets/react/users/race.webp" alt="" /><div><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div></div>
+              <span class="row-label">skærm</span><div class="vcard"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div><div class="vcard"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div><div class="vcard"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div>
             </div>
           </div>
           <p class="bottom-line">Tre objekter giver tre <code>&lt;User /&gt;</code>. 900 objekter giver 900. Koden er den samme.</p>
@@ -1040,7 +1038,7 @@ export default function User({ name, title, mail, image }) {
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Det er trin 2 i Thinking in React: en statisk version med faste data.</p>
+          <p class="bottom-line">Test: ét kort pr. objekt i arrayet. Det er trin 2 i Thinking in React: en statisk version med faste data.</p>
         </section>
 
         <section id="ex-9a" class="step-slide" data-accent="green">
@@ -1051,7 +1049,7 @@ export default function User({ name, title, mail, image }) {
               <li>Erstat alt i <code>index.css</code> med koden til højre</li>
               <li>Pak alt i <code>App</code> ind i <code>&lt;main className="app"&gt;</code> i stedet for <code>&lt;&gt;</code></li>
               <li>Tilføj <code>.app</code> i <code>App.css</code></li>
-              <li>Gem. Siden er mørk, og indholdet står i midten</li>
+              <li>Gem. <code>var(--bg)</code> henter farven fra <code>:root</code></li>
             </ol>
             <div class="step-code code-pair">
               <div>
@@ -1083,7 +1081,7 @@ body {
               </div>
             </div>
           </div>
-          <p class="bottom-line">Farverne er de samme som i Vites startside. <code>var(--accent)</code> bruger en variabel fra <code>:root</code>.</p>
+          <p class="bottom-line">Test: siden er mørk, og indholdet står i midten. Farverne er de samme som i Vites startside.</p>
         </section>
 
         <section id="ex-9b" class="step-slide" data-accent="green">
@@ -1092,7 +1090,7 @@ body {
           <div class="step-layout">
             <ol class="steps">
               <li>Tilføj koden til højre i bunden af <code>App.css</code></li>
-              <li>Gem. Headeren står nu i sin egen boks med en lilla kant</li>
+              <li>Gem. <code>header</code> rammer det <code>&lt;header&gt;</code>-tag, som <code>Header</code> returnerer</li>
               <li>Prøv en anden farve i <code>--accent</code> i <code>index.css</code>. Hvad ændrer sig?</li>
             </ol>
             <div class="step-code">
@@ -1116,7 +1114,7 @@ header p {
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Det er almindelig CSS. <code>header</code> rammer det <code>&lt;header&gt;</code>-tag, som jeres <code>Header</code>-component returnerer.</p>
+          <p class="bottom-line">Test: headeren står i sin egen boks med en lilla kant.</p>
         </section>
 
         <section id="ex-9c" class="step-slide" data-accent="green">
@@ -1127,6 +1125,7 @@ header p {
               <li>Pak <code>users.map(...)</code> ind i en <code>&lt;section className="grid"&gt;</code></li>
               <li>Tilføj koden til højre i bunden af <code>App.css</code></li>
               <li>Gem. Gør browservinduet smallere og bredere. Hvad sker der med kolonnerne?</li>
+              <li class="break">Skift <code>220px</code> til <code>400px</code>. Hvor mange kolonner er der nu? Sæt det tilbage</li>
             </ol>
             <div class="step-code">
               <span class="file">src/App.css</span>
@@ -1151,7 +1150,7 @@ header p {
 }</code></pre>
             </div>
           </div>
-          <p class="bottom-line">Det er stadig <code>className</code>, ikke <code>class</code>.</p>
+          <p class="bottom-line">Test: kortene står i et grid, og billedet fylder ikke længere hele bredden. Husk <code>className</code>, ikke <code>class</code>.</p>
         </section>
 
         <section class="fill viz" data-accent="green">
@@ -1249,12 +1248,12 @@ header p {
         <section class="step-slide" data-accent="green">
           <span class="eyebrow">Øvelse 10 · UserList</span>
           <h2>Flyt listen ud i en <code>UserList</code></h2>
-          <div class="step-layout pair-layout">
+          <div class="step-layout pair-layout ex10-layout">
             <ol class="steps">
               <li>Opret <code>UserList.jsx</code> i <code>src/components</code></li>
-              <li>Flyt <code>&lt;section className="grid"&gt;</code> med <code>users.map(...)</code> fra <code>App</code> over i <code>UserList</code></li>
-              <li>Flyt også <code>import User</code> med over</li>
-              <li>Importér <code>UserList</code> i <code>App</code>, og send listen med: <code>users={users}</code></li>
+              <li>Flyt grid'et med <code>users.map()</code> fra <code>App</code> over i <code>UserList</code></li>
+              <li>Flyt <code>import User</code> med over</li>
+              <li>Brug <code>UserList</code> i <code>App</code>, og send <code>users={users}</code> med</li>
               <li class="break">Fjern <code>users={users}</code>. Læs fejlen i Console. Sæt den ind igen</li>
             </ol>
             <div class="step-code code-pair">

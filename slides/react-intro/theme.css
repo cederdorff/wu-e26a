@@ -2544,3 +2544,44 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+/* Exercises 6-7: room for the full image URL on one line */
+.step-layout.url-layout {
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
+  gap: 36px;
+}
+.url-layout .steps li {
+  font-size: 22px;
+}
+.url-layout .step-code pre.small code {
+  padding: 20px 22px;
+  font-size: 16px;
+  white-space: pre;
+}
+
+/* Steps: keep inline code in one piece instead of breaking mid-tag */
+.steps li code {
+  white-space: nowrap;
+}
+
+/* .map() visualization: vertical cards, same shape as the app */
+.map-viz .vcard {
+  justify-self: center;
+  width: 250px;
+}
+
+/* Exercise 10: more room for the two code files */
+.ex10-layout.step-layout.pair-layout {
+  grid-template-columns: minmax(0, 0.58fr) minmax(0, 1.42fr);
+  gap: 40px;
+}
+.ex10-layout .steps li {
+  font-size: 22px;
+}
+.ex10-layout .step-code.code-pair {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+.ex10-layout .step-code pre code {
+  font-size: 16px;
+  white-space: pre;
+}
