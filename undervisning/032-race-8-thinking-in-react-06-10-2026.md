@@ -50,7 +50,7 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 
 - Thinking in React: UI'et er bygget af **components**, der får data via **props** og husker data i **state**
 - Øvelse 4, to og to: tag et screenshot af den færdige users-app. Tegn kasser om de dele, der hører sammen, og navngiv dem. Hvilke kasser går igen? Tegn hierarkiet som et træ, og skriv, hvilke data hver kasse skal bruge
-- Sammenlign med jeres sidemakker. Bagefter ser vi vores bud i plenum: `App` med en `Header` og én `User` pr. person
+- Sammenlign med jeres sidemakker. Bagefter ser vi vores bud i plenum: `App` med en `Header` og en `UserList`, der viser én `User` pr. person
 - Se også de fem trin i ["Thinking in React"](https://react.dev/learn/thinking-in-react) på react.dev
 </details>
 <details>
@@ -65,19 +65,20 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - **`children`:** det, der står mellem start- og slut-tagget, sendes med som `props.children`. I bruger det i tutorialens step 1
 </details>
 <details>
-<summary><strong>6. Lister og styling: øvelse 8-9</strong></summary>
+<summary><strong>6. Lister og styling: øvelse 8-10</strong></summary>
 
 - **Lister:** `.map()` over et array giver ét element pr. objekt, og hvert element skal have en unik `key`, så React kan holde styr på dem mellem to renders
 - Øvelse 8: læg 3-4 users i et array i `App`, og vis dem med `users.map()` og `key={user.id}`. Fjern `key`, læs advarslen i Console, og sæt den ind igen
 - Øvelse 9 i fire små trin med `className` og almindelig CSS: 9a et mørkt tema med CSS-variabler, 9b en header med tydelig ramme, 9c et grid af kort og 9d finpudsning med tekst, link og hover
+- Øvelse 10: flyt grid'et og `users.map()` ud i en `UserList`-component. `App` beholder arrayet og sender det ned med `users={users}`. Fjern prop'en, læs fejlen, og sæt den ind igen. Nu har I alle fire kasser fra øvelse 4
 </details>
 <details>
-<summary><strong>7. Hent rigtige data: øvelse 10-11</strong></summary>
+<summary><strong>7. Hent rigtige data: øvelse 11-12</strong></summary>
 
 - Just do it, og forstå det i morgen: `useState` husker data, og `useEffect` kører kode, efter componenten er vist. Det er et godt sted at hente data med `fetch`
-- Øvelse 10: erstat jeres array med `useState([])`, hent [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json) i en `useEffect`, og gem data med `setUsers`. Nu viser grid'et alle users
-- Hele vejen: `fetch` → `setUsers` → `App` kører igen → `users.map()` → props → DOM
-- Øvelse 11: commit og push `my-first-react-app` til GitHub fra VS Code
+- Øvelse 11: erstat jeres array med `useState([])`, hent [users.json](https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/users.json) i en `useEffect`, og gem data med `setUsers`. Nu viser grid'et alle users. `UserList` og `User` er ikke ændret
+- Hele vejen: `fetch` → `setUsers` → `App` kører igen → `UserList` får users → `users.map()` → props → DOM
+- Øvelse 12: commit og push `my-first-react-app` til GitHub fra VS Code
 </details>
 <details>
 <summary><strong>8. Kom i gang med chatbot-tutorialen: step 1 og 2</strong></summary>
@@ -113,7 +114,8 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 - Slides:
   - [RACE 8 · Thinking in React](https://cederdorff.com/wu-e26a/react-intro/)
 - Opgaver:
-  - [my-first-react-app](https://cederdorff.com/wu-e26a/react-intro/#/vite): øvelse 1-11 i slides. Byg en users-app med Vite, components, props og `.map()`, og hent data fra en rigtig URL
+  - [my-first-react-app](https://cederdorff.com/wu-e26a/react-intro/#/vite): øvelse 1-12 i slides. Byg en users-app med Vite, components, props og `.map()`, og hent data fra en rigtig URL
+    - [Løsning til my-first-react-app](https://github.com/cederdorff/my-first-react-app): én branch pr. øvelse. Prøv selv først
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
     - [Chatbot-tutorial, step 1: Component-arkitektur](https://github.com/bewildergeist/chatbot-react-postgres/pull/1)
     - [Chatbot-tutorial, step 2: Rendering lists](https://github.com/bewildergeist/chatbot-react-postgres/pull/2)

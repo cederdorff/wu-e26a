@@ -74,6 +74,7 @@
 }
 .tree .t-app { color: var(--orange); }
 .tree .t-header { color: var(--cyan); }
+.tree .t-list { color: var(--yellow); }
 .tree .t-user { color: var(--green); }
 .tree small {
   color: var(--muted);

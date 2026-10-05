@@ -30,8 +30,8 @@
             <li><a href="#/jsx"><b>JSX</b><small>øvelse 3: ryd op og skriv jeres første JSX</small></a></li>
             <li><a href="#/thinking"><b>Thinking in React</b><small>øvelse 4: tegn kasser om UI'et</small></a></li>
             <li><a href="#/components"><b>Components og props</b><small>øvelse 5-7: <code>Header</code> og <code>User</code></small></a></li>
-            <li><a href="#/lister"><b>Lister og styling</b><small>øvelse 8-9: <code>.map()</code>, <code>key</code> og et grid</small></a></li>
-            <li><a href="#/data"><b>Hent rigtige data</b><small>øvelse 10-11: just do it, og push til GitHub</small></a></li>
+            <li><a href="#/lister"><b>Lister og styling</b><small>øvelse 8-10: <code>.map()</code>, <code>key</code>, et grid og <code>UserList</code></small></a></li>
+            <li><a href="#/data"><b>Hent rigtige data</b><small>øvelse 11-12: just do it, og push til GitHub</small></a></li>
             <li><a href="#/tutorial"><b>Chatbot-tutorialen</b><small>step 1 og 2: det samme igen, i chatbotten</small></a></li>
           </ol>
         </section>
@@ -46,7 +46,7 @@
                 <li>Et React-projekt med Vite</li>
                 <li>En <code>Header</code>-component</li>
                 <li>En <code>User</code>-component, der får data via props</li>
-                <li>Et grid med én <code>User</code> pr. person</li>
+                <li>En <code>UserList</code>, der viser én <code>User</code> pr. person i et grid</li>
                 <li>Data hentet fra en rigtig URL</li>
               </ol>
             </div>
@@ -376,15 +376,17 @@ export default function App() {
 
         <section class="shot-slide" data-accent="orange">
           <span class="eyebrow">Vores bud</span>
-          <h2>Tre components, og én af dem går igen</h2>
+          <h2>Fire components, og én af dem går igen</h2>
           <div class="shot-layout">
-            <figure><img src="../assets/react/users-grid-components.jpg" alt="Den samme app med farvede kasser: App om det hele, Header om overskriften og User om hvert kort" /></figure>
+            <figure><img src="../assets/react/users-grid-components.jpg" alt="Den samme app med farvede kasser: App om det hele, Header om overskriften, UserList om grid'et og User om hvert kort" /></figure>
             <div class="shot-side">
               <pre class="tree"><span class="t-app">App</span>
 ├── <span class="t-header">Header</span>
-└── <span class="t-user">User</span> <small>× én pr. person</small></pre>
+└── <span class="t-list">UserList</span>
+    └── <span class="t-user">User</span> <small>× én pr. person</small></pre>
               <ul>
                 <li><code>User</code> skal bruge <code>name</code>, <code>title</code>, <code>mail</code> og <code>image</code></li>
+                <li><code>UserList</code> får alle users og laver én <code>User</code> pr. person</li>
                 <li><code>App</code> har listen af users og sender dem videre</li>
               </ul>
             </div>
@@ -801,6 +803,52 @@ header p {
           <p class="bottom-line">Test: navn, titel og mail står pænt, og kortet løfter sig, når musen er over det.</p>
         </section>
 
+        <section class="step-slide" data-accent="green">
+          <span class="eyebrow">Øvelse 10 · UserList</span>
+          <h2>Flyt listen ud i en <code>UserList</code></h2>
+          <div class="step-layout pair-layout">
+            <ol class="steps">
+              <li>Opret <code>UserList.jsx</code> i <code>src/components</code></li>
+              <li>Flyt <code>&lt;section className="grid"&gt;</code> med <code>users.map(...)</code> fra <code>App</code> over i <code>UserList</code></li>
+              <li>Flyt også <code>import User</code> med over</li>
+              <li>Importér <code>UserList</code> i <code>App</code>, og send listen med: <code>users={users}</code></li>
+              <li class="break">Fjern <code>users={users}</code>. Læs fejlen i Console. Sæt den ind igen</li>
+            </ol>
+            <div class="step-code code-pair">
+              <div>
+              <span class="file">src/components/UserList.jsx</span>
+              <pre data-copy class="tiny"><code class="language-javascript">import User from "./User";
+
+export default function UserList({ users }) {
+  return (
+    &lt;section className="grid"&gt;
+      {users.map(user =&gt; (
+        &lt;User
+          key={user.id}
+          name={user.name}
+          title={user.title}
+          mail={user.mail}
+          image={user.image}
+        /&gt;
+      ))}
+    &lt;/section&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+              <span class="file">src/App.jsx · return</span>
+              <pre data-copy class="tiny"><code class="language-javascript">return (
+  &lt;main className="app"&gt;
+    &lt;Header /&gt;
+    &lt;UserList users={users} /&gt;
+  &lt;/main&gt;
+);</code></pre>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Test: siden ser ud præcis som før. Nu har I alle fire kasser fra øvelse 4.</p>
+        </section>
+
         <!-- 07 Data -->
         <section id="data" class="chapter" data-accent="yellow">
           <span class="chapter-number">07</span>
@@ -835,7 +883,7 @@ header p {
         </section>
 
         <section class="step-slide" data-accent="yellow">
-          <span class="eyebrow">Øvelse 10 · Hent data · del 1</span>
+          <span class="eyebrow">Øvelse 11 · Hent data · del 1</span>
           <h2>Hent data, og log dem i Console</h2>
           <div class="step-layout">
             <ol class="steps">
@@ -869,7 +917,7 @@ export default function App() {
         </section>
 
         <section class="step-slide" data-accent="yellow">
-          <span class="eyebrow">Øvelse 10 · Hent data · del 2</span>
+          <span class="eyebrow">Øvelse 11 · Hent data · del 2</span>
           <h2>Gem data i state, og se grid'et fyldes</h2>
           <div class="step-layout">
             <ol class="steps">
@@ -890,7 +938,7 @@ export default function App() {
 }, []);</code></pre>
             </div>
           </div>
-          <p class="bottom-line"><code>Header</code> og <code>User</code> er ikke ændret. Kun stedet, data kommer fra.</p>
+          <p class="bottom-line"><code>Header</code>, <code>UserList</code> og <code>User</code> er ikke ændret. Kun stedet, data kommer fra.</p>
         </section>
 
         <section class="flow-slide" data-accent="yellow">
@@ -899,8 +947,8 @@ export default function App() {
           <ol class="flow dense">
             <li><b>01</b><strong><code>fetch(url)</code></strong><span>Effecten henter JSON, efter første render</span></li>
             <li><b>02</b><strong><code>setUsers(data)</code></strong><span>State ændrer sig</span></li>
-            <li><b>03</b><strong><code>App</code> kører igen</strong><span>Nu med alle users i stedet for nul</span></li>
-            <li><b>04</b><strong><code>users.map()</code></strong><span>Én <code>&lt;User /&gt;</code> pr. objekt</span></li>
+            <li><b>03</b><strong><code>App</code> kører igen</strong><span>Sender alle users ned til <code>UserList</code></span></li>
+            <li><b>04</b><strong><code>users.map()</code></strong><span>I <code>UserList</code>: én <code>&lt;User /&gt;</code> pr. objekt</span></li>
             <li><b>05</b><strong>Props</strong><span><code>name</code>, <code>title</code>, <code>mail</code>, <code>image</code> ned i <code>User</code></span></li>
             <li><b>06</b><strong>DOM</strong><span>React indsætter kun det, der er nyt</span></li>
           </ol>
@@ -908,7 +956,7 @@ export default function App() {
         </section>
 
         <section class="activity-slide" data-accent="yellow">
-          <span class="eyebrow">Øvelse 11 · GitHub</span>
+          <span class="eyebrow">Øvelse 12 · GitHub</span>
           <h2>Commit og push jeres første React-app</h2>
           <ul class="checklist">
             <li>Åbn <b>Source Control</b> i VS Code, og klik <b>Initialize Repository</b></li>
@@ -931,7 +979,7 @@ export default function App() {
           <span class="eyebrow">Fra my-first-react-app til chatbotten</span>
           <h2>I har allerede prøvet det hele</h2>
           <div class="map-rows">
-            <div class="map-row"><div><small>I dag</small><code>Header</code> og <code>User</code> i egne filer</div><b>→</b><div><small>Step 1</small>Del to store components op i mindre, i egne filer</div></div>
+            <div class="map-row"><div><small>I dag</small><code>Header</code>, <code>UserList</code> og <code>User</code> i egne filer</div><b>→</b><div><small>Step 1</small>Del to store components op i mindre, i egne filer</div></div>
             <div class="map-row"><div><small>I dag</small>Props og <code>children</code></div><b>→</b><div><small>Step 1</small>Send data og indhold ned til de nye components</div></div>
             <div class="map-row"><div><small>I dag</small><code>users</code>-array, <code>.map()</code> og <code>key</code></div><b>→</b><div><small>Step 2</small>Beskeder og samtaler i arrays, vist med <code>.map()</code></div></div>
             <div class="map-row"><div><small>I dag</small>Data i <code>App</code>, sendt ned via props</div><b>→</b><div><small>Step 2</small>Løft arrays op til den component, hvor de hører til</div></div>
