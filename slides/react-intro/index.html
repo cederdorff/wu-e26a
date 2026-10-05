@@ -527,7 +527,7 @@ createRoot(
               </div>
             </div>
           </div>
-          <p class="bottom-line">I dag skriver I kun i <code>App.jsx</code> og jeres egne components. <code>index.html</code> og <code>main.jsx</code> rører I ikke.</p>
+          <p class="bottom-line">I dag skriver I kun i <code>App.jsx</code> og jeres egne components. <code>index.css</code> kopierer I ind én gang. <code>index.html</code> og <code>main.jsx</code> rører I ikke.</p>
         </section>
 
         <section id="ex-2" class="activity-slide" data-accent="green">
@@ -1201,6 +1201,7 @@ export default function App() {
   }, []);
 
   // return (...) som før</code></pre>
+              <p class="step-note"><code>setUsers</code> bruger I først i del 2. Viser VS Code en advarsel om den, er det derfor.</p>
             </div>
           </div>
           <p class="bottom-line">Test: Console viser et array med users. Siden viser kun headeren, for <code>users</code> er stadig et tomt array.</p>
