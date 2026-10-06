@@ -191,56 +191,9 @@ document.body.append(h1);</code></pre>
           <p class="bottom-line">I kender allerede begge dele. <b>HTML</b> og <b>CSS</b> er deklarativt. DOM-kode i <b>JavaScript</b> er imperativt.</p>
         </section>
 
-        <section class="compare-code-slide three-way" data-accent="cyan">
-          <span class="eyebrow">Imperativ vs. deklarativ</span>
-          <h2>Den samme liste af users, tre måder</h2>
-          <div class="before-after three">
-            <article>
-              <span>Imperativ · insertAdjacentHTML</span>
-              <pre><code class="language-javascript">for (const user of users) {
-  grid.insertAdjacentHTML(
-    "beforeend",
-    `&lt;article&gt;
-      &lt;h2&gt;${user.name}&lt;/h2&gt;
-      &lt;p&gt;${user.title}&lt;/p&gt;
-    &lt;/article&gt;`
-  );
-}</code></pre>
-            </article>
-            <article>
-              <span>Imperativ · createElement</span>
-              <pre><code class="language-javascript">for (const user of users) {
-  const card = document.createElement("article");
-  const h2 = document.createElement("h2");
-  h2.textContent = user.name;
-  const p = document.createElement("p");
-  p.textContent = user.title;
-  card.append(h2, p);
-  grid.append(card);
-}</code></pre>
-            </article>
-            <article class="is-react">
-              <span>Deklarativ · React</span>
-              <pre><code class="language-javascript">function App() {
-  return (
-    &lt;section className="grid"&gt;
-      {users.map(user =&gt; (
-        &lt;article key={user.id}&gt;
-          &lt;h2&gt;{user.name}&lt;/h2&gt;
-          &lt;p&gt;{user.title}&lt;/p&gt;
-        &lt;/article&gt;
-      ))}
-    &lt;/section&gt;
-  );
-}</code></pre>
-            </article>
-          </div>
-          <p class="bottom-line">I de to første bygger I selv DOM'en i <code>grid</code>, trin for trin. I React beskriver I, hvordan listen skal se ud. React sætter den ind.</p>
-        </section>
-
-        <section class="question-slide code-question-slide" data-accent="cyan">
+        <section class="question-slide code-question-slide three-way-question" data-accent="cyan">
           <span class="eyebrow">To og to · 3 minutter</span>
-          <h2>Hvad sker der, når users ændrer sig?</h2>
+          <h2>Den samme liste, tre måder. Hvad sker der, når users ændrer sig?</h2>
           <div class="cq-layout">
             <div class="cq-col">
               <span class="cq-label"><b>A</b>Imperativ · insertAdjacentHTML</span>
@@ -253,14 +206,21 @@ document.body.append(h1);</code></pre>
     &lt;/article&gt;`
   );
 }</code></pre>
-              <ol class="question-list">
-                <li>Anne bliver tilføjet til <code>users</code>. Hvad skal I skrive i <b>A</b>, før hun dukker op på siden?</li>
-                <li>I kører løkken i <b>A</b> én gang til. Hvad står der nu i grid'et?</li>
-                <li>Dan bliver slettet fra <code>users</code>. Hvordan får I hans kort væk i <b>A</b>?</li>
-              </ol>
+            </div>
+            <div class="cq-col">
+              <span class="cq-label"><b>B</b>Imperativ · createElement</span>
+              <pre><code class="language-javascript">for (const user of users) {
+  const card = document.createElement("article");
+  const h2 = document.createElement("h2");
+  h2.textContent = user.name;
+  const p = document.createElement("p");
+  p.textContent = user.title;
+  card.append(h2, p);
+  grid.append(card);
+}</code></pre>
             </div>
             <div class="cq-col is-react">
-              <span class="cq-label"><b>B</b>Deklarativ · React</span>
+              <span class="cq-label"><b>C</b>Deklarativ · React</span>
               <pre><code class="language-javascript">function App() {
   return (
     &lt;section className="grid"&gt;
@@ -273,11 +233,17 @@ document.body.append(h1);</code></pre>
     &lt;/section&gt;
   );
 }</code></pre>
-              <ol class="question-list" start="4">
-                <li>Samme tre tilfælde i <b>B</b>: Anne kommer til, koden kører igen, Dan bliver slettet. Hvad skal I skrive her?</li>
-              </ol>
             </div>
+            <ol class="question-list cq-imperative">
+              <li>Anne bliver tilføjet til <code>users</code>. Hvad skal I skrive i <b>A</b> og <b>B</b>, før hun dukker op på siden?</li>
+              <li>I kører løkken én gang til. Hvad står der nu i grid'et?</li>
+              <li>Dan bliver slettet fra <code>users</code>. Hvordan får I hans kort væk?</li>
+            </ol>
+            <ol class="question-list cq-react" start="4">
+              <li>Samme tre tilfælde i <b>C</b>. Hvad skal I skrive her?</li>
+            </ol>
           </div>
+          <p class="bottom-line">I <b>A</b> og <b>B</b> bygger I selv DOM'en i <code>grid</code>, trin for trin. I <b>C</b> beskriver I, hvordan listen skal se ud. React sætter den ind.</p>
         </section>
 
         <section class="statement-slide photo-bg" data-accent="cyan" data-background-image="../assets/react/react-code-bg.jpg" data-background-size="cover" data-background-color="#050908" data-background-opacity="0.3">
@@ -430,26 +396,18 @@ document.body.append(h1);</code></pre>
           <p class="bottom-line">Står der en anden mappe i Explorer, så åbn den rigtige med <b>File › Open Folder</b>.</p>
         </section>
 
-        <section class="shots-slide" data-accent="green">
+        <section class="shots-slide vite-shots" data-accent="green">
           <span class="eyebrow">Øvelse 1 · Sådan ser det ud</span>
-          <h2>Tre valg i terminalen</h2>
-          <div class="shot-grid three">
+          <h2>Tre valg, og så installér og start</h2>
+          <div class="shot-grid three six">
             <figure><img src="../assets/react/vite-02-framework.jpg" alt="Terminalen spørger Select a framework, React er valgt" /><figcaption><b>1</b>Framework: <strong>React</strong></figcaption></figure>
             <figure><img src="../assets/react/vite-03-variant.jpg" alt="Terminalen spørger Select a variant, JavaScript er valgt" /><figcaption><b>2</b>Variant: <strong>JavaScript</strong></figcaption></figure>
             <figure><img src="../assets/react/vite-04-linter.jpg" alt="Terminalen spørger Which linter to use, Oxlint er valgt" /><figcaption><b>3</b>Linter: <strong>Oxlint</strong></figcaption></figure>
-          </div>
-          <p class="bottom-line">Piletasterne flytter valget. Enter bekræfter.</p>
-        </section>
-
-        <section class="shots-slide" data-accent="green">
-          <span class="eyebrow">Øvelse 1 · Sådan ser det ud</span>
-          <h2>Installér, start og åbn i browseren</h2>
-          <div class="shot-grid three wide">
             <figure><img src="../assets/react/vite-05-install.jpg" alt="Terminalen spørger Install with npm and start now, Yes er valgt" /><figcaption><b>4</b>Install and start now: <strong>Yes</strong></figcaption></figure>
             <figure><img src="../assets/react/vite-07-dev-server.jpg" alt="Vite-serveren kører og viser Local: http://localhost:5174" /><figcaption><b>5</b>Åbn URL'en ved <strong>Local</strong></figcaption></figure>
             <figure><img src="../assets/react/vite-08-browser.jpg" alt="Vites startside med Get started og tæller-knappen Count is 0" /><figcaption><b>6</b>Vites startside. Klar til øvelse 2</figcaption></figure>
           </div>
-          <p class="bottom-line">Er port 5173 optaget, vælger Vite selv den næste, fx 5174. Brug altid den URL, terminalen viser.</p>
+          <p class="bottom-line">Piletasterne flytter valget, og Enter bekræfter. Brug altid den URL, terminalen viser. Er port 5173 optaget, vælger Vite selv den næste.</p>
         </section>
 
         <section class="vite-tree-slide" data-accent="green">
@@ -648,7 +606,7 @@ const element = React.createElement(
             <article class="c-cyan">
               <span>Components</span>
               <h3>Byggeklodser</h3>
-              <p>En funktion, der returnerer JSX. Små dele, der sættes sammen til hele siden.</p>
+              <p>En funktion, der returnerer JSX. Den bygger én del af UI'et.</p>
               <pre><code class="language-javascript">function User() {
   return &lt;article&gt;…&lt;/article&gt;;
 }</code></pre>
@@ -657,7 +615,7 @@ const element = React.createElement(
             <article class="c-orange">
               <span>Props</span>
               <h3>Data ind udefra</h3>
-              <p><code>App</code> sender data ned til <code>User</code>. Samme component, forskellige data.</p>
+              <p>Data, som en component får udefra. Samme component, forskellige data.</p>
               <pre><code class="language-html">&lt;User name="Anne" /&gt;
 &lt;User name="Dan" /&gt;</code></pre>
               <p class="known">I kender: attributter i HTML, fx <code>src</code></p>
@@ -701,7 +659,7 @@ const element = React.createElement(
 └── <span class="t-list">UserList</span>
     └── <span class="t-user">User</span> <small>× én pr. person</small></pre>
               <ul>
-                <li><code>User</code> skal bruge <code>name</code>, <code>title</code>, <code>mail</code> og <code>image</code></li>
+                <li><code>User</code> skal bruge <code>name</code>, <code>title</code>, <code>mail</code> og <code>image</code> som props</li>
                 <li><code>UserList</code> får alle users og laver én <code>User</code> pr. person</li>
                 <li><code>App</code> har listen af users og sender dem videre</li>
               </ul>
@@ -711,26 +669,8 @@ const element = React.createElement(
         </section>
 
         <section class="fill viz" data-accent="orange">
-          <span class="eyebrow">Øvelse 4 · Samme øvelse, en anden app</span>
-          <h2>Chatbotten: hvor tegner I kasserne her?</h2>
-          <div class="stage">
-            <div class="cb-layout">
-              <div class="cb" aria-hidden="true"><aside class="cb-side"><div class="cb-head"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads"><li>How to learn programming?</li><li>What are the best pizza toppings?</li><li>Can you explain quantum physics?</li><li>Help me create a morning routine</li><li>What should I do this weekend?</li><li>Why is the sky blue?</li><li>How do I learn a new language?</li><li>What's the meaning of life?</li><li>Tell me a funny joke</li><li>What's a healthy dinner idea?</li><li>Recommend me a good book</li><li>Give me a creative writing prompt</li></ul><div class="cb-foot"><i></i>Batman</div></aside><div class="cb-main"><div class="cb-msgs"><div class="cb-msg user"><p>Hello! Can you help me understand React Router v7?</p></div><div class="cb-msg bot"><p>Of course! React Router v7 is the latest version, with better data loading and nested routing.</p></div><div class="cb-msg user"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot"><p>Nested routes let you build hierarchical UI. A parent route shows child routes in an &lt;Outlet /&gt;.</p></div><div class="cb-msg user"><p>What's the difference between route() and layout() helpers?</p></div><div class="cb-msg bot"><p>Great question! route() adds URL segments, while layout() only adds UI structure.</p></div></div><div class="cb-input"><span>Type your message here...</span><b>Send</b></div></div></div>
-              <div class="shot-side">
-                <ol>
-                  <li>Tegn kasser, og giv dem navne</li>
-                  <li>Hvilke kasser går igen?</li>
-                  <li>Hvilken kasse svarer til <code>UserList</code>? Og til <code>User</code>?</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Samme spørgsmål som før. Kun appen er en anden.</p>
-        </section>
-
-        <section class="fill viz" data-accent="orange">
-          <span class="eyebrow">Vores bud · chatbotten</span>
-          <h2>Ti components, og to af dem går igen</h2>
+          <span class="eyebrow">Samme tankegang · chatbot-tutorialen</span>
+          <h2>Chatbotten er også bygget af components</h2>
           <div class="stage">
             <div class="cb-layout">
               <div class="cb boxed k-page" data-c="Layout" aria-hidden="true"><aside class="cb-side k-sec" data-c="Sidebar"><div class="cb-head k-part" data-c="SidebarHeader"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads k-list" data-c="ChatThreadsList"><li class=" k-item" data-c="ChatThreadItem">How to learn programming?</li><li class="o-item k-item">What are the best pizza toppings?</li><li class="o-item k-item">Can you explain quantum physics?</li><li class="o-item k-item">Help me create a morning routine</li><li class="o-item k-item">What should I do this weekend?</li><li class="o-item k-item">Why is the sky blue?</li><li class="o-item k-item">How do I learn a new language?</li><li class="o-item k-item">What's the meaning of life?</li><li class="o-item k-item">Tell me a funny joke</li><li class="o-item k-item">What's a healthy dinner idea?</li><li class="o-item k-item">Recommend me a good book</li><li class="o-item k-item">Give me a creative writing prompt</li></ul><div class="cb-foot k-part" data-c="SidebarFooter"><i></i>Batman</div></aside><div class="cb-main k-sec" data-c="Home"><div class="cb-msgs k-list" data-c="ChatMessages"><div class="cb-msg user k-item" data-c="Message"><p>Hello! Can you help me understand React Router v7?</p></div><div class="cb-msg bot o-item k-item"><p>Of course! React Router v7 is the latest version, with better data loading and nested routing.</p></div><div class="cb-msg user o-item k-item"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot o-item k-item"><p>Nested routes let you build hierarchical UI. A parent route shows child routes in an &lt;Outlet /&gt;.</p></div><div class="cb-msg user o-item k-item"><p>What's the difference between route() and layout() helpers?</p></div><div class="cb-msg bot o-item k-item"><p>Great question! route() adds URL segments, while layout() only adds UI structure.</p></div></div><div class="cb-input k-part" data-c="ChatInput"><span>Type your message here...</span><b>Send</b></div></div></div>
@@ -746,15 +686,15 @@ const element = React.createElement(
     └── <span class="t-header">ChatInput</span></pre>
             </div>
           </div>
-          <p class="bottom-line">Samme farver som users-appen: <b style="color: var(--yellow)">gul</b> holder en liste, <b style="color: var(--green)">grøn</b> går igen.</p>
+          <p class="bottom-line">Dem laver I selv i step 1 af tutorialen. Som i users-appen: <b style="color: var(--yellow)">gul</b> holder en liste, <b style="color: var(--green)">grøn</b> går igen.</p>
         </section>
 
         <!-- 05 Components & props -->
         <section id="components" class="chapter" data-accent="cyan">
           <span class="chapter-number">05</span>
           <span class="eyebrow">Components og props</span>
-          <h2>En funktion,<br />der returnerer JSX</h2>
-          <p>Navnet starter med stort bogstav, så React kan kende forskel på jeres components og almindelige HTML-tags.</p>
+          <h2>Byggeklodser,<br />der får data</h2>
+          <p>En component er en funktion, der returnerer JSX. Props er de data, den får udefra. Nu bygger I kasserne fra jeres træ: først <code>Header</code>, så <code>User</code>.</p>
         </section>
 
         <section class="compare-code-slide" data-accent="cyan">
@@ -895,7 +835,7 @@ React.createElement(Header);</code></pre>
 
         <section class="compare-code-slide" data-accent="orange">
           <span class="eyebrow">Props</span>
-          <h2>Samme component, forskellige data</h2>
+          <h2>Props er data, som en component får udefra</h2>
           <div class="before-after">
             <article>
               <span>src/App.jsx · sender props som attributter</span>
@@ -921,7 +861,7 @@ React.createElement(Header);</code></pre>
 }</code></pre>
             </article>
           </div>
-          <p class="bottom-line"><code>{ name, title, mail, image }</code> henter felterne ud af ét <code>props</code>-objekt. Props går kun nedad, fra <code>App</code> til <code>User</code>.</p>
+          <p class="bottom-line">I sender props som attributter. Componenten får dem som parameter. Så kan én <code>User</code> vise tre forskellige personer. Props går kun nedad, fra <code>App</code> til <code>User</code>.</p>
         </section>
 
         <section class="fill viz" data-accent="orange">

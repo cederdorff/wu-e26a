@@ -2634,3 +2634,49 @@
   font-size: 0.9em;
   white-space: nowrap;
 }
+
+/* Question slide with three code columns (A, B, C) and questions underneath */
+.three-way-question h2 {
+  font-size: 46px;
+}
+.three-way-question .cq-layout {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr) minmax(0, 0.95fr);
+  align-items: start;
+  gap: 22px 26px;
+}
+.three-way-question .cq-col pre code {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.three-way-question .cq-label {
+  font-size: 15px;
+  white-space: nowrap;
+}
+.three-way-question .cq-imperative {
+  grid-column: 1 / 3;
+}
+.three-way-question .question-list li {
+  font-size: 22px;
+}
+
+/* Vite prompts: six screenshots in a 3 × 2 grid */
+.shot-grid.three.six {
+  gap: 16px 22px;
+  margin-bottom: 70px;
+}
+.shot-grid.three.six figure {
+  gap: 8px;
+}
+.shot-grid.three.six {
+  margin-top: 28px;
+}
+.shot-grid.three.six img {
+  height: 230px;
+  object-position: left bottom;
+}
+.shot-grid.three.six figure:last-child img {
+  object-position: center;
+}
+.shot-grid.three.six figcaption {
+  font-size: 20px;
+}
