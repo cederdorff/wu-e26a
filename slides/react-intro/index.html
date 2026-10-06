@@ -1331,30 +1331,6 @@ export default function App() {
         </section>
 
 
-        <section class="fill viz" data-accent="cyan">
-          <span class="eyebrow">Chatbot step 1 · før og efter</span>
-          <h2>Fra to store filer til små components</h2>
-          <div class="stage">
-            <div class="files-pair">
-              <div class="panel">
-                <span class="viz-label">Startpunktet</span>
-                <div class="file-row"><code>app/routes/layout.jsx</code><div><span class="vchip orange">Layout</span></div>
-                  <div class="fat"><i style="width: 70%"></i><small>&lt;aside&gt; header</small><i class="many"></i><small>14 × &lt;li&gt; skrevet i hånden</small><i style="width: 55%"></i><small>footer &lt;/aside&gt;</small></div></div>
-                <div class="file-row"><code>app/routes/home.jsx</code><div><span class="vchip purple">Home</span></div>
-                  <div class="fat"><i class="many"></i><small>10 × &lt;div className="message"&gt;</small><i style="width: 60%"></i><small>&lt;textarea&gt; og Send</small></div></div>
-              </div>
-              <b class="v-arrow">→<small>step 1</small></b>
-              <div class="panel">
-                <span class="viz-label">Efter step 1</span>
-                <div class="file-row"><code>app/components/Sidebar.jsx</code><div><span class="vchip purple">Sidebar</span><span class="vchip cyan">SidebarHeader</span><span class="vchip yellow">ChatThreadsList</span><span class="vchip green">ChatThreadItem</span><span class="vchip cyan">SidebarFooter</span></div></div>
-                <div class="file-row"><code>app/components/Chat.jsx</code><div><span class="vchip yellow">ChatMessages</span><span class="vchip green">Message</span><span class="vchip cyan">ChatInput</span></div></div>
-                <div class="file-row"><code>app/routes/layout.jsx</code><div><span class="vchip orange">Layout</span><span class="prop-in">→ bruger <code>&lt;Sidebar /&gt;</code></span></div></div>
-                <div class="file-row"><code>app/routes/home.jsx</code><div><span class="vchip purple">Home</span><span class="prop-in">→ bruger <code>&lt;ChatMessages /&gt;</code> og <code>&lt;ChatInput /&gt;</code></span></div></div>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Samme træk som jeres <code>src/components</code>. Her hedder mappen <code>app/components</code>, og siden ser ud præcis som før.</p>
-        </section>
 
         <section class="fill viz" data-accent="cyan">
           <span class="eyebrow">Container og item</span>
@@ -1384,57 +1360,30 @@ export default function App() {
           <p class="bottom-line">En <b>container</b> holder listen. Et <b>item</b> viser ét element og går igen. Det har I allerede bygget i dag.</p>
         </section>
 
-        <section class="fill viz" data-accent="cyan">
-          <span class="eyebrow">Chatbot step 1 · på ét billede</span>
-          <h2>Udefra og ind, én kasse ad gangen</h2>
-          <div class="stage">
-            <div class="cb-layout">
-              <div class="cb boxed k-page" data-c="Layout" aria-hidden="true"><aside class="cb-side k-sec" data-c="Sidebar" data-s="1"><div class="cb-head k-part" data-c="SidebarHeader" data-s="2"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads k-list" data-c="ChatThreadsList" data-s="4"><li class=" k-item" data-c="ChatThreadItem" data-s="5">How to learn programming?</li><li class="o-item k-item">What are the best pizza toppings?</li><li class="o-item k-item">Can you explain quantum physics?</li><li class="o-item k-item">Help me create a morning routine</li><li class="o-item k-item">What should I do this weekend?</li><li class="o-item k-item">Why is the sky blue?</li><li class="o-item k-item">How do I learn a new language?</li><li class="o-item k-item">What's the meaning of life?</li><li class="o-item k-item">Tell me a funny joke</li><li class="o-item k-item">What's a healthy dinner idea?</li><li class="o-item k-item">Recommend me a good book</li><li class="o-item k-item">Give me a creative writing prompt</li></ul><div class="cb-foot k-part" data-c="SidebarFooter" data-s="3"><i></i>Batman</div></aside><div class="cb-main k-sec" data-c="Home"><div class="cb-msgs k-list" data-c="ChatMessages" data-s="8"><div class="cb-msg user k-item" data-c="Message" data-s="7"><p>Hello! Can you help me understand React Router v7?</p></div><div class="cb-msg bot o-item k-item"><p>Of course! React Router v7 is the latest version, with better data loading and nested routing.</p></div><div class="cb-msg user o-item k-item"><p>How do nested routes work in v7?</p></div><div class="cb-msg bot o-item k-item"><p>Nested routes let you build hierarchical UI. A parent route shows child routes in an &lt;Outlet /&gt;.</p></div><div class="cb-msg user o-item k-item"><p>What's the difference between route() and layout() helpers?</p></div><div class="cb-msg bot o-item k-item"><p>Great question! route() adds URL segments, while layout() only adds UI structure.</p></div></div><div class="cb-input k-part" data-c="ChatInput" data-s="9"><span>Type your message here...</span><b>Send</b></div></div></div>
-              <div class="cb-steps">
-                <div><strong>Sidebaren · delopgave 1-6</strong><ol>
-                  <li><code>Sidebar</code></li><li><code>SidebarHeader</code></li><li><code>SidebarFooter</code></li><li><code>ChatThreadsList</code></li><li><code>ChatThreadItem</code> med props</li><li>Flyt til <code>Sidebar.jsx</code></li></ol></div>
-                <div><strong>Chatten · delopgave 7-11</strong><ol start="7">
-                  <li><code>Message</code> med props</li><li><code>ChatMessages</code></li><li><code>ChatInput</code></li><li>Flyt til <code>Chat.jsx</code></li><li>Teksten mellem tags</li></ol></div>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Siden skal se ens ud efter hver delopgave. Commit hver gang.</p>
-        </section>
 
 
-        <section class="fill viz" data-accent="cyan">
-          <span class="eyebrow">Chatbot step 2 · data flyttes op</span>
-          <h2>Arrays op i træet, props ned</h2>
-          <div class="stage">
-            <div class="tree-pair">
-              <div class="panel">
-                <span class="viz-label">Beskeder · delopgave 1-2</span>
-                <ul class="vtree"><li><span class="vn sec">Home <small>har messages</small></span>
-                  <ul>
-                    <li><span class="vn list">ChatMessages</span><span class="prop-in">← <span class="vchip yellow">messages</span></span>
-                      <ul><li><span class="vn user">Message <small>× 10</small></span><span class="prop-in">← <span class="vchip green">type</span> <small>+ teksten mellem tags</small></span></li></ul>
-                    </li>
-                    <li><span class="vn header">ChatInput</span></li>
-                  </ul>
-                </li></ul>
-                <p class="viz-note">Samme form som <code>App</code> → <code>UserList</code> → <code>User</code></p>
-              </div>
-              <div class="panel">
-                <span class="viz-label">Tråde · delopgave 3-4</span>
-                <ul class="vtree"><li><span class="vn app">Layout <small>har threads</small></span>
-                  <ul>
-                    <li><span class="vn sec">Sidebar</span><span class="prop-in">← <span class="vchip yellow">threads</span> <small>sender bare videre</small></span>
-                      <ul><li><span class="vn list">ChatThreadsList</span><span class="prop-in">← <span class="vchip yellow">threads</span></span>
-                        <ul><li><span class="vn user">ChatThreadItem <small>× 14</small></span><span class="prop-in">← <span class="vchip green">href</span> <span class="vchip green">title</span></span></li></ul>
-                      </li></ul>
-                    </li>
-                  </ul>
-                </li></ul>
-                <p class="viz-note"><code>threads</code> skal ned gennem <code>Sidebar</code> for at nå <code>ChatThreadsList</code></p>
-              </div>
-            </div>
+
+        <section id="tutorial-nyt" class="shift-slide" data-accent="cyan">
+          <span class="eyebrow">Chatbot step 1 og 2</span>
+          <h2>Tre ting, der er anderledes</h2>
+          <div class="shift-grid">
+            <span></span>
+            <span class="viz-label">my-first-react-app</span>
+            <span class="viz-label">Chatbot-tutorialen</span>
+
+            <strong>Retning</strong>
+            <p>I byggede op fra en tom fil</p>
+            <p class="new">I skiller færdig kode ad. Siden må <b>ikke</b> ændre sig</p>
+
+            <strong>Props</strong>
+            <p><code>function User({ name })</code></p>
+            <p class="new"><code>function ChatThreadItem(props)</code><br />og så <code>props.title</code></p>
+
+            <strong>Filer</strong>
+            <p>Én fil pr. component og <code>export default</code></p>
+            <p class="new">Først alle i samme fil. Flyt dem ud bagefter, også med <code>export { ... }</code></p>
           </div>
-          <p class="bottom-line">Først <code>.map()</code> over et array i componenten. Bagefter flytter I arrayet op til den component, der ejer det.</p>
+          <p class="bottom-line"><code>props.title</code> og <code>{ title }</code> er det samme. Tutorialen bruger <code>props</code>, så gør det samme.</p>
         </section>
 
         <section id="ex-tutorial" class="step-slide" data-accent="cyan">

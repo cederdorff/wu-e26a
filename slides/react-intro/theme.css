@@ -2591,3 +2591,46 @@
 .case-slide .before-after pre code {
   font-size: 28px;
 }
+
+/* Tutorial bridge: what is different from my-first-react-app */
+.shift-slide {
+  display: flex !important;
+  flex-direction: column;
+}
+.shift-grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 170px minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-content: center;
+  gap: 18px 24px;
+  margin: 24px 0 80px;
+}
+.shift-grid .viz-label {
+  margin: 0;
+  padding-left: 26px;
+}
+.shift-grid strong {
+  align-self: center;
+  font-size: 30px;
+}
+.shift-grid p {
+  margin: 0;
+  padding: 24px 28px;
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+  color: var(--muted);
+  font-size: 28px;
+  line-height: 1.4;
+}
+.shift-grid p.new {
+  border-left: 3px solid var(--accent);
+  color: var(--ink);
+}
+.shift-grid p.none {
+  align-self: center;
+  background: none;
+}
+.shift-grid code {
+  font-size: 0.9em;
+  white-space: nowrap;
+}
