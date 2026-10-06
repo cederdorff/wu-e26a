@@ -2246,13 +2246,17 @@ body {
 .checklist li {
   position: relative;
   margin: 0;
-  padding: 19px 20px 19px 70px;
+  --checklist-pad: 19px;
+  padding: var(--checklist-pad) 20px var(--checklist-pad) 70px;
   border-top: 1px solid var(--line);
   font-size: 27px;
+  line-height: 1.35;
 }
+/* Center the circle on the first text line: padding-top + half a line */
 .checklist li::before {
   position: absolute;
-  top: 16px;
+  top: calc(var(--checklist-pad) + 0.675 * 27px);
+  transform: translateY(-50%);
   left: 16px;
   display: grid;
   width: 34px;

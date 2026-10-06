@@ -1396,15 +1396,18 @@ export default function App() {
           <h2>Kom i gang med tutorialen</h2>
           <div class="step-layout step-wide-steps">
             <ol class="steps">
-              <li>Opret en tom mappe til chatbotten, åbn den i VS Code, og klik <strong>Initialize Repository</strong></li>
-              <li>Hent startpunktet med kommandoen til højre. Commit det, før I ændrer noget, og publish som i øvelse 11</li>
-              <li><code>cd frontend</code>, <code>npm install</code> og <code>npm audit fix</code>. De 8 advarsler, der er tilbage, er forventede. Lad dem være</li>
+              <li>Opret en ny mappe, <code>chatbot-react-postgres</code>, der hvor du har dine kodeprojekter</li>
+              <li>Åbn kun den mappe i VS Code: <b>File › Open Folder</b>. Klik <strong>Initialize Repository</strong> under <b>Source Control</b></li>
+              <li>Kør kommandoen til højre. Commit, og publish som i øvelse 11</li>
+              <li><code>cd frontend</code>, <code>npm install</code>, <code>npm audit fix</code>. De sidste 8 advarsler er forventede</li>
               <li><code>npm run dev</code>, og åbn den URL, terminalen viser</li>
               <li>Følg <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/1" target="_blank" rel="noreferrer">step 1 ↗</a> og <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/2" target="_blank" rel="noreferrer">step 2 ↗</a>. Commit efter hver delopgave</li>
             </ol>
             <div class="step-code">
               <span class="file">I roden af jeres nye repository</span>
               <pre data-copy><code class="language-bash">npx degit --force bewildergeist/chatbot-react-postgres#pr-1-start</code></pre>
+              <span class="file">Tutorialen</span>
+              <p><a href="https://github.com/bewildergeist/chatbot-react-postgres#learning-path" target="_blank" rel="noreferrer">Oversigt over alle steps ↗</a>. Hvert step er en pull request med en trin-for-trin-guide.</p>
               <span class="file">Bemærk</span>
               <p>Projektet bruger React Router, så filerne ligger i <code>app/routes/</code> i stedet for <code>src/</code>. Det er stadig Vite og React. Routing kommer i morgen.</p>
             </div>
