@@ -789,6 +789,27 @@ export default function App() {
           <p class="bottom-line"><code>export default</code> i den ene fil, <code>import</code> i den anden. Samme moduler, som I brugte i jeres Express-routes.</p>
         </section>
 
+        <section class="vite-tree-slide" data-accent="cyan">
+          <span class="eyebrow">Navne og mapper</span>
+          <h2>Hvor bor en component?</h2>
+          <div class="vite-tree">
+            <pre class="tree">src/
+├── <span class="t-header">components/</span>
+│   ├── <span class="t-header">Header.jsx</span>
+│   ├── <span class="t-header">User.jsx</span>
+│   └── <span class="t-header">UserList.jsx</span>
+├── App.jsx
+├── index.css
+└── main.jsx</pre>
+            <div class="file-notes">
+              <div class="hot"><code>Header</code><span>Stort bogstav i starten af hvert ord. Det er sådan, React kender jeres components fra HTML-tags som <code>&lt;header&gt;</code></span></div>
+              <div class="hot"><code>Header.jsx</code><span>Filen hedder det samme som componenten. Så ved I, hvor I skal lede</span></div>
+              <div class="hot"><code>components/</code><span>Alle byggeklodser samlet ét sted. Ligesom <code>routes/</code> i Express</span></div>
+              <div><code>.jsx</code><span>Filen indeholder JSX. Så ved VS Code og Vite, hvordan den skal læses</span></div>
+            </div>
+          </div>
+        </section>
+
         <section id="ex-5" class="step-slide" data-accent="cyan">
           <span class="eyebrow">Øvelse 5 · Første component</span>
           <h2>Flyt overskriften ud i en <code>Header</code></h2>
@@ -814,6 +835,31 @@ export default function App() {
             </div>
           </div>
           <p class="bottom-line">Test: overskriften står præcis som før. Nu kommer den bare fra sin egen component.</p>
+        </section>
+
+        <section class="compare-code-slide short-code case-slide" data-accent="cyan">
+          <span class="eyebrow">Stort eller lille bogstav</span>
+          <h2>Stort bogstav betyder component</h2>
+          <div class="before-after">
+            <article>
+              <span>Lille h · React laver et HTML-tag</span>
+              <pre><code class="language-javascript">&lt;header /&gt;
+
+// Vite oversætter til
+React.createElement("header");</code></pre>
+              <div class="mini-result"><small>I browseren</small><span>Et tomt <code>&lt;header&gt;</code>. Ingen overskrift</span></div>
+            </article>
+            <b aria-hidden="true">≠</b>
+            <article>
+              <span>Stort H · React kalder jeres funktion</span>
+              <pre><code class="language-javascript">&lt;Header /&gt;
+
+// Vite oversætter til
+React.createElement(Header);</code></pre>
+              <div class="mini-result"><small>I browseren</small><strong>Users</strong></div>
+            </article>
+          </div>
+          <p class="bottom-line">Med lille h bliver jeres funktion aldrig kaldt. Derfor <b>PascalCase</b>: <code>Header</code>, <code>User</code>, <code>UserList</code>.</p>
         </section>
 
         <section id="ex-6" class="step-slide" data-accent="cyan">
