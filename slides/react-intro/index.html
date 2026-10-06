@@ -947,15 +947,16 @@ React.createElement(Header);</code></pre>
           <p>Tre <code>&lt;User /&gt;</code> skrevet i hånden holder ikke, når der kommer flere. Eller 900.</p>
         </section>
 
-        <section class="compare-code-slide short-code" data-accent="green">
+        <section class="compare-code-slide short-code lists-compare" data-accent="green">
           <span class="eyebrow">Lister</span>
           <h2>Data i et array, ét element pr. objekt</h2>
           <div class="before-after">
             <article>
               <span>Før · skrevet i hånden</span>
-              <pre><code class="language-javascript">&lt;User name="Dan" ... /&gt;
+              <pre><code class="language-html">&lt;User name="Dan" ... /&gt;
 &lt;User name="Magnus" ... /&gt;
 &lt;User name="Rasmus" ... /&gt;</code></pre>
+              <div class="mini-result"><small>Én user mere</small><span>Én linje mere i JSX'en</span></div>
             </article>
             <b aria-hidden="true">→</b>
             <article>
@@ -968,6 +969,7 @@ React.createElement(Header);</code></pre>
 {users.map(user =&gt; (
   &lt;User key={user.id} name={user.name} ... /&gt;
 ))}</code></pre>
+              <div class="mini-result"><small>Én user mere</small><span>Ét objekt mere i arrayet. JSX'en er den samme</span></div>
             </article>
           </div>
           <p class="bottom-line"><code>key</code> skal være unik, så React kan holde styr på hvert element mellem to renders. Brug <code>id</code>.</p>
@@ -982,14 +984,16 @@ React.createElement(Header);</code></pre>
   name: <span class="s">"Dan"</span> }</pre><pre class="viz-code">{ id: <span class="s">"esCq…"</span>,
   name: <span class="s">"Magnus"</span> }</pre><pre class="viz-code">{ id: <span class="s">"fTs8…"</span>,
   name: <span class="s">"Rasmus"</span> }</pre>
+              <span class="row-label"></span><div class="map-step"><b>↓</b><span class="vchip muted">user · 1. gang</span></div><div class="map-step"><b>↓</b><span class="vchip muted">user · 2. gang</span></div><div class="map-step"><b>↓</b><span class="vchip muted">user · 3. gang</span></div>
               <span class="row-label"></span>
-              <div class="map-fn">users.map(user =&gt; <span class="t">&lt;User</span> key={user.id} name={user.name} … <span class="t">/&gt;</span>)</div>
+              <div class="map-fn">users.map(user =&gt; <span class="t">&lt;User</span> key={user.id} name={user.name} … <span class="t">/&gt;</span>)<small>samme funktion, kaldt én gang pr. objekt</small></div>
+              <span class="row-label"></span><b class="down">↓</b><b class="down">↓</b><b class="down">↓</b>
               <span class="row-label">JSX</span><pre class="viz-code"><span class="t">&lt;User</span> <span class="hl">key="HlvR…"</span>
   name=<span class="s">"Dan"</span> <span class="t">/&gt;</span></pre><pre class="viz-code"><span class="t">&lt;User</span> <span class="hl">key="esCq…"</span>
   name=<span class="s">"Magnus"</span> <span class="t">/&gt;</span></pre><pre class="viz-code"><span class="t">&lt;User</span> <span class="hl">key="fTs8…"</span>
   name=<span class="s">"Rasmus"</span> <span class="t">/&gt;</span></pre>
               <span class="row-label"></span><b class="down">↓</b><b class="down">↓</b><b class="down">↓</b>
-              <span class="row-label">skærm</span><div class="vcard"><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div><div class="vcard"><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div><div class="vcard"><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div>
+              <span class="row-label">skærm</span><div class="vcard"><span class="key-tag">key HlvR…</span><img src="../assets/react/users/dob.webp" alt="" /><b>Dan Okkels Brendstrup</b><small>Senior Lecturer</small><small>dob@eaaa.dk</small></div><div class="vcard"><span class="key-tag">key esCq…</span><img src="../assets/react/users/magl.webp" alt="" /><b>Magnus Lindholm Nielsen</b><small>Lecturer</small><small>magl@eaaa.dk</small></div><div class="vcard"><span class="key-tag">key fTs8…</span><img src="../assets/react/users/race.webp" alt="" /><b>Rasmus Cederdorff</b><small>Senior Lecturer</small><small>race@eaaa.dk</small></div>
             </div>
           </div>
           <p class="bottom-line">Tre objekter giver tre <code>&lt;User /&gt;</code>. 900 objekter giver 900. Koden er den samme.</p>
@@ -1043,27 +1047,25 @@ React.createElement(Header);</code></pre>
             <div class="tree-pair">
               <div class="panel">
                 <span class="viz-label">Nu · efter øvelse 8</span>
-                <ul class="vtree"><li><span class="vn app">App <small>har users</small></span>
+                <ul class="vtree"><li><span class="vn app">App <small>har users</small></span><span class="vchip cyan tag">.map()</span>
                   <ul>
                     <li><span class="vn header">Header</span></li>
                     <li><span class="vn user">User <small>× én pr. person</small></span><span class="prop-in">← <span class="vchip green">name</span> <span class="vchip green">title</span> <span class="vchip green">mail</span> <span class="vchip green">image</span></span></li>
                   </ul>
                 </li></ul>
-                <p class="viz-note"><code>App</code> laver både data og <code>.map()</code></p>
               </div>
               <div class="panel">
                 <span class="viz-label">Efter øvelse 9</span>
                 <ul class="vtree"><li><span class="vn app">App <small>har users</small></span>
                   <ul>
                     <li><span class="vn header">Header</span></li>
-                    <li><span class="vn list">UserList</span><span class="prop-in">← <span class="vchip yellow">users</span></span>
+                    <li><span class="vn list new">UserList</span><span class="vchip green tag">ny</span><span class="vchip cyan tag">.map()</span><span class="prop-in">← <span class="vchip yellow">users</span></span>
                       <ul>
                         <li><span class="vn user">User <small>× én pr. person</small></span><span class="prop-in">← <span class="vchip green">name</span> <span class="vchip green">title</span> <span class="vchip green">mail</span> <span class="vchip green">image</span></span></li>
                       </ul>
                     </li>
                   </ul>
                 </li></ul>
-                <p class="viz-note"><code>App</code> har data. <code>UserList</code> laver <code>.map()</code></p>
               </div>
             </div>
           </div>

@@ -2680,3 +2680,81 @@
 .shot-grid.three.six figcaption {
   font-size: 20px;
 }
+
+/* .map(): one pass per object, the key travels with each card */
+.map-viz {
+  gap: 8px 22px;
+  margin-top: 14px;
+}
+.map-viz .viz-code {
+  padding: 8px 16px;
+}
+.map-viz .map-fn {
+  padding: 8px 20px;
+}
+.map-viz .down {
+  font-size: 22px;
+}
+.map-step {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 24px;
+  line-height: 1;
+}
+.map-viz .map-fn small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font: 600 15px/1.3 var(--font, inherit);
+}
+.map-viz .vcard {
+  position: relative;
+  width: 270px;
+  margin-top: 8px;
+}
+.reveal .map-viz .vcard img {
+  aspect-ratio: 3 / 1;
+  object-position: center 30%;
+}
+.key-tag {
+  position: absolute;
+  top: -11px;
+  right: 10px;
+  padding: 1px 8px;
+  border: 1px dashed var(--accent);
+  border-radius: 999px;
+  background: #0d1413;
+  color: var(--accent);
+  font: 700 13px/1.4 "SFMono-Regular", Consolas, monospace;
+}
+
+/* Lists compare: what one more user costs before and after */
+.compare-code-slide.lists-compare .before-after {
+  align-items: stretch;
+}
+.lists-compare .before-after article {
+  display: flex;
+  flex-direction: column;
+}
+.lists-compare .mini-result {
+  margin-top: auto;
+  padding-top: 16px;
+}
+.lists-compare .mini-result span {
+  font-size: 22px;
+}
+
+/* Exercise 9 tree: center the tree, the .map() chip shows who does the map */
+.tree-pair .panel {
+  display: flex;
+  flex-direction: column;
+}
+.tree-pair .panel .vtree {
+  margin: auto 0;
+}
+.tree-pair .vchip.tag {
+  font-size: 18px;
+}
