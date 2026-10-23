@@ -8,7 +8,7 @@ Jeres chatbot kan nu oprette, læse, redigere og slette tråde via jeres eget Ex
 
 Vi starter med at prøve at ødelægge jeres egen chatbot, så I selv ser hullerne. Derefter lukker vi det første af dem: brugeren skal kunne oprette en konto og logge ind. Det gør vi i et lille, nyt projekt, `react-supabase-auth`, med samme opsætning som chatbotten. Undervejs ser vi på, hvorfor passwords aldrig gemmes i klartekst, hvad hashing og salt er, og hvad der står i det JWT, I får tilbage, når I logger ind.
 
-Hver øvelse svarer til en delopgave i [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) i [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres). Når dagen er slut, kender I alle dele af step 14 og kan lave det selv i chatbotten i selvstudiet torsdag og i gruppearbejdet fredag.
+De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) i [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres). Når dagen er slut, kender I alle dele af step 14 og kan lave det selv i chatbotten i selvstudiet torsdag og i gruppearbejdet fredag.
 
 ---
 
@@ -50,7 +50,7 @@ Hver øvelse svarer til en delopgave i [step 14](https://github.com/bewildergeis
 - **Salt:** et tilfældigt stykke tekst, der lægges til hvert password, før det hashes. Derfor var jeres to hashes forskellige
 - **bcrypt** er en hash-funktion, der er lavet til passwords. Den er bevidst langsom, så det tager lang tid at gætte sig frem. Hashen starter med `$2a$`
 - Øvelse 5: opret en bruger med to forskellige passwords. Det lykkes, fordi ingen tjekker det. Tilføj validering i `clientAction`, og vis fejlen med `useActionData()`
-- **Tre lag validering:** HTML (`required`, `minLength`), jeres `clientAction` og Supabase. I fjerner selv de to første og ser, at Supabase stadig afviser et kort password. Kun det sidste lag ligger på serveren, ligesom I sendte requests uden om formularen med Thunder Client i opsamlingen
+- **Tre lag validering:** HTML (`required`, `minLength`), jeres `clientAction` og Supabase. I fjerner selv de to første og ser, at Supabase stadig afviser et kort password. De to første lag kan enhver komme uden om, ligesom I gik uden om frontenden med Thunder Client i opsamlingen. Kun det sidste lag ligger på serveren
 </details>
 
 **Pause 9.50-10.05**
@@ -77,7 +77,7 @@ Hver øvelse svarer til en delopgave i [step 14](https://github.com/bewildergeis
 <summary><strong>6. Fra øvelserne til step 14 (11.10-11.30)</strong></summary>
 
 - Vi åbner [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) sammen og sætter øvelsesnumre på hver delopgave. Tabellen står sidst i opgaven
-- Forskellene: I skriver selv formularerne, routes skal stå uden for layoutet, så sidebaren ikke vises, og login sender til `/` i stedet for `/profile`
+- Forskellene: i step 14 skriver I selv formularerne, routes skal stå uden for layoutet, så sidebaren ikke vises, og login sender til `/` i stedet for `/profile`
 - Tilbage til tavlen fra opsamlingen: Hvilke huller kan login lukke? Endnu ingen. Frontenden ved, hvem I er, men backenden gør ikke. Det kommer i de næste steps, når tokenet sendes med i alle requests, og backenden begynder at kræve det
 - **Torsdag og fredag:** lav step 14 i chatbotten. Er I ikke færdige med step 13, så hent startpunktet med `npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start`, og commit det, før I ændrer noget. Har I lavet AI-svarene på en branch, så bliv på `main`. Branchen merger I ind efter auth-stepsene
 - Fredag arbejder I i bordgrupperne og hjælper hinanden. Når I er i mål, så log ind med to forskellige brugere i hver sin browser i chatbotten. Ser de stadig de samme tråde? Og står jeres token i Network-fanen, når chatbotten kalder jeres API? Tag svarene med næste gang. Vi starter med dem
@@ -89,11 +89,11 @@ Hver øvelse svarer til en delopgave i [step 14](https://github.com/bewildergeis
 
 - Sørg for at være færdig med [step 13](https://github.com/bewildergeist/chatbot-react-postgres/pull/13), så jeres frontend og backend kører
 - Skim "Overview" i [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14), så du ved, hvad vi skal bygge
-- Find URL og key til jeres Supabase-projekt i chatbottens `frontend/.env`. Dem skal I bruge i dag
-- På [Scrimba](https://scrimba.com/fullstack-path-c0fullstack):
-  - Intro to Supabase > Authentication, til og med "Navigate after sign out"
+- Find URL og key til dit Supabase-projekt i chatbottens `frontend/.env`. Dem skal du bruge i dag
+- På Scrimba:
+  - [Intro to Supabase](https://scrimba.com/intro-to-supabase-c0abltfqed) > Authentication, til og med "Navigate after sign out"
 - Supplerende, hvis du har tid:
-  - Fullstack > Express.js > Authentication, frem til "Hash the password", hvis du ikke nåede det i selvstudiet
+  - [Fullstack](https://scrimba.com/fullstack-path-c0fullstack) > Express.js > Authentication, frem til "Hash the password", hvis du ikke nåede det i selvstudiet
   - ["Introduction to JSON Web Tokens"](https://jwt.io/introduction) på jwt.io
 
 ---
