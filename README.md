@@ -174,7 +174,7 @@ Kun RACE-sider kan sendes tilbage til Canvas herfra. Se [vedligeholdelse](#vedli
 
 ## Vedligeholdelse
 
-Når du pusher til `main`, sender GitHub Actions kun ændrede RACE-sider i `undervisning/` til deres eksisterende Canvas-sider. En side regnes som RACE-materiale, når `RACE` står som et selvstændigt ord i filnavnet eller Canvas-titlen; alle andre underviseres sider springes over. Der køres ingen fuld spejling og oprettes ingen bot-commits. Slides udgives separat til GitHub Pages, når du ændrer dem.
+Når du pusher til `main`, sender GitHub Actions kun ændrede RACE-sider i `undervisning/` til deres eksisterende Canvas-sider. En side regnes som RACE-materiale, når `RACE` står som et selvstændigt ord i filnavnet eller Canvas-titlen, og ingen anden underviser (DOB, MAGL, HEOE, NKKR eller NYCH) gør. Fælles sider som "DOB + RACE" og alle andre underviseres sider springes over. Der køres ingen fuld spejling og oprettes ingen bot-commits. Slides udgives separat til GitHub Pages, når du ændrer dem.
 
 Repoet er styrende for indholdet på de RACE-sider, du sender. Push erstatter sidens indhold, også hvis nogen har redigeret den direkte i Canvas. Hent derfor Canvas-versionen først, hvis sådanne ændringer skal med. Titler, publiceringsstatus og modulrækkefølge ændres ikke. Nye sider skal oprettes i Canvas og hentes med pull; slettede lokale filer sletter ikke sider i Canvas.
 

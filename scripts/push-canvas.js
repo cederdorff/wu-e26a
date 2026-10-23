@@ -14,7 +14,7 @@ import { dirname, relative, resolve } from "node:path";
 import { marked } from "marked";
 import {
   canvasRequest,
-  isRaceOwned,
+  isRaceOnly,
   loadLocalEnv,
   requiredEnv,
 } from "./canvas-lib.js";
@@ -79,7 +79,7 @@ for (const path of targets) {
 
   const { metadata, bodyMarkdown } = parsed;
   if (!isRacePage(relativePath, metadata)) {
-    console.log("  Springer over: kun RACE-sider må vedligeholdes fra repoet.");
+    console.log("  Springer over: kun RACE-sider uden andre undervisere må vedligeholdes fra repoet.");
     skipped += 1;
     continue;
   }
@@ -157,7 +157,7 @@ function parseYamlValue(rawValue) {
 }
 
 function isRacePage(relativePath, metadata) {
-  return isRaceOwned(`${relativePath}\n${metadata.canvas_page_title ?? ""}`);
+  return isRaceOnly(`${relativePath}\n${metadata.canvas_page_title ?? ""}`);
 }
 
 function renderBodyHtml(bodyMarkdown, currentPath, pathToPage, repoBlobRoot) {

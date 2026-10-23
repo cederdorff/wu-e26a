@@ -84,10 +84,22 @@ export async function fileExists(path) {
   }
 }
 
-// Fælles ejerskabsregel for både sider (push-canvas.js) og filer (pull-canvas.js):
-// "race" skal stå som selvstændigt ord, så fx "terrace" ikke tæller med.
+// Initialer skal stå som selvstændigt ord, så fx "terrace" ikke tæller som "race".
+function hasInitials(text, initials) {
+  return new RegExp(`(^|[^a-z0-9])${initials}([^a-z0-9]|$)`, "i").test(text ?? "");
+}
+
+const otherTeachers = ["dob", "magl", "heoe", "nkkr", "nych"];
+
+// Ejerskabsregel for filer (pull-canvas.js): alt med "race" i navnet.
 export function isRaceOwned(text) {
-  return /(^|[^a-z0-9])race([^a-z0-9]|$)/i.test(text ?? "");
+  return hasInitials(text, "race");
+}
+
+// Ejerskabsregel for sider (push-canvas.js): kun sider, hvor RACE er eneste underviser.
+// Fælles sider som "DOB + RACE" vedligeholdes i Canvas.
+export function isRaceOnly(text) {
+  return isRaceOwned(text) && !otherTeachers.some((initials) => hasInitials(text, initials));
 }
 
 export async function readJsonIfPresent(path) {

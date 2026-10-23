@@ -85,6 +85,11 @@ test("push selects Git changes without requiring a Canvas mirror", async (t) => 
   assert.equal(nonRace.requests.length, 0, "non-RACE pages never call the Canvas API");
   assert.match(nonRace.stdout, /kun RACE-sider/);
   git("checkout", "--", "undervisning/3.md");
+  await writePage(4, "Shared edit", "DOB + RACE lesson");
+  const shared = await run(["--apply"]);
+  assert.equal(shared.status, 0, shared.stderr);
+  assert.equal(shared.requests.length, 0, "shared pages with other teachers never call the Canvas API");
+  await rm(resolve(root, "undervisning/4.md"));
   git("rm", "undervisning/2.md");
   await writeFile(resolve(root, "undervisning/README.md"), "# Documentation\n");
   commit("Delete local page and update docs");
