@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
 
-I dag mødes I i [ugens bordgrupper](https://eaaa.instructure.com/courses/32059/modules/items/1065427) og hjælper hinanden med at få login ind i chatbotten. Målet er, at alle i gruppen har lavet [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14), og at I kan forklare, hvad der sker, når man logger ind.
+I dag mødes I i [ugens bordgrupper](https://eaaa.instructure.com/courses/32059/modules/items/1065427) og hjælper hinanden med at få login ind i chatbotten. Nåede du ikke [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) i går, er det helt fint. Det er det, I har tid til i dag. Målet er, at alle i gruppen har lavet step 14, når I går hjem, og at I kan forklare, hvad der sker, når man logger ind.
 
 Lokale 4.05 er reserveret til jer.
 
@@ -47,7 +47,7 @@ canvas_page_id: 209569
 canvas_page_slug: "gruppearbejde-uge-44-login-i-chatbotten"
 canvas_page_title: "Gruppearbejde uge 44: Login i chatbotten"
 canvas_page_published: false
-canvas_updated_at: "2026-10-23T08:43:14Z"
+canvas_updated_at: "2026-10-23T08:49:07Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1072874"
 local_status: mirrored
 ```
