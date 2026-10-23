@@ -1,6 +1,10 @@
-# Forberedelse - Selvstudium - 15-10-2026
+# Forberedelse - Gruppearbejde - 15-10-2026
 
-*Modulet har endnu ikke indhold i Canvas.*
+## Materialer
+
+- Forberedelse Til Fredag (Individuel) — Assignment
+- Gruppearbejde 2: Modeller jeres første database — Assignment
+- [Bordgrupper uge 42.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1067980)
 
 ---
 
@@ -11,7 +15,7 @@
 canvas_course_id: 32059
 canvas_module_id: 178062
 canvas_module_position: 39
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: null
 canvas_module_item_position: null
 canvas_page_id: null

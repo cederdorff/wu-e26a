@@ -24,6 +24,9 @@ TBA
 
 ### Opgaver
 
+- Gruppearbejde 3: Normaliser en database — Assignment
+- [Forberedelse til MAGL 4](./044-forberedelse-selvstudium-22-10-2026.md)
+
 ---
 
 <details>
@@ -33,7 +36,7 @@ TBA
 canvas_course_id: 32059
 canvas_module_id: 178070
 canvas_module_position: 47
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: 1018757
 canvas_module_item_position: 1
 canvas_page_id: 200732

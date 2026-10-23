@@ -219,7 +219,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 7,
+    "items_count": 8,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178025/items",
     "items": [
       {
@@ -241,8 +241,25 @@
         }
       },
       {
-        "id": 1037529,
+        "id": 1059637,
         "position": 2,
+        "title": "Oversigt over alle øvelser (AMAbot og students)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178025,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1059637",
+        "external_url": "https://github.com/cederdorff/wu-e26a/blob/main/opgaver/README.md",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1037529,
+        "position": 3,
         "title": "Bordgrupper",
         "indent": 0,
         "quiz_lti": false,
@@ -256,7 +273,7 @@
       },
       {
         "id": 1037530,
-        "position": 3,
+        "position": 4,
         "title": "Bordgrupper uge 35-36.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -275,7 +292,7 @@
       },
       {
         "id": 1037531,
-        "position": 4,
+        "position": 5,
         "title": "Bordgrupper uge 37.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -294,7 +311,7 @@
       },
       {
         "id": 1037534,
-        "position": 5,
+        "position": 6,
         "title": "Bordgrupper uge 38.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -313,7 +330,7 @@
       },
       {
         "id": 1037533,
-        "position": 6,
+        "position": 7,
         "title": "Bordgrupper uge 39.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -332,7 +349,7 @@
       },
       {
         "id": 1037532,
-        "position": 7,
+        "position": 8,
         "title": "Bordgrupper uge 40.pdf",
         "indent": 0,
         "quiz_lti": false,
@@ -341,10 +358,9 @@
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1037532",
         "content_id": 1677511,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1677511",
-        "published": false,
-        "unpublishable": false,
+        "published": true,
+        "unpublishable": true,
         "content_details": {
-          "locked": true,
           "display_name": "Bordgrupper uge 40.pdf",
           "thumbnail_url": null,
           "locked_for_user": false
@@ -1404,7 +1420,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 5,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178044/items",
     "items": [
       {
@@ -1436,25 +1452,6 @@
         "published": true,
         "unpublishable": true,
         "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1057680,
-        "position": 3,
-        "title": "DOB 6 - Promises og async await - slides - no quiz.pdf",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "File",
-        "module_id": 178044,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1057680",
-        "content_id": 1702725,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1702725",
-        "published": true,
-        "unpublishable": true,
-        "content_details": {
-          "display_name": "DOB 6 - Promises og async await - slides - no quiz.pdf",
-          "thumbnail_url": null,
           "locked_for_user": false
         }
       },
@@ -1564,7 +1561,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 1,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178046/items",
     "items": [
       {
@@ -1579,6 +1576,57 @@
         "page_url": "opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/opgaver-laesning-og-scrimba-kurser-pa-forberedelsesdagene-uge-35-40",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1058630,
+        "position": 2,
+        "title": "1. REST API-øvelse: Arkitektur — routes, data, controllers og filtrering",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178046,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1058630",
+        "external_url": "https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1058631,
+        "position": 3,
+        "title": "2. Øvelse 7: AMAbotten i lag — routes og data-modul — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178046,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1058631",
+        "external_url": "https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-arkitektur.md",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1058632,
+        "position": 4,
+        "title": "3. Øvelse 8: AMAbotten får en frontend — fetch og DOM — byg en rigtig frontend til jeres AMAbot med fetch(), i eget tempo",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178046,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1058632",
+        "external_url": "https://github.com/cederdorff/wu-e26a/blob/main/opgaver/fetch-dom-amabot.md",
+        "new_tab": true,
         "published": true,
         "unpublishable": true,
         "content_details": {
@@ -1658,7 +1706,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178048/items",
     "items": [
       {
@@ -1687,15 +1735,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178048,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
+        "id": 1060324,
+        "position": 4,
+        "title": "DOB 7 - Client-side error handling - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178048,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1060324",
+        "content_id": 1706734,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1706734",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 7 - Client-side error handling - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
         "id": 1018723,
-        "position": 3,
+        "position": 5,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -1719,7 +1786,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 1,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178049/items",
     "items": [
       {
@@ -1739,34 +1806,85 @@
         "content_details": {
           "locked_for_user": false
         }
+      },
+      {
+        "id": 1058633,
+        "position": 2,
+        "title": "Øvelse 8: AMAbotten får en frontend — fetch og DOM",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178049,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1058633",
+        "external_url": "https://github.com/cederdorff/wu-e26a/blob/main/opgaver/fetch-dom-amabot.md",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1059633,
+        "position": 3,
+        "title": "Øvelse 9: AMAbotten bliver sikker og fejltolerant",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178049,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1059633",
+        "external_url": "https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1059634,
+        "position": 4,
+        "title": "Oversigt over alle øvelser (AMAbot og Students)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178049,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1059634",
+        "external_url": "https://github.com/cederdorff/wu-e26a/blob/main/opgaver/README.md",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
       }
     ]
   },
   {
     "id": 178050,
     "position": 27,
-    "name": "DOB + RACE 8 - Client/Server præsentationer - 30-09-2026",
+    "name": "DOB + RACE + MAGL 8 - Client/Server præsentationer - 30-09-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 5,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178050/items",
     "items": [
       {
         "id": 1018724,
         "position": 1,
-        "title": "Plan for DOB + RACE 8 - Client/Server præsentationer",
+        "title": "Plan for DOB + RACE + MAGL 8 - Client/Server præsentationer",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178050,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018724",
-        "page_url": "plan-for-dob-+-race-8-client-slash-server-praesentationer",
+        "page_url": "plan-for-dob-+-race-+-magl-8-client-slash-server-praesentationer",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-+-race-8-client-slash-server-praesentationer",
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-+-race-+-magl-8-client-slash-server-praesentationer",
         "published": true,
         "unpublishable": true,
         "content_details": {
@@ -1781,23 +1899,61 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178050,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018726,
+        "id": 1062698,
         "position": 3,
+        "title": "DOB 8 - Fernisering & præsentationer - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178050,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1062698",
+        "content_id": 1710150,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1710150",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 8 - Fernisering & præsentationer - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018726,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178050,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1061852,
+        "position": 5,
+        "title": "DOB 8 - Fernisering & præsentationer - worksheet.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178050,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1061852",
+        "content_id": 1709071,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1709071",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 8 - Fernisering & præsentationer - worksheet.pdf",
+          "thumbnail_url": null,
           "locked_for_user": false
         }
       }
@@ -1813,9 +1969,141 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 0,
+    "items_count": 7,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178051/items",
-    "items": []
+    "items": [
+      {
+        "id": 1065001,
+        "position": 1,
+        "title": "Bordgrupper",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178051,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1065424,
+        "position": 2,
+        "title": "Bordgrupper uge 41.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178051,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065424",
+        "content_id": 1713898,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713898",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Bordgrupper uge 41.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1065429,
+        "position": 3,
+        "title": "Bordgrupper uge 42.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178051,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065429",
+        "content_id": 1713903,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713903",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Bordgrupper uge 42.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1065428,
+        "position": 4,
+        "title": "Bordgrupper uge 43.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178051,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065428",
+        "content_id": 1713902,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713902",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Bordgrupper uge 43.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1065427,
+        "position": 5,
+        "title": "Bordgrupper uge 44.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178051,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065427",
+        "content_id": 1713901,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713901",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "Bordgrupper uge 44.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1065426,
+        "position": 6,
+        "title": "Bordgrupper uge 45.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178051,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065426",
+        "content_id": 1713900,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713900",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "Bordgrupper uge 45.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1065425,
+        "position": 7,
+        "title": "Bordgrupper uge 46.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178051,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065425",
+        "content_id": 1713899,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713899",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "Bordgrupper uge 46.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178052,
@@ -1826,10 +2114,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178052/items",
-    "items": []
+    "items": [
+      {
+        "id": 1062011,
+        "position": 1,
+        "title": "Selvstudie uge 41: Kom i gang med React",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178052,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1062011",
+        "page_url": "selvstudie-uge-41-kom-i-gang-med-react",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/selvstudie-uge-41-kom-i-gang-med-react",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178053,
@@ -1840,23 +2147,23 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 6,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178053/items",
     "items": [
       {
         "id": 1018727,
         "position": 1,
-        "title": "Plan for NYCH 1 - Byg et chatbot UI i Figma",
+        "title": "Plan for Figma-dag - Byg et chatbot UI i Figma",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178053,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018727",
-        "page_url": "plan-for-nych-1-byg-et-chatbot-ui-i-figma",
+        "page_url": "plan-for-figma-dag-byg-et-chatbot-ui-i-figma",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-nych-1-byg-et-chatbot-ui-i-figma",
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-figma-dag-byg-et-chatbot-ui-i-figma",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1870,7 +2177,24 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178053,
-        "published": false,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1062869,
+        "position": 3,
+        "title": "Øvelsesbeskrivelse",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178053,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1062869",
+        "external_url": "https://www.figma.com/deck/Sqlm521L1lVtE2NT2KMBdV",
+        "new_tab": true,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1878,13 +2202,47 @@
       },
       {
         "id": 1018729,
-        "position": 3,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178053,
-        "published": false,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1062870,
+        "position": 5,
+        "title": "Jeres udgangspunkt - Kopier framen fra denne fil over i jeres Figma dokument",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178053,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1062870",
+        "external_url": "https://www.figma.com/design/sN1FPOFeBI2tjrfLE7Ell5/Tekster?node-id=0-1&t=EkjdS0t3t5Do10mY-1",
+        "new_tab": true,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1062871,
+        "position": 6,
+        "title": "Færdig chatbot (Opslagsværk til inspiration)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178053,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1062871",
+        "external_url": "https://www.figma.com/design/yXTVBwDuFsHTVgz0q85Nrx/Chatbot-demo?node-id=2-432&t=6Y64oPYKjmaGnyoQ-1",
+        "new_tab": true,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1901,10 +2259,29 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178054/items",
-    "items": []
+    "items": [
+      {
+        "id": 1062697,
+        "position": 1,
+        "title": "Selvstudie uge 41: Kom i gang med React",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178054,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1062697",
+        "page_url": "selvstudie-uge-41-kom-i-gang-med-react",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/selvstudie-uge-41-kom-i-gang-med-react",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178055,
@@ -1915,7 +2292,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178055/items",
     "items": [
@@ -1931,7 +2308,7 @@
         "page_url": "plan-for-race-8-thinking-in-react",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-8-thinking-in-react",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -1976,8 +2353,8 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178056/items",
     "items": [
       {
@@ -1992,7 +2369,7 @@
         "page_url": "plan-for-dob-9-react-state-and-routing-med-react-router",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-9-react-state-and-routing-med-react-router",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2006,15 +2383,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178056,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018735,
+        "id": 1066870,
         "position": 3,
+        "title": "DOB 9 - React state og routing - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178056,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1066870",
+        "content_id": 1716403,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1716403",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 9 - React state og routing - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018735,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -2029,44 +2425,30 @@
     ]
   },
   {
-    "id": 178057,
-    "position": 34,
-    "name": "Forberedelse - Selvstudium - 08-10-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178057/items",
-    "items": []
-  },
-  {
     "id": 178058,
-    "position": 35,
-    "name": "HEOE 1 - Informationsarkitektur & accessibility - 09-10-2026",
+    "position": 34,
+    "name": "HEOE 1 - Informationsarkitektur & accessibility - 08-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 6,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178058/items",
     "items": [
       {
         "id": 1018736,
         "position": 1,
-        "title": "Plan for NYCH 2 - Informationsarkitektur & accessibility",
+        "title": "Plan for HEOE 1 - Informationsarkitektur & accessibility",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178058,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018736",
-        "page_url": "plan-for-nych-2-informationsarkitektur-and-accessibility",
+        "page_url": "plan-for-heoe-1-informationsarkitektur-and-accessibility",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-nych-2-informationsarkitektur-and-accessibility",
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-heoe-1-informationsarkitektur-and-accessibility",
         "published": false,
         "unpublishable": true,
         "content_details": {
@@ -2081,23 +2463,133 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178058,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018738,
+        "id": 1066448,
         "position": 3,
-        "title": "Opgaver",
+        "title": "UX session 2.pdf",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178058,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1066448",
+        "content_id": 1715112,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1715112",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "UX session 2.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018738,
+        "position": 4,
+        "title": "Opgaver etc",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178058,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1066446,
+        "position": 5,
+        "title": "Cheat_Sheet_ARIA_EAAA_AI.docx",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178058,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1066446",
+        "content_id": 1715110,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1715110",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Cheat_Sheet_ARIA_EAAA_AI.docx",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1066447,
+        "position": 6,
+        "title": "Cheat_Sheet_Information_Architecture_EAAA_AI.docx",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178058,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1066447",
+        "content_id": 1715111,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1715111",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Cheat_Sheet_Information_Architecture_EAAA_AI.docx",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      }
+    ]
+  },
+  {
+    "id": 178057,
+    "position": 35,
+    "name": "Forberedelse - Gruppearbejde - 09-10-2026",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": true,
+    "items_count": 2,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178057/items",
+    "items": [
+      {
+        "id": 1065434,
+        "position": 1,
+        "title": "Bordgrupper uge 41.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178057,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065434",
+        "content_id": 1713898,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713898",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Bordgrupper uge 41.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1066269,
+        "position": 2,
+        "title": "Gruppearbejde uge 41: Byg en AMAbot showcase med React",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178057,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1066269",
+        "content_id": 60157,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60157",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "due_at": "2026-10-09T12:00:00Z",
+          "points_possible": 100,
           "locked_for_user": false
         }
       }
@@ -2126,8 +2618,8 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178060/items",
     "items": [
       {
@@ -2142,7 +2634,7 @@
         "page_url": "plan-for-dob-10-data-fetching-og-mutation-via-supabase",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-10-data-fetching-og-mutation-via-supabase",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2156,15 +2648,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178060,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018741,
+        "id": 1068356,
         "position": 3,
+        "title": "DOB 10 - Data fetching og mutations med Supabase - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178060,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068356",
+        "content_id": 1718378,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1718378",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 10 - Data fetching og mutations med Supabase - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018741,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -2187,23 +2698,23 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 11,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178061/items",
     "items": [
       {
-        "id": 1018742,
+        "id": 1068212,
         "position": 1,
-        "title": "Plan for MAGL 1 - SQL intro via Supabase",
+        "title": "Plan: Introduktion til kurset, databasemodellering og SQL",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178061,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018742",
-        "page_url": "plan-for-magl-1-sql-intro-via-supabase",
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068212",
+        "page_url": "plan-introduktion-til-kurset-databasemodellering-og-sql",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-magl-1-sql-intro-via-supabase",
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-introduktion-til-kurset-databasemodellering-og-sql",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2217,16 +2728,138 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178061,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018744,
+        "id": 1068209,
         "position": 3,
+        "title": "Slides: Introduktion til kurset, databasemodellering og SQL",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178061,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068209",
+        "content_id": 1718535,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1718535",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "WEB-E26-session1-pres1.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018744,
+        "position": 4,
         "title": "Opgaver",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178061,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1068213,
+        "position": 5,
+        "title": "Arbejdsark: Introduktion til kurset, databasemodellering og SQL",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178061,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068213",
+        "page_url": "arbejdsark-introduktion-til-kurset-databasemodellering-og-sql",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/arbejdsark-introduktion-til-kurset-databasemodellering-og-sql",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1068211,
+        "position": 6,
+        "title": "Quiz 1: Tabeller, nøgler og SELECT",
+        "indent": 1,
+        "quiz_lti": true,
+        "type": "Assignment",
+        "module_id": 178061,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068211",
+        "content_id": 60210,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60210",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "unlock_at": "2026-10-14T09:00:00Z",
+          "points_possible": 10,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1068063,
+        "position": 7,
+        "title": "Resourcer",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178061,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1068919,
+        "position": 8,
+        "title": "seed.sql",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178061,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068919",
+        "content_id": 1718912,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1718912",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "seed.sql",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1068918,
+        "position": 9,
+        "title": "schema.sql",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178061,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068918",
+        "content_id": 1718911,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1718911",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "schema.sql",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1068214,
+        "position": 10,
+        "title": "Teacher-only",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
@@ -2236,22 +2869,100 @@
         "content_details": {
           "locked_for_user": false
         }
+      },
+      {
+        "id": 1068215,
+        "position": 11,
+        "title": "Code-along-guide: Introduktion til kurset, databasemodellering og SQL",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178061,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068215",
+        "content_id": 1718217,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1718217",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "WEB-E26-session1-teacher-code-along.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
       }
     ]
   },
   {
     "id": 178062,
     "position": 39,
-    "name": "Forberedelse - Selvstudium - 15-10-2026",
+    "name": "Forberedelse - Gruppearbejde - 15-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178062/items",
-    "items": []
+    "items": [
+      {
+        "id": 1068037,
+        "position": 1,
+        "title": "Forberedelse Til Fredag (Individuel)",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178062,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068037",
+        "content_id": 60208,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60208",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "unlock_at": "2026-10-11T22:00:00Z",
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1068039,
+        "position": 2,
+        "title": "Gruppearbejde 2: Modeller jeres første database",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178062,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1068039",
+        "content_id": 60209,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60209",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "due_at": "2026-10-15T21:59:00Z",
+          "unlock_at": "2026-10-11T22:00:00Z",
+          "points_possible": 0,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1067980,
+        "position": 3,
+        "title": "Bordgrupper uge 42.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178062,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1067980",
+        "content_id": 1713903,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713903",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Bordgrupper uge 42.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178063,
@@ -2262,23 +2973,23 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 6,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178063/items",
     "items": [
       {
-        "id": 1018745,
+        "id": 1069641,
         "position": 1,
-        "title": "Plan for MAGL 2 - Express API setup",
+        "title": "Plan: CRUD og SQL fra en backend",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178063,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018745",
-        "page_url": "plan-for-magl-2-express-api-setup",
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1069641",
+        "page_url": "plan-crud-og-sql-fra-en-backend",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-magl-2-express-api-setup",
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-crud-og-sql-fra-en-backend",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2286,74 +2997,234 @@
       },
       {
         "id": 1018746,
-        "position": 2,
+        "position": 3,
         "title": "Præsentationer",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178063,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
+        "id": 1069639,
+        "position": 4,
+        "title": "Slides: CRUD og SQL fra en backend",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178063,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1069639",
+        "content_id": 1719757,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1719757",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "WEB-E26-session2-pres2.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
         "id": 1018747,
-        "position": 3,
+        "position": 5,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178063,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1069640,
+        "position": 6,
+        "title": "Arbejdsark: CRUD og SQL fra en backend",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178063,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1069640",
+        "page_url": "arbejdsark-crud-og-sql-fra-en-backend",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/arbejdsark-crud-og-sql-fra-en-backend",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1069726,
+        "position": 7,
+        "title": "Quiz 2: CRUD og SQL fra en backend",
+        "indent": 1,
+        "quiz_lti": true,
+        "type": "Assignment",
+        "module_id": 178063,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1069726",
+        "content_id": 60229,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60229",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "unlock_at": "2026-10-16T08:35:00Z",
+          "points_possible": 10,
           "locked_for_user": false
         }
       }
     ]
   },
   {
-    "id": 178064,
+    "id": 178068,
     "position": 41,
-    "name": "Forberedelse - Selvstudium - 19-10-2026",
+    "name": "HEOE 2 - Design tokens og theming - 19-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178064/items",
-    "items": []
+    "published": true,
+    "items_count": 6,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178068/items",
+    "items": [
+      {
+        "id": 1018754,
+        "position": 1,
+        "title": "Plan for HEOE 2 - Design tokens og theming",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178068,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018754",
+        "page_url": "plan-for-heoe-2-design-tokens-og-theming",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-heoe-2-design-tokens-og-theming",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018755,
+        "position": 2,
+        "title": "Præsentationer",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178068,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070425,
+        "position": 3,
+        "title": "UX session 2 tokens.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178068,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070425",
+        "content_id": 1720715,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1720715",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "UX session 2 tokens.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018756,
+        "position": 4,
+        "title": "Opgaver",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178068,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070423,
+        "position": 5,
+        "title": "Oevelser-chatbot.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178068,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070423",
+        "content_id": 1720714,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1720714",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Oevelser-chatbot.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070424,
+        "position": 6,
+        "title": "Oevelser-eget-projekt.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178068,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070424",
+        "content_id": 1720713,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1720713",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "Oevelser-eget-projekt.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178065,
     "position": 42,
-    "name": "MAGL 3 - Læs og skriv beskeder via SQL - 20-10-2026",
+    "name": "MAGL 3 - CREATE TABLE, JOINS og Normalisering - 20-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 12,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178065/items",
     "items": [
       {
-        "id": 1018748,
+        "id": 1070789,
         "position": 1,
-        "title": "Plan for MAGL 3 - Læs og skriv beskeder via SQL",
+        "title": "Plan: CREATE TABLE, JOINs og normalisering",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178065,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018748",
-        "page_url": "plan-for-magl-3-laes-og-skriv-beskeder-via-sql",
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070789",
+        "page_url": "plan-create-table-joins-og-normalisering",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-magl-3-laes-og-skriv-beskeder-via-sql",
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-create-table-joins-og-normalisering",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2361,8 +3232,131 @@
       },
       {
         "id": 1018749,
-        "position": 2,
+        "position": 3,
         "title": "Præsentationer",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178065,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070783,
+        "position": 4,
+        "title": "Slides: CREATE TABLE, JOINs og normalisering",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070783",
+        "content_id": 1721294,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1721294",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "WEB-E26-session3-pres3.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018750,
+        "position": 5,
+        "title": "Opgaver",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178065,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1069659,
+        "position": 6,
+        "title": "Individuel opgave 1: Databasedesign og normalisering",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1069659",
+        "content_id": 60227,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60227",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "due_at": "2026-10-19T21:59:00Z",
+          "unlock_at": "2026-10-15T22:00:00Z",
+          "points_possible": 0,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1069660,
+        "position": 7,
+        "title": "Forberedelse 2: Læs op på SQL",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1069660",
+        "content_id": 60228,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60228",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "due_at": "2026-10-19T21:59:00Z",
+          "unlock_at": "2026-10-15T22:00:00Z",
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070782,
+        "position": 8,
+        "title": "Quiz 3: JOINs og normalisering",
+        "indent": 1,
+        "quiz_lti": true,
+        "type": "Assignment",
+        "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070782",
+        "content_id": 60266,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60266",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "unlock_at": "2026-10-20T13:05:00Z",
+          "points_possible": 10,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070784,
+        "position": 9,
+        "title": "Arbejdsark: CREATE TABLE, JOINs og normalisering",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070784",
+        "page_url": "arbejdsark-create-table-joins-og-normalisering",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/arbejdsark-create-table-joins-og-normalisering",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070785,
+        "position": 10,
+        "title": "Teacher-only",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
@@ -2374,16 +3368,62 @@
         }
       },
       {
-        "id": 1018750,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
+        "id": 1070786,
+        "position": 11,
+        "title": "Code-along-guide: CREATE TABLE, JOINs og normalisering",
+        "indent": 1,
         "quiz_lti": false,
-        "type": "SubHeader",
+        "type": "File",
         "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070786",
+        "content_id": 1721296,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1721296",
         "published": false,
-        "unpublishable": true,
+        "unpublishable": false,
         "content_details": {
+          "locked": true,
+          "display_name": "WEB-E26-session3-teacher-code-along.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070787,
+        "position": 12,
+        "title": "Facit normalisering: CREATE TABLE, JOINs og normalisering",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070787",
+        "content_id": 1721297,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1721297",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "WEB-E26-session3-teacher-facit-normalisering.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070788,
+        "position": 13,
+        "title": "Facit opgave: CREATE TABLE, JOINs og normalisering",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178065,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070788",
+        "content_id": 1721298,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1721298",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "WEB-E26-session3-teacher-facit-opgave.pdf",
+          "thumbnail_url": null,
           "locked_for_user": false
         }
       }
@@ -2392,29 +3432,29 @@
   {
     "id": 178066,
     "position": 43,
-    "name": "DOB 11 - AI integration via Mistral API - 21-10-2026",
+    "name": "DOB 11 - AI integration via LLM API - 21-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 4,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178066/items",
     "items": [
       {
         "id": 1018751,
         "position": 1,
-        "title": "Plan for DOB 11 - AI integration via Mistral API",
+        "title": "Plan for DOB 11 - AI integration via LLM API",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178066,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018751",
-        "page_url": "plan-for-dob-11-ai-integration-via-mistral-api",
+        "page_url": "plan-for-dob-11-ai-integration-via-llm-api",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-11-ai-integration-via-mistral-api",
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-11-ai-integration-via-llm-api",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2428,15 +3468,34 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178066,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018753,
+        "id": 1071778,
         "position": 3,
+        "title": "DOB 11 - AI integration via LLM API - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178066,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1071778",
+        "content_id": 1722880,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1722880",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 11 - AI integration via LLM API - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018753,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -2459,65 +3518,23 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178067/items",
-    "items": []
-  },
-  {
-    "id": 178068,
-    "position": 45,
-    "name": "HEOE 3 - Design tokens og theming - 23-10-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178068/items",
     "items": [
       {
-        "id": 1018754,
+        "id": 1071526,
         "position": 1,
-        "title": "Plan for NYCH 3 - Design tokens og theming",
+        "title": "Forberedelse til MAGL 4",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
-        "module_id": 178068,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018754",
-        "page_url": "plan-for-nych-3-design-tokens-og-theming",
+        "module_id": 178067,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1071526",
+        "page_url": "forberedelse-til-magl-4",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-nych-3-design-tokens-og-theming",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018755,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178068,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018756,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178068,
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/forberedelse-til-magl-4",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2527,17 +3544,99 @@
   },
   {
     "id": 178069,
+    "position": 45,
+    "name": "Forberedelse - Gruppearbejde - 23-10-2026",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": true,
+    "items_count": 1,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178069/items",
+    "items": [
+      {
+        "id": 1071524,
+        "position": 1,
+        "title": "Gruppearbejde 3: Normaliser en database",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178069,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1071524",
+        "content_id": 60265,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60265",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "due_at": "2026-10-26T11:59:00Z",
+          "unlock_at": "2026-10-18T22:00:00Z",
+          "points_possible": 0,
+          "locked_for_user": false
+        }
+      }
+    ]
+  },
+  {
+    "id": 178073,
     "position": 46,
-    "name": "Forberedelse - Selvstudium - 26-10-2026",
+    "name": "HEOE 3 - Planlægning af designprocesser - 26-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": false,
-    "items_count": 0,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178069/items",
-    "items": []
+    "items_count": 3,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178073/items",
+    "items": [
+      {
+        "id": 1018763,
+        "position": 1,
+        "title": "Plan for HEOE 3 - Planlægning af designprocesser",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178073,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018763",
+        "page_url": "plan-for-heoe-3-planlaegning-af-designprocesser",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-heoe-3-planlaegning-af-designprocesser",
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018764,
+        "position": 2,
+        "title": "Præsentationer",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178073,
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018765,
+        "position": 3,
+        "title": "Opgaver",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178073,
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178070,
@@ -2548,8 +3647,8 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
+    "published": true,
+    "items_count": 5,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178070/items",
     "items": [
       {
@@ -2592,7 +3691,45 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178070,
-        "published": false,
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1070780,
+        "position": 4,
+        "title": "Gruppearbejde 3: Normaliser en database",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1070780",
+        "content_id": 60265,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60265",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "due_at": "2026-10-26T11:59:00Z",
+          "unlock_at": "2026-10-18T22:00:00Z",
+          "points_possible": 0,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1071535,
+        "position": 5,
+        "title": "Forberedelse til MAGL 4",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1071535",
+        "page_url": "forberedelse-til-magl-4",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/forberedelse-til-magl-4",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2609,7 +3746,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178071/items",
     "items": [
@@ -2676,70 +3813,9 @@
     "items": []
   },
   {
-    "id": 178073,
+    "id": 178064,
     "position": 50,
-    "name": "HEOE 4 - Planlægning af designprocesser - 30-10-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178073/items",
-    "items": [
-      {
-        "id": 1018763,
-        "position": 1,
-        "title": "Plan for NYCH 4 - Planlægning af designprocesser",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "Page",
-        "module_id": 178073,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018763",
-        "page_url": "plan-for-nych-4-planlaegning-af-designprocesser",
-        "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-nych-4-planlaegning-af-designprocesser",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018764,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178073,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018765,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178073,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      }
-    ]
-  },
-  {
-    "id": 178074,
-    "position": 51,
-    "name": "Forberedelse - Selvstudium - 02-11-2026",
+    "name": "Forberedelse - Gruppearbejde - 30-10-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -2747,8 +3823,69 @@
     "prerequisite_module_ids": [],
     "published": false,
     "items_count": 0,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178074/items",
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178064/items",
     "items": []
+  },
+  {
+    "id": 178078,
+    "position": 51,
+    "name": "HEOE 4 - Brugertest til validering af en løsning - 02-11-2026",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": false,
+    "items_count": 3,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178078/items",
+    "items": [
+      {
+        "id": 1018772,
+        "position": 1,
+        "title": "Plan for HEOE 4 - Brugertest til validering af en løsning",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178078,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018772",
+        "page_url": "plan-for-heoe-4-brugertest-til-validering-af-en-losning",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-heoe-4-brugertest-til-validering-af-en-losning",
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018773,
+        "position": 2,
+        "title": "Præsentationer",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178078,
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018774,
+        "position": 3,
+        "title": "Opgaver",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178078,
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178075,
@@ -2759,7 +3896,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178075/items",
     "items": [
@@ -2812,15 +3949,29 @@
     ]
   },
   {
-    "id": 178076,
+    "id": 178074,
     "position": 53,
-    "name": "DOB 12 - Test, kvalitetssikring og deployment - 04-11-2026",
+    "name": "Forberedelse - Selvstudium - 04-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": false,
+    "items_count": 0,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178074/items",
+    "items": []
+  },
+  {
+    "id": 178076,
+    "position": 54,
+    "name": "DOB 12 - Test, kvalitetssikring og deployment - 05-11-2026",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178076/items",
     "items": [
@@ -2836,7 +3987,7 @@
         "page_url": "plan-for-dob-12-test-kvalitetssikring-og-deployment",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-dob-12-test-kvalitetssikring-og-deployment",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -2874,8 +4025,8 @@
   },
   {
     "id": 178077,
-    "position": 54,
-    "name": "Forberedelse - Selvstudium - 05-11-2026",
+    "position": 55,
+    "name": "Forberedelse - Gruppearbejde - 06-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -2885,67 +4036,6 @@
     "items_count": 0,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178077/items",
     "items": []
-  },
-  {
-    "id": 178078,
-    "position": 55,
-    "name": "HEOE 5 - Brugertest til validering af en løsning - 06-11-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 3,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178078/items",
-    "items": [
-      {
-        "id": 1018772,
-        "position": 1,
-        "title": "Plan for NYCH 5 - Brugertest til validering af en løsning",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "Page",
-        "module_id": 178078,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018772",
-        "page_url": "plan-for-nych-5-brugertest-til-validering-af-en-losning",
-        "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-nych-5-brugertest-til-validering-af-en-losning",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018773,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178078,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018774,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178078,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      }
-    ]
   },
   {
     "id": 178079,
@@ -3084,23 +4174,9 @@
     ]
   },
   {
-    "id": 178082,
-    "position": 59,
-    "name": "Forberedelse - Selvstudium - 12-11-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178082/items",
-    "items": []
-  },
-  {
     "id": 178083,
-    "position": 60,
-    "name": "MAGL 6 - Data isolation for bruger data - 13-11-2026",
+    "position": 59,
+    "name": "MAGL 6 - Data isolation for bruger data - 12-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -3157,6 +4233,20 @@
         }
       }
     ]
+  },
+  {
+    "id": 178082,
+    "position": 60,
+    "name": "Forberedelse - Gruppearbejde - 13-11-2026",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": false,
+    "items_count": 0,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178082/items",
+    "items": []
   },
   {
     "id": 178084,

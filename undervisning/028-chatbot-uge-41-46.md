@@ -1,6 +1,15 @@
 # ➡️ Chatbot (Uge 41-46)
 
-*Modulet har endnu ikke indhold i Canvas.*
+## Materialer
+
+### Bordgrupper
+
+- [Bordgrupper uge 41.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065424)
+- [Bordgrupper uge 42.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065429)
+- [Bordgrupper uge 43.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065428)
+- [Bordgrupper uge 44.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065427)
+- [Bordgrupper uge 45.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065426)
+- [Bordgrupper uge 46.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065425)
 
 ---
 

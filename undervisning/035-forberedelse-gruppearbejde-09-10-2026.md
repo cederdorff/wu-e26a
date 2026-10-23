@@ -1,6 +1,9 @@
-# Forberedelse - Selvstudium - 08-10-2026
+# Forberedelse - Gruppearbejde - 09-10-2026
 
-*Modulet har endnu ikke indhold i Canvas.*
+## Materialer
+
+- [Bordgrupper uge 41.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065434)
+- Gruppearbejde uge 41: Byg en AMAbot showcase med React — Assignment
 
 ---
 
@@ -10,8 +13,8 @@
 ```yaml
 canvas_course_id: 32059
 canvas_module_id: 178057
-canvas_module_position: 34
-canvas_module_published: false
+canvas_module_position: 35
+canvas_module_published: true
 canvas_module_item_id: null
 canvas_module_item_position: null
 canvas_page_id: null

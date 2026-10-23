@@ -1,4 +1,4 @@
-# DOB + RACE 8 - Client/Server præsentationer - 30-09-2026
+# DOB + RACE + MAGL 8 - Client/Server præsentationer - 30-09-2026
 
 <link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
 
@@ -29,9 +29,13 @@ Og så inddeles I i grupper, som hver får til opgave at forberede en præsentat
 
 ## Materialer
 
-## Præsentationer
+### Præsentationer
 
-## Opgaver
+- [DOB 8 - Fernisering & præsentationer - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1062698)
+
+### Opgaver
+
+- [DOB 8 - Fernisering & præsentationer - worksheet.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1061852)
 
 ---
 
@@ -46,10 +50,10 @@ canvas_module_published: true
 canvas_module_item_id: 1018724
 canvas_module_item_position: 1
 canvas_page_id: 200721
-canvas_page_slug: "plan-for-dob-+-race-8-client-slash-server-praesentationer"
-canvas_page_title: "Plan for DOB + RACE 8 - Client/Server præsentationer"
+canvas_page_slug: "plan-for-dob-+-race-+-magl-8-client-slash-server-praesentationer"
+canvas_page_title: "Plan for DOB + RACE + MAGL 8 - Client/Server præsentationer"
 canvas_page_published: true
-canvas_updated_at: "2026-09-21T06:58:23Z"
+canvas_updated_at: "2026-09-30T08:10:54Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018724"
 local_status: mirrored
 ```

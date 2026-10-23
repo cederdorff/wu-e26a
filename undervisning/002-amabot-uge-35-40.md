@@ -21,6 +21,8 @@ Tech stack:
 
 ## Materialer
 
+- [Oversigt over alle øvelser (AMAbot og students)](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/README.md)
+
 ### Bordgrupper
 
 - [Bordgrupper uge 35-36.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1037530)

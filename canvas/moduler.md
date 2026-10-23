@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-09-23T08:18:35.517Z
+Senest hentet: 2026-10-23T07:19:40.005Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -31,6 +31,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/002-amabot-uge-35-40.md) · publiceret
 
 - [AMAbot projektbeskrivelse](../undervisning/002-amabot-uge-35-40.md)
+- [Oversigt over alle øvelser (AMAbot og students)](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/README.md)
 
 ### Bordgrupper
 
@@ -124,7 +125,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/011-forberedelse-selvstudium-08-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
-- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/092-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026
 
@@ -143,7 +144,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/013-forberedelse-selvstudium-10-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
-- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/092-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 014 · RACE 4 - Persistens, JSON og File System - 11-09-2026
 
@@ -208,7 +209,6 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
-- [DOB 6 - Promises og async await - slides - no quiz.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1057680)
 - [DOB 6 - Promises og async await - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1057769)
 
 ### Opgaver
@@ -228,6 +228,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/023-forberedelse-selvstudium-24-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
+- [1. REST API-øvelse: Arkitektur — routes, data, controllers og filtrering](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md)
+- [2. Øvelse 7: AMAbotten i lag — routes og data-modul — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-arkitektur.md)
+- [3. Øvelse 8: AMAbotten får en frontend — fetch og DOM — byg en rigtig frontend til jeres AMAbot med fetch(), i eget tempo](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/fetch-dom-amabot.md)
 
 ## 024 · RACE 7 - Sikkerhed og Error Handling - 25-09-2026
 
@@ -247,6 +250,8 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
+- [DOB 7 - Client-side error handling - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1060324)
+
 ### Opgaver
 
 ## 026 · Forberedelse - Selvstudium - 29-09-2026
@@ -254,48 +259,67 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/026-forberedelse-selvstudium-29-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
+- [Øvelse 8: AMAbotten får en frontend — fetch og DOM](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/fetch-dom-amabot.md)
+- [Øvelse 9: AMAbotten bliver sikker og fejltolerant](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md)
+- [Oversigt over alle øvelser (AMAbot og Students)](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/README.md)
 
-## 027 · DOB + RACE 8 - Client/Server præsentationer - 30-09-2026
+## 027 · DOB + RACE + MAGL 8 - Client/Server præsentationer - 30-09-2026
 
-[Lokal fil](../undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md) · publiceret
+[Lokal fil](../undervisning/027-dob-race-magl-8-client-server-praesentationer-30-09-2026.md) · publiceret
 
-- [Plan for DOB + RACE 8 - Client/Server præsentationer](../undervisning/027-dob-race-8-client-server-praesentationer-30-09-2026.md)
+- [Plan for DOB + RACE + MAGL 8 - Client/Server præsentationer](../undervisning/027-dob-race-magl-8-client-server-praesentationer-30-09-2026.md)
 
 ### Præsentationer
 
+- [DOB 8 - Fernisering & præsentationer - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1062698)
+
 ### Opgaver
+
+- [DOB 8 - Fernisering & præsentationer - worksheet.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1061852)
 
 ## 028 · ➡️ Chatbot (Uge 41-46)
 
 [Lokal fil](../undervisning/028-chatbot-uge-41-46.md) · publiceret
 
-*Ingen Canvas-elementer.*
+### Bordgrupper
+
+- [Bordgrupper uge 41.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065424)
+- [Bordgrupper uge 42.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065429)
+- [Bordgrupper uge 43.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065428)
+- [Bordgrupper uge 44.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065427)
+- [Bordgrupper uge 45.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065426)
+- [Bordgrupper uge 46.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065425)
 
 ## 029 · Forberedelse - Selvstudium - 01-10-2026
 
-[Lokal fil](../undervisning/029-forberedelse-selvstudium-01-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/029-forberedelse-selvstudium-01-10-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Selvstudie uge 41: Kom i gang med React](../undervisning/031-forberedelse-selvstudium-05-10-2026.md)
 
 ## 030 · NKKR 1 - Byg et chatbot UI i Figma - 02-10-2026
 
-[Lokal fil](../undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md) · publiceret
 
-- [Plan for NYCH 1 - Byg et chatbot UI i Figma](../undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md)
+- [Plan for Figma-dag - Byg et chatbot UI i Figma](../undervisning/030-nkkr-1-byg-et-chatbot-ui-i-figma-02-10-2026.md)
 
 ### Præsentationer
 
+- [Øvelsesbeskrivelse](https://www.figma.com/deck/Sqlm521L1lVtE2NT2KMBdV)
+
 ### Opgaver
+
+- [Jeres udgangspunkt - Kopier framen fra denne fil over i jeres Figma dokument](https://www.figma.com/design/sN1FPOFeBI2tjrfLE7Ell5/Tekster?node-id=0-1&t=EkjdS0t3t5Do10mY-1)
+- [Færdig chatbot (Opslagsværk til inspiration)](https://www.figma.com/design/yXTVBwDuFsHTVgz0q85Nrx/Chatbot-demo?node-id=2-432&t=6Y64oPYKjmaGnyoQ-1)
 
 ## 031 · Forberedelse - Selvstudium - 05-10-2026
 
-[Lokal fil](../undervisning/031-forberedelse-selvstudium-05-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/031-forberedelse-selvstudium-05-10-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Selvstudie uge 41: Kom i gang med React](../undervisning/031-forberedelse-selvstudium-05-10-2026.md)
 
 ## 032 · RACE 8 - Thinking in React - 06-10-2026
 
-[Lokal fil](../undervisning/032-race-8-thinking-in-react-06-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/032-race-8-thinking-in-react-06-10-2026.md) · publiceret
 
 - [Plan for RACE 8 - Thinking in React](../undervisning/032-race-8-thinking-in-react-06-10-2026.md)
 
@@ -305,29 +329,37 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 033 · DOB 9 - React state & routing med React Router - 07-10-2026
 
-[Lokal fil](../undervisning/033-dob-9-react-state-routing-med-react-router-07-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/033-dob-9-react-state-routing-med-react-router-07-10-2026.md) · publiceret
 
 - [Plan for DOB 9 - React state & routing med React Router](../undervisning/033-dob-9-react-state-routing-med-react-router-07-10-2026.md)
 
 ### Præsentationer
 
+- [DOB 9 - React state og routing - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1066870)
+
 ### Opgaver
 
-## 034 · Forberedelse - Selvstudium - 08-10-2026
+## 034 · HEOE 1 - Informationsarkitektur & accessibility - 08-10-2026
 
-[Lokal fil](../undervisning/034-forberedelse-selvstudium-08-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/034-heoe-1-informationsarkitektur-accessibility-08-10-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
-
-## 035 · HEOE 1 - Informationsarkitektur & accessibility - 09-10-2026
-
-[Lokal fil](../undervisning/035-heoe-1-informationsarkitektur-accessibility-09-10-2026.md) · upubliceret
-
-- [Plan for NYCH 2 - Informationsarkitektur & accessibility](../undervisning/035-heoe-1-informationsarkitektur-accessibility-09-10-2026.md)
+- [Plan for HEOE 1 - Informationsarkitektur & accessibility](../undervisning/034-heoe-1-informationsarkitektur-accessibility-08-10-2026.md)
 
 ### Præsentationer
 
-### Opgaver
+- [UX session 2.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1066448)
+
+### Opgaver etc
+
+- [Cheat_Sheet_ARIA_EAAA_AI.docx](https://eaaa.instructure.com/courses/32059/modules/items/1066446)
+- [Cheat_Sheet_Information_Architecture_EAAA_AI.docx](https://eaaa.instructure.com/courses/32059/modules/items/1066447)
+
+## 035 · Forberedelse - Gruppearbejde - 09-10-2026
+
+[Lokal fil](../undervisning/035-forberedelse-gruppearbejde-09-10-2026.md) · publiceret
+
+- [Bordgrupper uge 41.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1065434)
+- Gruppearbejde uge 41: Byg en AMAbot showcase med React — Assignment
 
 ## 036 · Forberedelse - Selvstudium - 12-10-2026
 
@@ -337,91 +369,138 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 037 · DOB 10 - Data fetching og mutation via Supabase - 13-10-2026
 
-[Lokal fil](../undervisning/037-dob-10-data-fetching-og-mutation-via-supabase-13-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/037-dob-10-data-fetching-og-mutation-via-supabase-13-10-2026.md) · publiceret
 
 - [Plan for DOB 10 - Data fetching og mutation via Supabase](../undervisning/037-dob-10-data-fetching-og-mutation-via-supabase-13-10-2026.md)
 
 ### Præsentationer
 
+- [DOB 10 - Data fetching og mutations med Supabase - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1068356)
+
 ### Opgaver
 
 ## 038 · MAGL 1 - SQL intro via Supabase - 14-10-2026
 
-[Lokal fil](../undervisning/038-magl-1-sql-intro-via-supabase-14-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/038-magl-1-sql-intro-via-supabase-14-10-2026.md) · publiceret
 
-- [Plan for MAGL 1 - SQL intro via Supabase](../undervisning/038-magl-1-sql-intro-via-supabase-14-10-2026.md)
+- [Plan: Introduktion til kurset, databasemodellering og SQL](../undervisning/038-magl-1-sql-intro-via-supabase-14-10-2026.md)
 
 ### Præsentationer
 
+- [Slides: Introduktion til kurset, databasemodellering og SQL](https://eaaa.instructure.com/courses/32059/modules/items/1068209)
+
 ### Opgaver
 
-## 039 · Forberedelse - Selvstudium - 15-10-2026
+- [Arbejdsark: Introduktion til kurset, databasemodellering og SQL](../undervisning/089-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md)
+- Quiz 1: Tabeller, nøgler og SELECT — Assignment
 
-[Lokal fil](../undervisning/039-forberedelse-selvstudium-15-10-2026.md) · upubliceret
+### Resourcer
 
-*Ingen Canvas-elementer.*
+- [seed.sql](https://eaaa.instructure.com/courses/32059/modules/items/1068919)
+- [schema.sql](https://eaaa.instructure.com/courses/32059/modules/items/1068918)
+
+### Teacher-only
+
+- [Code-along-guide: Introduktion til kurset, databasemodellering og SQL](https://eaaa.instructure.com/courses/32059/modules/items/1068215)
+
+## 039 · Forberedelse - Gruppearbejde - 15-10-2026
+
+[Lokal fil](../undervisning/039-forberedelse-gruppearbejde-15-10-2026.md) · publiceret
+
+- Forberedelse Til Fredag (Individuel) — Assignment
+- Gruppearbejde 2: Modeller jeres første database — Assignment
+- [Bordgrupper uge 42.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1067980)
 
 ## 040 · MAGL 2 - Express API setup - 16-10-2026
 
-[Lokal fil](../undervisning/040-magl-2-express-api-setup-16-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/040-magl-2-express-api-setup-16-10-2026.md) · publiceret
 
-- [Plan for MAGL 2 - Express API setup](../undervisning/040-magl-2-express-api-setup-16-10-2026.md)
+- [Plan: CRUD og SQL fra en backend](../undervisning/040-magl-2-express-api-setup-16-10-2026.md)
 
 ### Præsentationer
+
+- [Slides: CRUD og SQL fra en backend](https://eaaa.instructure.com/courses/32059/modules/items/1069639)
 
 ### Opgaver
 
-## 041 · Forberedelse - Selvstudium - 19-10-2026
+- [Arbejdsark: CRUD og SQL fra en backend](../undervisning/088-arbejdsark-crud-og-sql-fra-en-backend.md)
+- Quiz 2: CRUD og SQL fra en backend — Assignment
 
-[Lokal fil](../undervisning/041-forberedelse-selvstudium-19-10-2026.md) · upubliceret
+## 041 · HEOE 2 - Design tokens og theming - 19-10-2026
 
-*Ingen Canvas-elementer.*
+[Lokal fil](../undervisning/041-heoe-2-design-tokens-og-theming-19-10-2026.md) · publiceret
 
-## 042 · MAGL 3 - Læs og skriv beskeder via SQL - 20-10-2026
-
-[Lokal fil](../undervisning/042-magl-3-laes-og-skriv-beskeder-via-sql-20-10-2026.md) · upubliceret
-
-- [Plan for MAGL 3 - Læs og skriv beskeder via SQL](../undervisning/042-magl-3-laes-og-skriv-beskeder-via-sql-20-10-2026.md)
+- [Plan for HEOE 2 - Design tokens og theming](../undervisning/041-heoe-2-design-tokens-og-theming-19-10-2026.md)
 
 ### Præsentationer
+
+- [UX session 2 tokens.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1070425)
 
 ### Opgaver
 
-## 043 · DOB 11 - AI integration via Mistral API - 21-10-2026
+- [Oevelser-chatbot.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1070423)
+- [Oevelser-eget-projekt.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1070424)
 
-[Lokal fil](../undervisning/043-dob-11-ai-integration-via-mistral-api-21-10-2026.md) · upubliceret
+## 042 · MAGL 3 - CREATE TABLE, JOINS og Normalisering - 20-10-2026
 
-- [Plan for DOB 11 - AI integration via Mistral API](../undervisning/043-dob-11-ai-integration-via-mistral-api-21-10-2026.md)
+[Lokal fil](../undervisning/042-magl-3-create-table-joins-og-normalisering-20-10-2026.md) · publiceret
+
+- [Plan: CREATE TABLE, JOINs og normalisering](../undervisning/042-magl-3-create-table-joins-og-normalisering-20-10-2026.md)
 
 ### Præsentationer
+
+- [Slides: CREATE TABLE, JOINs og normalisering](https://eaaa.instructure.com/courses/32059/modules/items/1070783)
+
+### Opgaver
+
+- Individuel opgave 1: Databasedesign og normalisering — Assignment
+- Forberedelse 2: Læs op på SQL — Assignment
+- Quiz 3: JOINs og normalisering — Assignment
+- [Arbejdsark: CREATE TABLE, JOINs og normalisering](../undervisning/087-arbejdsark-create-table-joins-og-normalisering.md)
+
+### Teacher-only
+
+- [Code-along-guide: CREATE TABLE, JOINs og normalisering](https://eaaa.instructure.com/courses/32059/modules/items/1070786)
+- [Facit normalisering: CREATE TABLE, JOINs og normalisering](https://eaaa.instructure.com/courses/32059/modules/items/1070787)
+- [Facit opgave: CREATE TABLE, JOINs og normalisering](https://eaaa.instructure.com/courses/32059/modules/items/1070788)
+
+## 043 · DOB 11 - AI integration via LLM API - 21-10-2026
+
+[Lokal fil](../undervisning/043-dob-11-ai-integration-via-llm-api-21-10-2026.md) · publiceret
+
+- [Plan for DOB 11 - AI integration via LLM API](../undervisning/043-dob-11-ai-integration-via-llm-api-21-10-2026.md)
+
+### Præsentationer
+
+- [DOB 11 - AI integration via LLM API - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1071778)
 
 ### Opgaver
 
 ## 044 · Forberedelse - Selvstudium - 22-10-2026
 
-[Lokal fil](../undervisning/044-forberedelse-selvstudium-22-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/044-forberedelse-selvstudium-22-10-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Forberedelse til MAGL 4](../undervisning/044-forberedelse-selvstudium-22-10-2026.md)
 
-## 045 · HEOE 3 - Design tokens og theming - 23-10-2026
+## 045 · Forberedelse - Gruppearbejde - 23-10-2026
 
-[Lokal fil](../undervisning/045-heoe-3-design-tokens-og-theming-23-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/045-forberedelse-gruppearbejde-23-10-2026.md) · publiceret
 
-- [Plan for NYCH 3 - Design tokens og theming](../undervisning/045-heoe-3-design-tokens-og-theming-23-10-2026.md)
+- Gruppearbejde 3: Normaliser en database — Assignment
+
+## 046 · HEOE 3 - Planlægning af designprocesser - 26-10-2026
+
+[Lokal fil](../undervisning/046-heoe-3-planlaegning-af-designprocesser-26-10-2026.md) · upubliceret
+
+- [Plan for HEOE 3 - Planlægning af designprocesser](../undervisning/046-heoe-3-planlaegning-af-designprocesser-26-10-2026.md)
 
 ### Præsentationer
 
 ### Opgaver
 
-## 046 · Forberedelse - Selvstudium - 26-10-2026
-
-[Lokal fil](../undervisning/046-forberedelse-selvstudium-26-10-2026.md) · upubliceret
-
-*Ingen Canvas-elementer.*
-
 ## 047 · MAGL 4 - Slette oprette og redigere tråde - 27-10-2026
 
-[Lokal fil](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md) · publiceret
 
 - [Plan for MAGL 4 - Slette oprette og redigere tråde](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md)
 
@@ -429,9 +508,12 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Opgaver
 
+- Gruppearbejde 3: Normaliser en database — Assignment
+- [Forberedelse til MAGL 4](../undervisning/044-forberedelse-selvstudium-22-10-2026.md)
+
 ## 048 · RACE 9 - User authentication og login - 28-10-2026
 
-[Lokal fil](../undervisning/048-race-9-user-authentication-og-login-28-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/048-race-9-user-authentication-og-login-28-10-2026.md) · publiceret
 
 - [Plan for RACE 9 - User authentication og login](../undervisning/048-race-9-user-authentication-og-login-28-10-2026.md)
 
@@ -445,25 +527,25 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 050 · HEOE 4 - Planlægning af designprocesser - 30-10-2026
+## 050 · Forberedelse - Gruppearbejde - 30-10-2026
 
-[Lokal fil](../undervisning/050-heoe-4-planlaegning-af-designprocesser-30-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md) · upubliceret
 
-- [Plan for NYCH 4 - Planlægning af designprocesser](../undervisning/050-heoe-4-planlaegning-af-designprocesser-30-10-2026.md)
+*Ingen Canvas-elementer.*
+
+## 051 · HEOE 4 - Brugertest til validering af en løsning - 02-11-2026
+
+[Lokal fil](../undervisning/051-heoe-4-brugertest-til-validering-af-en-loesning-02-11-2026.md) · upubliceret
+
+- [Plan for HEOE 4 - Brugertest til validering af en løsning](../undervisning/051-heoe-4-brugertest-til-validering-af-en-loesning-02-11-2026.md)
 
 ### Præsentationer
 
 ### Opgaver
 
-## 051 · Forberedelse - Selvstudium - 02-11-2026
-
-[Lokal fil](../undervisning/051-forberedelse-selvstudium-02-11-2026.md) · upubliceret
-
-*Ingen Canvas-elementer.*
-
 ## 052 · RACE 10 - JWT tokens fra frontend - 03-11-2026
 
-[Lokal fil](../undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md) · publiceret
 
 - [Plan for RACE 10 - JWT tokens fra frontend](../undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md)
 
@@ -471,31 +553,27 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Opgaver
 
-## 053 · DOB 12 - Test, kvalitetssikring og deployment - 04-11-2026
+## 053 · Forberedelse - Selvstudium - 04-11-2026
 
-[Lokal fil](../undervisning/053-dob-12-test-kvalitetssikring-og-deployment-04-11-2026.md) · upubliceret
-
-- [Plan for DOB 12 - Test, kvalitetssikring og deployment](../undervisning/053-dob-12-test-kvalitetssikring-og-deployment-04-11-2026.md)
-
-### Præsentationer
-
-### Opgaver
-
-## 054 · Forberedelse - Selvstudium - 05-11-2026
-
-[Lokal fil](../undervisning/054-forberedelse-selvstudium-05-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/053-forberedelse-selvstudium-04-11-2026.md) · upubliceret
 
 *Ingen Canvas-elementer.*
 
-## 055 · HEOE 5 - Brugertest til validering af en løsning - 06-11-2026
+## 054 · DOB 12 - Test, kvalitetssikring og deployment - 05-11-2026
 
-[Lokal fil](../undervisning/055-heoe-5-brugertest-til-validering-af-en-loesning-06-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/054-dob-12-test-kvalitetssikring-og-deployment-05-11-2026.md) · publiceret
 
-- [Plan for NYCH 5 - Brugertest til validering af en løsning](../undervisning/055-heoe-5-brugertest-til-validering-af-en-loesning-06-11-2026.md)
+- [Plan for DOB 12 - Test, kvalitetssikring og deployment](../undervisning/054-dob-12-test-kvalitetssikring-og-deployment-05-11-2026.md)
 
 ### Præsentationer
 
 ### Opgaver
+
+## 055 · Forberedelse - Gruppearbejde - 06-11-2026
+
+[Lokal fil](../undervisning/055-forberedelse-gruppearbejde-06-11-2026.md) · upubliceret
+
+*Ingen Canvas-elementer.*
 
 ## 056 · Forberedelse - Selvstudium - 09-11-2026
 
@@ -523,21 +601,21 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Opgaver
 
-## 059 · Forberedelse - Selvstudium - 12-11-2026
+## 059 · MAGL 6 - Data isolation for bruger data - 12-11-2026
 
-[Lokal fil](../undervisning/059-forberedelse-selvstudium-12-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/059-magl-6-data-isolation-for-bruger-data-12-11-2026.md) · upubliceret
 
-*Ingen Canvas-elementer.*
-
-## 060 · MAGL 6 - Data isolation for bruger data - 13-11-2026
-
-[Lokal fil](../undervisning/060-magl-6-data-isolation-for-bruger-data-13-11-2026.md) · upubliceret
-
-- [Plan for MAGL 6 - Data isolation for bruger data](../undervisning/060-magl-6-data-isolation-for-bruger-data-13-11-2026.md)
+- [Plan for MAGL 6 - Data isolation for bruger data](../undervisning/059-magl-6-data-isolation-for-bruger-data-12-11-2026.md)
 
 ### Præsentationer
 
 ### Opgaver
+
+## 060 · Forberedelse - Gruppearbejde - 13-11-2026
+
+[Lokal fil](../undervisning/060-forberedelse-gruppearbejde-13-11-2026.md) · upubliceret
+
+*Ingen Canvas-elementer.*
 
 ## 061 · ➡️ Semesterprojekt (Uge 47-51)
 

@@ -37,6 +37,8 @@ Vi kigger på hvordan vi kan håndtere fejl både i vorres client-side JavaScrip
 
 ### Præsentationer
 
+- [DOB 7 - Client-side error handling - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1060324)
+
 ### Opgaver
 
 ---

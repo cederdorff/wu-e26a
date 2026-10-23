@@ -33,6 +33,12 @@ I Client/Server forløbet (AMAbot-projektet i uge 35-40) er det de markede modul
 
 [![scrimba-fullstack-dev-path.png](https://eaaa.instructure.com/courses/29949/files/1471832/preview)](https://scrimba.com/fullstack-path-c0fullstack)
 
+## Materialer
+
+- [Øvelse 8: AMAbotten får en frontend — fetch og DOM](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/fetch-dom-amabot.md)
+- [Øvelse 9: AMAbotten bliver sikker og fejltolerant](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-sikkerhed-og-fejlhaandtering.md)
+- [Oversigt over alle øvelser (AMAbot og Students)](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/README.md)
+
 ---
 
 <details>

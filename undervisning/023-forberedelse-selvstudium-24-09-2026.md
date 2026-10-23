@@ -33,6 +33,12 @@ I Client/Server forløbet (AMAbot-projektet i uge 35-40) er det de markede modul
 
 [![scrimba-fullstack-dev-path.png](https://eaaa.instructure.com/courses/29949/files/1471832/preview)](https://scrimba.com/fullstack-path-c0fullstack)
 
+## Materialer
+
+- [1. REST API-øvelse: Arkitektur — routes, data, controllers og filtrering](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-arkitektur.md)
+- [2. Øvelse 7: AMAbotten i lag — routes og data-modul — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/express-rest-api-amabot-arkitektur.md)
+- [3. Øvelse 8: AMAbotten får en frontend — fetch og DOM — byg en rigtig frontend til jeres AMAbot med fetch(), i eget tempo](https://github.com/cederdorff/wu-e26a/blob/main/opgaver/fetch-dom-amabot.md)
+
 ---
 
 <details>

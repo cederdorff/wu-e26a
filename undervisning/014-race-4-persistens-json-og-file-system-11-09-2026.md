@@ -68,7 +68,7 @@ I dag giver vi AMAbotten persistens: vi bruger Node.js' File System API til at l
 
 ## Forberedelse
 
-- Færdiggør [øvelse 3](../opgaver/express-ejs-amabot.md) og [øvelse 4](../opgaver/express-ejs-amabot-statistik.md), hvis I ikke er helt i mål endnu — se evt. [opsamlingen fra sidst](./087-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- Færdiggør [øvelse 3](../opgaver/express-ejs-amabot.md) og [øvelse 4](../opgaver/express-ejs-amabot-statistik.md), hvis I ikke er helt i mål endnu — se evt. [opsamlingen fra sidst](./092-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 - Genopfrisk begreberne fra DOB 3: string-metoder, funktioner, parametre og returværdier — dem bruger vi i arbejdet med AMAbotten fra øvelse 4
 - Genopfrisk ["Working with JSON"](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) på MDN
 - Læs om [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) og [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) på MDN — se evt. [Scrimba-forklaringen](https://scrimba.com/explain/guide01mo060op) af de to metoder som supplement
@@ -100,7 +100,7 @@ canvas_page_id: 200713
 canvas_page_slug: "plan-for-race-4-persistens-json-og-file-system"
 canvas_page_title: "Plan for RACE 4 - Persistens, JSON og File System"
 canvas_page_published: true
-canvas_updated_at: "2026-09-22T10:54:07Z"
+canvas_updated_at: "2026-09-23T09:00:50Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018700"
 local_status: mirrored
 ```

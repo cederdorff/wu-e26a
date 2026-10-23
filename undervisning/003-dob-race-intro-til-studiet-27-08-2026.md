@@ -29,12 +29,12 @@ Velkomst og introduktion til akademiet, til uddannelsen og til underviserne og h
 
 ## Materialer
 
-### Præsentationer
+## Præsentationer
 
 - [INTRO STUDIEVEJLEDNINGEN WU 2026 1.0.pptx](https://eaaa.instructure.com/courses/32059/modules/items/1038210)
 - [Intro - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1038208)
 
-### Opgaver
+## Opgaver
 
 - [Intro - worksheet.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1038209)
 
@@ -54,7 +54,7 @@ canvas_page_id: 200706
 canvas_page_slug: "plan-for-dob-+-race-intro-til-studiet"
 canvas_page_title: "Plan for DOB + RACE - Intro til studiet"
 canvas_page_published: true
-canvas_updated_at: "2026-08-24T08:38:16Z"
+canvas_updated_at: "2026-09-23T09:00:48Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018679"
 local_status: mirrored
 ```
