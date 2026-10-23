@@ -41,6 +41,13 @@ Lav hver students-opgave før den AMAbot-øvelse, den hører til.
 4. [REST API-øvelse: Fejlhåndtering](express-rest-api-fejlhaandtering.md) — før øvelse 9\
    Du gør statuskoderne eksplicitte, tilføjer `404`- og `400`-tjek og samler fejl i en fælles fejl-middleware.
 
+## Chatbot-forløbet
+
+I chatbot-forløbet følger du [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres). Opgaverne her er små projekter, hvor du øver et nyt emne, før du laver det tilsvarende step i tutorialen.
+
+1. [React Supabase Auth: Login før chatbotten](react-supabase-auth.md) — før step 14\
+   En lille React Router-app med Supabase Auth. Du opretter brugere, logger ind, kigger i dit JWT og bygger en profilside, der kræver login.
+
 ## Kom i gang med Node og Express
 
 Opvarmning fra første gang. Lav dem før AMAbot-øvelse 1.
