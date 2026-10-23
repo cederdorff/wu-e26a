@@ -3747,7 +3747,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178071/items",
     "items": [
       {
@@ -3762,35 +3762,7 @@
         "page_url": "plan-for-race-9-user-authentication-og-login",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-9-user-authentication-og-login",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018761,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178071,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018762,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178071,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -3808,9 +3780,28 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": false,
-    "items_count": 0,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178072/items",
-    "items": []
+    "items": [
+      {
+        "id": 1072873,
+        "position": 1,
+        "title": "Selvstudie uge 44: Login i chatbotten",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178072,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1072873",
+        "page_url": "selvstudie-uge-44-login-i-chatbotten",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/selvstudie-uge-44-login-i-chatbotten",
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178064,
@@ -3822,9 +3813,28 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": false,
-    "items_count": 0,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178064/items",
-    "items": []
+    "items": [
+      {
+        "id": 1072874,
+        "position": 1,
+        "title": "Gruppearbejde uge 44: Login i chatbotten",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178064,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1072874",
+        "page_url": "gruppearbejde-uge-44-login-i-chatbotten",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/gruppearbejde-uge-44-login-i-chatbotten",
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178078,

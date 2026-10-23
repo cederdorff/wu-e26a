@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-10-23T07:19:40.005Z
+Senest hentet: 2026-10-23T08:43:23.408Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -517,21 +517,17 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 - [Plan for RACE 9 - User authentication og login](../undervisning/048-race-9-user-authentication-og-login-28-10-2026.md)
 
-### Præsentationer
-
-### Opgaver
-
 ## 049 · Forberedelse - Selvstudium - 29-10-2026
 
 [Lokal fil](../undervisning/049-forberedelse-selvstudium-29-10-2026.md) · upubliceret
 
-*Ingen Canvas-elementer.*
+- [Selvstudie uge 44: Login i chatbotten](../undervisning/049-forberedelse-selvstudium-29-10-2026.md)
 
 ## 050 · Forberedelse - Gruppearbejde - 30-10-2026
 
 [Lokal fil](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md) · upubliceret
 
-*Ingen Canvas-elementer.*
+- [Gruppearbejde uge 44: Login i chatbotten](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md)
 
 ## 051 · HEOE 4 - Brugertest til validering af en løsning - 02-11-2026
 
