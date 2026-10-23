@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-10-23T08:49:12.343Z
+Senest hentet: 2026-10-23T08:51:08.422Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -519,13 +519,13 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 049 · Forberedelse - Selvstudium - 29-10-2026
 
-[Lokal fil](../undervisning/049-forberedelse-selvstudium-29-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/049-forberedelse-selvstudium-29-10-2026.md) · publiceret
 
 - [Selvstudie uge 44: Login i chatbotten](../undervisning/049-forberedelse-selvstudium-29-10-2026.md)
 
 ## 050 · Forberedelse - Gruppearbejde - 30-10-2026
 
-[Lokal fil](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md) · upubliceret
+[Lokal fil](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md) · publiceret
 
 - [Gruppearbejde uge 44: Login i chatbotten](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md)
 

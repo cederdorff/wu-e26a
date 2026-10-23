@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-10-23T08:49:12.343Z",
+  "pulled_at": "2026-10-23T08:51:08.422Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "d4757cfbbf057b4e4dac48920ce816076b8df196b2f4a461dd540a532ffb9270",
@@ -195,12 +195,12 @@
       "canvas_hash": "4e9bb8c8a2243f74847ca37ac3100ca167a34de0b1dcff45937e1bb0f70830a1"
     },
     "undervisning/049-forberedelse-selvstudium-29-10-2026.md": {
-      "local_hash": "5a7cc686355dc3a5d6adf6778644294501fcfa8aeb57f56b3092aa1dfd9870a4",
-      "canvas_hash": "5a7cc686355dc3a5d6adf6778644294501fcfa8aeb57f56b3092aa1dfd9870a4"
+      "local_hash": "a7219c75c25ecc889a1ae621a69589bb5c35aa69d3333bb98a1b8666e5ac0525",
+      "canvas_hash": "a7219c75c25ecc889a1ae621a69589bb5c35aa69d3333bb98a1b8666e5ac0525"
     },
     "undervisning/050-forberedelse-gruppearbejde-30-10-2026.md": {
-      "local_hash": "449921a047f03613aef728ddb86d6f5c6d018f5b7c34f99a0c9cd2961fbc38e5",
-      "canvas_hash": "449921a047f03613aef728ddb86d6f5c6d018f5b7c34f99a0c9cd2961fbc38e5"
+      "local_hash": "2c64d28b69d2e5ae4a54c255dfda47f030e6e68c5d07a0c6f73f4e4ab9a0b615",
+      "canvas_hash": "2c64d28b69d2e5ae4a54c255dfda47f030e6e68c5d07a0c6f73f4e4ab9a0b615"
     },
     "undervisning/051-heoe-4-brugertest-til-validering-af-en-loesning-02-11-2026.md": {
       "local_hash": "cb05b503c3838554fbc7a5003365f4ba66cae40c560f220529ea2118d54855f0",

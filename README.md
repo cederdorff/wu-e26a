@@ -100,8 +100,8 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [046 · HEOE 3 - Planlægning af designprocesser - 26-10-2026](./undervisning/046-heoe-3-planlaegning-af-designprocesser-26-10-2026.md) — *kladde i Canvas*
 - [047 · MAGL 4 - Slette oprette og redigere tråde - 27-10-2026](./undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md)
 - [048 · RACE 9 - User authentication og login - 28-10-2026](./undervisning/048-race-9-user-authentication-og-login-28-10-2026.md)
-- [049 · Forberedelse - Selvstudium - 29-10-2026](./undervisning/049-forberedelse-selvstudium-29-10-2026.md) — *kladde i Canvas*
-- [050 · Forberedelse - Gruppearbejde - 30-10-2026](./undervisning/050-forberedelse-gruppearbejde-30-10-2026.md) — *kladde i Canvas*
+- [049 · Forberedelse - Selvstudium - 29-10-2026](./undervisning/049-forberedelse-selvstudium-29-10-2026.md)
+- [050 · Forberedelse - Gruppearbejde - 30-10-2026](./undervisning/050-forberedelse-gruppearbejde-30-10-2026.md)
 - [051 · HEOE 4 - Brugertest til validering af en løsning - 02-11-2026](./undervisning/051-heoe-4-brugertest-til-validering-af-en-loesning-02-11-2026.md) — *kladde i Canvas*
 - [052 · RACE 10 - JWT tokens fra frontend - 03-11-2026](./undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md)
 - [053 · Forberedelse - Selvstudium - 04-11-2026](./undervisning/053-forberedelse-selvstudium-04-11-2026.md) — *kladde i Canvas*

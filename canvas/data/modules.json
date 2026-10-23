@@ -3779,7 +3779,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178072/items",
     "items": [
@@ -3795,7 +3795,7 @@
         "page_url": "selvstudie-uge-44-login-i-chatbotten",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/selvstudie-uge-44-login-i-chatbotten",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -3812,7 +3812,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178064/items",
     "items": [
@@ -3828,7 +3828,7 @@
         "page_url": "gruppearbejde-uge-44-login-i-chatbotten",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/gruppearbejde-uge-44-login-i-chatbotten",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false

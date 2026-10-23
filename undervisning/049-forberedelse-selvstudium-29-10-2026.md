@@ -32,14 +32,14 @@ Sidder du fast, så skriv ned, hvor du sidder fast, og hvad fejlen siger. Tag de
 canvas_course_id: 32059
 canvas_module_id: 178072
 canvas_module_position: 49
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: 1072873
 canvas_module_item_position: 1
 canvas_page_id: 209568
 canvas_page_slug: "selvstudie-uge-44-login-i-chatbotten"
 canvas_page_title: "Selvstudie uge 44: Login i chatbotten"
-canvas_page_published: false
-canvas_updated_at: "2026-10-23T08:49:07Z"
+canvas_page_published: true
+canvas_updated_at: "2026-10-23T08:49:22Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1072873"
 local_status: mirrored
 ```

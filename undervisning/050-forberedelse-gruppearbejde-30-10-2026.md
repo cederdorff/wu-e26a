@@ -40,14 +40,14 @@ Næste gang starter vi med jeres tegninger og svar. Derefter sender vi tokenet m
 canvas_course_id: 32059
 canvas_module_id: 178064
 canvas_module_position: 50
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: 1072874
 canvas_module_item_position: 1
 canvas_page_id: 209569
 canvas_page_slug: "gruppearbejde-uge-44-login-i-chatbotten"
 canvas_page_title: "Gruppearbejde uge 44: Login i chatbotten"
-canvas_page_published: false
-canvas_updated_at: "2026-10-23T08:49:07Z"
+canvas_page_published: true
+canvas_updated_at: "2026-10-23T08:49:25Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1072874"
 local_status: mirrored
 ```
