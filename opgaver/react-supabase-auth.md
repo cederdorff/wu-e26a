@@ -205,11 +205,12 @@ export async function clientAction({ request }) {
 
 #### Test øvelse 4
 
-1. Opret en bruger. Du skal ende på `/login`.
-2. Find brugeren i Supabase under Authentication → Users.
-3. Åbn Table Editor, vælg schema `auth` og tabellen `users`. Find kolonnen `encrypted_password`. Hashen starter med `$2a$`, som betyder bcrypt.
-4. Opret en bruger mere med samme password. Er de to hashes ens?
-5. Prøv at oprette den samme email igen. Hvad står der i Console?
+1. Åbn Network-fanen i DevTools, og opret en bruger. Du skal ende på `/login`.
+2. Find requestet til `.../auth/v1/signup` i Network-fanen. Kig i Payload. Står passwordet i klartekst? Står der `https` i URL'en?
+3. Find brugeren i Supabase under Authentication → Users.
+4. Åbn Table Editor, vælg schema `auth` og tabellen `users`. Find kolonnen `encrypted_password`. Hashen starter med `$2a$`, som betyder bcrypt.
+5. Opret en bruger mere med samme password. Er de to hashes ens?
+6. Prøv at oprette den samme email igen. Hvad står der i Console?
 
 ---
 

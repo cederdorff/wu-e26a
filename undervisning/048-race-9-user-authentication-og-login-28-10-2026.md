@@ -15,51 +15,75 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: Prøv at ødelægge jeres chatbot (8.15-8.35)</strong></summary>
+<summary><strong>1. User authentication: hvem er du, og hvad må du?</strong></summary>
 
 - Start jeres chatbot, både frontend og backend
-- To og to, 10 minutter. Åbn chatbotten i to browsere, eller i et normalt vindue og et inkognitovindue:
+- To og to, 10 minutter. Prøv at ødelægge jeres chatbot. Åbn den i to browsere, eller i et normalt vindue og et inkognitovindue:
   - Opret en tråd i den ene browser. Kan den anden se den?
   - Slet eller omdøb den i den anden browser
   - Send `GET /api/threads` fra Thunder Client. Hvad får I?
   - Åbn `threads`-tabellen i Supabase. Hvor står det, hvem der ejer en tråd?
 - Skriv hullerne ned. Vi samler dem på tavlen og vender tilbage til listen sidst på dagen
 - De fleste huller handler om to spørgsmål: Hvem er du? Og hvad må du?
-- **Authentication:** hvem er du? Login med email og password
-- **Authorization:** hvad må du? Kun se og slette dine egne tråde
+- **Authentication:** hvem er du? Brugeren beviser det med email og password og får et token tilbage
+- **Authorization:** hvad må du? Fx kun se og slette dine egne tråde
 - I dag tager vi det første spørgsmål og kun i frontenden. Det andet kommer, når backenden begynder at kræve et token
 </details>
 <details>
-<summary><strong>2. Nyt projekt og Supabase-klienten: øvelse 1-3 (8.35-9.05)</strong></summary>
+<summary><strong>2. Supabase Auth: øvelse 1-3</strong></summary>
 
-- Vi øver login i et lille projekt, så I kan se hver del for sig, uden backend, tråde og sidebar omkring. Bagefter laver I det samme i chatbotten
-- Øvelse 1: hent `react-supabase-auth` med degit. Opsætningen er den samme som i chatbotten: React Router i SPA-mode med `clientAction` og `clientLoader`
-- Indtil nu har I brugt Supabase som database. Nu bruger I også Supabase Auth, som står for brugere, passwords og tokens. I bruger jeres eksisterende Supabase-projekt
-- Øvelse 2: installér `@supabase/supabase-js`, kopiér URL og key fra chatbottens `.env`, og lav én fælles klient i `app/lib/supabase.js`
+- Login er svært at bygge sikkert selv. Man skal gemme passwords sikkert, udstede og forny tokens, sende bekræftelsesmails og meget mere
+- **Supabase Auth** er den del af Supabase, der klarer det for jer. Indtil nu har I brugt Supabase som database. Nu bruger I også Supabase Auth i samme projekt
+- Brugerne ligger i tabellen `auth.users`, adskilt fra jeres egne tabeller. Passwords bliver hashet, før de gemmes, og ved login får brugeren et JWT
+- I taler med Supabase Auth gennem JavaScript-klienten `@supabase/supabase-js`: `signUp()` opretter en bruger, `signInWithPassword()` logger ind, `getUser()` henter den indloggede bruger, og `signOut()` logger ud
+- Vi øver det i et lille projekt, `react-supabase-auth`, så I kan se hver del for sig, uden backend, tråde og sidebar omkring. Opsætningen er den samme som i chatbotten: React Router i SPA-mode med `clientAction` og `clientLoader`
+- Øvelse 1: hent projektet med degit
+- Øvelse 2: installér `@supabase/supabase-js`, kopiér URL og key fra chatbottens `.env`, og lav én fælles klient i `app/lib/supabase.js`, som resten af appen importerer
+- **Miljøvariabler:** `.env` indeholder jeres egne værdier og bliver aldrig committet. `.env.example` viser, hvilke variabler projektet skal bruge, og bliver committet. Vite giver adgang til dem med `import.meta.env`, men kun dem, der starter med `VITE_`, fordi alt med `VITE_` ender i browseren. Mangler en variabel, kaster `supabase.js` en tydelig fejl med det samme
 - **Anon key vs. service role key:** anon key må gerne ligge i browseren, fordi Supabase selv tjekker, hvad den må. Service role key giver adgang til alt og må aldrig ligge i frontenden. Sammenlign med jeres Groq-nøgle, der kun ligger i backendens `.env`
 - Slå "Confirm email" fra i Supabase. Supabase sender kun få mails i timen, og I skal oprette mange testbrugere i dag
 - Øvelse 3: registrér `/register` og `/login` i `routes.js`
 </details>
 <details>
-<summary><strong>3. Opret en bruger: øvelse 4-5 (9.05-9.50)</strong></summary>
+<summary><strong>3. Opret en bruger: øvelse 4</strong></summary>
 
-- Øvelse 4: tryk "Create Account" uden en `clientAction`, og læs fejlen. Skriv derefter en `clientAction` med `supabase.auth.signUp()`, ligesom formularerne til nye tråde og beskeder i chatbotten
-- Find brugeren i Supabase og kolonnen `encrypted_password` i `auth.users`. Opret en bruger mere med samme password. Er de to hashes ens?
+- Tryk "Create Account" uden en `clientAction`, og læs fejlen
+- `<Form method="post">` sender til routens egen `clientAction`, ligesom formularerne til nye tråde og beskeder i chatbotten. Den henter felterne med `formData.get()`
+- Kig på formularens markup. I step 14 skriver I den selv: `name` er det, `formData.get()` læser. `<label htmlFor>` hører sammen med inputtets `id`. `type="email"` og `type="password"` giver det rigtige tastatur og skjuler passwordet. `autoComplete="new-password"` ved oprettelse og `"current-password"` ved login hjælper browserens password-manager
+- Øvelse 4: opret brugeren med `supabase.auth.signUp()`, og send videre med `redirect("/login?registered=true")`
+- Find brugeren i Supabase under Authentication → Users og i tabellen `auth.users`
+</details>
+<details>
+<summary><strong>4. Passwords: hashing, salt og bcrypt</strong></summary>
+
 - Forestil jer, at I havde gemt brugere med password i en JSON-fil, som I gjorde med students. Hvad sker der, hvis filen eller databasen bliver lækket?
 - **Hashing:** et password køres gennem en funktion, der giver en fast tekststreng. Man kan ikke regne baglæns fra hash til password. Ved login hasher man det indtastede password igen og sammenligner de to hashes
-- **Salt:** et tilfældigt stykke tekst, der lægges til hvert password, før det hashes. Derfor var jeres to hashes forskellige
+- Find kolonnen `encrypted_password` i `auth.users`. Opret en bruger mere med samme password. Er de to hashes ens?
+- **Salt:** et tilfældigt stykke tekst, der lægges til hvert password, før det hashes. Derfor er jeres to hashes forskellige
 - **bcrypt** er en hash-funktion, der er lavet til passwords. Den er bevidst langsom, så det tager lang tid at gætte sig frem. Hashen starter med `$2a$`
-- Øvelse 5: opret en bruger med to forskellige passwords. Det lykkes, fordi ingen tjekker det. Tilføj validering i `clientAction`, og vis fejlen med `useActionData()`
-- **Tre lag validering:** HTML (`required`, `minLength`), jeres `clientAction` og Supabase. I fjerner selv de to første og ser, at Supabase stadig afviser et kort password. De to første lag kan enhver komme uden om, ligesom I gik uden om frontenden med Thunder Client i opsamlingen. Kun det sidste lag ligger på serveren
+- Hvad med vejen fra formularen til Supabase? Åbn Network-fanen, og opret en bruger. Passwordet står i klartekst i requestets body, men forbindelsen til Supabase er HTTPS, så det er krypteret på vejen. Først hos Supabase bliver det hashet
+- I skal ikke selv skrive det her. Supabase Auth hasher med bcrypt for jer
 </details>
-
-**Pause 9.50-10.05**
-
 <details>
-<summary><strong>4. Log ind og kig i jeres JWT: øvelse 6-7 (10.05-10.45)</strong></summary>
+<summary><strong>5. Form validation: øvelse 5</strong></summary>
 
-- Øvelse 6: gør det samme for login med `supabase.auth.signInWithPassword()`. Fejlbeskeden siger ikke, om det er emailen eller passwordet, der er forkert. Hvorfor?
-- Hvad sker der ved login? Browseren sender email og password til Supabase. Supabase hasher og sammenligner, og svarer med et token, som klienten gemmer i localStorage
+- Opret en bruger med to forskellige passwords. Det lykkes, fordi ingen tjekker det
+- Øvelse 5: tilføj validering i `clientAction`, og returnér `{ error: "..." }` i stedet for at sende videre
+- `useActionData()` giver componenten det, `clientAction` returnerede, så fejlen kan vises i formularen. `useNavigation()` fortæller, om formularen er ved at blive sendt, så knappen kan slås fra og vise "Creating account..."
+- **Tre lag validering:** HTML (`required`, `minLength`), jeres `clientAction` og Supabase. I fjerner selv de to første og ser, at Supabase stadig afviser et kort password
+- De to første lag giver hurtig feedback, men enhver kan komme uden om dem, ligesom I gik uden om frontenden med Thunder Client i opsamlingen. Kun det sidste lag ligger på serveren
+</details>
+<details>
+<summary><strong>6. Login: øvelse 6</strong></summary>
+
+- Hvad sker der ved login? Browseren sender email og password til Supabase. Supabase hasher det indtastede password og sammenligner med hashen i `auth.users`. Passer de, svarer Supabase med et token, som klienten gemmer i localStorage
+- Øvelse 6: gør det samme for login med `supabase.auth.signInWithPassword()`
+- Fejlbeskeden siger ikke, om det er emailen eller passwordet, der er forkert. Hvorfor?
+- `useSearchParams()` læser `?registered=true` fra URL'en, så login-siden kan byde en ny bruger velkommen
+</details>
+<details>
+<summary><strong>7. JWT: øvelse 7</strong></summary>
+
 - Øvelse 7: find nøglen `sb-...-auth-token` i Local Storage, og indsæt `access_token` på [jwt.io](https://jwt.io)
 - **JWT** (JSON Web Token) har tre dele adskilt af punktummer: header, payload og signatur. Find jeres bruger-id i `sub`, jeres email og udløbstiden i `exp`
 - Et JWT er kun kodet, ikke krypteret. Alle kan læse payloaden, så der må aldrig stå hemmeligheder i den
@@ -67,19 +91,21 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - **Access token vs. refresh token:** access token udløber efter en time. Refresh token bruges til at hente et nyt, og det klarer Supabase-klienten selv
 </details>
 <details>
-<summary><strong>5. Profilside: øvelse 8-9 (10.45-11.10)</strong></summary>
+<summary><strong>8. Sider, der kræver login: øvelse 8-9</strong></summary>
 
 - Øvelse 8: en `/profile`-side, der henter brugeren i en `clientLoader` med `supabase.auth.getUser()` og sender til `/login`, hvis ingen er logget ind
 - Prøv at ødelægge det: ret ét bogstav i jeres token i Local Storage, og genindlæs. `getUser()` sender tokenet til Supabase, som afviser det, fordi signaturen ikke passer. Derfor kan man ikke bare ændre sit bruger-id i tokenet
 - Øvelse 9 er en bonus: log ud med `supabase.auth.signOut()`, og se tokenet forsvinde fra Local Storage. Logout kommer i chatbotten i næste step
 </details>
 <details>
-<summary><strong>6. Fra øvelserne til step 14 (11.10-11.30)</strong></summary>
+<summary><strong>9. Fra øvelserne til step 14</strong></summary>
 
 - Vi åbner [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) sammen og sætter øvelsesnumre på hver delopgave. Tabellen står sidst i opgaven
-- Forskellene: i step 14 skriver I selv formularerne, routes skal stå uden for layoutet, så sidebaren ikke vises, og login sender til `/` i stedet for `/profile`
+- Forskellene: i step 14 skriver I selv formularerne, og login sender til `/` i stedet for `/profile`
+- **Layout-routes:** i chatbottens `routes.js` ligger alle sider inde i `layout.jsx`, som viser sidebaren og et `<Outlet />`. Login og register skal ikke have sidebar, så de skal stå efter layout-routen, ikke inde i den
+- **Styling:** chatbotten har allerede de samme CSS-variabler i `:root`, som `react-supabase-auth` bruger. Kopiér afsnittet `Authentication Pages` fra `app.css`, og tab jer gennem formularen for at se fokus-stylingen
 - Tilbage til tavlen fra opsamlingen: Hvilke huller kan login lukke? Endnu ingen. Frontenden ved, hvem I er, men backenden gør ikke. Det kommer i de næste steps, når tokenet sendes med i alle requests, og backenden begynder at kræve det
-- **Torsdag og fredag:** lav step 14 i chatbotten. Er I ikke færdige med step 13, så hent startpunktet med `npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start`, og commit det, før I ændrer noget. Har I lavet AI-svarene på en branch, så bliv på `main`. Branchen merger I ind efter auth-stepsene
+- **Torsdag og fredag:** lav step 14 i chatbotten. Er I ikke færdige med step 13, så hent startpunktet med `npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start`, og commit det, før I ændrer noget. Husk at installere `@supabase/supabase-js` inde i `frontend/`, hvor `package.json` og `.env` ligger. Har I lavet AI-svarene på en branch, så bliv på `main`. Branchen merger I ind efter auth-stepsene
 - Fredag arbejder I i bordgrupperne og hjælper hinanden. Når I er i mål, så log ind med to forskellige brugere i hver sin browser i chatbotten. Ser de stadig de samme tråde? Og står jeres token i Network-fanen, når chatbotten kalder jeres API? Tag svarene med næste gang. Vi starter med dem
 </details>
 
