@@ -561,8 +561,8 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start
 | Delopgave 1: Install Supabase client library | Øvelse 2. Installér inde i `frontend/`, hvor `package.json` ligger |
 | Delopgave 2: Create Supabase client module | Øvelse 2 |
 | Delopgave 3: Configure environment variables | Øvelse 2. `.env` findes allerede i `frontend/` |
-| Delopgave 4: Build the registration page | Øvelse 4 og 5. Du skriver selv formularen |
-| Delopgave 5: Build the login page | Øvelse 6 og 7. Tutorialen sender til `/` i stedet for `/profile` |
+| Delopgave 4: Build the registration page | Øvelse 4 og 5. Lad dig inspirere af din `register.jsx` |
+| Delopgave 5: Build the login page | Øvelse 6 og 7. Lad dig inspirere af din `login.jsx`. Tutorialen sender til `/` i stedet for `/profile` |
 | Delopgave 6: Style the authentication pages | Kopiér afsnittet `Authentication Pages` fra `app.css` i dette projekt. Klasserne har samme navne |
 | Delopgave 7: Register authentication routes | Øvelse 3. Her skal routes stå uden for layoutet, så sidebaren ikke vises |
 

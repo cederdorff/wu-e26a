@@ -49,7 +49,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 
 - Tryk "Create Account" uden en `clientAction`, og læs fejlen
 - `<Form method="post">` sender til routens egen `clientAction`, ligesom formularerne til nye tråde og beskeder i chatbotten. Den henter felterne med `formData.get()`
-- Kig på formularens markup. I step 14 skriver I den selv: `name` er det, `formData.get()` læser. `<label htmlFor>` hører sammen med inputtets `id`. `type="email"` og `type="password"` giver det rigtige tastatur og skjuler passwordet. `autoComplete="new-password"` ved oprettelse og `"current-password"` ved login hjælper browserens password-manager
+- Kig på formularens markup. Den kan I lade jer inspirere af i step 14: `name` er det, `formData.get()` læser. `<label htmlFor>` hører sammen med inputtets `id`. `type="email"` og `type="password"` giver det rigtige tastatur og skjuler passwordet. `autoComplete="new-password"` ved oprettelse og `"current-password"` ved login hjælper browserens password-manager
 - Øvelse 4: opret brugeren med `supabase.auth.signUp()`, og send videre med `redirect("/login?registered=true")`
 </details>
 <details>
@@ -97,7 +97,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 <summary><strong>9. Fra øvelserne til step 14</strong></summary>
 
 - Vi åbner [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) sammen og sætter øvelsesnumre på hver delopgave. Tabellen står sidst i opgaven
-- Forskellene: i step 14 skriver I selv formularerne, og login sender til `/` i stedet for `/profile`
+- Lad jer inspirere af jeres `register.jsx` og `login.jsx`, når I laver siderne i chatbotten. Klasserne og CSS'en er de samme. Forskellen er, at login sender til `/` i stedet for `/profile`
 - **Layout-routes:** i chatbottens `routes.js` ligger alle sider inde i `layout.jsx`, som viser sidebaren og et `<Outlet />`. Login og register skal ikke have sidebar, så de skal stå efter layout-routen, ikke inde i den
 - **Styling:** chatbotten har allerede de samme CSS-variabler i `:root`, som `react-supabase-auth` bruger. Kopiér afsnittet `Authentication Pages` fra `app.css`, og tab jer gennem formularen for at se fokus-stylingen
 - Tilbage til listen på tavlen: Hvilke af authentication-hullerne kan login lukke? Endnu ingen. Frontenden ved, hvem I er, men backenden gør ikke. Det kommer i de næste steps, når tokenet sendes med i alle requests, og backenden begynder at kræve det
