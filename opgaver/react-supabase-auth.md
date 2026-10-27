@@ -793,8 +793,18 @@ Efter step 14 ser chatbottens sider sådan ud. Sammenlign med billedet under [De
 
 ![Alle chatbottens sider kan ses uden login. Chat-siderne ligger i layout.jsx med sidebar. /login og /register ligger uden for layoutet. Kræver login er tom](assets/chatbot-step-14-sider.svg)
 
-Efter step 14 kræver ingen af siderne login. Chat-siderne kommer over i "Kræver login" i de næste steps, når tokenet bliver sendt med, og backenden begynder at kræve det.
+Efter step 14 kræver ingen af siderne login. Chat-siderne kommer over i "Kræver login" i de næste steps. Se [Hvor ender chatbotten?](#hvor-ender-chatbotten)
 
 Step 14 siger, at du bliver logget ud, hvis du retter ét tegn i tokenet. I chatbotten sker der ikke noget endnu, fordi intet kalder `getUser()`. Du så det på `/profile` i øvelse 8.
 
 Profilsiden og logout er ikke med i step 14. Logout kommer i step 15.
+
+---
+
+## Hvor ender chatbotten?
+
+Efter step 18 ser chatbotten sådan ud:
+
+![Kun /login og /register kan ses uden login. Alle chat-siderne i layout.jsx kræver login, og du ser kun dine egne tråde. Svarer API'et 401, bliver du sendt til /login](assets/chatbot-step-18-sider.svg)
+
+Step 15 sender tokenet med til backenden. Step 16 får backenden til at kræve det, og step 18 sender dig til `/login`, når API'et svarer 401. Step 17 sørger for, at du kun ser dine egne tråde.
