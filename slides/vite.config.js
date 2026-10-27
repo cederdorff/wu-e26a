@@ -17,7 +17,8 @@ export default defineConfig({
         restApi: resolve("slides/rest-api/index.html"),
         arkitektur: resolve("slides/arkitektur/index.html"),
         fejlhaandteringSikkerhed: resolve("slides/fejlhaandtering-sikkerhed/index.html"),
-        reactIntro: resolve("slides/react-intro/index.html")
+        reactIntro: resolve("slides/react-intro/index.html"),
+        supabaseAuth: resolve("slides/supabase-auth/index.html")
       }
     }
   }

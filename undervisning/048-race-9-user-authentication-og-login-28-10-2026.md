@@ -124,6 +124,8 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 
 ## Materialer
 
+- Slides:
+  - [RACE 9 · User authentication og login](https://cederdorff.com/wu-e26a/supabase-auth/)
 - Opgaver:
   - [React Supabase Auth: Login før chatbotten](../opgaver/react-supabase-auth.md): øvelse 1-9. Opret en bruger, log ind, kig i jeres JWT, og byg en profilside
     - [Løsning til react-supabase-auth](https://github.com/cederdorff/react-supabase-auth): én branch pr. øvelse. Prøv selv først

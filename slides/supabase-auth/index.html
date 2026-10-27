@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RACE 9 · User authentication og login · WU-E26A · 28. oktober 2026" />
+    <title>User authentication og login · WU-E26A</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <svg class="pg-defs" width="0" height="0" aria-hidden="true">
+      <defs>
+        <marker id="pg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-muted" d="M0,0 L10,5 L0,10 z" /></marker>
+        <marker id="pg-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-red" d="M0,0 L10,5 L0,10 z" /></marker>
+        <marker id="pg-arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-orange" d="M0,0 L10,5 L0,10 z" /></marker>
+      </defs>
+    </svg>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-accent="green">
+          <div class="title-copy">
+            <span class="eyebrow">WU-E26A · RACE 9 · 28. oktober 2026</span>
+            <h1>Hvem er<br /><span>du?</span></h1>
+            <p class="lead">Login med Supabase Auth. Opret en konto, log ind, kig i jeres JWT, og byg en side, der kræver login. Først i <code>react-supabase-auth</code>, så i chatbotten.</p>
+          </div>
+          <div class="title-art" aria-hidden="true">
+            <div class="ac">
+              <span class="h">Welcome Back</span>
+              <span class="sub">Log in with your email and password</span>
+              <div class="fg"><span>Email</span><i>anna@example.com</i></div>
+              <div class="fg"><span>Password</span><i class="focus">•••••••••••</i></div>
+              <span class="btn">Log In</span>
+              <span class="foot">Don't have an account? <b>Sign up</b></span>
+            </div>
+            <div class="tok"><span class="h">eyJhbGciOiJFUzI1NiIs</span><span class="dot">.</span><span class="p">eyJzdWIiOiI4ZjNjMmE3MS01ZDRl…</span><span class="dot">.</span><span class="s">Ht0NZgcqwrWsTc1eKy2k…</span></div>
+          </div>
+        </section>
+
+        <section id="agenda" class="agenda-slide" data-accent="green">
+          <span class="eyebrow">Agenda</span>
+          <h2>Først et lille projekt. Så chatbotten</h2>
+          <ol class="agenda-grid">
+            <li><a href="#/huller"><b>Hvad mangler chatbotten?</b><small>prøv at ødelægge den, og sortér hullerne</small></a></li>
+            <li><a href="#/supabase-auth"><b>Supabase Auth</b><small>øvelse 1-3: projektet, klienten og routes</small></a></li>
+            <li><a href="#/opret"><b>Opret en bruger</b><small>øvelse 4: <code>&lt;Form&gt;</code>, <code>clientAction</code> og <code>signUp()</code></small></a></li>
+            <li><a href="#/passwords"><b>Passwords i Supabase Auth</b><small>fra <code>crypt</code> i går til <code>auth.users</code> i dag</small></a></li>
+            <li><a href="#/validering"><b>Validering</b><small>øvelse 5: tre lag, og kun ét af dem på serveren</small></a></li>
+            <li><a href="#/login"><b>Log ind</b><small>øvelse 6: <code>signInWithPassword()</code></small></a></li>
+            <li><a href="#/jwt"><b>JWT</b><small>øvelse 7: header, payload og signatur</small></a></li>
+            <li><a href="#/kraever-login"><b>Sider, der kræver login</b><small>øvelse 8-9: <code>getUser()</code> og <code>signOut()</code></small></a></li>
+            <li><a href="#/step-14"><b>Fra øvelserne til step 14</b><small>det samme igen, i chatbotten</small></a></li>
+          </ol>
+          <p class="bottom-line">Øvelserne står i opgaven: <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md" target="_blank" rel="noreferrer"><b>React Supabase Auth ↗</b></a>. Løsningen: <a href="https://github.com/cederdorff/react-supabase-auth" target="_blank" rel="noreferrer"><b>én branch pr. øvelse ↗</b></a>.</p>
+        </section>
+
+        <!-- ============ DAGENS MÅL ============ -->
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">Dagens mål · react-supabase-auth</span>
+          <h2>Fire sider. Én af dem kræver login</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-380" viewBox="0 0 880 380" role="img" aria-labelledby="rsa-title">
+                <title id="rsa-title">Forsiden, /register og /login kan alle se. /profile kræver login. Er du ikke logget ind, eller logger du ud, bliver du sendt fra /profile til /login</title>
+                <rect class="z-open" x="20" y="20" width="540" height="340" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+                <rect class="z-lock" x="600" y="20" width="260" height="340" rx="14" />
+                <path class="lock-arc" d="M627 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="624" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="646" y="54">Kræver login</text>
+
+                <g class="dim"><rect class="card" x="195" y="82" width="160" height="66" rx="10" /><text class="route" x="275" y="111">/</text><text class="desc" x="275" y="132">forsiden</text></g>
+                <g class="dim"><rect class="card" x="50" y="200" width="160" height="66" rx="10" /><text class="route" x="130" y="229">/register</text><text class="desc" x="130" y="250">opret en konto</text></g>
+                <g class="keep"><rect class="card" x="340" y="200" width="160" height="66" rx="10" /><text class="route" x="420" y="229">/login</text><text class="desc" x="420" y="250">log ind</text></g>
+                <g class="hi"><rect class="card" x="650" y="200" width="160" height="66" rx="10" /><text class="route" x="730" y="229">/profile</text><text class="desc" x="730" y="250">din profil</text></g>
+
+                <g class="dim"><line class="flow" x1="240" y1="150" x2="160" y2="197" /><line class="flow" x1="310" y1="150" x2="390" y2="197" />
+                <line class="flow" x1="212" y1="233" x2="337" y2="233" /><rect class="pill" x="228" y="208" width="92" height="20" rx="10" /><text class="label" x="274" y="222">konto oprettet</text></g>
+                <g class="keep"><line class="flow" x1="502" y1="233" x2="647" y2="233" /><rect class="pill" x="539" y="208" width="70" height="20" rx="10" /><text class="label" x="574" y="222">logget ind</text></g>
+                <g class="keep"><path class="redir" d="M730 268 V318 H420 V271" /><rect class="pill pill-red" x="487" y="295" width="176" height="20" rx="10" /><text class="label red" x="575" y="309">ikke logget ind, eller Log Out</text></g>
+              </svg>
+            </div>
+          </div>
+          <p class="bottom-line">Det bygger I i dag, i et lille projekt uden backend, tråde og sidebar. Samme billede som øverst i opgaven.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Torsdag og fredag · chatbotten efter step 14</span>
+          <h2>Login, men ingen sider kræver det endnu</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-420" viewBox="0 0 880 420" role="img" aria-labelledby="s14-title">
+                <title id="s14-title">Alle chatbottens sider kan ses uden login. Chat-siderne ligger i layout.jsx med sidebar. /login og /register ligger uden for layoutet. Kræver login er tom</title>
+                <rect class="z-open" x="20" y="20" width="580" height="380" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+
+                <rect class="layout-box" x="44" y="72" width="532" height="182" rx="12" />
+                <text class="layout-t" x="62" y="96">layout.jsx med sidebar</text>
+                <rect class="card" x="60" y="110" width="240" height="56" rx="10" /><text class="route sm" x="180" y="134">/</text><text class="file" x="180" y="154">home.jsx</text>
+                <rect class="card" x="318" y="110" width="240" height="56" rx="10" /><text class="route sm" x="438" y="134">/chat/new</text><text class="file" x="438" y="154">chat-new.jsx</text>
+                <rect class="card" x="60" y="180" width="240" height="56" rx="10" /><text class="route sm" x="180" y="204">/chat/:threadId</text><text class="file" x="180" y="224">chat-thread.jsx</text>
+                <rect class="card" x="318" y="180" width="240" height="56" rx="10" /><text class="route sm" x="438" y="204">/chat/:threadId/edit</text><text class="file" x="438" y="224">chat-thread-edit.jsx</text>
+
+                <rect class="card" x="60" y="300" width="180" height="60" rx="10" /><text class="route sm" x="150" y="325">/register</text><text class="file" x="150" y="346">register.jsx</text>
+                <rect class="card" x="360" y="300" width="180" height="60" rx="10" /><text class="route sm" x="450" y="325">/login</text><text class="file" x="450" y="346">login.jsx</text>
+                <text class="note" x="60" y="386">/login og /register står uden for layoutet, så der er ingen sidebar</text>
+
+                <line class="flow" x1="242" y1="330" x2="357" y2="330" /><rect class="pill" x="254" y="305" width="92" height="20" rx="10" /><text class="label" x="300" y="319">konto oprettet</text>
+                <line class="flow" x1="450" y1="298" x2="450" y2="258" /><rect class="pill" x="462" y="268" width="70" height="20" rx="10" /><text class="label" x="497" y="282">logget ind</text>
+
+                <rect class="z-lock" x="640" y="20" width="220" height="380" rx="14" />
+                <path class="lock-arc" d="M667 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="664" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="686" y="54">Kræver login</text>
+                <rect class="empty-box" x="665" y="150" width="170" height="104" rx="10" />
+                <text class="empty-t" x="750" y="188">Ingen sider endnu</text>
+                <text class="empty-s" x="750" y="212">Chat-siderne kommer</text>
+                <text class="empty-s" x="750" y="230">i de næste steps</text>
+                <path class="to-lock" d="M578 163 C 615 163, 625 202, 660 202" />
+              </svg>
+            </div>
+          </div>
+          <p class="bottom-line">Samme register og login som i dag, sat ind i chatbotten. Chat-siderne flytter først over i "Kræver login" i de næste steps.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Hvor vi er på vej hen · efter step 18</span>
+          <h2>Hvor ender chatbotten?</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-380 pg-18" viewBox="0 0 880 380" role="img" aria-labelledby="s18-title">
+                <title id="s18-title">Kun /login og /register kan ses uden login. Alle chat-siderne i layout.jsx kræver login, og du ser kun dine egne tråde. Svarer API'et 401, bliver du sendt til /login</title>
+                <rect class="z-open" x="20" y="20" width="260" height="340" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+                <rect class="card" x="50" y="84" width="200" height="60" rx="10" /><text class="route sm" x="150" y="109">/register</text><text class="file" x="150" y="130">register.jsx</text>
+                <rect class="card" x="50" y="210" width="200" height="60" rx="10" /><text class="route sm" x="150" y="235">/login</text><text class="file" x="150" y="256">login.jsx</text>
+                <line class="flow" x1="150" y1="146" x2="150" y2="207" /><rect class="pill" x="104" y="166" width="92" height="20" rx="10" /><text class="label" x="150" y="180">konto oprettet</text>
+
+                <rect class="z-lock" x="320" y="20" width="540" height="340" rx="14" />
+                <path class="lock-arc" d="M347 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="344" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="366" y="54">Kræver login</text>
+                <rect class="layout-box" x="344" y="72" width="492" height="182" rx="12" />
+                <text class="layout-t" x="362" y="96">layout.jsx med sidebar</text>
+                <rect class="pill pill-orange" x="652" y="82" width="168" height="22" rx="11" /><text class="label orange" x="736" y="97">kun dine egne tråde</text>
+                <rect class="card" x="360" y="110" width="220" height="56" rx="10" /><text class="route sm" x="470" y="134">/</text><text class="file" x="470" y="154">home.jsx</text>
+                <rect class="card" x="600" y="110" width="220" height="56" rx="10" /><text class="route sm" x="710" y="134">/chat/new</text><text class="file" x="710" y="154">chat-new.jsx</text>
+                <rect class="card" x="360" y="180" width="220" height="56" rx="10" /><text class="route sm" x="470" y="204">/chat/:threadId</text><text class="file" x="470" y="224">chat-thread.jsx</text>
+                <rect class="card" x="600" y="180" width="220" height="56" rx="10" /><text class="route sm" x="710" y="204">/chat/:threadId/edit</text><text class="file" x="710" y="224">chat-thread-edit.jsx</text>
+
+                <line class="flow" x1="252" y1="240" x2="341" y2="240" /><rect class="pill" x="263" y="214" width="70" height="20" rx="10" /><text class="label" x="298" y="228">logget ind</text>
+                <path class="redir" d="M590 256 V322 H150 V273" /><rect class="pill pill-red" x="308" y="312" width="124" height="20" rx="10" /><text class="label red" x="370" y="326">API'et svarer 401</text>
+              </svg>
+            </div>
+            <ol class="steps18">
+              <li><b>15</b><span>Tokenet sendes med til backenden</span></li>
+              <li><b>16</b><span>Backenden kræver det og tjekker det med <code>getUser()</code></span></li>
+              <li><b>17</b><span>I ser kun jeres egne tråde</span></li>
+              <li><b>18</b><span>Svarer API'et 401, sendes I til <code>/login</code></span></li>
+            </ol>
+          </div>
+          <p class="bottom-line">Til sidst sender chatbotten jer til <code>/login</code>, hvis I ikke er logget ind. Det samme, som <code>/profile</code> gør i dag.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">I går</span>
+          <h2>Fire ting fra i går, I bruger i dag</h2>
+          <div class="stage">
+            <div class="recap4">
+              <article style="--c: var(--cyan)">
+                <div class="top"><span>Authentication</span><strong>Hvem er du?</strong><small>Systemet tjekker, at du er den, du siger. Fx når du logger ind med email og password.</small></div>
+                <div class="today"><b>I dag</b>Opret en konto og log ind. Øvelse 4-6</div>
+              </article>
+              <article style="--c: var(--orange)">
+                <div class="top"><span>Hash og salt</span><strong>Aldrig passwordet selv</strong><pre class="viz-code">crypt('hemmelig123',
+  gen_salt('bf', 10))</pre><small>Samme password, forskellige hashes.</small></div>
+                <div class="today"><b>I dag</b>Find samme slags hash i jeres egen <code>auth.users</code></div>
+              </article>
+              <article style="--c: var(--purple)">
+                <div class="top"><span>Opgave 11, situation 3</span><strong>Signaturen på tokenet</strong><small>"Backenden tjekker, at signaturen på dit token passer." Det var authentication.</small></div>
+                <div class="today"><b>I dag</b>Kig i jeres eget token, og ret i det. Øvelse 7-8</div>
+              </article>
+              <article style="--c: var(--yellow)">
+                <div class="top"><span>Authorization</span><strong>Hvad må du?</strong><small>Fx om du må slette en bestemt tråd. Kræver, at systemet ved, hvem du er. Authentication kommer altid først.</small></div>
+                <div class="today"><b>Senere</b>Når backenden tjekker tokenet</div>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">I går var det SQL og begreber. I dag ser I det hele ske i jeres eget Supabase-projekt.</p>
+        </section>
+
+        <!-- ============ 01 HVAD MANGLER CHATBOTTEN? ============ -->
+
+        <section id="huller" class="chapter" data-accent="red">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Hvad mangler chatbotten?</span>
+          <h2>Den ved ikke,<br />hvem I er</h2>
+          <p>Jeres chatbot kan oprette, læse, omdøbe og slette tråde. Men alle ser alles tråde, og alle kan slette alt. Prøv selv.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">To og to · 10 minutter</span>
+          <h2>Prøv at ødelægge jeres chatbot</h2>
+          <div class="stage">
+            <div class="twob-layout">
+              <ol class="steps">
+                <li>Start frontend og backend. Åbn chatbotten i et normalt vindue og i et inkognitovindue</li>
+                <li>Opret en tråd i det ene vindue. Kan det andet se den?</li>
+                <li>Omdøb eller slet den fra det andet vindue</li>
+                <li>Send <code>GET /api/threads</code> fra Thunder Client. Hvad får I?</li>
+                <li>Åbn <code>threads</code> i Supabase. Hvor står det, hvem der ejer en tråd?</li>
+              </ol>
+              <div class="twob" aria-hidden="true">
+                <div class="bw">
+                  <div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">localhost:5173</span></div>
+                  <div class="cb"><aside class="cb-side"><div class="cb-head"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads"><li class="mine">Min hemmelige tråd</li><li>How to learn programming?</li><li>What are the best pizza toppings?</li><li>Can you explain quantum physics?</li><li>Help me create a morning routine</li></ul><div class="cb-foot"><i></i>Batman</div></aside><div class="cb-main"><div class="cb-msgs"><div class="cb-msg user"><p>Det her må ingen andre se</p></div><div class="cb-msg bot"><p>Selvfølgelig. Din hemmelighed er sikker hos mig.</p></div></div><div class="cb-input"><span>Type your message here...</span><b>Send</b></div></div></div>
+                </div>
+                <div class="bw incog">
+                  <div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">localhost:5173</span><span class="bw-tag">Inkognito</span></div>
+                  <div class="cb"><aside class="cb-side"><div class="cb-head"><b>Chatbot</b><span>+ New</span></div><ul class="cb-threads"><li class="mine">Min hemmelige tråd</li><li>How to learn programming?</li><li>What are the best pizza toppings?</li><li>Can you explain quantum physics?</li><li>Help me create a morning routine</li></ul><div class="cb-foot"><i></i>Batman</div></aside><div class="cb-main"><div class="cb-msgs"><div class="cb-msg user"><p>Det her må ingen andre se</p></div><div class="cb-msg bot"><p>Selvfølgelig. Din hemmelighed er sikker hos mig.</p></div></div><div class="cb-input"><span>Type your message here...</span><b>Send</b></div></div></div>
+                </div>
+                <b class="q">?</b>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Skriv hullerne ned. Vi samler dem på tavlen og vender tilbage til listen sidst på dagen.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Hvor står det, hvem der ejer en tråd?</span>
+          <h2>Kolonnen findes. Men alle nye tråde får alices id</h2>
+          <div class="stage">
+            <div class="tbl" style="margin-bottom: 26px">
+              <div class="tbl-head"><span class="vchip muted">public</span><b>threads</b><span>jeres nye tråde fra før</span></div>
+              <table>
+                <thead><tr><th>title</th><th>user_id</th><th>created_at</th></tr></thead>
+                <tbody>
+                  <tr class="hi"><td>Min hemmelige tråd</td><td class="uid">00000001-0001-0001-0001-000000000001<span class="uid-who">alice</span></td><td>2026-10-28 08:31</td></tr>
+                  <tr class="hi"><td>Omdøbt fra inkognito</td><td class="uid">00000001-0001-0001-0001-000000000001<span class="uid-who">alice</span></td><td>2026-10-28 08:29</td></tr>
+                  <tr class="hi"><td>Thunder Client-test</td><td class="uid">00000001-0001-0001-0001-000000000001<span class="uid-who">alice</span></td><td>2026-10-28 08:26</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="owner-layout">
+              <pre class="viz-code"><span class="c">// backend/server.js · alice fra seed.sql, indtil vi har login</span>
+<span class="k">const</span> <span class="hl">TEST_USER_ID</span> = <span class="s">"00000001-0001-0001-0001-000000000001"</span>;
+
+INSERT INTO threads (title, user_id)
+VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
+              <div class="card card-bad">
+                <span>Fra trin 12 i går</span>
+                <p><code>threads.user_id</code> er <code>NOT NULL</code> og en foreign key til <code>auth.users</code>. Indtil der er login, får alle nye tråde testbrugeren <b>alice</b>.</p>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Databasen kan godt gemme en ejer. Det er API'et, der ikke ved, hvem I er.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Sortér hullerne · ligesom opgave 11 i går</span>
+          <h2>Authentication eller authorization?</h2>
+          <div class="stage">
+            <div class="holes-head">
+              <div style="--c: var(--cyan)"><b>Authentication:</b> Hvem er du?</div>
+              <div style="--c: var(--orange)"><b>Authorization:</b> Hvad må du?</div>
+            </div>
+            <ul class="holes">
+              <li><i>1</i><span>Chatbotten ved ikke, hvem der bruger den. Sidebaren siger bare "Batman"</span><em class="authn fragment">Authentication</em></li>
+              <li><i>2</i><span>Alle nye tråde får alices id</span><em class="authn fragment">Authentication</em></li>
+              <li><i>3</i><span>Thunder Client får alle tråde uden at logge ind</span><em class="authn fragment">Authentication</em></li>
+              <li><i>4</i><span>Alle ser alles tråde</span><em class="authz fragment">Authorization</em></li>
+              <li><i>5</i><span>Alle kan omdøbe og slette alles tråde</span><em class="authz fragment">Authorization</em></li>
+            </ul>
+          </div>
+          <p class="bottom-line">Authorization kræver authentication. Man kan ikke tjekke, hvad du må, før man ved, hvem du er.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">De næste uger</span>
+          <h2>I dag: authentication, og kun i frontenden</h2>
+          <div class="stage">
+            <div class="roadmap">
+              <span class="lane" style="grid-row: 1">Frontend</span>
+              <span class="lane" style="grid-row: 3">Backend</span>
+              <article class="ev front now" style="grid-column: 2"><small>I dag · step 14</small><strong>Login i frontenden</strong><span>Brugeren logger ind og får et token</span></article>
+              <article class="ev front" style="grid-column: 3"><small>3. nov · step 15</small><strong>Tokenet med til API'et</strong><span>Hvert request sender tokenet med</span></article>
+              <div class="empty" style="grid-column: 4; grid-row: 1"></div>
+              <article class="ev front" style="grid-column: 5"><small>11. november</small><strong>Når sessionen udløber</strong><span>Frontenden opdager det og sender til login</span></article>
+              <div class="empty" style="grid-column: 6; grid-row: 1"></div>
+              <div class="axis"><span class="now">28/10</span><span>3/11</span><span>10/11</span><span>11/11</span><span>12/11</span></div>
+              <div class="empty" style="grid-column: 2; grid-row: 3"></div>
+              <div class="empty" style="grid-column: 3; grid-row: 3"></div>
+              <article class="ev back" style="grid-column: 4"><small>10. november</small><strong>Backenden kræver tokenet</strong><span>API'et tjekker signaturen og ser jeres id</span></article>
+              <div class="empty" style="grid-column: 5; grid-row: 3"></div>
+              <article class="ev back" style="grid-column: 6"><small>12. november</small><strong>Kun jeres egne tråde</strong><span>Hver bruger ser og ændrer kun sine egne data</span></article>
+            </div>
+          </div>
+          <p class="bottom-line">Brugeren logger ind med email og password og får et token. Authorization kommer, når backenden begynder at kræve tokenet.</p>
+        </section>
+
+        <!-- ============ 02 SUPABASE AUTH ============ -->
+
+        <section id="supabase-auth" class="chapter" data-accent="green">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Supabase Auth · øvelse 1-3</span>
+          <h2>Login er svært<br />at bygge selv</h2>
+          <p>Supabase Auth klarer det for jer, i det Supabase-projekt, I allerede bruger til tråde og beskeder.</p>
+        </section>
+
+        <section class="fill cors-def-slide" data-accent="green">
+          <span class="eyebrow">Definition</span>
+          <h2>Hvad er Supabase Auth?</h2>
+          <div class="stage">
+            <div class="throw-anatomy cors-name">
+              <span class="cn-cross"><code>Supabase</code><small>det projekt, I allerede bruger</small></span>
+              <span class="cn-share"><code>Auth</code><small>authentication · hvem er du?</small></span>
+            </div>
+            <p class="cors-definition">Supabase Auth er den del af Supabase, der klarer <b>brugere</b>. Den gemmer passwords sikkert, udsteder <b>tokens</b> og kan sende bekræftelsesmails.</p>
+            <div class="cards-3 cors-facts">
+              <article class="card card-good"><span>Svarer på · hvem er du?</span><p>Authentication. Den ved, hvem brugeren er, og giver et token, der beviser det.</p></article>
+              <article class="card card-warn"><span>Svarer ikke på · hvad må du?</span><p>Hvad brugeren må i jeres API, bestemmer jeres backend. Når den begynder at kræve tokenet.</p></article>
+              <article class="card"><span>Kan mere, end vi bruger</span><p>Magic links og login med Google eller GitHub. I dag kun email og password.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">Samme ord som i går. Supabase Auth klarer <b>authentication</b>. <b>Authorization</b> er stadig jeres eget job.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">Hvad kan Supabase Auth?</span>
+          <h2>Det, I ellers skulle bygge selv</h2>
+          <div class="stage">
+            <div class="cap6">
+              <article style="--c: var(--cyan)"><i>1</i><strong>Opretter brugere</strong><span>Med email og password. Brugeren lander i <code>auth.users</code>.</span><small><code>signUp()</code> · øvelse 4</small></article>
+              <article style="--c: var(--orange)"><i>2</i><strong>Gemmer passwords sikkert</strong><span>bcrypt med en ny salt til hver bruger. Aldrig passwordet selv.</span><small><code>encrypted_password</code> · i går</small></article>
+              <article style="--c: var(--cyan)"><i>3</i><strong>Logger ind</strong><span>Tjekker passwordet mod hashen, og udsteder et JWT.</span><small><code>signInWithPassword()</code> · øvelse 6</small></article>
+              <article style="--c: var(--purple)"><i>4</i><strong>Tjekker tokenet</strong><span>Passer signaturen? Så ved den, hvem brugeren er.</span><small><code>getUser()</code> · øvelse 8</small></article>
+              <article style="--c: var(--purple)"><i>5</i><strong>Fornyer og sletter tokenet</strong><span>Et nyt access token hver time. Væk igen ved logout.</span><small><code>signOut()</code> · øvelse 9</small></article>
+              <article style="--c: var(--yellow)"><i>6</i><strong>Sender mails</strong><span>Bekræft email og nulstil password. Kun få mails i timen.</span><small>Confirm email · slået fra i dag</small></article>
+            </div>
+          </div>
+          <p class="bottom-line">Seks ting, I slipper for at bygge og holde sikre selv. I kalder dem med én linje hver.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">Hvor bor Supabase Auth?</span>
+          <h2>Samme projekt. En ny del af det</h2>
+          <div class="stage">
+            <div class="sbx-solo">
+              <div class="sbx">
+                <div class="sbx-title"><svg viewBox="0 0 109 113" aria-hidden="true"><path d="M63.7 110.3c-2.9 3.6-8.6 1.6-8.7-3L54 40h45.8c8.3 0 12.9 9.6 7.7 16z" fill="#249361"/><path d="M45.3 2.1c2.9-3.6 8.6-1.6 8.7 3l.4 67.4H9.2C.9 72.5-3.7 62.9 1.5 56.5z" fill="#3ecf8e"/></svg>Jeres Supabase-projekt<small>https://….supabase.co</small></div>
+                <div class="sbx-parts">
+                  <div class="sbx-part" style="--c: var(--cyan)">
+                    <span>Database · schema public</span>
+                    <strong>Jeres tabeller</strong>
+                    <div class="tblchip">threads<small>id, title, user_id, created_at</small></div>
+                    <div class="tblchip">messages<small>id, thread_id, type, content</small></div>
+                    <em class="tag">Det har I brugt</em>
+                  </div>
+                  <div class="sbx-part" style="--c: var(--green)">
+                    <span>Auth · schema auth</span>
+                    <strong>Supabase' tabeller</strong>
+                    <div class="tblchip">auth.users<small>id, email, encrypted_password, …</small></div>
+                    <em class="tag">Nyt i dag</em>
+                  </div>
+                </div>
+                <div class="sbx-fk"><code>threads.user_id</code> → <code>auth.users.id</code>. Den foreign key, I så i går.</div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Samme URL og samme key som i chatbotten. I bruger bare Auth-delen af projektet nu.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">Det sker i koden · @supabase/supabase-js</span>
+          <h2>Fire funktioner, fire sider</h2>
+          <div class="stage">
+            <div class="fnrows">
+              <span class="hd">Side</span><span></span><span class="hd">Kører i</span><span></span><span class="hd">Kalder</span><span></span><span class="hd">Og så</span><span></span>
+
+              <span class="cell page" style="--c: var(--cyan)">/register</span><b class="ar">→</b><span class="cell">clientAction</span><b class="ar">→</b><span class="cell call">signUp()</span><b class="ar">→</b><span class="cell res"><code>redirect("/login?registered=true")</code></span><em class="ex" style="--c: var(--cyan)">Øvelse 4</em>
+
+              <span class="cell page" style="--c: var(--cyan)">/login</span><b class="ar">→</b><span class="cell">clientAction</span><b class="ar">→</b><span class="cell call">signInWithPassword()</span><b class="ar">→</b><span class="cell res">Token i localStorage, og <code>redirect("/profile")</code></span><em class="ex" style="--c: var(--cyan)">Øvelse 6</em>
+
+              <span class="cell page" style="--c: var(--orange)">/profile</span><b class="ar">→</b><span class="cell">clientLoader</span><b class="ar">→</b><span class="cell call">getUser()</span><b class="ar">→</b><span class="cell res">Vis brugeren, eller <code>redirect("/login")</code></span><em class="ex" style="--c: var(--green)">Øvelse 8</em>
+
+              <span class="cell page" style="--c: var(--orange)">Log Out</span><b class="ar">→</b><span class="cell">clientAction</span><b class="ar">→</b><span class="cell call">signOut()</span><b class="ar">→</b><span class="cell res">Tokenet slettes, og <code>redirect("/login")</code></span><em class="ex" style="--c: var(--green)">Øvelse 9</em>
+            </div>
+          </div>
+          <p class="bottom-line">Ingen <code>fetch</code> og ingen URL'er. Klienten sender requests til Supabase og gemmer tokenet for jer.</p>
+        </section>
+
+        <section id="ex-1" class="activity-slide handson" data-accent="green">
+          <span class="ho-num"><small>Øvelse</small>1-3</span>
+          <span class="eyebrow">Hands-on · Øvelse 1-3</span>
+          <h2>Projektet, klienten og routes</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md#øvelse-1-hent-startprojektet" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Øvelse 1:</b> Hent <code>react-supabase-auth</code> med degit, commit, og start det</li>
+            <li><b>Øvelse 2:</b> Installér <code>@supabase/supabase-js</code>. Lav <code>.env</code> med URL og key fra chatbottens <code>frontend/.env</code></li>
+            <li><b>Øvelse 2:</b> Slå <b>Confirm email</b> fra i Supabase, og opret <code>app/lib/supabase.js</code></li>
+            <li><b>Øvelse 3:</b> Registrér <code>/register</code> og <code>/login</code> i <code>routes.js</code></li>
+          </ul>
+          <p class="bottom-line">Test: <code>/register</code> og <code>/login</code> vises. Commit og push efter hver øvelse.</p>
+        </section>
+
+        <!-- ============ 03 OPRET EN BRUGER ============ -->
+
+        <section id="opret" class="chapter" data-accent="cyan">
+          <span class="chapter-number">03</span>
+          <span class="eyebrow">Opret en bruger · øvelse 4</span>
+          <h2>En formular, en<br />clientAction og signUp()</h2>
+          <p>Samme mønster, som når I sender en besked i chatbotten. Nu sender clientAction bare videre til Supabase.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Prøv det først</span>
+          <h2>Tryk "Create Account", før der er en clientAction</h2>
+          <div class="stage">
+            <div class="err405">
+              <div class="bw">
+                <div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">localhost:5173/register</span></div>
+                <div class="bw-body">
+                  <div class="ac"><span class="h">Create Account</span><span class="sub">Sign up with email and password</span><div class="fg"><span>Email</span><i>anna@example.com</i></div><div class="fg"><span>Password</span><i>•••••••••••</i></div><div class="fg"><span>Confirm Password</span><i>•••••••••••</i></div><span class="btn">Create Account</span></div>
+                </div>
+              </div>
+              <div class="click">→<small>Create<br />Account</small></div>
+              <div class="bw">
+                <div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">localhost:5173/register</span></div>
+                <div class="bw-body">
+                  <div class="ac"><span class="h">Error 405</span><span class="err">Error: You made a POST request to "/register" but did not provide an `action` for route "routes/register", so there is no way to handle the request.</span><span class="foot"><b>Back to start</b></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line"><code>&lt;Form method="post"&gt;</code> sender til routens egen <code>clientAction</code>. Den findes ikke endnu. Fejlen siger det ret præcist.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Fra formularen til clientAction</span>
+          <h2><code>name</code> er det, <code>formData.get()</code> læser</h2>
+          <div class="stage">
+            <div class="wire">
+              <div>
+                <span class="viz-label">register.jsx · formularen</span>
+                <pre class="viz-code"><span class="t">&lt;Form</span> <span class="n4">method="post"</span><span class="t">&gt;</span>
+  <span class="t">&lt;input</span> type="email" <span class="n1">name="email"</span> <span class="t">/&gt;</span>
+  <span class="t">&lt;input</span> type="password" <span class="n2">name="password"</span> <span class="t">/&gt;</span>
+  <span class="t">&lt;input</span> type="password" <span class="n3">name="confirmPassword"</span> <span class="t">/&gt;</span>
+  <span class="t">&lt;button</span> type="submit"<span class="t">&gt;</span>Create Account<span class="t">&lt;/button&gt;</span>
+<span class="t">&lt;/Form&gt;</span></pre>
+              </div>
+              <b class="v-arrow">→<small>submit</small></b>
+              <div>
+                <span class="viz-label">register.jsx · øverst i filen</span>
+                <pre class="viz-code"><span class="k">export async function</span> <span class="n4">clientAction</span>({ request }) {
+  <span class="k">const</span> formData = <span class="k">await</span> request.formData();
+  <span class="k">const</span> email = formData.get(<span class="n1">"email"</span>);
+  <span class="k">const</span> password = formData.get(<span class="n2">"password"</span>);
+  <span class="c">// "confirmPassword": øvelse 5</span>
+}</pre>
+              </div>
+              <div class="same-in-chatbot"><span>Samme i chatbotten</span>ChatInput: <code>&lt;textarea name="message"&gt;</code> → <code>chat-new.jsx</code>: <code>formData.get("message")</code></div>
+            </div>
+          </div>
+          <p class="bottom-line">Staver I <code>name</code> forkert i den ene ende, får I <code>null</code> i den anden. Det tester I i trin 1.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Formularens markup · lad jer inspirere i step 14</span>
+          <h2>Hver attribut har sit eget job</h2>
+          <div class="stage">
+            <div class="anat">
+              <pre class="viz-code"><span class="t">&lt;div</span> className="form-group"<span class="t">&gt;</span>
+  <span class="t">&lt;label</span> <span class="n1">htmlFor="password"</span><span class="t">&gt;</span>Password<span class="t">&lt;/label&gt;</span>
+  <span class="t">&lt;input</span>
+    <span class="n3">type="password"</span>
+    <span class="n1">id="password"</span>
+    <span class="n2">name="password"</span>
+    <span class="n6">required</span>
+    <span class="n6">minLength={6}</span>
+    <span class="n5">autoComplete="new-password"</span>
+    placeholder="At least 6 characters"
+  <span class="t">/&gt;</span>
+<span class="t">&lt;/div&gt;</span></pre>
+              <ul class="anat-list">
+                <li><span class="a"><code class="n1">htmlFor</code> = <code class="n1">id</code></span><span>Klik på teksten, så får feltet fokus. Skærmlæsere læser den op</span></li>
+                <li><span class="a"><code class="n2">name</code></span><span>Det, <code>formData.get()</code> læser i <code>clientAction</code></span></li>
+                <li><span class="a"><code class="n3">type="password"</code></span><span>Skjuler det, man skriver. <code>type="email"</code> giver @ på mobilens tastatur</span></li>
+                <li><span class="a"><code class="n6">required</code> <code class="n6">minLength</code></span><span>Browseren tjekker, før formularen sendes. Første lag i øvelse 5</span></li>
+                <li><span class="a"><code class="n5">autoComplete</code></span><span><code>"new-password"</code> ved oprettelse, <code>"current-password"</code> ved login. Hjælper password-manageren</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="bottom-line">Formularerne er færdige i projektet. Kig på dem, når I laver siderne i chatbotten.</p>
+        </section>
+
+        <section id="ex-4" class="activity-slide handson" data-accent="cyan">
+          <span class="ho-num"><small>Øvelse</small>4</span>
+          <span class="eyebrow">Hands-on · Øvelse 4</span>
+          <h2>Opret en bruger</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md#øvelse-4-opret-en-bruger" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Trin 1:</b> Læs <code>email</code> og <code>password</code> med <code>formData.get()</code>, og log dem</li>
+            <li><b>Trin 2:</b> Opret brugeren med <code>signUp()</code>, og log hele svaret</li>
+            <li><b>Trin 3:</b> Håndtér <code>error</code>, og send videre med <code>redirect()</code></li>
+            <li>Find brugeren under Authentication › Users og i <code>auth.users</code></li>
+          </ul>
+          <p class="bottom-line">Test efter hvert trin. Testene står i opgaven, og vi kigger på dem sammen bagefter.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Trin 1 · hvor blev det logget?</span>
+          <h2>clientAction kører i browseren, ikke i terminalen</h2>
+          <div class="stage">
+            <div class="where">
+              <article>
+                <div class="verdict yes"><b>✓</b>DevTools › Console</div>
+                <div class="dt">
+                  <div class="dt-tabs"><span>Elements</span><span class="on">Console</span><span>Network</span><span>Application</span></div>
+                  <div class="dt-body">
+                    <div class="dt-line">anna@example.com hemmelig123 <span class="m">                register.jsx:7</span></div>
+                  </div>
+                </div>
+              </article>
+              <article>
+                <div class="verdict no"><b>✗</b>Terminalen med <code>npm run dev</code></div>
+                <div class="term"><b>Terminal</b><pre>  <span class="g">VITE</span> v7.1.3  ready in 312 ms
+
+  <span class="g">➜</span>  Local:   http://localhost:5173/
+  <span class="m">➜  Network: use --host to expose</span>
+  <span class="m">➜  press h + enter to show help</span>
+</pre></div>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line"><code>ssr: false</code> i <code>react-router.config.js</code>. Hele appen kører i browseren, ligesom chatbotten. Derfor kan supabase-js gemme tokenet i browserens localStorage.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Trin 2 · svaret fra signUp()</span>
+          <h2>Svaret har altid to dele: <code>data</code> og <code>error</code></h2>
+          <div class="stage">
+            <div class="de2">
+              <article>
+                <span class="viz-label">Ny email</span>
+                <pre class="viz-code">{
+  data: {
+    user: { <span class="ok">id: "8f3c2a71-…", email: "anna@example.com"</span>, … },
+    session: { access_token: "eyJhbGciOi…", … }
+  },
+  error: <span class="nul">null</span>
+}</pre>
+              </article>
+              <article>
+                <span class="viz-label">Samme email igen</span>
+                <pre class="viz-code">{
+  data: { user: <span class="nul">null</span>, session: <span class="nul">null</span> },
+  error: <span class="bad">AuthApiError</span> {
+    message: <span class="bad">"User already registered"</span>,
+    status: 422
+  }
+}</pre>
+              </article>
+              <pre class="viz-code de2-code"><span class="k">const</span> { error } = <span class="k">await</span> supabase.auth.signUp({ email, password });</pre>
+            </div>
+          </div>
+          <p class="bottom-line">I trin 3 henter I kun <code>error</code> ud af svaret. <code>getUser()</code> i øvelse 8 svarer på samme måde.</p>
+        </section>
+
+        <!-- ============ 04 PASSWORDS ============ -->
+
+        <section id="passwords" class="chapter" data-accent="orange">
+          <span class="chapter-number">04</span>
+          <span class="eyebrow">Passwords i Supabase Auth</span>
+          <h2>Fra crypt i går<br />til signUp() i dag</h2>
+          <p>I går hashede I selv et password i SQL Editor. I dag gør Supabase det samme for jer, hver gang I kalder <code>signUp()</code>.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Passwordets vej</span>
+          <h2>Fra formularen til <code>auth.users</code></h2>
+          <div class="stage">
+            <div class="chain">
+              <div class="nd" style="--c: var(--cyan)"><span>1 · Formularen</span><strong>Brugeren skriver <span class="pw">hemmelig123</span></strong><small>Prikker på skærmen. Men klartekst i jeres JavaScript.</small></div>
+              <div class="ar lock">🔒<small>HTTPS</small></div>
+              <div class="nd" style="--c: var(--yellow)"><span>2 · Requestet</span><strong>POST /auth/v1/signup</strong><pre class="viz-code">{
+  "email": "anna@example.com",
+  "password": "<span class="pw">hemmelig123</span>"
+}</pre><small>Klartekst i body, men krypteret på vejen.</small></div>
+              <div class="ar">→<small>Supabase<br />modtager</small></div>
+              <div class="nd" style="--c: var(--orange)"><span>3 · Supabase Auth</span><strong>bcrypt med en ny salt</strong><small>Det samme som <code>crypt('hemmelig123', gen_salt('bf', 10))</code> i går.</small></div>
+              <div class="ar">→<small>gemmer</small></div>
+              <div class="nd" style="--c: var(--green)"><span>4 · auth.users</span><strong>encrypted_password</strong><div class="hashchip">$2a$10$7T/wgSvC.SqSZC/VvI96Zu1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</div><small>Passwordet bliver aldrig gemt. Kun hashen.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">HTTPS beskytter passwordet på vejen. bcrypt beskytter det, når det ligger i databasen.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Øvelse 4 · test trin 3 · se det selv</span>
+          <h2>Find passwordet på vejen og hashen i databasen</h2>
+          <div class="stage">
+            <div class="net-layout">
+              <ol class="steps">
+                <li>Åbn <b>Network</b>-fanen, og opret en ny bruger</li>
+                <li>Klik på <code>signup</code>. Står passwordet i klartekst i <b>Payload</b>? Står der <code>https</code> i URL'en?</li>
+                <li><b>Table Editor</b> › schema <code>auth</code> › <code>users</code>. Find <code>encrypted_password</code>. Starter den med <code>$2a$</code>?</li>
+                <li>Opret en bruger mere med samme password. Er de to hashes ens?</li>
+              </ol>
+              <div class="dt">
+                <div class="dt-tabs"><span>Elements</span><span>Console</span><span class="on">Network</span><span>Application</span></div>
+                <div class="dt-net">
+                  <div class="reqs"><div class="on">signup</div><div>login</div><div>login.jsx</div></div>
+                  <div class="pane">
+                    <div class="dt-tabs"><span>Headers</span><span class="on">Payload</span><span>Response</span></div>
+                    <div class="kv"><b>Request URL</b><span><span class="https">https</span>://qwmzkcyhprlbtnxsdfga.supabase.co/auth/v1/signup</span><b>Request Method</b><span>POST</span><b>Status Code</b><span>200 OK</span></div>
+                    <div class="dt-payload">{
+  <span class="k">"email"</span>: <span class="s">"anna@example.com"</span>,
+  <span class="k">"password"</span>: <span class="pw">"hemmelig123"</span>,
+  <span class="k">"data"</span>: {},
+  <span class="k">"gotrue_meta_security"</span>: {}
+}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Passwordet står i klartekst i requestet, men forbindelsen er HTTPS. Først hos Supabase bliver det hashet.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">I går og i dag</span>
+          <h2>Samme slags hash, som I lavede i går</h2>
+          <div class="stage">
+            <div class="yt">
+              <article style="--c: var(--orange)">
+                <span>I går · SQL Editor</span>
+                <pre class="viz-code"><span class="k">SELECT</span> crypt(<span class="s">'hemmelig123'</span>, gen_salt(<span class="s">'bf'</span>, 10));</pre>
+                <b class="down">↓</b>
+                <div class="out"><small>Resultat</small>$2a$10$7T/wgSvC.SqSZC/VvI96Zu1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</div>
+              </article>
+              <b>=</b>
+              <article style="--c: var(--green)">
+                <span>I dag · register.jsx</span>
+                <pre class="viz-code"><span class="k">await</span> supabase.auth.signUp({ email, password: <span class="s">"hemmelig123"</span> });</pre>
+                <b class="down">↓</b>
+                <div class="out"><small>auth.users · encrypted_password</small>$2a$10$.KsgMosBW/mohUqKBPliUeQSBa/1wc/lo1E4erohOuTKETxMjEKem</div>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line"><code>$2a$</code> betyder bcrypt. I skriver ikke selv SQL'en. Supabase hasher passwordet for jer, når I kalder <code>signUp()</code>.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Anatomien af en bcrypt-hash</span>
+          <h2>Hashen har salten med</h2>
+          <div class="stage">
+            <div class="hashv">
+              <div class="hv-str">
+                <span class="h-alg"><i>$2a$</i><small>algoritme</small></span>
+                <span class="h-cost"><i>10$</i><small>cost</small></span>
+                <span class="h-salt"><i>7T/wgSvC.SqSZC/VvI96Zu</i><small>salt · 22 tegn</small></span>
+                <span class="h-hash"><i>1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</i><small>hash · 31 tegn</small></span>
+              </div>
+              <div class="hv-cards">
+                <article class="h-alg"><strong>Algoritme</strong><span><code>$2a$</code> betyder bcrypt. Den samme i SQL Editor og i Supabase Auth.</span></article>
+                <article class="h-cost"><strong>Cost</strong><span>2<sup>10</sup> = 1.024 runder. <b>Langsom med vilje</b>, så hvert gæt tager tid. md5 er hurtig.</span></article>
+                <article class="h-salt"><strong>Salt</strong><span>Tilfældig og ny for hver bruger. <b>Ikke hemmelig.</b> Den står jo lige her.</span></article>
+                <article class="h-hash"><strong>Hash</strong><span>Password + salt hakket sammen. Kan <b>ikke</b> regnes baglæns.</span></article>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Salten står i hashen. Derfor kan Supabase tjekke jeres password ved login uden at gemme passwordet. Det ser I i øvelse 6.</p>
+        </section>
+
+        <section class="fill two-users" data-accent="orange">
+          <span class="eyebrow">Øvelse 4 · to brugere, samme password</span>
+          <h2>Samme password giver to forskellige hashes</h2>
+          <div class="stage">
+            <div class="tbl">
+              <div class="tbl-head"><span class="vchip muted">auth</span><b>users</b><span>begge har skrevet hemmelig123</span></div>
+              <table>
+                <thead><tr><th>email</th><th>encrypted_password</th></tr></thead>
+                <tbody>
+                  <tr><td>anna@example.com</td><td><span class="h-pre-txt">$2a$10$</span><span class="h-salt-txt">7T/wgSvC.SqSZC/VvI96Zu</span><span class="h-hash-txt">1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</span></td></tr>
+                  <tr><td>bo@example.com</td><td><span class="h-pre-txt">$2a$10$</span><span class="h-salt-txt">.KsgMosBW/mohUqKBPliUe</span><span class="h-hash-txt">QSBa/1wc/lo1E4erohOuTKETxMjEKem</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="cards-3">
+              <div class="card" style="--accent: var(--cyan)"><span>Samme password</span><p>Begge har skrevet <code>hemmelig123</code></p></div>
+              <div class="card" style="--accent: var(--green)"><span>Forskellig salt</span><p>Supabase laver en ny salt til hver bruger</p></div>
+              <div class="card" style="--accent: var(--orange)"><span>Forskellig hash</span><p>En tyv kan ikke se, at de har samme password. Og kan ikke slå hashen op i en liste, som med md5</p></div>
+            </div>
+          </div>
+          <p class="bottom-line">Præcis som da I kørte <code>crypt</code> to gange i går og fik to forskellige hashes.</p>
+        </section>
+
+        <!-- ============ 05 VALIDERING ============ -->
+
+        <section id="validering" class="chapter" data-accent="yellow">
+          <span class="chapter-number">05</span>
+          <span class="eyebrow">Validering · øvelse 5</span>
+          <h2>Tre lag, og kun<br />ét på serveren</h2>
+          <p>Hvad, hvis de to passwords ikke er ens? Lige nu tjekker ingen det.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Prøv det først</span>
+          <h2>Forskellige passwords? Oprettet alligevel</h2>
+          <div class="stage">
+            <div class="broken">
+              <div class="ac"><span class="h">Create Account</span><span class="sub">Sign up with email and password</span><div class="fg"><span>Email</span><i>cecilie@example.com</i></div><div class="fg"><span>Password</span><i>•••••••••••<em>hemmelig123</em></i></div><div class="fg"><span>Confirm Password</span><i class="bad">•••••••••••<em>hemmelig124</em></i></div><span class="btn">Create Account</span></div>
+              <div class="click">→<small>Create<br />Account</small></div>
+              <div class="tbl">
+                <div class="tbl-head"><span class="vchip muted">auth</span><b>users</b></div>
+                <table>
+                  <thead><tr><th>email</th><th>created_at</th></tr></thead>
+                  <tbody>
+                    <tr><td>anna@example.com</td><td>2026-10-28 09:41</td></tr>
+                    <tr><td>bo@example.com</td><td>2026-10-28 09:44</td></tr>
+                    <tr class="hi"><td>cecilie@example.com</td><td>2026-10-28 10:02 <span class="vchip red">oprettet?!</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Jeres <code>clientAction</code> kigger aldrig på <code>confirmPassword</code>. Den sender bare email og password videre.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">useActionData()</span>
+          <h2>To veje ud af clientAction</h2>
+          <div class="stage">
+            <div class="fork2">
+              <div class="src"><strong>clientAction</strong><small>Tjekker felterne, før den kalder <code>signUp()</code></small></div>
+              <div class="fork-line" aria-hidden="true"></div>
+              <div class="path" style="--c: var(--red); grid-column: 3; grid-row: 1">
+                <span>Noget er galt</span>
+                <pre class="viz-code"><span class="k">return</span> { error: <span class="s">"Passwords do not match"</span> };</pre>
+                <small>I bliver på siden. <code>useActionData()</code> giver componenten objektet. Før første submit er det <code>undefined</code>, derfor <code>actionData?.error</code>.</small>
+              </div>
+              <b class="to" style="--c: var(--red); grid-column: 4; grid-row: 1">→</b>
+              <div style="grid-column: 5; grid-row: 1"><div class="ac"><div class="fg"><span>Password</span><i>•••••••••••</i></div><div class="fg"><span>Confirm Password</span><i class="bad">•••••••••••</i></div><span class="err">Passwords do not match</span><span class="btn">Create Account</span></div></div>
+              <div class="path" style="--c: var(--green); grid-column: 3; grid-row: 2">
+                <span>Alt er godt</span>
+                <pre class="viz-code"><span class="k">return</span> redirect(<span class="s">"/login?registered=true"</span>);</pre>
+                <small>En ny side. Brugeren er oprettet.</small>
+              </div>
+              <b class="to" style="--c: var(--green); grid-column: 4; grid-row: 2">→</b>
+              <div style="grid-column: 5; grid-row: 2"><div class="ac"><span class="h">Welcome Back</span><span class="ok">Account created successfully! Please log in.</span><div class="fg"><span>Email</span><i class="ph">you@example.com</i></div></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Samme mønster som i chatbottens <code>chat-new.jsx</code>: <code>return { error: "Message cannot be empty" }</code>.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">useNavigation()</span>
+          <h2>Knappen ved, hvornår formularen bliver sendt</h2>
+          <div class="stage">
+            <div class="navstates">
+              <article style="--c: var(--muted)">
+                <code class="st">"idle"</code>
+                <div class="ac"><div class="fg"><span>Confirm Password</span><i>•••••••••••</i></div><span class="btn">Create Account</span></div>
+                <small>Formularen venter på brugeren</small>
+              </article>
+              <b>→</b>
+              <article style="--c: var(--yellow)">
+                <code class="st">"submitting"</code>
+                <div class="ac"><div class="fg"><span>Confirm Password</span><i>•••••••••••</i></div><span class="btn off">Creating account...</span></div>
+                <small><code>clientAction</code> kører. Knappen er slået fra, så ingen trykker to gange</small>
+              </article>
+              <b>→</b>
+              <article style="--c: var(--green)">
+                <code class="st">"loading"</code>
+                <div class="ac"><span class="ok">Account created successfully! Please log in.</span><span class="btn">Log In</span></div>
+                <small><code>redirect()</code> henter den næste side</small>
+              </article>
+            </div>
+            <div class="nav-code">
+              <pre class="viz-code"><span class="k">const</span> navigation = useNavigation();
+<span class="k">const</span> isSubmitting = navigation.state === <span class="s">"submitting"</span>;
+
+<span class="t">&lt;button</span> disabled={isSubmitting}<span class="t">&gt;</span>
+  {isSubmitting ? <span class="s">"Creating account..."</span> : <span class="s">"Create Account"</span>}
+<span class="t">&lt;/button&gt;</span></pre>
+            </div>
+          </div>
+          <p class="bottom-line">Det går for hurtigt til at se. Vælg <b>Slow 4G</b> i Network-fanen, og opret en bruger igen.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Tre lag validering</span>
+          <h2>Kun det sidste lag kan ingen komme uden om</h2>
+          <div class="stage">
+            <div class="layers3">
+              <span class="zone browser">I browseren · hurtig feedback</span>
+              <span class="zone server">På serveren · gælder for alle</span>
+              <article style="--c: var(--cyan)">
+                <span>Lag 1 · HTML</span>
+                <strong><code>required</code> og <code>minLength</code></strong>
+                <pre class="viz-code">&lt;input required minLength={6} /&gt;</pre>
+                <small>Browseren stopper formularen, før den bliver sendt.</small>
+              </article>
+              <article style="--c: var(--yellow)">
+                <span>Lag 2 · jeres clientAction</span>
+                <strong>Jeres egne tjek</strong>
+                <pre class="viz-code"><span class="k">if</span> (password !== confirmPassword) {
+  <span class="k">return</span> { error: <span class="s">"Passwords do not match"</span> };
+}</pre>
+                <small>Fejlen vises i formularen med <code>useActionData()</code>.</small>
+              </article>
+              <article style="--c: var(--green)">
+                <span>Lag 3 · Supabase</span>
+                <strong>Supabase' egne regler</strong>
+                <div class="msg">Password should be at least 6 characters.</div>
+                <small>Tjekkes hos Supabase, uanset hvor requestet kommer fra.</small>
+              </article>
+              <div class="bypass"><b>Kan omgås</b>Thunder Client, curl eller DevTools. Lag 1 og 2 bliver aldrig spurgt<i>→ lag 3</i></div>
+            </div>
+          </div>
+          <p class="bottom-line">Ligesom I gik uden om frontenden med Thunder Client i starten af dagen. Og ligesom jeres Express API selv validerede <code>request.body</code>.</p>
+        </section>
+
+        <section id="ex-5" class="activity-slide handson" data-accent="yellow">
+          <span class="ho-num"><small>Øvelse</small>5</span>
+          <span class="eyebrow">Hands-on · Øvelse 5</span>
+          <h2>Validering</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md#øvelse-5-validering" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Trin 1:</b> Tjek <code>confirmPassword</code> før <code>signUp()</code>, og vis fejlen med <code>useActionData()</code></li>
+            <li><b>Trin 2:</b> Tomme felter, under 6 tegn og Supabase' egen fejlbesked</li>
+            <li><b>Trin 3:</b> Slå knappen fra med <code>useNavigation()</code></li>
+            <li>Fjern <code>required</code> og <code>minLength</code>, og test de tre lag ét ad gangen</li>
+          </ul>
+          <p class="bottom-line">Sæt <code>required</code>, <code>minLength</code> og jeres længdetjek ind igen bagefter.</p>
+        </section>
+
+        <!-- ============ 06 LOG IND ============ -->
+
+        <section id="login" class="chapter" data-accent="cyan">
+          <span class="chapter-number">06</span>
+          <span class="eyebrow">Log ind · øvelse 6</span>
+          <h2>Email og password ind.<br />Et token ud</h2>
+          <p>Supabase tjekker passwordet mod hashen i <code>auth.users</code>. Passer det, får I et token tilbage.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Hvad sker der ved login?</span>
+          <h2>Hash igen med samme salt, og sammenlign</h2>
+          <div class="stage">
+            <div class="verify">
+              <article style="--c: var(--cyan)"><i>1</i><strong>Find brugeren</strong><pre class="viz-code">… WHERE email =
+  'anna@example.com'</pre><small>Supabase slår emailen op i <code>auth.users</code>.</small></article>
+              <article style="--c: var(--green)"><i>2</i><strong>Læs salten</strong><pre class="viz-code">$2a$10$<span class="sa">7T/wgSvC.SqSZC/VvI96Zu</span><span class="ha">1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</span></pre><small>Salten står i selve hashen.</small></article>
+              <article style="--c: var(--orange)"><i>3</i><strong>Hash igen</strong><pre class="viz-code">crypt('hemmelig123',
+  <span class="sa">hash</span>)</pre><small>Det indtastede password med <b>samme</b> salt.</small></article>
+              <article style="--c: var(--yellow)"><i>4</i><strong>Sammenlign</strong><pre class="viz-code">crypt(…) = <span class="ha">hash</span>
+→ true</pre><small>Ens? Så er det det rigtige password.</small></article>
+            </div>
+            <div class="verify-out">
+              <div style="--c: var(--green)"><b>✓</b><span>Ens: Supabase svarer med et <b>access token</b> og et <b>refresh token</b>. supabase-js gemmer dem i localStorage</span></div>
+              <div style="--c: var(--red)"><b>✗</b><span>Forskellige: Supabase svarer med en <code>error</code>. Jeres <code>clientAction</code> returnerer <code>{ error }</code></span></div>
+            </div>
+          </div>
+          <p class="bottom-line">Det er svaret på det sidste spørgsmål i <code>crypt</code>-opgaven i går: Hvordan kan Supabase tjekke jeres password, når hver hash er forskellig?</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">useSearchParams()</span>
+          <h2>register sender en besked til login gennem URL'en</h2>
+          <div class="stage">
+            <div class="urlv">
+              <div>
+                <span class="viz-label">register.jsx · clientAction</span>
+                <pre class="viz-code"><span class="k">return</span> redirect(
+  <span class="s">"/login<span class="hl">?registered=true</span>"</span>
+);</pre>
+              </div>
+              <b>→</b>
+              <div class="mid">
+                <div class="url">localhost:5173/login<b>?registered=true</b></div>
+                <span class="viz-label">login.jsx · componenten</span>
+                <pre class="viz-code"><span class="k">const</span> [searchParams] = useSearchParams();
+<span class="k">const</span> justRegistered =
+  searchParams.get(<span class="s">"registered"</span>) === <span class="s">"true"</span>;</pre>
+              </div>
+              <b>→</b>
+              <div class="ac"><span class="h">Welcome Back</span><span class="sub">Log in with your email and password</span><span class="ok">Account created successfully! Please log in.</span><div class="fg"><span>Email</span><i class="ph">you@example.com</i></div><div class="fg"><span>Password</span><i class="ph">Your password</i></div><span class="btn">Log In</span></div>
+            </div>
+          </div>
+          <p class="bottom-line"><code>useSearchParams()</code> returnerer et array ligesom <code>useState()</code>. I skal kun bruge den første værdi.</p>
+        </section>
+
+        <section id="ex-6" class="activity-slide handson" data-accent="cyan">
+          <span class="ho-num"><small>Øvelse</small>6</span>
+          <span class="eyebrow">Hands-on · Øvelse 6</span>
+          <h2>Log ind</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md#øvelse-6-log-ind" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>En <code>clientAction</code> i <code>login.jsx</code> med <code>signInWithPassword()</code></li>
+            <li>Én fælles fejlbesked: "Invalid email or password"</li>
+            <li>"Logging in..." på knappen med <code>useNavigation()</code></li>
+            <li>Velkomstbesked med <code>useSearchParams()</code>, når man kommer fra <code>/register</code></li>
+          </ul>
+          <p class="bottom-line">Test: forkert password giver jeres fejl. Rigtigt password sender jer til forsiden.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">To og to · 2 minutter</span>
+          <h2>To måder at sige nej. Hvilken er bedst, og hvorfor?</h2>
+          <div class="stage">
+            <div class="msg2">
+              <article>
+                <div class="lab"><b>A</b>Fortæl præcis, hvad der er galt</div>
+                <div class="pair">
+                  <div class="ac"><span class="h">Welcome Back</span><div class="fg"><span>Email</span><i>bo@exampel.com</i></div><span class="err">No account with that email</span></div>
+                  <div class="ac"><span class="h">Welcome Back</span><div class="fg"><span>Email</span><i>bo@example.com</i></div><span class="err">Wrong password</span></div>
+                </div>
+              </article>
+              <article>
+                <div class="lab"><b>B</b>Sig det samme hver gang</div>
+                <div class="pair">
+                  <div class="ac"><span class="h">Welcome Back</span><div class="fg"><span>Email</span><i>bo@example.com</i></div><span class="err">Invalid email or password</span></div>
+                </div>
+              </article>
+            </div>
+            <div class="answer fragment"><b>B.</b> Med A kan en angriber prøve emails af og se, hvem der har en konto. Så skal de kun gætte passwords til dem.</div>
+          </div>
+          <p class="bottom-line">A er mere hjælpsom for brugeren. B afslører mindre. Ved login vinder B.</p>
+        </section>
+
+        <!-- ============ 07 JWT ============ -->
+
+        <section id="jwt" class="chapter" data-accent="purple">
+          <span class="chapter-number">07</span>
+          <span class="eyebrow">JWT · øvelse 7</span>
+          <h2>Alle kan læse det.<br />Ingen kan rette i det</h2>
+          <p>Det token, Supabase giver jer ved login, er et JSON Web Token. Det siger, hvem I er, og hvor længe det gælder.</p>
+        </section>
+
+        <section id="ex-7" class="fill handson" data-accent="purple">
+          <span class="ho-num"><small>Øvelse</small>7</span>
+          <span class="eyebrow">Hands-on · Øvelse 7 · ingen kode</span>
+          <h2>Find jeres token i Local Storage</h2>
+          <div class="stage">
+            <div class="ls-layout">
+              <ol class="steps">
+                <li>Log ind. DevTools › <b>Application</b> › <b>Local Storage</b> › <code>http://localhost:5173</code></li>
+                <li>Find nøglen, der starter med <code>sb-</code> og slutter med <code>-auth-token</code></li>
+                <li>Kopiér værdien af <code>access_token</code></li>
+                <li>Indsæt den på <a href="https://jwt.io" target="_blank" rel="noreferrer"><b>jwt.io ↗</b></a></li>
+                <li>Find <code>sub</code>, <code>email</code>, <code>role</code>, <code>iat</code> og <code>exp</code> i payloaden</li>
+              </ol>
+              <div class="dt">
+                <div class="dt-tabs"><span>Elements</span><span>Console</span><span>Network</span><span class="on">Application</span></div>
+                <div class="dt-app">
+                  <div class="tree"><div>Storage</div><div class="l2">▾ Local storage</div><div class="l3 on">http://localhost:5173</div><div class="l2">▸ Session storage</div><div class="l2">▸ IndexedDB</div><div class="l2">▸ Cookies</div></div>
+                  <div class="ls">
+                    <div class="ls-row hd"><span>Key</span><span>Value</span></div>
+                    <div class="ls-row on"><span>sb-qwmzkcyhprlbtnxsdfga-auth-token</span><span>{"access_token":"eyJhbGciOiJFUzI1NiIs…</span></div>
+                    <div class="val">{
+  <span class="k">"access_token"</span>: <span class="tk">"eyJhbGciOiJFUzI1NiIs…"</span>,
+  <span class="k">"token_type"</span>: <span class="s">"bearer"</span>,
+  <span class="k">"expires_in"</span>: <span class="n">3600</span>,
+  <span class="k">"expires_at"</span>: <span class="n">1793182320</span>,
+  <span class="k">"refresh_token"</span>: <span class="s">"x7k2m9qplw4r"</span>,
+  <span class="k">"user"</span>: { <span class="k">"id"</span>: <span class="s">"8f3c2a71-…"</span>, … }
+}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Det var <code>signInWithPassword()</code>, der lagde det der. I har ikke skrevet én linje kode til at gemme det.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Det, jwt.io viser jer</span>
+          <h2>Tre dele, adskilt af punktummer</h2>
+          <div class="stage">
+            <div class="jwtv">
+              <div class="enc"><span class="h">eyJhbGciOiJFUzI1NiIsImtpZCI6ImI3YzQxZjJlLTlhM2QtNGM1NS04ZTIxLTZmMGQzYTliN2UxNCIsInR5cCI6IkpXVCJ9</span><span class="dot">.</span><span class="p">eyJpc3MiOiJodHRwczovL3F3bXprY3locHJsYnRueHNkZmdhLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZjNjMmE3MS01ZDRlLTRiOWEtOWMxZi0yZTZkN2EwYjNjNDUiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzkzMTgyMzIwLCJpYXQiOjE3OTMxNzg3MjAsImVtYWlsIjoiYW5uYUBleGFtcGxlLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJhbm5hQGV4YW1wbGUuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwic3ViIjoiOGYzYzJhNzEtNWQ0ZS00YjlhLTljMWYtMmU2ZDdhMGIzYzQ1In0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3OTMxNzg3MjB9XSwic2Vzc2lvbl9pZCI6ImQyYTllNmIxLTdjM2YtNGU4YS1iNWQwLTkxZjRjMmU3YTNiNiIsImlzX2Fub255bW91cyI6ZmFsc2V9</span><span class="dot">.</span><span class="s">Ht0NZgcqwrWsTc1eKy2kL4_XDpFokNVWx7ojlo3jV1XWPIDXX7PByaTVgAKGQNb6ruJf1HL_fFaHGqEvjX2hOQ</span></div>
+              <div class="dec">
+                <article class="jw-h"><span>Header</span><pre class="viz-code">{
+  <span class="k">"alg"</span>: "ES256",
+  <span class="k">"kid"</span>: "b7c41f2e-…",
+  <span class="k">"typ"</span>: "JWT"
+}</pre><small>Hvordan tokenet er underskrevet. Ældre projekter: HS256.</small></article>
+                <article class="jw-p"><span>Payload</span><pre class="viz-code">{
+  <span class="k">"sub"</span>: <span class="hl">"8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45"</span>,
+  <span class="k">"email"</span>: "anna@example.com",
+  <span class="k">"role"</span>: "authenticated",
+  <span class="k">"iat"</span>: 1793178720,
+  <span class="k">"exp"</span>: 1793182320,
+  <span class="m">…</span>
+}</pre><small>Data om brugeren. Hvert felt kaldes en <b>claim</b>.</small></article>
+                <article class="jw-s"><span>Signatur</span><pre class="viz-code">Ht0NZgcqwrWs
+Tc1eKy2kL4_X
+DpFokNVWx7oj
+…</pre><small>Lavet af Supabase med en hemmelig nøgle, der aldrig er i browseren.</small></article>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line"><b>header.payload.signatur</b>. jwt.io farver de tre dele på samme måde.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Kodet, ikke krypteret</span>
+          <h2>Et JWT er et postkort med et segl</h2>
+          <div class="stage">
+            <div class="pc-layout">
+              <div class="decoded">
+                <span class="viz-label">Payload, som det står i tokenet</span>
+                <pre class="viz-code enc-p">eyJpc3MiOiJodHRwczovL3F3bXprY3locHJsYnRueHNkZmdh
+LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZjNjMmE3…</pre>
+                <b class="v-arrow">↓<small>base64url-afkodet · ingen nøgle</small></b>
+                <pre class="viz-code">{ "iss": "https://qwmzkcyhprlbtnxsdfga.supabase.co/auth/v1",
+  "sub": "8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45", … }</pre>
+                <div class="rule">Kodet er ikke det samme som krypteret. <b>Der må aldrig stå hemmeligheder i et JWT.</b></div>
+              </div>
+              <b>≈</b>
+              <div class="postcard" aria-hidden="true">
+                <div class="msg"><b>Postkort</b><span>Hej! Jeg er 8f3c2a71-…</span><span>Min email er anna@example.com</span><span>Jeg er logget ind</span><span>Gælder til kl. 11.12</span></div>
+                <span class="line"></span>
+                <div class="side"><span class="stamp">Supabase<br />Auth</span><span class="seal">SEGL<br />✓</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Alle kan læse et postkort. Men bryder nogen seglet og skriver noget nyt, kan Supabase se det. Seglet er signaturen.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Signaturen</span>
+          <h2>Ret ét tegn, og signaturen passer ikke længere</h2>
+          <div class="stage">
+            <div class="tamper">
+              <div class="row">
+                <span class="lbl">Det rigtige</span>
+                <div class="tk"><span class="h">header</span><span class="p">"sub": "8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45"</span><span class="s">Ht0NZgcq…</span></div>
+                <b>→</b>
+                <div class="verdict" style="--c: var(--green)"><strong>✓ Passer</strong><small>Det er Anna</small></div>
+              </div>
+              <div class="row">
+                <span class="lbl">Rettet</span>
+                <div class="tk"><span class="h">header</span><span class="p">"sub": "<mark>00000001-0001-0001-0001-000000000001</mark>"</span><span class="s">Ht0NZgcq…</span></div>
+                <b>→</b>
+                <div class="verdict" style="--c: var(--red)"><strong>✗ Passer ikke</strong><small>Afvist. Ingen kan udgive sig for at være alice</small></div>
+              </div>
+              <div class="magl">I går, opgave 11: <b>"Backenden tjekker, at signaturen på dit token passer."</b> Det er det, der sker her. I øvelse 8 ser I Supabase gøre det.</div>
+            </div>
+          </div>
+          <p class="bottom-line">Signaturen er lavet ud fra header og payload med Supabase' hemmelige nøgle. Uden nøglen kan ingen lave en ny, der passer.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Access token og refresh token</span>
+          <h2>Et access token lever kun en time</h2>
+          <div class="stage">
+            <div class="tline">
+              <div class="tl-track">
+                <div class="bar" style="--c: var(--purple)"><strong>access_token #1</strong><small>I logger ind kl. 10.12</small></div>
+                <div class="bar" style="--c: var(--purple)"><strong>access_token #2</strong><small>Hentet med refresh_token</small></div>
+                <div class="bar off" style="--c: var(--purple)"><strong>access_token #3</strong><small>… og sådan fortsætter det</small></div>
+              </div>
+              <div class="ticks"><span>10.12 · iat</span><span>11.12 · exp</span><span>12.12</span></div>
+              <div class="refresh"><div><b>↻</b><span>Lige før <code>exp</code> bruger supabase-js <code>refresh_token</code></span></div><div><b>↻</b><span>Igen en time senere</span></div><div><b>✕</b><span><code>signOut()</code> sletter begge</span></div></div>
+            </div>
+            <div class="tline-cards">
+              <div style="--c: var(--purple)"><b>Access token</b><span>Det JWT, I kiggede i. Siger, hvem I er. Bliver det stjålet, virker det kun til <code>exp</code>.</span></div>
+              <div style="--c: var(--yellow)"><b>Refresh token</b><span>Bruges kun til at hente et nyt access token. Det klarer Supabase-klienten selv.</span></div>
+            </div>
+          </div>
+          <p class="bottom-line">I skal ikke selv forny tokenet. Hvad der sker, når en session alligevel udløber, kommer senere i forløbet.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">sub</span>
+          <h2><code>sub</code> er jeres bruger-id. Det samme id tre steder</h2>
+          <div class="stage">
+            <div class="subv">
+              <div class="center"><small>I payloaden</small><span class="k">"sub": </span><span class="v">"8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45"</span></div>
+              <div class="fan" aria-hidden="true"></div>
+              <div class="places">
+                <article style="--c: var(--green)"><span>Supabase</span><strong>Authentication › Users</strong><div class="idbox"><span class="m">UID </span><span class="v">8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45</span></div><small>Det er <code>auth.users.id</code>.</small></article>
+                <article style="--c: var(--cyan)"><span>Øvelse 8</span><strong>/profile</strong><div class="idbox"><span class="m">User ID </span><span class="v">8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45</span></div><small><code>getUser()</code> giver jer det samme id.</small></article>
+                <article style="--c: var(--orange)"><span>Senere · chatbotten</span><strong>threads.user_id</strong><div class="idbox"><span class="m">nu  </span>00000001-…-000000000001<br /><span class="m">senere  </span><span class="v">8f3c2a71-…</span></div><small>Foreign key til <code>auth.users</code>.</small></article>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Tjek det selv: sammenlign <code>sub</code> på jwt.io med id'et under Authentication › Users.</p>
+        </section>
+
+        <!-- ============ 08 SIDER, DER KRÆVER LOGIN ============ -->
+
+        <section id="kraever-login" class="chapter" data-accent="green">
+          <span class="chapter-number">08</span>
+          <span class="eyebrow">Sider, der kræver login · øvelse 8-9</span>
+          <h2>Spørg Supabase,<br />før siden vises</h2>
+          <p>En <code>clientLoader</code> kører, før siden vises. Den kan sende jer til <code>/login</code>, hvis ingen er logget ind.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">Dagens mål igen · øvelse 8-9</span>
+          <h2>/profile er den eneste side, der kræver login</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-380 focus" viewBox="0 0 880 380" role="img" aria-labelledby="rsa-profile-title">
+                <title id="rsa-profile-title">Forsiden, /register og /login kan alle se. /profile kræver login. Er du ikke logget ind, eller logger du ud, bliver du sendt fra /profile til /login</title>
+                <rect class="z-open" x="20" y="20" width="540" height="340" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+                <rect class="z-lock" x="600" y="20" width="260" height="340" rx="14" />
+                <path class="lock-arc" d="M627 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="624" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="646" y="54">Kræver login</text>
+
+                <g class="dim"><rect class="card" x="195" y="82" width="160" height="66" rx="10" /><text class="route" x="275" y="111">/</text><text class="desc" x="275" y="132">forsiden</text></g>
+                <g class="dim"><rect class="card" x="50" y="200" width="160" height="66" rx="10" /><text class="route" x="130" y="229">/register</text><text class="desc" x="130" y="250">opret en konto</text></g>
+                <g class="keep"><rect class="card" x="340" y="200" width="160" height="66" rx="10" /><text class="route" x="420" y="229">/login</text><text class="desc" x="420" y="250">log ind</text></g>
+                <g class="hi"><rect class="card" x="650" y="200" width="160" height="66" rx="10" /><text class="route" x="730" y="229">/profile</text><text class="desc" x="730" y="250">din profil</text></g>
+
+                <g class="dim"><line class="flow" x1="240" y1="150" x2="160" y2="197" /><line class="flow" x1="310" y1="150" x2="390" y2="197" />
+                <line class="flow" x1="212" y1="233" x2="337" y2="233" /><rect class="pill" x="228" y="208" width="92" height="20" rx="10" /><text class="label" x="274" y="222">konto oprettet</text></g>
+                <g class="keep"><line class="flow" x1="502" y1="233" x2="647" y2="233" /><rect class="pill" x="539" y="208" width="70" height="20" rx="10" /><text class="label" x="574" y="222">logget ind</text></g>
+                <g class="keep"><path class="redir" d="M730 268 V318 H420 V271" /><rect class="pill pill-red" x="487" y="295" width="176" height="20" rx="10" /><text class="label red" x="575" y="309">ikke logget ind, eller Log Out</text></g>
+              </svg>
+            </div>
+          </div>
+          <p class="bottom-line">Den røde pil bygger I nu: en <code>clientLoader</code>, der sender jer til <code>/login</code>, før siden vises. Og en <b>Log Out</b>-knap.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">clientLoader på /profile</span>
+          <h2>Tre situationer. Kun én af dem viser siden</h2>
+          <div class="stage">
+            <div class="gate3">
+              <div class="row"><span class="head">Hvem</span><span class="head">Token i localStorage</span><span></span><span class="head">clientLoader kalder</span><span></span><span class="head">Supabase siger</span><span></span><span class="head">Så</span></div>
+              <div class="row ok-c">
+                <div class="gate-who"><strong>Logget ind</strong><small>almindeligt vindue</small></div>
+                <span class="cell tok">eyJhbGciOiJFUzI1…</span><b>→</b><span class="cell fn">getUser()</span><b>→</b>
+                <span class="verd">✓ Signaturen passer</span><b>→</b><span class="res"><code>return { user }</code>. Siden vises</span>
+              </div>
+              <div class="row no-c">
+                <div class="gate-who"><strong>Inkognito</strong><small>ikke logget ind</small></div>
+                <span class="cell none">intet token</span><b>→</b><span class="cell fn">getUser()</span><b>→</b>
+                <span class="verd">✗ Ingen bruger</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
+              </div>
+              <div class="row no-c">
+                <div class="gate-who"><strong>Rettet token</strong><small>ét bogstav ændret</small></div>
+                <span class="cell tok">eyJhbG<mark>X</mark>iOiJFUzI1…</span><b>→</b><span class="cell fn">getUser()</span><b>→</b>
+                <span class="verd">✗ Passer ikke</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line"><code>getUser()</code> sender tokenet til Supabase, som tjekker signaturen. Derfor kan man ikke bare ændre sit bruger-id i tokenet.</p>
+        </section>
+
+        <section id="ex-8" class="activity-slide handson" data-accent="green">
+          <span class="ho-num"><small>Øvelse</small>8-9</span>
+          <span class="eyebrow">Hands-on · Øvelse 8-9</span>
+          <h2>Profilside og log ud</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md#øvelse-8-profilside" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Øvelse 8, trin 1:</b> <code>/profile</code> med en <code>clientLoader</code>, der kalder <code>getUser()</code> og logger svaret</li>
+            <li><b>Trin 2:</b> <code>redirect("/login")</code>, hvis der ingen bruger er. Ellers vis brugeren</li>
+            <li>Ret ét bogstav i <code>access_token</code> i Local Storage, og genindlæs <code>/profile</code></li>
+            <li><b>Øvelse 9 · bonus:</b> Log ud med <code>signOut()</code></li>
+          </ul>
+          <p class="bottom-line">Test: logget ind ser I jeres profil. I inkognito bliver I sendt til <code>/login</code>.</p>
+        </section>
+
+        <!-- ============ 09 FRA ØVELSERNE TIL STEP 14 ============ -->
+
+        <section id="step-14" class="chapter" data-accent="cyan">
+          <span class="chapter-number">09</span>
+          <span class="eyebrow">Fra øvelserne til step 14</span>
+          <h2>Det samme igen,<br />i chatbotten</h2>
+          <p>I kender alle delene af step 14 nu. Torsdag og fredag sætter I dem ind i chatbotten.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Step 14 · Frontend register and signup routes</span>
+          <h2>Hver delopgave har I lavet i dag</h2>
+          <div class="stage">
+            <div class="map7">
+              <div class="row first"><i>7</i><strong>Register authentication routes <span class="first-tag">Tag den først</span></strong><b>←</b><em>Øvelse 3</em><small>Uden for layoutet, så sidebaren ikke vises</small></div>
+              <div class="row"><i>1</i><strong>Install Supabase client library</strong><b>←</b><em>Øvelse 2</em><small>Inde i <code>frontend/</code>, hvor <code>package.json</code> ligger</small></div>
+              <div class="row"><i>2</i><strong>Create Supabase client module</strong><b>←</b><em>Øvelse 2</em><small>Samme <code>app/lib/supabase.js</code></small></div>
+              <div class="row"><i>3</i><strong>Configure environment variables</strong><b>←</b><em>Øvelse 2</em><small><code>.env</code> findes allerede i <code>frontend/</code></small></div>
+              <div class="row"><i>4</i><strong>Build the registration page</strong><b>←</b><em style="--c: var(--cyan)">Øvelse 4 og 5</em><small>Lad jer inspirere af jeres <code>register.jsx</code></small></div>
+              <div class="row"><i>5</i><strong>Build the login page</strong><b>←</b><em style="--c: var(--cyan)">Øvelse 6 og 7</em><small>Send til <code>/</code> i stedet for <code>/profile</code></small></div>
+              <div class="row"><i>6</i><strong>Style the authentication pages</strong><b>←</b><em style="--c: var(--yellow)">app.css</em><small>Kopiér afsnittet <code>Authentication Pages</code></small></div>
+            </div>
+          </div>
+          <p class="bottom-line">Tag delopgave 7 før 4, så I kan se siderne, mens I bygger dem. Tabellen står også sidst i opgaven.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Layout-routes</span>
+          <h2>Login og register skal stå uden for layoutet</h2>
+          <div class="stage">
+            <div class="rviz">
+              <div>
+                <span class="viz-label">frontend/app/routes.js efter delopgave 7</span>
+                <pre class="viz-code"><span class="k">export default</span> [
+  <span class="lay">route("/", "routes/layout.jsx", [</span>
+    index("routes/home.jsx"),
+    route("chat/new", "routes/chat-new.jsx"),
+    route("chat/:threadId", "routes/chat-thread.jsx", [
+      route("edit", "routes/chat-thread-edit.jsx"),
+    ]),
+  <span class="lay">]),</span>
+  <span class="out">route("login", "routes/login.jsx"),</span>
+  <span class="out">route("register", "routes/register.jsx"),</span>
+];</pre>
+              </div>
+              <div class="rboxes">
+                <div class="rbox-layout">
+                  <div class="sb"><b>Sidebar</b><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="outlet">
+                    <span>layout.jsx · &lt;Outlet /&gt;</span>
+                    <div class="rchip">home.jsx<small>/</small></div>
+                    <div class="rchip">chat-new.jsx<small>/chat/new</small></div>
+                    <div class="rchip">chat-thread.jsx<small>/chat/:threadId</small></div>
+                    <div class="rchip nested">chat-thread-edit.jsx<small>…/edit</small></div>
+                  </div>
+                </div>
+                <div class="rchip outside">login.jsx<small>/login</small></div>
+                <div class="rchip outside">register.jsx<small>/register</small></div>
+                <span class="note">Står efter layout-routen. Ingen sidebar.</span>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Alt inde i <code>layout.jsx</code> får sidebaren og vises i dens <code>&lt;Outlet /&gt;</code>. Login og register står efter layout-routen.</p>
+        </section>
+
+        <section class="shift-slide" data-accent="cyan">
+          <span class="eyebrow">Chatbot step 14</span>
+          <h2>Det er anderledes i chatbotten</h2>
+          <div class="shift-grid">
+            <span></span>
+            <span class="viz-label">react-supabase-auth</span>
+            <span class="viz-label">Chatbot · step 14</span>
+
+            <strong>Installér</strong>
+            <p>I roden af projektet</p>
+            <p class="new">Inde i <code>frontend/</code>, hvor <code>package.json</code> og <code>.env</code> ligger</p>
+
+            <strong>Efter login</strong>
+            <p><code>redirect("/profile")</code></p>
+            <p class="new"><code>redirect("/")</code></p>
+
+            <strong>CSS</strong>
+            <p>Færdig i <code>app.css</code></p>
+            <p class="new">Kopiér <code>Authentication Pages</code>. Variablerne findes allerede i <code>:root</code></p>
+
+            <strong>Rettet token</strong>
+            <p><code>/profile</code> sender jer til <code>/login</code></p>
+            <p class="new">Der sker ingenting endnu. Intet kalder <code>getUser()</code></p>
+          </div>
+          <p class="bottom-line">Tab jer gennem formularen i chatbotten for at se fokus-stylingen fra <code>app.css</code>.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Tilbage til listen på tavlen</span>
+          <h2>Hvilke huller lukker login?</h2>
+          <div class="stage">
+            <ul class="holes">
+              <li><i>1</i><span>Chatbotten ved ikke, hvem der bruger den</span><em class="open fragment">Frontenden ved det nu</em></li>
+              <li><i>2</i><span>Alle nye tråde får alices id</span><em class="open fragment">Stadig åbent</em></li>
+              <li><i>3</i><span>Thunder Client får alle tråde uden at logge ind</span><em class="open fragment">Stadig åbent</em></li>
+              <li><i>4</i><span>Alle ser alles tråde</span><em class="open fragment">Stadig åbent</em></li>
+              <li><i>5</i><span>Alle kan omdøbe og slette alles tråde</span><em class="open fragment">Stadig åbent</em></li>
+            </ul>
+          </div>
+          <p class="bottom-line">Endnu ingen. Login giver frontenden et token. Men intet af det når jeres API.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Hvorfor ingen?</span>
+          <h2>Frontenden ved, hvem I er. Backenden gør ikke</h2>
+          <div class="stage">
+            <div class="gapv">
+              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>Ved, hvem I er</strong><pre class="viz-code">localStorage
+sb-…-auth-token ✓</pre><div class="know">✓ access_token med sub</div></div>
+              <div class="ar">→<small>fetch</small></div>
+              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">fetch(`${apiUrl}/api/threads`)
+<span class="miss">// intet token med</span></pre><small>Tokenet bliver i browseren.</small></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--red)"><span>Express API</span><strong>Ved ikke, hvem I er</strong><small>Intet token at tjekke. Svarer alle, der spørger.</small><div class="know">✗ ingen bruger</div></div>
+              <div class="ar">→<small>SQL</small></div>
+              <div class="nd" style="--c: var(--orange)"><span>Postgres</span><strong>Alle tråde</strong><pre class="viz-code">SELECT id, title, created_at
+FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">Det ændrer step 15-18: tokenet sendes med, og backenden begynder at kræve det. Det er målet fra starten af dagen.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Hvor stod det, hvem der ejer en tråd?</span>
+          <h2>Det id, I så i <code>sub</code>, er det, tråde skal knyttes til</h2>
+          <div class="stage">
+            <div class="own2">
+              <article style="--c: var(--red)">
+                <span>Nu · backend/server.js</span>
+                <pre class="viz-code"><span class="c">// alice fra seed.sql, indtil vi har login</span>
+<span class="k">const</span> <span class="bad">TEST_USER_ID</span> =
+  <span class="s">"00000001-0001-0001-0001-000000000001"</span>;
+
+INSERT INTO threads (title, user_id)
+VALUES (${trimmedTitle}, ${<span class="bad">TEST_USER_ID</span>})</pre>
+                <small>Alle nye tråde tilhører alice.</small>
+              </article>
+              <b>→</b>
+              <article style="--c: var(--purple)">
+                <span>Senere · når backenden læser tokenet</span>
+                <pre class="viz-code"><span class="c">// id'et fra tokenets sub</span>
+<span class="k">const</span> <span class="good">userId</span> =
+  <span class="s">"8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45"</span>;
+
+INSERT INTO threads (title, user_id)
+VALUES (${trimmedTitle}, ${<span class="good">userId</span>})</pre>
+                <small>Hver tråd tilhører den, der er logget ind.</small>
+              </article>
+            </div>
+            <div class="own-chain"><span>sub i JWT'et</span><b>=</b><span>User ID på /profile</span><b>=</b><span>auth.users.id</span><b>→</b><span>threads.user_id</span></div>
+          </div>
+          <p class="bottom-line">Kolonnen og foreign key'en har I allerede fra i går. Det, der mangler, er, at API'et ved, hvem I er.</p>
+        </section>
+
+        <section id="ex-step14" class="activity-slide handson" data-accent="cyan">
+          <span class="ho-num"><small>Step</small>14</span>
+          <span class="eyebrow">Hands-on · torsdag og fredag</span>
+          <h2>Step 14 i chatbotten</h2>
+          <ul class="checklist">
+            <li>Lav <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/14" target="_blank" rel="noreferrer"><b>step 14 ↗</b></a>. Mangler step 13, så brug degit-kommandoen sidst i opgaven</li>
+            <li>AI-svarene på en branch? Bliv på <code>main</code>, og merge branchen ind efter auth-stepsene</li>
+            <li>Fredag, når I er i mål: log ind med to brugere i to browsere. Ser de stadig de samme tråde?</li>
+            <li>Står jeres token i Network-fanen, når chatbotten kalder jeres API på <code>localhost:3000</code>?</li>
+          </ul>
+          <p class="bottom-line">Tag svarene med næste gang. Vi starter med dem.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="green">
+          <span class="eyebrow">Opsamling</span>
+          <h2>Det kan I nu</h2>
+          <ul class="checklist">
+            <li>Forklare, hvad Supabase Auth klarer for jer, og hvad jeres backend stadig skal gøre</li>
+            <li>Oprette en bruger og logge ind med <code>signUp()</code> og <code>signInWithPassword()</code></li>
+            <li>Finde bcrypt-hashen i <code>auth.users</code> og forklare, hvad salten gør</li>
+            <li>Validere en formular og vise fejlen med <code>useActionData()</code></li>
+            <li>Læse et JWT og forklare header, payload og signatur</li>
+            <li>Beskytte en side med en <code>clientLoader</code> og <code>getUser()</code></li>
+          </ul>
+        </section>
+
+        <section class="materials-slide" data-accent="green">
+          <span class="eyebrow">Arbejd videre</span>
+          <h2>Opgave, løsning og opslagsværker</h2>
+          <div class="material-links">
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md" target="_blank" rel="noreferrer"><strong>React Supabase Auth</strong><span>Opgaven ↗</span></a>
+            <a href="https://github.com/cederdorff/react-supabase-auth" target="_blank" rel="noreferrer"><strong>Løsningen</strong><span>Én branch pr. øvelse ↗</span></a>
+            <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/14" target="_blank" rel="noreferrer"><strong>Step 14</strong><span>Chatbot-tutorialen ↗</span></a>
+            <a href="https://jwt.io" target="_blank" rel="noreferrer"><strong>jwt.io</strong><span>Dekod jeres token ↗</span></a>
+            <a href="https://jwt.io/introduction" target="_blank" rel="noreferrer"><strong>Introduction to JSON Web Tokens</strong><span>jwt.io ↗</span></a>
+            <a href="https://supabase.com/docs/guides/auth" target="_blank" rel="noreferrer"><strong>Auth</strong><span>Supabase docs ↗</span></a>
+            <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" target="_blank" rel="noreferrer"><strong>Password Storage Cheat Sheet</strong><span>OWASP ↗</span></a>
+            <a href="https://scrimba.com/intro-to-supabase-c0abltfqed" target="_blank" rel="noreferrer"><strong>Intro to Supabase</strong><span>Scrimba ↗</span></a>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="../shared/deck.js"></script>
+  </body>
+</html>
