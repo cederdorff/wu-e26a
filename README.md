@@ -146,17 +146,19 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 
 - [087 · Arbejdsark: CREATE TABLE, JOINs og normalisering](./undervisning/087-arbejdsark-create-table-joins-og-normalisering.md)
 - [088 · Arbejdsark: CRUD og SQL fra en backend](./undervisning/088-arbejdsark-crud-og-sql-fra-en-backend.md)
-- [089 · Arbejdsark: Introduktion til kurset, databasemodellering og SQL](./undervisning/089-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md)
-- [090 · Bordgrupper uge 41 og 42](./undervisning/090-bordgrupper-uge-41-og-42.md)
-- [091 · Forberedelse til MAGL 2](./undervisning/091-forberedelse-til-magl-2.md) — *kladde i Canvas*
-- [092 · Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](./undervisning/092-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
-- [093 · Plan for MAGL 1 - SQL intro via Supabase](./undervisning/093-plan-for-magl-1-sql-intro-via-supabase.md) — *kladde i Canvas*
-- [094 · Plan for MAGL 2 - Express API setup](./undervisning/094-plan-for-magl-2-express-api-setup.md) — *kladde i Canvas*
-- [095 · Plan for MAGL 3 - Læs og skriv beskeder via SQL](./undervisning/095-plan-for-magl-3-laes-og-skriv-beskeder-via-sql.md) — *kladde i Canvas*
-- [096 · Sådan bruger du dette Canvas-rum](./undervisning/096-sadan-bruger-du-dette-canvas-rum.md)
-- [097 · Sådan bruger du dette Canvas-rum](./undervisning/097-sadan-bruger-du-dette-canvas-rum.md)
-- [098 · Test element](./undervisning/098-test-element.md) — *kladde i Canvas*
-- [099 · Test element](./undervisning/099-test-element.md) — *kladde i Canvas*
+- [089 · Arbejdsark: Fra CRUD til login](./undervisning/089-arbejdsark-fra-crud-til-login.md)
+- [090 · Arbejdsark: Introduktion til kurset, databasemodellering og SQL](./undervisning/090-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md)
+- [091 · Bordgrupper uge 41 og 42](./undervisning/091-bordgrupper-uge-41-og-42.md)
+- [092 · Forberedelse til MAGL 2](./undervisning/092-forberedelse-til-magl-2.md) — *kladde i Canvas*
+- [093 · Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](./undervisning/093-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- [094 · Plan for MAGL 1 - SQL intro via Supabase](./undervisning/094-plan-for-magl-1-sql-intro-via-supabase.md) — *kladde i Canvas*
+- [095 · Plan for MAGL 2 - Express API setup](./undervisning/095-plan-for-magl-2-express-api-setup.md) — *kladde i Canvas*
+- [096 · Plan for MAGL 3 - Læs og skriv beskeder via SQL](./undervisning/096-plan-for-magl-3-laes-og-skriv-beskeder-via-sql.md) — *kladde i Canvas*
+- [097 · Plan for MAGL 4 - Slette oprette og redigere tråde](./undervisning/097-plan-for-magl-4-slette-oprette-og-redigere-trade.md) — *kladde i Canvas*
+- [098 · Sådan bruger du dette Canvas-rum](./undervisning/098-sadan-bruger-du-dette-canvas-rum.md)
+- [099 · Sådan bruger du dette Canvas-rum](./undervisning/099-sadan-bruger-du-dette-canvas-rum.md)
+- [100 · Test element](./undervisning/100-test-element.md) — *kladde i Canvas*
+- [101 · Test element](./undervisning/101-test-element.md) — *kladde i Canvas*
 <!-- CANVAS_OVERSIGT_SLUT -->
 
 ## Repoets indhold

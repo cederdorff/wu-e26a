@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-10-23T08:51:08.422Z
+Senest hentet: 2026-10-27T06:38:07.535Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -125,7 +125,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/011-forberedelse-selvstudium-08-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
-- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/092-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/093-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026
 
@@ -144,7 +144,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/013-forberedelse-selvstudium-10-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
-- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/092-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/093-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 014 · RACE 4 - Persistens, JSON og File System - 11-09-2026
 
@@ -391,7 +391,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Opgaver
 
-- [Arbejdsark: Introduktion til kurset, databasemodellering og SQL](../undervisning/089-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md)
+- [Arbejdsark: Introduktion til kurset, databasemodellering og SQL](../undervisning/090-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md)
 - Quiz 1: Tabeller, nøgler og SELECT — Assignment
 
 ### Resourcer
@@ -502,14 +502,27 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md) · publiceret
 
-- [Plan for MAGL 4 - Slette oprette og redigere tråde](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md)
+- [Plan: Fra CRUD til login](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md)
+- [Forberedelse til MAGL 4](../undervisning/044-forberedelse-selvstudium-22-10-2026.md)
 
 ### Præsentationer
+
+- [Slides: Fra CRUD til login](https://eaaa.instructure.com/courses/32059/modules/items/1073725)
 
 ### Opgaver
 
 - Gruppearbejde 3: Normaliser en database — Assignment
-- [Forberedelse til MAGL 4](../undervisning/044-forberedelse-selvstudium-22-10-2026.md)
+- [Arbejdsark: Fra CRUD til login](../undervisning/089-arbejdsark-fra-crud-til-login.md)
+
+### Quizer
+
+- Recap-quiz 4: Databaser og SQL indtil nu — Assignment
+- [Midtvejsevaluering](https://forms.cloud.microsoft/e/2twpiPgNSD)
+- Quiz 4: API'ets nye endpoints og authentication — Assignment
+
+### Teacher-only
+
+- [Code-along-guide: Fra CRUD til login](https://eaaa.instructure.com/courses/32059/modules/items/1073729)
 
 ## 048 · RACE 9 - User authentication og login - 28-10-2026
 
@@ -544,10 +557,6 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md) · publiceret
 
 - [Plan for RACE 10 - JWT tokens fra frontend](../undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md)
-
-### Præsentationer
-
-### Opgaver
 
 ## 053 · Forberedelse - Selvstudium - 04-11-2026
 

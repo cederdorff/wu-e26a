@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-10-23T08:51:08.422Z",
+  "pulled_at": "2026-10-27T06:38:07.535Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "d4757cfbbf057b4e4dac48920ce816076b8df196b2f4a461dd540a532ffb9270",
@@ -43,20 +43,20 @@
       "canvas_hash": "87ac933c1987ff2d4c46b0c4d71077ff051b302969224cc8db0c10b402d31fea"
     },
     "undervisning/011-forberedelse-selvstudium-08-09-2026.md": {
-      "local_hash": "26f2152da43d6b961cbd4c96428367755f70e2bf4107b9cd910b4582b52d6cc0",
-      "canvas_hash": "26f2152da43d6b961cbd4c96428367755f70e2bf4107b9cd910b4582b52d6cc0"
+      "local_hash": "3ec547ddbd26980ca1e6a09eaa147b8faed5a24776fc789a49cae5d1dbd54526",
+      "canvas_hash": "3ec547ddbd26980ca1e6a09eaa147b8faed5a24776fc789a49cae5d1dbd54526"
     },
     "undervisning/012-dob-3-string-parsing-metoder-og-funktioner-09-09-2026.md": {
       "local_hash": "fa75583ba58e7212689c30dceeae17a717ec023b72830832215d47eaf631a6ae",
       "canvas_hash": "fa75583ba58e7212689c30dceeae17a717ec023b72830832215d47eaf631a6ae"
     },
     "undervisning/013-forberedelse-selvstudium-10-09-2026.md": {
-      "local_hash": "54b0a9fe4db1d7c0ed3f68f3bbf6bc96e8f9c91fc923666fd21e6b95a131ed29",
-      "canvas_hash": "54b0a9fe4db1d7c0ed3f68f3bbf6bc96e8f9c91fc923666fd21e6b95a131ed29"
+      "local_hash": "d37194bea6c543bfa444d08993fe6b4fa56e8dac7fcf991a08dd6da40b53ac9c",
+      "canvas_hash": "d37194bea6c543bfa444d08993fe6b4fa56e8dac7fcf991a08dd6da40b53ac9c"
     },
     "undervisning/014-race-4-persistens-json-og-file-system-11-09-2026.md": {
-      "local_hash": "273bbf1679aad66c99d333a94f425b3abb2c419f8d9e006c7978631a30f76c9c",
-      "canvas_hash": "273bbf1679aad66c99d333a94f425b3abb2c419f8d9e006c7978631a30f76c9c"
+      "local_hash": "1b25faf634a9f935b841a51ca09ae4fb24e03484743617bc8612c88360deb037",
+      "canvas_hash": "1b25faf634a9f935b841a51ca09ae4fb24e03484743617bc8612c88360deb037"
     },
     "undervisning/015-forberedelse-selvstudium-14-09-2026.md": {
       "local_hash": "bcbc7c3db1c033a295ebe336decd7f769b216506a5b8071ed65ba30657ceb071",
@@ -187,8 +187,8 @@
       "canvas_hash": "4de52e862b217abe332b40619bdd012f9079e66ef9ec958f1c2dadff03b434c1"
     },
     "undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md": {
-      "local_hash": "02dd0e00d14c32ba4aacb1a78a19d68bd9bae195b27f2eb2b80fefd79baea567",
-      "canvas_hash": "02dd0e00d14c32ba4aacb1a78a19d68bd9bae195b27f2eb2b80fefd79baea567"
+      "local_hash": "92ad1d8d80a17b072c23d227d4e15ed42124eaf2472bc617f154c0288880f6cc",
+      "canvas_hash": "92ad1d8d80a17b072c23d227d4e15ed42124eaf2472bc617f154c0288880f6cc"
     },
     "undervisning/048-race-9-user-authentication-og-login-28-10-2026.md": {
       "local_hash": "4e9bb8c8a2243f74847ca37ac3100ca167a34de0b1dcff45937e1bb0f70830a1",
@@ -354,47 +354,55 @@
       "local_hash": "c40916111386e3a58a1022c3489123a29b307281ac7b81e6efd5686370bc9ec9",
       "canvas_hash": "c40916111386e3a58a1022c3489123a29b307281ac7b81e6efd5686370bc9ec9"
     },
-    "undervisning/089-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md": {
+    "undervisning/089-arbejdsark-fra-crud-til-login.md": {
+      "local_hash": "2f1c6957902c60e2790f2747f2c50ccd3ed32374c71a5509b1ef6e676a9d8ad3",
+      "canvas_hash": "2f1c6957902c60e2790f2747f2c50ccd3ed32374c71a5509b1ef6e676a9d8ad3"
+    },
+    "undervisning/090-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md": {
       "local_hash": "08b9e187b74ee1f9cfbcb1b6ab0b847cfd531ca5760ebbb4006fc2542f499686",
       "canvas_hash": "08b9e187b74ee1f9cfbcb1b6ab0b847cfd531ca5760ebbb4006fc2542f499686"
     },
-    "undervisning/090-bordgrupper-uge-41-og-42.md": {
+    "undervisning/091-bordgrupper-uge-41-og-42.md": {
       "local_hash": "85e5442651a33f95e193fc2d1c5256779ee79fc67f5d1a917af2f85d08a80ba4",
       "canvas_hash": "85e5442651a33f95e193fc2d1c5256779ee79fc67f5d1a917af2f85d08a80ba4"
     },
-    "undervisning/091-forberedelse-til-magl-2.md": {
+    "undervisning/092-forberedelse-til-magl-2.md": {
       "local_hash": "8ca2282fda0450b9ae031f0b88d006f6e2fc62afc5df751871b4f9e9ea3bad87",
       "canvas_hash": "8ca2282fda0450b9ae031f0b88d006f6e2fc62afc5df751871b4f9e9ea3bad87"
     },
-    "undervisning/092-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md": {
+    "undervisning/093-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md": {
       "local_hash": "79a4dd836510ad05f92f31d0d0c3b5401d262bbca5d074aebca9f3d16eb3cb29",
       "canvas_hash": "79a4dd836510ad05f92f31d0d0c3b5401d262bbca5d074aebca9f3d16eb3cb29"
     },
-    "undervisning/093-plan-for-magl-1-sql-intro-via-supabase.md": {
+    "undervisning/094-plan-for-magl-1-sql-intro-via-supabase.md": {
       "local_hash": "81a1f30bdd759cea5a0ff85f4f5ae2c520557d78e83c8d5d777bf49e3630d9d3",
       "canvas_hash": "81a1f30bdd759cea5a0ff85f4f5ae2c520557d78e83c8d5d777bf49e3630d9d3"
     },
-    "undervisning/094-plan-for-magl-2-express-api-setup.md": {
+    "undervisning/095-plan-for-magl-2-express-api-setup.md": {
       "local_hash": "3902c1893316cefa0256775b0607c889f284c68352d0b5d74ef1e3fcb59fdc5c",
       "canvas_hash": "3902c1893316cefa0256775b0607c889f284c68352d0b5d74ef1e3fcb59fdc5c"
     },
-    "undervisning/095-plan-for-magl-3-laes-og-skriv-beskeder-via-sql.md": {
+    "undervisning/096-plan-for-magl-3-laes-og-skriv-beskeder-via-sql.md": {
       "local_hash": "64a878eab0a63741f8067da533034bf3009d985343da8303bdcfd0e1731555f1",
       "canvas_hash": "64a878eab0a63741f8067da533034bf3009d985343da8303bdcfd0e1731555f1"
     },
-    "undervisning/096-sadan-bruger-du-dette-canvas-rum.md": {
+    "undervisning/097-plan-for-magl-4-slette-oprette-og-redigere-trade.md": {
+      "local_hash": "c6a76b1a37e1f4849f5dc7419936241464088b3c4e91ab42969de250b1d8bd9f",
+      "canvas_hash": "c6a76b1a37e1f4849f5dc7419936241464088b3c4e91ab42969de250b1d8bd9f"
+    },
+    "undervisning/098-sadan-bruger-du-dette-canvas-rum.md": {
       "local_hash": "4655fe403a201d96cdba47f4ba75dbb1f4e6392fcf80afa9321c276ab7cf8c5b",
       "canvas_hash": "4655fe403a201d96cdba47f4ba75dbb1f4e6392fcf80afa9321c276ab7cf8c5b"
     },
-    "undervisning/097-sadan-bruger-du-dette-canvas-rum.md": {
+    "undervisning/099-sadan-bruger-du-dette-canvas-rum.md": {
       "local_hash": "671bba3a0b1dfa97880c360a1524c190ab2f3adedcdabb9253a1f10e21827ff6",
       "canvas_hash": "671bba3a0b1dfa97880c360a1524c190ab2f3adedcdabb9253a1f10e21827ff6"
     },
-    "undervisning/098-test-element.md": {
+    "undervisning/100-test-element.md": {
       "local_hash": "641eee9f52e8fc395147c8e68e92facb4d8a39ed99c4fec7ee0e767fa273231e",
       "canvas_hash": "641eee9f52e8fc395147c8e68e92facb4d8a39ed99c4fec7ee0e767fa273231e"
     },
-    "undervisning/099-test-element.md": {
+    "undervisning/101-test-element.md": {
       "local_hash": "b190b7028d67892cf374c528a7a8797e2c0bcc4f4cb22bfa07bc9682cd12d960",
       "canvas_hash": "b190b7028d67892cf374c528a7a8797e2c0bcc4f4cb22bfa07bc9682cd12d960"
     }

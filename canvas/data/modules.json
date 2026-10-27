@@ -2054,10 +2054,9 @@
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1065427",
         "content_id": 1713901,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713901",
-        "published": false,
-        "unpublishable": false,
+        "published": true,
+        "unpublishable": true,
         "content_details": {
-          "locked": true,
           "display_name": "Bordgrupper uge 44.pdf",
           "thumbnail_url": null,
           "locked_for_user": false
@@ -3648,22 +3647,40 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 5,
+    "items_count": 13,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178070/items",
     "items": [
       {
-        "id": 1018757,
+        "id": 1073727,
         "position": 1,
-        "title": "Plan for MAGL 4 - Slette oprette og redigere tråde",
+        "title": "Plan: Fra CRUD til login",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178070,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018757",
-        "page_url": "plan-for-magl-4-slette-oprette-og-redigere-trade",
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1073727",
+        "page_url": "plan-fra-crud-til-login",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-magl-4-slette-oprette-og-redigere-trade",
-        "published": false,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-fra-crud-til-login",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1071535,
+        "position": 2,
+        "title": "Forberedelse til MAGL 4",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1071535",
+        "page_url": "forberedelse-til-magl-4",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/forberedelse-til-magl-4",
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -3671,21 +3688,40 @@
       },
       {
         "id": 1018758,
-        "position": 2,
+        "position": 3,
         "title": "Præsentationer",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178070,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
+        "id": 1073725,
+        "position": 4,
+        "title": "Slides: Fra CRUD til login",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1073725",
+        "content_id": 1725681,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1725681",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "WEB-E26-session4-pres4.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
         "id": 1018759,
-        "position": 3,
+        "position": 5,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -3699,7 +3735,7 @@
       },
       {
         "id": 1070780,
-        "position": 4,
+        "position": 6,
         "title": "Gruppearbejde 3: Normaliser en database",
         "indent": 1,
         "quiz_lti": false,
@@ -3718,20 +3754,125 @@
         }
       },
       {
-        "id": 1071535,
-        "position": 5,
-        "title": "Forberedelse til MAGL 4",
-        "indent": 0,
+        "id": 1073726,
+        "position": 7,
+        "title": "Arbejdsark: Fra CRUD til login",
+        "indent": 1,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178070,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1071535",
-        "page_url": "forberedelse-til-magl-4",
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1073726",
+        "page_url": "arbejdsark-fra-crud-til-login",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/forberedelse-til-magl-4",
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/arbejdsark-fra-crud-til-login",
         "published": true,
         "unpublishable": true,
         "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1073734,
+        "position": 8,
+        "title": "Quizer",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178070,
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1073774,
+        "position": 9,
+        "title": "Recap-quiz 4: Databaser og SQL indtil nu",
+        "indent": 1,
+        "quiz_lti": true,
+        "type": "Assignment",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1073774",
+        "content_id": 60343,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60343",
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "due_at": "2026-11-09T22:59:00Z",
+          "unlock_at": "2026-10-27T07:15:00Z",
+          "points_possible": 10,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1074113,
+        "position": 10,
+        "title": "Midtvejsevaluering",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "ExternalUrl",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/api/v1/courses/32059/module_item_redirect/1074113",
+        "external_url": "https://forms.cloud.microsoft/e/2twpiPgNSD",
+        "new_tab": true,
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1073723,
+        "position": 11,
+        "title": "Quiz 4: API'ets nye endpoints og authentication",
+        "indent": 1,
+        "quiz_lti": true,
+        "type": "Assignment",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1073723",
+        "content_id": 60342,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60342",
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "due_at": "2026-11-09T22:59:00Z",
+          "unlock_at": "2026-10-27T10:15:00Z",
+          "points_possible": 8,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1073728,
+        "position": 12,
+        "title": "Teacher-only",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "SubHeader",
+        "module_id": 178070,
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1073729,
+        "position": 13,
+        "title": "Code-along-guide: Fra CRUD til login",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178070,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1073729",
+        "content_id": 1725684,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1725684",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "WEB-E26-session4-teacher-code-along.pdf",
+          "thumbnail_url": null,
           "locked_for_user": false
         }
       }
@@ -3907,7 +4048,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178075/items",
     "items": [
       {
@@ -3922,35 +4063,7 @@
         "page_url": "plan-for-race-10-jwt-tokens-fra-frontend",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-10-jwt-tokens-fra-frontend",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018767,
-        "position": 2,
-        "title": "Præsentationer",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178075,
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
-        "id": 1018768,
-        "position": 3,
-        "title": "Opgaver",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "SubHeader",
-        "module_id": 178075,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
