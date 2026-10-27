@@ -33,11 +33,11 @@ Vi kigger også nærmere på organisering af koden bag svarlogikken. Jo mere ava
 
 ## Materialer
 
-## Præsentationer
+### Præsentationer
 
-- \[DOB 3 - String parsing, metoder og funktioner - slides.pdf\]([https://github.com/cederdorff/wu-e26a/blob/main/materialer/canvas-filer/AMAbot/DOB](../materialer/canvas-filer/AMAbot/DOB) 3 - String parsing, metoder og funktioner - slides.pdf)
+- [DOB 3 - String parsing, metoder og funktioner - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1051517)
 
-## Opgaver
+### Opgaver
 
 ---
 
@@ -55,7 +55,7 @@ canvas_page_id: 200712
 canvas_page_slug: "plan-for-dob-3-string-parsing-metoder-og-funktioner"
 canvas_page_title: "Plan for DOB 3 - String parsing, metoder og funktioner"
 canvas_page_published: true
-canvas_updated_at: "2026-09-21T06:58:15Z"
+canvas_updated_at: "2026-09-22T08:19:29Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018697"
 local_status: mirrored
 ```

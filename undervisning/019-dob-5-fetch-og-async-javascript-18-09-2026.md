@@ -34,11 +34,11 @@ Nu hvor I har byggeklodserne til et fungerende API, skal vi lære at kommunikere
 
 ## Materialer
 
-## Præsentationer
+### Præsentationer
 
-- \[DOB 5 - Fetch & async JavaScript - slides.pdf\]([https://github.com/cederdorff/wu-e26a/blob/main/materialer/canvas-filer/AMAbot/DOB](../materialer/canvas-filer/AMAbot/DOB) 5 - Fetch & async JavaScript - slides.pdf)
+- [DOB 5 - Fetch & async JavaScript - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1056054)
 
-## Opgaver
+### Opgaver
 
 ---
 
@@ -56,7 +56,7 @@ canvas_page_id: 200716
 canvas_page_slug: "plan-for-dob-5-fetch-og-async-javascript"
 canvas_page_title: "Plan for DOB 5 - Fetch og async JavaScript"
 canvas_page_published: true
-canvas_updated_at: "2026-09-21T06:58:19Z"
+canvas_updated_at: "2026-09-22T08:18:47Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018709"
 local_status: mirrored
 ```

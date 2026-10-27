@@ -34,7 +34,7 @@ Vi bygger videre på sidste uges introduktion til Fetch API'et og asynkron JavaS
 
 ### Præsentationer
 
-- [DOB 6 - Promises og async await - slides - no quiz.pdf](../materialer/canvas-filer/AMAbot/DOB%206%20-%20Promises%20og%20async%20await%20-%20slides%20-%20no%20quiz.pdf)
+- [DOB 6 - Promises og async await - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1057769)
 
 ### Opgaver
 
@@ -54,7 +54,7 @@ canvas_page_id: 200717
 canvas_page_slug: "plan-for-dob-6-promises-og-async-slash-await"
 canvas_page_title: "Plan for DOB 6 - Promises og async/await"
 canvas_page_published: true
-canvas_updated_at: "2026-09-07T09:23:19Z"
+canvas_updated_at: "2026-09-22T08:18:18Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018712"
 local_status: mirrored
 ```

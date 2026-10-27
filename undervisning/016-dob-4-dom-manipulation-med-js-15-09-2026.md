@@ -30,11 +30,11 @@ Vi kigger også på Git remotes og hvordan vi kan push'e og pull'e fra flere rem
 
 ## Materialer
 
-## Præsentationer
+### Præsentationer
 
-- \[DOB 4 - DOM manipulation med JS - slides.pdf\]([https://github.com/cederdorff/wu-e26a/blob/main/materialer/canvas-filer/AMAbot/DOB](../materialer/canvas-filer/AMAbot/DOB) 4 - DOM manipulation med JS - slides.pdf)
+- [DOB 4 - DOM manipulation med JS - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1054382)
 
-## Opgaver
+### Opgaver
 
 ---
 
@@ -52,7 +52,7 @@ canvas_page_id: 200714
 canvas_page_slug: "plan-for-dob-4-dom-manipulation-med-js"
 canvas_page_title: "Plan for DOB 4 - DOM manipulation med JS"
 canvas_page_published: true
-canvas_updated_at: "2026-09-21T06:58:17Z"
+canvas_updated_at: "2026-09-22T08:19:09Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018703"
 local_status: mirrored
 ```
