@@ -22,6 +22,19 @@ Spring aldrig en test over, heller ikke når den virker oplagt.
 
 </details>
 
+## Det bygger du
+
+![Forsiden, /register og /login kan alle se. /profile kræver login. Er du ikke logget ind, eller logger du ud, bliver du sendt fra /profile til /login](assets/react-supabase-auth-sider.svg)
+
+Det sker i koden, når du bruger siderne:
+
+```text
+/register  -> clientAction -> signUp()             -> redirect("/login?registered=true")
+/login     -> clientAction -> signInWithPassword() -> token i localStorage -> redirect("/profile")
+/profile   -> clientLoader -> getUser()            -> vis brugeren, eller redirect("/login")
+Log Out    -> clientAction -> signOut()            -> token slettet -> redirect("/login")
+```
+
 ---
 
 ## Øvelse 1: Hent startprojektet
@@ -712,6 +725,14 @@ export async function clientLoader() {
 3. Åbn Local Storage i dit almindelige vindue igen. Dobbeltklik på værdien, og ret ét bogstav inde i `access_token`. Genindlæs `/profile`. Hvad sker der?
 4. Log ind igen for at få et gyldigt token.
 
+Tokenets vej fra login til `/profile`:
+
+```text
+Log ind:       email + password -> Supabase tjekker hashen      -> access_token gemmes i localStorage
+/profile:      access_token     -> Supabase tjekker signaturen  -> { user }
+Rettet token:  access_token     -> signaturen passer ikke       -> error -> redirect("/login")
+```
+
 > `getUser()` sender tokenet til Supabase, som tjekker signaturen. Passer den ikke til indholdet, afviser Supabase tokenet, og din `clientLoader` sender dig til `/login`. Derfor kan man ikke bare ændre sit bruger-id i tokenet.
 
 ---
@@ -767,6 +788,12 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start
 | Delopgave 5: Build the login page | Øvelse 6 og 7. Lad dig inspirere af din `login.jsx`. Tutorialen sender til `/` i stedet for `/profile` |
 | Delopgave 6: Style the authentication pages | Kopiér afsnittet `Authentication Pages` fra `app.css` i dette projekt. Klasserne har samme navne |
 | Delopgave 7: Register authentication routes | Øvelse 3. Her skal routes stå uden for layoutet, så sidebaren ikke vises |
+
+Efter step 14 ser chatbottens sider sådan ud. Sammenlign med billedet under [Det bygger du](#det-bygger-du):
+
+![Alle chatbottens sider kan ses uden login. Chat-siderne ligger i layout.jsx med sidebar. /login og /register ligger uden for layoutet. Kræver login er tom](assets/chatbot-step-14-sider.svg)
+
+Efter step 14 kræver ingen af siderne login. Chat-siderne kommer over i "Kræver login" i de næste steps, når tokenet bliver sendt med, og backenden begynder at kræve det.
 
 Step 14 siger, at du bliver logget ud, hvis du retter ét tegn i tokenet. I chatbotten sker der ikke noget endnu, fordi intet kalder `getUser()`. Du så det på `/profile` i øvelse 8.
 
