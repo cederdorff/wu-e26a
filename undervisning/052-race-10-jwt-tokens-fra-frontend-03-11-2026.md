@@ -28,6 +28,7 @@ Når dagen er slut, har I lavet [step 15](https://github.com/bewildergeist/chatb
 - HTTP husker ingenting mellem to requests. Hvert request skal selv fortælle, hvem det kommer fra
 - Tokenet ligger i localStorage, og frontenden skal sende det med i hvert request til jeres API
 - Backenden kan så læse tokenet, tjekke signaturen og se brugerens id i `sub`. Det gør I i backenden næste uge
+- Vis billedet under ["Hvor ender chatbotten?"](../opgaver/react-supabase-auth.md#hvor-ender-chatbotten) sidst i React Supabase Auth-opgaven. I dag laver vi step 15, det første skridt derhen
 - **Session:** at brugeren er logget ind over flere requests og sidevisninger. Supabase-klienten holder styr på sessionen og henter et nyt access token med refresh tokenet, når det gamle udløber
 </details>
 <details>

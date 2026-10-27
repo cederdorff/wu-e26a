@@ -807,4 +807,4 @@ Efter step 18 ser chatbotten sådan ud:
 
 ![Kun /login og /register kan ses uden login. Alle chat-siderne i layout.jsx kræver login, og du ser kun dine egne tråde. Svarer API'et 401, bliver du sendt til /login](assets/chatbot-step-18-sider.svg)
 
-Step 15 sender tokenet med til backenden. Step 16 får backenden til at kræve det, og step 18 sender dig til `/login`, når API'et svarer 401. Step 17 sørger for, at du kun ser dine egne tråde.
+Step 15 sender tokenet med til backenden. Step 16 får backenden til at kræve det. Backenden tjekker tokenet med den samme `getUser()`, som du brugte på `/profile`. Step 17 sørger for, at du kun ser dine egne tråde, og step 18 sender dig til `/login`, når API'et svarer 401. Så virker testen fra øvelse 8 også i chatbotten: ret ét tegn i tokenet, og du bliver sendt til `/login`.

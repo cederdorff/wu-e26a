@@ -23,6 +23,8 @@ Hjælp hinanden, og kig på hinandens kode. Alle skal have register og login com
 
 Tegn på papir, tavle eller i Figma, hvad der sker, fra brugeren trykker "Log In", til tokenet ligger i Local Storage. Hvad sker der i browseren, og hvad sker der hos Supabase? Hvor bliver passwordet hashet? Hvor ligger tokenet bagefter?
 
+Tegn det først uden at kigge i opgaven. Sammenlign bagefter med "Tokenets vej" i øvelse 8 i [opgaven fra onsdag](../opgaver/react-supabase-auth.md).
+
 ## 5\. Diskutér
 
 - Hvad kan man gøre, hvis man får fat i jeres anon key?
