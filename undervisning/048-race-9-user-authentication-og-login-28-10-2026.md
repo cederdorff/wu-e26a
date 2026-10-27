@@ -102,6 +102,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - **Layout-routes:** i chatbottens `routes.js` ligger alle sider inde i `layout.jsx`, som viser sidebaren og et `<Outlet />`. Login og register skal ikke have sidebar, så de skal stå efter layout-routen, ikke inde i den
 - **Styling:** chatbotten har allerede de samme CSS-variabler i `:root`, som `react-supabase-auth` bruger. Kopiér afsnittet `Authentication Pages` fra `app.css`, og tab jer gennem formularen for at se fokus-stylingen
 - Tilbage til listen på tavlen: Hvilke af authentication-hullerne kan login lukke? Endnu ingen. Frontenden ved, hvem I er, men backenden gør ikke. Det kommer i de næste steps, når tokenet sendes med i alle requests, og backenden begynder at kræve det
+- Hvor stod det, hvem der ejer en tråd? Det id, I så i `sub` og på `/profile`, er det, tråde skal knyttes til senere
 - **Torsdag og fredag:** lav step 14 i chatbotten. Er I ikke færdige med step 13, så brug degit-kommandoen under Forberedelse. Husk at installere `@supabase/supabase-js` inde i `frontend/`, hvor `package.json` og `.env` ligger. Har I lavet AI-svarene på en branch, så bliv på `main`. Branchen merger I ind efter auth-stepsene
 - Fredag arbejder I i bordgrupperne og hjælper hinanden. Når I er i mål, så log ind med to forskellige brugere i hver sin browser i chatbotten. Ser de stadig de samme tråde? Og står jeres token i Network-fanen, når chatbotten kalder jeres API? Tag svarene med næste gang. Vi starter med dem
 </details>
