@@ -558,7 +558,7 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start
 
 | Step 14 | Det har du lavet i |
 | --- | --- |
-| Delopgave 1: Install Supabase client library | Øvelse 2 |
+| Delopgave 1: Install Supabase client library | Øvelse 2. Installér inde i `frontend/`, hvor `package.json` ligger |
 | Delopgave 2: Create Supabase client module | Øvelse 2 |
 | Delopgave 3: Configure environment variables | Øvelse 2. `.env` findes allerede i `frontend/` |
 | Delopgave 4: Build the registration page | Øvelse 4 og 5. Du skriver selv formularen |

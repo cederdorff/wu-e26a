@@ -40,7 +40,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - Øvelse 1: hent projektet med degit
 - Øvelse 2: installér `@supabase/supabase-js`, kopiér URL og key fra chatbottens `.env`, og lav én fælles klient i `app/lib/supabase.js`, som resten af appen importerer
 - **Miljøvariabler:** `.env` indeholder jeres egne værdier og bliver aldrig committet. `.env.example` viser, hvilke variabler projektet skal bruge, og bliver committet. Vite giver adgang til dem med `import.meta.env`, men kun dem, der starter med `VITE_`, fordi alt med `VITE_` ender i browseren. Mangler en variabel, kaster `supabase.js` en tydelig fejl med det samme
-- **Anon key vs. service role key:** anon key må gerne ligge i browseren, fordi Supabase selv tjekker, hvad den må. Service role key giver adgang til alt og må aldrig ligge i frontenden. Sammenlign med jeres Groq-nøgle, der kun ligger i backendens `.env`
+- **Anon key vs. service role key:** anon key må gerne ligge i browseren, fordi Supabase selv tjekker, hvad den må. Har jeres projekt en publishable key (`sb_publishable_...`), virker den på samme måde. Service role key og secret key giver adgang til alt og må aldrig ligge i frontenden. Sammenlign med jeres Groq-nøgle, der kun ligger i backendens `.env`
 - Slå "Confirm email" fra i Supabase. Supabase sender kun få mails i timen, og I skal oprette mange testbrugere i dag
 - Øvelse 3: registrér `/register` og `/login` i `routes.js`
 </details>
@@ -51,15 +51,14 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - `<Form method="post">` sender til routens egen `clientAction`, ligesom formularerne til nye tråde og beskeder i chatbotten. Den henter felterne med `formData.get()`
 - Kig på formularens markup. I step 14 skriver I den selv: `name` er det, `formData.get()` læser. `<label htmlFor>` hører sammen med inputtets `id`. `type="email"` og `type="password"` giver det rigtige tastatur og skjuler passwordet. `autoComplete="new-password"` ved oprettelse og `"current-password"` ved login hjælper browserens password-manager
 - Øvelse 4: opret brugeren med `supabase.auth.signUp()`, og send videre med `redirect("/login?registered=true")`
-- Find brugeren i Supabase under Authentication → Users og i tabellen `auth.users`
 </details>
 <details>
 <summary><strong>4. Passwords i Supabase Auth</strong></summary>
 
 - I går kørte I `crypt('hemmelig123', gen_salt('bf', 10))` i SQL Editor. Supabase gør det samme med jeres password, når I kalder `signUp()`
-- Find kolonnen `encrypted_password` i `auth.users`. Hashen starter med `$2a$`, ligesom jeres `crypt`-hash
-- Opret en bruger mere med samme password, og hav Network-fanen åben. Er de to hashes ens? Nej, for hver bruger får sin egen salt
-- Find requestet til `/auth/v1/signup` i Network-fanen. Passwordet står i klartekst i requestets body, men forbindelsen til Supabase er HTTPS, så det er krypteret på vejen. Først hos Supabase bliver det hashet
+- Hvad med vejen fra formularen til Supabase? Opret en bruger med Network-fanen åben, og find requestet til `/auth/v1/signup`. Passwordet står i klartekst i requestets body, men forbindelsen til Supabase er HTTPS, så det er krypteret på vejen. Først hos Supabase bliver det hashet
+- Find brugeren under Authentication → Users og i tabellen `auth.users`. Kolonnen `encrypted_password` starter med `$2a$`, ligesom jeres `crypt`-hash
+- Opret en bruger mere med samme password. Er de to hashes ens? Nej, for hver bruger får sin egen salt
 </details>
 <details>
 <summary><strong>5. Form validation: øvelse 5</strong></summary>
