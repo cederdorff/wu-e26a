@@ -566,4 +566,6 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start
 | Delopgave 6: Style the authentication pages | Kopiér afsnittet `Authentication Pages` fra `app.css` i dette projekt. Klasserne har samme navne |
 | Delopgave 7: Register authentication routes | Øvelse 3. Her skal routes stå uden for layoutet, så sidebaren ikke vises |
 
+Step 14 siger, at du bliver logget ud, hvis du retter ét tegn i tokenet. I chatbotten sker der ikke noget endnu, fordi intet kalder `getUser()`. Du så det på `/profile` i øvelse 8.
+
 Profilsiden og logout er ikke med i step 14. Logout kommer i step 15.

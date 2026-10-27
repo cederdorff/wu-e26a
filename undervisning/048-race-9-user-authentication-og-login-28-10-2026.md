@@ -98,6 +98,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 
 - Vi åbner [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) sammen og sætter øvelsesnumre på hver delopgave. Tabellen står sidst i opgaven
 - Lad jer inspirere af jeres `register.jsx` og `login.jsx`, når I laver siderne i chatbotten. Klasserne og CSS'en er de samme. Forskellen er, at login sender til `/` i stedet for `/profile`
+- Step 14 siger, at I bliver logget ud, hvis I retter ét tegn i tokenet. I chatbotten sker der ikke noget endnu, fordi intet kalder `getUser()`. I så det på `/profile` i øvelse 8
 - **Layout-routes:** i chatbottens `routes.js` ligger alle sider inde i `layout.jsx`, som viser sidebaren og et `<Outlet />`. Login og register skal ikke have sidebar, så de skal stå efter layout-routen, ikke inde i den
 - **Styling:** chatbotten har allerede de samme CSS-variabler i `:root`, som `react-supabase-auth` bruger. Kopiér afsnittet `Authentication Pages` fra `app.css`, og tab jer gennem formularen for at se fokus-stylingen
 - Tilbage til listen på tavlen: Hvilke af authentication-hullerne kan login lukke? Endnu ingen. Frontenden ved, hvem I er, men backenden gør ikke. Det kommer i de næste steps, når tokenet sendes med i alle requests, og backenden begynder at kræve det
