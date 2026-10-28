@@ -401,6 +401,14 @@
   text-transform: uppercase;
 }
 
+/* Resten af ugen: same cards, with the day and its type on two lines */
+#ugen .recap4 article {
+  min-height: 520px;
+}
+#ugen .recap4 .top > span {
+  line-height: 1.45;
+}
+
 /* ===================================================================
    01 · Break the chatbot: two browsers with the same threads
    =================================================================== */
@@ -2436,29 +2444,109 @@
 
 /* ===================================================================
    Slide-type tweaks for this deck
-   =================================================================== *//* Nine agenda items: two columns so nothing runs past the slide */
-#agenda .agenda-grid {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(5, auto);
-  grid-auto-flow: column;
-  column-gap: 56px;
+   =================================================================== *//* Agenda: the five blocks on the whiteboard, each bracketing its chapters */
+#agenda .agenda-map {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 26px;
+  padding-bottom: 64px;
+}
+#agenda .am-head,
+#agenda .am-groups > li {
+  display: grid;
+  grid-template-columns: 410px 1fr;
+  column-gap: 44px;
+}
+#agenda .am-head {
+  padding-bottom: 10px;
+  color: var(--muted);
+  font: 800 15px/1 var(--font);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+#agenda .am-groups,
+#agenda .am-chapters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#agenda .am-groups > li {
+  align-items: center;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+  font-size: inherit;
+}
+#agenda .am-board {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+#agenda .am-board i {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  font: 800 22px/1 var(--font);
+  font-style: normal;
+}
+#agenda .am-board span {
+  display: grid;
+  gap: 3px;
+}
+#agenda .am-board b {
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.1;
+}
+#agenda .am-board em {
+  color: var(--muted);
+  font-size: 18px;
+  font-style: normal;
+}
+#agenda .am-chapters {
+  display: grid;
+  padding-left: 26px;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+#agenda .am-chapters li {
+  font-size: inherit;
+  line-height: inherit;
+}
+#agenda .am-chapters a {
+  display: grid;
+  grid-template-columns: 34px 330px 1fr;
+  column-gap: 14px;
+  align-items: baseline;
+  padding: 5px 0;
+}
+#agenda .am-chapters i {
+  color: var(--green);
+  font: 800 16px/1 var(--font);
+  font-style: normal;
+}
+#agenda .am-chapters b {
+  color: var(--ink);
+  font-size: 25px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+#agenda .am-chapters small {
+  color: var(--muted);
+  font-size: 18px;
+}
+#agenda .am-chapters a:hover b {
+  color: var(--accent);
 }
 
 /* ===================================================================
    Pass 2: fixes after the first screenshot round
-   =================================================================== *//* Agenda: nine items in two columns, large enough to fill the slide */
-#agenda .agenda-grid a {
-  padding: 22px 0;
-}
-#agenda .agenda-grid b {
-  font-size: 30px;
-}
-#agenda .agenda-grid small {
-  margin-top: 6px;
-  font-size: 20px;
-}
-
-/* Attribute anatomy: the code part is one grid cell */
+   =================================================================== *//* Attribute anatomy: the code part is one grid cell */
 .anat-list li > .a {
   display: flex;
   flex-wrap: wrap;

@@ -39,124 +39,72 @@
         <section id="agenda" class="agenda-slide" data-accent="green">
           <span class="eyebrow">Agenda</span>
           <h2>Først et lille projekt. Så chatbotten</h2>
-          <ol class="agenda-grid">
-            <li><a href="#/huller"><b>Hvad mangler chatbotten?</b><small>prøv at ødelægge den, og sortér hullerne</small></a></li>
-            <li><a href="#/supabase-auth"><b>Supabase Auth</b><small>øvelse 1-3: projektet, klienten og routes</small></a></li>
-            <li><a href="#/opret"><b>Opret en bruger</b><small>øvelse 4: <code>&lt;Form&gt;</code>, <code>clientAction</code> og <code>signUp()</code></small></a></li>
-            <li><a href="#/passwords"><b>Passwords i Supabase Auth</b><small>fra <code>crypt</code> i går til <code>auth.users</code> i dag</small></a></li>
-            <li><a href="#/validering"><b>Validering</b><small>øvelse 5: tre lag, og kun ét af dem på serveren</small></a></li>
-            <li><a href="#/login"><b>Log ind</b><small>øvelse 6: <code>signInWithPassword()</code></small></a></li>
-            <li><a href="#/jwt"><b>JWT</b><small>øvelse 7: header, payload og signatur</small></a></li>
-            <li><a href="#/kraever-login"><b>Sider, der kræver login</b><small>øvelse 8-9: <code>getUser()</code> og <code>signOut()</code></small></a></li>
-            <li><a href="#/step-14"><b>Fra øvelserne til step 14</b><small>det samme igen, i chatbotten</small></a></li>
-          </ol>
+          <div class="agenda-map">
+            <div class="am-head"><span>På tavlen</span><span>Kapitler i slides</span></div>
+            <ol class="am-groups">
+              <li>
+                <div class="am-board"><i>1</i><span><b>Hvad mangler chatbotten?</b></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/huller"><i>01</i><b>Hvad mangler chatbotten?</b><small>prøv at ødelægge den, og sortér hullerne</small></a></li>
+                </ol>
+              </li>
+              <li>
+                <div class="am-board"><i>2</i><span><b>Supabase Auth</b><em>øvelse 1-3</em></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/supabase-auth"><i>02</i><b>Supabase Auth</b><small>øvelse 1-3: projektet, klienten og routes</small></a></li>
+                </ol>
+              </li>
+              <li>
+                <div class="am-board"><i>3</i><span><b>Opret en konto</b><em>øvelse 4-5</em></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/opret"><i>03</i><b>Opret en bruger</b><small>øvelse 4: <code>&lt;Form&gt;</code>, <code>clientAction</code> og <code>signUp()</code></small></a></li>
+                  <li><a href="#/passwords"><i>04</i><b>Passwords i Supabase Auth</b><small>fra <code>crypt</code> i går til <code>auth.users</code> i dag</small></a></li>
+                  <li><a href="#/validering"><i>05</i><b>Validering</b><small>øvelse 5: tre lag, og kun ét af dem på serveren</small></a></li>
+                </ol>
+              </li>
+              <li>
+                <div class="am-board"><i>4</i><span><b>Log ind og tokens</b><em>øvelse 6-9</em></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/login"><i>06</i><b>Log ind</b><small>øvelse 6: <code>signInWithPassword()</code></small></a></li>
+                  <li><a href="#/jwt"><i>07</i><b>JWT</b><small>øvelse 7: header, payload og signatur</small></a></li>
+                  <li><a href="#/kraever-login"><i>08</i><b>Sider, der kræver login</b><small>øvelse 8-9: <code>getUser()</code> og <code>signOut()</code></small></a></li>
+                </ol>
+              </li>
+              <li>
+                <div class="am-board"><i>5</i><span><b>Step 14 i chatbotten</b></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/step-14"><i>09</i><b>Fra øvelserne til step 14</b><small>det samme igen, i chatbotten</small></a></li>
+                </ol>
+              </li>
+            </ol>
+          </div>
           <p class="bottom-line">Øvelserne står i opgaven: <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth.md" target="_blank" rel="noreferrer"><b>React Supabase Auth ↗</b></a>. Løsningen: <a href="https://github.com/cederdorff/react-supabase-auth" target="_blank" rel="noreferrer"><b>én branch pr. øvelse ↗</b></a>.</p>
         </section>
 
-        <!-- ============ DAGENS MÅL ============ -->
-
-        <section class="fill" data-accent="green">
-          <span class="eyebrow">Dagens mål · react-supabase-auth</span>
-          <h2>Fire sider. Én af dem kræver login</h2>
+        <section id="ugen" class="fill" data-accent="green">
+          <span class="eyebrow">Resten af ugen</span>
+          <h2>Fra øvelserne i dag til step 14 fredag</h2>
           <div class="stage">
-            <div class="pg-wrap">
-              <svg class="pg pg-380" viewBox="0 0 880 380" role="img" aria-labelledby="rsa-title">
-                <title id="rsa-title">Forsiden, /register og /login kan alle se. /profile kræver login. Er du ikke logget ind, eller logger du ud, bliver du sendt fra /profile til /login</title>
-                <rect class="z-open" x="20" y="20" width="540" height="340" rx="14" />
-                <text class="z-t open" x="44" y="54">Kan alle se</text>
-                <rect class="z-lock" x="600" y="20" width="260" height="340" rx="14" />
-                <path class="lock-arc" d="M627 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="624" y="44" width="14" height="11" rx="2" />
-                <text class="z-t lock" x="646" y="54">Kræver login</text>
-
-                <g class="dim"><rect class="card" x="195" y="82" width="160" height="66" rx="10" /><text class="route" x="275" y="111">/</text><text class="desc" x="275" y="132">forsiden</text></g>
-                <g class="dim"><rect class="card" x="50" y="200" width="160" height="66" rx="10" /><text class="route" x="130" y="229">/register</text><text class="desc" x="130" y="250">opret en konto</text></g>
-                <g class="keep"><rect class="card" x="340" y="200" width="160" height="66" rx="10" /><text class="route" x="420" y="229">/login</text><text class="desc" x="420" y="250">log ind</text></g>
-                <g class="hi"><rect class="card" x="650" y="200" width="160" height="66" rx="10" /><text class="route" x="730" y="229">/profile</text><text class="desc" x="730" y="250">din profil</text></g>
-
-                <g class="dim"><line class="flow" x1="240" y1="150" x2="160" y2="197" /><line class="flow" x1="310" y1="150" x2="390" y2="197" />
-                <line class="flow" x1="212" y1="233" x2="337" y2="233" /><rect class="pill" x="228" y="208" width="92" height="20" rx="10" /><text class="label" x="274" y="222">konto oprettet</text></g>
-                <g class="keep"><line class="flow" x1="502" y1="233" x2="647" y2="233" /><rect class="pill" x="539" y="208" width="70" height="20" rx="10" /><text class="label" x="574" y="222">logget ind</text></g>
-                <g class="keep"><path class="redir" d="M730 268 V318 H420 V271" /><rect class="pill pill-red" x="487" y="295" width="176" height="20" rx="10" /><text class="label red" x="575" y="309">ikke logget ind, eller Log Out</text></g>
-              </svg>
+            <div class="recap4">
+              <article style="--c: var(--green)">
+                <div class="top"><span>Onsdag 28/10<br />i dag</span><strong>Login i et lille projekt</strong><small><code>react-supabase-auth</code>, øvelse 1-9. Opret en konto, log ind, kig i jeres JWT, og byg en side, der kræver login.</small></div>
+                <div class="today"><b>Resultat</b>Alle dele af step 14, én ad gangen</div>
+              </article>
+              <article style="--c: var(--cyan)">
+                <div class="top"><span>Torsdag 29/10<br />selvstudium</span><strong>Bliv færdig, og start step 14</strong><small>Lav de øvelser, I ikke nåede. Gå i gang med step 14 i chatbotten. Tag delopgave 7 før 4.</small></div>
+                <div class="today"><b>Sidder du fast?</b>Skriv ned hvor, og hvad fejlen siger. Tag det med fredag</div>
+              </article>
+              <article style="--c: var(--yellow)">
+                <div class="top"><span>Fredag 30/10<br />gruppearbejde</span><strong>Step 14 i bordgrupperne</strong><small>Lokale 4.05. Hjælp hinanden i mål med step 14. Tegn login-flowet uden at kigge i opgaven.</small></div>
+                <div class="today"><b>Test sammen</b>To brugere i to browsere. Ser de de samme tråde?</div>
+              </article>
+              <article style="--c: var(--purple)">
+                <div class="top"><span>Tirsdag 3/11<br />næste gang</span><strong>Tokenet med til API'et</strong><small>Vi starter med jeres tegninger og svar. Derefter step 15: tokenet sendes med til jeres API.</small></div>
+                <div class="today"><b>Tag med</b>Jeres tegning af login-flowet og svarene fra fredag</div>
+              </article>
             </div>
           </div>
-          <p class="bottom-line">Det bygger I i dag, i et lille projekt uden backend, tråde og sidebar. Samme billede som øverst i opgaven.</p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Torsdag og fredag · chatbotten efter step 14</span>
-          <h2>Login, men ingen sider kræver det endnu</h2>
-          <div class="stage">
-            <div class="pg-wrap">
-              <svg class="pg pg-420" viewBox="0 0 880 420" role="img" aria-labelledby="s14-title">
-                <title id="s14-title">Alle chatbottens sider kan ses uden login. Chat-siderne ligger i layout.jsx med sidebar. /login og /register ligger uden for layoutet. Kræver login er tom</title>
-                <rect class="z-open" x="20" y="20" width="580" height="380" rx="14" />
-                <text class="z-t open" x="44" y="54">Kan alle se</text>
-
-                <rect class="layout-box" x="44" y="72" width="532" height="182" rx="12" />
-                <text class="layout-t" x="62" y="96">layout.jsx med sidebar</text>
-                <rect class="card" x="60" y="110" width="240" height="56" rx="10" /><text class="route sm" x="180" y="134">/</text><text class="file" x="180" y="154">home.jsx</text>
-                <rect class="card" x="318" y="110" width="240" height="56" rx="10" /><text class="route sm" x="438" y="134">/chat/new</text><text class="file" x="438" y="154">chat-new.jsx</text>
-                <rect class="card" x="60" y="180" width="240" height="56" rx="10" /><text class="route sm" x="180" y="204">/chat/:threadId</text><text class="file" x="180" y="224">chat-thread.jsx</text>
-                <rect class="card" x="318" y="180" width="240" height="56" rx="10" /><text class="route sm" x="438" y="204">/chat/:threadId/edit</text><text class="file" x="438" y="224">chat-thread-edit.jsx</text>
-
-                <rect class="card" x="60" y="300" width="180" height="60" rx="10" /><text class="route sm" x="150" y="325">/register</text><text class="file" x="150" y="346">register.jsx</text>
-                <rect class="card" x="360" y="300" width="180" height="60" rx="10" /><text class="route sm" x="450" y="325">/login</text><text class="file" x="450" y="346">login.jsx</text>
-                <text class="note" x="60" y="386">/login og /register står uden for layoutet, så der er ingen sidebar</text>
-
-                <line class="flow" x1="242" y1="330" x2="357" y2="330" /><rect class="pill" x="254" y="305" width="92" height="20" rx="10" /><text class="label" x="300" y="319">konto oprettet</text>
-                <line class="flow" x1="450" y1="298" x2="450" y2="258" /><rect class="pill" x="462" y="268" width="70" height="20" rx="10" /><text class="label" x="497" y="282">logget ind</text>
-
-                <rect class="z-lock" x="640" y="20" width="220" height="380" rx="14" />
-                <path class="lock-arc" d="M667 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="664" y="44" width="14" height="11" rx="2" />
-                <text class="z-t lock" x="686" y="54">Kræver login</text>
-                <rect class="empty-box" x="665" y="150" width="170" height="104" rx="10" />
-                <text class="empty-t" x="750" y="188">Ingen sider endnu</text>
-                <text class="empty-s" x="750" y="212">Chat-siderne kommer</text>
-                <text class="empty-s" x="750" y="230">i de næste steps</text>
-                <path class="to-lock" d="M578 163 C 615 163, 625 202, 660 202" />
-              </svg>
-            </div>
-          </div>
-          <p class="bottom-line">Samme register og login som i dag, sat ind i chatbotten. Chat-siderne flytter først over i "Kræver login" i de næste steps.</p>
-        </section>
-
-        <section class="fill" data-accent="orange">
-          <span class="eyebrow">Hvor vi er på vej hen · efter step 18</span>
-          <h2>Hvor ender chatbotten?</h2>
-          <div class="stage">
-            <div class="pg-wrap">
-              <svg class="pg pg-380 pg-18" viewBox="0 0 880 380" role="img" aria-labelledby="s18-title">
-                <title id="s18-title">Kun /login og /register kan ses uden login. Alle chat-siderne i layout.jsx kræver login, og du ser kun dine egne tråde. Svarer API'et 401, bliver du sendt til /login</title>
-                <rect class="z-open" x="20" y="20" width="260" height="340" rx="14" />
-                <text class="z-t open" x="44" y="54">Kan alle se</text>
-                <rect class="card" x="50" y="84" width="200" height="60" rx="10" /><text class="route sm" x="150" y="109">/register</text><text class="file" x="150" y="130">register.jsx</text>
-                <rect class="card" x="50" y="210" width="200" height="60" rx="10" /><text class="route sm" x="150" y="235">/login</text><text class="file" x="150" y="256">login.jsx</text>
-                <line class="flow" x1="150" y1="146" x2="150" y2="207" /><rect class="pill" x="104" y="166" width="92" height="20" rx="10" /><text class="label" x="150" y="180">konto oprettet</text>
-
-                <rect class="z-lock" x="320" y="20" width="540" height="340" rx="14" />
-                <path class="lock-arc" d="M347 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="344" y="44" width="14" height="11" rx="2" />
-                <text class="z-t lock" x="366" y="54">Kræver login</text>
-                <rect class="layout-box" x="344" y="72" width="492" height="182" rx="12" />
-                <text class="layout-t" x="362" y="96">layout.jsx med sidebar</text>
-                <rect class="pill pill-orange" x="652" y="82" width="168" height="22" rx="11" /><text class="label orange" x="736" y="97">kun dine egne tråde</text>
-                <rect class="card" x="360" y="110" width="220" height="56" rx="10" /><text class="route sm" x="470" y="134">/</text><text class="file" x="470" y="154">home.jsx</text>
-                <rect class="card" x="600" y="110" width="220" height="56" rx="10" /><text class="route sm" x="710" y="134">/chat/new</text><text class="file" x="710" y="154">chat-new.jsx</text>
-                <rect class="card" x="360" y="180" width="220" height="56" rx="10" /><text class="route sm" x="470" y="204">/chat/:threadId</text><text class="file" x="470" y="224">chat-thread.jsx</text>
-                <rect class="card" x="600" y="180" width="220" height="56" rx="10" /><text class="route sm" x="710" y="204">/chat/:threadId/edit</text><text class="file" x="710" y="224">chat-thread-edit.jsx</text>
-
-                <line class="flow" x1="252" y1="240" x2="341" y2="240" /><rect class="pill" x="263" y="214" width="70" height="20" rx="10" /><text class="label" x="298" y="228">logget ind</text>
-                <path class="redir" d="M590 256 V322 H150 V273" /><rect class="pill pill-red" x="308" y="312" width="124" height="20" rx="10" /><text class="label red" x="370" y="326">API'et svarer 401</text>
-              </svg>
-            </div>
-            <ol class="steps18">
-              <li><b>15</b><span>Tokenet sendes med til backenden</span></li>
-              <li><b>16</b><span>Backenden kræver det og tjekker det med <code>getUser()</code></span></li>
-              <li><b>17</b><span>I ser kun jeres egne tråde</span></li>
-              <li><b>18</b><span>Svarer API'et 401, sendes I til <code>/login</code></span></li>
-            </ol>
-          </div>
-          <p class="bottom-line">Til sidst sender chatbotten jer til <code>/login</code>, hvis I ikke er logget ind. Det samme, som <code>/profile</code> gør i dag.</p>
+          <p class="bottom-line">Målet: alle har lavet step 14 fredag og kan forklare, hvad der sker, når man logger ind.</p>
         </section>
 
         <section class="fill" data-accent="green">
@@ -365,6 +313,36 @@ VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
             </div>
           </div>
           <p class="bottom-line">Samme URL og samme key som i chatbotten. I bruger bare Auth-delen af projektet nu.</p>
+        </section>
+
+        <!-- ============ DAGENS MÅL ============ -->
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">Dagens mål · react-supabase-auth</span>
+          <h2>Fire sider. Én af dem kræver login</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-380" viewBox="0 0 880 380" role="img" aria-labelledby="rsa-title">
+                <title id="rsa-title">Forsiden, /register og /login kan alle se. /profile kræver login. Er du ikke logget ind, eller logger du ud, bliver du sendt fra /profile til /login</title>
+                <rect class="z-open" x="20" y="20" width="540" height="340" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+                <rect class="z-lock" x="600" y="20" width="260" height="340" rx="14" />
+                <path class="lock-arc" d="M627 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="624" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="646" y="54">Kræver login</text>
+
+                <g class="dim"><rect class="card" x="195" y="82" width="160" height="66" rx="10" /><text class="route" x="275" y="111">/</text><text class="desc" x="275" y="132">forsiden</text></g>
+                <g class="dim"><rect class="card" x="50" y="200" width="160" height="66" rx="10" /><text class="route" x="130" y="229">/register</text><text class="desc" x="130" y="250">opret en konto</text></g>
+                <g class="keep"><rect class="card" x="340" y="200" width="160" height="66" rx="10" /><text class="route" x="420" y="229">/login</text><text class="desc" x="420" y="250">log ind</text></g>
+                <g class="hi"><rect class="card" x="650" y="200" width="160" height="66" rx="10" /><text class="route" x="730" y="229">/profile</text><text class="desc" x="730" y="250">din profil</text></g>
+
+                <g class="dim"><line class="flow" x1="240" y1="150" x2="160" y2="197" /><line class="flow" x1="310" y1="150" x2="390" y2="197" />
+                <line class="flow" x1="212" y1="233" x2="337" y2="233" /><rect class="pill" x="228" y="208" width="92" height="20" rx="10" /><text class="label" x="274" y="222">konto oprettet</text></g>
+                <g class="keep"><line class="flow" x1="502" y1="233" x2="647" y2="233" /><rect class="pill" x="539" y="208" width="70" height="20" rx="10" /><text class="label" x="574" y="222">logget ind</text></g>
+                <g class="keep"><path class="redir" d="M730 268 V318 H420 V271" /><rect class="pill pill-red" x="487" y="295" width="176" height="20" rx="10" /><text class="label red" x="575" y="309">ikke logget ind, eller Log Out</text></g>
+              </svg>
+            </div>
+          </div>
+          <p class="bottom-line">Det bygger I i dag, i et lille projekt uden backend, tråde og sidebar. Samme billede som øverst i opgaven.</p>
         </section>
 
         <section class="fill" data-accent="green">
@@ -1193,6 +1171,44 @@ LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZjNjMmE3…</pre>
         </section>
 
         <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Torsdag og fredag · chatbotten efter step 14</span>
+          <h2>Login, men ingen sider kræver det endnu</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-420" viewBox="0 0 880 420" role="img" aria-labelledby="s14-title">
+                <title id="s14-title">Alle chatbottens sider kan ses uden login. Chat-siderne ligger i layout.jsx med sidebar. /login og /register ligger uden for layoutet. Kræver login er tom</title>
+                <rect class="z-open" x="20" y="20" width="580" height="380" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+
+                <rect class="layout-box" x="44" y="72" width="532" height="182" rx="12" />
+                <text class="layout-t" x="62" y="96">layout.jsx med sidebar</text>
+                <rect class="card" x="60" y="110" width="240" height="56" rx="10" /><text class="route sm" x="180" y="134">/</text><text class="file" x="180" y="154">home.jsx</text>
+                <rect class="card" x="318" y="110" width="240" height="56" rx="10" /><text class="route sm" x="438" y="134">/chat/new</text><text class="file" x="438" y="154">chat-new.jsx</text>
+                <rect class="card" x="60" y="180" width="240" height="56" rx="10" /><text class="route sm" x="180" y="204">/chat/:threadId</text><text class="file" x="180" y="224">chat-thread.jsx</text>
+                <rect class="card" x="318" y="180" width="240" height="56" rx="10" /><text class="route sm" x="438" y="204">/chat/:threadId/edit</text><text class="file" x="438" y="224">chat-thread-edit.jsx</text>
+
+                <rect class="card" x="60" y="300" width="180" height="60" rx="10" /><text class="route sm" x="150" y="325">/register</text><text class="file" x="150" y="346">register.jsx</text>
+                <rect class="card" x="360" y="300" width="180" height="60" rx="10" /><text class="route sm" x="450" y="325">/login</text><text class="file" x="450" y="346">login.jsx</text>
+                <text class="note" x="60" y="386">/login og /register står uden for layoutet, så der er ingen sidebar</text>
+
+                <line class="flow" x1="242" y1="330" x2="357" y2="330" /><rect class="pill" x="254" y="305" width="92" height="20" rx="10" /><text class="label" x="300" y="319">konto oprettet</text>
+                <line class="flow" x1="450" y1="298" x2="450" y2="258" /><rect class="pill" x="462" y="268" width="70" height="20" rx="10" /><text class="label" x="497" y="282">logget ind</text>
+
+                <rect class="z-lock" x="640" y="20" width="220" height="380" rx="14" />
+                <path class="lock-arc" d="M667 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="664" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="686" y="54">Kræver login</text>
+                <rect class="empty-box" x="665" y="150" width="170" height="104" rx="10" />
+                <text class="empty-t" x="750" y="188">Ingen sider endnu</text>
+                <text class="empty-s" x="750" y="212">Chat-siderne kommer</text>
+                <text class="empty-s" x="750" y="230">i de næste steps</text>
+                <path class="to-lock" d="M578 163 C 615 163, 625 202, 660 202" />
+              </svg>
+            </div>
+          </div>
+          <p class="bottom-line">Samme register og login som i dag, sat ind i chatbotten. Chat-siderne flytter først over i "Kræver login" i de næste steps.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
           <span class="eyebrow">Layout-routes</span>
           <h2>Login og register skal stå uden for layoutet</h2>
           <div class="stage">
@@ -1293,6 +1309,44 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
           <p class="bottom-line">Det ændrer step 15-18: tokenet sendes med, og backenden begynder at kræve det. Det er målet fra starten af dagen.</p>
         </section>
 
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Hvor vi er på vej hen · efter step 18</span>
+          <h2>Hvor ender chatbotten?</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-380 pg-18" viewBox="0 0 880 380" role="img" aria-labelledby="s18-title">
+                <title id="s18-title">Kun /login og /register kan ses uden login. Alle chat-siderne i layout.jsx kræver login, og du ser kun dine egne tråde. Svarer API'et 401, bliver du sendt til /login</title>
+                <rect class="z-open" x="20" y="20" width="260" height="340" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+                <rect class="card" x="50" y="84" width="200" height="60" rx="10" /><text class="route sm" x="150" y="109">/register</text><text class="file" x="150" y="130">register.jsx</text>
+                <rect class="card" x="50" y="210" width="200" height="60" rx="10" /><text class="route sm" x="150" y="235">/login</text><text class="file" x="150" y="256">login.jsx</text>
+                <line class="flow" x1="150" y1="146" x2="150" y2="207" /><rect class="pill" x="104" y="166" width="92" height="20" rx="10" /><text class="label" x="150" y="180">konto oprettet</text>
+
+                <rect class="z-lock" x="320" y="20" width="540" height="340" rx="14" />
+                <path class="lock-arc" d="M347 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="344" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="366" y="54">Kræver login</text>
+                <rect class="layout-box" x="344" y="72" width="492" height="182" rx="12" />
+                <text class="layout-t" x="362" y="96">layout.jsx med sidebar</text>
+                <rect class="pill pill-orange" x="652" y="82" width="168" height="22" rx="11" /><text class="label orange" x="736" y="97">kun dine egne tråde</text>
+                <rect class="card" x="360" y="110" width="220" height="56" rx="10" /><text class="route sm" x="470" y="134">/</text><text class="file" x="470" y="154">home.jsx</text>
+                <rect class="card" x="600" y="110" width="220" height="56" rx="10" /><text class="route sm" x="710" y="134">/chat/new</text><text class="file" x="710" y="154">chat-new.jsx</text>
+                <rect class="card" x="360" y="180" width="220" height="56" rx="10" /><text class="route sm" x="470" y="204">/chat/:threadId</text><text class="file" x="470" y="224">chat-thread.jsx</text>
+                <rect class="card" x="600" y="180" width="220" height="56" rx="10" /><text class="route sm" x="710" y="204">/chat/:threadId/edit</text><text class="file" x="710" y="224">chat-thread-edit.jsx</text>
+
+                <line class="flow" x1="252" y1="240" x2="341" y2="240" /><rect class="pill" x="263" y="214" width="70" height="20" rx="10" /><text class="label" x="298" y="228">logget ind</text>
+                <path class="redir" d="M590 256 V322 H150 V273" /><rect class="pill pill-red" x="308" y="312" width="124" height="20" rx="10" /><text class="label red" x="370" y="326">API'et svarer 401</text>
+              </svg>
+            </div>
+            <ol class="steps18">
+              <li><b>15</b><span>Tokenet sendes med til backenden</span></li>
+              <li><b>16</b><span>Backenden kræver det og tjekker det med <code>getUser()</code></span></li>
+              <li><b>17</b><span>I ser kun jeres egne tråde</span></li>
+              <li><b>18</b><span>Svarer API'et 401, sendes I til <code>/login</code></span></li>
+            </ol>
+          </div>
+          <p class="bottom-line">Til sidst sender chatbotten jer til <code>/login</code>, hvis I ikke er logget ind. Det samme, som <code>/profile</code> gør i dag.</p>
+        </section>
+
         <section id="ex-step14" class="activity-slide handson" data-accent="cyan">
           <span class="ho-num"><small>Step</small>14</span>
           <span class="eyebrow">Hands-on · torsdag og fredag</span>
@@ -1303,7 +1357,7 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
             <li>Fredag, når I er i mål: log ind med to brugere i to browsere. Ser de stadig de samme tråde?</li>
             <li>Står jeres token i Network-fanen, når chatbotten kalder jeres API på <code>localhost:3000</code>?</li>
           </ul>
-          <p class="bottom-line">Tag svarene med næste gang. Vi starter med dem.</p>
+          <p class="bottom-line">Fredag tegner I også login-flowet. Tag tegningen og svarene med næste gang. Vi starter med dem.</p>
         </section>
 
         <section class="activity-slide" data-accent="green">

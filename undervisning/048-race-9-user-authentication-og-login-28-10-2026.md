@@ -105,7 +105,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - Tilbage til listen på tavlen: Hvilke af authentication-hullerne kan login lukke? Endnu ingen. Frontenden ved, hvem I er, men backenden gør ikke. Det kommer i de næste steps, når tokenet sendes med i alle requests, og backenden begynder at kræve det. Vis billedet under "Hvor ender chatbotten?" sidst i opgaven
 - Hvor stod det, hvem der ejer en tråd? Det id, I så i `sub` og på `/profile`, er det, tråde skal knyttes til senere
 - **Torsdag og fredag:** lav step 14 i chatbotten. Er I ikke færdige med step 13, så brug degit-kommandoen under Forberedelse. Husk at installere `@supabase/supabase-js` inde i `frontend/`, hvor `package.json` og `.env` ligger. Har I lavet AI-svarene på en branch, så bliv på `main`. Branchen merger I ind efter auth-stepsene
-- Fredag arbejder I i bordgrupperne og hjælper hinanden. Når I er i mål, så log ind med to forskellige brugere i hver sin browser i chatbotten. Ser de stadig de samme tråde? Og står jeres token i Network-fanen, når chatbotten kalder jeres API? Tag svarene med næste gang. Vi starter med dem
+- Fredag arbejder I i bordgrupperne og hjælper hinanden. Når I er i mål, så log ind med to forskellige brugere i hver sin browser i chatbotten. Ser de stadig de samme tråde? Og står jeres token i Network-fanen, når chatbotten kalder jeres API? Tegn også login-flowet, fra brugeren trykker "Log In", til tokenet ligger i Local Storage. Tag tegningen og svarene med næste gang. Vi starter med dem
 </details>
 
 ---

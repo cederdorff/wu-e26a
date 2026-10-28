@@ -14,7 +14,7 @@ Her er et forslag til, hvad du kan bruge dagen på. Du behøver ikke nå det hel
 - Følg [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14) delopgave for delopgave, og commit efter hver. Tabellen sidst i opgaven fra onsdag viser, hvilken øvelse der svarer til hvilken delopgave
 - Kør `cd frontend`, før du installerer `@supabase/supabase-js`
 - Tag delopgave 7 (routes) før delopgave 4, så du kan teste siderne undervejs
-- Er du ikke færdig med step 13, så hent startpunktet i roden af dit chatbot-repo med `npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start`. Commit, før du ændrer noget
+- Er du ikke færdig med step 13, så hent startpunktet i roden af dit chatbot-repo med `npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start`. Commit, før du ændrer noget. Sæt derefter `TEST_USER_ID` ind i `backend/server.js` igen, som i trin 12. Startpunktet opretter tråde uden `user_id`, og det fejler i kursets database. Se kodestykket sidst i [opgaven fra onsdag](../opgaver/react-supabase-auth.md)
 - Har du lavet AI-svarene på en branch, så bliv på `main`
 
 Sidder du fast, så skriv ned, hvor du sidder fast, og hvad fejlen siger. Tag det med til gruppen i morgen.
