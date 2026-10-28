@@ -3205,5 +3205,26 @@
   font-weight: 700;
 }
 .tokmap .tag code {
+  color: var(--c) !important;
   font-size: 0.95em !important;
+}
+
+/* JWT definition: the name split in three, like the Supabase Auth definition */
+.jwt-name .cn-json {
+  border-color: var(--jwt-p);
+}
+.jwt-name .cn-json code {
+  color: var(--jwt-p) !important;
+}
+.jwt-name .cn-web {
+  border-color: var(--orange);
+}
+.jwt-name .cn-web code {
+  color: var(--orange) !important;
+}
+.jwt-name .cn-token {
+  border-color: var(--cyan);
+}
+.jwt-name .cn-token code {
+  color: var(--cyan) !important;
 }

@@ -66,7 +66,7 @@
                 <div class="am-board"><i>4</i><span><b>Log ind og tokens</b><em>øvelse 6-9</em></span></div>
                 <ol class="am-chapters">
                   <li><a href="#/login"><i>06</i><b>Log ind</b><small>øvelse 6: <code>signInWithPassword()</code></small></a></li>
-                  <li><a href="#/jwt"><i>07</i><b>JWT</b><small>øvelse 7: header, payload og signatur</small></a></li>
+                  <li><a href="#/jwt"><i>07</i><b>Token og JWT</b><small>øvelse 7: hvad er et token, og hvad står der i jeres?</small></a></li>
                   <li><a href="#/kraever-login"><i>08</i><b>Sider, der kræver login</b><small>øvelse 8-9: <code>getUser()</code> og <code>signOut()</code></small></a></li>
                 </ol>
               </li>
@@ -820,32 +820,6 @@ VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
           <p>Supabase tjekker passwordet mod hashen i <code>auth.users</code>. Passer det, får I et token tilbage.</p>
         </section>
 
-        <section class="fill token-def-slide" data-accent="cyan">
-          <span class="eyebrow">Definition</span>
-          <h2>Hvad er et token?</h2>
-          <div class="stage">
-            <div class="tokmap">
-              <span></span><span class="hd">Én gang</span><span></span><span class="hd">Du får</span><span></span><span class="hd">Bagefter</span>
-
-              <span class="lbl" style="--c: var(--yellow)">Festival</span>
-              <div class="cell"><strong>Billet og ID</strong><small>Tjekkes ved indgangen</small></div>
-              <b class="ar">→</b>
-              <div class="cell got" style="--c: var(--yellow)"><strong>Armbånd</strong><small>Gælder hele festivalen</small></div>
-              <b class="ar">→</b>
-              <div class="cell"><strong>Vis armbåndet</strong><small>Så kommer du ind ved scenen uden ID</small></div>
-
-              <span class="lbl" style="--c: var(--cyan)">Login</span>
-              <div class="cell" style="--c: var(--cyan)"><strong>Email og password</strong><small>Supabase tjekker det mod hashen</small><em class="tag"><code>signInWithPassword()</code> · øvelse 6</em></div>
-              <b class="ar">→</b>
-              <div class="cell got" style="--c: var(--cyan)"><strong>Token</strong><span class="tok"><span class="h">eyJhbGci</span><span class="dot">.</span><span class="p">eyJzdWIi</span><span class="dot">.</span><span class="s">Ht0NZgcq</span></span><small>Gælder en time</small><em class="tag" style="--c: var(--purple)">Local Storage · øvelse 7</em></div>
-              <b class="ar">→</b>
-              <div class="cell" style="--c: var(--green)"><strong>Send tokenet</strong><small>Så ved Supabase, hvem du er, uden password</small><em class="tag"><code>getUser()</code> · øvelse 8</em></div>
-            </div>
-            <p class="cors-definition">Et <b>token</b> er en tekststreng, der beviser, hvem du er, i en begrænset tid. Et request fortæller ikke selv, hvem det kommer fra. Derfor sender appen tokenet med i stedet for dit password.</p>
-          </div>
-          <p class="bottom-line">Det er det, chatbotten mangler. Fra step 15 sender den tokenet med til jeres API.</p>
-        </section>
-
         <section class="fill" data-accent="cyan">
           <span class="eyebrow">Hvad sker der ved login?</span>
           <h2>Hash igen med samme salt, og sammenlign</h2>
@@ -935,9 +909,54 @@ VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
 
         <section id="jwt" class="chapter" data-accent="purple">
           <span class="chapter-number">07</span>
-          <span class="eyebrow">JWT · øvelse 7</span>
+          <span class="eyebrow">Token og JWT · øvelse 7</span>
           <h2>Alle kan læse det.<br />Ingen kan rette i det</h2>
-          <p>Det token, Supabase giver jer ved login, er et JSON Web Token. Det siger, hvem I er, og hvor længe det gælder.</p>
+          <p>I fik et token i øvelse 6. Hvad er et token? Og hvad står der i jeres?</p>
+        </section>
+
+        <section class="fill token-def-slide" data-accent="purple">
+          <span class="eyebrow">Definition</span>
+          <h2>Hvad er et token?</h2>
+          <div class="stage">
+            <div class="tokmap">
+              <span></span><span class="hd">Én gang</span><span></span><span class="hd">Du får</span><span></span><span class="hd">Bagefter</span>
+
+              <span class="lbl" style="--c: var(--yellow)">Festival</span>
+              <div class="cell"><strong>Billet og ID</strong><small>Tjekkes ved indgangen</small></div>
+              <b class="ar">→</b>
+              <div class="cell got" style="--c: var(--yellow)"><strong>Armbånd</strong><small>Gælder hele festivalen</small></div>
+              <b class="ar">→</b>
+              <div class="cell"><strong>Vis armbåndet</strong><small>Så kommer du ind ved scenen uden ID</small></div>
+
+              <span class="lbl" style="--c: var(--cyan)">Login</span>
+              <div class="cell" style="--c: var(--cyan)"><strong>Email og password</strong><small>Supabase tjekker det mod hashen</small><em class="tag"><code>signInWithPassword()</code> · øvelse 6</em></div>
+              <b class="ar">→</b>
+              <div class="cell got" style="--c: var(--cyan)"><strong>Token</strong><span class="tok"><span class="h">eyJhbGci</span><span class="dot">.</span><span class="p">eyJzdWIi</span><span class="dot">.</span><span class="s">Ht0NZgcq</span></span><small>Gælder en time</small><em class="tag" style="--c: var(--purple)">Local Storage · øvelse 7</em></div>
+              <b class="ar">→</b>
+              <div class="cell" style="--c: var(--green)"><strong>Send tokenet</strong><small>Så ved Supabase, hvem du er, uden password</small><em class="tag"><code>getUser()</code> · øvelse 8</em></div>
+            </div>
+            <p class="cors-definition">Et <b>token</b> er en tekststreng, der beviser, hvem du er, i en begrænset tid. Et request fortæller ikke selv, hvem det kommer fra. Derfor sender appen tokenet med i stedet for dit password.</p>
+          </div>
+          <p class="bottom-line">Der findes mange slags tokens. Det, I fik fra Supabase, er et JSON Web Token.</p>
+        </section>
+
+        <section class="fill cors-def-slide jwt-def-slide" data-accent="purple">
+          <span class="eyebrow">Definition</span>
+          <h2>Hvad er et JSON Web Token?</h2>
+          <div class="stage">
+            <div class="throw-anatomy cors-name jwt-name">
+              <span class="cn-json"><code>JSON</code><small>det format, jeres API sender</small></span>
+              <span class="cn-web"><code>Web</code><small>sendes med i requests</small></span>
+              <span class="cn-token"><code>Token</code><small>beviser, hvem du er</small></span>
+            </div>
+            <p class="cors-definition">Et <b>JSON Web Token</b> (JWT) er et token, hvor oplysningerne om dig står som JSON, underskrevet af Supabase. Alle kan læse det, men ingen kan rette i det.</p>
+            <div class="cards-3 cors-facts">
+              <article class="card card-warn"><span>Alle kan læse det</span><p>Det er kun kodet, ikke krypteret. Der må aldrig stå hemmeligheder i det.</p></article>
+              <article class="card card-good"><span>Ingen kan rette i det</span><p>Ret ét tegn, og signaturen passer ikke længere.</p></article>
+              <article class="card"><span>Udløbstiden står i det</span><p>Feltet <code>exp</code> siger, hvornår tokenet holder op med at virke.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">Jeres access token er et JWT. Find det, og kig i det.</p>
         </section>
 
         <section id="ex-7" class="fill handson" data-accent="purple">

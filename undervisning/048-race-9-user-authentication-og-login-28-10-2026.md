@@ -79,10 +79,12 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - `useSearchParams()` læser `?registered=true` fra URL'en, så login-siden kan byde en ny bruger velkommen
 </details>
 <details>
-<summary><strong>7. JWT: øvelse 7</strong></summary>
+<summary><strong>7. Token og JWT: øvelse 7</strong></summary>
 
+- **Token:** en tekststreng, der beviser, hvem du er, i en begrænset tid. Et request fortæller ikke selv, hvem det kommer fra. Derfor sender appen tokenet med i stedet for passwordet. Det svarer til et armbånd på en festival: I viser billet og ID én gang ved indgangen. Bagefter kigger vagterne kun på armbåndet
+- **JWT** (JSON Web Token): et token, hvor oplysningerne om dig står som JSON, underskrevet af Supabase. Alle kan læse det, men ingen kan rette i det. Det token, I fik i øvelse 6, er et JWT
 - Øvelse 7: find nøglen `sb-...-auth-token` i Local Storage, og indsæt `access_token` på [jwt.io](https://jwt.io)
-- **JWT** (JSON Web Token) har tre dele adskilt af punktummer: header, payload og signatur. Find jeres bruger-id i `sub`, jeres email og udløbstiden i `exp`
+- Et JWT har tre dele adskilt af punktummer: header, payload og signatur. Find jeres bruger-id i `sub`, jeres email og udløbstiden i `exp`
 - Et JWT er kun kodet, ikke krypteret. Alle kan læse payloaden, så der må aldrig stå hemmeligheder i den
 - **Signatur:** Supabase har underskrevet tokenet. Ændrer man noget i payloaden, passer signaturen ikke længere. Det er den signatur, backenden skal tjekke, som i en af situationerne i går
 - **Access token vs. refresh token:** access token udløber efter en time. Refresh token bruges til at hente et nyt, og det klarer Supabase-klienten selv
