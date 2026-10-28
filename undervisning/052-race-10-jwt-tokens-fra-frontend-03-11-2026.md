@@ -4,13 +4,11 @@
 
 ## Dagens fokus
 
-Jeres chatbot har login, og der ligger et JWT i localStorage. Men tokenet bliver aldrig sendt til jeres API. Backenden ved stadig ikke, hvem der spørger, og to brugere ser de samme tråde.
+Jeres chatbot har login, og der ligger et JWT i localStorage. Men tokenet bliver aldrig sendt til jeres API. Backenden ved ikke, hvem der spørger, og to brugere ser de samme tråde.
 
-I dag ser vi på, hvordan tokenet kommer med i et request. Vi kigger på HTTP headers og Bearer tokens og samler alle API-kald i én funktion, `apiFetch`.
+I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én funktion, `apiFetch`. Ligesom sidst øver vi i `react-supabase-auth`. Den har ingen backend, så der sender I tokenet til Supabase Auth' eget API.
 
-Ligesom sidst øver vi i `react-supabase-auth`. Den har ingen backend, så I sender tokenet til Supabase Auth' eget API. I bygger selv det request, `getUser()` sender, og samler det i `apiFetch`.
-
-Øvelserne svarer til delopgaverne i [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) i [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres). Når dagen er slut, kender I alle dele af step 15 og kan lave det selv i chatbotten. Det, I ikke når i dag, laver I i selvstudiet onsdag. Step 15 skal være færdig torsdag, hvor test og deployment bygger videre på den. Backenden tjekker ikke tokenet endnu. Det kommer i backenden næste uge.
+Øvelserne svarer til delopgaverne i [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) i [chatbot-tutorialen](https://github.com/bewildergeist/chatbot-react-postgres). Når dagen er slut, kender I alle dele af step 15 og kan lave det selv i chatbotten. Det, I ikke når, laver I i selvstudiet onsdag. Step 15 skal være færdig torsdag, hvor test og deployment bygger videre på den.
 
 ---
 
@@ -19,80 +17,61 @@ Ligesom sidst øver vi i `react-supabase-auth`. Den har ingen backend, så I sen
 <details>
 <summary><strong>1. Opsamling: jeres login-flow</strong></summary>
 
-- Vi starter med jeres tegninger af login-flowet og jeres svar fra fredagens gruppearbejde
+- Vi starter med jeres tegninger og svar fra fredagens gruppearbejde
 - Hvad kan man gøre med en stjålet anon key? Med et stjålet access token? Og hvorfor kan backenden ikke stole på validering i frontenden?
-- Hvad fandt I ud af, da I testede med to brugere i to browsere? Ser de stadig de samme tråde? Og stod tokenet nogen steder i requestet til jeres eget API? Det gør vi noget ved i dag
+- Ser to brugere stadig de samme tråde? Stod tokenet i requestet til jeres API? Det gør vi noget ved i dag
 </details>
 <details>
 <summary><strong>2. Hvordan ved backenden, hvem du er?</strong></summary>
 
 - HTTP husker ingenting mellem to requests. Hvert request skal selv fortælle, hvem det kommer fra
-- Tokenet ligger i localStorage, og frontenden skal sende det med i hvert request til jeres API
-- Backenden kan så læse tokenet, tjekke signaturen og se brugerens id i `sub`. Det gør I i backenden næste uge
-- Vis billedet under ["Hvor ender chatbotten?"](../opgaver/react-supabase-auth.md#hvor-ender-chatbotten) sidst i React Supabase Auth-opgaven. Step 15 er det første skridt derhen
-- **Session:** at brugeren er logget ind over flere requests og sidevisninger. Supabase-klienten holder styr på sessionen og henter et nyt access token med refresh tokenet, når det gamle udløber
+- Frontenden sender tokenet med. Backenden tjekker signaturen og finder brugerens id i `sub`. Det gør I i backenden næste uge
+- Vis billedet under ["Hvor ender chatbotten?"](../opgaver/react-supabase-auth.md#hvor-ender-chatbotten). Step 15 er det første skridt derhen
+- **Session:** at brugeren er logget ind over flere requests. Supabase-klienten henter selv et nyt access token med refresh tokenet, når det gamle udløber
 </details>
 <details>
 <summary><strong>3. HTTP headers og Bearer tokens: øvelse 10</strong></summary>
 
-- **Headers** er ekstra information, der sendes med et request. I kender allerede `Content-Type: application/json`, når I sender JSON
-- **Authorization header:** standardstedet til at sende et token: `Authorization: Bearer <token>`
-- **Bearer** betyder "ihændehaver": den, der har tokenet, får adgang. Derfor må tokenet ikke komme i forkerte hænder
-- I har gjort det før: jeres backend sender jeres Groq-nøgle som Bearer token, når den kalder LLM API'et. I chatbotten er det jeres egen backend, der modtager et Bearer token, og det er brugerens frontend, der sender det
-- Øvelse 10 i [React Supabase Auth: Send tokenet med](../opgaver/react-supabase-auth-bearer-token.md): byg selv det request, `getUser()` sender på `/profile`. Tilføj én header ad gangen. Uden headers svarer Supabase 401 "No API key found". Med `apikey` svarer den 401 "This endpoint requires a valid Bearer token". Med `Authorization` får I 200 og brugeren. Et rettet token giver 403
-- **`apikey` vs. `Authorization`:** `apikey` fortæller Supabase, hvilket projekt det er, og er den samme for alle brugere. `Authorization` fortæller, hvilken bruger det er. Tilbage til spørgsmålet fra opsamlingen: anon key står alligevel i jeres frontend, så med den kan man kun det, alle besøgende kan. Med et stjålet access token er man brugeren, indtil tokenet udløber
+- **Headers** er ekstra information i et request. I kender `Content-Type: application/json`
+- **Bearer token:** `Authorization: Bearer <token>`. Bearer betyder "ihændehaver": den, der har tokenet, får adgang. I har gjort det før, da jeres backend sendte Groq-nøglen
+- Øvelse 10: byg selv det request, `getUser()` sender, og tilføj én header ad gangen. Hver header retter én fejl
+- **`apikey` vs. `Authorization`:** `apikey` siger, hvilket projekt det er. `Authorization` siger, hvilken bruger det er. Det svarer på spørgsmålet fra opsamlingen: anon key står alligevel i frontenden, men et stjålet access token gør en anden til brugeren, indtil det udløber
 </details>
 <details>
-<summary><strong>4. apiFetch: øvelse 11</strong></summary>
+<summary><strong>4. apiFetch: øvelse 11-12</strong></summary>
 
-- I chatbotten bygger hver route selv URL'en med `import.meta.env.VITE_API_URL` og kalder `fetch()`. Skal tokenet med, skal I rette alle steder
-- **DRY** (Don't Repeat Yourself): saml det, der gentages, ét sted. Samme idé som jeres data-modul i Express, hvor kun ét modul læste og skrev filen
-- **Wrapper-funktion:** `apiFetch(path, options)` tager kun stien, fx `/auth/v1/user` i øveprojektet eller `/api/threads` i chatbotten. Den bygger URL'en, henter tokenet og kalder `fetch()`
-- Tokenet hentes med `supabase.auth.getSession()`. Er brugeren ikke logget ind, er `session` `null`, og `session?.access_token` giver `undefined` i stedet for en fejl
-- **`getSession()` vs. `getUser()`:** i øvelse 10 byggede I selv `getUser()` oven på `getSession()`. `getSession()` læser tokenet fra localStorage og spørger ikke Supabase. `getUser()` sender det til Supabase, som tjekker signaturen. I `apiFetch` er `getSession()` nok, fordi frontenden kun skal sende tokenet videre. Det er backenden, der skal tjekke det
-- Eksisterende headers bevares med spread: `{ ...options.headers, Authorization: ... }`
-- Øvelse 11: `apiFetch` i `react-supabase-auth`, og brug den på `/profile`
+- I chatbotten bygger hver route selv URL'en og kalder `fetch()`. Skal tokenet med, skal I rette alle steder
+- **DRY** (Don't Repeat Yourself): saml det, der gentages, ét sted. Samme idé som data-modulet i Express
+- **Wrapper-funktion:** `apiFetch(path, options)` bygger URL'en, henter tokenet med `getSession()` og kalder `fetch()`
+- **`getSession()` vs. `getUser()`:** `getSession()` læser tokenet fra localStorage. `getUser()` spørger Supabase, om det er gyldigt. Frontenden skal kun sende tokenet videre, så `getSession()` er nok
+- Øvelse 11: `apiFetch` i øveprojektet. Øvelse 12 er en bonus: vis emailen på forsiden med `useEffect`
 </details>
 <details>
-<summary><strong>5. Hvem er logget ind: øvelse 12</strong></summary>
+<summary><strong>5. Fra øvelserne til step 15</strong></summary>
 
-- Øvelse 12 er en bonus: vis brugerens email på forsiden
-- **`useEffect`:** forsiden henter emailen med `getSession()`, når den bliver vist, og gemmer den i state. Samme mønster, som da I hentede users i `my-first-react-app`
-- Hvorfor ikke en `clientLoader`? I chatbotten står emailen i `SidebarFooter`. Den er en component og ikke en route, så den kan ikke have en `clientLoader`
+- Vi åbner [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) sammen og sætter øvelsesnumre på delopgaverne. Tabellen står sidst i opgaven
+- Forskellene i chatbotten: `apiFetch` bruger `VITE_API_URL` og ingen `apikey`. Logout sidder i sidebaren med `intent="logout"`. Emailen hentes med `useEffect`, fordi `SidebarFooter` ikke er en route
+- Når I er i mål: find `Authorization: Bearer ...` i Network-fanen. Der kommer også `OPTIONS`-requests. Browseren spørger først API'et om lov, fordi requestet har en `Authorization`-header og går til et andet origin. Det er CORS igen
+- Resten af dagen går I i gang med step 15. Er I ikke færdige med step 14, så brug degit-kommandoen sidst i opgaven
 </details>
 <details>
-<summary><strong>6. Fra øvelserne til step 15</strong></summary>
+<summary><strong>6. Hvad mangler stadig?</strong></summary>
 
-- Vi åbner [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) sammen og sætter øvelsesnumre på hver delopgave. Tabellen står sidst i opgaven
-- **Delopgave 1:** `apiFetch` fra øvelse 11. Forskellen er, at I bruger `VITE_API_URL` og dropper `apikey`. Jeres eget API skal kun have tokenet
-- **Delopgave 2:** skift `fetch()` ud med `apiFetch()` i `layout.jsx`, `chat-thread.jsx`, `chat-new.jsx` og `chat-thread-edit.jsx`. `` fetch(`${apiUrl}/api/threads`) `` bliver til `apiFetch("/api/threads")`. Method, headers og body sendes med på samme måde som før
-- **Delopgave 3:** logout kender I fra øvelse 9. Forskellen er, hvor knappen står: i chatbotten sidder den i sidebaren, som er en del af layoutet. Emailen i `SidebarFooter` henter I med `useEffect` som i øvelse 12
-- **Intent-mønstret:** layoutets `clientAction` håndterer allerede `intent="delete"`. I tilføjer `intent="logout"`, som kalder `supabase.auth.signOut()` og sender til `/login`
-- En `<Form method="post">` uden `action` sender til den route, den står i. Logout-knappen i sidebaren sender derfor til layoutets `clientAction`
-- Når I er i mål: find `Authorization: Bearer ...` under Request Headers i Network-fanen, og indsæt tokenet på [jwt.io](https://jwt.io). Er det det samme bruger-id som i Supabase? Kig i Local Storage før og efter logout
-- Frontenden kører på `localhost:5173` og API'et på `localhost:3000`. Når et request til et andet origin har en `Authorization` header, spørger browseren først API'et med et `OPTIONS`-request, om det er tilladt. Det er CORS igen, og det er derfor, der nu også dukker `OPTIONS`-requests op foran jeres `GET`-requests i Network-fanen
-- Resten af dagen går I i gang med step 15 i chatbotten. Er I ikke færdige med step 14, så brug degit-kommandoen sidst i opgaven
-</details>
-<details>
-<summary><strong>7. Hvad mangler stadig?</strong></summary>
-
-- Send `GET /api/threads` fra Thunder Client uden en `Authorization` header. Virker det?
-- Backenden tager imod alle requests, med eller uden token. Når step 15 er færdig, sender frontenden tokenet, men ingen tjekker det. To brugere ser stadig de samme tråde
-- Næste skridt: backenden skal afvise requests uden et gyldigt token ([step 16](https://github.com/bewildergeist/chatbot-react-postgres/pull/16)), og hver bruger skal kun se sine egne tråde ([step 17](https://github.com/bewildergeist/chatbot-react-postgres/pull/17))
-- Næste uge kommer backenden til at tjekke tokenet med `supabase.auth.getUser(token)`. Det sender det samme request, som I byggede i øvelse 10. Supabase svarede 403 på et rettet token, men jeres backend kommer til at svare 401
-- **Onsdag:** bliv færdige med øvelserne og step 15 i selvstudiet. Step 15 skal være færdig torsdag, hvor test og deployment bygger videre på den. Husk at pushe, for I deployer fra jeres repo
+- Send `GET /api/threads` fra Thunder Client uden token. Virker det?
+- Frontenden sender tokenet, men ingen tjekker det. Næste uge skal backenden afvise requests uden et gyldigt token ([step 16](https://github.com/bewildergeist/chatbot-react-postgres/pull/16)) og kun vise brugerens egne tråde ([step 17](https://github.com/bewildergeist/chatbot-react-postgres/pull/17)). Den tjekker tokenet med `getUser(token)`, altså det samme request som i øvelse 10
+- **Onsdag:** bliv færdige i selvstudiet, og push. Torsdag deployer I fra jeres repo
 </details>
 
 ---
 
 ## Forberedelse
 
-- Sørg for at være færdig med [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14), så du kan oprette en bruger og logge ind i chatbotten
-- Sørg for, at `react-supabase-auth` kører, og at du kan logge ind og se `/profile`. Nåede du ikke øvelse 8 og 9, så følg "Kom i gang" i [dagens opgave](../opgaver/react-supabase-auth-bearer-token.md)
+- Bliv færdig med [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14), så du kan logge ind i chatbotten
+- Tjek, at `react-supabase-auth` kører, og at du kan se `/profile`. Mangler du øvelse 8 og 9, så se "Kom i gang" i [dagens opgave](../opgaver/react-supabase-auth-bearer-token.md)
 - Tag tegningen og svarene fra fredagens gruppearbejde med
-- Skim "Overview" i [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15), så du ved, hvad vi skal bygge
+- Skim "Overview" i [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15)
 - På Scrimba:
-  - [Intro to Supabase](https://scrimba.com/intro-to-supabase-c0abltfqed) > Authentication, fra "Row Level Security" til og med "Sign up expansion". Row Level Security bruger vi ikke i chatbotten. Der er det backenden, der sørger for, at hver bruger kun ser sine egne tråde
+  - [Intro to Supabase](https://scrimba.com/intro-to-supabase-c0abltfqed) > Authentication, fra "Row Level Security" til og med "Sign up expansion". Row Level Security bruger vi ikke i chatbotten
 - Supplerende, hvis du har tid:
   - ["Authorization"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorization) på MDN
 
