@@ -581,13 +581,13 @@ VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
               <div class="nd" style="--c: var(--cyan)"><span>1 · Formularen</span><strong>Brugeren skriver <span class="pw">hemmelig123</span></strong><small>Prikker på skærmen. Men klartekst i jeres JavaScript.</small></div>
               <div class="ar lock">🔒<small>HTTPS</small></div>
               <div class="nd" style="--c: var(--yellow)"><span>2 · Requestet</span><strong>POST /auth/v1/signup</strong><pre class="viz-code">{
-  "email": "anna@example.com",
-  "password": "<span class="pw">hemmelig123</span>"
+  "email": "anna@…",
+  "password": <span class="pw">"hemmelig123"</span>
 }</pre><small>Klartekst i body, men krypteret på vejen.</small></div>
               <div class="ar">→<small>Supabase<br />modtager</small></div>
-              <div class="nd" style="--c: var(--orange)"><span>3 · Supabase Auth</span><strong>bcrypt med en ny salt</strong><small>Det samme som <code>crypt('hemmelig123', gen_salt('bf', 10))</code> i går.</small></div>
+              <div class="nd" style="--c: var(--orange)"><span>3 · Supabase Auth</span><strong>bcrypt med en ny salt</strong><small>Det samme som <code>crypt()</code> i SQL Editor i går.</small></div>
               <div class="ar">→<small>gemmer</small></div>
-              <div class="nd" style="--c: var(--green)"><span>4 · auth.users</span><strong>encrypted_password</strong><div class="hashchip">$2a$10$7T/wgSvC.SqSZC/VvI96Zu1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</div><small>Passwordet bliver aldrig gemt. Kun hashen.</small></div>
+              <div class="nd" style="--c: var(--green)"><span>4 · auth.users</span><strong>Kun hashen</strong><div class="hashchip">$2a$10$7T/wgSvC.SqSZC/VvI96Zu1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</div><small>I kolonnen <code>encrypted_password</code>. Passwordet selv bliver aldrig gemt.</small></div>
             </div>
           </div>
           <p class="bottom-line">HTTPS beskytter passwordet på vejen. bcrypt beskytter det, når det ligger i databasen.</p>
@@ -847,9 +847,9 @@ VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
           <h2>Hash igen med samme salt, og sammenlign</h2>
           <div class="stage">
             <div class="verify">
-              <article style="--c: var(--cyan)"><i>1</i><strong>Find brugeren</strong><pre class="viz-code">… WHERE email =
+              <article style="--c: var(--cyan)"><i>1</i><strong>Find brugeren</strong><pre class="viz-code">WHERE email =
   'anna@example.com'</pre><small>Supabase slår emailen op i <code>auth.users</code>.</small></article>
-              <article style="--c: var(--green)"><i>2</i><strong>Læs salten</strong><pre class="viz-code">$2a$10$<span class="sa">7T/wgSvC.SqSZC/VvI96Zu</span><span class="ha">1UfIf4TxkrRHaUslrtSxg4Y.PQTbS9.</span></pre><small>Salten står i selve hashen.</small></article>
+              <article style="--c: var(--green)"><i>2</i><strong>Læs salten</strong><pre class="viz-code">$2a$10$<span class="sa">7T/wgSvC.SqSZC/VvI96Zu</span><span class="ha">1UfIf4Txk…</span></pre><small>Salten står i selve hashen.</small></article>
               <article style="--c: var(--orange)"><i>3</i><strong>Hash igen</strong><pre class="viz-code">crypt('hemmelig123',
   <span class="sa">hash</span>)</pre><small>Det indtastede password med <b>samme</b> salt.</small></article>
               <article style="--c: var(--yellow)"><i>4</i><strong>Sammenlign</strong><pre class="viz-code">crypt(…) = <span class="ha">hash</span>
@@ -860,7 +860,7 @@ VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
               <div style="--c: var(--red)"><b>✗</b><span>Forskellige: Supabase svarer med en <code>error</code>. Jeres <code>clientAction</code> returnerer <code>{ error }</code></span></div>
             </div>
           </div>
-          <p class="bottom-line">Det er svaret på det sidste spørgsmål i <code>crypt</code>-opgaven i går: Hvordan kan Supabase tjekke jeres password, når hver hash er forskellig?</p>
+          <p class="bottom-line">Det er svaret på det sidste spørgsmål i <code>crypt</code>-opgaven i går. Salten står i hashen, så Supabase kan hashe igen.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -1176,19 +1176,20 @@ LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZjNjMmE3…</pre>
 
         <section class="fill" data-accent="cyan">
           <span class="eyebrow">Step 14 · Frontend register and signup routes</span>
-          <h2>Hver delopgave har I lavet i dag</h2>
+          <h2>Step 14 er det, I har lavet i dag</h2>
           <div class="stage">
             <div class="map7">
-              <div class="row first"><i>7</i><strong>Register authentication routes <span class="first-tag">Tag den først</span></strong><b>←</b><em>Øvelse 3</em><small>Uden for layoutet, så sidebaren ikke vises</small></div>
-              <div class="row"><i>1</i><strong>Install Supabase client library</strong><b>←</b><em>Øvelse 2</em><small>Inde i <code>frontend/</code>, hvor <code>package.json</code> ligger</small></div>
-              <div class="row"><i>2</i><strong>Create Supabase client module</strong><b>←</b><em>Øvelse 2</em><small>Samme <code>app/lib/supabase.js</code></small></div>
-              <div class="row"><i>3</i><strong>Configure environment variables</strong><b>←</b><em>Øvelse 2</em><small><code>.env</code> findes allerede i <code>frontend/</code></small></div>
-              <div class="row"><i>4</i><strong>Build the registration page</strong><b>←</b><em style="--c: var(--cyan)">Øvelse 4 og 5</em><small>Lad jer inspirere af jeres <code>register.jsx</code></small></div>
-              <div class="row"><i>5</i><strong>Build the login page</strong><b>←</b><em style="--c: var(--cyan)">Øvelse 6 og 7</em><small>Send til <code>/</code> i stedet for <code>/profile</code></small></div>
-              <div class="row"><i>6</i><strong>Style the authentication pages</strong><b>←</b><em style="--c: var(--yellow)">app.css</em><small>Kopiér afsnittet <code>Authentication Pages</code></small></div>
+              <div class="row head"><span></span><span>Delopgave i step 14</span><span>Det har I lavet i</span><span>Husk i chatbotten</span></div>
+              <div class="row"><i>1</i><strong>Install Supabase client library</strong><em>Øvelse 2</em><small>Installér inde i <code>frontend/</code>, hvor <code>package.json</code> ligger</small></div>
+              <div class="row"><i>2</i><strong>Create Supabase client module</strong><em>Øvelse 2</em><small>Samme <code>app/lib/supabase.js</code></small></div>
+              <div class="row"><i>3</i><strong>Configure environment variables</strong><em>Øvelse 2</em><small><code>.env</code> findes allerede i <code>frontend/</code></small></div>
+              <div class="row"><i>4</i><strong>Build the registration page</strong><em style="--c: var(--cyan)">Øvelse 4 og 5</em><small>Lad jer inspirere af jeres <code>register.jsx</code></small></div>
+              <div class="row"><i>5</i><strong>Build the login page</strong><em style="--c: var(--cyan)">Øvelse 6 og 7</em><small>Send til <code>/</code> i stedet for <code>/profile</code></small></div>
+              <div class="row"><i>6</i><strong>Style the authentication pages</strong><em class="none">Ingen øvelse</em><small>Kopiér afsnittet <code>Authentication Pages</code> fra <code>app.css</code></small></div>
+              <div class="row first"><i>7</i><strong>Register authentication routes <span class="first-tag">Lav den før 4</span></strong><em>Øvelse 3</em><small>Uden for layoutet, så sidebaren ikke vises</small></div>
             </div>
           </div>
-          <p class="bottom-line">Tag delopgave 7 før 4, så I kan se siderne, mens I bygger dem. Tabellen står også sidst i opgaven.</p>
+          <p class="bottom-line">Lav delopgave 7 før 4, så I kan se siderne, mens I bygger dem. Samme tabel står sidst i opgaven.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -1278,50 +1279,18 @@ LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZjNjMmE3…</pre>
           <div class="stage">
             <div class="gapv">
               <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>Ved, hvem I er</strong><pre class="viz-code">localStorage
-sb-…-auth-token ✓</pre><div class="know">✓ access_token med sub</div></div>
+sb-…-auth-token</pre><div class="know">✓ access_token med sub</div></div>
               <div class="ar">→<small>fetch</small></div>
-              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">fetch(`${apiUrl}/api/threads`)
+              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">fetch(url)
 <span class="miss">// intet token med</span></pre><small>Tokenet bliver i browseren.</small></div>
               <div class="ar">→</div>
               <div class="nd" style="--c: var(--red)"><span>Express API</span><strong>Ved ikke, hvem I er</strong><small>Intet token at tjekke. Svarer alle, der spørger.</small><div class="know">✗ ingen bruger</div></div>
               <div class="ar">→<small>SQL</small></div>
-              <div class="nd" style="--c: var(--orange)"><span>Postgres</span><strong>Alle tråde</strong><pre class="viz-code">SELECT id, title, created_at
+              <div class="nd" style="--c: var(--orange)"><span>Postgres</span><strong>Alle tråde</strong><pre class="viz-code">SELECT …
 FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
             </div>
           </div>
           <p class="bottom-line">Det ændrer step 15-18: tokenet sendes med, og backenden begynder at kræve det. Det er målet fra starten af dagen.</p>
-        </section>
-
-        <section class="fill" data-accent="purple">
-          <span class="eyebrow">Hvor stod det, hvem der ejer en tråd?</span>
-          <h2>Det id, I så i <code>sub</code>, er det, tråde skal knyttes til</h2>
-          <div class="stage">
-            <div class="own2">
-              <article style="--c: var(--red)">
-                <span>Nu · backend/server.js</span>
-                <pre class="viz-code"><span class="c">// alice fra seed.sql, indtil vi har login</span>
-<span class="k">const</span> <span class="bad">TEST_USER_ID</span> =
-  <span class="s">"00000001-0001-0001-0001-000000000001"</span>;
-
-INSERT INTO threads (title, user_id)
-VALUES (${trimmedTitle}, ${<span class="bad">TEST_USER_ID</span>})</pre>
-                <small>Alle nye tråde tilhører alice.</small>
-              </article>
-              <b>→</b>
-              <article style="--c: var(--purple)">
-                <span>Senere · når backenden læser tokenet</span>
-                <pre class="viz-code"><span class="c">// id'et fra tokenets sub</span>
-<span class="k">const</span> <span class="good">userId</span> =
-  <span class="s">"8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45"</span>;
-
-INSERT INTO threads (title, user_id)
-VALUES (${trimmedTitle}, ${<span class="good">userId</span>})</pre>
-                <small>Hver tråd tilhører den, der er logget ind.</small>
-              </article>
-            </div>
-            <div class="own-chain"><span>sub i JWT'et</span><b>=</b><span>User ID på /profile</span><b>=</b><span>auth.users.id</span><b>→</b><span>threads.user_id</span></div>
-          </div>
-          <p class="bottom-line">Kolonnen og foreign key'en har I allerede fra i går. Det, der mangler, er, at API'et ved, hvem I er.</p>
         </section>
 
         <section id="ex-step14" class="activity-slide handson" data-accent="cyan">

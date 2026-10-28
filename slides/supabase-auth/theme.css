@@ -2434,72 +2434,6 @@
   font-weight: 750;
 }
 
-/* TEST_USER_ID now -> the id from the token later */
-.own2 {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr);
-  align-items: stretch;
-  gap: 16px;
-}
-.own2 article {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 14px;
-  padding: 26px 26px;
-  border-top: 4px solid var(--c);
-  background: var(--soft);
-}
-.own2 article > span {
-  color: var(--c);
-  font-size: 16px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.own2 .viz-code {
-  align-self: center;
-  font-size: 17px;
-  line-height: 1.55;
-  white-space: pre-wrap;
-}
-.own2 .viz-code .bad {
-  color: var(--red);
-}
-.own2 .viz-code .good {
-  color: var(--jwt-p);
-}
-.own2 article > small {
-  color: var(--muted);
-  font-size: 20px;
-  line-height: 1.35;
-}
-.own2 > b {
-  align-self: center;
-  color: var(--accent);
-  font-size: 40px;
-  text-align: center;
-}
-.own-chain {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 24px;
-  font-size: 19px;
-}
-.own-chain span {
-  padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--soft);
-  font-family: var(--mono);
-  font-weight: 700;
-}
-.own-chain b {
-  color: var(--accent);
-}
-
 /* ===================================================================
    Slide-type tweaks for this deck
    =================================================================== *//* Nine agenda items: two columns so nothing runs past the slide */
@@ -2956,4 +2890,137 @@
 }
 .handson .eyebrow {
   align-self: flex-start;
+}
+
+/* Step 14 mapping, read like the table in the exercise: delopgave in PR
+   order, which exercise it matches, what is different in the chatbot */
+.map7 .row {
+  grid-template-columns: 58px minmax(0, 1fr) 220px minmax(0, 1fr);
+}
+.map7 .row.head {
+  padding-top: 0;
+  padding-bottom: 4px;
+  border: 0;
+  background: none;
+}
+.map7 .row.head span {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.map7 .row > em.none {
+  background: none;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+}
+.map7 {
+  gap: 8px;
+  margin-top: 30px;
+}
+.map7 .row:not(.head) {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* ===================================================================
+   Pass 3: readable on a projector. Code in the visualizations at least
+   ~18px; shorter snippets instead of smaller text
+   =================================================================== */
+
+/* "I går": the crypt call */
+.recap4 .top .viz-code {
+  padding: 12px 14px;
+  font-size: 18px;
+}
+.recap4 .top > small {
+  font-size: 22px;
+}
+.recap4 .today {
+  font-size: 21px;
+}
+
+/* Password path: the request card is wider, everything a step up */
+.chain .ar {
+  width: 64px;
+}
+.chain .nd:nth-child(3) {
+  flex: 1.5;
+}
+.chain .nd > strong {
+  font-size: 29px;
+}
+.chain .nd > small {
+  font-size: 21px;
+}
+.chain .nd .viz-code {
+  font-size: 17.5px;
+  white-space: pre;
+}
+.chain .hashchip {
+  padding: 10px 12px;
+  font-size: 18px;
+}
+
+/* Login check: bigger code, titles and notes */
+.verify article > strong {
+  font-size: 28px;
+}
+.verify article > small {
+  font-size: 21px;
+}
+.verify .viz-code {
+  padding: 12px 14px;
+  font-size: 18px;
+}
+
+/* JWT decoded parts */
+.jwtv .dec .viz-code {
+  font-size: 18px;
+}
+.jwtv .dec article > small {
+  font-size: 20px;
+}
+
+/* Frontend knows, backend does not */
+.gapv .ar {
+  width: 70px;
+}
+.gapv .nd > strong {
+  font-size: 29px;
+}
+.gapv .nd > small {
+  font-size: 21px;
+}
+.gapv .viz-code {
+  padding: 12px 14px;
+  font-size: 18px;
+}
+.gapv .know {
+  font-size: 20px;
+}
+.chain .nd:nth-child(3) {
+  flex: 1.8;
+}
+.gapv .nd > strong {
+  font-size: 27px;
+}
+.gapv .nd:nth-child(5) {
+  flex: 1.15;
+}
+.chain .nd:nth-child(3) {
+  flex: 1.65;
+}
+.chain .hashchip {
+  font-size: 17px;
+}
+.gapv .nd:nth-child(3) {
+  flex: 1.15;
+}
+.chain .nd:last-child {
+  flex: 1.25;
+}
+.gapv .nd:last-child {
+  flex: 1.15;
 }
