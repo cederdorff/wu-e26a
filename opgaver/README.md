@@ -47,6 +47,8 @@ I chatbot-forløbet følger du [chatbot-tutorialen](https://github.com/bewilderg
 
 1. [React Supabase Auth: Login før chatbotten](react-supabase-auth.md) — før step 14\
    En lille React Router-app med Supabase Auth. Du opretter brugere, logger ind, kigger i dit JWT og bygger en profilside, der kræver login.
+2. [React Supabase Auth: Send tokenet med](react-supabase-auth-bearer-token.md) — før step 15\
+   Samme projekt. Du sender selv tokenet til Supabase i en `Authorization`-header og samler det i én funktion, `apiFetch`.
 
 ## Kom i gang med Node og Express
 
