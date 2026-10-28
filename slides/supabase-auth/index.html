@@ -270,6 +270,32 @@ VALUES (${trimmedTitle}, ${<span class="hl">TEST_USER_ID</span>})</pre>
           <p class="bottom-line">Samme ord som i går. Supabase Auth klarer <b>authentication</b>. <b>Authorization</b> er stadig jeres eget job.</p>
         </section>
 
+        <section class="fill token-def-slide" data-accent="green">
+          <span class="eyebrow">Definition</span>
+          <h2>Hvad er et token?</h2>
+          <div class="stage">
+            <div class="tokmap">
+              <span></span><span class="hd">Én gang</span><span></span><span class="hd">Du får</span><span></span><span class="hd">Bagefter</span>
+
+              <span class="lbl" style="--c: var(--yellow)">Festival</span>
+              <div class="cell"><strong>Billet og ID</strong><small>Tjekkes ved indgangen</small></div>
+              <b class="ar">→</b>
+              <div class="cell got" style="--c: var(--yellow)"><strong>Armbånd</strong><small>Gælder hele festivalen</small></div>
+              <b class="ar">→</b>
+              <div class="cell"><strong>Vis armbåndet</strong><small>Ved scenen og i baren. Ingen beder om ID igen</small></div>
+
+              <span class="lbl" style="--c: var(--green)">Login</span>
+              <div class="cell"><strong>Email og password</strong><small>Supabase tjekker passwordet</small></div>
+              <b class="ar">→</b>
+              <div class="cell got" style="--c: var(--green)"><strong>Token</strong><span class="tok"><span class="h">eyJhbGci</span><span class="dot">.</span><span class="p">eyJzdWIi</span><span class="dot">.</span><span class="s">Ht0NZgcq</span></span><small>Gælder en time</small></div>
+              <b class="ar">→</b>
+              <div class="cell"><strong>Vis tokenet</strong><small>Ved hvert request. Ingen beder om passwordet igen</small></div>
+            </div>
+            <p class="cors-definition">Et <b>token</b> er en tekststreng, der beviser, hvem du er, i en begrænset tid. Du får det, når du logger ind, og bruger det i stedet for dit password.</p>
+          </div>
+          <p class="bottom-line">Ikke det samme som tokens hos en LLM. Der var et token et lille stykke tekst, I betalte for.</p>
+        </section>
+
         <section class="fill" data-accent="green">
           <span class="eyebrow">Hvad kan Supabase Auth?</span>
           <h2>Det, I ellers skulle bygge selv</h2>
