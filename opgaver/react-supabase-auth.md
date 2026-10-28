@@ -722,7 +722,7 @@ export async function clientLoader() {
 
 1. Log ind. Du skal ende på `/profile` og se din email og dit id.
 2. Gå til `/profile` i inkognitovinduet. Du skal blive sendt til `/login`.
-3. Åbn Local Storage i dit almindelige vindue igen. Dobbeltklik på værdien, og ret ét bogstav inde i `access_token`. Genindlæs `/profile`. Hvad sker der?
+3. Åbn Local Storage i dit almindelige vindue igen. Dobbeltklik på værdien, og ret ét bogstav midt i `access_token`. Ikke det sidste, for det tæller ikke altid med. Genindlæs `/profile`. Hvad sker der?
 4. Log ind igen for at få et gyldigt token.
 
 Tokenets vej fra login til `/profile`:
@@ -779,6 +779,17 @@ Nu laver du det samme i chatbotten. Er du ikke færdig med step 13, så hent sta
 npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start
 ```
 
+Startpunktet følger tutorialen og opretter tråde uden `user_id`. I kursets database skal en tråd have en ejer, så du får en fejl, når du opretter en ny tråd. Sæt `TEST_USER_ID` ind i `backend/server.js` igen, som i trin 12:
+
+```js
+// alice fra seed.sql, indtil vi har login
+const TEST_USER_ID = "00000001-0001-0001-0001-000000000001";
+
+// i POST /api/threads
+INSERT INTO threads (title, user_id)
+VALUES (${trimmedTitle}, ${TEST_USER_ID})
+```
+
 | Step 14 | Det har du lavet i |
 | --- | --- |
 | Delopgave 1: Install Supabase client library | Øvelse 2. Installér inde i `frontend/`, hvor `package.json` ligger |
@@ -787,7 +798,7 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start
 | Delopgave 4: Build the registration page | Øvelse 4 og 5. Lad dig inspirere af din `register.jsx` |
 | Delopgave 5: Build the login page | Øvelse 6 og 7. Lad dig inspirere af din `login.jsx`. Tutorialen sender til `/` i stedet for `/profile` |
 | Delopgave 6: Style the authentication pages | Kopiér afsnittet `Authentication Pages` fra `app.css` i dette projekt. Klasserne har samme navne |
-| Delopgave 7: Register authentication routes | Øvelse 3. Her skal routes stå uden for layoutet, så sidebaren ikke vises |
+| Delopgave 7: Register authentication routes | Øvelse 3. Her skal routes stå uden for layoutet, så sidebaren ikke vises. Lav den før delopgave 4, så du kan se siderne, mens du bygger dem |
 
 Efter step 14 ser chatbottens sider sådan ud. Sammenlign med billedet under [Det bygger du](#det-bygger-du):
 

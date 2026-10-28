@@ -62,7 +62,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - Opret en bruger mere med samme password. Er de to hashes ens? Nej, for hver bruger får sin egen salt
 </details>
 <details>
-<summary><strong>5. Form validation: øvelse 5</strong></summary>
+<summary><strong>5. Validering: øvelse 5</strong></summary>
 
 - Opret en bruger med to forskellige passwords. Det lykkes, fordi ingen tjekker det
 - Øvelse 5: tilføj validering i `clientAction`, og returnér `{ error: "..." }` i stedet for at sende videre
@@ -71,9 +71,9 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 - De to første lag giver hurtig feedback, men enhver kan komme uden om dem, ligesom I gik uden om frontenden med Thunder Client i starten af dagen. Kun det sidste lag ligger på serveren
 </details>
 <details>
-<summary><strong>6. Login: øvelse 6</strong></summary>
+<summary><strong>6. Log ind: øvelse 6</strong></summary>
 
-- Hvad sker der ved login? Browseren sender email og password til Supabase. Salten står i selve hashen i `auth.users`, så Supabase kan hashe det indtastede password med samme salt og sammenligne. Det er svaret på det sidste spørgsmål i `crypt`-opgaven. Passer de, svarer Supabase med et token, som klienten gemmer i localStorage
+- Hvad sker der ved login? Browseren sender email og password til Supabase. Salten står i selve hashen i `auth.users`, så Supabase kan hashe det indtastede password med samme salt og sammenligne. Det er svaret på spørgsmål 3 i `crypt`-opgaven. Passer de, svarer Supabase med et token, som klienten gemmer i localStorage
 - Øvelse 6: gør det samme for login med `supabase.auth.signInWithPassword()`
 - Fejlbeskeden siger ikke, om det er emailen eller passwordet, der er forkert. Hvorfor?
 - `useSearchParams()` læser `?registered=true` fra URL'en, så login-siden kan byde en ny bruger velkommen
@@ -91,7 +91,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 <summary><strong>8. Sider, der kræver login: øvelse 8-9</strong></summary>
 
 - Øvelse 8: en `/profile`-side, der henter brugeren i en `clientLoader` med `supabase.auth.getUser()` og sender til `/login`, hvis ingen er logget ind
-- Prøv at ødelægge det: ret ét bogstav i jeres token i Local Storage, og genindlæs. `getUser()` sender tokenet til Supabase, som afviser det, fordi signaturen ikke passer. Derfor kan man ikke bare ændre sit bruger-id i tokenet
+- Prøv at ødelægge det: ret ét bogstav midt i jeres token i Local Storage, og genindlæs. Ikke det sidste tegn, for de sidste bits i signaturen bruges ikke altid. `getUser()` sender tokenet til Supabase, som afviser det, fordi signaturen ikke passer. Derfor kan man ikke bare ændre sit bruger-id i tokenet
 - Øvelse 9 er en bonus: log ud med `supabase.auth.signOut()`, og se tokenet forsvinde fra Local Storage. Logout kommer i chatbotten i næste step
 </details>
 <details>
@@ -112,7 +112,7 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 
 ## Forberedelse
 
-- Bliv færdig med step 11 til [13](https://github.com/bewildergeist/chatbot-react-postgres/pull/13) fra i går, så din frontend og backend kører. Når du det ikke, så hent startpunktet i roden af dit chatbot-repo med `npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start`, og commit det, før du ændrer noget
+- Bliv færdig med step 11 til [13](https://github.com/bewildergeist/chatbot-react-postgres/pull/13) fra i går, så din frontend og backend kører. Når du det ikke, så hent startpunktet i roden af dit chatbot-repo med `npx degit --force bewildergeist/chatbot-react-postgres#pr-14-start`, og commit det, før du ændrer noget. Startpunktet følger tutorialen og opretter tråde uden `user_id`, så sæt `TEST_USER_ID` ind i `backend/server.js` igen, som i trin 12
 - Skim "Overview" i [step 14](https://github.com/bewildergeist/chatbot-react-postgres/pull/14), så du ved, hvad vi skal bygge
 - Find URL og key til dit Supabase-projekt i chatbottens `frontend/.env`. Dem skal du bruge i dag
 - På Scrimba:
