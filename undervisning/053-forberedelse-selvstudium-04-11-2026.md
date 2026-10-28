@@ -33,15 +33,15 @@ Sidder du fast, så skriv ned, hvor du sidder fast, og hvad fejlen siger. Tag de
 canvas_course_id: 32059
 canvas_module_id: 178074
 canvas_module_position: 53
-canvas_module_published: false
-canvas_module_item_id: null
-canvas_module_item_position: null
-canvas_page_id: null
-canvas_page_slug: null
-canvas_page_title: null
-canvas_page_published: null
-canvas_updated_at: null
-canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/178074"
+canvas_module_published: true
+canvas_module_item_id: 1076083
+canvas_module_item_position: 1
+canvas_page_id: 209752
+canvas_page_slug: "forberedelse-selvstudium-04-11-2026"
+canvas_page_title: "Forberedelse - Selvstudium - 04-11-2026"
+canvas_page_published: true
+canvas_updated_at: "2026-10-28T11:42:09Z"
+canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1076083"
 local_status: mirrored
 ```
 
