@@ -11,9 +11,9 @@ Her er et forslag til, hvad du kan bruge dagen på. Step 15 skal være færdig i
 
 ## 2\. Lav step 15 i chatbotten
 
-- Er du ikke færdig med step 14, så hent startpunktet i roden af dit chatbot-repo med `npx degit --force bewildergeist/chatbot-react-postgres#pr-15-start`. Commit, før du ændrer noget. Sæt derefter `TEST_USER_ID` ind i `backend/server.js` igen. Startpunktet opretter tråde uden `user_id`, og det fejler i kursets database
-- Følg [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) delopgave for delopgave, og commit efter hver. Tabellen sidst i opgaven fra i går viser, hvilken øvelse der svarer til hvilken delopgave
-- Sidder du fast i en delopgave, så sammenlign med tutorialens reference-commit til den
+- Lav [Chatbot step 15: Send tokenet med til dit API](../opgaver/chatbot-step-15-send-tokenet.md). Det er [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) på dansk og i mindre trin. Commit efter hver øvelse
+- Er du ikke færdig med step 14, så se "Kom i gang" i opgaven
+- Sidder du fast, så sammenlign med commit'et til øvelsen. Tabellen står sidst i opgaven
 - Test: log ind, klik rundt, og find `Authorization: Bearer ...` i Network-fanen på et request til `localhost:3000`
 - Push til GitHub, når du er færdig. I morgen tester I chatbotten, og fredag deployer I den fra jeres repo
 

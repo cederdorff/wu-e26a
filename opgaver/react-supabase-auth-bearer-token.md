@@ -409,6 +409,8 @@ Startpunktet opretter tråde uden `user_id`, ligesom startpunktet til step 14. S
 | Delopgave 2: Update all loaders and actions | Øvelse 11, hvor du skiftede `fetch` ud i `profile.jsx`. I chatbotten er det fire filer: `layout.jsx`, `chat-thread.jsx`, `chat-new.jsx` og `chat-thread-edit.jsx` |
 | Delopgave 3: Add logout functionality | Øvelse 9 og 12. Logout ligger i layoutets `clientAction` med `intent="logout"`. Emailen står i `SidebarFooter` |
 
+Vil du have step 15 i mindre trin på dansk, så brug [Chatbot step 15: Send tokenet med til dit API](chatbot-step-15-send-tokenet.md).
+
 Efter step 15 står tokenet i hvert request til dit eget API på `localhost:3000`. Find det i Network-fanen. Backenden tjekker det ikke endnu, så to brugere ser stadig de samme tråde.
 
 Senere skal backenden tjekke tokenet. Den gør det med `supabase.auth.getUser(token)`, som sender præcis det request, du byggede i øvelse 10. Supabase svarede 403 på dit rettede token. Din egen backend kommer til at svare 401, og det er den statuskode, chatbotten skal reagere på, når et token er udløbet.

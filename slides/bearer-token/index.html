@@ -436,11 +436,13 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
             <div class="files4">
               <article><header><strong>layout.jsx</strong><span>2 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
 fetch(<span class="rep">`${apiUrl}</span>/api/threads`)
+<span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
 fetch(<span class="rep">`${apiUrl}</span>/api/threads/${threadId}`, {
   method: <span class="s">"DELETE"</span> })</pre></article>
               <article><header><strong>chat-thread.jsx</strong><span>3 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
 fetch(<span class="rep">`${apiUrl}</span>/api/threads/${params.threadId}`)
 fetch(<span class="rep">`${apiUrl}</span>/api/threads/…/messages`)
+<span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
 fetch(<span class="rep">`${apiUrl}</span>/api/threads/…/messages`, {
   method: <span class="s">"POST"</span> })</pre></article>
               <article><header><strong>chat-new.jsx</strong><span>1 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
@@ -451,7 +453,7 @@ fetch(<span class="rep">`${apiUrl}</span>/api/threads/${params.threadId}`, {
   method: <span class="s">"PATCH"</span> })</pre></article>
             </div>
           </div>
-          <p class="bottom-line">Skal tokenet med, skal I rette syv steder. Glemmer I ét, mangler tokenet dér.</p>
+          <p class="bottom-line"><code>VITE_API_URL</code> står seks steder, og <code>fetch</code> syv. Skal tokenet med, skal I rette dem alle.</p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -641,7 +643,7 @@ useEffect(() => {
               <div class="row"><i>3</i><strong>Add logout functionality</strong><em style="--c: var(--cyan)">Øvelse 9 og 12</em><small>Logout i layoutets <code>clientAction</code> med <code>intent="logout"</code>. Emailen står i <code>SidebarFooter</code></small></div>
             </div>
           </div>
-          <p class="bottom-line">Commit efter hver delopgave. Samme tabel står sidst i opgaven.</p>
+          <p class="bottom-line">Opgaven <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-15-send-tokenet.md" target="_blank" rel="noreferrer"><b>Chatbot step 15 ↗</b></a> tager de tre delopgaver i mindre trin, på dansk.</p>
         </section>
 
         <section class="shift-slide" data-accent="cyan">
@@ -709,14 +711,14 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
           <span class="ho-num"><small>Step</small>15</span>
           <span class="eyebrow">Hands-on · resten af dagen og onsdag</span>
           <h2>Step 15 i chatbotten</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-15-send-tokenet.md" target="_blank" rel="noreferrer">Åbn opgaven på GitHub ↗</a>
           <ul class="checklist">
-            <li>Lav <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/15" target="_blank" rel="noreferrer"><b>step 15 ↗</b></a> delopgave for delopgave, og commit efter hver</li>
-            <li>Mangler step 14? Brug degit-kommandoen med <code>#pr-15-start</code> sidst i opgaven, og sæt <code>TEST_USER_ID</code> ind igen</li>
-            <li>Find <code>Authorization: Bearer ...</code> på et request til <code>localhost:3000</code>. Og et <code>OPTIONS</code> før det</li>
-            <li>Log ud med × i sidebaren. Står jeres email der igen, når I logger ind?</li>
-            <li>Push til GitHub, når I er færdige</li>
+            <li><b>Øvelse 1:</b> find de tre ting, der mangler. Ingen kode. Mangler step 14? Se "Kom i gang"</li>
+            <li><b>Øvelse 2-3:</b> lav <code>apiFetch</code>, og brug den i alle fire filer. Commit efter hver øvelse</li>
+            <li><b>Øvelse 4:</b> log ud med × i sidebaren, og vis jeres email i stedet for "Batman"</li>
+            <li>Find <code>Authorization: Bearer ...</code> og et <code>OPTIONS</code> i Network-fanen. Push til GitHub</li>
           </ul>
-          <p class="bottom-line">Sidder I fast i en delopgave, så sammenlign med tutorialens reference-commit til den.</p>
+          <p class="bottom-line">Sidder I fast, så sammenlign med commit'et til øvelsen. Tabellen står sidst i opgaven.</p>
         </section>
 
         <!-- ============ 06 HVAD MANGLER STADIG? ============ -->
@@ -805,12 +807,12 @@ Bearer eyJhbGci…</pre></div>
           <div class="material-links">
             <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md" target="_blank" rel="noreferrer"><strong>Send tokenet med</strong><span>Opgaven ↗</span></a>
             <a href="https://github.com/cederdorff/react-supabase-auth" target="_blank" rel="noreferrer"><strong>Løsningen</strong><span>Én branch pr. øvelse ↗</span></a>
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-15-send-tokenet.md" target="_blank" rel="noreferrer"><strong>Chatbot step 15</strong><span>Opgaven på dansk ↗</span></a>
             <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/15" target="_blank" rel="noreferrer"><strong>Step 15</strong><span>Chatbot-tutorialen ↗</span></a>
             <a href="https://jwt.io" target="_blank" rel="noreferrer"><strong>jwt.io</strong><span>Dekod tokenet fra Network-fanen ↗</span></a>
             <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorization" target="_blank" rel="noreferrer"><strong>Authorization</strong><span>MDN ↗</span></a>
             <a href="https://react.dev/reference/react/useEffect" target="_blank" rel="noreferrer"><strong>useEffect</strong><span>react.dev ↗</span></a>
             <a href="https://supabase.com/docs/reference/javascript/auth-getsession" target="_blank" rel="noreferrer"><strong>getSession()</strong><span>Supabase docs ↗</span></a>
-            <a href="https://scrimba.com/intro-to-supabase-c0abltfqed" target="_blank" rel="noreferrer"><strong>Intro to Supabase</strong><span>Scrimba ↗</span></a>
           </div>
         </section>
       </div>

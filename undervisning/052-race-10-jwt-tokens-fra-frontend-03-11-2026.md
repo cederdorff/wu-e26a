@@ -52,7 +52,7 @@ I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én 
 - Vi åbner [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) sammen og sætter øvelsesnumre på delopgaverne. Tabellen står sidst i opgaven
 - Forskellene i chatbotten: `apiFetch` bruger `VITE_API_URL` og ingen `apikey`. Logout sidder i sidebaren med `intent="logout"`. Emailen hentes med `useEffect`, fordi `SidebarFooter` ikke er en route
 - Når I er i mål: find `Authorization: Bearer ...` i Network-fanen. Der kommer også `OPTIONS`-requests. Browseren spørger først API'et om lov, fordi requestet har en `Authorization`-header og går til et andet origin. Det er CORS igen
-- Resten af dagen går I i gang med step 15. Er I ikke færdige med step 14, så brug degit-kommandoen sidst i opgaven
+- Resten af dagen går I i gang med step 15 i [Chatbot step 15](../opgaver/chatbot-step-15-send-tokenet.md). Er I ikke færdige med step 14, så se "Kom i gang" i opgaven
 </details>
 <details>
 <summary><strong>6. Hvad mangler stadig?</strong></summary>
@@ -84,6 +84,7 @@ I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én 
 - Opgaver:
   - [React Supabase Auth: Send tokenet med](../opgaver/react-supabase-auth-bearer-token.md): øvelse 10-12. Send tokenet til Supabase i en header, og saml det i `apiFetch`
     - [Løsning til react-supabase-auth](https://github.com/cederdorff/react-supabase-auth): én branch pr. øvelse. Prøv selv først
+  - [Chatbot step 15: Send tokenet med til dit API](../opgaver/chatbot-step-15-send-tokenet.md): step 15 på dansk og i mindre trin
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
     - [Chatbot-tutorial, step 15: Send bearer tokens in requests](https://github.com/bewildergeist/chatbot-react-postgres/pull/15)
 - Links:
