@@ -15,13 +15,13 @@ Her er et forslag til, hvad du kan bruge dagen på. Step 15 skal være færdig i
 - Følg [step 15](https://github.com/bewildergeist/chatbot-react-postgres/pull/15) delopgave for delopgave, og commit efter hver. Tabellen sidst i opgaven fra i går viser, hvilken øvelse der svarer til hvilken delopgave
 - Sidder du fast i en delopgave, så sammenlign med tutorialens reference-commit til den
 - Test: log ind, klik rundt, og find `Authorization: Bearer ...` i Network-fanen på et request til `localhost:3000`
-- Push til GitHub, når du er færdig. I morgen deployer I fra jeres repo
+- Push til GitHub, når du er færdig. I morgen tester I chatbotten, og fredag deployer I den fra jeres repo
 
 Sidder du fast, så skriv ned, hvor du sidder fast, og hvad fejlen siger. Tag det med i morgen.
 
 ## 3\. Forbered dig til i morgen
 
-- Læs forberedelsen på siden for i morgen. Du skal bl.a. oprette konti på Netlify og Render
+- Læs forberedelsen på siden for i morgen. Du skal bl.a. installere Playwright-extension'en i VS Code og have dine svar fra HEOE 4 klar
 
 ---
 

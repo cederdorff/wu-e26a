@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RACE 10 · JWT tokens fra frontend · WU-E26A · 3. november 2026" />
+    <title>JWT tokens fra frontend · WU-E26A</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-accent="purple">
+          <div class="title-copy">
+            <span class="eyebrow">WU-E26A · RACE 10 · 3. november 2026</span>
+            <h1>Hvem<br /><span>spørger?</span></h1>
+            <p class="lead">Jeres token ligger i Local Storage. I dag sender I det med i en header. Først i <code>react-supabase-auth</code>, så i chatbotten med step 15.</p>
+          </div>
+          <div class="title-art" aria-hidden="true">
+            <div class="req">
+              <div class="rl"><b>GET</b> /api/threads</div>
+              <div class="hs">
+                <span>Host: localhost:3000</span>
+                <span>Accept: */*</span>
+                <span>Origin: http://localhost:5173</span>
+                <span class="on">Authorization: Bearer <i>eyJhbGciOiJFUzI1…</i></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="agenda" class="agenda-slide" data-accent="purple">
+          <span class="eyebrow">Agenda</span>
+          <h2>Tokenet med i hvert request</h2>
+          <div class="agenda-map">
+            <div class="am-head"><span>På tavlen</span><span>Kapitler i slides</span></div>
+            <ol class="am-groups">
+              <li style="--g: var(--yellow)">
+                <div class="am-board"><i>1</i><span><b>Opsamling</b></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/opsamling"><i>01</i><b>Jeres login-flow</b><small>tegningerne og de tre spørgsmål fra fredag</small></a></li>
+                </ol>
+              </li>
+              <li style="--g: var(--red)">
+                <div class="am-board"><i>2</i><span><b>Hvordan ved backenden, hvem du er?</b></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/hvem"><i>02</i><b>Hvem spørger?</b><small>HTTP husker ingenting mellem to requests</small></a></li>
+                </ol>
+              </li>
+              <li style="--g: var(--purple)">
+                <div class="am-board"><i>3</i><span><b>Headers og Bearer tokens</b><em>øvelse 10</em></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/bearer"><i>03</i><b>Send tokenet selv</b><small>øvelse 10: én header ad gangen</small></a></li>
+                </ol>
+              </li>
+              <li style="--g: var(--orange)">
+                <div class="am-board"><i>4</i><span><b>apiFetch</b><em>øvelse 11-12</em></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/apifetch"><i>04</i><b>Skriv det én gang</b><small>øvelse 11-12: DRY og en wrapper-funktion</small></a></li>
+                </ol>
+              </li>
+              <li style="--g: var(--cyan)">
+                <div class="am-board"><i>5</i><span><b>Step 15 i chatbotten</b></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/step-15"><i>05</i><b>Fra øvelserne til step 15</b><small>det samme igen, i chatbotten</small></a></li>
+                </ol>
+              </li>
+              <li style="--g: var(--red)">
+                <div class="am-board"><i>6</i><span><b>Hvad mangler stadig?</b></span></div>
+                <ol class="am-chapters">
+                  <li><a href="#/mangler"><i>06</i><b>Hvad mangler stadig?</b><small>et request uden token, og step 16</small></a></li>
+                </ol>
+              </li>
+            </ol>
+          </div>
+          <p class="bottom-line">Øvelserne står i opgaven: <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md" target="_blank" rel="noreferrer"><b>Send tokenet med ↗</b></a>. Løsningen: <a href="https://github.com/cederdorff/react-supabase-auth" target="_blank" rel="noreferrer"><b>én branch pr. øvelse ↗</b></a>.</p>
+        </section>
+
+        <section id="ugen" class="fill" data-accent="purple">
+          <span class="eyebrow">Resten af ugen</span>
+          <h2>Step 15 i dag. Test og deployment bygger på den</h2>
+          <div class="stage">
+            <div class="recap4">
+              <article style="--c: var(--purple)">
+                <div class="top"><span>Tirsdag 3/11<br />i dag</span><strong>Tokenet med i en header</strong><small><code>react-supabase-auth</code>, øvelse 10-12. Bagefter går I i gang med step 15 i chatbotten.</small></div>
+                <div class="today"><b>Resultat</b>Alle dele af step 15, én ad gangen</div>
+              </article>
+              <article style="--c: var(--cyan)">
+                <div class="top"><span>Onsdag 4/11<br />selvstudium</span><strong>Bliv færdig med step 15</strong><small>Lav de øvelser, I ikke nåede. Lav step 15, og commit efter hver delopgave.</small></div>
+                <div class="today"><b>Husk</b>Push til GitHub, når I er færdige</div>
+              </article>
+              <article style="--c: var(--yellow)">
+                <div class="top"><span>Torsdag 5/11<br />DOB 12</span><strong>Test og kvalitetssikring</strong><small>Fra user story til testscenarier. I optager Playwright-tests af jeres chatbot.</small></div>
+                <div class="today"><b>Kræver</b>Step 15, og at chatbotten kører lokalt</div>
+              </article>
+              <article style="--c: var(--green)">
+                <div class="top"><span>Fredag 6/11<br />gruppearbejde</span><strong>Deployment</strong><small>I deployer chatbotten til Render og Netlify fra jeres repo.</small></div>
+                <div class="today"><b>Kræver</b>Step 15 er pushet til GitHub</div>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Målet: step 15 er færdig og pushet onsdag aften.</p>
+        </section>
+
+        <!-- ============ 01 OPSAMLING ============ -->
+
+        <section id="opsamling" class="chapter" data-accent="yellow">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Opsamling</span>
+          <h2>Fra knappen til<br />Local Storage</h2>
+          <p>Fredag tegnede I, hvad der sker, når man trykker "Log In". Vi starter med jeres tegninger.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Sammenlign med jeres tegning</span>
+          <h2>Tokenets vej ved login</h2>
+          <div class="stage">
+            <div class="gapv">
+              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>login.jsx</strong><pre class="viz-code">signInWithPassword({
+  email, password
+})</pre><small>I <code>clientAction</code>. Kører i browseren.</small></div>
+              <div class="ar">→<small>HTTPS</small></div>
+              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>POST /auth/v1/token</strong><pre class="viz-code">{ "email": "anna@…",
+  "password": "hemmelig123" }</pre><small>Passwordet står i klartekst. Forbindelsen er krypteret.</small></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--orange)"><span>Supabase Auth</span><strong>Hasher og sammenligner</strong><small>Henter hashen i <code>auth.users</code>. Hasher det indtastede password med samme salt. Passer de?</small><div class="know">✓ Her bliver passwordet hashet</div></div>
+              <div class="ar">→<small>svar</small></div>
+              <div class="nd" style="--c: var(--purple)"><span>Local Storage</span><strong>sb-…-auth-token</strong><pre class="viz-code">access_token
+refresh_token
+user</pre><small>supabase-js gemmer det selv.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">Passwordet forlader browseren én gang. Bagefter er det tokenet, der beviser, hvem I er.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Spørgsmålene fra fredag</span>
+          <h2>Hvad kan man gøre med det, hvis man får fat i det?</h2>
+          <div class="stage">
+            <div class="qa3">
+              <article style="--c: var(--cyan)">
+                <span>Spørgsmål 1</span>
+                <strong>Jeres anon key</strong>
+                <div class="ans fragment">Det samme som enhver anden besøgende. Den står i jeres frontend-kode, så <b>alle kan finde den</b> alligevel.</div>
+              </article>
+              <article style="--c: var(--red)">
+                <span>Spørgsmål 2</span>
+                <strong>En brugers access token</strong>
+                <div class="ans fragment">Man <b>er brugeren</b>, indtil tokenet udløber. Det står i <code>exp</code>. Højst en time.</div>
+              </article>
+              <article style="--c: var(--orange)">
+                <span>Spørgsmål 3</span>
+                <strong>Validering i <code>clientAction</code></strong>
+                <div class="ans fragment">Den kører i browseren. Alle kan sende et request <b>uden om den</b>, fx fra Thunder Client.</div>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Spørgsmål 1 og 2 kommer igen i dag. Det er derfor, der er to forskellige headers.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">To og to · 5 minutter</span>
+          <h2>Står tokenet i requestet til jeres API?</h2>
+          <div class="stage">
+            <div class="net-layout wide">
+              <ol class="steps">
+                <li>Start frontend og backend. Log ind i chatbotten</li>
+                <li>Åbn <b>Network</b>-fanen, og genindlæs</li>
+                <li>Klik på <code>threads</code>. Det er requestet til <code>localhost:3000</code></li>
+                <li>Find <b>Request Headers</b>. Står der en <code>Authorization</code>?</li>
+                <li>Log ind som en anden bruger i et inkognitovindue. Ser I de samme tråde?</li>
+              </ol>
+              <div class="dt">
+                <div class="dt-tabs"><span>Elements</span><span>Console</span><span class="on">Network</span><span>Application</span></div>
+                <div class="dt-net">
+                  <div class="reqs"><div class="on">threads</div><div>layout.jsx</div><div>home.jsx</div></div>
+                  <div class="pane">
+                    <div class="dt-tabs"><span class="on">Headers</span><span>Response</span></div>
+                    <div class="kv">
+                      <b>Request URL</b><span>http://localhost:3000/api/threads</span>
+                      <b>Request Method</b><span>GET</span>
+                      <b>Status Code</b><span>200 OK</span>
+                      <span class="sec">Request Headers</span>
+                      <b>Accept</b><span>*/*</span>
+                      <b>Origin</b><span>http://localhost:5173</span>
+                      <b>Referer</b><span>http://localhost:5173/</span>
+                      <b>User-Agent</b><span>Mozilla/5.0 …</span>
+                      <span class="gap fragment">Ingen Authorization. Tokenet bliver i browseren</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Frontenden ved, hvem I er. Men det fortæller den ikke jeres API.</p>
+        </section>
+
+        <!-- ============ 02 HVEM SPØRGER? ============ -->
+
+        <section id="hvem" class="chapter" data-accent="red">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Hvordan ved backenden, hvem du er?</span>
+          <h2>HTTP husker<br />ingenting</h2>
+          <p>Hvert request står alene. Det skal selv fortælle, hvem det kommer fra.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Hvert request står alene</span>
+          <h2>Samme browser. API'et ser tre fremmede</h2>
+          <div class="stage">
+            <div class="stateless">
+              <div class="row" style="--c: var(--red)">
+                <span class="lbl">Nu<small>uden token</small></span>
+                <div class="rq"><code>GET /api/threads</code><span class="tk none">ingen Authorization</span><em>Hvem er du?</em></div>
+                <div class="rq"><code>POST /api/threads</code><span class="tk none">ingen Authorization</span><em>Hvem er du?</em></div>
+                <div class="rq"><code>DELETE /api/threads/7</code><span class="tk none">ingen Authorization</span><em>Hvem er du?</em></div>
+              </div>
+              <div class="row fragment" style="--c: var(--green)">
+                <span class="lbl">Efter step 15<small>tokenet i hvert request</small></span>
+                <div class="rq"><code>GET /api/threads</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
+                <div class="rq"><code>POST /api/threads</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
+                <div class="rq"><code>DELETE /api/threads/7</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
+              </div>
+              <div class="session fragment"><b>Session</b><span>At I er logget ind over mange requests. Supabase-klienten henter selv et nyt access token med refresh tokenet, når det gamle udløber.</span></div>
+            </div>
+          </div>
+          <p class="bottom-line">Ligesom armbåndet på festivalen: I viser det ved hver scene, ikke kun ved indgangen.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Request-vejen · før step 15</span>
+          <h2>Frontenden ved, hvem I er. Backenden gør ikke</h2>
+          <div class="stage">
+            <div class="gapv">
+              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>Ved, hvem I er</strong><pre class="viz-code">localStorage
+sb-…-auth-token</pre><div class="know">✓ access_token med sub</div></div>
+              <div class="ar">→<small>fetch</small></div>
+              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">fetch(url)
+<span class="miss">// intet token med</span></pre><small>Tokenet bliver i browseren.</small></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--red)"><span>Express API</span><strong>Ved ikke, hvem I er</strong><small>Intet token at tjekke. Svarer alle, der spørger.</small><div class="know">✗ ingen bruger</div></div>
+              <div class="ar">→<small>SQL</small></div>
+              <div class="nd" style="--c: var(--orange)"><span>Postgres</span><strong>Alle tråde</strong><pre class="viz-code">SELECT …
+FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">Det var her, vi slap sidst. I dag flytter tokenet ind i requestet.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Hvor vi er på vej hen · step 15-18</span>
+          <h2>Hvor ender chatbotten?</h2>
+          <div class="stage">
+            <div class="pg-wrap">
+              <svg class="pg pg-380 pg-18" viewBox="0 0 880 380" role="img" aria-labelledby="s18-title">
+                <title id="s18-title">Kun /login og /register kan ses uden login. Alle chat-siderne i layout.jsx kræver login, og du ser kun dine egne tråde. Svarer API'et 401, bliver du sendt til /login</title>
+                <rect class="z-open" x="20" y="20" width="260" height="340" rx="14" />
+                <text class="z-t open" x="44" y="54">Kan alle se</text>
+                <rect class="card" x="50" y="84" width="200" height="60" rx="10" /><text class="route sm" x="150" y="109">/register</text><text class="file" x="150" y="130">register.jsx</text>
+                <rect class="card" x="50" y="210" width="200" height="60" rx="10" /><text class="route sm" x="150" y="235">/login</text><text class="file" x="150" y="256">login.jsx</text>
+                <line class="flow" x1="150" y1="146" x2="150" y2="207" /><rect class="pill" x="104" y="166" width="92" height="20" rx="10" /><text class="label" x="150" y="180">konto oprettet</text>
+
+                <rect class="z-lock" x="320" y="20" width="540" height="340" rx="14" />
+                <path class="lock-arc" d="M347 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="344" y="44" width="14" height="11" rx="2" />
+                <text class="z-t lock" x="366" y="54">Kræver login</text>
+                <rect class="layout-box" x="344" y="72" width="492" height="182" rx="12" />
+                <text class="layout-t" x="362" y="96">layout.jsx med sidebar</text>
+                <rect class="pill pill-orange" x="652" y="82" width="168" height="22" rx="11" /><text class="label orange" x="736" y="97">kun dine egne tråde</text>
+                <rect class="card" x="360" y="110" width="220" height="56" rx="10" /><text class="route sm" x="470" y="134">/</text><text class="file" x="470" y="154">home.jsx</text>
+                <rect class="card" x="600" y="110" width="220" height="56" rx="10" /><text class="route sm" x="710" y="134">/chat/new</text><text class="file" x="710" y="154">chat-new.jsx</text>
+                <rect class="card" x="360" y="180" width="220" height="56" rx="10" /><text class="route sm" x="470" y="204">/chat/:threadId</text><text class="file" x="470" y="224">chat-thread.jsx</text>
+                <rect class="card" x="600" y="180" width="220" height="56" rx="10" /><text class="route sm" x="710" y="204">/chat/:threadId/edit</text><text class="file" x="710" y="224">chat-thread-edit.jsx</text>
+
+                <line class="flow" x1="252" y1="240" x2="341" y2="240" /><rect class="pill" x="263" y="214" width="70" height="20" rx="10" /><text class="label" x="298" y="228">logget ind</text>
+                <path class="redir" d="M590 256 V322 H150 V273" /><rect class="pill pill-red" x="308" y="312" width="124" height="20" rx="10" /><text class="label red" x="370" y="326">API'et svarer 401</text>
+              </svg>
+            </div>
+            <ol class="steps18">
+              <li class="now"><b>15</b><span>I dag: tokenet sendes med til backenden</span></li>
+              <li><b>16</b><span>Backenden kræver det og tjekker det med <code>getUser()</code></span></li>
+              <li><b>17</b><span>I ser kun jeres egne tråde</span></li>
+              <li><b>18</b><span>Svarer API'et 401, sendes I til <code>/login</code></span></li>
+            </ol>
+          </div>
+          <p class="bottom-line">Step 15 er første skridt. Backenden kan ikke kræve et token, som frontenden ikke sender.</p>
+        </section>
+
+        <!-- ============ 03 HEADERS OG BEARER TOKENS ============ -->
+
+        <section id="bearer" class="chapter" data-accent="purple">
+          <span class="chapter-number">03</span>
+          <span class="eyebrow">Headers og Bearer tokens · øvelse 10</span>
+          <h2>Et request er mere<br />end en URL</h2>
+          <p>Tokenet skal med i en header. I kender allerede én.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Headers</span>
+          <h2>Headers er ekstra information i requestet</h2>
+          <div class="stage">
+            <div class="req-anat">
+              <pre class="viz-code"><span class="c">// Kender I fra POST til jeres API</span>
+<span class="k">await</span> fetch(<span class="s">`${apiUrl}/api/threads`</span>, {
+  method: <span class="s">"POST"</span>,
+  headers: {
+    <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+    <span class="hl">Authorization: `Bearer ${token}`</span>,
+  },
+  body: JSON.stringify({ title }),
+});</pre>
+              <b aria-hidden="true">→</b>
+              <div class="raw">
+                <div style="--c: var(--green)"><small>Linje</small><span>POST /api/threads</span></div>
+                <div style="--c: var(--cyan)"><small>Headers</small><span><span class="hk">Content-Type:</span> application/json
+<span class="on"><span class="hk">Authorization:</span> Bearer eyJhbGci…</span></span></div>
+                <div style="--c: var(--yellow)"><small>Body</small><span>{"title":"Pizza"}</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">En header er et navn og en værdi. I <code>fetch()</code> skriver I dem i objektet <code>headers</code>.</p>
+        </section>
+
+        <section class="fill cors-def-slide" data-accent="purple">
+          <span class="eyebrow">Definition</span>
+          <h2>Hvad er et Bearer token?</h2>
+          <div class="stage">
+            <div class="throw-anatomy cors-name jwt-name">
+              <span class="cn-json"><code>Authorization:</code><small>headerens navn</small></span>
+              <span class="cn-web"><code>Bearer</code><small>"ihændehaver"</small></span>
+              <span class="cn-token"><code>eyJhbGci…</code><small>jeres access_token</small></span>
+            </div>
+            <p class="cors-definition">Et <b>Bearer token</b> giver adgang til den, der har det. Ingen spørger efter password eller ID. Derfor skal det holdes hemmeligt, og derfor udløber det.</p>
+            <div class="bearer-uses">
+              <article style="--c: var(--green)"><span>Kender I fra DOB 11</span><strong>Jeres Groq-nøgle</strong><pre class="viz-code"><span class="s">"Authorization"</span>: <span class="s">`Bearer ${apiKey}`</span></pre><small>Backenden beviser over for Groq, at den må bruge API'et.</small></article>
+              <article style="--c: var(--purple)"><span>I dag</span><strong>Brugerens access token</strong><pre class="viz-code">Authorization: <span class="s">`Bearer ${token}`</span></pre><small>Frontenden beviser over for API'et, hvilken bruger der spørger.</small></article>
+            </div>
+          </div>
+          <p class="bottom-line">Samme header, samme format. Forskellen er, hvem der beviser hvad over for hvem.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Øvelse 10 · trin 2 · det svarer Supabase</span>
+          <h2>Én header ad gangen. Hver header retter én fejl</h2>
+          <div class="stage">
+            <div class="ladder">
+              <div class="row head"><span></span><span>Headers på fetch</span><span></span><span>Status</span><span>Supabase svarer</span></div>
+              <div class="row" style="--c: var(--red)"><i>1</i><div class="hdrs"><span class="none">ingen headers</span></div><b>→</b><span class="st">401</span><div class="say"><code>No API key found in request</code><span>Hvilket projekt hører det til?</span></div></div>
+              <div class="row fragment" style="--c: var(--red)"><i>2</i><div class="hdrs"><span class="add">apikey</span></div><b>→</b><span class="st">401</span><div class="say"><code>This endpoint requires a valid Bearer token</code><span>Kender projektet. Men hvem er du?</span></div></div>
+              <div class="row fragment" style="--c: var(--green)"><i>3</i><div class="hdrs"><span class="old">apikey</span><span class="add">Authorization: Bearer eyJ…</span></div><b>→</b><span class="st">200</span><div class="say"><code>{ "id": "8f3c2a71-…", "email": "anna@…" }</code><span>Kender projektet og brugeren</span></div></div>
+              <div class="row fragment" style="--c: var(--red)"><i>4</i><div class="hdrs"><span class="old">apikey</span><span class="add">Bearer eyJhbG<mark>X</mark>i…</span></div><b>→</b><span class="st">403</span><div class="say"><code>invalid JWT: … signature is invalid</code><span>Ét tegn rettet. Signaturen passer ikke</span></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Det er præcis det request, <code>getUser()</code> sendte for jer i øvelse 8. Find begge i Network-fanen.</p>
+        </section>
+
+        <section class="shift-slide two-things" data-accent="purple">
+          <span class="eyebrow">Svaret på spørgsmål 1 og 2</span>
+          <h2><code>apikey</code> eller <code>Authorization</code>?</h2>
+          <div class="shift-grid">
+            <span></span>
+            <span class="viz-label"><code>apikey</code></span>
+            <span class="viz-label"><code>Authorization</code></span>
+
+            <strong>Svarer på</strong>
+            <p>Hvilket projekt?</p>
+            <p class="new">Hvilken bruger?</p>
+
+            <strong>Hvem har den?</strong>
+            <p>Den samme for alle brugere</p>
+            <p class="new">Forskellig for hver bruger</p>
+
+            <strong>Hvor ligger den?</strong>
+            <p><code>.env</code>, og derfra i jeres frontend-kode</p>
+            <p class="new">Local Storage, efter login</p>
+
+            <strong>Hvis den bliver stjålet</strong>
+            <p>Det samme som enhver besøgende</p>
+            <p class="new">Man er brugeren, indtil <code>exp</code></p>
+          </div>
+          <p class="bottom-line">Jeres anon key er offentlig. Et access token er det ikke.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Øvelse 10 · trin 3 · jeres eget fetch</span>
+          <h2>Tre situationer. Kun én af dem viser siden</h2>
+          <div class="stage">
+            <div class="gate3 fetch3">
+              <div class="row"><span class="head">Hvem</span><span class="head">Authorization</span><span></span><span class="head">clientLoader</span><span></span><span class="head">Supabase svarer</span><span></span><span class="head">Så</span></div>
+              <div class="row ok-c">
+                <div class="gate-who"><strong>Logget ind</strong><small>almindeligt vindue</small></div>
+                <span class="cell tok">Bearer eyJhbGci…</span><b>→</b><span class="cell fn">fetch()</span><b>→</b>
+                <span class="verd">✓ 200</span><b>→</b><span class="res"><code>return { user }</code>. Siden vises</span>
+              </div>
+              <div class="row no-c">
+                <div class="gate-who"><strong>Inkognito</strong><small>session er null</small></div>
+                <span class="cell none">Bearer undefined</span><b>→</b><span class="cell fn">fetch()</span><b>→</b>
+                <span class="verd">✗ 403 malformed</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
+              </div>
+              <div class="row no-c">
+                <div class="gate-who"><strong>Rettet token</strong><small>ét bogstav ændret</small></div>
+                <span class="cell tok">Bearer eyJhbG<mark>X</mark>i…</span><b>→</b><span class="cell fn">fetch()</span><b>→</b>
+                <span class="verd">✗ 403 signature</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">I tjekker kun <code>response.ok</code>. Det er <code>false</code> ved alt andet end 200-299.</p>
+        </section>
+
+        <section id="ex-10" class="activity-slide handson" data-accent="purple">
+          <span class="ho-num"><small>Øvelse</small>10</span>
+          <span class="eyebrow">Hands-on · Øvelse 10</span>
+          <h2>Send tokenet selv</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md#øvelse-10-send-tokenet-selv" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Trin 1:</b> hent tokenet med <code>getSession()</code> i <code>clientLoader</code> på <code>/profile</code>, og log det</li>
+            <li><b>Trin 2:</b> kald <code>/auth/v1/user</code> med <code>fetch</code>. Tilføj én header ad gangen, og læs svaret</li>
+            <li><b>Trin 3:</b> fjern <code>getUser()</code>, og brug jeres eget svar. <code>redirect("/login")</code>, hvis <code>response.ok</code> er <code>false</code></li>
+            <li>Mangler I øvelse 8-9? Brug degit-kommandoen under "Kom i gang"</li>
+          </ul>
+          <p class="bottom-line">Test: logget ind ser I jeres profil. I inkognito og med et rettet token bliver I sendt til <code>/login</code>.</p>
+        </section>
+
+        <!-- ============ 04 APIFETCH ============ -->
+
+        <section id="apifetch" class="chapter" data-accent="orange">
+          <span class="chapter-number">04</span>
+          <span class="eyebrow">apiFetch · øvelse 11-12</span>
+          <h2>Skriv det<br />én gang</h2>
+          <p>Jeres <code>clientLoader</code> ved nu, hvad URL'en er, hvor nøglen ligger, og hvordan tokenet skal med. Det skal alle sider vide.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Chatbotten før step 15</span>
+          <h2>Syv fetch-kald i fire filer</h2>
+          <div class="stage">
+            <div class="files4">
+              <article><header><strong>layout.jsx</strong><span>2 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
+fetch(<span class="rep">`${apiUrl}</span>/api/threads`)
+fetch(<span class="rep">`${apiUrl}</span>/api/threads/${threadId}`, {
+  method: <span class="s">"DELETE"</span> })</pre></article>
+              <article><header><strong>chat-thread.jsx</strong><span>3 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
+fetch(<span class="rep">`${apiUrl}</span>/api/threads/${params.threadId}`)
+fetch(<span class="rep">`${apiUrl}</span>/api/threads/…/messages`)
+fetch(<span class="rep">`${apiUrl}</span>/api/threads/…/messages`, {
+  method: <span class="s">"POST"</span> })</pre></article>
+              <article><header><strong>chat-new.jsx</strong><span>1 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
+fetch(<span class="rep">`${apiUrl}</span>/api/threads`, {
+  method: <span class="s">"POST"</span> })</pre></article>
+              <article><header><strong>chat-thread-edit.jsx</strong><span>1 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
+fetch(<span class="rep">`${apiUrl}</span>/api/threads/${params.threadId}`, {
+  method: <span class="s">"PATCH"</span> })</pre></article>
+            </div>
+          </div>
+          <p class="bottom-line">Skal tokenet med, skal I rette syv steder. Glemmer I ét, mangler tokenet dér.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">DRY · Don't Repeat Yourself</span>
+          <h2>Det, der gentages, står ét sted</h2>
+          <div class="stage">
+            <div class="dry2">
+              <article style="--c: var(--green)">
+                <span>Express · data-modulet fra RACE 6</span>
+                <pre class="viz-code"><span class="c">// data-helpers.js</span>
+<span class="k">export async function</span> loadStudents() {
+  <span class="k">const</span> data = <span class="k">await</span> fs.readFile(
+    <span class="s">"./data/students.json"</span>, <span class="s">"utf8"</span>
+  );
+  <span class="k">return</span> JSON.parse(data);
+}
+
+<span class="c">// server.js</span>
+<span class="k">const</span> students = <span class="k">await</span> <span class="hl">loadStudents()</span>;</pre>
+                <small>Routes ved ikke, hvor filen ligger. <b>Filstien og <code>JSON.parse</code></b> står ét sted.</small>
+              </article>
+              <article style="--c: var(--orange)">
+                <span>React · i dag</span>
+                <pre class="viz-code"><span class="c">// lib/apiFetch.js</span>
+<span class="k">export async function</span> apiFetch(path, options) {
+  <span class="c">// URL, apikey og token</span>
+  <span class="k">return</span> fetch(url + path, {
+    ...options, headers,
+  });
+}
+
+<span class="c">// routes/profile.jsx</span>
+<span class="k">const</span> response = <span class="k">await</span> <span class="hl">apiFetch("/auth/v1/user")</span>;</pre>
+                <small>Siderne ved ikke, hvordan tokenet kommer med. <b>URL, apikey og token</b> står ét sted.</small>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Skal noget ændres, ændrer I det ét sted. Alle, der kalder funktionen, får det med.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Wrapper-funktion · øvelse 11</span>
+          <h2>apiFetch er fetch med URL, apikey og token sat på</h2>
+          <div class="stage">
+            <div class="anat">
+              <pre class="viz-code"><span class="k">export async function</span> apiFetch(path, options = {}) {
+  <span class="k">const</span> {
+    data: { session },
+  } = <span class="k">await</span> supabase.auth.getSession();<span class="no">1</span>
+  <span class="k">const</span> token = session?.access_token;
+
+  <span class="k">const</span> headers = {
+    ...options.headers,
+    apikey: supabaseAnonKey,
+  };<span class="no">2</span>
+
+  <span class="k">if</span> (token) {
+    headers.Authorization = <span class="s">`Bearer ${token}`</span>;
+  }<span class="no">3</span>
+
+  <span class="k">return</span> fetch(<span class="s">`${supabaseUrl}${path}`</span>, { ...options, headers });<span class="no">4</span>
+}</pre>
+              <ol>
+                <li><span>Hent tokenet fra Local Storage. Er I logget ud, er <code>session</code> <code>null</code></span></li>
+                <li><span>Behold de headers, siden selv sendte med, og læg <code>apikey</code> på</span></li>
+                <li><span><code>Authorization</code> kun, hvis der er et token. Ellers sender I <code>Bearer undefined</code></span></li>
+                <li><span>Kald det rigtige <code>fetch()</code> med hele URL'en, og returnér svaret</span></li>
+              </ol>
+            </div>
+          </div>
+          <p class="bottom-line">En <b>wrapper-funktion</b> kalder en anden funktion og lægger noget til. Den tager de samme options som <code>fetch()</code>.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow"><code>...options.headers</code> og <code>{ ...options, headers }</code></span>
+          <h2>Sidens headers plus apiFetch' egne</h2>
+          <div class="stage">
+            <div class="merge">
+              <pre class="viz-code"><span class="c">// Fx når chatbotten opretter en tråd</span>
+apiFetch(<span class="s">"/api/threads"</span>, {
+  method: <span class="s">"POST"</span>,
+  headers: {
+    <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+  },
+  body: JSON.stringify({ title }),
+});</pre>
+              <b aria-hidden="true">→</b>
+              <div class="out">
+                <span>Det, fetch() får</span>
+                <div class="hrow keep" style="--c: var(--muted)"><span>method: "POST"</span><small>fra options</small></div>
+                <div class="hrow" style="--c: var(--cyan)"><span>Content-Type</span><small>fra siden</small></div>
+                <div class="hrow" style="--c: var(--orange)"><span>apikey</span><small>fra apiFetch</small></div>
+                <div class="hrow" style="--c: var(--purple)"><span>Authorization</span><small>fra apiFetch</small></div>
+                <div class="hrow keep" style="--c: var(--muted)"><span>body: "{…}"</span><small>fra options</small></div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Fjern <code>...options.headers</code>, og <code>Content-Type</code> forsvinder. Det er test 5 i øvelse 11.</p>
+        </section>
+
+        <section class="shift-slide two-things" data-accent="orange">
+          <span class="eyebrow">Hvorfor getSession() i apiFetch?</span>
+          <h2><code>getSession()</code> læser. <code>getUser()</code> spørger</h2>
+          <div class="shift-grid">
+            <span></span>
+            <span class="viz-label"><code>getSession()</code></span>
+            <span class="viz-label"><code>getUser()</code></span>
+
+            <strong>Hvad gør den?</strong>
+            <p>Læser tokenet fra Local Storage</p>
+            <p class="new">Sender tokenet til Supabase</p>
+
+            <strong>Request?</strong>
+            <p>Nej. Intet i Network-fanen</p>
+            <p class="new">Ja. <code>/auth/v1/user</code></p>
+
+            <strong>Tjekker signaturen?</strong>
+            <p>Nej</p>
+            <p class="new">Ja</p>
+
+            <strong>Hvem bruger den?</strong>
+            <p>Frontenden, der bare sender tokenet videre</p>
+            <p class="new">Den, der skal stole på tokenet. Snart jeres backend</p>
+          </div>
+          <p class="bottom-line">Frontenden behøver ikke tjekke tokenet. Det gør den, der modtager det.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Øvelse 12 · bonus</span>
+          <h2>Ingen clientLoader? Så useEffect</h2>
+          <div class="stage">
+            <div class="dry2 big">
+              <article style="--c: var(--cyan)">
+                <span>En route · fx /profile</span>
+                <pre class="viz-code"><span class="k">export async function</span> clientLoader() {
+  <span class="k">const</span> response =
+    <span class="k">await</span> apiFetch(<span class="s">"/auth/v1/user"</span>);
+  …
+}</pre>
+                <small>Data hentes, <b>før</b> siden vises.</small>
+              </article>
+              <article style="--c: var(--orange)">
+                <span>En component · fx SidebarFooter</span>
+                <pre class="viz-code"><span class="k">const</span> [email, setEmail] = useState(<span class="k">null</span>);
+
+useEffect(() => {
+  <span class="c">// getSession() og setEmail(...)</span>
+}, []);</pre>
+                <small>Kan ikke have en <code>clientLoader</code>. Data hentes, <b>når</b> componenten bliver vist. Som users i <code>my-first-react-app</code>.</small>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">I øvelse 12 viser I emailen på forsiden. I chatbotten står den i <code>SidebarFooter</code>.</p>
+        </section>
+
+        <section id="ex-11" class="activity-slide handson" data-accent="orange">
+          <span class="ho-num"><small>Øvelse</small>11-12</span>
+          <span class="eyebrow">Hands-on · Øvelse 11-12</span>
+          <h2>apiFetch og emailen på forsiden</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md#øvelse-11-apifetch" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Øvelse 11:</b> opret <code>app/lib/apiFetch.js</code> ud fra skabelonen</li>
+            <li>Brug den i <code>clientLoader</code> på <code>/profile</code>. Ét kald: <code>apiFetch("/auth/v1/user")</code></li>
+            <li>Find <code>apikey</code> og <code>Authorization</code> under Request Headers. Prøv også i inkognito</li>
+            <li><b>Øvelse 12 · bonus:</b> vis emailen og et link til <code>/profile</code> på forsiden med <code>useEffect</code></li>
+          </ul>
+          <p class="bottom-line">Øvelse 10 og 11 er nok til at lave step 15. Øvelse 12 svarer til emailen i sidebaren.</p>
+        </section>
+
+        <!-- ============ 05 FRA ØVELSERNE TIL STEP 15 ============ -->
+
+        <section id="step-15" class="chapter" data-accent="cyan">
+          <span class="chapter-number">05</span>
+          <span class="eyebrow">Fra øvelserne til step 15</span>
+          <h2>Det samme igen,<br />i chatbotten</h2>
+          <p>I kender alle delene af step 15 nu. Resten af dagen og i morgen sætter I dem ind i chatbotten.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Step 15 · Send bearer tokens in requests</span>
+          <h2>Step 15 er det, I har lavet i dag</h2>
+          <div class="stage">
+            <div class="map7 map3">
+              <div class="row head"><span></span><span>Delopgave i step 15</span><span>Det har I lavet i</span><span>Husk i chatbotten</span></div>
+              <div class="row"><i>1</i><strong>Create apiFetch helper</strong><em>Øvelse 11</em><small>Brug <code>VITE_API_URL</code>, og drop <code>apikey</code>. Jeres API skal kun have tokenet</small></div>
+              <div class="row"><i>2</i><strong>Update all loaders and actions</strong><em>Øvelse 11</em><small>Fire filer, syv kald: <code>layout.jsx</code>, <code>chat-thread.jsx</code>, <code>chat-new.jsx</code> og <code>chat-thread-edit.jsx</code></small></div>
+              <div class="row"><i>3</i><strong>Add logout functionality</strong><em style="--c: var(--cyan)">Øvelse 9 og 12</em><small>Logout i layoutets <code>clientAction</code> med <code>intent="logout"</code>. Emailen står i <code>SidebarFooter</code></small></div>
+            </div>
+          </div>
+          <p class="bottom-line">Commit efter hver delopgave. Samme tabel står sidst i opgaven.</p>
+        </section>
+
+        <section class="shift-slide" data-accent="cyan">
+          <span class="eyebrow">Chatbot step 15</span>
+          <h2>Det er anderledes i chatbotten</h2>
+          <div class="shift-grid">
+            <span></span>
+            <span class="viz-label">react-supabase-auth</span>
+            <span class="viz-label">Chatbot · step 15</span>
+
+            <strong>URL</strong>
+            <p><code>VITE_SUPABASE_URL</code></p>
+            <p class="new"><code>VITE_API_URL</code>, jeres eget API</p>
+
+            <strong>apikey</strong>
+            <p>Ja. Supabase skal vide, hvilket projekt</p>
+            <p class="new">Nej. Jeres API skal kun have tokenet</p>
+
+            <strong>Log ud</strong>
+            <p><code>clientAction</code> i <code>profile.jsx</code></p>
+            <p class="new"><code>clientAction</code> i <code>layout.jsx</code> med <code>intent="logout"</code>, ved siden af <code>"delete"</code></p>
+
+            <strong>Emailen</strong>
+            <p><code>useEffect</code> i <code>home.jsx</code></p>
+            <p class="new"><code>useEffect</code> i <code>SidebarFooter</code>. Erstatter "Batman"</p>
+          </div>
+          <p class="bottom-line">Er I ikke færdige med step 14, så brug degit-kommandoen sidst i opgaven, og commit, før I ændrer noget.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Når I er i mål · Network-fanen</span>
+          <h2>Hvorfor står der to requests til threads?</h2>
+          <div class="stage">
+            <div class="preflight">
+              <div class="side l" style="--c: var(--green)"><span>Browseren</span><strong>localhost:5173</strong></div>
+              <div class="msg" style="--c: var(--yellow)"><div>OPTIONS /api/threads <b>→</b></div><small>"Må jeg sende en <code>Authorization</code>-header fra localhost:5173?"</small></div>
+              <div class="msg back fragment" style="--c: var(--cyan)"><div><b>←</b> 204 · Access-Control-Allow-Headers: authorization</div><small><code>cors()</code> i jeres backend svarer ja</small></div>
+              <div class="msg fragment" style="--c: var(--purple)"><div>GET /api/threads · Authorization: Bearer eyJ… <b>→</b></div><small>Først nu bliver det rigtige request sendt</small></div>
+              <div class="side r" style="--c: var(--orange)"><span>Express API</span><strong>localhost:3000</strong></div>
+            </div>
+          </div>
+          <p class="bottom-line">Det er CORS igen. Et andet origin og en <code>Authorization</code>-header får browseren til at spørge først.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Request-vejen · efter step 15</span>
+          <h2>Tokenet når frem. Ingen kigger på det</h2>
+          <div class="stage">
+            <div class="gapv">
+              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>Ved, hvem I er</strong><pre class="viz-code">apiFetch(<span class="s">"/api/threads"</span>)</pre><div class="know">✓ access_token med sub</div></div>
+              <div class="ar">→<small>fetch</small></div>
+              <div class="nd" style="--c: var(--green)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">Authorization:
+Bearer eyJhbGci…</pre><div class="know">✓ tokenet er med</div></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--red)"><span>Express API</span><strong>Kigger ikke på det</strong><small>Headeren er der. Ingen kode læser den endnu.</small><div class="know">✗ ingen bruger</div></div>
+              <div class="ar">→<small>SQL</small></div>
+              <div class="nd" style="--c: var(--orange)"><span>Postgres</span><strong>Alle tråde</strong><pre class="viz-code">SELECT …
+FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">To brugere ser stadig de samme tråde efter step 15. Det er forventet.</p>
+        </section>
+
+        <section id="ex-step15" class="activity-slide handson" data-accent="cyan">
+          <span class="ho-num"><small>Step</small>15</span>
+          <span class="eyebrow">Hands-on · resten af dagen og onsdag</span>
+          <h2>Step 15 i chatbotten</h2>
+          <ul class="checklist">
+            <li>Lav <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/15" target="_blank" rel="noreferrer"><b>step 15 ↗</b></a> delopgave for delopgave, og commit efter hver</li>
+            <li>Mangler step 14? Brug degit-kommandoen med <code>#pr-15-start</code> sidst i opgaven, og sæt <code>TEST_USER_ID</code> ind igen</li>
+            <li>Find <code>Authorization: Bearer ...</code> på et request til <code>localhost:3000</code>. Og et <code>OPTIONS</code> før det</li>
+            <li>Log ud med × i sidebaren. Står jeres email der igen, når I logger ind?</li>
+            <li>Push til GitHub, når I er færdige</li>
+          </ul>
+          <p class="bottom-line">Sidder I fast i en delopgave, så sammenlign med tutorialens reference-commit til den.</p>
+        </section>
+
+        <!-- ============ 06 HVAD MANGLER STADIG? ============ -->
+
+        <section id="mangler" class="chapter" data-accent="red">
+          <span class="chapter-number">06</span>
+          <span class="eyebrow">Hvad mangler stadig?</span>
+          <h2>Send et request<br />uden token</h2>
+          <p>Frontenden sender tokenet. Men hvad med alle andre?</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Prøv selv · Thunder Client</span>
+          <h2>Thunder Client får stadig alle tråde</h2>
+          <div class="stage">
+            <div class="tc">
+              <div>
+                <div class="url"><b>GET</b><span>http://localhost:3000/api/threads</span></div>
+                <div class="tabs"><span>Query</span><span class="on">Headers</span><span>Auth</span><span>Body</span></div>
+                <div class="none">Ingen Authorization-header</div>
+              </div>
+              <div>
+                <div class="tabs"><span class="status">Status: 200 OK</span><span>Size: 1.2 KB</span></div>
+                <pre>[
+  { <span class="k">"id"</span>: 12, <span class="k">"title"</span>: <span class="s">"Min hemmelige tråd"</span>, … },
+  { <span class="k">"id"</span>: 11, <span class="k">"title"</span>: <span class="s">"Annas tråd"</span>, … },
+  { <span class="k">"id"</span>: 3, <span class="k">"title"</span>: <span class="s">"How to learn programming?"</span>, … },
+  …
+]</pre>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Frontenden sender tokenet frivilligt. Ingen tvinger nogen til det.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Listen fra sidst</span>
+          <h2>Hvilke huller lukker step 15?</h2>
+          <div class="stage">
+            <ul class="holes">
+              <li><i>1</i><span>Chatbotten ved ikke, hvem der bruger den</span><em class="done fragment">Lukket · step 14 og 15</em></li>
+              <li><i>2</i><span>Alle nye tråde får alices id</span><em class="next fragment">Step 17</em></li>
+              <li><i>3</i><span>Thunder Client får alle tråde uden at logge ind</span><em class="next fragment">Step 16</em></li>
+              <li><i>4</i><span>Alle ser alles tråde</span><em class="next fragment">Step 17</em></li>
+              <li><i>5</i><span>Alle kan omdøbe og slette alles tråde</span><em class="next fragment">Step 17</em></li>
+            </ul>
+          </div>
+          <p class="bottom-line">Step 15 lukker kun det første alene. Men uden step 15 kan backenden ikke lukke resten.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Næste skridt · step 16 med MAGL</span>
+          <h2>Backenden spørger Supabase, ligesom øvelse 10</h2>
+          <div class="stage">
+            <div class="gapv">
+              <div class="nd" style="--c: var(--green)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">Authorization:
+Bearer eyJhbGci…</pre></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--cyan)"><span>Express · requireAuth</span><strong>Middleware før hver route</strong><pre class="viz-code">getUser(token)</pre><small>Intet token, eller passer signaturen ikke: <b>401</b>.</small></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--purple)"><span>Supabase Auth</span><strong>/auth/v1/user</strong><small>Det samme request, I byggede i øvelse 10.</small><div class="know">✓ signaturen passer</div></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--orange)"><span>Route handleren</span><strong>Kender jeres id</strong><pre class="viz-code">req.userId =
+  user.id</pre><small>Samme id som <code>sub</code> i tokenet. Nu ved API'et, hvem I er.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">Supabase svarede 403 på jeres rettede token. Jeres backend svarer 401. Det er den, chatbotten skal reagere på i step 18.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="purple">
+          <span class="eyebrow">Opsamling</span>
+          <h2>Det kan I nu</h2>
+          <ul class="checklist">
+            <li>Forklare, hvorfor hvert request selv skal sige, hvem det kommer fra</li>
+            <li>Sende et token i en <code>Authorization</code>-header med <code>fetch()</code></li>
+            <li>Forklare forskellen på <code>apikey</code> og <code>Authorization</code>, og hvad der sker, hvis de bliver stjålet</li>
+            <li>Samle gentaget kode i en wrapper-funktion, <code>apiFetch</code></li>
+            <li>Vælge mellem <code>getSession()</code> og <code>getUser()</code></li>
+            <li>Finde tokenet og <code>OPTIONS</code>-requestet i Network-fanen</li>
+          </ul>
+        </section>
+
+        <section class="materials-slide" data-accent="purple">
+          <span class="eyebrow">Arbejd videre</span>
+          <h2>Opgave, løsning og opslagsværker</h2>
+          <div class="material-links">
+            <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md" target="_blank" rel="noreferrer"><strong>Send tokenet med</strong><span>Opgaven ↗</span></a>
+            <a href="https://github.com/cederdorff/react-supabase-auth" target="_blank" rel="noreferrer"><strong>Løsningen</strong><span>Én branch pr. øvelse ↗</span></a>
+            <a href="https://github.com/bewildergeist/chatbot-react-postgres/pull/15" target="_blank" rel="noreferrer"><strong>Step 15</strong><span>Chatbot-tutorialen ↗</span></a>
+            <a href="https://jwt.io" target="_blank" rel="noreferrer"><strong>jwt.io</strong><span>Dekod tokenet fra Network-fanen ↗</span></a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorization" target="_blank" rel="noreferrer"><strong>Authorization</strong><span>MDN ↗</span></a>
+            <a href="https://react.dev/reference/react/useEffect" target="_blank" rel="noreferrer"><strong>useEffect</strong><span>react.dev ↗</span></a>
+            <a href="https://supabase.com/docs/reference/javascript/auth-getsession" target="_blank" rel="noreferrer"><strong>getSession()</strong><span>Supabase docs ↗</span></a>
+            <a href="https://scrimba.com/intro-to-supabase-c0abltfqed" target="_blank" rel="noreferrer"><strong>Intro to Supabase</strong><span>Scrimba ↗</span></a>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="../shared/deck.js"></script>
+  </body>
+</html>

@@ -1,0 +1,885 @@
+@import "../supabase-auth/theme.css";
+
+/* RACE 10 deck additions: the token from RACE 9 goes into a header.
+   First by hand against Supabase Auth in react-supabase-auth, then
+   collected in apiFetch, then step 15 in the chatbot. Reuses the RACE 9
+   mocks (DevTools, gapv request path, gate3, map7, holes, roadmap) */
+
+/* ===================================================================
+   Title: one request with the token in a header
+   =================================================================== */
+.title-art .req {
+  width: 470px;
+  overflow: hidden;
+  border: 1px solid #3c3d40;
+  border-radius: 12px;
+  background: #1f2023;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 35%);
+  color: #e3e3e3;
+  font: 500 17px/1.6 var(--mono);
+  text-align: left;
+}
+.title-art .req .rl {
+  padding: 12px 18px;
+  border-bottom: 1px solid #3c3d40;
+  background: #2a2b2e;
+  font-weight: 700;
+}
+.title-art .req .rl b {
+  color: var(--green);
+}
+.title-art .req .hs {
+  display: grid;
+  gap: 4px;
+  padding: 14px 18px 16px;
+}
+.title-art .req .hs span {
+  color: #9aa0a6;
+  white-space: nowrap;
+}
+.title-art .req .hs span.on {
+  margin: 4px -10px 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--purple) 22%, transparent);
+  color: #fff;
+}
+.title-art .req .hs span.on i {
+  color: var(--jwt-p);
+  font-style: normal;
+}
+
+/* ===================================================================
+   01 Opsamling
+   =================================================================== */
+
+/* Three questions from Friday, answer revealed as a fragment */
+.qa3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.qa3 article {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 16px;
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.qa3 article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.qa3 article > strong {
+  font-size: 30px;
+  line-height: 1.2;
+}
+.qa3 .ans {
+  align-self: end;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+  font-size: 22px;
+  line-height: 1.4;
+}
+.qa3 .ans b {
+  color: var(--c);
+}
+
+/* Network tab: request headers to localhost:3000, Authorization missing */
+.dt-net .kv .auth {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--purple) 25%, transparent);
+  color: #e9d5ff;
+}
+.dt-net .kv .miss {
+  color: var(--red);
+  font-weight: 700;
+}
+.dt-net .kv .sec {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  color: #e3e3e3;
+  font: 700 14px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.dt-net .kv .gap {
+  grid-column: 1 / -1;
+  padding: 8px 10px;
+  border: 1px dashed color-mix(in srgb, var(--red) 60%, transparent);
+  border-radius: 8px;
+  color: var(--red);
+  font-weight: 700;
+}
+.net-layout.wide {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+.net-layout .dt {
+  font-size: 16px;
+}
+.net-layout .dt-net {
+  grid-template-columns: 190px 1fr;
+  min-height: 430px;
+}
+.net-layout .dt-net .kv {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+/* ===================================================================
+   02 Hvem spørger?
+   =================================================================== */
+
+/* HTTP is stateless: three requests, each on its own */
+.stateless {
+  display: grid;
+  gap: 26px;
+}
+.stateless .row {
+  display: grid;
+  grid-template-columns: 210px repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
+}
+.stateless .lbl {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  color: var(--c);
+  font-size: 24px;
+  font-weight: 850;
+}
+.stateless .lbl small {
+  color: var(--muted);
+  font-size: 17px;
+  font-weight: 600;
+}
+.stateless .rq {
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--c);
+  border-radius: 12px;
+  background: var(--soft);
+}
+.stateless .rq code {
+  font-size: 20px;
+}
+.stateless .rq .tk {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--purple) 20%, transparent);
+  color: var(--jwt-p);
+  font: 600 15px/1.3 var(--mono);
+}
+.stateless .rq .tk.none {
+  background: none;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+}
+.stateless .rq em {
+  color: var(--c);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 750;
+}
+.stateless .session {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 24px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--yellow) 10%, transparent);
+  font-size: 22px;
+  line-height: 1.4;
+}
+.stateless .session b {
+  flex: none;
+  color: var(--yellow);
+}
+
+/* Step 15 marked as today under the roadmap */
+.steps18 li.now {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--ink);
+}
+
+/* ===================================================================
+   03 Headers og Bearer tokens
+   =================================================================== */
+
+/* fetch() options on the left, the request that is sent on the right */
+.req-anat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1.1fr);
+  align-items: center;
+  gap: 16px;
+}
+.req-anat .viz-code {
+  padding: 22px 26px;
+  font-size: 21px;
+  line-height: 1.55;
+}
+.req-anat > b {
+  color: var(--accent);
+  font-size: 40px;
+  text-align: center;
+}
+.req-anat .raw {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font: 500 20px/1.5 var(--mono);
+}
+.req-anat .raw > div {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+.req-anat .raw > div:first-child {
+  border-top: 0;
+}
+.req-anat .raw > div > small {
+  align-self: stretch;
+  display: grid;
+  align-content: center;
+  padding: 0 14px;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  color: var(--c);
+  font: 850 14px/1.2 var(--font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.req-anat .raw > div > span {
+  padding: 14px 18px;
+  white-space: pre;
+}
+.req-anat .raw .hk {
+  color: var(--cyan);
+}
+.req-anat .raw .on {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--purple) 22%, transparent);
+}
+
+/* Bearer token definition: two known uses of the same header */
+.bearer-uses {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.bearer-uses article {
+  display: grid;
+  gap: 12px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.bearer-uses article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bearer-uses article > strong {
+  font-size: 26px;
+}
+.bearer-uses .viz-code {
+  padding: 12px 16px;
+  font-size: 18px;
+}
+.bearer-uses small {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+/* One header at a time: request -> status -> what Supabase knows */
+.ladder {
+  display: grid;
+  gap: 14px;
+}
+.ladder .row {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1.05fr) 40px 96px minmax(0, 1.3fr);
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--soft);
+}
+.ladder .row.head {
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ladder .row > i {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 850;
+}
+.ladder .hdrs {
+  display: grid;
+  gap: 4px;
+  font: 500 18px/1.35 var(--mono);
+}
+.ladder .hdrs .none {
+  color: var(--muted);
+  font-family: var(--font);
+  font-style: italic;
+}
+.ladder .hdrs .add {
+  color: var(--ink);
+}
+.ladder .hdrs .old {
+  color: var(--muted);
+}
+.ladder .row > b {
+  color: var(--muted);
+  font-size: 26px;
+  text-align: center;
+}
+.ladder .st {
+  justify-self: start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+  color: var(--c);
+  font: 800 20px/1.2 var(--mono);
+}
+.ladder .say {
+  display: grid;
+  gap: 6px;
+}
+.ladder .say code {
+  color: var(--c);
+  font-size: 16px;
+  line-height: 1.35;
+  white-space: normal;
+}
+.ladder .say span {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+/* Bigger shift-grid rows when it compares two things side by side */
+.shift-slide.two-things .shift-grid {
+  grid-template-columns: 250px minmax(0, 1fr) minmax(0, 1fr);
+}
+.shift-slide.two-things .shift-grid > .viz-label {
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.shift-slide.two-things .shift-grid > .viz-label code {
+  font-size: 22px;
+}
+
+/* gate3 with fetch: the header cell carries "Bearer ..." */
+.gate3.fetch3 .cell.tok,
+.gate3.fetch3 .cell.none {
+  white-space: nowrap;
+}
+
+/* ===================================================================
+   04 apiFetch
+   =================================================================== */
+
+/* Seven fetch calls in four files */
+.files4 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.files4 article {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.files4 article > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.files4 article > header strong {
+  font: 700 21px/1.2 var(--mono);
+}
+.files4 article > header span {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.files4 .viz-code {
+  padding: 10px 14px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.files4 .viz-code .rep {
+  background: color-mix(in srgb, var(--red) 18%, transparent);
+  color: #ffb4ab;
+}
+
+/* DRY: Express data module and apiFetch, same idea */
+.dry2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+.dry2 article {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.dry2 article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.dry2 .viz-code {
+  padding: 14px 18px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.dry2 small {
+  color: var(--muted);
+  font-size: 21px;
+  line-height: 1.4;
+}
+.dry2 small b {
+  color: var(--ink);
+}
+
+/* apiFetch anatomy: code with numbered notes */
+.anat {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 34px;
+}
+.anat .viz-code {
+  padding: 22px 26px;
+  font-size: 19px;
+  line-height: 1.5;
+}
+.anat .viz-code .no {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #111;
+  font: 850 15px/1 var(--font);
+  vertical-align: 2px;
+}
+.anat ol {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: anat;
+}
+.anat ol li {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 14px;
+  align-items: start;
+  font-size: 22px;
+  line-height: 1.4;
+  counter-increment: anat;
+}
+.anat ol li::before {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #111;
+  font-weight: 850;
+  content: counter(anat);
+}
+
+/* The caller's headers + apiFetch's own */
+.merge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 60px minmax(0, 0.9fr);
+  align-items: center;
+  gap: 20px;
+}
+.merge .viz-code {
+  padding: 20px 24px;
+  font-size: 20px;
+  line-height: 1.55;
+}
+.merge > b {
+  color: var(--accent);
+  font-size: 40px;
+  text-align: center;
+}
+.merge .out {
+  display: grid;
+  gap: 12px;
+}
+.merge .out > span {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.merge .hrow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--c);
+  border-radius: 10px;
+  background: var(--soft);
+  font: 600 19px/1.3 var(--mono);
+}
+.merge .hrow small {
+  color: var(--c);
+  font: 800 15px/1.2 var(--font);
+  white-space: nowrap;
+}
+.merge .hrow.keep {
+  border-style: dashed;
+  border-left-style: solid;
+}
+
+/* ===================================================================
+   05 Step 15
+   =================================================================== */
+.map7.map3 .row:not(.head) {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.map7.map3 .row strong {
+  font-size: 24px;
+}
+.map7.map3 .row small {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+/* Preflight: OPTIONS first, then the real GET */
+.preflight {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 220px;
+  gap: 18px 26px;
+  align-items: center;
+}
+.preflight .side {
+  display: grid;
+  gap: 8px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+  text-align: center;
+}
+.preflight .side span {
+  color: var(--c);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.preflight .side strong {
+  font: 700 22px/1.2 var(--mono);
+}
+.preflight .side.l {
+  grid-row: 1 / span 3;
+  grid-column: 1;
+}
+.preflight .side.r {
+  grid-row: 1 / span 3;
+  grid-column: 3;
+}
+.preflight .msg {
+  grid-column: 2;
+  display: grid;
+  gap: 6px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+.preflight .msg > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 600 19px/1.3 var(--mono);
+}
+.preflight .msg > div b {
+  color: var(--c);
+  font-size: 24px;
+}
+.preflight .msg small {
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.35;
+}
+.preflight .msg.back > div {
+  justify-content: flex-end;
+}
+.preflight .msg.back small {
+  text-align: right;
+}
+
+/* ===================================================================
+   06 Hvad mangler stadig?
+   =================================================================== */
+.holes em.done {
+  background: color-mix(in srgb, var(--green) 18%, transparent);
+  color: var(--green);
+}
+.holes em.next {
+  background: color-mix(in srgb, var(--orange) 18%, transparent);
+  color: var(--orange);
+}
+
+/* Thunder Client without a token */
+.tc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid #3c3d40;
+  border-radius: 12px;
+  background: #1f2023;
+  color: #e3e3e3;
+  font: 500 18px/1.5 var(--mono);
+  text-align: left;
+}
+.tc > div {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 20px 22px;
+}
+.tc > div + div {
+  border-left: 1px solid #3c3d40;
+}
+.tc .url {
+  display: flex;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #2a2b2e;
+}
+.tc .url b {
+  color: var(--green);
+}
+.tc .tabs {
+  display: flex;
+  gap: 18px;
+  color: #9aa0a6;
+  font: 500 15px/1.2 var(--font);
+}
+.tc .tabs .on {
+  color: #e3e3e3;
+  box-shadow: inset 0 -2px #8ab4f8;
+  padding-bottom: 6px;
+}
+.tc .none {
+  padding: 12px 14px;
+  border: 1px dashed #5f6368;
+  border-radius: 8px;
+  color: #9aa0a6;
+  font-family: var(--font);
+  font-style: italic;
+}
+.tc .status {
+  color: var(--green);
+  font-weight: 800;
+}
+.tc pre {
+  margin: 0;
+  color: #c4c7c5;
+  font: 500 16px/1.5 var(--mono);
+  white-space: pre;
+}
+.tc pre .k { color: #a8c7fa; }
+.tc pre .s { color: #f28b82; }
+
+/* ===================================================================
+   Fill the slide height: this deck has fewer, bigger diagrams than
+   RACE 9, so the shared components are scaled up here
+   =================================================================== */
+.gapv .nd {
+  min-height: 440px;
+  padding: 30px 26px;
+  gap: 16px;
+}
+.gapv .nd > span { font-size: 17px; }
+.gapv .nd > strong { font-size: 32px; }
+.gapv .nd > small { font-size: 23px; }
+.gapv .viz-code { font-size: 20px; }
+.gapv .know { font-size: 22px; }
+.gapv .ar { font-size: 40px; }
+.gapv .ar small { font-size: 16px; }
+
+.qa3 article {
+  min-height: 470px;
+  padding: 34px 34px;
+}
+.qa3 article > strong { font-size: 38px; }
+.qa3 .ans { font-size: 27px; padding: 22px 24px; }
+
+.stateless { gap: 36px; }
+.stateless .rq { padding: 24px 24px; gap: 14px; }
+.stateless .rq code { font-size: 24px; }
+.stateless .rq .tk { font-size: 18px; }
+.stateless .rq em { font-size: 24px; }
+.stateless .lbl { font-size: 30px; }
+.stateless .lbl small { font-size: 19px; }
+.stateless .session { font-size: 25px; padding: 22px 28px; }
+
+.req-anat .viz-code { font-size: 25px; padding: 30px 34px; }
+.req-anat .raw { font-size: 25px; }
+.req-anat .raw > div { grid-template-columns: 140px minmax(0, 1fr); }
+.req-anat .raw > div > span { padding: 22px 22px; }
+.req-anat .raw > div > small { font-size: 16px; }
+
+.bearer-uses article { padding: 28px 32px; gap: 16px; }
+.bearer-uses article > strong { font-size: 30px; }
+.bearer-uses .viz-code { font-size: 21px; padding: 14px 18px; }
+.bearer-uses small { font-size: 22px; }
+
+.gate3.fetch3 { gap: 34px; }
+.gate3.fetch3 .row {
+  grid-template-columns: 210px 280px 46px 170px 46px 250px 46px minmax(0, 1fr);
+}
+.gate3.fetch3 .row:first-child .head { font-size: 16px; }
+.gate3.fetch3 .gate-who strong { font-size: 30px; }
+.gate3.fetch3 .gate-who small { font-size: 19px; }
+.gate3.fetch3 .cell { padding: 20px 18px; font-size: 21px; }
+.gate3.fetch3 .verd { padding: 20px 18px; font-size: 22px; }
+.gate3.fetch3 .res { font-size: 21px; }
+
+.files4 { gap: 22px; }
+.files4 article { padding: 22px 26px; }
+.files4 article > header strong { font-size: 24px; }
+.files4 .viz-code {
+  font-size: 18px;
+  white-space: pre-wrap;
+}
+
+.dry2 .viz-code {
+  font-size: 19px;
+  white-space: pre-wrap;
+}
+.dry2 article { padding: 28px 30px; }
+.dry2 small { font-size: 23px; }
+
+.anat .viz-code { font-size: 19px; padding: 24px 28px; }
+.anat ol li { font-size: 24px; }
+
+.merge .viz-code { font-size: 24px; padding: 28px 32px; }
+.merge .hrow { font-size: 22px; padding: 16px 20px; }
+.merge .hrow small { font-size: 17px; }
+.merge .out { gap: 14px; }
+
+.preflight .side { padding: 30px 22px; }
+.preflight .side strong { font-size: 24px; }
+.preflight .msg { padding: 22px 26px; }
+.preflight .msg > div { font-size: 22px; }
+.preflight .msg small { font-size: 21px; }
+.preflight { gap: 26px 30px; }
+
+.tc { font-size: 21px; }
+.tc > div { padding: 28px 30px; gap: 18px; min-height: 420px; }
+.tc pre { font-size: 19px; }
+
+.ladder .row { padding: 20px 24px; }
+.ladder .hdrs { font-size: 20px; }
+.ladder .say code { font-size: 18px; }
+.ladder .say span { font-size: 22px; }
+
+/* Second pass after screenshots */
+.gapv .nd > strong { font-size: 28px; }
+.req-anat { grid-template-columns: minmax(0, 1.25fr) 56px minmax(0, 1fr); }
+.req-anat .viz-code { font-size: 23px; }
+.req-anat .raw { font-size: 23px; }
+.gate3.fetch3 { gap: 46px; }
+.files4 .viz-code { font-size: 17px; }
+.dry2 article { min-height: 400px; }
+.dry2.big .viz-code { font-size: 23px; }
+.dry2.big small { font-size: 25px; }
+.preflight { grid-template-columns: 250px minmax(0, 1fr) 250px; gap: 30px 30px; }
+.preflight .side { padding: 40px 18px; }
+.preflight .side strong { font-size: 21px; }
+.preflight .msg { padding: 26px 30px; }
+.preflight .msg > div { font-size: 23px; }
+.preflight .msg small { font-size: 22px; }
+.tc { font-size: 24px; }
+.tc > div { min-height: 480px; padding: 32px 34px; gap: 22px; }
+.tc .tabs { font-size: 19px; }
+.tc .none { font-size: 22px; padding: 16px 18px; }
+.tc pre { font-size: 22px; line-height: 1.6; }
+.activity-slide .checklist li { --checklist-pad: 30px; }
+.materials-slide .material-links { margin-top: 34px; }
+
+/* Third pass */
+.req-anat { grid-template-columns: minmax(0, 1.1fr) 56px minmax(0, 1fr); }
+.req-anat .viz-code { font-size: 22px; }
+.req-anat .raw { font-size: 20px; }
+.req-anat .raw > div { grid-template-columns: 120px minmax(0, 1fr); }
+.preflight { grid-template-columns: 280px minmax(0, 1fr) 280px; gap: 36px 30px; }
+.preflight .side { padding: 70px 18px; }
+.preflight .side strong { font-size: 24px; }
+.preflight .msg { padding: 32px 34px; gap: 10px; }
+.preflight .msg > div { font-size: 24px; }
+.preflight .msg small { font-size: 23px; }
+.tc { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.tc pre { font-size: 20px; }
+.tc .url { font-size: 18px; }

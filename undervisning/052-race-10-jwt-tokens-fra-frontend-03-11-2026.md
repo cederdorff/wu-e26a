@@ -59,7 +59,7 @@ I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én 
 
 - Send `GET /api/threads` fra Thunder Client uden token. Virker det?
 - Frontenden sender tokenet, men ingen tjekker det. Næste uge skal backenden afvise requests uden et gyldigt token ([step 16](https://github.com/bewildergeist/chatbot-react-postgres/pull/16)) og kun vise brugerens egne tråde ([step 17](https://github.com/bewildergeist/chatbot-react-postgres/pull/17)). Den tjekker tokenet med `getUser(token)`, altså det samme request som i øvelse 10
-- **Onsdag:** bliv færdige i selvstudiet, og push. Torsdag deployer I fra jeres repo
+- **Onsdag:** bliv færdige i selvstudiet, og push. Torsdag tester I chatbotten, og fredag deployer I den fra jeres repo
 </details>
 
 ---
@@ -79,6 +79,8 @@ I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én 
 
 ## Materialer
 
+- Slides:
+  - [RACE 10 · JWT tokens fra frontend](https://cederdorff.com/wu-e26a/bearer-token/)
 - Opgaver:
   - [React Supabase Auth: Send tokenet med](../opgaver/react-supabase-auth-bearer-token.md): øvelse 10-12. Send tokenet til Supabase i en header, og saml det i `apiFetch`
     - [Løsning til react-supabase-auth](https://github.com/cederdorff/react-supabase-auth): én branch pr. øvelse. Prøv selv først
