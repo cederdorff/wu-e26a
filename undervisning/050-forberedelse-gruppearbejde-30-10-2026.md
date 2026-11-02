@@ -33,6 +33,10 @@ Tegn det først uden at kigge i opgaven. Sammenlign bagefter med "Tokenets vej" 
 
 Næste gang starter vi med jeres tegninger og svar. Derefter sender vi tokenet med til backenden i step 15.
 
+## Materialer
+
+- [Bordgrupper uge 44.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076776)
+
 ---
 
 <details>

@@ -43,7 +43,7 @@ canvas_page_id: 207926
 canvas_page_slug: "byg-et-kortspil-lav-opgave-4-fra-i-fredags-faerdig-parvis"
 canvas_page_title: "Byg et kortspil — lav opgave 4 fra i fredags færdig (parvis)"
 canvas_page_published: true
-canvas_updated_at: "2026-09-21T06:58:20Z"
+canvas_updated_at: "2026-09-22T08:08:48Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1056213"
 local_status: mirrored
 ```

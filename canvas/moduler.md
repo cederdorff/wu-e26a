@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-10-27T06:41:31.339Z
+Senest hentet: 2026-11-02T11:25:24.971Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -125,7 +125,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/011-forberedelse-selvstudium-08-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
-- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/093-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/094-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 012 · DOB 3 - String parsing, metoder og funktioner - 09-09-2026
 
@@ -144,7 +144,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/013-forberedelse-selvstudium-10-09-2026.md) · publiceret
 
 - [Opgaver, læsning og Scrimba kurser på forberedelsesdagene (uge 35-40)](../undervisning/026-forberedelse-selvstudium-29-09-2026.md)
-- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/093-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
+- [Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](../undervisning/094-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
 
 ## 014 · RACE 4 - Persistens, JSON og File System - 11-09-2026
 
@@ -502,6 +502,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md) · publiceret
 
+- Quiz 4: API'ets nye endpoints og authentication — Assignment
 - [Plan: Fra CRUD til login](../undervisning/047-magl-4-slette-oprette-og-redigere-trade-27-10-2026.md)
 - [Forberedelse til MAGL 4](../undervisning/044-forberedelse-selvstudium-22-10-2026.md)
 
@@ -513,12 +514,15 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 - Gruppearbejde 3: Normaliser en database — Assignment
 - [Arbejdsark: Fra CRUD til login](../undervisning/089-arbejdsark-fra-crud-til-login.md)
+- [schema-2.sql](https://eaaa.instructure.com/courses/32059/modules/items/1074613)
+- [seed-2.sql](https://eaaa.instructure.com/courses/32059/modules/items/1074614)
+- [update.sql](https://eaaa.instructure.com/courses/32059/modules/items/1075141)
 
 ### Quizer
 
 - Recap-quiz 4: Databaser og SQL indtil nu — Assignment
-- [Midtvejsevaluering](https://forms.cloud.microsoft/e/2twpiPgNSD)
 - Quiz 4: API'ets nye endpoints og authentication — Assignment
+- [Midtvejsevaluering](https://forms.cloud.microsoft/e/2twpiPgNSD)
 
 ### Teacher-only
 
@@ -541,16 +545,22 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 [Lokal fil](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md) · publiceret
 
 - [Gruppearbejde uge 44: Login i chatbotten](../undervisning/050-forberedelse-gruppearbejde-30-10-2026.md)
+- [Bordgrupper uge 44.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076776)
 
-## 051 · HEOE 4 - Brugertest til validering af en løsning - 02-11-2026
+## 051 · HEOE 4 - User Stories og test til validering af en løsning - 02-11-2026
 
-[Lokal fil](../undervisning/051-heoe-4-brugertest-til-validering-af-en-loesning-02-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/051-heoe-4-user-stories-og-test-til-validering-af-en-loesning-02-11-2026.md) · publiceret
 
-- [Plan for HEOE 4 - Brugertest til validering af en løsning](../undervisning/051-heoe-4-brugertest-til-validering-af-en-loesning-02-11-2026.md)
+- [Plan for HEOE 4 - Brugertest til validering af en løsning](../undervisning/051-heoe-4-user-stories-og-test-til-validering-af-en-loesning-02-11-2026.md)
 
 ### Præsentationer
 
+- [UX Session 4 User stories og test.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1077619)
+
 ### Opgaver
+
+- [stella-handout.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1077618)
+- [Forberedelse 2-11.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1075917)
 
 ## 052 · RACE 10 - JWT tokens fra frontend - 03-11-2026
 
@@ -560,9 +570,9 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 053 · Forberedelse - Selvstudium - 04-11-2026
 
-[Lokal fil](../undervisning/053-forberedelse-selvstudium-04-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/053-forberedelse-selvstudium-04-11-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [Forberedelse - Selvstudium - 04-11-2026](../undervisning/053-forberedelse-selvstudium-04-11-2026.md)
 
 ## 054 · DOB 12 - Test, kvalitetssikring og deployment - 05-11-2026
 
@@ -578,7 +588,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/055-forberedelse-gruppearbejde-06-11-2026.md) · upubliceret
 
-*Ingen Canvas-elementer.*
+- [Bordgrupper uge 45.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076779)
 
 ## 056 · Forberedelse - Selvstudium - 09-11-2026
 
@@ -588,13 +598,24 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ## 057 · MAGL 5 - Backend auth enforcement - 10-11-2026
 
-[Lokal fil](../undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md) · publiceret
 
-- [Plan for MAGL 5 - Backend auth enforcement](../undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md)
+- [Plan: Normal Former: Reloaded](../undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md)
+- [Plan for MAGL 5 - Backend auth enforcement](../undervisning/099-plan-for-magl-5-backend-auth-enforcement.md)
 
 ### Præsentationer
 
+- [Slides: Normal Former: Reloaded](https://eaaa.instructure.com/courses/32059/modules/items/1077295)
+
 ### Opgaver
+
+- Forberedelse 5: Normalformer — Assignment
+- Quiz 5: Normalforms — Assignment
+- [Arbejdsark: Normal Former: Reloaded](../undervisning/091-arbejdsark-normal-former-reloaded.md)
+
+### Teacher-only
+
+- [Code-along-guide: Normal Former: Reloaded](https://eaaa.instructure.com/courses/32059/modules/items/1077298)
 
 ## 058 · RACE 11 - Session expiration handling i Frontend - 11-11-2026
 
@@ -620,7 +641,7 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/060-forberedelse-gruppearbejde-13-11-2026.md) · upubliceret
 
-*Ingen Canvas-elementer.*
+- [Bordgrupper uge 46.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076780)
 
 ## 061 · ➡️ Semesterprojekt (Uge 47-51)
 

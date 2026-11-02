@@ -128,8 +128,8 @@ canvas_module_item_position: 1
 canvas_page_id: 200719
 canvas_page_slug: "plan-for-race-7-sikkerhed-og-error-handling"
 canvas_page_title: "Plan for RACE 7 - Sikkerhed og Error Handling"
-canvas_page_published: false
-canvas_updated_at: "2026-09-22T08:08:50Z"
+canvas_page_published: true
+canvas_updated_at: "2026-09-24T17:37:35Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018718"
 local_status: mirrored
 ```

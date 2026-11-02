@@ -1,6 +1,8 @@
 # Forberedelse - Gruppearbejde - 13-11-2026
 
-*Modulet har endnu ikke indhold i Canvas.*
+## Materialer
+
+- [Bordgrupper uge 46.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076780)
 
 ---
 

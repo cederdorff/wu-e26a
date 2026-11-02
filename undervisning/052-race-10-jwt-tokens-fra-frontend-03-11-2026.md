@@ -104,8 +104,8 @@ canvas_module_item_position: 1
 canvas_page_id: 200735
 canvas_page_slug: "plan-for-race-10-jwt-tokens-fra-frontend"
 canvas_page_title: "Plan for RACE 10 - JWT tokens fra frontend"
-canvas_page_published: false
-canvas_updated_at: "2026-08-10T12:34:35Z"
+canvas_page_published: true
+canvas_updated_at: "2026-10-28T12:00:58Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1018766"
 local_status: mirrored
 ```

@@ -26,7 +26,7 @@
 
 - [Slides: Fra CRUD til login](https://eaaa.instructure.com/courses/32059/modules/items/1073725)
 - [Arbejdsark: Fra CRUD til login](https://eaaa.instructure.com/courses/32059/modules/items/1073726)
-- [Recap-quiz 4: Databaser og SQL indtil nu](https://eaaa.instructure.com/courses/32059/assignments/60341)
+- [Recap-quiz 4: Databaser og SQL indtil nu](https://eaaa.instructure.com/courses/32059/modules/items/1073774)
 - [Quiz 4: API'ets nye endpoints og authentication](https://eaaa.instructure.com/courses/32059/assignments/60342)
 - Forberedelse 4: Klar til brugere og login (kommer på Canvas)
 - [Gruppearbejde 4: Normaliser en database](https://eaaa.instructure.com/courses/32059/assignments/60265)
@@ -44,12 +44,12 @@ canvas_module_id: 178070
 canvas_module_position: 47
 canvas_module_published: true
 canvas_module_item_id: 1073727
-canvas_module_item_position: 1
+canvas_module_item_position: 2
 canvas_page_id: 209627
 canvas_page_slug: "plan-fra-crud-til-login"
 canvas_page_title: "Plan: Fra CRUD til login"
 canvas_page_published: true
-canvas_updated_at: "2026-10-26T10:19:25Z"
+canvas_updated_at: "2026-10-27T07:24:20Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1073727"
 local_status: mirrored
 ```

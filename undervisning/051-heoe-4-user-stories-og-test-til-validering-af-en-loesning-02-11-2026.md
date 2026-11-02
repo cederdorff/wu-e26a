@@ -1,4 +1,4 @@
-# HEOE 4 - Brugertest til validering af en løsning - 02-11-2026
+# HEOE 4 - User Stories og test til validering af en løsning - 02-11-2026
 
 <link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
 
@@ -22,7 +22,12 @@ TBA
 
 ### Præsentationer
 
+- [UX Session 4 User stories og test.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1077619)
+
 ### Opgaver
+
+- [stella-handout.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1077618)
+- [Forberedelse 2-11.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1075917)
 
 ---
 
@@ -33,7 +38,7 @@ TBA
 canvas_course_id: 32059
 canvas_module_id: 178078
 canvas_module_position: 51
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: 1018772
 canvas_module_item_position: 1
 canvas_page_id: 200737

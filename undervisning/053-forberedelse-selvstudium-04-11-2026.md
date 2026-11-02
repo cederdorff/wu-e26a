@@ -39,7 +39,7 @@ canvas_page_id: 209752
 canvas_page_slug: "forberedelse-selvstudium-04-11-2026"
 canvas_page_title: "Forberedelse - Selvstudium - 04-11-2026"
 canvas_page_published: true
-canvas_updated_at: "2026-10-28T11:42:09Z"
+canvas_updated_at: "2026-10-28T11:58:06Z"
 canvas_source_url: "https://eaaa.instructure.com/courses/32059/modules/items/1076083"
 local_status: mirrored
 ```
