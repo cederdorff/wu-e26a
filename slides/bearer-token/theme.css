@@ -884,344 +884,6 @@
 .tc pre { font-size: 20px; }
 .tc .url { font-size: 18px; }
 
-/* ===================================================================
-   Opening: what the students built last time (react-supabase-auth and
-   step 14), and where the token goes today
-   =================================================================== */
-
-/* Sidst · react-supabase-auth: four screens in the order they were built */
-.story4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1fr);
-  align-items: stretch;
-}
-.story4 article {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 20px;
-  min-width: 0;
-}
-.story4 > .ar {
-  align-self: center;
-  margin-bottom: 120px;
-  color: var(--accent);
-  font-size: 32px;
-  font-weight: 900;
-  text-align: center;
-}
-.story4 .bw,
-.story4 .ls-mini {
-  border-top: 4px solid var(--c);
-}
-.story4 .bw {
-  display: flex;
-  flex-direction: column;
-}
-.story4 .bw-url {
-  overflow: hidden;
-  font-size: 12.5px;
-  text-overflow: ellipsis;
-}
-.story4 .bw-body {
-  flex: 1;
-  align-content: center;
-  padding: 16px 12px;
-}
-.story4 .ac {
-  width: 100%;
-  padding: 18px 18px 16px;
-  zoom: 0.92;
-}
-.story4 .ac .h { font-size: 20px; margin-bottom: 12px; }
-.story4 .ac .sub { margin: -8px 0 14px; }
-.story4 .ac .fg { margin-bottom: 8px; }
-.story4 .ac .fg > i { min-height: 32px; padding: 6px 10px; }
-.story4 .ac .ok { margin-bottom: 12px; font-size: 12px; }
-.story4 .ac dl { margin: 6px 0 16px; }
-
-.story4 .ls-mini {
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
-}
-.story4 .ls-key {
-  padding: 10px 14px;
-  background: #2d3e57;
-  color: var(--purple);
-  font: 700 15px/1.3 var(--mono);
-}
-.story4 .ls-val {
-  margin: 0;
-  padding: 14px;
-  font: 500 15px/1.65 var(--mono);
-  white-space: pre;
-}
-.story4 .ls-val .k { color: #a8c7fa; }
-.story4 .ls-val .tk { font-weight: 700; }
-.story4 .ls-val .jh { color: var(--jwt-h); }
-.story4 .ls-val .jp { color: var(--jwt-p); }
-.story4 .ls-val .js { color: var(--jwt-s); }
-.story4 .ls-jwt {
-  display: grid;
-  gap: 6px;
-  padding: 14px;
-  border-top: 1px dashed #3c3d40;
-  background: rgb(192 132 252 / 8%);
-}
-.story4 .ls-jwt span {
-  color: var(--purple);
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.story4 .ls-jwt code {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: #e3e3e3;
-  font: 500 15px/1.35 var(--mono);
-}
-.story4 .ls-jwt code b { color: var(--jwt-p); }
-
-.story4 .cap {
-  display: grid;
-  gap: 8px;
-  min-height: 150px;
-  align-content: start;
-}
-.story4 .cap em {
-  color: var(--c);
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.story4 .cap > code {
-  justify-self: start;
-  font-size: 22px;
-}
-.story4 .cap small {
-  color: var(--muted);
-  font-size: 20px;
-  line-height: 1.35;
-}
-
-/* Sidst · step 14: files from the PR next to the page diagram */
-.pr14 {
-  display: grid;
-  grid-template-columns: 500px minmax(0, 1fr);
-  align-items: start;
-  gap: 40px;
-}
-.pr14 .files {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--soft);
-}
-.pr14 .fh {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--line);
-  border-top: 4px solid var(--cyan);
-}
-.pr14 .fh b {
-  color: var(--cyan);
-  font-size: 22px;
-}
-.pr14 .fh span {
-  color: var(--muted);
-  font-size: 17px;
-}
-.pr14 .fr {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 60px 120px;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border-bottom: 1px solid rgb(255 255 255 / 6%);
-}
-.pr14 .fr code {
-  justify-self: start;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--ink);
-  font-size: 17px;
-}
-.pr14 .fr .plus {
-  color: var(--green);
-  font: 700 16px var(--mono);
-  text-align: right;
-}
-.pr14 .fr em {
-  color: var(--cyan);
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 800;
-  text-align: right;
-}
-.pr14 .fr em.none { color: var(--muted); font-weight: 600; }
-.pr14 .fnot {
-  display: grid;
-  gap: 4px;
-  padding: 14px 20px;
-  background: color-mix(in srgb, var(--orange) 9%, transparent);
-}
-.pr14 .fnot b {
-  color: var(--orange);
-  font-size: 14px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.pr14 .fnot span {
-  color: var(--muted);
-  font-size: 18px;
-  line-height: 1.35;
-}
-.pr14 .pg-wrap { justify-content: flex-end; }
-.pg-14s { width: 100%; }
-.pg .card.new { stroke: var(--cyan); stroke-width: 2; }
-
-.tamper2 {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
-  align-items: stretch;
-  gap: 16px;
-  margin-top: 28px;
-}
-.tamper2 .q {
-  align-self: center;
-  max-width: 300px;
-  font-size: 22px;
-  font-weight: 750;
-  line-height: 1.3;
-}
-.tamper2 > div {
-  display: grid;
-  gap: 4px;
-  padding: 14px 20px;
-  border-left: 4px solid var(--c);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--c) 10%, transparent);
-}
-.tamper2 > div b {
-  color: var(--c);
-  font-size: 15px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.tamper2 > div span {
-  font-size: 20px;
-  line-height: 1.35;
-}
-
-/* I dag: the token moves one station further each session */
-.journey {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1.25fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr);
-  align-items: stretch;
-}
-.journey article {
-  display: grid;
-  align-content: start;
-  gap: 14px;
-  min-height: 470px;
-  padding: 28px 26px;
-  border: 1px solid var(--line);
-  border-top: 4px solid var(--c);
-  border-radius: var(--radius);
-  background: var(--soft);
-}
-.journey .when {
-  justify-self: start;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--c) 16%, transparent);
-  color: var(--c);
-  font-size: 15px;
-  font-weight: 850;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.journey .where {
-  color: var(--muted);
-  font-size: 16px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.journey strong {
-  font-size: 30px;
-  line-height: 1.15;
-}
-.journey .viz-code {
-  padding: 12px 14px;
-  font-size: 19px;
-  white-space: pre-wrap;
-}
-.journey small {
-  color: var(--muted);
-  font-size: 21px;
-  line-height: 1.35;
-}
-.journey article.now {
-  border-color: color-mix(in srgb, var(--c) 55%, transparent);
-  border-top-width: 6px;
-  background: color-mix(in srgb, var(--c) 9%, var(--soft));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent), 0 24px 60px rgb(0 0 0 / 35%);
-}
-.journey article.now strong { font-size: 34px; }
-.journey article.later { opacity: 0.62; }
-.journey .ar {
-  align-self: center;
-  color: var(--accent);
-  font-size: 34px;
-  font-weight: 900;
-  text-align: center;
-}
-.journey .ar.next { color: var(--muted); opacity: 0.6; }
-.journey .today-steps {
-  display: grid;
-  gap: 10px;
-  margin: 6px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.journey .today-steps li {
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  align-items: center;
-  gap: 12px;
-  font-size: 21px;
-  line-height: 1.3;
-}
-.journey .today-steps li b {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--c);
-  color: #111;
-  font-size: 18px;
-}
-
-/* Opening, second pass after screenshots */
-.story4 .bw { min-height: 420px; }
-.story4 .ac { zoom: 1; }
-.story4 .ls-val { font-size: 16px; }
-.journey .where { white-space: nowrap; }
-.story4 .bw { min-height: 372px; }
-.story4 .cap { min-height: 0; }
-.journey .today-steps code { font-size: 17px; white-space: nowrap; }
-
 /* Opsamling: the students' drawing as an empty skeleton of the next slide */
 .gapv.sketch .nd {
   border-style: dashed;
@@ -1239,3 +901,199 @@
   font-weight: 900;
 }
 .gapv.sketch .ar small { font-size: 20px; }
+
+/* ===================================================================
+   Opening: one system diagram. Gray = steps 11-13, green = last time
+   (login gives a token), purple = today (the token goes into a header)
+   =================================================================== */
+.mk-green { fill: var(--green); }
+.mk-purple { fill: var(--purple); }
+
+.sys-legend {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 18px;
+}
+.sys-legend .lg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 19px;
+  font-weight: 700;
+}
+.sys-legend .lg::before {
+  content: "";
+  width: 34px;
+  height: 0;
+  border-top: 4px solid currentColor;
+}
+.sys-legend .lg.before::before { border-top-style: dashed; }
+.sys-legend .lg.last { color: var(--green); }
+.sys-legend .lg.today { color: var(--purple); }
+
+.sys {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--font);
+}
+.sys .proj {
+  fill: color-mix(in srgb, var(--green) 5%, transparent);
+  stroke: color-mix(in srgb, var(--green) 40%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 7 5;
+}
+.sys .proj-t {
+  fill: var(--green);
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sys .box {
+  fill: #121b19;
+  stroke: rgb(255 255 255 / 24%);
+  stroke-width: 1.5;
+}
+.sys .box-t {
+  fill: var(--ink);
+  font-size: 26px;
+  font-weight: 800;
+}
+.sys .sub {
+  fill: var(--muted);
+  font-size: 19px;
+}
+.sys .mono {
+  fill: var(--ink);
+  font: 600 17px var(--mono);
+}
+.sys .tok {
+  fill: color-mix(in srgb, var(--green) 14%, transparent);
+  stroke: var(--green);
+  stroke-width: 1.5;
+}
+.sys .tok-t {
+  fill: var(--green);
+  font-size: 18px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.sys .a {
+  fill: none;
+  stroke-width: 3;
+}
+.sys .a.before {
+  stroke: var(--muted);
+  stroke-dasharray: 8 6;
+  marker-end: url(#pg-arrow);
+}
+.sys .a.last {
+  stroke: var(--green);
+  marker-end: url(#sys-green);
+}
+.sys .a.today {
+  stroke: var(--purple);
+  stroke-width: 4;
+  marker-end: url(#sys-purple);
+}
+.sys .lbl {
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+.sys .lbl.before { fill: var(--muted); }
+.sys .lbl.last { fill: var(--green); }
+.sys .lbl.today { fill: var(--purple); }
+.sys .lbl.today.in { fill: #111; font-weight: 800; }
+.sys .pill.today { fill: var(--purple); }
+.sys .note {
+  fill: var(--red);
+  font-size: 16px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+.sys {
+  width: auto;
+  height: 486px;
+  margin: 0 auto;
+}
+.sys { height: 452px; }
+.sys .mono.lg-m { font-size: 21px; }
+
+/* Login flow as client/server: same .sys diagram as the opening */
+.sys .role {
+  fill: var(--muted);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sys .mid { text-anchor: middle; }
+.sys .code {
+  fill: #0a0f0e;
+  stroke: rgb(255 255 255 / 12%);
+}
+.sys .code-t {
+  fill: var(--ink);
+  font: 600 17px var(--mono);
+}
+.sys .ok { fill: color-mix(in srgb, var(--orange) 16%, transparent); }
+.sys .ok-t {
+  fill: var(--orange);
+  font-size: 19px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+.sys .q {
+  fill: var(--ink);
+  font-size: 20px;
+  font-weight: 700;
+}
+.sys .lbl.q-l { fill: var(--yellow); }
+.sys .ph {
+  fill: none;
+  stroke: color-mix(in srgb, var(--yellow) 50%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+.sys .qm {
+  fill: var(--yellow);
+  font-size: 52px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+.sys .qm.sm { font-size: 38px; }
+
+/* Last time: screenshots of the solution in browser frames */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.shots .bw img {
+  display: block;
+  width: 100%;
+  height: 430px;
+  object-fit: contain;
+  background: #f9f9f9;
+}
+.shots .cap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 20px;
+}
+.shots .cap em {
+  color: var(--c);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
