@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="./theme.css" />
   </head>
   <body>
+    <svg class="pg-defs" width="0" height="0" aria-hidden="true">
+      <defs>
+        <marker id="pg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-muted" d="M0,0 L10,5 L0,10 z" /></marker>
+        <marker id="pg-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-red" d="M0,0 L10,5 L0,10 z" /></marker>
+        <marker id="pg-arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-orange" d="M0,0 L10,5 L0,10 z" /></marker>
+      </defs>
+    </svg>
     <div class="reveal">
       <div class="slides">
         <section class="title-slide" data-accent="purple">
@@ -27,6 +34,270 @@
               </div>
             </div>
           </div>
+        </section>
+
+        <!-- ============ SIDST ============ -->
+
+        <section id="sidst" class="fill" data-accent="green">
+          <span class="eyebrow">Sidst · react-supabase-auth · øvelse 1-9</span>
+          <h2>Fire sider og et token i Local Storage</h2>
+          <div class="stage">
+            <div class="story4">
+              <article style="--c: var(--cyan)">
+                <div class="bw">
+                  <div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">/register</span></div>
+                  <div class="bw-body"><div class="ac"><span class="h">Create Account</span><div class="fg"><span>Email</span><i>anna@example.com</i></div><div class="fg"><span>Password</span><i>•••••••••••</i></div><div class="fg"><span>Confirm Password</span><i>•••••••••••</i></div><span class="btn">Create Account</span></div></div>
+                </div>
+                <div class="cap"><em>Øvelse 4-5</em><code>signUp()</code><small>Supabase gemmer en bcrypt-hash i <code>auth.users</code></small></div>
+              </article>
+              <b class="ar" aria-hidden="true">→</b>
+              <article style="--c: var(--cyan)">
+                <div class="bw">
+                  <div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">/login?registered=true</span></div>
+                  <div class="bw-body"><div class="ac"><span class="ok">Account created successfully! Please log in.</span><span class="h">Log In</span><div class="fg"><span>Email</span><i>anna@example.com</i></div><div class="fg"><span>Password</span><i>•••••••••••</i></div><span class="btn">Log In</span></div></div>
+                </div>
+                <div class="cap"><em>Øvelse 6</em><code>signInWithPassword()</code><small>Supabase-klienten gemmer tokenet i Local Storage</small></div>
+              </article>
+              <b class="ar" aria-hidden="true">→</b>
+              <article style="--c: var(--purple)">
+                <div class="dt ls-mini">
+                  <div class="dt-tabs"><span>Console</span><span>Network</span><span class="on">Application</span></div>
+                  <div class="ls-key">sb-…-auth-token</div>
+                  <pre class="ls-val"><span class="k">"access_token"</span>:
+  <span class="tk"><span class="jh">eyJhbGci</span>.<span class="jp">eyJzdWIi</span>.<span class="js">Ht0NZg</span>…</span>
+<span class="k">"refresh_token"</span>: …
+<span class="k">"user"</span>: { … }</pre>
+                  <div class="ls-jwt"><span>jwt.io</span><code><b>"sub"</b>: "8f3c2a71-…"</code><code><b>"exp"</b>: om en time</code></div>
+                </div>
+                <div class="cap"><em>Øvelse 7</em><code>jwt.io</code><small>Alle kan læse tokenet. Ingen kan rette i det</small></div>
+              </article>
+              <b class="ar" aria-hidden="true">→</b>
+              <article style="--c: var(--orange)">
+                <div class="bw">
+                  <div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">/profile</span></div>
+                  <div class="bw-body"><div class="ac"><span class="h">My Profile</span><span class="sub">You are logged in</span><dl><dt>Email</dt><dd>anna@example.com</dd><dt>User ID</dt><dd>8f3c2a71-…</dd></dl><span class="btn alt">Log Out</span></div></div>
+                </div>
+                <div class="cap"><em>Øvelse 8-9</em><code>getUser()</code><small>Sender tokenet til Supabase. Rettet token: sendt til <code>/login</code></small></div>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Passwordet bruges kun ved login. Derefter er det tokenet, der viser, hvem I er.</p>
+        </section>
+
+        <section id="sidst-step-14" class="fill" data-accent="cyan">
+          <span class="eyebrow">Sidst · step 14 i chatbotten</span>
+          <h2>Chatbotten har login. Ingen side kræver det</h2>
+          <div class="stage">
+            <div class="pr14">
+              <div class="files">
+                <div class="fh"><b>PR 14</b><span>Files changed</span></div>
+                <div class="fr"><code>package.json</code><span class="plus">+1</span><em>Øvelse 2</em></div>
+                <div class="fr"><code>.env.example</code><span class="plus">+7</span><em>Øvelse 2</em></div>
+                <div class="fr"><code>app/lib/supabase.js</code><span class="plus">+50</span><em>Øvelse 2</em></div>
+                <div class="fr"><code>app/routes.js</code><span class="plus">+3</span><em>Øvelse 3</em></div>
+                <div class="fr"><code>app/routes/register.jsx</code><span class="plus">+153</span><em>Øvelse 4-5</em></div>
+                <div class="fr"><code>app/routes/login.jsx</code><span class="plus">+151</span><em>Øvelse 6</em></div>
+                <div class="fr"><code>app/app.css</code><span class="plus">+158</span><em class="none">kopieret</em></div>
+                <div class="fnot"><b>Ikke med i step 14</b><span><code>/profile</code> og <code>getUser()</code>. Logout kommer i step 15</span></div>
+              </div>
+              <div class="pg-wrap">
+                <svg class="pg pg-14s" viewBox="0 0 880 420" role="img" aria-labelledby="s14r-title">
+                  <title id="s14r-title">Alle chatbottens sider kan ses uden login. Chat-siderne ligger i layout.jsx med sidebar. /login og /register ligger uden for layoutet. Kræver login er tom</title>
+                  <rect class="z-open" x="20" y="20" width="580" height="380" rx="14" />
+                  <text class="z-t open" x="44" y="54">Kan alle se</text>
+
+                  <rect class="layout-box" x="44" y="72" width="532" height="182" rx="12" />
+                  <text class="layout-t" x="62" y="96">layout.jsx med sidebar</text>
+                  <rect class="card" x="60" y="110" width="240" height="56" rx="10" /><text class="route sm" x="180" y="134">/</text><text class="file" x="180" y="154">home.jsx</text>
+                  <rect class="card" x="318" y="110" width="240" height="56" rx="10" /><text class="route sm" x="438" y="134">/chat/new</text><text class="file" x="438" y="154">chat-new.jsx</text>
+                  <rect class="card" x="60" y="180" width="240" height="56" rx="10" /><text class="route sm" x="180" y="204">/chat/:threadId</text><text class="file" x="180" y="224">chat-thread.jsx</text>
+                  <rect class="card" x="318" y="180" width="240" height="56" rx="10" /><text class="route sm" x="438" y="204">/chat/:threadId/edit</text><text class="file" x="438" y="224">chat-thread-edit.jsx</text>
+
+                  <rect class="card new" x="60" y="300" width="180" height="60" rx="10" /><text class="route sm" x="150" y="325">/register</text><text class="file" x="150" y="346">register.jsx</text>
+                  <rect class="card new" x="360" y="300" width="180" height="60" rx="10" /><text class="route sm" x="450" y="325">/login</text><text class="file" x="450" y="346">login.jsx</text>
+                  <text class="note" x="60" y="386">Nye i step 14. Uden for layoutet, så der er ingen sidebar</text>
+
+                  <line class="flow" x1="242" y1="330" x2="357" y2="330" /><rect class="pill" x="254" y="305" width="92" height="20" rx="10" /><text class="label" x="300" y="319">konto oprettet</text>
+                  <line class="flow" x1="450" y1="298" x2="450" y2="258" /><rect class="pill" x="462" y="268" width="70" height="20" rx="10" /><text class="label" x="497" y="282">logget ind</text>
+
+                  <rect class="z-lock" x="640" y="20" width="220" height="380" rx="14" />
+                  <path class="lock-arc" d="M667 44 v-3.5 a4 4 0 0 1 8 0 v3.5" /><rect class="lock-ico" x="664" y="44" width="14" height="11" rx="2" />
+                  <text class="z-t lock" x="686" y="54">Kræver login</text>
+                  <rect class="empty-box" x="665" y="150" width="170" height="104" rx="10" />
+                  <text class="empty-t" x="750" y="188">Ingen sider endnu</text>
+                  <text class="empty-s" x="750" y="212">Chat-siderne kommer</text>
+                  <text class="empty-s" x="750" y="230">i de næste steps</text>
+                </svg>
+              </div>
+            </div>
+            <div class="tamper2 fragment">
+              <span class="q">Ret ét tegn i <code>access_token</code>, og genindlæs</span>
+              <div style="--c: var(--green)"><b>react-supabase-auth</b><span><code>getUser()</code> afviser tokenet. Sendt til <code>/login</code></span></div>
+              <div style="--c: var(--red)"><b>Chatbotten</b><span>Ingenting. Intet sender tokenet nogen steder hen</span></div>
+            </div>
+          </div>
+          <p class="bottom-line">Chatbotten kan logge jer ind. Men tokenet bliver liggende i browseren.</p>
+        </section>
+
+        <!-- ============ 01 OPSAMLING ============ -->
+
+        <section id="opsamling" class="chapter" data-accent="yellow">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Opsamling</span>
+          <h2>Fra knappen til<br />Local Storage</h2>
+          <p>Fredag tegnede I, hvad der sker, når man trykker "Log In". Vi starter med jeres tegninger.</p>
+        </section>
+
+        <section id="tegninger" class="fill" data-accent="yellow">
+          <span class="eyebrow">Fra fredag · jeres tegninger</span>
+          <h2>Hvad sker der, når man trykker "Log In"?</h2>
+          <div class="stage">
+            <div class="gapv sketch">
+              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>Hvad sker der i koden?</strong><b class="qm">?</b><small>Hvilken fil? Hvilken funktion?</small></div>
+              <div class="ar">→<small>?</small></div>
+              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>Hvad bliver sendt?</strong><b class="qm">?</b><small>Kan andre læse passwordet på vejen?</small></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--orange)"><span>Supabase Auth</span><strong>Hvad sker der her?</strong><b class="qm">?</b><small>Hvor bliver passwordet hashet?</small></div>
+              <div class="ar">→<small>?</small></div>
+              <div class="nd" style="--c: var(--purple)"><span>Local Storage</span><strong>Hvad ligger der bagefter?</strong><b class="qm">?</b><small>Hvem lagde det der?</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">2-3 grupper viser deres tegning. Hvad var svært at tegne? Bagefter sammenligner vi med vores.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Sammenlign med jeres tegning</span>
+          <h2>Tokenets vej ved login</h2>
+          <div class="stage">
+            <div class="gapv">
+              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>login.jsx</strong><pre class="viz-code">signInWithPassword({
+  email, password
+})</pre><small>I <code>clientAction</code>. Kører i browseren.</small></div>
+              <div class="ar">→<small>HTTPS</small></div>
+              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>POST /auth/v1/token</strong><pre class="viz-code">{ "email": "anna@…",
+  "password": "hemmelig123" }</pre><small>Passwordet står i klartekst. Forbindelsen er krypteret.</small></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--orange)"><span>Supabase Auth</span><strong>Hasher og sammenligner</strong><small>Henter hashen i <code>auth.users</code>. Hasher det indtastede password med samme salt. Passer de?</small><div class="know">✓ Her bliver passwordet hashet</div></div>
+              <div class="ar">→<small>svar</small></div>
+              <div class="nd" style="--c: var(--purple)"><span>Local Storage</span><strong>sb-…-auth-token</strong><pre class="viz-code">access_token
+refresh_token
+user</pre><small>supabase-js gemmer det selv.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">Passwordet forlader browseren én gang. Bagefter er det tokenet, der beviser, hvem I er.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Spørgsmålene fra fredag</span>
+          <h2>Hvad kan man gøre med det, hvis man får fat i det?</h2>
+          <div class="stage">
+            <div class="qa3">
+              <article style="--c: var(--cyan)">
+                <span>Spørgsmål 1</span>
+                <strong>Jeres anon key</strong>
+                <div class="ans fragment">Det samme som enhver anden besøgende. Den står i jeres frontend-kode, så <b>alle kan finde den</b> alligevel.</div>
+              </article>
+              <article style="--c: var(--red)">
+                <span>Spørgsmål 2</span>
+                <strong>En brugers access token</strong>
+                <div class="ans fragment">Man <b>er brugeren</b>, indtil tokenet udløber. Det står i <code>exp</code>. Højst en time.</div>
+              </article>
+              <article style="--c: var(--orange)">
+                <span>Spørgsmål 3</span>
+                <strong>Validering i <code>clientAction</code></strong>
+                <div class="ans fragment">Den kører i browseren. Alle kan sende et request <b>uden om den</b>, fx fra Thunder Client.</div>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Spørgsmål 1 og 2 kommer igen i dag. Det er derfor, der er to forskellige headers.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Fredagens test · to og to · 5 minutter</span>
+          <h2>Står tokenet i requestet til jeres API?</h2>
+          <div class="stage">
+            <div class="net-layout wide">
+              <ol class="steps">
+                <li>Start frontend og backend. Log ind i chatbotten</li>
+                <li>Åbn <b>Network</b>-fanen, og genindlæs</li>
+                <li>Klik på <code>threads</code>. Det er requestet til <code>localhost:3000</code></li>
+                <li>Find <b>Request Headers</b>. Står der en <code>Authorization</code>?</li>
+                <li>Log ind som en anden bruger i et inkognitovindue. Ser I de samme tråde?</li>
+              </ol>
+              <div class="dt">
+                <div class="dt-tabs"><span>Elements</span><span>Console</span><span class="on">Network</span><span>Application</span></div>
+                <div class="dt-net">
+                  <div class="reqs"><div class="on">threads</div><div>layout.jsx</div><div>home.jsx</div></div>
+                  <div class="pane">
+                    <div class="dt-tabs"><span class="on">Headers</span><span>Response</span></div>
+                    <div class="kv">
+                      <b>Request URL</b><span>http://localhost:3000/api/threads</span>
+                      <b>Request Method</b><span>GET</span>
+                      <b>Status Code</b><span>200 OK</span>
+                      <span class="sec">Request Headers</span>
+                      <b>Accept</b><span>*/*</span>
+                      <b>Origin</b><span>http://localhost:5173</span>
+                      <b>Referer</b><span>http://localhost:5173/</span>
+                      <b>User-Agent</b><span>Mozilla/5.0 …</span>
+                      <span class="gap fragment">Ingen Authorization. Tokenet bliver i browseren</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Frontenden ved, hvem I er. Men det fortæller den ikke jeres API.</p>
+        </section>
+
+        <!-- ============ I DAG ============ -->
+
+        <section id="i-dag" class="fill" data-accent="purple">
+          <span class="eyebrow">Hvor skal vi hen i dag?</span>
+          <h2>I dag flytter tokenet ét led længere</h2>
+          <div class="stage">
+            <div class="journey">
+              <article class="done" style="--c: var(--green)">
+                <span class="when">✓ Sidst · step 14</span>
+                <span class="where">Browseren</span>
+                <strong>Tokenet ligger i Local Storage</strong>
+                <pre class="viz-code">sb-…-auth-token</pre>
+                <small>Login virker. Frontenden ved, hvem I er.</small>
+                <ol class="today-steps">
+                  <li><b>✓</b><span><code>react-supabase-auth</code>, øvelse 1-9</span></li>
+                  <li><b>✓</b><span>Step 14 i chatbotten</span></li>
+                </ol>
+              </article>
+              <b class="ar" aria-hidden="true">→</b>
+              <article class="now" style="--c: var(--purple)">
+                <span class="when">I dag · step 15</span>
+                <span class="where">Requestet</span>
+                <strong>Tokenet kommer med i hvert request</strong>
+                <pre class="viz-code">Authorization:
+  Bearer eyJhbGci…</pre>
+                <ol class="today-steps">
+                  <li><b>1</b><span><code>react-supabase-auth</code>, øvelse 10-12</span></li>
+                  <li><b>2</b><span>Step 15 i chatbotten</span></li>
+                </ol>
+              </article>
+              <b class="ar next" aria-hidden="true">→</b>
+              <article class="later" style="--c: var(--cyan)">
+                <span class="when">10/11 · step 16 · MAGL</span>
+                <span class="where">Express API</span>
+                <strong>Backenden kræver tokenet</strong>
+                <pre class="viz-code">getUser(token)</pre>
+                <small>Intet gyldigt token: 401.</small>
+              </article>
+              <b class="ar next" aria-hidden="true">→</b>
+              <article class="later" style="--c: var(--orange)">
+                <span class="when">12/11 · step 17 · MAGL</span>
+                <span class="where">Postgres</span>
+                <strong>Kun jeres egne tråde</strong>
+                <pre class="viz-code">WHERE user_id = …</pre>
+                <small>To brugere ser hver sine tråde.</small>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Backenden kan ikke tjekke et token, den aldrig får. Derfor starter vi i frontenden.</p>
         </section>
 
         <section id="agenda" class="agenda-slide" data-accent="purple">
@@ -100,99 +371,6 @@
             </div>
           </div>
           <p class="bottom-line">Målet: step 15 er færdig og pushet onsdag aften.</p>
-        </section>
-
-        <!-- ============ 01 OPSAMLING ============ -->
-
-        <section id="opsamling" class="chapter" data-accent="yellow">
-          <span class="chapter-number">01</span>
-          <span class="eyebrow">Opsamling</span>
-          <h2>Fra knappen til<br />Local Storage</h2>
-          <p>Fredag tegnede I, hvad der sker, når man trykker "Log In". Vi starter med jeres tegninger.</p>
-        </section>
-
-        <section class="fill" data-accent="yellow">
-          <span class="eyebrow">Sammenlign med jeres tegning</span>
-          <h2>Tokenets vej ved login</h2>
-          <div class="stage">
-            <div class="gapv">
-              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>login.jsx</strong><pre class="viz-code">signInWithPassword({
-  email, password
-})</pre><small>I <code>clientAction</code>. Kører i browseren.</small></div>
-              <div class="ar">→<small>HTTPS</small></div>
-              <div class="nd" style="--c: var(--yellow)"><span>Requestet</span><strong>POST /auth/v1/token</strong><pre class="viz-code">{ "email": "anna@…",
-  "password": "hemmelig123" }</pre><small>Passwordet står i klartekst. Forbindelsen er krypteret.</small></div>
-              <div class="ar">→</div>
-              <div class="nd" style="--c: var(--orange)"><span>Supabase Auth</span><strong>Hasher og sammenligner</strong><small>Henter hashen i <code>auth.users</code>. Hasher det indtastede password med samme salt. Passer de?</small><div class="know">✓ Her bliver passwordet hashet</div></div>
-              <div class="ar">→<small>svar</small></div>
-              <div class="nd" style="--c: var(--purple)"><span>Local Storage</span><strong>sb-…-auth-token</strong><pre class="viz-code">access_token
-refresh_token
-user</pre><small>supabase-js gemmer det selv.</small></div>
-            </div>
-          </div>
-          <p class="bottom-line">Passwordet forlader browseren én gang. Bagefter er det tokenet, der beviser, hvem I er.</p>
-        </section>
-
-        <section class="fill" data-accent="yellow">
-          <span class="eyebrow">Spørgsmålene fra fredag</span>
-          <h2>Hvad kan man gøre med det, hvis man får fat i det?</h2>
-          <div class="stage">
-            <div class="qa3">
-              <article style="--c: var(--cyan)">
-                <span>Spørgsmål 1</span>
-                <strong>Jeres anon key</strong>
-                <div class="ans fragment">Det samme som enhver anden besøgende. Den står i jeres frontend-kode, så <b>alle kan finde den</b> alligevel.</div>
-              </article>
-              <article style="--c: var(--red)">
-                <span>Spørgsmål 2</span>
-                <strong>En brugers access token</strong>
-                <div class="ans fragment">Man <b>er brugeren</b>, indtil tokenet udløber. Det står i <code>exp</code>. Højst en time.</div>
-              </article>
-              <article style="--c: var(--orange)">
-                <span>Spørgsmål 3</span>
-                <strong>Validering i <code>clientAction</code></strong>
-                <div class="ans fragment">Den kører i browseren. Alle kan sende et request <b>uden om den</b>, fx fra Thunder Client.</div>
-              </article>
-            </div>
-          </div>
-          <p class="bottom-line">Spørgsmål 1 og 2 kommer igen i dag. Det er derfor, der er to forskellige headers.</p>
-        </section>
-
-        <section class="fill" data-accent="red">
-          <span class="eyebrow">To og to · 5 minutter</span>
-          <h2>Står tokenet i requestet til jeres API?</h2>
-          <div class="stage">
-            <div class="net-layout wide">
-              <ol class="steps">
-                <li>Start frontend og backend. Log ind i chatbotten</li>
-                <li>Åbn <b>Network</b>-fanen, og genindlæs</li>
-                <li>Klik på <code>threads</code>. Det er requestet til <code>localhost:3000</code></li>
-                <li>Find <b>Request Headers</b>. Står der en <code>Authorization</code>?</li>
-                <li>Log ind som en anden bruger i et inkognitovindue. Ser I de samme tråde?</li>
-              </ol>
-              <div class="dt">
-                <div class="dt-tabs"><span>Elements</span><span>Console</span><span class="on">Network</span><span>Application</span></div>
-                <div class="dt-net">
-                  <div class="reqs"><div class="on">threads</div><div>layout.jsx</div><div>home.jsx</div></div>
-                  <div class="pane">
-                    <div class="dt-tabs"><span class="on">Headers</span><span>Response</span></div>
-                    <div class="kv">
-                      <b>Request URL</b><span>http://localhost:3000/api/threads</span>
-                      <b>Request Method</b><span>GET</span>
-                      <b>Status Code</b><span>200 OK</span>
-                      <span class="sec">Request Headers</span>
-                      <b>Accept</b><span>*/*</span>
-                      <b>Origin</b><span>http://localhost:5173</span>
-                      <b>Referer</b><span>http://localhost:5173/</span>
-                      <b>User-Agent</b><span>Mozilla/5.0 …</span>
-                      <span class="gap fragment">Ingen Authorization. Tokenet bliver i browseren</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Frontenden ved, hvem I er. Men det fortæller den ikke jeres API.</p>
         </section>
 
         <!-- ============ 02 HVEM SPØRGER? ============ -->
