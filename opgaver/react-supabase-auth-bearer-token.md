@@ -22,6 +22,10 @@ Spring aldrig en test over, heller ikke når den virker oplagt.
 
 ## Det bygger du
 
+![profile.jsx kalder apiFetch. apiFetch henter tokenet fra localStorage med getSession() og sender det til Supabase Auth i Authorization-headeren. Supabase svarer med brugeren eller 403](assets/react-supabase-auth-bearer-token.svg)
+
+Det sker i koden på `/profile`:
+
 ```text
 Før:       /profile -> clientLoader -> getUser()                 -> { user }
 Nu:        /profile -> clientLoader -> apiFetch("/auth/v1/user") -> { user }
@@ -395,13 +399,7 @@ export default function Home() {
 
 ## Fra øvelserne til step 15
 
-Nu laver du det samme i chatbotten. Er du ikke færdig med step 14, så hent startpunktet i roden af chatbot-repoet, og commit det, før du ændrer noget:
-
-```bash
-npx degit --force bewildergeist/chatbot-react-postgres#pr-15-start
-```
-
-Startpunktet opretter tråde uden `user_id`, ligesom startpunktet til step 14. Sæt `TEST_USER_ID` ind i `backend/server.js` igen. Kodestykket står i [React Supabase Auth: Login før chatbotten](react-supabase-auth.md#fra-øvelserne-til-step-14).
+Nu laver du det samme i chatbotten. Opgaven [Chatbot step 15: Send tokenet med til dit API](chatbot-step-15-send-tokenet.md) tager dig igennem det i små trin. Der står også, hvad du gør, hvis du ikke er færdig med step 14.
 
 | Step 15 | Det har du lavet i |
 | --- | --- |
@@ -411,6 +409,10 @@ Startpunktet opretter tråde uden `user_id`, ligesom startpunktet til step 14. S
 
 Vil du have step 15 i mindre trin på dansk, så brug [Chatbot step 15: Send tokenet med til dit API](chatbot-step-15-send-tokenet.md).
 
-Efter step 15 står tokenet i hvert request til dit eget API på `localhost:3000`. Find det i Network-fanen. Backenden tjekker det ikke endnu, så to brugere ser stadig de samme tråde.
+Efter step 15 ser chatbotten sådan ud. Sammenlign med billedet under [Det bygger du](#det-bygger-du):
+
+![Samme browser-side som i øveprojektet. apiFetch sender tokenet til dit Express API på localhost:3000 uden apikey. API'et læser ikke tokenet endnu og svarer med alle tråde](assets/chatbot-step-15-token.svg)
+
+Venstre side er den samme. Tokenet står nu i hvert request til dit eget API. Backenden tjekker det ikke endnu, så to brugere ser stadig de samme tråde.
 
 Senere skal backenden tjekke tokenet. Den gør det med `supabase.auth.getUser(token)`, som sender præcis det request, du byggede i øvelse 10. Supabase svarede 403 på dit rettede token. Din egen backend kommer til at svare 401, og det er den statuskode, chatbotten skal reagere på, når et token er udløbet.

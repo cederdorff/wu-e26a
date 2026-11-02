@@ -24,6 +24,12 @@ Spring aldrig en test over, heller ikke når den virker oplagt.
 
 ## Det bygger du
 
+![Routes i chatbotten kalder apiFetch. apiFetch henter tokenet fra localStorage med getSession() og sender det til dit Express API i Authorization-headeren. API'et læser ikke tokenet endnu og svarer med alle tråde](assets/chatbot-step-15-token.svg)
+
+Har du lavet øveprojektet, så kender du venstre side. Kun højre side er ny: tokenet skal til dit eget API og ikke til Supabase.
+
+Det sker i koden:
+
 ```text
 Før:       clientLoader -> fetch(`${apiUrl}/api/threads`) -> intet token
 Nu:        clientLoader -> apiFetch("/api/threads")       -> Authorization: Bearer <token>
@@ -58,7 +64,7 @@ Her skal du ikke skrive kode. Du finder de tre ting, der mangler. Resten af opga
 Du skal have fundet tre ting:
 
 - Tokenet ligger i localStorage, men bliver ikke sendt med til API'et
-- Hver route bygger selv URL'en og kalder `fetch`. Der er seks steder
+- Hver route bygger selv URL'en og kalder `fetch`. Der er syv `fetch` i fire filer
 - Sidebaren viser "Batman", og der er ingen knap til at logge ud
 
 Du kunne også se trådene i inkognitovinduet uden at være logget ind. Det retter du ikke i denne opgave. Backenden skal tjekke tokenet, og det sker i step 16.

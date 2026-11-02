@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="880" height="400" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Chatbotten efter step 15: routes kalder apiFetch, som henter tokenet fra localStorage og sender det til Express API'et i Authorization-headeren. API'et læser ikke tokenet endnu</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; }
+      .route { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; font-weight: 700; fill: #0d0d0d; text-anchor: middle; }
+      .file { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #4b5563; text-anchor: middle; }
+      .sub { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #4b5563; }
+      .desc { font-size: 13px; fill: #4b5563; text-anchor: middle; }
+      .label { font-size: 12.5px; fill: #4b5563; text-anchor: middle; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #0d0d0d; }
+      .flow { stroke: #6b7280; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .pill { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+      .num { fill: #0d0d0d; }
+      .num-t { font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="400" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+
+  <!-- Browseren -->
+  <rect x="20" y="20" width="280" height="360" rx="14" fill="#eef7f0" stroke="#a7d7b4" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="16" font-weight="700" fill="#1f6b3a">Browseren</text>
+  <text class="sub" x="44" y="70">localhost:5173</text>
+
+  <rect class="card" x="50" y="92" width="220" height="60" rx="10"/>
+  <text class="route" x="160" y="117">layout.jsx m.fl.</text>
+  <text class="desc" x="160" y="138">loaders og actions</text>
+
+  <rect class="card" x="50" y="196" width="220" height="60" rx="10"/>
+  <text class="route" x="160" y="221">apiFetch()</text>
+  <text class="file" x="160" y="242">app/lib/apiFetch.js</text>
+
+  <rect class="card" x="50" y="306" width="220" height="56" rx="10"/>
+  <text class="route" x="160" y="330">localStorage</text>
+  <text class="file" x="160" y="350">access_token</text>
+
+  <!-- Express API -->
+  <rect x="600" y="20" width="260" height="360" rx="14" fill="#fdf1e7" stroke="#f2bf94" stroke-width="1.5"/>
+  <text x="624" y="50" font-size="16" font-weight="700" fill="#9a3412">Express API</text>
+  <text class="sub" x="624" y="70">localhost:3000</text>
+
+  <rect class="card" x="625" y="196" width="210" height="60" rx="10"/>
+  <text class="route" x="730" y="221">/api/threads</text>
+  <text x="730" y="242" font-size="12.5" fill="#c2410c" text-anchor="middle">læser ikke tokenet endnu</text>
+
+  <rect class="card" x="625" y="306" width="210" height="56" rx="10"/>
+  <text class="route" x="730" y="330">Postgres</text>
+  <text class="desc" x="730" y="350">alle tråde</text>
+
+  <line class="flow" x1="730" y1="259" x2="730" y2="303" marker-start="url(#arrow)"/>
+  <rect class="pill" x="706" y="271" width="48" height="20" rx="10"/>
+  <text class="label" x="730" y="285">SQL</text>
+
+  <!-- 1: routen kalder apiFetch -->
+  <line class="flow" x1="160" y1="154" x2="160" y2="193"/>
+  <rect class="pill" x="54" y="163" width="212" height="20" rx="10"/>
+  <circle class="num" cx="66" cy="173" r="8"/>
+  <text class="num-t" x="66" y="177">1</text>
+  <text class="code" x="80" y="177" font-size="12">apiFetch("/api/threads")</text>
+
+  <!-- 2: apiFetch henter tokenet -->
+  <line class="flow" x1="160" y1="259" x2="160" y2="303" marker-start="url(#arrow)"/>
+  <rect class="pill" x="94" y="271" width="132" height="20" rx="10"/>
+  <circle class="num" cx="106" cy="281" r="8"/>
+  <text class="num-t" x="106" y="285">2</text>
+  <text class="code" x="120" y="285" font-size="12">getSession()</text>
+
+  <!-- 3: requestet med headers -->
+  <line class="flow" x1="272" y1="226" x2="315" y2="226"/>
+  <line class="flow" x1="574" y1="226" x2="622" y2="226"/>
+  <circle class="num" cx="340" cy="164" r="8"/>
+  <text class="num-t" x="340" y="168">3</text>
+  <text x="354" y="168" font-size="12.5" fill="#4b5563">requestet</text>
+  <rect x="318" y="178" width="254" height="96" rx="10" fill="#fafafa" stroke="#9ca3af" stroke-width="1.5"/>
+  <text class="code" x="334" y="202" font-weight="700">GET /api/threads</text>
+  <rect x="326" y="212" width="238" height="22" rx="5" fill="#fef3c7"/>
+  <text class="code" x="334" y="228">Authorization: Bearer eyJ…</text>
+  <text class="code" x="334" y="254" fill="#6b7280">// ingen apikey</text>
+
+  <!-- 4: svaret -->
+  <path class="flow" d="M730 194 V122 H274"/>
+  <rect class="pill" x="394" y="112" width="132" height="20" rx="10"/>
+  <circle class="num" cx="406" cy="122" r="8"/>
+  <text class="num-t" x="406" y="126">4</text>
+  <text x="420" y="126" font-size="12.5" fill="#4b5563">200 + alle tråde</text>
+</svg>
