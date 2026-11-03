@@ -836,19 +836,62 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
           <div class="stage">
             <div class="throw-anatomy cors-name jwt-name">
               <span class="cn-json"><code>Authorization:</code><small>headerens navn</small></span>
-              <span class="cn-web"><code>Bearer</code><small>"ihændehaver"</small></span>
-              <span class="cn-token"><code>eyJhbGci…</code><small>jeres access_token</small></span>
+              <span class="cn-web"><code>Bearer</code><small>typen: "ihændehaver"</small></span>
+              <span class="cn-token"><code>eyJhbGci…</code><small>jeres access_token (JWT)</small></span>
             </div>
-            <p class="cors-definition">Et <b>Bearer token</b> giver adgang til den, der har det. Ingen spørger efter password eller ID. Derfor skal det holdes hemmeligt, og derfor udløber det.</p>
+            <p class="cors-definition"><b>Bearer</b> er typen i <code>Authorization</code>-headeren. Den betyder "her kommer et token, og den, der har det, får adgang". Et <b>Bearer token</b> er et token, der sendes sådan. I dag er det jeres access token.</p>
+            <div class="cards-3 cors-facts">
+              <article class="card"><span>Ordet Bearer</span><p>Står foran tokenet, adskilt af ét mellemrum. Glemmer I det, kan serveren ikke læse headeren, og requestet bliver afvist.</p></article>
+              <article class="card card-good"><span>Serveren tjekker kun tokenet</span><p>Er det ægte og ikke udløbet? Der er intet password, og serveren kan ikke se, hvem der sender det.</p></article>
+              <article class="card card-warn"><span>Derfor: pas på det</span><p>Får andre fat i det, kan de bruge det som jer, indtil <code>exp</code>. Aldrig i URL'er, logs eller på GitHub.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">I øvelse 10 sender I jeres eget token fra Thunder Client. Supabase kan ikke se forskel.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Bearer token · kender I fra DOB 11</span>
+          <h2>I har sendt et Bearer token før</h2>
+          <div class="stage">
             <div class="bearer-uses">
-              <article style="--c: var(--green)"><span>Kender I fra DOB 11</span><strong>Jeres Groq-nøgle</strong><pre class="viz-code"><span class="s">"Authorization"</span>: <span class="s">`Bearer ${apiKey}`</span></pre><small>Backenden beviser over for Groq, at den må bruge API'et.</small></article>
-              <article style="--c: var(--purple)"><span>I dag</span><strong>Brugerens access token</strong><pre class="viz-code">Authorization: <span class="s">`Bearer ${token}`</span></pre><small>Frontenden beviser over for API'et, hvilken bruger der spørger.</small></article>
+              <article style="--c: var(--green)"><span>DOB 11 · backend → Groq</span><strong>Jeres Groq-nøgle</strong><pre class="viz-code"><span class="s">"Authorization"</span>: <span class="s">`Bearer ${apiKey}`</span></pre><small>Backenden beviser over for Groq, at den må bruge API'et.</small></article>
+              <article style="--c: var(--purple)"><span>I dag · frontend → jeres API</span><strong>Brugerens access token</strong><pre class="viz-code">Authorization: <span class="s">`Bearer ${token}`</span></pre><small>Frontenden beviser over for API'et, hvilken bruger der spørger.</small></article>
             </div>
           </div>
           <p class="bottom-line">Samme header, samme format. Forskellen er, hvem der beviser hvad over for hvem.</p>
         </section>
 
-        <section id="ex-10" class="activity-slide handson" data-accent="purple">
+        <section class="fill destr-slide" data-accent="purple">
+          <span class="eyebrow">Øvelse 10 · trin 1 · getSession()</span>
+          <h2>Samme token, to måder at skrive det</h2>
+          <div class="stage">
+            <div class="destr-res">
+              <span><code>getSession()</code> svarer med</span>
+              <pre class="viz-code">{ <span class="d1">data</span>: { <span class="d2">session</span>: { access_token: <span class="s">"eyJhbGci…"</span>, user: {…} } }, error: <span class="k">null</span> }</pre>
+            </div>
+            <div class="dry2 big">
+              <article style="--c: var(--orange)">
+                <span>Tutorialen · to lag på én gang</span>
+                <pre class="viz-code"><span class="k">const</span> {
+  <span class="d1">data</span>: { <span class="d2">session</span> },
+} = <span class="k">await</span> supabase.auth.getSession();
+
+<span class="k">const</span> token = <span class="d2">session</span>?.access_token;</pre>
+                <small>Tag <b>data</b> ud af svaret, og tag <b>session</b> ud af data. Prettier deler det over tre linjer.</small>
+              </article>
+              <article style="--c: var(--green)">
+                <span>Det samme · ét lag ad gangen</span>
+                <pre class="viz-code"><span class="k">const</span> { <span class="d1">data</span> } = <span class="k">await</span> supabase.auth.getSession();
+
+<span class="k">const</span> token = <span class="d1">data</span>.<span class="d2">session</span>?.access_token;</pre>
+                <small>Samme mønster som med <code>getUser()</code> sidst: først <b>data</b>, så <code>data.user</code>.</small>
+              </article>
+            </div>
+          </div>
+          <p class="bottom-line">Begge giver det samme token. Skriv den, I forstår. I tutorialen og opgaven står den til venstre.</p>
+        </section>
+
+        <section id="ex-10"class="activity-slide handson" data-accent="purple">
           <span class="ho-num"><small>Øvelse</small>10</span>
           <span class="eyebrow">Hands-on · Øvelse 10</span>
           <h2>Send tokenet selv</h2>

@@ -1392,3 +1392,26 @@
 .anat .sent code { font-size: 16px !important; }
 .anat.tight { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
 .anat.tight .viz-code { font-size: 17px; }
+
+/* getSession(): nested destructuring next to the simpler two-step version */
+.destr-res {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+.destr-res > span {
+  color: var(--muted);
+  font-size: 20px;
+}
+.destr-res .viz-code {
+  padding: 18px 26px;
+  font-size: 22px;
+}
+.destr-slide .dry2 article { min-height: 0; }
+.destr-slide .viz-code .d1 { color: var(--orange); font-weight: 800; }
+.destr-slide .viz-code .d2 { color: var(--purple); font-weight: 800; }
+.destr-slide .dry2 .viz-code {
+  font-size: 20px;
+  white-space: pre;
+}
