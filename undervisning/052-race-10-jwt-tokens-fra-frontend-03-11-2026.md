@@ -34,10 +34,10 @@ I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én 
 <details>
 <summary><strong>3. Tokens, headers og Bearer: øvelse 10</strong></summary>
 
-- **Headers** er et navn og en værdi. I `fetch()` skriver I dem i objektet `headers`
 - Repetition fra sidst: token, JWT (header, payload, signatur), access token og refresh token. Access tokenet skal med i headeren. Det bliver skiftet ud hver time, så I henter det frisk med `getSession()`
+- **Header:** et navn og en værdi, der fortæller noget om requestet eller responset. I kender `Content-Type` (`express.json()`) og `Access-Control-Allow-Origin` (`cors()`). I `fetch()` skriver I dem i objektet `headers`
 - **Bearer token:** `Authorization: Bearer <token>`. Bearer betyder "ihændehaver": den, der har tokenet, får adgang. I har gjort det før, da jeres backend sendte Groq-nøglen
-- Øvelse 10: byg selv det request, `getUser()` sender, og tilføj én header ad gangen. Hver header retter én fejl
+- Øvelse 10: byg selv det request, `getUser()` sender, og tilføj én header ad gangen. Hver header retter én fejl. Vi gennemgår svarene bagefter
 - **`apikey` vs. `Authorization`:** `apikey` siger, hvilket projekt det er. `Authorization` siger, hvilken bruger det er. Det svarer på spørgsmålet fra opsamlingen: anon key står alligevel i frontenden, men et stjålet access token gør en anden til brugeren, indtil det udløber
 </details>
 <details>

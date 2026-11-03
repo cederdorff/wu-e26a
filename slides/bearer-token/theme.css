@@ -1212,7 +1212,41 @@
   line-height: 1.4;
 }
 .stateless-recap .sl-def b { color: var(--accent); }
-.sys.sl { height: 420px; }
+.sys.sl { height: 470px; }
+.sys .rs-p {
+  fill: #0a0f0e;
+  stroke: color-mix(in srgb, var(--green) 60%, transparent);
+  stroke-width: 1.2;
+}
+.sys .rs-t {
+  fill: var(--muted);
+  font: 600 16px var(--mono);
+  text-anchor: middle;
+  white-space: pre;
+}
+.sys .rs-t .code { fill: var(--green); font-weight: 800; }
+.sys .leg {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+.sys .leg.rq-l { fill: var(--muted); }
+.sys .leg.rs-l { fill: var(--green); }
+.stateless-recap .sl-def { margin-bottom: 8px; }
+.sys .forget {
+  stroke: color-mix(in srgb, var(--red) 55%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+}
+.sys .forget-p { fill: #2a1416; stroke: var(--red); stroke-width: 1.2; }
+.sys .forget-t {
+  fill: var(--red);
+  font-size: 14px;
+  font-weight: 800;
+  text-anchor: middle;
+}
 .sys .a.plain {
   stroke: var(--muted);
   marker-end: url(#pg-arrow);

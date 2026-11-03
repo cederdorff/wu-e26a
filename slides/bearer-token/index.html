@@ -528,55 +528,62 @@
           <h2>Serveren husker intet mellem to requests</h2>
           <div class="stage">
             <p class="sl-def"><b>Stateless:</b> hvert request indeholder al nødvendig information. Serveren gemmer ikke klientens tilstand mellem requests.</p>
-            <svg class="sys sl" viewBox="0 0 1380 440" role="img" aria-labelledby="sys-sl-title">
-              <title id="sys-sl-title">Brugeren åbner Anna, åbner Bo og sletter Bo. Hver handling bliver et nyt request med id'et i URL'en, fordi serveren intet husker mellem dem. I dag sender chatbotten tokenet med i en header på samme måde, så serveren kan se, hvem der spørger</title>
+            <svg class="sys sl" viewBox="0 0 1380 490" role="img" aria-labelledby="sys-sl-title">
+              <title id="sys-sl-title">Browseren sender GET, POST og DELETE til /api/threads og får et response på hvert. Mellem hvert request glemmer serveren alt</title>
 
-              <rect class="box" x="20" y="20" width="280" height="400" rx="16" />
+              <rect class="box" x="20" y="20" width="280" height="460" rx="16" />
               <path class="bar" d="M20 64 V36 a16 16 0 0 1 16 -16 H284 a16 16 0 0 1 16 16 V64 Z" />
               <circle class="dot-r" cx="44" cy="42" r="6" /><circle class="dot-y" cx="62" cy="42" r="6" /><circle class="dot-g" cx="80" cy="42" r="6" />
               <rect class="url" x="100" y="30" width="180" height="24" rx="12" />
               <text class="url-t" x="116" y="47">localhost:5173</text>
-              <text class="role" x="44" y="102">Klient</text>
-              <text class="box-t" x="44" y="134">Browseren</text>
+              <text class="role" x="44" y="96">Klient</text>
+              <text class="box-t" x="44" y="126">Browseren</text>
 
-              <rect class="box" x="1080" y="20" width="280" height="400" rx="16" />
+              <rect class="box" x="1080" y="20" width="280" height="460" rx="16" />
               <path class="bar" d="M1080 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
               <use class="ico" href="#ico-server" x="1100" y="30" width="24" height="24" />
               <text class="url-t" x="1136" y="47">localhost:3000</text>
-              <text class="role" x="1104" y="102">Server</text>
-              <text class="box-t" x="1104" y="134">Express API</text>
-              <g transform="translate(1316 118)"><circle r="20" fill="none" stroke="var(--line)" stroke-width="3" /><path d="M-10 0 h20" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" /><path d="M-11 -11 L11 11" stroke="#ff6767" stroke-width="3.5" stroke-linecap="round" /></g>
+              <text class="role" x="1104" y="96">Server</text>
+              <text class="box-t" x="1104" y="126">Express API</text>
 
-              <text class="sub" x="44" y="197">Åbn Anna</text>
-              <line class="a plain" x1="302" y1="190" x2="1074" y2="190" />
-              <rect class="rq" x="500" y="168" width="380" height="44" rx="22" />
-              <text class="rq-t" x="690" y="197">GET /students/<tspan class="id">1</tspan></text>
-              <text class="sub" x="1104" y="197">id <tspan class="id-c">1</tspan> → Anna</text>
-              <text class="sub" x="44" y="257">Åbn Bo</text>
-              <line class="a plain" x1="302" y1="250" x2="1074" y2="250" />
-              <rect class="rq" x="500" y="228" width="380" height="44" rx="22" />
-              <text class="rq-t" x="690" y="257">GET /students/<tspan class="id">2</tspan></text>
-              <text class="sub" x="1104" y="257">id <tspan class="id-c">2</tspan> → Bo</text>
-              <text class="sub" x="44" y="317">Slet Bo</text>
-              <line class="a plain" x1="302" y1="310" x2="1074" y2="310" />
-              <rect class="rq" x="500" y="288" width="380" height="44" rx="22" />
-              <text class="rq-t" x="690" y="317">DELETE /students/<tspan class="id">2</tspan></text>
-              <text class="sub" x="1104" y="317">id <tspan class="id-c">2</tspan> → slettet</text>
+              <text class="leg rq-l" x="690" y="104">→ request</text>
+              <text class="leg rs-l" x="690" y="128">← response</text>
 
-              <g class="fragment">
-                <text class="sub" x="44" y="387">Åbn chatbotten</text>
-                <line class="a today" x1="302" y1="380" x2="1074" y2="380" />
-                <rect class="rq today" x="400" y="358" width="580" height="44" rx="22" />
-                <text class="rq-t" x="690" y="387">GET /api/threads · <tspan class="who">Authorization: Bearer eyJ…</tspan></text>
-                <text class="sub" x="1104" y="387">Hvem? <tspan class="who-c">tokenet</tspan></text>
-              </g>
+              <line class="forget" x1="20" y1="245" x2="1360" y2="245" />
+              <rect class="forget-p" x="1250" y="232" width="94" height="26" rx="13" />
+              <text class="forget-t" x="1297" y="250">✕ glemt</text>
+              <line class="forget" x1="20" y1="365" x2="1360" y2="365" />
+              <rect class="forget-p" x="1250" y="352" width="94" height="26" rx="13" />
+              <text class="forget-t" x="1297" y="370">✕ glemt</text>
+
+              <text class="sub" x="44" y="177">Åbn chatbotten</text>
+              <line class="a plain" x1="302" y1="170" x2="1074" y2="170" />
+              <rect class="rq" x="490" y="148" width="400" height="44" rx="22" />
+              <text class="rq-t" x="690" y="177">GET /api/threads</text>
+              <line class="a rs-a" x1="1078" y1="216" x2="306" y2="216" />
+              <rect class="rs-p" x="430" y="200" width="520" height="34" rx="17" />
+              <text class="rs-t" x="690" y="223"><tspan class="code">200 OK</tspan>  [{"id":7,"title":"Pizza"}, …]</text>
+              <text class="sub" x="44" y="297">Ny tråd</text>
+              <line class="a plain" x1="302" y1="290" x2="1074" y2="290" />
+              <rect class="rq" x="490" y="268" width="400" height="44" rx="22" />
+              <text class="rq-t" x="690" y="297">POST /api/threads</text>
+              <line class="a rs-a" x1="1078" y1="336" x2="306" y2="336" />
+              <rect class="rs-p" x="430" y="320" width="520" height="34" rx="17" />
+              <text class="rs-t" x="690" y="343"><tspan class="code">201 Created</tspan>  {"thread":{"id":8,…}}</text>
+              <text class="sub" x="44" y="417">Slet tråd 7</text>
+              <line class="a plain" x1="302" y1="410" x2="1074" y2="410" />
+              <rect class="rq" x="490" y="388" width="400" height="44" rx="22" />
+              <text class="rq-t" x="690" y="417">DELETE /api/threads/7</text>
+              <line class="a rs-a" x1="1078" y1="456" x2="306" y2="456" />
+              <rect class="rs-p" x="430" y="440" width="520" height="34" rx="17" />
+              <text class="rs-t" x="690" y="463"><tspan class="code">200 OK</tspan>  {"deletedId":7}</text>
             </svg>
           </div>
-          <p class="bottom-line">Id'et skal med i hvert request. Det samme gælder tokenet. <a href="../rest-api/#/princip-stateless" target="_blank" rel="noreferrer"><b>Sliden fra REST API ↗</b></a></p>
+          <p class="bottom-line">Det, serveren skal bruge, skal stå i requestet. Også hvem I er. <a href="../rest-api/#/princip-stateless" target="_blank" rel="noreferrer"><b>Sliden fra REST API ↗</b></a></p>
         </section>
 
         <section class="fill" data-accent="red">
-          <span class="eyebrow">Hvert request står alene</span>
+          <span class="eyebrow">Stateless · også hvem I er</span>
           <h2>Samme browser. API'et ser tre fremmede</h2>
           <div class="stage">
             <div class="stateless">
@@ -587,7 +594,7 @@
                 <div class="rq"><code>DELETE /api/threads/7</code><span class="tk none">ingen Authorization</span><em>Hvem er du?</em></div>
               </div>
               <div class="row fragment" style="--c: var(--green)">
-                <span class="lbl">Efter step 15<small>tokenet i hvert request</small></span>
+                <span class="lbl">Med token<small>step 15 sender det<br />step 16 læser det</small></span>
                 <div class="rq"><code>GET /api/threads</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
                 <div class="rq"><code>POST /api/threads</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
                 <div class="rq"><code>DELETE /api/threads/7</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
@@ -615,7 +622,7 @@ sb-…-auth-token</pre><div class="know">✓ access_token med sub</div></div>
 FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
             </div>
           </div>
-          <p class="bottom-line">Det var her, vi slap sidst. I dag flytter tokenet ind i requestet.</p>
+          <p class="bottom-line">Sådan ser request-vejen ud før step 15. Vi tegner den igen, når I er færdige.</p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -661,34 +668,8 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
         <section id="bearer" class="chapter" data-accent="purple">
           <span class="chapter-number">03</span>
           <span class="eyebrow">Tokens, headers og Bearer · øvelse 10</span>
-          <h2>Et request er mere<br />end en URL</h2>
-          <p>Tokenet skal med i en header. I kender allerede én.</p>
-        </section>
-
-        <section class="fill" data-accent="purple">
-          <span class="eyebrow">Headers</span>
-          <h2>Headers er ekstra information i requestet</h2>
-          <div class="stage">
-            <div class="req-anat">
-              <pre class="viz-code"><span class="c">// Kender I fra POST til jeres API</span>
-<span class="k">await</span> fetch(<span class="s">`${apiUrl}/api/threads`</span>, {
-  method: <span class="s">"POST"</span>,
-  headers: {
-    <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
-    <span class="hl">Authorization: `Bearer ${token}`</span>,
-  },
-  body: JSON.stringify({ title, content }),
-});</pre>
-              <b aria-hidden="true">→</b>
-              <div class="raw">
-                <div style="--c: var(--green)"><small>Linje</small><span>POST /api/threads</span></div>
-                <div style="--c: var(--cyan)"><small>Headers</small><span><span class="hk">Content-Type:</span> application/json
-<span class="on"><span class="hk">Authorization:</span> Bearer eyJhbGci…</span></span></div>
-                <div style="--c: var(--yellow)"><small>Body</small><span>{"title":"Pizza","content":"Hej"}</span></div>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">En header er et navn og en værdi. I <code>fetch()</code> skriver I dem i objektet <code>headers</code>.</p>
+          <h2>Hvad sender I,<br />og hvor?</h2>
+          <p>Først tokenet fra sidst. Så headeren, det skal stå i.</p>
         </section>
 
         <section class="fill token-def-slide" data-accent="purple">
@@ -789,6 +770,50 @@ DpFokNVWx7oj
 
         <section class="fill cors-def-slide" data-accent="purple">
           <span class="eyebrow">Definition</span>
+          <h2>Hvad er en header?</h2>
+          <div class="stage">
+            <div class="throw-anatomy cors-name jwt-name">
+              <span class="cn-json"><code>Content-Type:</code><small>navnet</small></span>
+              <span class="cn-token"><code>application/json</code><small>værdien</small></span>
+            </div>
+            <p class="cors-definition">En <b>header</b> er et navn og en værdi i et request eller response. Den fortæller noget <b>om</b> beskeden: hvad der er i body, hvor den kommer fra, eller hvem der sender den.</p>
+            <div class="cards-3 cors-facts">
+              <article class="card"><span>Kender I · POST til jeres API</span><p><code>Content-Type</code> siger, hvad der er i body. <code>express.json()</code> læser den.</p></article>
+              <article class="card"><span>Kender I · CORS</span><p><code>Access-Control-Allow-Origin</code> siger, om browseren må læse svaret. <code>cors()</code> sætter den.</p></article>
+              <article class="card card-good"><span>I dag · tokenet</span><p><code>Authorization</code> siger, hvem der spørger. Her skal tokenet stå.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">Headers er ikke en del af URL'en eller body. De står ved siden af.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Headers i fetch()</span>
+          <h2>Headers skriver I i <code>fetch()</code></h2>
+          <div class="stage">
+            <div class="req-anat">
+              <pre class="viz-code"><span class="c">// Kender I fra POST til jeres API</span>
+<span class="k">await</span> fetch(<span class="s">`${apiUrl}/api/threads`</span>, {
+  method: <span class="s">"POST"</span>,
+  headers: {
+    <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+    <span class="hl">Authorization: `Bearer ${token}`</span>,
+  },
+  body: JSON.stringify({ title, content }),
+});</pre>
+              <b aria-hidden="true">→</b>
+              <div class="raw">
+                <div style="--c: var(--green)"><small>Linje</small><span>POST /api/threads</span></div>
+                <div style="--c: var(--cyan)"><small>Headers</small><span><span class="hk">Content-Type:</span> application/json
+<span class="on"><span class="hk">Authorization:</span> Bearer eyJhbGci…</span></span></div>
+                <div style="--c: var(--yellow)"><small>Body</small><span>{"title":"Pizza","content":"Hej"}</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Hver nøgle i objektet <code>headers</code> bliver én linje i requestet. <code>Authorization</code> er bare én linje mere.</p>
+        </section>
+
+        <section class="fill cors-def-slide" data-accent="purple">
+          <span class="eyebrow">Definition</span>
           <h2>Hvad er et Bearer token?</h2>
           <div class="stage">
             <div class="throw-anatomy cors-name jwt-name">
@@ -805,8 +830,22 @@ DpFokNVWx7oj
           <p class="bottom-line">Samme header, samme format. Forskellen er, hvem der beviser hvad over for hvem.</p>
         </section>
 
+        <section id="ex-10" class="activity-slide handson" data-accent="purple">
+          <span class="ho-num"><small>Øvelse</small>10</span>
+          <span class="eyebrow">Hands-on · Øvelse 10</span>
+          <h2>Send tokenet selv</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md#øvelse-10-send-tokenet-selv" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Trin 1:</b> hent tokenet med <code>getSession()</code> i <code>clientLoader</code> på <code>/profile</code>, og log det</li>
+            <li><b>Trin 2:</b> kald <code>/auth/v1/user</code> med <code>fetch</code>. Tilføj én header ad gangen, og læs svaret</li>
+            <li><b>Trin 3:</b> fjern <code>getUser()</code>, og brug jeres eget svar. <code>redirect("/login")</code>, hvis <code>response.ok</code> er <code>false</code></li>
+            <li>Mangler I øvelse 8-9? Brug degit-kommandoen under "Kom i gang"</li>
+          </ul>
+          <p class="bottom-line">Test: logget ind ser I jeres profil. I inkognito og med et rettet token bliver I sendt til <code>/login</code>.</p>
+        </section>
+
         <section class="fill" data-accent="purple">
-          <span class="eyebrow">Øvelse 10 · trin 2 · det svarer Supabase</span>
+          <span class="eyebrow">Efter øvelse 10 · trin 2 · det svarede Supabase</span>
           <h2>Én header ad gangen. Hver header retter én fejl</h2>
           <div class="stage">
             <div class="ladder">
@@ -817,7 +856,7 @@ DpFokNVWx7oj
               <div class="row fragment" style="--c: var(--red)"><i>4</i><div class="hdrs"><span class="old">apikey</span><span class="add">Bearer eyJhbG<mark>X</mark>i…</span></div><b>→</b><span class="st">403</span><div class="say"><code>invalid JWT: … signature is invalid</code><span>Ét tegn rettet. Signaturen passer ikke</span></div></div>
             </div>
           </div>
-          <p class="bottom-line">Det er præcis det request, <code>getUser()</code> sendte for jer i øvelse 8. Find begge i Network-fanen.</p>
+          <p class="bottom-line">Det er præcis det request, <code>getUser()</code> sendte for jer i øvelse 8. Fandt I begge i Network-fanen?</p>
         </section>
 
         <section class="shift-slide two-things" data-accent="purple">
@@ -848,7 +887,7 @@ DpFokNVWx7oj
         </section>
 
         <section class="fill" data-accent="purple">
-          <span class="eyebrow">Øvelse 10 · trin 3 · jeres eget fetch</span>
+          <span class="eyebrow">Efter øvelse 10 · trin 3 · jeres eget fetch</span>
           <h2>Tre situationer. Kun én af dem viser siden</h2>
           <div class="stage">
             <div class="gate3 fetch3">
@@ -871,20 +910,6 @@ DpFokNVWx7oj
             </div>
           </div>
           <p class="bottom-line">I tjekker kun <code>response.ok</code>. Det er <code>false</code> ved alt andet end 200-299.</p>
-        </section>
-
-        <section id="ex-10" class="activity-slide handson" data-accent="purple">
-          <span class="ho-num"><small>Øvelse</small>10</span>
-          <span class="eyebrow">Hands-on · Øvelse 10</span>
-          <h2>Send tokenet selv</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md#øvelse-10-send-tokenet-selv" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
-          <ul class="checklist">
-            <li><b>Trin 1:</b> hent tokenet med <code>getSession()</code> i <code>clientLoader</code> på <code>/profile</code>, og log det</li>
-            <li><b>Trin 2:</b> kald <code>/auth/v1/user</code> med <code>fetch</code>. Tilføj én header ad gangen, og læs svaret</li>
-            <li><b>Trin 3:</b> fjern <code>getUser()</code>, og brug jeres eget svar. <code>redirect("/login")</code>, hvis <code>response.ok</code> er <code>false</code></li>
-            <li>Mangler I øvelse 8-9? Brug degit-kommandoen under "Kom i gang"</li>
-          </ul>
-          <p class="bottom-line">Test: logget ind ser I jeres profil. I inkognito og med et rettet token bliver I sendt til <code>/login</code>.</p>
         </section>
 
         <!-- ============ 04 APIFETCH ============ -->
