@@ -26,7 +26,7 @@
           <div class="title-copy">
             <span class="eyebrow">WU-E26A · RACE 10 · 3. november 2026</span>
             <h1>Hvem<br /><span>spørger?</span></h1>
-            <p class="lead">Jeres token ligger i Local Storage. I dag sender I det med i en header. Først i <code>react-supabase-auth</code>, så i chatbotten med step 15.</p>
+            <p class="lead">I dag sender I tokenet med i hvert request.</p>
           </div>
           <div class="title-art" aria-hidden="true">
             <div class="req">
@@ -588,7 +588,7 @@
                 <div class="rq"><code>POST /api/threads</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
                 <div class="rq"><code>DELETE /api/threads/7</code><span class="tk">Bearer eyJhbGci…</span><em>Det er Anna</em></div>
               </div>
-              <div class="session fragment"><b>Session</b><span>At I er logget ind over mange requests. Supabase-klienten henter selv et nyt access token med refresh tokenet, når det gamle udløber.</span></div>
+              <div class="session fragment"><b>Session</b><span>At I er logget ind over mange requests. Det er tokenet i hvert request, der gør det.</span></div>
             </div>
           </div>
           <p class="bottom-line">Ligesom armbåndet på festivalen: I viser det ved hver scene, ikke kun ved indgangen.</p>
