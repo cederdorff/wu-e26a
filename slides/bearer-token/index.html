@@ -14,7 +14,10 @@
         <marker id="pg-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-red" d="M0,0 L10,5 L0,10 z" /></marker>
         <marker id="sys-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="mk-green" d="M0,0 L10,5 L0,10 z" /></marker>
         <marker id="sys-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="mk-purple" d="M0,0 L10,5 L0,10 z" /></marker>
+        <marker id="sys-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="mk-cyan" d="M0,0 L10,5 L0,10 z" /></marker>
         <marker id="pg-arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-orange" d="M0,0 L10,5 L0,10 z" /></marker>
+        <symbol id="ico-server" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="8" rx="2" /><rect x="3" y="13" width="18" height="8" rx="2" /></g><circle cx="7" cy="7" r="1.3" fill="currentColor" /><circle cx="7" cy="17" r="1.3" fill="currentColor" /></symbol>
+        <symbol id="ico-db" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5" /><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" /></g></symbol>
       </defs>
     </svg>
     <div class="reveal">
@@ -42,9 +45,9 @@
           <span class="eyebrow">Agenda</span>
           <h2>Tokenet med i hvert request</h2>
           <ol class="agenda-grid">
-            <li><a href="#/opsamling"><b>Opsamling</b><small>jeres login-flow og de tre spørgsmål</small></a></li>
-            <li><a href="#/hvem"><b>Hvordan ved backenden, hvem du er?</b><small>HTTP husker ingenting</small></a></li>
-            <li><a href="#/bearer"><b>Headers og Bearer tokens</b><small>øvelse 10</small></a></li>
+            <li><a href="#/opsamling"><b>Opsamling</b><small>det byggede I, jeres tegninger og hvad der mangler</small></a></li>
+            <li><a href="#/hvem"><b>Hvordan ved backenden, hvem du er?</b><small>HTTP og stateless igen</small></a></li>
+            <li><a href="#/bearer"><b>Tokens, headers og Bearer</b><small>repetition af JWT · øvelse 10</small></a></li>
             <li><a href="#/apifetch"><b>apiFetch</b><small>øvelse 11-12</small></a></li>
             <li><a href="#/step-15"><b>Step 15 i chatbotten</b><small>det samme igen, i chatbotten</small></a></li>
             <li><a href="#/mangler"><b>Hvad mangler stadig?</b><small>et request uden token</small></a></li>
@@ -52,10 +55,17 @@
           <p class="bottom-line">Øvelserne står i opgaven: <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md" target="_blank" rel="noreferrer"><b>Send tokenet med ↗</b></a></p>
         </section>
 
-        <!-- ============ SIDST ============ -->
+        <!-- ============ 01 OPSAMLING: det byggede I, jeres tegninger, spørgsmålene, og hvad der mangler i dag ============ -->
 
-        <section id="sidst" class="fill" data-accent="green">
-          <span class="eyebrow">Sidst · react-supabase-auth · øvelse 1-9</span>
+        <section id="opsamling" class="chapter" data-accent="yellow">
+          <span class="chapter-number">01</span>
+          <span class="eyebrow">Opsamling</span>
+          <h2>Hvor slap<br />vi?</h2>
+          <p>Sidst fik I login til at virke. Fredag tegnede I, hvad der sker, når man logger ind. Vi samler op og ser, hvad der mangler i dag.</p>
+        </section>
+
+        <section id="sidst" class="fill" data-accent="yellow">
+          <span class="eyebrow">Opsamling · det byggede I sidst · øvelse 1-9</span>
           <h2>Fire sider. Én af dem kræver login</h2>
           <div class="stage">
             <div class="pg-wrap">
@@ -82,8 +92,8 @@
           <p class="bottom-line">Samme billede som øverst i opgaven fra sidst.</p>
         </section>
 
-        <section id="loesning" class="fill" data-accent="green">
-          <span class="eyebrow">Sidst · løsningen</span>
+        <section id="loesning" class="fill" data-accent="yellow">
+          <span class="eyebrow">Opsamling · løsningen</span>
           <h2>Sådan ser det ud, når det virker</h2>
           <div class="stage">
             <div class="shots">
@@ -104,206 +114,116 @@
           <p class="bottom-line">Løsningen ligger på GitHub med <a href="https://github.com/cederdorff/react-supabase-auth" target="_blank" rel="noreferrer"><b>én branch pr. øvelse ↗</b></a></p>
         </section>
 
-        <!-- ============ SIDST OG I DAG ============ -->
-
-        <section id="sidst-rsa" class="fill" data-accent="purple">
-          <span class="eyebrow">Sidst og i dag · react-supabase-auth</span>
-          <h2>Sidst fik I et token. I dag sender I det selv</h2>
-          <div class="stage">
-            <div class="sys-legend">
-              <span class="lg last">Sidst · øvelse 1-9</span>
-              <span class="lg today fragment" data-fragment-index="1">I dag · øvelse 10-12</span>
-            </div>
-            <svg class="sys" viewBox="0 0 1380 470" role="img" aria-labelledby="sys-rsa-title">
-              <title id="sys-rsa-title">react-supabase-auth logger ind hos Supabase Auth og får et token, som ligger i Local Storage. getUser() sender tokenet for jer. I dag sender I selv tokenet til /auth/v1/user i en Authorization-header</title>
-
-              <rect class="box" x="20" y="20" width="440" height="430" rx="16" />
-              <text class="box-t" x="52" y="70">react-supabase-auth</text>
-              <text class="sub" x="52" y="102">Browseren · ingen backend</text>
-              <text class="mono lg-m" x="52" y="160">/register</text><text class="sub" x="270" y="160">øvelse 4-5</text>
-              <text class="mono lg-m" x="52" y="204">/login</text><text class="sub" x="270" y="204">øvelse 6-7</text>
-              <text class="mono lg-m" x="52" y="248">/profile</text><text class="sub" x="270" y="248">øvelse 8-9</text>
-              <rect class="tok" x="52" y="350" width="376" height="64" rx="12" />
-              <text class="tok-t" x="240" y="389">token i Local Storage</text>
-
-              <rect class="box" x="920" y="20" width="440" height="430" rx="16" />
-              <text class="box-t" x="952" y="70">Supabase Auth</text>
-              <text class="mono" x="952" y="102">auth.users</text>
-              <text class="sub" x="952" y="160">Hasher passwords</text>
-              <text class="sub" x="952" y="196">Udsteder tokens</text>
-              <text class="sub" x="952" y="232">Tjekker signaturen</text>
-
-              <line class="a last" x1="462" y1="150" x2="914" y2="150" />
-              <text class="lbl last" x="690" y="136">signUp() · signInWithPassword()</text>
-              <line class="a last" x1="918" y1="200" x2="466" y2="200" />
-              <text class="lbl last" x="690" y="188">token</text>
-              <line class="a last" x1="462" y1="264" x2="914" y2="264" />
-              <text class="lbl last" x="690" y="250">getUser() sender tokenet for jer</text>
-
-              <g class="fragment" data-fragment-index="1">
-                <line class="a today" x1="430" y1="382" x2="914" y2="382" />
-                <rect class="pill today" x="520" y="362" width="340" height="40" rx="20" />
-                <text class="lbl today in" x="690" y="389">fetch("/auth/v1/user")</text>
-                <text class="lbl today" x="690" y="432">Authorization: Bearer eyJ… · apiFetch()</text>
-              </g>
-            </svg>
-          </div>
-          <p class="bottom-line"><code>getUser()</code> sendte tokenet for jer. I dag bygger I selv det request, den sender.</p>
-        </section>
-
-        <section id="sidst-chatbot" class="fill" data-accent="purple">
-          <span class="eyebrow">Sidst og i dag · chatbotten</span>
-          <h2>I dag kommer tokenet med til jeres API</h2>
-          <div class="stage">
-            <div class="sys-legend">
-              <span class="lg before">Fra step 11-13</span>
-              <span class="lg last">Sidst · step 14</span>
-              <span class="lg today fragment" data-fragment-index="1">I dag · step 15</span>
-            </div>
-            <svg class="sys" viewBox="0 0 1380 470" role="img" aria-labelledby="sys-cb-title">
-              <title id="sys-cb-title">Chatbotten logger ind hos Supabase Auth i step 14 og får et token. Den henter tråde fra Express uden token. I dag sender den tokenet til Express i en Authorization-header. Express kigger ikke på det før step 16</title>
-
-              <rect class="proj" x="1030" y="6" width="344" height="458" rx="18" />
-              <text class="proj-t" x="1054" y="40">Supabase-projektet</text>
-              <rect class="box" x="1054" y="60" width="296" height="150" rx="14" />
-              <text class="box-t" x="1078" y="100">Supabase Auth</text>
-              <text class="mono" x="1078" y="130">auth.users</text>
-              <text class="sub" x="1078" y="168">Udsteder tokens</text>
-              <rect class="box" x="1054" y="260" width="296" height="180" rx="14" />
-              <text class="box-t" x="1078" y="300">Postgres</text>
-              <text class="mono" x="1078" y="330">threads · messages</text>
-              <text class="sub" x="1078" y="368">Alle tråde. Ingen</text>
-              <text class="sub" x="1078" y="394">WHERE user_id endnu</text>
-
-              <rect class="box" x="6" y="20" width="334" height="430" rx="16" />
-              <text class="box-t" x="34" y="66">Chatbot</text>
-              <text class="sub" x="34" y="96">Browseren · frontend/</text>
-              <text class="mono" x="34" y="148">/login /register</text>
-              <text class="sub" x="34" y="176">nye i step 14</text>
-              <text class="mono" x="34" y="232">/ /chat/…</text>
-              <text class="sub" x="34" y="260">henter tråde fra API'et</text>
-              <rect class="tok" x="34" y="356" width="278" height="60" rx="12" />
-              <text class="tok-t" x="173" y="393">token i Local Storage</text>
-
-              <rect class="box" x="620" y="260" width="230" height="180" rx="14" />
-              <text class="box-t" x="644" y="300">Express API</text>
-              <text class="sub" x="644" y="330">backend/</text>
-              <text class="mono" x="644" y="370">/api/threads</text>
-
-              <line class="a last" x1="342" y1="120" x2="1048" y2="120" />
-              <text class="lbl last" x="695" y="106">step 14 · signUp() · signInWithPassword()</text>
-              <line class="a last" x1="1052" y1="166" x2="346" y2="166" />
-              <text class="lbl last" x="695" y="154">token</text>
-
-              <line class="a before" x1="342" y1="300" x2="614" y2="300" />
-              <text class="lbl before" x="478" y="286">fetch · intet token</text>
-              <line class="a before" x1="852" y1="340" x2="1048" y2="340" />
-              <text class="lbl before" x="950" y="326">SQL</text>
-
-              <g class="fragment" data-fragment-index="1">
-                <line class="a today" x1="312" y1="386" x2="614" y2="386" />
-                <rect class="pill today" x="378" y="366" width="190" height="40" rx="20" />
-                <text class="lbl today in" x="473" y="393">Bearer eyJ…</text>
-                <text class="lbl today" x="473" y="434">apiFetch() · step 15</text>
-                <text class="note" x="735" y="466">Kigger ikke på det endnu · step 16</text>
-              </g>
-            </svg>
-          </div>
-          <p class="bottom-line">Express får tokenet i dag. Det bliver først tjekket i step 16.</p>
-        </section>
-
-        <!-- ============ 01 OPSAMLING ============ -->
-
-        <section id="opsamling" class="chapter" data-accent="yellow">
-          <span class="chapter-number">01</span>
-          <span class="eyebrow">Opsamling</span>
-          <h2>Fra knappen til<br />Local Storage</h2>
-          <p>Fredag tegnede I, hvad der sker, når man trykker "Log In". Vi starter med jeres tegninger.</p>
-        </section>
-
         <section id="tegninger" class="fill" data-accent="yellow">
-          <span class="eyebrow">Fra fredag · jeres tegninger</span>
+          <span class="eyebrow">Opsamling · fra fredag · jeres tegninger</span>
           <h2>Hvad sker der, når man trykker "Log In"?</h2>
           <div class="stage">
-            <svg class="sys" viewBox="0 0 1380 470" role="img" aria-labelledby="sys-q-title">
+            <svg class="sys" viewBox="0 0 1380 500" role="img" aria-labelledby="sys-q-title">
               <title id="sys-q-title">Tom skabelon: klienten (browseren) sender et request til serveren (Supabase Auth) og får et svar, som ender i Local Storage. Hvert led er et spørgsmål</title>
 
-              <rect class="box" x="20" y="20" width="420" height="430" rx="16" />
-              <text class="role" x="52" y="58">Klient</text>
-              <text class="box-t" x="52" y="94">Browseren</text>
-              <text class="q" x="52" y="140">Hvad sker der i koden?</text>
-              <rect class="ph" x="52" y="158" width="356" height="96" rx="10" />
-              <text class="qm" x="230" y="222">?</text>
-              <text class="sub" x="52" y="284">Hvilken fil? Hvilken funktion?</text>
-              <rect class="ph" x="52" y="320" width="356" height="100" rx="12" />
-              <text class="tok-t" x="230" y="356">Local Storage</text>
-              <text class="sub mid" x="230" y="386">Hvad ligger der bagefter?</text>
-              <text class="sub mid" x="230" y="410">Hvem lagde det der?</text>
+              <rect class="box" x="20" y="20" width="420" height="460" rx="16" />
+              <path class="bar" d="M20 64 V36 a16 16 0 0 1 16 -16 H424 a16 16 0 0 1 16 16 V64 Z" />
+              <circle class="dot-r" cx="44" cy="42" r="6" /><circle class="dot-y" cx="62" cy="42" r="6" /><circle class="dot-g" cx="80" cy="42" r="6" />
+              <rect class="url" x="100" y="30" width="320" height="24" rx="12" />
+              <text class="url-t" x="116" y="47">localhost:5173<tspan class="on">/login</tspan></text>
+              <text class="role" x="52" y="100">Klient</text>
+              <text class="box-t" x="52" y="132">Browseren</text>
 
-              <rect class="box" x="940" y="20" width="420" height="430" rx="16" />
-              <text class="role" x="972" y="58">Server</text>
-              <text class="box-t" x="972" y="94">Supabase Auth</text>
-              <text class="q" x="972" y="140">Hvad sker der her?</text>
-              <rect class="ph" x="972" y="158" width="356" height="160" rx="10" />
-              <text class="qm" x="1150" y="254">?</text>
-              <text class="sub" x="972" y="352">Hvor bliver passwordet hashet?</text>
+              <rect class="box" x="940" y="20" width="420" height="460" rx="16" />
+              <path class="bar" d="M940 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
+              <use class="ico" href="#ico-server" x="960" y="30" width="24" height="24" />
+              <text class="url-t" x="996" y="47">dit-projekt.supabase.co</text>
+              <text class="role" x="972" y="100">Server</text>
+              <text class="box-t" x="972" y="132">Supabase Auth</text>
 
-              <line class="a before" x1="442" y1="140" x2="934" y2="140" />
-              <text class="lbl q-l" x="690" y="124">Hvad bliver sendt?</text>
-              <rect class="ph" x="530" y="164" width="320" height="76" rx="10" />
-              <text class="qm sm" x="690" y="216">?</text>
-              <text class="sub mid" x="690" y="270">Kan andre læse passwordet på vejen?</text>
+              <text class="q" x="52" y="176">Hvad sker der i koden?</text>
+              <rect class="ph" x="52" y="192" width="356" height="92" rx="10" />
+              <text class="qm" x="230" y="256">?</text>
+              <text class="sub" x="52" y="314">Hvilken fil? Hvilken funktion?</text>
+              <rect class="ph" x="52" y="344" width="356" height="112" rx="12" />
+              <text class="tok-t l" x="72" y="374">Local Storage</text>
+              <text class="sub mid" x="230" y="410">Hvad ligger der bagefter?</text>
+              <text class="sub mid" x="230" y="436">Hvem lagde det der?</text>
 
-              <line class="a before" x1="938" y1="370" x2="414" y2="370" />
-              <text class="lbl q-l" x="690" y="354">Hvad kommer tilbage?</text>
+              <text class="q" x="972" y="176">Hvad sker der her?</text>
+              <rect class="ph" x="972" y="192" width="356" height="170" rx="10" />
+              <text class="qm" x="1150" y="294">?</text>
+              <text class="sub" x="972" y="396">Hvor bliver passwordet hashet?</text>
+
+              <line class="a before" x1="442" y1="176" x2="934" y2="176" />
+              <text class="lbl q-l" x="690" y="160">Hvad bliver sendt?</text>
+              <rect class="ph" x="520" y="200" width="340" height="104" rx="12" />
+              <text class="qm sm" x="690" y="266">?</text>
+              <text class="sub mid" x="690" y="334">Kan andre læse passwordet på vejen?</text>
+
+              <line class="a before" x1="938" y1="420" x2="446" y2="420" />
+              <text class="lbl q-l" x="690" y="404">Hvad kommer tilbage?</text>
             </svg>
           </div>
           <p class="bottom-line">2-3 grupper viser deres tegning. Hvad var svært at tegne? Bagefter sammenligner vi med vores.</p>
         </section>
 
         <section class="fill" data-accent="yellow">
-          <span class="eyebrow">Sammenlign med jeres tegning</span>
+          <span class="eyebrow">Opsamling · sammenlign med jeres tegning</span>
           <h2>Tokenets vej ved login</h2>
           <div class="stage">
-            <svg class="sys" viewBox="0 0 1380 470" role="img" aria-labelledby="sys-login-title">
+            <svg class="sys" viewBox="0 0 1380 500" role="img" aria-labelledby="sys-login-title">
               <title id="sys-login-title">Klienten kalder signInWithPassword i login.jsx og sender email og password til Supabase Auth over HTTPS. Serveren hasher passwordet med samme salt og sammenligner med auth.users. Svaret med access token og refresh token gemmer supabase-js i Local Storage</title>
 
-              <rect class="box" x="20" y="20" width="420" height="430" rx="16" />
-              <text class="role" x="52" y="58">Klient</text>
-              <text class="box-t" x="52" y="94">Browseren</text>
-              <text class="mono" x="52" y="140">login.jsx · clientAction</text>
-              <rect class="code" x="52" y="158" width="356" height="96" rx="10" />
-              <text class="code-t" x="72" y="192">signInWithPassword({</text>
-              <text class="code-t" x="100" y="216">email, password</text>
-              <text class="code-t" x="72" y="240">})</text>
-              <text class="sub" x="52" y="284">Kører i browseren</text>
-              <rect class="tok" x="52" y="320" width="356" height="100" rx="12" />
-              <text class="tok-t" x="230" y="356">Local Storage</text>
-              <text class="mono mid" x="230" y="386">sb-…-auth-token</text>
-              <text class="sub mid" x="230" y="410">access_token · refresh_token</text>
+              <rect class="box" x="20" y="20" width="420" height="460" rx="16" />
+              <path class="bar" d="M20 64 V36 a16 16 0 0 1 16 -16 H424 a16 16 0 0 1 16 16 V64 Z" />
+              <circle class="dot-r" cx="44" cy="42" r="6" /><circle class="dot-y" cx="62" cy="42" r="6" /><circle class="dot-g" cx="80" cy="42" r="6" />
+              <rect class="url" x="100" y="30" width="320" height="24" rx="12" />
+              <text class="url-t" x="116" y="47">localhost:5173<tspan class="on">/login</tspan></text>
+              <text class="role" x="52" y="100">Klient</text>
+              <text class="box-t" x="52" y="132">Browseren</text>
 
-              <rect class="box" x="940" y="20" width="420" height="430" rx="16" />
-              <text class="role" x="972" y="58">Server</text>
-              <text class="box-t" x="972" y="94">Supabase Auth</text>
-              <text class="mono" x="972" y="140">auth.users</text>
-              <text class="sub" x="972" y="190">1. Henter hashen</text>
-              <text class="sub" x="972" y="226">2. Hasher det indtastede</text>
-              <text class="sub" x="996" y="252">password med samme salt</text>
-              <text class="sub" x="972" y="288">3. Passer de? Så et token</text>
-              <rect class="ok" x="972" y="320" width="356" height="56" rx="10" />
-              <text class="ok-t" x="1150" y="355">✓ Her bliver passwordet hashet</text>
+              <rect class="box" x="940" y="20" width="420" height="460" rx="16" />
+              <path class="bar" d="M940 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
+              <use class="ico" href="#ico-server" x="960" y="30" width="24" height="24" />
+              <text class="url-t" x="996" y="47">dit-projekt.supabase.co</text>
+              <text class="role" x="972" y="100">Server</text>
+              <text class="box-t" x="972" y="132">Supabase Auth</text>
 
-              <line class="a last" x1="442" y1="140" x2="934" y2="140" />
-              <text class="lbl last" x="690" y="124">POST /auth/v1/token</text>
-              <rect class="code" x="530" y="164" width="320" height="76" rx="10" />
-              <text class="code-t" x="550" y="196">"email": "anna@…",</text>
-              <text class="code-t" x="550" y="224">"password": "hemmelig123"</text>
-              <text class="sub mid" x="690" y="270">Klartekst i body. HTTPS krypterer vejen</text>
+              <text class="mono" x="52" y="176">login.jsx · clientAction</text>
+              <rect class="code" x="52" y="192" width="356" height="92" rx="10" />
+              <text class="code-t" x="72" y="222">signInWithPassword({</text>
+              <text class="code-t" x="100" y="246">email, password</text>
+              <text class="code-t" x="72" y="270">})</text>
+              <text class="sub" x="52" y="314">Kører i browseren</text>
+              <rect class="tok" x="52" y="344" width="356" height="112" rx="12" />
+              <text class="tok-t l" x="72" y="374">Local Storage</text>
+              <text class="key" x="388" y="374">sb-…-auth-token</text>
+              <g class="fragment" data-fragment-index="1">
+                <rect class="chip" x="72" y="390" width="270" height="36" rx="18" />
+                <text class="chip-t" x="86" y="414"><tspan class="jh">eyJhbGci</tspan>.<tspan class="jp">eyJzdWIi</tspan>.<tspan class="js">SflKxw</tspan></text>
+                <text class="sub sm" x="72" y="446">access_token + refresh_token</text>
+              </g>
 
-              <g class="fragment">
-                <line class="a last" x1="938" y1="370" x2="414" y2="370" />
-                <text class="lbl last" x="690" y="354">200 OK · access_token · refresh_token</text>
-                <text class="sub mid" x="690" y="402">supabase-js gemmer det selv</text>
+              <use class="ico" href="#ico-db" x="972" y="158" width="22" height="22" />
+              <text class="mono" x="1002" y="176">auth.users</text>
+              <text class="sub" x="972" y="224">1. Henter hashen</text>
+              <text class="sub" x="972" y="258">2. Hasher det indtastede</text>
+              <text class="sub" x="996" y="284">password med samme salt</text>
+              <text class="sub" x="972" y="318">3. Passer de? Så et token</text>
+              <rect class="ok" x="972" y="344" width="356" height="56" rx="10" />
+              <text class="ok-t" x="1150" y="379">✓ Her bliver passwordet hashet</text>
+
+              <line class="a last" x1="442" y1="176" x2="934" y2="176" />
+              <text class="lbl last" x="690" y="160">signInWithPassword() sender</text>
+              <rect class="req-c last" x="520" y="200" width="340" height="104" rx="12" />
+              <path class="req-bar" d="M520 236 V212 a12 12 0 0 1 12 -12 H848 a12 12 0 0 1 12 12 V236 Z" />
+              <text class="req-t" x="538" y="224"><tspan class="verb">POST</tspan> /auth/v1/token</text>
+              <text class="req-t" x="538" y="264">"email": "anna@…",</text>
+              <text class="req-t" x="538" y="290">"password": "hemmelig123"</text>
+              <text class="sub mid" x="690" y="334">Klartekst i body. HTTPS krypterer vejen</text>
+
+              <g class="fragment" data-fragment-index="1">
+                <line class="a last" x1="938" y1="420" x2="446" y2="420" />
+                <text class="lbl last" x="690" y="388">200 OK · access_token · refresh_token</text>
+                <rect class="chip" x="555" y="402" width="270" height="36" rx="18" />
+                <text class="chip-t" x="569" y="426"><tspan class="jh">eyJhbGci</tspan>.<tspan class="jp">eyJzdWIi</tspan>.<tspan class="js">SflKxw</tspan></text>
+                <text class="sub mid" x="690" y="470">supabase-js gemmer det selv</text>
               </g>
             </svg>
           </div>
@@ -311,41 +231,108 @@
         </section>
 
         <section class="fill" data-accent="yellow">
-          <span class="eyebrow">Spørgsmålene fra fredag</span>
-          <h2>Hvad kan man gøre med det, hvis man får fat i det?</h2>
+          <span class="eyebrow">Opsamling · spørgsmålene fra fredag</span>
+          <h2>Hvad svarede I?</h2>
           <div class="stage">
             <div class="qa3">
               <article style="--c: var(--cyan)">
                 <span>Spørgsmål 1</span>
-                <strong>Jeres anon key</strong>
+                <strong>Hvad kan man gøre, hvis man får fat i jeres <em>anon key</em>?</strong>
                 <div class="ans fragment">Det samme som enhver anden besøgende. Den står i jeres frontend-kode, så <b>alle kan finde den</b> alligevel.</div>
               </article>
               <article style="--c: var(--red)">
                 <span>Spørgsmål 2</span>
-                <strong>En brugers access token</strong>
+                <strong>Hvad kan man gøre, hvis man får fat i en brugers <em>access token</em>? Og hvor længe?</strong>
                 <div class="ans fragment">Man <b>er brugeren</b>, indtil tokenet udløber. Det står i <code>exp</code>. Højst en time.</div>
               </article>
               <article style="--c: var(--orange)">
                 <span>Spørgsmål 3</span>
-                <strong>Validering i <code>clientAction</code></strong>
+                <strong>Hvorfor kan backenden ikke stole på den validering, I har lavet i <code>clientAction</code>?</strong>
                 <div class="ans fragment">Den kører i browseren. Alle kan sende et request <b>uden om den</b>, fx fra Thunder Client.</div>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Spørgsmål 1 og 2 kommer igen i dag. Det er derfor, der er to forskellige headers.</p>
+          <p class="bottom-line">Spørgsmål 1 og 2 kommer igen i øvelse 10. Spørgsmål 3 kommer til sidst i dag.</p>
         </section>
 
-        <!-- ============ 02 HVEM SPØRGER? ============ -->
+        <!-- Sidst og i dag: broen til resten af dagen -->
 
-        <section id="hvem" class="chapter" data-accent="red">
-          <span class="chapter-number">02</span>
-          <span class="eyebrow">Hvordan ved backenden, hvem du er?</span>
-          <h2>HTTP husker<br />ingenting</h2>
-          <p>Hvert request står alene. Det skal selv fortælle, hvem det kommer fra.</p>
+        <section id="sidst-rsa" class="fill" data-accent="yellow">
+          <span class="eyebrow">Opsamling · sidst og i dag · react-supabase-auth</span>
+          <h2>Sidst fik I et token. I dag sender I det selv</h2>
+          <div class="stage">
+            <div class="sys-legend">
+              <span class="lg last">Sidst · øvelse 1-9</span>
+              <span class="lg today fragment" data-fragment-index="1">I dag · øvelse 10-12</span>
+            </div>
+            <svg class="sys" viewBox="0 0 1380 500" role="img" aria-labelledby="sys-rsa-title">
+              <title id="sys-rsa-title">react-supabase-auth i browseren logger ind hos Supabase Auth og får et token, som ligger i Local Storage. getUser() sender tokenet for jer. I dag bygger I selv requestet til /auth/v1/user med tokenet i en Authorization-header</title>
+
+              <rect class="box" x="20" y="20" width="410" height="460" rx="16" />
+              <path class="bar" d="M20 64 V36 a16 16 0 0 1 16 -16 H414 a16 16 0 0 1 16 16 V64 Z" />
+              <circle class="dot-r" cx="44" cy="42" r="6" /><circle class="dot-y" cx="62" cy="42" r="6" /><circle class="dot-g" cx="80" cy="42" r="6" />
+              <rect class="url" x="100" y="30" width="310" height="24" rx="12" />
+              <text class="url-t" x="116" y="47">localhost:5173<tspan class="on">/profile</tspan></text>
+              <text class="box-t" x="48" y="110">react-supabase-auth</text>
+              <text class="sub" x="48" y="138">Kun frontend. Ingen backend</text>
+              <rect class="mini" x="48" y="164" width="112" height="64" rx="10" />
+              <text class="mono mid" x="104" y="192">/register</text><text class="sub sm mid" x="104" y="215">øvelse 4-5</text>
+              <rect class="mini" x="168" y="164" width="112" height="64" rx="10" />
+              <text class="mono mid" x="224" y="192">/login</text><text class="sub sm mid" x="224" y="215">øvelse 6-7</text>
+              <rect class="mini" x="288" y="164" width="112" height="64" rx="10" />
+              <text class="mono mid" x="344" y="192">/profile</text><text class="sub sm mid" x="344" y="215">øvelse 8-9</text>
+
+              <rect class="tok" x="48" y="350" width="354" height="102" rx="12" />
+              <text class="tok-t l" x="68" y="380">Local Storage</text>
+              <text class="key" x="384" y="380">sb-…-auth-token</text>
+              <rect class="chip" x="68" y="398" width="270" height="36" rx="18" />
+              <text class="chip-t" x="84" y="422"><tspan class="jh">eyJhbGci</tspan>.<tspan class="jp">eyJzdWIi</tspan>.<tspan class="js">SflKxw</tspan></text>
+
+              <rect class="box" x="950" y="20" width="410" height="460" rx="16" />
+              <path class="bar" d="M950 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
+              <use class="ico" href="#ico-server" x="970" y="30" width="24" height="24" />
+              <text class="url-t" x="1006" y="47">dit-projekt.supabase.co</text>
+              <text class="box-t" x="978" y="110">Supabase Auth</text>
+              <use class="ico" href="#ico-db" x="978" y="128" width="22" height="22" />
+              <text class="mono" x="1008" y="145">auth.users</text>
+              <rect class="tbl" x="978" y="160" width="354" height="92" rx="8" />
+              <path class="tbl-l" d="M978 188 H1332 M978 220 H1332 M1120 160 V252" />
+              <text class="tbl-h" x="992" y="179">email</text><text class="tbl-h" x="1134" y="179">encrypted_password</text>
+              <text class="tbl-c" x="992" y="210">anna@…</text><text class="tbl-c" x="1134" y="210">$2a$10$Xk9…</text>
+              <text class="tbl-c" x="992" y="242">bo@…</text><text class="tbl-c" x="1134" y="242">$2a$10$Qp3…</text>
+              <text class="sub" x="978" y="300">Hasher passwords</text>
+              <text class="sub" x="978" y="334">Udsteder tokens</text>
+              <text class="sub" x="978" y="368">Tjekker signaturen</text>
+
+              <line class="a last" x1="432" y1="110" x2="944" y2="110" />
+              <text class="lbl last" x="690" y="96">signUp() · signInWithPassword()</text>
+              <line class="a last" x1="948" y1="170" x2="436" y2="170" />
+              <rect class="chip" x="555" y="152" width="270" height="36" rx="18" />
+              <text class="chip-t" x="569" y="176"><tspan class="jh">eyJhbGci</tspan>.<tspan class="jp">eyJzdWIi</tspan>.<tspan class="js">SflKxw</tspan></text>
+              <line class="a last" x1="432" y1="246" x2="944" y2="246" />
+              <rect class="pill last" x="610" y="228" width="160" height="36" rx="18" />
+              <text class="lbl last mono-l" x="690" y="252">getUser()</text>
+              <text class="sub sm mid" x="690" y="290">sender tokenet for jer. I ser ikke hvordan</text>
+
+              <g class="fragment" data-fragment-index="1">
+                <line class="a today" x1="340" y1="416" x2="482" y2="416" />
+                <rect class="req-c" x="488" y="322" width="384" height="140" rx="12" />
+                <path class="req-bar" d="M488 360 V334 a12 12 0 0 1 12 -12 H860 a12 12 0 0 1 12 12 V360 Z" />
+                <text class="req-t" x="506" y="347"><tspan class="verb">GET</tspan> /auth/v1/user</text>
+                <text class="req-t m" x="506" y="390">apikey: sb_publishable_…</text>
+                <rect class="req-hl" x="496" y="406" width="368" height="34" rx="8" />
+                <text class="req-t" x="506" y="429">Authorization: Bearer <tspan class="jh">eyJhbGci</tspan>…</text>
+                <line class="a today" x1="874" y1="362" x2="944" y2="362" />
+                <text class="ok-p" x="978" y="424">200 OK + brugeren</text>
+                <text class="lbl today" x="680" y="490">I bygger det selv · fetch() → apiFetch()</text>
+              </g>
+            </svg>
+          </div>
+          <p class="bottom-line"><code>getUser()</code> sendte tokenet for jer. I dag bygger I selv det request, den sender.</p>
         </section>
 
-        <section class="fill" data-accent="red">
-          <span class="eyebrow">Fredagens test · to og to · 5 minutter</span>
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Opsamling · fredagens test · to og to · 5 minutter</span>
           <h2>Står tokenet i requestet til jeres API?</h2>
           <div class="stage">
             <div class="net-layout wide">
@@ -379,6 +366,209 @@
             </div>
           </div>
           <p class="bottom-line">Frontenden ved, hvem I er. Men det fortæller den ikke jeres API.</p>
+        </section>
+
+        <section id="sidst-chatbot" class="fill" data-accent="yellow">
+          <span class="eyebrow">Opsamling · sidst og i dag · chatbotten</span>
+          <h2>I dag kommer tokenet med til jeres API</h2>
+          <div class="stage">
+            <div class="sys-legend">
+              <span class="lg before">Fra step 11-13</span>
+              <span class="lg last">Sidst · step 14</span>
+              <span class="lg today fragment" data-fragment-index="1">I dag · step 15</span>
+            </div>
+            <svg class="sys" viewBox="0 0 1380 500" role="img" aria-labelledby="sys-cb-title">
+              <title id="sys-cb-title">Chatbotten logger ind hos Supabase Auth i step 14 og får et token, som ligger i Local Storage. Den henter tråde fra Express uden token. I dag sender den tokenet til Express i en Authorization-header. Express læser det ikke før step 16</title>
+
+              <rect class="proj" x="1020" y="6" width="354" height="488" rx="18" />
+              <text class="proj-t" x="1044" y="40">Supabase-projektet</text>
+              <rect class="box" x="1044" y="60" width="306" height="166" rx="14" />
+              <use class="ico" href="#ico-server" x="1066" y="80" width="24" height="24" />
+              <text class="box-t" x="1100" y="101">Supabase Auth</text>
+              <text class="mono" x="1066" y="146">auth.users</text>
+              <text class="sub" x="1066" y="190">Udsteder tokens</text>
+              <rect class="box" x="1044" y="270" width="306" height="200" rx="14" />
+              <use class="ico" href="#ico-db" x="1066" y="290" width="24" height="24" />
+              <text class="box-t" x="1100" y="311">Postgres</text>
+              <text class="mono" x="1066" y="356">threads · messages</text>
+              <text class="sub" x="1066" y="406">Alle tråde. Ingen</text>
+              <text class="sub" x="1066" y="434">WHERE user_id endnu</text>
+
+              <rect class="box" x="6" y="20" width="330" height="460" rx="16" />
+              <path class="bar" d="M6 64 V36 a16 16 0 0 1 16 -16 H320 a16 16 0 0 1 16 16 V64 Z" />
+              <circle class="dot-r" cx="30" cy="42" r="6" /><circle class="dot-y" cx="48" cy="42" r="6" /><circle class="dot-g" cx="66" cy="42" r="6" />
+              <rect class="url" x="86" y="30" width="230" height="24" rx="12" />
+              <text class="url-t" x="102" y="47">localhost:5173<tspan class="on">/chat/…</tspan></text>
+              <text class="box-t" x="30" y="110">Chatbot</text>
+              <text class="sub" x="30" y="138">frontend/</text>
+              <rect class="mini" x="30" y="160" width="282" height="48" rx="10" />
+              <text class="mono" x="46" y="190">/login /register</text><text class="sub sm" x="296" y="190" text-anchor="end">step 14</text>
+              <rect class="mini" x="30" y="216" width="282" height="48" rx="10" />
+              <text class="mono" x="46" y="246">/ /chat/…</text><text class="sub sm" x="296" y="246" text-anchor="end">step 11-13</text>
+
+              <rect class="tok" x="30" y="350" width="282" height="102" rx="12" />
+              <text class="tok-t l" x="46" y="380">Local Storage</text>
+              <rect class="chip" x="46" y="398" width="234" height="36" rx="18" />
+              <text class="chip-t" x="60" y="422"><tspan class="jh">eyJhbGci</tspan>.<tspan class="jp">eyJzdWIi</tspan>.<tspan class="js">Sfl</tspan></text>
+
+              <rect class="box" x="680" y="270" width="250" height="200" rx="14" />
+              <path class="bar" d="M680 314 V284 a14 14 0 0 1 14 -14 H916 a14 14 0 0 1 14 14 V314 Z" />
+              <use class="ico" href="#ico-server" x="698" y="280" width="24" height="24" />
+              <text class="url-t" x="732" y="297">localhost:3000</text>
+              <text class="box-t" x="702" y="352">Express API</text>
+              <text class="sub" x="702" y="380">backend/</text>
+              <text class="mono" x="702" y="418">/api/threads</text>
+
+              <line class="a last" x1="338" y1="110" x2="1038" y2="110" />
+              <text class="lbl last" x="690" y="96">step 14 · signUp() · signInWithPassword()</text>
+              <line class="a last" x1="1042" y1="174" x2="342" y2="174" />
+              <rect class="chip" x="573" y="156" width="234" height="36" rx="18" />
+              <text class="chip-t" x="587" y="180"><tspan class="jh">eyJhbGci</tspan>.<tspan class="jp">eyJzdWIi</tspan>.<tspan class="js">Sfl</tspan></text>
+
+              <line class="a before" x1="338" y1="300" x2="674" y2="300" />
+              <text class="lbl before" x="506" y="286">fetch · intet token</text>
+              <line class="a before" x1="932" y1="370" x2="1038" y2="370" />
+              <text class="lbl before" x="985" y="356">SQL</text>
+
+              <g class="fragment" data-fragment-index="1">
+                <line class="a today" x1="282" y1="416" x2="350" y2="416" />
+                <rect class="req-c" x="356" y="336" width="262" height="112" rx="12" />
+                <path class="req-bar" d="M356 374 V348 a12 12 0 0 1 12 -12 H606 a12 12 0 0 1 12 12 V374 Z" />
+                <text class="req-t" x="372" y="361"><tspan class="verb">GET</tspan> /api/threads</text>
+                <rect class="req-hl" x="364" y="390" width="246" height="34" rx="8" />
+                <text class="req-t sm" x="374" y="412">Authorization: Bearer <tspan class="jh">eyJ</tspan>…</text>
+                <line class="a today" x1="620" y1="416" x2="674" y2="416" />
+                <text class="lbl today" x="487" y="476">apiFetch() · step 15</text>
+                <text class="note" x="805" y="452">Læser det ikke endnu</text>
+              </g>
+            </svg>
+          </div>
+          <p class="bottom-line">Express får tokenet i dag. Det bliver først tjekket i step 16.</p>
+        </section>
+
+        <!-- ============ 02 HVEM SPØRGER? ============ -->
+
+        <section id="hvem" class="chapter" data-accent="red">
+          <span class="chapter-number">02</span>
+          <span class="eyebrow">Hvordan ved backenden, hvem du er?</span>
+          <h2>HTTP husker<br />ingenting</h2>
+          <p>Hvert request står alene. Det skal selv fortælle, hvem det kommer fra.</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Kender I fra Node og Express · HTTP</span>
+          <h2>Et request ud. Et response tilbage</h2>
+          <div class="stage">
+            <svg class="sys" viewBox="0 0 1380 516" role="img" aria-labelledby="sys-http-title">
+              <title id="sys-http-title">Browseren sender POST /api/threads med headerne Content-Type og Origin og en JSON-body. Express svarer 201 Created med Content-Type og Access-Control-Allow-Origin. express.json() læser Content-Type, cors() sætter Access-Control-Allow-Origin, og browseren tjekker den</title>
+
+              <rect class="box" x="20" y="20" width="320" height="476" rx="16" />
+              <path class="bar" d="M20 64 V36 a16 16 0 0 1 16 -16 H324 a16 16 0 0 1 16 16 V64 Z" />
+              <circle class="dot-r" cx="44" cy="42" r="6" /><circle class="dot-y" cx="62" cy="42" r="6" /><circle class="dot-g" cx="80" cy="42" r="6" />
+              <rect class="url" x="100" y="30" width="220" height="24" rx="12" />
+              <text class="url-t" x="116" y="47">localhost:5173</text>
+              <text class="role" x="44" y="102">Klient</text>
+              <text class="box-t" x="44" y="134">Browseren</text>
+
+              <rect class="box" x="1040" y="20" width="320" height="476" rx="16" />
+              <path class="bar" d="M1040 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
+              <use class="ico" href="#ico-server" x="1060" y="30" width="24" height="24" />
+              <text class="url-t" x="1096" y="47">localhost:3000</text>
+              <text class="role" x="1064" y="102">Server</text>
+              <text class="box-t" x="1064" y="134">Express API</text>
+
+              <g transform="translate(0 36)">
+              <line class="a rq-a" x1="342" y1="140" x2="396" y2="140" />
+              <rect class="req-c rq-in" x="402" y="44" width="600" height="204" rx="12" />
+              <path class="req-bar" d="M402 84 V56 a12 12 0 0 1 12 -12 H990 a12 12 0 0 1 12 12 V84 Z" />
+              <text class="req-t" x="422" y="71"><tspan class="v-c">POST</tspan> /api/threads</text>
+              <text class="sec-t" x="422" y="108">Headers</text>
+              <text class="req-t m" x="422" y="134">Host: localhost:3000</text>
+              <text class="req-t" x="422" y="160">Content-Type: application/json</text><circle class="mk-n" cx="976" cy="154" r="12" /><text class="mk-t" x="976" y="159">1</text>
+              <text class="req-t" x="422" y="186">Origin: http://localhost:5173</text><circle class="mk-n" cx="976" cy="180" r="12" /><text class="mk-t" x="976" y="185">2</text>
+              <text class="sec-t" x="422" y="212">Body</text>
+              <text class="req-t y" x="422" y="236">{"title":"Pizza"}</text>
+              <line class="a rq-a" x1="1004" y1="140" x2="1034" y2="140" />
+              </g>
+              <g transform="translate(0 22)">
+              <line class="a rs-a" x1="1038" y1="372" x2="1008" y2="372" />
+              <rect class="req-c rs-in" x="402" y="282" width="600" height="182" rx="12" />
+              <path class="req-bar" d="M402 322 V294 a12 12 0 0 1 12 -12 H990 a12 12 0 0 1 12 12 V322 Z" />
+              <text class="req-t" x="422" y="309"><tspan class="v-g">201</tspan> Created</text>
+              <text class="sec-t" x="422" y="346">Headers</text>
+              <text class="req-t" x="422" y="372">Content-Type: application/json</text><circle class="mk-n" cx="976" cy="366" r="12" /><text class="mk-t" x="976" y="371">1</text>
+              <text class="req-t" x="422" y="398">Access-Control-Allow-Origin: http://localhost:5173</text><circle class="mk-n" cx="976" cy="392" r="12" /><text class="mk-t" x="976" y="397">2</text>
+              <text class="sec-t" x="422" y="424">Body</text>
+              <text class="req-t y" x="422" y="448">{"id":7,"title":"Pizza"}</text>
+              <line class="a rs-a" x1="400" y1="372" x2="346" y2="372" />
+              </g>
+              <g class="fragment" data-fragment-index="1" transform="translate(0 36)">
+                <circle class="mk-n" cx="56" cy="154" r="12" /><text class="mk-t" x="56" y="159">1</text><text class="note-l" x="78" y="160">sætter I i <tspan class="code">fetch()</tspan></text>
+                <circle class="mk-n" cx="56" cy="180" r="12" /><text class="mk-t" x="56" y="185">2</text><text class="note-l" x="78" y="186">sætter browseren selv</text>
+                <circle class="mk-n" cx="1076" cy="154" r="12" /><text class="mk-t" x="1076" y="159">1</text><text class="note-l" x="1098" y="160"><tspan class="code">express.json()</tspan> læser</text>
+                <circle class="mk-n" cx="1076" cy="180" r="12" /><text class="mk-t" x="1076" y="185">2</text><text class="note-l" x="1098" y="186"><tspan class="code">cors()</tspan> læser</text>
+              </g>
+              <g class="fragment" data-fragment-index="1" transform="translate(0 22)">
+                <text class="note-l m" x="44" y="372"><tspan class="code">response.json()</tspan> læser body</text>
+                <circle class="mk-n" cx="56" cy="392" r="12" /><text class="mk-t" x="56" y="397">2</text><text class="note-l" x="78" y="398">browseren tjekker den</text>
+                <circle class="mk-n" cx="1076" cy="366" r="12" /><text class="mk-t" x="1076" y="371">1</text><text class="note-l" x="1098" y="372"><tspan class="code">response.json()</tspan></text>
+                <circle class="mk-n" cx="1076" cy="392" r="12" /><text class="mk-t" x="1076" y="397">2</text><text class="note-l" x="1098" y="398"><tspan class="code">cors()</tspan> sætter</text>
+              </g>
+            </svg>
+          </div>
+          <p class="bottom-line">En header er et navn og en værdi. I dag kommer der én til i requestet: <code>Authorization</code>.</p>
+        </section>
+
+        <section class="fill stateless-recap" data-accent="red">
+          <span class="eyebrow">Kender I fra REST API · princip 02 · stateless</span>
+          <h2>Serveren husker intet mellem to requests</h2>
+          <div class="stage">
+            <p class="sl-def"><b>Stateless:</b> hvert request indeholder al nødvendig information. Serveren gemmer ikke klientens tilstand mellem requests.</p>
+            <svg class="sys sl" viewBox="0 0 1380 440" role="img" aria-labelledby="sys-sl-title">
+              <title id="sys-sl-title">Brugeren åbner Anna, åbner Bo og sletter Bo. Hver handling bliver et nyt request med id'et i URL'en, fordi serveren intet husker mellem dem. I dag sender chatbotten tokenet med i en header på samme måde, så serveren kan se, hvem der spørger</title>
+
+              <rect class="box" x="20" y="20" width="280" height="400" rx="16" />
+              <path class="bar" d="M20 64 V36 a16 16 0 0 1 16 -16 H284 a16 16 0 0 1 16 16 V64 Z" />
+              <circle class="dot-r" cx="44" cy="42" r="6" /><circle class="dot-y" cx="62" cy="42" r="6" /><circle class="dot-g" cx="80" cy="42" r="6" />
+              <rect class="url" x="100" y="30" width="180" height="24" rx="12" />
+              <text class="url-t" x="116" y="47">localhost:5173</text>
+              <text class="role" x="44" y="102">Klient</text>
+              <text class="box-t" x="44" y="134">Browseren</text>
+
+              <rect class="box" x="1080" y="20" width="280" height="400" rx="16" />
+              <path class="bar" d="M1080 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
+              <use class="ico" href="#ico-server" x="1100" y="30" width="24" height="24" />
+              <text class="url-t" x="1136" y="47">localhost:3000</text>
+              <text class="role" x="1104" y="102">Server</text>
+              <text class="box-t" x="1104" y="134">Express API</text>
+              <g transform="translate(1316 118)"><circle r="20" fill="none" stroke="var(--line)" stroke-width="3" /><path d="M-10 0 h20" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" /><path d="M-11 -11 L11 11" stroke="#ff6767" stroke-width="3.5" stroke-linecap="round" /></g>
+
+              <text class="sub" x="44" y="197">Åbn Anna</text>
+              <line class="a plain" x1="302" y1="190" x2="1074" y2="190" />
+              <rect class="rq" x="500" y="168" width="380" height="44" rx="22" />
+              <text class="rq-t" x="690" y="197">GET /students/<tspan class="id">1</tspan></text>
+              <text class="sub" x="1104" y="197">id <tspan class="id-c">1</tspan> → Anna</text>
+              <text class="sub" x="44" y="257">Åbn Bo</text>
+              <line class="a plain" x1="302" y1="250" x2="1074" y2="250" />
+              <rect class="rq" x="500" y="228" width="380" height="44" rx="22" />
+              <text class="rq-t" x="690" y="257">GET /students/<tspan class="id">2</tspan></text>
+              <text class="sub" x="1104" y="257">id <tspan class="id-c">2</tspan> → Bo</text>
+              <text class="sub" x="44" y="317">Slet Bo</text>
+              <line class="a plain" x1="302" y1="310" x2="1074" y2="310" />
+              <rect class="rq" x="500" y="288" width="380" height="44" rx="22" />
+              <text class="rq-t" x="690" y="317">DELETE /students/<tspan class="id">2</tspan></text>
+              <text class="sub" x="1104" y="317">id <tspan class="id-c">2</tspan> → slettet</text>
+
+              <g class="fragment">
+                <text class="sub" x="44" y="387">Åbn chatbotten</text>
+                <line class="a today" x1="302" y1="380" x2="1074" y2="380" />
+                <rect class="rq today" x="400" y="358" width="580" height="44" rx="22" />
+                <text class="rq-t" x="690" y="387">GET /api/threads · <tspan class="who">Authorization: Bearer eyJ…</tspan></text>
+                <text class="sub" x="1104" y="387">Hvem? <tspan class="who-c">tokenet</tspan></text>
+              </g>
+            </svg>
+          </div>
+          <p class="bottom-line">Id'et skal med i hvert request. Det samme gælder tokenet. <a href="../rest-api/#/princip-stateless" target="_blank" rel="noreferrer"><b>Sliden fra REST API ↗</b></a></p>
         </section>
 
         <section class="fill" data-accent="red">
@@ -466,7 +656,7 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
 
         <section id="bearer" class="chapter" data-accent="purple">
           <span class="chapter-number">03</span>
-          <span class="eyebrow">Headers og Bearer tokens · øvelse 10</span>
+          <span class="eyebrow">Tokens, headers og Bearer · øvelse 10</span>
           <h2>Et request er mere<br />end en URL</h2>
           <p>Tokenet skal med i en header. I kender allerede én.</p>
         </section>
@@ -495,6 +685,102 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
             </div>
           </div>
           <p class="bottom-line">En header er et navn og en værdi. I <code>fetch()</code> skriver I dem i objektet <code>headers</code>.</p>
+        </section>
+
+        <section class="fill token-def-slide" data-accent="purple">
+          <span class="eyebrow">Repetition fra sidst · token</span>
+          <h2>Hvad er et token?</h2>
+          <div class="stage">
+            <div class="tokmap">
+              <span></span><span class="hd">Én gang</span><span></span><span class="hd">Du får</span><span></span><span class="hd">Bagefter</span>
+
+              <span class="lbl" style="--c: var(--yellow)">Festival</span>
+              <div class="cell"><strong>Billet og ID</strong><small>Tjekkes ved indgangen</small></div>
+              <b class="ar">→</b>
+              <div class="cell got" style="--c: var(--yellow)"><strong>Armbånd</strong><small>Gælder hele festivalen</small></div>
+              <b class="ar">→</b>
+              <div class="cell"><strong>Vis armbåndet</strong><small>Så kommer du ind ved scenen uden ID</small></div>
+
+              <span class="lbl" style="--c: var(--cyan)">Login</span>
+              <div class="cell" style="--c: var(--cyan)"><strong>Email og password</strong><small>Supabase tjekker det mod hashen</small><em class="tag"><code>signInWithPassword()</code> · øvelse 6</em></div>
+              <b class="ar">→</b>
+              <div class="cell got" style="--c: var(--cyan)"><strong>Token</strong><span class="tok"><span class="h">eyJhbGci</span><span class="dot">.</span><span class="p">eyJzdWIi</span><span class="dot">.</span><span class="s">Ht0NZgcq</span></span><small>Gælder en time</small><em class="tag" style="--c: var(--purple)">Local Storage · øvelse 7</em></div>
+              <b class="ar">→</b>
+              <div class="cell" style="--c: var(--green)"><strong>Send tokenet</strong><small>Så ved Supabase, hvem du er, uden password</small><em class="tag"><code>getUser()</code> · øvelse 8</em></div>
+            </div>
+            <p class="cors-definition">Et <b>token</b> er en tekststreng, der beviser, hvem du er, i en begrænset tid. Et request fortæller ikke selv, hvem det kommer fra. Derfor sender appen tokenet med i stedet for dit password.</p>
+          </div>
+          <p class="bottom-line">Sidst sendte <code>getUser()</code> tokenet for jer. I dag gør I det selv. Det, I sender, er et JSON Web Token.</p>
+        </section>
+
+        <section class="fill cors-def-slide jwt-def-slide" data-accent="purple">
+          <span class="eyebrow">Repetition fra sidst · JWT</span>
+          <h2>Hvad er et JSON Web Token?</h2>
+          <div class="stage">
+            <div class="throw-anatomy cors-name jwt-name">
+              <span class="cn-json"><code>JSON</code><small>det format, jeres API sender</small></span>
+              <span class="cn-web"><code>Web</code><small>sendes med i requests</small></span>
+              <span class="cn-token"><code>Token</code><small>beviser, hvem du er</small></span>
+            </div>
+            <p class="cors-definition">Et <b>JSON Web Token</b> (JWT) er et token, hvor oplysningerne om dig står som JSON, underskrevet af Supabase. Alle kan læse det, men ingen kan rette i det.</p>
+            <div class="cards-3 cors-facts">
+              <article class="card card-warn"><span>Alle kan læse det</span><p>Det er kun kodet, ikke krypteret. Der må aldrig stå hemmeligheder i det.</p></article>
+              <article class="card card-good"><span>Ingen kan rette i det</span><p>Ret ét tegn, og signaturen passer ikke længere.</p></article>
+              <article class="card"><span>Udløbstiden står i det</span><p>Feltet <code>exp</code> siger, hvornår tokenet holder op med at virke.</p></article>
+            </div>
+          </div>
+          <p class="bottom-line">Jeres access token er et JWT. Det er det, der står efter <code>Bearer</code> i dag.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Repetition fra sidst · det, jwt.io viser jer</span>
+          <h2>Tre dele, adskilt af punktummer</h2>
+          <div class="stage">
+            <div class="jwtv">
+              <div class="enc"><span class="h">eyJhbGciOiJFUzI1NiIsImtpZCI6ImI3YzQxZjJlLTlhM2QtNGM1NS04ZTIxLTZmMGQzYTliN2UxNCIsInR5cCI6IkpXVCJ9</span><span class="dot">.</span><span class="p">eyJpc3MiOiJodHRwczovL3F3bXprY3locHJsYnRueHNkZmdhLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZjNjMmE3MS01ZDRlLTRiOWEtOWMxZi0yZTZkN2EwYjNjNDUiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzkzMTgyMzIwLCJpYXQiOjE3OTMxNzg3MjAsImVtYWlsIjoiYW5uYUBleGFtcGxlLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJhbm5hQGV4YW1wbGUuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwic3ViIjoiOGYzYzJhNzEtNWQ0ZS00YjlhLTljMWYtMmU2ZDdhMGIzYzQ1In0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3OTMxNzg3MjB9XSwic2Vzc2lvbl9pZCI6ImQyYTllNmIxLTdjM2YtNGU4YS1iNWQwLTkxZjRjMmU3YTNiNiIsImlzX2Fub255bW91cyI6ZmFsc2V9</span><span class="dot">.</span><span class="s">Ht0NZgcqwrWsTc1eKy2kL4_XDpFokNVWx7ojlo3jV1XWPIDXX7PByaTVgAKGQNb6ruJf1HL_fFaHGqEvjX2hOQ</span></div>
+              <div class="dec">
+                <article class="jw-h"><span>Header</span><pre class="viz-code">{
+  <span class="k">"alg"</span>: "ES256",
+  <span class="k">"kid"</span>: "b7c41f2e-…",
+  <span class="k">"typ"</span>: "JWT"
+}</pre><small>Hvordan tokenet er underskrevet. Ældre projekter: HS256.</small></article>
+                <article class="jw-p"><span>Payload</span><pre class="viz-code">{
+  <span class="k">"sub"</span>: <span class="hl">"8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45"</span>,
+  <span class="k">"email"</span>: "anna@example.com",
+  <span class="k">"role"</span>: "authenticated",
+  <span class="k">"iat"</span>: 1793178720,
+  <span class="k">"exp"</span>: 1793182320,
+  <span class="m">…</span>
+}</pre><small>Data om brugeren. Hvert felt kaldes en <b>claim</b>.</small></article>
+                <article class="jw-s"><span>Signatur</span><pre class="viz-code">Ht0NZgcqwrWs
+Tc1eKy2kL4_X
+DpFokNVWx7oj
+…</pre><small>Lavet af Supabase med en hemmelig nøgle, der aldrig er i browseren.</small></article>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line"><b>header.payload.signatur</b>. jwt.io farver de tre dele på samme måde.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Repetition fra sidst · access token og refresh token</span>
+          <h2>Et access token lever kun en time</h2>
+          <div class="stage">
+            <div class="tline">
+              <div class="tl-track">
+                <div class="bar" style="--c: var(--purple)"><strong>access_token #1</strong><small>I logger ind kl. 10.12</small></div>
+                <div class="bar" style="--c: var(--purple)"><strong>access_token #2</strong><small>Hentet med refresh_token</small></div>
+                <div class="bar off" style="--c: var(--purple)"><strong>access_token #3</strong><small>… og sådan fortsætter det</small></div>
+              </div>
+              <div class="ticks"><span>10.12 · iat</span><span>11.12 · exp</span><span>12.12</span></div>
+              <div class="refresh"><div><b>↻</b><span>Lige før <code>exp</code> bruger supabase-js <code>refresh_token</code></span></div><div><b>↻</b><span>Igen en time senere</span></div><div><b>✕</b><span><code>signOut()</code> sletter begge</span></div></div>
+            </div>
+            <div class="tline-cards">
+              <div style="--c: var(--purple)"><b>Access token</b><span>Det JWT, I kiggede i. Siger, hvem I er. Bliver det stjålet, virker det kun til <code>exp</code>.</span></div>
+              <div style="--c: var(--yellow)"><b>Refresh token</b><span>Bruges kun til at hente et nyt access token. Det klarer Supabase-klienten selv.</span></div>
+            </div>
+          </div>
+          <p class="bottom-line">Tokenet i Local Storage bliver skiftet ud hver time. Derfor henter I det frisk med <code>getSession()</code> ved hvert request.</p>
         </section>
 
         <section class="fill cors-def-slide" data-accent="purple">

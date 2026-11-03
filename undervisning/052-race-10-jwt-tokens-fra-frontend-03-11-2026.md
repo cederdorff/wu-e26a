@@ -17,22 +17,24 @@ I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én 
 <details>
 <summary><strong>1. Opsamling: jeres login-flow</strong></summary>
 
-- Vi starter med jeres tegninger og svar fra fredagens gruppearbejde
+- Hvad byggede I sidst? Derefter jeres tegninger og svar fra fredagens gruppearbejde
 - Hvad kan man gøre med en stjålet anon key? Med et stjålet access token? Og hvorfor kan backenden ikke stole på validering i frontenden?
 - Ser to brugere stadig de samme tråde? Stod tokenet i requestet til jeres API? Det gør vi noget ved i dag
 </details>
 <details>
 <summary><strong>2. Hvordan ved backenden, hvem du er?</strong></summary>
 
-- HTTP husker ingenting mellem to requests. Hvert request skal selv fortælle, hvem det kommer fra
+- Et HTTP-request og et response har begge headers. I kender `Content-Type` fra `express.json()` og `Origin` fra CORS
+- HTTP husker ingenting mellem to requests. Det er stateless fra REST API: id'et står i URL'en hver gang. Nu skal tokenet også med hver gang
 - Frontenden sender tokenet med. Backenden tjekker signaturen og finder brugerens id i `sub`. Det gør I i backenden næste uge
 - Vis billedet under ["Hvor ender chatbotten?"](../opgaver/react-supabase-auth.md#hvor-ender-chatbotten). Step 15 er det første skridt derhen
 - **Session:** at brugeren er logget ind over flere requests. Supabase-klienten henter selv et nyt access token med refresh tokenet, når det gamle udløber
 </details>
 <details>
-<summary><strong>3. HTTP headers og Bearer tokens: øvelse 10</strong></summary>
+<summary><strong>3. Tokens, headers og Bearer: øvelse 10</strong></summary>
 
 - **Headers** er ekstra information i et request. I kender `Content-Type: application/json`
+- Repetition fra sidst: token, JWT (header, payload, signatur), access token og refresh token. Det er jeres access token, der skal med i headeren
 - **Bearer token:** `Authorization: Bearer <token>`. Bearer betyder "ihændehaver": den, der har tokenet, får adgang. I har gjort det før, da jeres backend sendte Groq-nøglen
 - Øvelse 10: byg selv det request, `getUser()` sender, og tilføj én header ad gangen. Hver header retter én fejl
 - **`apikey` vs. `Authorization`:** `apikey` siger, hvilket projekt det er. `Authorization` siger, hvilken bruger det er. Det svarer på spørgsmålet fra opsamlingen: anon key står alligevel i frontenden, men et stjålet access token gør en anden til brugeren, indtil det udløber

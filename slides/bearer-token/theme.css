@@ -80,6 +80,10 @@
   font-size: 30px;
   line-height: 1.2;
 }
+.qa3 article > strong em {
+  color: var(--c);
+  font-style: normal;
+}
 .qa3 .ans {
   align-self: end;
   padding: 18px 20px;
@@ -772,7 +776,7 @@
   min-height: 470px;
   padding: 34px 34px;
 }
-.qa3 article > strong { font-size: 38px; }
+.qa3 article > strong { font-size: 32px; }
 .qa3 .ans { font-size: 27px; padding: 22px 24px; }
 
 .stateless { gap: 36px; }
@@ -908,6 +912,7 @@
    =================================================================== */
 .mk-green { fill: var(--green); }
 .mk-purple { fill: var(--purple); }
+.mk-cyan { fill: var(--cyan); }
 
 .sys-legend {
   display: flex;
@@ -1021,8 +1026,7 @@
   height: 486px;
   margin: 0 auto;
 }
-.sys { height: 452px; }
-.sys .mono.lg-m { font-size: 21px; }
+.sys { height: 480px; }
 
 /* Login flow as client/server: same .sys diagram as the opening */
 .sys .role {
@@ -1068,6 +1072,87 @@
 }
 .sys .qm.sm { font-size: 38px; }
 
+/* Shared building blocks for the four .sys models (slide 5, 6, 8, 9):
+   browser window with address bar, server with icon and host, Local
+   Storage with the token as a jwt.io-colored chip, and the HTTP request
+   as a card (same card as the title slide and the opgave diagrams) */
+.sys .bar { fill: #1b2725; }
+.sys .dot-r { fill: #ff5f57; }
+.sys .dot-y { fill: #febc2e; }
+.sys .dot-g { fill: #28c840; }
+.sys .url { fill: #0a0f0e; }
+.sys .url-t {
+  fill: var(--muted);
+  font: 500 15px var(--mono);
+}
+.sys .url-t .on { fill: var(--ink); font-weight: 700; }
+.sys .ico { color: var(--muted); }
+.sys .sub.sm { font-size: 15px; }
+.sys .mini {
+  fill: #0a0f0e;
+  stroke: rgb(255 255 255 / 14%);
+}
+.sys .tok-t.l { text-anchor: start; }
+.sys .key {
+  fill: var(--muted);
+  font: 500 14px var(--mono);
+  text-anchor: end;
+}
+.sys .chip {
+  fill: #0a0f0e;
+  stroke: color-mix(in srgb, var(--green) 70%, transparent);
+  stroke-width: 1.5;
+}
+.sys .chip-t {
+  fill: var(--ink);
+  font: 700 16px var(--mono);
+}
+.sys .jh { fill: var(--jwt-h); }
+.sys .jp { fill: var(--jwt-p); }
+.sys .js { fill: var(--jwt-s); }
+.sys .pill.last {
+  fill: #0a0f0e;
+  stroke: var(--green);
+  stroke-width: 1.5;
+}
+.sys .lbl.mono-l { font: 700 17px var(--mono); }
+.sys .tbl {
+  fill: #0a0f0e;
+  stroke: rgb(255 255 255 / 14%);
+}
+.sys .tbl-l {
+  stroke: rgb(255 255 255 / 10%);
+  stroke-width: 1;
+}
+.sys .tbl-h {
+  fill: var(--muted);
+  font: 700 13px var(--mono);
+}
+.sys .tbl-c {
+  fill: var(--ink);
+  font: 500 14px var(--mono);
+}
+.sys .req-c {
+  fill: #1f2023;
+  stroke: var(--purple);
+  stroke-width: 2;
+}
+.sys .req-c.last { stroke: var(--green); }
+.sys .req-bar { fill: #2a2b2e; }
+.sys .req-t {
+  fill: var(--ink);
+  font: 600 16px var(--mono);
+}
+.sys .req-t.m { fill: #9aa0a6; }
+.sys .req-t.sm { font-size: 14px; }
+.sys .req-t .verb { fill: var(--green); font-weight: 800; }
+.sys .ok-p {
+  fill: var(--purple);
+  font-size: 19px;
+  font-weight: 800;
+}
+.sys .req-hl { fill: color-mix(in srgb, var(--purple) 24%, transparent); }
+
 /* Last time: screenshots of the solution in browser frames */
 .shots {
   display: grid;
@@ -1097,3 +1182,73 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
+/* ===================================================================
+   Recap: HTTP message and stateless as client-server models
+   =================================================================== */
+.sys .a.rq-a {
+  stroke: var(--cyan);
+  marker-end: url(#sys-cyan);
+}
+.sys .a.rs-a {
+  stroke: var(--green);
+  marker-end: url(#sys-green);
+}
+.sys .req-c.rq-in { stroke: var(--cyan); }
+.sys .req-c.rs-in { stroke: var(--green); }
+.sys .req-t .v-c { fill: var(--cyan); font-weight: 800; }
+.sys .req-t .v-g { fill: var(--green); font-weight: 800; }
+.sys .req-t.y { fill: var(--yellow); }
+.sys .sec-t {
+  fill: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sys .mk-n { fill: var(--red); }
+.sys .mk-t {
+  fill: #111;
+  font-size: 15px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+.sys .note-l {
+  fill: var(--ink);
+  font-size: 18px;
+  font-weight: 600;
+}
+.sys .note-l.m { fill: var(--muted); }
+.sys .note-l .code,
+.sys .sub .who-c {
+  fill: var(--yellow);
+  font-family: var(--mono);
+}
+.sys .sub .who-c { fill: var(--purple); }
+.sys .sub .id-c { fill: var(--cyan); font-family: var(--mono); }
+
+.stateless-recap .sl-def {
+  margin: 0 0 18px;
+  font-size: 24px;
+  line-height: 1.4;
+}
+.stateless-recap .sl-def b { color: var(--accent); }
+.sys.sl { height: 420px; }
+.sys .a.plain {
+  stroke: var(--muted);
+  marker-end: url(#pg-arrow);
+}
+.sys .rq {
+  fill: #1f2023;
+  stroke: rgb(255 255 255 / 24%);
+  stroke-width: 1.5;
+}
+.sys .rq.today { stroke: var(--purple); stroke-width: 2; }
+.sys .rq-t {
+  fill: var(--ink);
+  font: 700 21px var(--mono);
+  text-anchor: middle;
+}
+.sys .rq-t .id { fill: var(--cyan); }
+.sys .rq-t .who { fill: var(--purple); }
+.sys .lbl.id-l { fill: var(--cyan); }
