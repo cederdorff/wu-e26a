@@ -8,45 +8,24 @@
 /* ===================================================================
    Title: one request with the token in a header
    =================================================================== */
-.title-art .req {
-  width: 470px;
-  overflow: hidden;
-  border: 1px solid #3c3d40;
-  border-radius: 12px;
-  background: #1f2023;
-  box-shadow: 0 24px 60px rgb(0 0 0 / 35%);
-  color: #e3e3e3;
-  font: 500 17px/1.6 var(--mono);
-  text-align: left;
+.title-slide {
+  grid-template-columns: 1fr 0.9fr;
 }
-.title-art .req .rl {
-  padding: 12px 18px;
-  border-bottom: 1px solid #3c3d40;
-  background: #2a2b2e;
-  font-weight: 700;
+.sys.title-sys {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 50px rgb(0 0 0 / 40%));
 }
-.title-art .req .rl b {
-  color: var(--green);
+.sys .req-t.big { font-size: 22px; }
+.sys .chip-t.big {
+  font-size: 22px;
+  text-anchor: middle;
 }
-.title-art .req .hs {
-  display: grid;
-  gap: 4px;
-  padding: 14px 18px 16px;
-}
-.title-art .req .hs span {
-  color: #9aa0a6;
-  white-space: nowrap;
-}
-.title-art .req .hs span.on {
-  margin: 4px -10px 0;
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--purple) 22%, transparent);
-  color: #fff;
-}
-.title-art .req .hs span.on i {
-  color: var(--jwt-p);
-  font-style: normal;
+.sys .tl-l {
+  fill: var(--green);
+  font-size: 18px;
+  font-weight: 800;
+  text-anchor: middle;
 }
 
 /* ===================================================================
