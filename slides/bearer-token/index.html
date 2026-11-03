@@ -54,7 +54,7 @@
             <li><a href="#/bearer"><b>Tokens, headers og Bearer</b><small>repetition af JWT · øvelse 10</small></a></li>
             <li><a href="#/apifetch"><b>apiFetch</b><small>øvelse 11-12</small></a></li>
             <li><a href="#/step-15"><b>Step 15 i chatbotten</b><small>det samme igen, i chatbotten</small></a></li>
-            <li><a href="#/mangler"><b>Hvad mangler stadig?</b><small>et request uden token</small></a></li>
+            <li><a href="#/mangler"><b>Hvad mangler stadig?</b><small>ingen tjekker tokenet endnu</small></a></li>
           </ol>
           <p class="bottom-line">Øvelserne står i opgaven: <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md" target="_blank" rel="noreferrer"><b>Send tokenet med ↗</b></a></p>
         </section>
@@ -1176,33 +1176,6 @@ useEffect(() => {
           <p class="bottom-line">Opgaven <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-15-send-tokenet.md" target="_blank" rel="noreferrer"><b>Chatbot step 15 ↗</b></a> tager de tre delopgaver i mindre trin, på dansk.</p>
         </section>
 
-        <section class="shift-slide" data-accent="cyan">
-          <span class="eyebrow">Chatbot step 15</span>
-          <h2>Det er anderledes i chatbotten</h2>
-          <div class="shift-grid">
-            <span></span>
-            <span class="viz-label">react-supabase-auth</span>
-            <span class="viz-label">Chatbot · step 15</span>
-
-            <strong>URL</strong>
-            <p><code>VITE_SUPABASE_URL</code></p>
-            <p class="new"><code>VITE_API_URL</code>, jeres eget API</p>
-
-            <strong>apikey</strong>
-            <p>Ja. Supabase skal vide, hvilket projekt</p>
-            <p class="new">Nej. Jeres API skal kun have tokenet</p>
-
-            <strong>Log ud</strong>
-            <p><code>clientAction</code> i <code>profile.jsx</code></p>
-            <p class="new"><code>clientAction</code> i <code>layout.jsx</code> med <code>intent="logout"</code>, ved siden af <code>"delete"</code></p>
-
-            <strong>Emailen</strong>
-            <p><code>useEffect</code> i <code>home.jsx</code></p>
-            <p class="new"><code>useEffect</code> i <code>SidebarFooter</code>. Erstatter "Batman"</p>
-          </div>
-          <p class="bottom-line">Er I ikke færdige med step 14, så brug degit-kommandoen under "Kom i gang" i opgaven, og commit, før I ændrer noget.</p>
-        </section>
-
         <section class="fill" data-accent="cyan">
           <span class="eyebrow">Når I er i mål · Network-fanen</span>
           <h2>Hvorfor står der to requests til threads?</h2>
@@ -1216,25 +1189,6 @@ useEffect(() => {
             </div>
           </div>
           <p class="bottom-line">Det er CORS igen. Et andet origin og en <code>Authorization</code>-header får browseren til at spørge først.</p>
-        </section>
-
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Request-vejen · efter step 15</span>
-          <h2>Tokenet når frem. Ingen kigger på det</h2>
-          <div class="stage">
-            <div class="gapv">
-              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>Ved, hvem I er</strong><pre class="viz-code">apiFetch(<span class="s">"/api/threads"</span>)</pre><div class="know">✓ access_token med sub</div></div>
-              <div class="ar">→<small>fetch</small></div>
-              <div class="nd" style="--c: var(--green)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">Authorization:
-Bearer eyJhbGci…</pre><div class="know">✓ tokenet er med</div></div>
-              <div class="ar">→</div>
-              <div class="nd" style="--c: var(--red)"><span>Express API</span><strong>Kigger ikke på det</strong><small>Headeren er der. Ingen kode læser den endnu.</small><div class="know">✗ ingen bruger</div></div>
-              <div class="ar">→<small>SQL</small></div>
-              <div class="nd" style="--c: var(--orange)"><span>Postgres</span><strong>Alle tråde</strong><pre class="viz-code">SELECT …
-FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
-            </div>
-          </div>
-          <p class="bottom-line">To brugere ser stadig de samme tråde efter step 15. Det er forventet.</p>
         </section>
 
         <section id="ex-step15" class="activity-slide handson" data-accent="cyan">
@@ -1256,12 +1210,31 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
         <section id="mangler" class="chapter" data-accent="red">
           <span class="chapter-number">06</span>
           <span class="eyebrow">Hvad mangler stadig?</span>
-          <h2>Send et request<br />uden token</h2>
-          <p>Frontenden sender tokenet. Men hvad med alle andre?</p>
+          <h2>Ingen tjekker<br />tokenet endnu</h2>
+          <p>Frontenden sender det. Men backenden læser det ikke, og ingen tvinger nogen til at sende det.</p>
         </section>
 
         <section class="fill" data-accent="red">
-          <span class="eyebrow">Prøv selv · Thunder Client</span>
+          <span class="eyebrow">Request-vejen · efter step 15</span>
+          <h2>Tokenet når frem. Ingen kigger på det</h2>
+          <div class="stage">
+            <div class="gapv">
+              <div class="nd" style="--c: var(--green)"><span>Browseren</span><strong>Ved, hvem I er</strong><pre class="viz-code">apiFetch(<span class="s">"/api/threads"</span>)</pre><div class="know">✓ access_token med sub</div></div>
+              <div class="ar">→<small>fetch</small></div>
+              <div class="nd" style="--c: var(--green)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">Authorization:
+Bearer eyJhbGci…</pre><div class="know">✓ tokenet er med</div></div>
+              <div class="ar">→</div>
+              <div class="nd" style="--c: var(--red)"><span>Express API</span><strong>Kigger ikke på det</strong><small>Headeren er der. Ingen kode læser den endnu.</small><div class="know">✗ ingen bruger</div></div>
+              <div class="ar">→<small>SQL</small></div>
+              <div class="nd" style="--c: var(--orange)"><span>Postgres</span><strong>Alle tråde</strong><pre class="viz-code">SELECT …
+FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
+            </div>
+          </div>
+          <p class="bottom-line">To brugere ser stadig de samme tråde efter step 15. Det er forventet. Men hvad med requests, der slet ikke kommer fra chatbotten?</p>
+        </section>
+
+        <section class="fill" data-accent="red">
+          <span class="eyebrow">Svaret på spørgsmål 3 · Thunder Client</span>
           <h2>Thunder Client får stadig alle tråde</h2>
           <div class="stage">
             <div class="tc">
@@ -1281,22 +1254,7 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
               </div>
             </div>
           </div>
-          <p class="bottom-line">I øvelse 10 krævede Supabase tokenet. Jeres API gør ikke. Endnu.</p>
-        </section>
-
-        <section class="fill" data-accent="red">
-          <span class="eyebrow">Listen fra sidst</span>
-          <h2>Hvilke huller lukker step 15?</h2>
-          <div class="stage">
-            <ul class="holes">
-              <li><i>1</i><span>Chatbotten ved ikke, hvem der bruger den</span><em class="done fragment">Lukket · step 14 og 15</em></li>
-              <li><i>2</i><span>Alle nye tråde får alices id</span><em class="next fragment">Step 17</em></li>
-              <li><i>3</i><span>Thunder Client får alle tråde uden at logge ind</span><em class="next fragment">Step 16</em></li>
-              <li><i>4</i><span>Alle ser alles tråde</span><em class="next fragment">Step 17</em></li>
-              <li><i>5</i><span>Alle kan omdøbe og slette alles tråde</span><em class="next fragment">Step 17</em></li>
-            </ul>
-          </div>
-          <p class="bottom-line">Step 15 lukker kun det første alene. Men uden step 15 kan backenden ikke lukke resten.</p>
+          <p class="bottom-line">Validering og tokens i frontenden kan springes over. I øvelse 10 krævede Supabase tokenet. Jeres API gør ikke endnu. Det lukker step 16.</p>
         </section>
 
         <section class="fill" data-accent="red">
@@ -1316,6 +1274,19 @@ Bearer eyJhbGci…</pre></div>
             </div>
           </div>
           <p class="bottom-line">Supabase svarede 403 på jeres rettede token. Jeres backend svarer 401. Det er den, chatbotten skal reagere på i step 18.</p>
+        </section>
+
+        <section class="activity-slide" data-accent="purple">
+          <span class="eyebrow">Opsamling</span>
+          <h2>Det kan I nu</h2>
+          <ul class="checklist">
+            <li>Forklare, hvorfor hvert request selv skal sige, hvem det kommer fra</li>
+            <li>Sende et token i en <code>Authorization</code>-header med <code>fetch()</code></li>
+            <li>Forklare, hvad et access token er, og hvad der sker, hvis det bliver stjålet</li>
+            <li>Samle gentaget kode i en wrapper-funktion, <code>apiFetch</code></li>
+            <li>Vælge mellem <code>getSession()</code> og <code>getUser()</code></li>
+            <li>Finde tokenet og <code>OPTIONS</code>-requestet i Network-fanen</li>
+          </ul>
         </section>
 
         <section id="ugen" class="fill" data-accent="purple">
@@ -1342,19 +1313,6 @@ Bearer eyJhbGci…</pre></div>
             </div>
           </div>
           <p class="bottom-line">Målet: step 15 er færdig og pushet onsdag aften.</p>
-        </section>
-
-        <section class="activity-slide" data-accent="purple">
-          <span class="eyebrow">Opsamling</span>
-          <h2>Det kan I nu</h2>
-          <ul class="checklist">
-            <li>Forklare, hvorfor hvert request selv skal sige, hvem det kommer fra</li>
-            <li>Sende et token i en <code>Authorization</code>-header med <code>fetch()</code></li>
-            <li>Forklare, hvad et access token er, og hvad der sker, hvis det bliver stjålet</li>
-            <li>Samle gentaget kode i en wrapper-funktion, <code>apiFetch</code></li>
-            <li>Vælge mellem <code>getSession()</code> og <code>getUser()</code></li>
-            <li>Finde tokenet og <code>OPTIONS</code>-requestet i Network-fanen</li>
-          </ul>
         </section>
 
         <section class="materials-slide" data-accent="purple">
