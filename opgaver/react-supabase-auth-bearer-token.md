@@ -113,8 +113,9 @@ Du tilføjer én header ad gangen og genindlæser `/profile` efter hver.
 3. Tilføj `Authorization` i samme objekt: `` Authorization: `Bearer ${session?.access_token}` ``. Nu skal du få status 200 og din bruger. Står din email der?
 4. Find de to requests til `user` i Network-fanen. Det ene er dit, det andet er fra `getUser()`. Kig under Request Headers. Sender `getUser()` også `apikey` og `Authorization`?
 5. Ret ét bogstav midt i `access_token` i Local Storage, og genindlæs. Hvad er status nu? Log ind igen bagefter.
+6. Prøv det samme uden for browseren. Kopiér `access_token` fra Local Storage. Send `GET` til `/auth/v1/user` på din Supabase-URL fra Thunder Client. Sæt `apikey` og `Authorization: Bearer <token>` under Headers. Hvem svarer Supabase med? Fjern `Authorization`, og send igen.
 
-> **`apikey` og `Authorization`:** `apikey` fortæller Supabase, hvilket projekt requestet hører til. Den er den samme for alle brugere og står i din `.env`. `Authorization` fortæller, hvilken bruger der spørger. Den er forskellig for hver bruger og ligger i localStorage. Supabase tjekker tokenets signatur og svarer med brugeren. Det er det, `getUser()` gør.
+> **`apikey` og `Authorization`:** `apikey` fortæller Supabase, hvilket projekt requestet hører til. Den er den samme for alle brugere og står i din `.env`. `Authorization` fortæller, hvilken bruger der spørger. Den er forskellig for hver bruger og ligger i localStorage. Supabase tjekker tokenets signatur og svarer med brugeren. Det er det, `getUser()` gør. Supabase kan ikke se, om requestet kommer fra din browser eller fra Thunder Client. Den, der har tokenet, er brugeren.
 
 ### Trin 3: Brug dit eget svar
 

@@ -256,7 +256,7 @@
               </article>
             </div>
           </div>
-          <p class="bottom-line">Spørgsmål 1 og 2 kommer igen i øvelse 10. Spørgsmål 3 kommer til sidst i dag.</p>
+          <p class="bottom-line">Spørgsmål 2 kommer igen, når vi repeterer access tokens. Spørgsmål 3 kommer til sidst i dag.</p>
         </section>
 
         <!-- Sidst og i dag: broen til resten af dagen -->
@@ -721,30 +721,48 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
           <span class="eyebrow">Repetition fra sidst · det, jwt.io viser jer</span>
           <h2>Tre dele, adskilt af punktummer</h2>
           <div class="stage">
-            <div class="jwtv">
-              <div class="enc"><span class="h">eyJhbGciOiJFUzI1NiIsImtpZCI6ImI3YzQxZjJlLTlhM2QtNGM1NS04ZTIxLTZmMGQzYTliN2UxNCIsInR5cCI6IkpXVCJ9</span><span class="dot">.</span><span class="p">eyJpc3MiOiJodHRwczovL3F3bXprY3locHJsYnRueHNkZmdhLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZjNjMmE3MS01ZDRlLTRiOWEtOWMxZi0yZTZkN2EwYjNjNDUiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzkzMTgyMzIwLCJpYXQiOjE3OTMxNzg3MjAsImVtYWlsIjoiYW5uYUBleGFtcGxlLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJhbm5hQGV4YW1wbGUuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwic3ViIjoiOGYzYzJhNzEtNWQ0ZS00YjlhLTljMWYtMmU2ZDdhMGIzYzQ1In0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3OTMxNzg3MjB9XSwic2Vzc2lvbl9pZCI6ImQyYTllNmIxLTdjM2YtNGU4YS1iNWQwLTkxZjRjMmU3YTNiNiIsImlzX2Fub255bW91cyI6ZmFsc2V9</span><span class="dot">.</span><span class="s">Ht0NZgcqwrWsTc1eKy2kL4_XDpFokNVWx7ojlo3jV1XWPIDXX7PByaTVgAKGQNb6ruJf1HL_fFaHGqEvjX2hOQ</span></div>
-              <div class="dec">
-                <article class="jw-h"><span>Header</span><pre class="viz-code">{
-  <span class="k">"alg"</span>: "ES256",
-  <span class="k">"kid"</span>: "b7c41f2e-…",
+            <div class="jwt3">
+              <div class="enc">
+                <span class="h">eyJhbGciOiJFUzI1NiIs…<small>header</small></span><b>.</b>
+                <span class="p">eyJzdWIiOiI4ZjNjMmE3MS01ZDRl…<small>payload</small></span><b>.</b>
+                <span class="s">Ht0NZgcqwrWsTc1e…<small>signatur</small></span>
+              </div>
+              <div class="parts">
+                <article style="--c: var(--jwt-h)">
+                  <span>Header</span>
+                  <strong>Hvordan er det lavet?</strong>
+                  <pre class="viz-code">{
+  <span class="k">"alg"</span>: "ES256", <span class="cm">// metode</span>
   <span class="k">"typ"</span>: "JWT"
-}</pre><small>Hvordan tokenet er underskrevet. Ældre projekter: HS256.</small></article>
-                <article class="jw-p"><span>Payload</span><pre class="viz-code">{
-  <span class="k">"sub"</span>: <span class="hl">"8f3c2a71-5d4e-4b9a-9c1f-2e6d7a0b3c45"</span>,
-  <span class="k">"email"</span>: "anna@example.com",
+}</pre>
+                  <small>Siger, hvordan signaturen er regnet ud. <b>Ikke</b> det samme som en HTTP-header.</small>
+                </article>
+                <article style="--c: var(--jwt-p)">
+                  <span>Payload</span>
+                  <strong>Hvem er du, og hvor længe?</strong>
+                  <pre class="viz-code">{
+  <span class="k">"sub"</span>: "8f3c2a71-…", <span class="cm">// bruger-id</span>
+  <span class="k">"email"</span>: "anna@…",
   <span class="k">"role"</span>: "authenticated",
-  <span class="k">"iat"</span>: 1793178720,
-  <span class="k">"exp"</span>: 1793182320,
-  <span class="m">…</span>
-}</pre><small>Data om brugeren. Hvert felt kaldes en <b>claim</b>.</small></article>
-                <article class="jw-s"><span>Signatur</span><pre class="viz-code">Ht0NZgcqwrWs
-Tc1eKy2kL4_X
-DpFokNVWx7oj
-…</pre><small>Lavet af Supabase med en hemmelig nøgle, der aldrig er i browseren.</small></article>
+  <span class="k">"iat"</span>: 1793178720, <span class="cm">// udstedt</span>
+  <span class="k">"exp"</span>: 1793182320  <span class="cm">// udløber</span>
+}</pre>
+                  <small>Data om brugeren. Hvert felt hedder en <b>claim</b>. Alle kan læse det.</small>
+                </article>
+                <article style="--c: var(--jwt-s)">
+                  <span>Signatur</span>
+                  <strong>Er det ægte?</strong>
+                  <pre class="viz-code">segl(
+  header + payload,
+  <span class="key">Supabase' hemmelige nøgle</span>
+)
+→ Ht0NZgcqwrWs…</pre>
+                  <small>Kun Supabase har nøglen. Ret ét tegn i payload, og seglet <b>passer ikke</b>.</small>
+                </article>
               </div>
             </div>
           </div>
-          <p class="bottom-line"><b>header.payload.signatur</b>. jwt.io farver de tre dele på samme måde.</p>
+          <p class="bottom-line">Header og payload kan alle læse. Signaturen beviser, at det er Supabase, der har skrevet dem.</p>
         </section>
 
         <section class="fill" data-accent="purple">
@@ -837,53 +855,11 @@ DpFokNVWx7oj
           <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/react-supabase-auth-bearer-token.md#øvelse-10-send-tokenet-selv" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
           <ul class="checklist">
             <li><b>Trin 1:</b> hent tokenet med <code>getSession()</code> i <code>clientLoader</code> på <code>/profile</code>, og log det</li>
-            <li><b>Trin 2:</b> kald <code>/auth/v1/user</code> med <code>fetch</code>. Tilføj én header ad gangen, og læs svaret</li>
+            <li><b>Trin 2:</b> kald <code>/auth/v1/user</code> med <code>fetch</code>. Tilføj først <code>apikey</code> (hvilket projekt), så <code>Authorization</code> (hvilken bruger). Prøv det også fra Thunder Client</li>
             <li><b>Trin 3:</b> fjern <code>getUser()</code>, og brug jeres eget svar. <code>redirect("/login")</code>, hvis <code>response.ok</code> er <code>false</code></li>
             <li>Mangler I øvelse 8-9? Brug degit-kommandoen under "Kom i gang"</li>
           </ul>
           <p class="bottom-line">Test: logget ind ser I jeres profil. I inkognito og med et rettet token bliver I sendt til <code>/login</code>.</p>
-        </section>
-
-        <section class="fill" data-accent="purple">
-          <span class="eyebrow">Efter øvelse 10 · trin 2 · det svarede Supabase</span>
-          <h2>Én header ad gangen. Hver header retter én fejl</h2>
-          <div class="stage">
-            <div class="ladder">
-              <div class="row head"><span></span><span>Headers på fetch</span><span></span><span>Status</span><span>Supabase svarer</span></div>
-              <div class="row" style="--c: var(--red)"><i>1</i><div class="hdrs"><span class="none">ingen headers</span></div><b>→</b><span class="st">401</span><div class="say"><code>No API key found in request</code><span>Hvilket projekt hører det til?</span></div></div>
-              <div class="row fragment" style="--c: var(--red)"><i>2</i><div class="hdrs"><span class="add">apikey</span></div><b>→</b><span class="st">401</span><div class="say"><code>This endpoint requires a valid Bearer token</code><span>Kender projektet. Men hvem er du?</span></div></div>
-              <div class="row fragment" style="--c: var(--green)"><i>3</i><div class="hdrs"><span class="old">apikey</span><span class="add">Authorization: Bearer eyJ…</span></div><b>→</b><span class="st">200</span><div class="say"><code>{ "id": "8f3c2a71-…", "email": "anna@…" }</code><span>Kender projektet og brugeren</span></div></div>
-              <div class="row fragment" style="--c: var(--red)"><i>4</i><div class="hdrs"><span class="old">apikey</span><span class="add">Bearer eyJhbG<mark>X</mark>i…</span></div><b>→</b><span class="st">403</span><div class="say"><code>invalid JWT: … signature is invalid</code><span>Ét tegn rettet. Signaturen passer ikke</span></div></div>
-            </div>
-          </div>
-          <p class="bottom-line">Det er præcis det request, <code>getUser()</code> sendte for jer i øvelse 8. Fandt I begge i Network-fanen?</p>
-        </section>
-
-        <section class="shift-slide two-things" data-accent="purple">
-          <span class="eyebrow">Svaret på spørgsmål 1 og 2</span>
-          <h2><code>apikey</code> eller <code>Authorization</code>?</h2>
-          <div class="shift-grid">
-            <span></span>
-            <span class="viz-label"><code>apikey</code></span>
-            <span class="viz-label"><code>Authorization</code></span>
-
-            <strong>Svarer på</strong>
-            <p>Hvilket projekt?</p>
-            <p class="new">Hvilken bruger?</p>
-
-            <strong>Hvem har den?</strong>
-            <p>Den samme for alle brugere</p>
-            <p class="new">Forskellig for hver bruger</p>
-
-            <strong>Hvor ligger den?</strong>
-            <p><code>.env</code>, og derfra i jeres frontend-kode</p>
-            <p class="new">Local Storage, efter login</p>
-
-            <strong>Hvis den bliver stjålet</strong>
-            <p>Det samme som enhver besøgende</p>
-            <p class="new">Man er brugeren, indtil <code>exp</code></p>
-          </div>
-          <p class="bottom-line">Jeres anon key er offentlig. Et access token er det ikke.</p>
         </section>
 
         <section class="fill" data-accent="purple">
@@ -1162,7 +1138,7 @@ useEffect(() => {
             <p><code>useEffect</code> i <code>home.jsx</code></p>
             <p class="new"><code>useEffect</code> i <code>SidebarFooter</code>. Erstatter "Batman"</p>
           </div>
-          <p class="bottom-line">Er I ikke færdige med step 14, så brug degit-kommandoen sidst i opgaven, og commit, før I ændrer noget.</p>
+          <p class="bottom-line">Er I ikke færdige med step 14, så brug degit-kommandoen under "Kom i gang" i opgaven, og commit, før I ændrer noget.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -1243,7 +1219,7 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
               </div>
             </div>
           </div>
-          <p class="bottom-line">Frontenden sender tokenet frivilligt. Ingen tvinger nogen til det.</p>
+          <p class="bottom-line">I øvelse 10 krævede Supabase tokenet. Jeres API gør ikke. Endnu.</p>
         </section>
 
         <section class="fill" data-accent="red">
@@ -1312,7 +1288,7 @@ Bearer eyJhbGci…</pre></div>
           <ul class="checklist">
             <li>Forklare, hvorfor hvert request selv skal sige, hvem det kommer fra</li>
             <li>Sende et token i en <code>Authorization</code>-header med <code>fetch()</code></li>
-            <li>Forklare forskellen på <code>apikey</code> og <code>Authorization</code>, og hvad der sker, hvis de bliver stjålet</li>
+            <li>Forklare, hvad et access token er, og hvad der sker, hvis det bliver stjålet</li>
             <li>Samle gentaget kode i en wrapper-funktion, <code>apiFetch</code></li>
             <li>Vælge mellem <code>getSession()</code> og <code>getUser()</code></li>
             <li>Finde tokenet og <code>OPTIONS</code>-requestet i Network-fanen</li>
