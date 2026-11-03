@@ -863,25 +863,51 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
         </section>
 
         <section class="fill" data-accent="purple">
+          <span class="eyebrow">Efter øvelse 10 · trin 2 · Thunder Client</span>
+          <h2>Den, der har tokenet, er brugeren</h2>
+          <div class="stage">
+            <div class="tc tc-req">
+              <div>
+                <div class="url"><b>GET</b><span>https://dit-projekt.supabase.co/auth/v1/user</span></div>
+                <div class="tabs"><span>Query</span><span class="on">Headers</span><span>Auth</span><span>Body</span></div>
+                <div class="hdr"><i>✓</i><b>apikey</b><span>sb_publishable_…</span></div>
+                <div class="hdr on"><i>✓</i><b>Authorization</b><span>Bearer <em>eyJhbGciOiJFUzI1…</em></span></div>
+                <div class="from">Kopieret fra Local Storage. Intet password</div>
+              </div>
+              <div>
+                <div class="tabs"><span class="status">Status: 200 OK</span><span>Size: 1.8 KB</span></div>
+                <pre>{
+  <span class="k">"id"</span>: <span class="s">"8f3c2a71-5d4e-…"</span>,
+  <span class="k">"email"</span>: <span class="s">"anna@example.com"</span>,
+  <span class="k">"role"</span>: <span class="s">"authenticated"</span>,
+  …
+}</pre>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Supabase kan ikke se, at det ikke er jeres browser. Men slet signaturen, og tokenet bliver afvist.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
           <span class="eyebrow">Efter øvelse 10 · trin 3 · jeres eget fetch</span>
           <h2>Tre situationer. Kun én af dem viser siden</h2>
           <div class="stage">
             <div class="gate3 fetch3">
-              <div class="row"><span class="head">Hvem</span><span class="head">Authorization</span><span></span><span class="head">clientLoader</span><span></span><span class="head">Supabase svarer</span><span></span><span class="head">Så</span></div>
+              <div class="row"><span class="head">Hvem</span><span class="head">Authorization</span><span></span><span class="head">Supabase svarer</span><span></span><span class="head"><code>response.ok</code></span><span></span><span class="head">Så</span></div>
               <div class="row ok-c">
                 <div class="gate-who"><strong>Logget ind</strong><small>almindeligt vindue</small></div>
-                <span class="cell tok">Bearer eyJhbGci…</span><b>→</b><span class="cell fn">fetch()</span><b>→</b>
-                <span class="verd">✓ 200</span><b>→</b><span class="res"><code>return { user }</code>. Siden vises</span>
+                <span class="cell tok">Bearer eyJhbGci…</span><b>→</b><span class="verd">✓ 200</span><b>→</b>
+                <span class="cell okv">true</span><b>→</b><span class="res"><code>return { user }</code>. Siden vises</span>
               </div>
               <div class="row no-c">
                 <div class="gate-who"><strong>Inkognito</strong><small>session er null</small></div>
-                <span class="cell none">Bearer undefined</span><b>→</b><span class="cell fn">fetch()</span><b>→</b>
-                <span class="verd">✗ 403 malformed</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
+                <span class="cell none">Bearer undefined</span><b>→</b><span class="verd">✗ 403 malformed</span><b>→</b>
+                <span class="cell okv">false</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
               </div>
               <div class="row no-c">
                 <div class="gate-who"><strong>Rettet token</strong><small>ét bogstav ændret</small></div>
-                <span class="cell tok">Bearer eyJhbG<mark>X</mark>i…</span><b>→</b><span class="cell fn">fetch()</span><b>→</b>
-                <span class="verd">✗ 403 signature</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
+                <span class="cell tok">Bearer eyJhbG<mark>X</mark>i…</span><b>→</b><span class="verd">✗ 403 signature</span><b>→</b>
+                <span class="cell okv">false</span><b>→</b><span class="res"><code>redirect("/login")</code></span>
               </div>
             </div>
           </div>
@@ -898,79 +924,88 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Chatbotten før step 15</span>
+          <span class="eyebrow">Chatbotten · før step 15 · DRY</span>
           <h2>Syv fetch-kald i fire filer</h2>
           <div class="stage">
-            <div class="files4">
-              <article><header><strong>layout.jsx</strong><span>2 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
-fetch(<span class="rep">`${apiUrl}</span>/api/threads`)
-<span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
-fetch(<span class="rep">`${apiUrl}</span>/api/threads/${threadId}`, {
-  method: <span class="s">"DELETE"</span> })</pre></article>
-              <article><header><strong>chat-thread.jsx</strong><span>3 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
-fetch(<span class="rep">`${apiUrl}</span>/api/threads/${params.threadId}`)
-fetch(<span class="rep">`${apiUrl}</span>/api/threads/…/messages`)
-<span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
-fetch(<span class="rep">`${apiUrl}</span>/api/threads/…/messages`, {
-  method: <span class="s">"POST"</span> })</pre></article>
-              <article><header><strong>chat-new.jsx</strong><span>1 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
-fetch(<span class="rep">`${apiUrl}</span>/api/threads`, {
-  method: <span class="s">"POST"</span> })</pre></article>
-              <article><header><strong>chat-thread-edit.jsx</strong><span>1 kald</span></header><pre class="viz-code"><span class="rep">const apiUrl = import.meta.env.VITE_API_URL;</span>
-fetch(<span class="rep">`${apiUrl}</span>/api/threads/${params.threadId}`, {
-  method: <span class="s">"PATCH"</span> })</pre></article>
-            </div>
+            <svg class="sys" viewBox="0 0 1380 480" role="img" aria-labelledby="sys-dry-title">
+              <title id="sys-dry-title">Fire filer i chatbotten har syv fetch-kald, der hver bygger URL'en med VITE_API_URL og kalder Express direkte. Med apiFetch går alle syv gennem én funktion, der sætter URL og token på, før den kalder Express</title>
+
+              <rect class="box" x="20" y="20" width="300" height="110" rx="12" />
+              <text class="mono" x="40" y="52">layout.jsx</text>
+              <text class="sub sm" x="300" y="52" text-anchor="end">2 kald</text>
+              <rect class="box" x="20" y="145" width="300" height="140" rx="12" />
+              <text class="mono" x="40" y="177">chat-thread.jsx</text>
+              <text class="sub sm" x="300" y="177" text-anchor="end">3 kald</text>
+              <rect class="box" x="20" y="300" width="300" height="76" rx="12" />
+              <text class="mono" x="40" y="332">chat-new.jsx</text>
+              <text class="sub sm" x="300" y="332" text-anchor="end">1 kald</text>
+              <rect class="box" x="20" y="390" width="300" height="76" rx="12" />
+              <text class="mono" x="40" y="422">chat-thread-edit.jsx</text>
+              <text class="sub sm" x="300" y="422" text-anchor="end">1 kald</text>
+
+              <rect class="box" x="1080" y="20" width="280" height="446" rx="16" />
+              <path class="bar" d="M1080 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
+              <use class="ico" href="#ico-server" x="1100" y="30" width="24" height="24" />
+              <text class="url-t" x="1136" y="47">localhost:3000</text>
+              <text class="role" x="1104" y="100">Server</text>
+              <text class="box-t" x="1104" y="132">Express API</text>
+              <text class="mono" x="1104" y="176">/api/threads</text>
+
+              <g class="fragment fade-out" data-fragment-index="1">
+                <line class="a plain" x1="322" y1="82" x2="1074" y2="82" />
+                <rect class="miss-p" x="640" y="71" width="120" height="22" rx="11" />
+                <text class="miss-t" x="700" y="87">apiUrl + fetch</text>
+                <line class="a plain" x1="322" y1="108" x2="1074" y2="108" />
+                <rect class="miss-p" x="640" y="97" width="120" height="22" rx="11" />
+                <text class="miss-t" x="700" y="113">apiUrl + fetch</text>
+                <line class="a plain" x1="322" y1="205" x2="1074" y2="205" />
+                <rect class="miss-p" x="640" y="194" width="120" height="22" rx="11" />
+                <text class="miss-t" x="700" y="210">apiUrl + fetch</text>
+                <line class="a plain" x1="322" y1="232" x2="1074" y2="232" />
+                <rect class="miss-p" x="640" y="221" width="120" height="22" rx="11" />
+                <text class="miss-t" x="700" y="237">apiUrl + fetch</text>
+                <line class="a plain" x1="322" y1="259" x2="1074" y2="259" />
+                <rect class="miss-p" x="640" y="248" width="120" height="22" rx="11" />
+                <text class="miss-t" x="700" y="264">apiUrl + fetch</text>
+                <line class="a plain" x1="322" y1="345" x2="1074" y2="345" />
+                <rect class="miss-p" x="640" y="334" width="120" height="22" rx="11" />
+                <text class="miss-t" x="700" y="350">apiUrl + fetch</text>
+                <line class="a plain" x1="322" y1="435" x2="1074" y2="435" />
+                <rect class="miss-p" x="640" y="424" width="120" height="22" rx="11" />
+                <text class="miss-t" x="700" y="440">apiUrl + fetch</text>
+              </g>
+
+              <g class="fragment" data-fragment-index="1">
+                <line class="a plain" x1="322" y1="82" x2="574" y2="162" />
+                <line class="a plain" x1="322" y1="108" x2="574" y2="182" />
+                <line class="a plain" x1="322" y1="205" x2="574" y2="202" />
+                <line class="a plain" x1="322" y1="232" x2="574" y2="222" />
+                <line class="a plain" x1="322" y1="259" x2="574" y2="242" />
+                <line class="a plain" x1="322" y1="345" x2="574" y2="262" />
+                <line class="a plain" x1="322" y1="435" x2="574" y2="282" />
+                <rect class="fn-box" x="580" y="150" width="290" height="150" rx="14" />
+                <text class="fn-t" x="602" y="186">apiFetch(path)</text>
+                <text class="mono" x="602" y="222">VITE_API_URL + path</text>
+                <text class="mono jp" x="602" y="252">Authorization: Bearer</text>
+                <text class="mono" x="602" y="282">fetch()</text>
+                <text class="lbl one" x="725" y="132">Ét sted</text>
+                <line class="a today" x1="872" y1="226" x2="1074" y2="226" />
+                <rect class="rq today" x="898" y="209" width="150" height="34" rx="17" />
+                <text class="rq-t sm" x="973" y="232">Bearer eyJ…</text>
+              </g>
+            </svg>
           </div>
-          <p class="bottom-line"><code>VITE_API_URL</code> står seks steder, og <code>fetch</code> syv. Skal tokenet med, skal I rette dem alle.</p>
+          <p class="bottom-line"><b>DRY</b>, Don't Repeat Yourself: det, der gentages, står ét sted. Samme idé som <code>loadStudents()</code> i data-modulet fra RACE 6.</p>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">DRY · Don't Repeat Yourself</span>
-          <h2>Det, der gentages, står ét sted</h2>
-          <div class="stage">
-            <div class="dry2">
-              <article style="--c: var(--green)">
-                <span>Express · data-modulet fra RACE 6</span>
-                <pre class="viz-code"><span class="c">// data-helpers.js</span>
-<span class="k">export async function</span> loadStudents() {
-  <span class="k">const</span> data = <span class="k">await</span> fs.readFile(
-    <span class="s">"./data/students.json"</span>, <span class="s">"utf8"</span>
-  );
-  <span class="k">return</span> JSON.parse(data);
-}
-
-<span class="c">// server.js</span>
-<span class="k">const</span> students = <span class="k">await</span> <span class="hl">loadStudents()</span>;</pre>
-                <small>Routes ved ikke, hvor filen ligger. <b>Filstien og <code>JSON.parse</code></b> står ét sted.</small>
-              </article>
-              <article style="--c: var(--orange)">
-                <span>React · i dag</span>
-                <pre class="viz-code"><span class="c">// lib/apiFetch.js</span>
-<span class="k">export async function</span> apiFetch(path, options) {
-  <span class="c">// URL, apikey og token</span>
-  <span class="k">return</span> fetch(url + path, {
-    ...options, headers,
-  });
-}
-
-<span class="c">// routes/profile.jsx</span>
-<span class="k">const</span> response = <span class="k">await</span> <span class="hl">apiFetch("/auth/v1/user")</span>;</pre>
-                <small>Siderne ved ikke, hvordan tokenet kommer med. <b>URL, apikey og token</b> står ét sted.</small>
-              </article>
-            </div>
-          </div>
-          <p class="bottom-line">Skal noget ændres, ændrer I det ét sted. Alle, der kalder funktionen, får det med.</p>
-        </section>
-
-        <section class="fill" data-accent="orange">
-          <span class="eyebrow">Wrapper-funktion · øvelse 11</span>
+          <span class="eyebrow">react-supabase-auth · øvelse 11 · wrapper-funktion</span>
           <h2>apiFetch er fetch med URL, apikey og token sat på</h2>
           <div class="stage">
-            <div class="anat">
+            <div class="anat tight">
               <pre class="viz-code"><span class="k">export async function</span> apiFetch(path, options = {}) {
-  <span class="k">const</span> {
-    data: { session },
-  } = <span class="k">await</span> supabase.auth.getSession();<span class="no">1</span>
+  <span class="k">const</span> { data: { session } } =
+    <span class="k">await</span> supabase.auth.getSession();<span class="no">1</span>
   <span class="k">const</span> token = session?.access_token;
 
   <span class="k">const</span> headers = {
@@ -984,19 +1019,73 @@ fetch(<span class="rep">`${apiUrl}</span>/api/threads/${params.threadId}`, {
 
   <span class="k">return</span> fetch(<span class="s">`${supabaseUrl}${path}`</span>, { ...options, headers });<span class="no">4</span>
 }</pre>
-              <ol>
-                <li><span>Hent tokenet fra Local Storage. Er I logget ud, er <code>session</code> <code>null</code></span></li>
-                <li><span>Behold de headers, siden selv sendte med, og læg <code>apikey</code> på</span></li>
-                <li><span><code>Authorization</code> kun, hvis der er et token. Ellers sender I <code>Bearer undefined</code></span></li>
-                <li><span>Kald det rigtige <code>fetch()</code> med hele URL'en, og returnér svaret</span></li>
-              </ol>
+              <div class="build">
+                <div class="b-tok"><i class="n">1</i><span>token</span><code>eyJhbGci…</code><small>fra Local Storage · <code>null</code>, hvis logget ud</small></div>
+                <div class="rqcard">
+                  <div class="rl"><span><b>GET</b> /auth/v1/user</span><em class="o">path</em></div>
+                  <small>Headers</small>
+                  <div class="hl" style="--c: var(--orange)"><span>apikey: sb_publishable_…</span><em><i class="n">2</i></em></div>
+                  <div class="hl on" style="--c: var(--purple)"><span>Authorization: Bearer eyJ…</span><em><i class="n">3</i></em></div>
+                  <div class="sent"><i class="n">4</i><span><code>fetch(supabaseUrl + path)</code> sender det</span></div>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="bottom-line">En <b>wrapper-funktion</b> kalder en anden funktion og lægger noget til. Den tager de samme options som <code>fetch()</code>.</p>
+          <p class="bottom-line">I chatbotten bruger I <code>VITE_API_URL</code> og ingen <code>apikey</code>. Resten er det samme.</p>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow"><code>...options.headers</code> og <code>{ ...options, headers }</code></span>
+          <span class="eyebrow">react-supabase-auth · trin 1 · hvorfor getSession()?</span>
+          <h2><code>getSession()</code> læser. <code>getUser()</code> spørger</h2>
+          <div class="stage">
+            <svg class="sys" viewBox="0 0 1380 470" role="img" aria-labelledby="sys-gs-title">
+              <title id="sys-gs-title">getSession læser tokenet fra Local Storage i browseren uden at sende et request. getUser sender tokenet til Supabase Auth, som tjekker signaturen og svarer med brugeren</title>
+
+              <rect class="box" x="20" y="20" width="560" height="440" rx="16" />
+              <path class="bar" d="M20 64 V36 a16 16 0 0 1 16 -16 H564 a16 16 0 0 1 16 16 V64 Z" />
+              <circle class="dot-r" cx="44" cy="42" r="6" /><circle class="dot-y" cx="62" cy="42" r="6" /><circle class="dot-g" cx="80" cy="42" r="6" />
+              <rect class="url" x="100" y="30" width="460" height="24" rx="12" />
+              <text class="url-t" x="116" y="47">localhost:5173</text>
+              <text class="role" x="48" y="100">Klient</text>
+              <text class="box-t" x="48" y="132">Browseren</text>
+
+              <rect class="fn-box" x="48" y="164" width="210" height="52" rx="12" />
+              <text class="fn-t" x="153" y="198" text-anchor="middle">getSession()</text>
+              <line class="a last" x1="260" y1="190" x2="318" y2="190" />
+              <rect class="ls" x="324" y="150" width="232" height="80" rx="12" />
+              <text class="tok-t l" x="342" y="178">Local Storage</text>
+              <rect class="chip" x="342" y="190" width="196" height="30" rx="15" />
+              <text class="chip-t" x="356" y="211"><tspan class="jh">eyJhbG</tspan>.<tspan class="jp">eyJzdW</tspan>.<tspan class="js">Sfl</tspan></text>
+              <text class="sub" x="48" y="252">Læser bare. <tspan class="hl-t">Intet request</tspan></text>
+              <text class="sub sm" x="48" y="274">Bruges i apiFetch. Frontenden sender kun videre</text>
+
+              <rect class="fn-box" x="48" y="306" width="210" height="52" rx="12" />
+              <text class="fn-t" x="153" y="340" text-anchor="middle">getUser()</text>
+              <text class="sub sm" x="48" y="420">Bruges af den, der skal stole på tokenet.</text>
+              <text class="sub sm" x="48" y="442">Snart jeres backend</text>
+
+              <rect class="box" x="900" y="20" width="460" height="440" rx="16" />
+              <path class="bar" d="M900 64 V36 a16 16 0 0 1 16 -16 H1344 a16 16 0 0 1 16 16 V64 Z" />
+              <use class="ico" href="#ico-server" x="920" y="30" width="24" height="24" />
+              <text class="url-t" x="956" y="47">dit-projekt.supabase.co</text>
+              <text class="role" x="928" y="100">Server</text>
+              <text class="box-t" x="928" y="132">Supabase Auth</text>
+              <text class="sub" x="928" y="196">Hører intet fra getSession()</text>
+
+              <line class="a today" x1="260" y1="332" x2="894" y2="332" />
+              <rect class="rq today" x="470" y="312" width="300" height="40" rx="20" />
+              <text class="rq-t sm" x="620" y="338">GET /auth/v1/user · Bearer eyJ…</text>
+              <line class="a last" x1="898" y1="390" x2="264" y2="390" />
+              <text class="lbl last" x="620" y="380">{ id, email }</text>
+              <rect class="ok" x="928" y="334" width="404" height="56" rx="10" />
+              <text class="ok-t" x="1130" y="369">✓ Tjekker signaturen</text>
+            </svg>
+          </div>
+          <p class="bottom-line">Frontenden behøver ikke tjekke tokenet. Det gør den, der modtager det.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Chatbotten · trin 2 · <code>...options.headers</code></span>
           <h2>Sidens headers plus apiFetch' egne</h2>
           <div class="stage">
             <div class="merge">
@@ -1009,44 +1098,17 @@ apiFetch(<span class="s">"/api/threads"</span>, {
   body: JSON.stringify({ title, content }),
 });</pre>
               <b aria-hidden="true">→</b>
-              <div class="out">
-                <span>Det, fetch() får</span>
-                <div class="hrow keep" style="--c: var(--muted)"><span>method: "POST"</span><small>fra options</small></div>
-                <div class="hrow" style="--c: var(--cyan)"><span>Content-Type</span><small>fra siden</small></div>
-                <div class="hrow" style="--c: var(--orange)"><span>apikey</span><small>fra apiFetch</small></div>
-                <div class="hrow" style="--c: var(--purple)"><span>Authorization</span><small>fra apiFetch</small></div>
-                <div class="hrow keep" style="--c: var(--muted)"><span>body: "{…}"</span><small>fra options</small></div>
+              <div class="rqcard">
+                <div class="rl"><span><b>POST</b> /api/threads</span><em class="o">fra options</em></div>
+                <small>Headers</small>
+                <div class="hl" style="--c: var(--cyan)"><span>Content-Type: application/json</span><em>fra siden</em></div>
+                <div class="hl on" style="--c: var(--purple)"><span>Authorization: Bearer eyJ…</span><em>fra apiFetch</em></div>
+                <small>Body</small>
+                <div class="hl" style="--c: var(--yellow)"><span>{"title":"Pizza","content":"Hej"}</span><em class="o">fra options</em></div>
               </div>
             </div>
           </div>
           <p class="bottom-line">Fjern <code>...options.headers</code>, og <code>Content-Type</code> forsvinder. Det er test 5 i øvelse 11.</p>
-        </section>
-
-        <section class="shift-slide two-things" data-accent="orange">
-          <span class="eyebrow">Hvorfor getSession() i apiFetch?</span>
-          <h2><code>getSession()</code> læser. <code>getUser()</code> spørger</h2>
-          <div class="shift-grid">
-            <span></span>
-            <span class="viz-label"><code>getSession()</code></span>
-            <span class="viz-label"><code>getUser()</code></span>
-
-            <strong>Hvad gør den?</strong>
-            <p>Læser tokenet fra Local Storage</p>
-            <p class="new">Sender tokenet til Supabase</p>
-
-            <strong>Request?</strong>
-            <p>Nej. Intet i Network-fanen</p>
-            <p class="new">Ja. <code>/auth/v1/user</code></p>
-
-            <strong>Tjekker signaturen?</strong>
-            <p>Nej</p>
-            <p class="new">Ja</p>
-
-            <strong>Hvem bruger den?</strong>
-            <p>Frontenden, der bare sender tokenet videre</p>
-            <p class="new">Den, der skal stole på tokenet. Snart jeres backend</p>
-          </div>
-          <p class="bottom-line">Frontenden behøver ikke tjekke tokenet. Det gør den, der modtager det.</p>
         </section>
 
         <section class="fill" data-accent="orange">

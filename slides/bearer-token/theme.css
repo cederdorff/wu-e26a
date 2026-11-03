@@ -651,6 +651,34 @@
 }
 .tc pre .k { color: #a8c7fa; }
 .tc pre .s { color: #f28b82; }
+.tc .hdr {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid #3c3d40;
+  border-radius: 8px;
+}
+.tc .hdr i {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: #8ab4f8;
+  color: #1f2023;
+  font: 900 13px/1 var(--font);
+  font-style: normal;
+}
+.tc .hdr b { color: #e3e3e3; }
+.tc .hdr span { color: #9aa0a6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tc .hdr.on { background: color-mix(in srgb, var(--purple) 22%, transparent); border-color: var(--purple); }
+.tc .hdr em { color: var(--jwt-h); font-style: normal; }
+.tc .from {
+  color: #9aa0a6;
+  font: italic 500 17px/1.3 var(--font);
+}
 
 /* ===================================================================
    Fill the slide height: this deck has fewer, bigger diagrams than
@@ -698,7 +726,7 @@
 
 .gate3.fetch3 { gap: 34px; }
 .gate3.fetch3 .row {
-  grid-template-columns: 210px 280px 46px 170px 46px 250px 46px minmax(0, 1fr);
+  grid-template-columns: 210px 280px 46px 250px 46px 150px 46px minmax(0, 1fr);
 }
 .gate3.fetch3 .row:first-child .head { font-size: 16px; }
 .gate3.fetch3 .gate-who strong { font-size: 30px; }
@@ -706,6 +734,15 @@
 .gate3.fetch3 .cell { padding: 20px 18px; font-size: 21px; }
 .gate3.fetch3 .verd { padding: 20px 18px; font-size: 22px; }
 .gate3.fetch3 .res { font-size: 21px; }
+.gate3.fetch3 .cell.okv {
+  border-color: color-mix(in srgb, var(--c) 50%, transparent);
+  color: var(--c);
+  text-align: center;
+}
+.gate3.fetch3 .head code {
+  font-size: 16px !important;
+  text-transform: none;
+}
 
 .files4 { gap: 22px; }
 .files4 article { padding: 22px 26px; }
@@ -1250,3 +1287,117 @@
   line-height: 1.4;
 }
 .jwt3 .parts small b { color: var(--c); }
+
+/* Thunder Client against Supabase: the request side holds the headers */
+.tc.tc-req { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); }
+.tc.tc-req .url { white-space: nowrap; }
+
+/* 04 apiFetch: seven calls collapse into one function */
+.sys .miss-p { fill: #2a1416; stroke: color-mix(in srgb, var(--red) 60%, transparent); }
+.sys .miss-t {
+  fill: var(--red);
+  font: 700 12px var(--mono);
+  text-anchor: middle;
+}
+.sys .fn-box {
+  fill: #0a0f0e;
+  stroke: var(--orange);
+  stroke-width: 2;
+}
+.sys .fn-t {
+  fill: var(--orange);
+  font: 800 20px var(--mono);
+}
+.sys .mono.jp { fill: var(--jwt-p); }
+.sys .lbl.one { fill: var(--orange); font-size: 18px; }
+.sys .rq-t.sm { font-size: 15px; }
+.sys .sub .hl-t { fill: var(--ink); font-weight: 700; }
+
+/* apiFetch merge: the request fetch() ends up sending */
+.rqcard {
+  overflow: hidden;
+  border: 2px solid var(--orange);
+  border-radius: 14px;
+  background: #1f2023;
+  font: 600 19px/1.4 var(--mono);
+}
+.rqcard .rl {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #2a2b2e;
+}
+.rqcard .rl b { color: var(--green); }
+.rqcard > small {
+  display: block;
+  padding: 14px 20px 4px;
+  color: var(--muted);
+  font: 800 13px/1 var(--font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.rqcard .hl {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 4px 12px;
+  padding: 8px 10px;
+  border-left: 4px solid var(--c);
+  border-radius: 6px;
+}
+.rqcard .hl:last-child { margin-bottom: 16px; }
+.rqcard .hl.on { background: color-mix(in srgb, var(--purple) 20%, transparent); }
+.rqcard em {
+  flex: none;
+  color: var(--c, var(--muted));
+  font: 700 15px/1.6 var(--font);
+  font-style: normal;
+}
+.rqcard em.o { color: var(--muted); }
+
+/* apiFetch anatomy: the request card fills up step by step */
+.anat .build {
+  display: grid;
+  gap: 18px;
+}
+.anat i.n {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #111;
+  font: 850 15px/1 var(--font);
+  font-style: normal;
+}
+.anat .b-tok {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  padding: 14px 18px;
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--green) 10%, transparent);
+  font-size: 19px;
+}
+.anat .b-tok > span { color: var(--green); font-weight: 800; }
+.anat .b-tok > code { color: var(--jwt-h); }
+.anat .b-tok small { flex-basis: 100%; color: var(--muted); font-size: 16px; }
+.anat .rqcard { font-size: 17px; }
+.anat .rqcard .hl em { display: flex; align-items: center; }
+.anat .sent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 12px 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font: 600 17px/1.4 var(--font);
+}
+.anat .sent code { font-size: 16px !important; }
+.anat.tight { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+.anat.tight .viz-code { font-size: 17px; }

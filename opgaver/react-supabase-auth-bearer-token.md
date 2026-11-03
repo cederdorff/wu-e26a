@@ -113,9 +113,36 @@ Du tilføjer én header ad gangen og genindlæser `/profile` efter hver.
 3. Tilføj `Authorization` i samme objekt: `` Authorization: `Bearer ${session?.access_token}` ``. Nu skal du få status 200 og din bruger. Står din email der?
 4. Find de to requests til `user` i Network-fanen. Det ene er dit, det andet er fra `getUser()`. Kig under Request Headers. Sender `getUser()` også `apikey` og `Authorization`?
 5. Ret ét bogstav midt i `access_token` i Local Storage, og genindlæs. Hvad er status nu? Log ind igen bagefter.
-6. Prøv det samme uden for browseren. Kopiér `access_token` fra Local Storage. Send `GET` til `/auth/v1/user` på din Supabase-URL fra Thunder Client. Sæt `apikey` og `Authorization: Bearer <token>` under Headers. Hvem svarer Supabase med? Fjern `Authorization`, og send igen.
 
-> **`apikey` og `Authorization`:** `apikey` fortæller Supabase, hvilket projekt requestet hører til. Den er den samme for alle brugere og står i din `.env`. `Authorization` fortæller, hvilken bruger der spørger. Den er forskellig for hver bruger og ligger i localStorage. Supabase tjekker tokenets signatur og svarer med brugeren. Det er det, `getUser()` gør. Supabase kan ikke se, om requestet kommer fra din browser eller fra Thunder Client. Den, der har tokenet, er brugeren.
+> **`apikey` og `Authorization`:** `apikey` fortæller Supabase, hvilket projekt requestet hører til. Den er den samme for alle brugere og står i din `.env`. `Authorization` fortæller, hvilken bruger der spørger. Den er forskellig for hver bruger og ligger i localStorage. Supabase tjekker tokenets signatur og svarer med brugeren. Det er det, `getUser()` gør.
+
+#### Prøv i Thunder Client
+
+Supabase kan ikke se, om et request kommer fra din browser. Prøv selv at sende det samme request fra Thunder Client.
+
+![Thunder Client sender GET til /auth/v1/user med apikey og Authorization: Bearer og tokenet fra Local Storage. Supabase svarer 200 OK med brugerens id, email og role](assets/react-supabase-auth-thunder-client.svg)
+
+1. Log ind igen i browseren. Åbn din `.env`. Du skal bruge `VITE_SUPABASE_URL` og `VITE_SUPABASE_ANON_KEY`.
+2. Åbn Application → Local Storage, og klik på `sb-…-auth-token`. Fold værdien ud under listen. Kopiér værdien af `access_token`. Den starter med `eyJ`. Tag ikke anførselstegnene med.
+3. Åbn Thunder Client, og lav et nyt request. Vælg `GET`, og skriv din `VITE_SUPABASE_URL` efterfulgt af `/auth/v1/user`. Fx `https://abcdefgh.supabase.co/auth/v1/user`.
+4. Send uden headers. Du skal få `401` ligesom i test 1.
+5. Gå til fanen **Headers**. Tilføj `apikey` som navn og din anon key som værdi. Send. Du skal få `401` ligesom i test 2.
+6. Tilføj `Authorization` som navn. Skriv `Bearer`, et mellemrum og dit token som værdi. Send. Du skal få `200` og din bruger. Er det din email?
+7. Fjern fluebenet ved `Authorization`, og send igen. Hvad svarer Supabase nu?
+8. Sæt fluebenet igen. Slet alt efter det sidste punktum i tokenet. Nu er der kun header og payload tilbage. Send. Hvad svarer Supabase? Dit bruger-id står stadig i payloaden. Kun signaturen mangler.
+
+Supabase svarede med din bruger, selvom requestet kom fra et helt andet program. Du skrev aldrig dit password. Den, der har tokenet, er brugeren. Derfor skal det holdes hemmeligt. Men tokenet virker kun med signaturen, og den kan kun Supabase lave.
+
+<details>
+<summary>Hint</summary>
+
+- `401` og `No API key found`: tjek, at headeren hedder `apikey`, og at værdien er hele din anon key.
+- `403` og `malformed`: mangler `Bearer` og mellemrummet foran tokenet? Eller kom anførselstegnene med?
+- `403` i trin 8 er rigtigt. Uden signatur kan Supabase ikke se, om payloaden er ægte. Sæt signaturen på igen, hvis du vil fortsætte.
+- `403` og `token is expired`: tokenet lever en time. Genindlæs siden i browseren, og kopiér det nye `access_token`.
+- Thunder Client har også en **Auth**-fane med Bearer. Den sætter den samme header. Brug **Headers** her, så du selv ser den.
+
+</details>
 
 ### Trin 3: Brug dit eget svar
 
