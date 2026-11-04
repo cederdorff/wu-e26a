@@ -88,9 +88,9 @@ Til sidst tilføjer vi filtrering, sortering og paginering via query parameters,
 
 ## Materialer
 
-- Slides:
+- **Slides:**
     - [RACE 6 · Arkitektur og REST API best practices](https://cederdorff.com/wu-e26a/arkitektur/)
-- Opgaver:
+- **Opgaver:**
     - [REST API-øvelse: Arkitektur — routes, data, controllers og filtrering](../opgaver/express-rest-api-arkitektur.md)
     - [Øvelse 7: AMAbotten i lag — routes og data-modul](../opgaver/express-rest-api-amabot-arkitektur.md) — overfør routes/data-modul-opdelingen til jeres eget AMAbot-API fra øvelse 6, i eget tempo
     - [Øvelse 8: AMAbotten får en frontend — fetch og DOM](../opgaver/fetch-dom-amabot.md) — byg en rigtig frontend til jeres AMAbot med `fetch()`, i eget tempo

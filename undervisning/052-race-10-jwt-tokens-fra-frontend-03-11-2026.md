@@ -82,15 +82,15 @@ I dag lærer I at sende tokenet med i en header og at samle alle API-kald i én 
 
 ## Materialer
 
-- Slides:
+- **Slides:**
   - [RACE 10 · JWT tokens fra frontend](https://cederdorff.com/wu-e26a/bearer-token/)
-- Opgaver:
+- **Opgaver:**
   - [React Supabase Auth: Send tokenet med](../opgaver/react-supabase-auth-bearer-token.md): øvelse 10-12. Send tokenet til Supabase i en header, og saml det i `apiFetch`
     - [Løsning til react-supabase-auth](https://github.com/cederdorff/react-supabase-auth): én branch pr. øvelse. Prøv selv først
   - [Chatbot step 15: Send tokenet med til dit API](../opgaver/chatbot-step-15-send-tokenet.md): step 15 på dansk og i mindre trin
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
     - [Chatbot-tutorial, step 15: Send bearer tokens in requests](https://github.com/bewildergeist/chatbot-react-postgres/pull/15)
-- Links:
+- **Links:**
   - [jwt.io](https://jwt.io): dekod tokenet fra Network-fanen
   - ["Authorization"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorization) på MDN
   - ["useEffect"](https://react.dev/reference/react/useEffect) på react.dev

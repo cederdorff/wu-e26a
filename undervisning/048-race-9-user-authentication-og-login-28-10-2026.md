@@ -126,14 +126,14 @@ De fleste øvelser svarer til en delopgave i [step 14](https://github.com/bewild
 
 ## Materialer
 
-- Slides:
+- **Slides:**
   - [RACE 9 · User authentication og login](https://cederdorff.com/wu-e26a/supabase-auth/)
-- Opgaver:
+- **Opgaver:**
   - [React Supabase Auth: Login før chatbotten](../opgaver/react-supabase-auth.md): øvelse 1-9. Opret en bruger, log ind, kig i jeres JWT, og byg en profilside
     - [Løsning til react-supabase-auth](https://github.com/cederdorff/react-supabase-auth): én branch pr. øvelse. Prøv selv først
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
     - [Chatbot-tutorial, step 14: Frontend register and signup routes](https://github.com/bewildergeist/chatbot-react-postgres/pull/14)
-- Links:
+- **Links:**
   - [jwt.io](https://jwt.io): dekod jeres eget access token
   - ["Auth"](https://supabase.com/docs/guides/auth) i Supabase-dokumentationen
   - ["Password Storage Cheat Sheet"](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) hos OWASP

@@ -116,9 +116,9 @@ Når dagen er slut, har I jeres egen `my-first-react-app` på GitHub og er godt 
 
 ## Materialer
 
-- Slides:
+- **Slides:**
   - [RACE 8 · Thinking in React](https://cederdorff.com/wu-e26a/react-intro/)
-- Opgaver:
+- **Opgaver:**
   - [my-first-react-app](https://cederdorff.com/wu-e26a/react-intro/#/ovelser): øvelse 1-11 i slides. Byg en users-app med Vite, components, props og `.map()`, og hent data fra en rigtig URL
     - [Løsning til my-first-react-app](https://github.com/cederdorff/my-first-react-app): én branch pr. øvelse. Prøv selv først
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)

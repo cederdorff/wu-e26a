@@ -14,9 +14,9 @@ Hvad skal de studerende forstå, kunne eller have produceret, når dagen er slut
 
 ## Materialer
 
-- Slides: TBA
-- Opgaver: TBA
-- Kodeeksempler: TBA
+- **Slides:** TBA
+- **Opgaver:** TBA
+- **Kodeeksempler:** TBA
 
 ---
 
