@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 330" width="880" height="330" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Step 18: Brugeren er på /chat/abc, og API'et svarer 401. apiFetch kaster en redirect til /login?redirect=%2Fchat%2Fabc. Login-siden viser "Your session has expired". Når brugeren logger ind, læser clientAction redirect fra URL'en og sender brugeren tilbage til /chat/abc</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <style>
+      .page { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; }
+      .bar { fill: #f3f4f6; }
+      .url { fill: #ffffff; stroke: #e5e7eb; stroke-width: 1; }
+      .url-t { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; fill: #374151; }
+      .h { font-size: 15px; font-weight: 700; fill: #0d0d0d; text-anchor: middle; }
+      .bubble { fill: #f3f4f6; }
+      .bubble-me { fill: #e5e7eb; }
+      .field { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+      .flow { stroke: #6b7280; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .cap { font-size: 13px; font-weight: 700; fill: #0d0d0d; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; fill: #0d0d0d; }
+      .chip { fill: #fafafa; stroke: #e5e7eb; stroke-width: 1; }
+      .num { fill: #0d0d0d; }
+      .num-t { font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .note { font-size: 12.5px; fill: #6b7280; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="330" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+
+  <!-- Side 1: tråden -->
+  <rect class="page" x="20" y="24" width="250" height="186" rx="12"/>
+  <path class="bar" d="M32 25 H258 A11 11 0 0 1 269 36 V58 H21 V36 A11 11 0 0 1 32 25 Z"/>
+  <rect class="url" x="32" y="32" width="226" height="20" rx="10"/>
+  <text class="url-t" x="44" y="46">/chat/abc</text>
+  <text class="h" x="145" y="88">Din tråd</text>
+  <rect class="bubble-me" x="130" y="102" width="122" height="22" rx="11"/>
+  <rect class="bubble" x="38" y="132" width="160" height="22" rx="11"/>
+  <rect x="80" y="170" width="130" height="26" rx="13" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="145" y="188" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="middle">API'et svarer 401</text>
+
+  <!-- Side 2: login -->
+  <rect class="page" x="315" y="24" width="250" height="186" rx="12"/>
+  <path class="bar" d="M327 25 H553 A11 11 0 0 1 564 36 V58 H316 V36 A11 11 0 0 1 327 25 Z"/>
+  <rect class="url" x="327" y="32" width="226" height="20" rx="10"/>
+  <text class="url-t" x="337" y="46">/login?redirect=%2Fchat%2Fabc</text>
+  <text class="h" x="440" y="88">Welcome Back</text>
+  <rect x="333" y="100" width="214" height="26" rx="6" fill="#eef4ff" stroke="#c7d7fe"/>
+  <text x="440" y="117" font-size="11.5" fill="#1d4ed8" text-anchor="middle">Your session has expired.</text>
+  <rect class="field" x="333" y="134" width="214" height="18" rx="5"/>
+  <rect class="field" x="333" y="158" width="214" height="18" rx="5"/>
+  <rect x="333" y="184" width="214" height="18" rx="5" fill="#4b5563"/>
+  <text x="440" y="197" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">Log In</text>
+
+  <!-- Side 3: tilbage -->
+  <rect class="page" x="610" y="24" width="250" height="186" rx="12"/>
+  <path class="bar" d="M622 25 H848 A11 11 0 0 1 859 36 V58 H611 V36 A11 11 0 0 1 622 25 Z"/>
+  <rect class="url" x="622" y="32" width="226" height="20" rx="10"/>
+  <text class="url-t" x="634" y="46">/chat/abc</text>
+  <text class="h" x="735" y="88">Din tråd</text>
+  <rect class="bubble-me" x="720" y="102" width="122" height="22" rx="11"/>
+  <rect class="bubble" x="628" y="132" width="160" height="22" rx="11"/>
+  <rect x="670" y="170" width="130" height="26" rx="13" fill="#eef7f0" stroke="#a7d7b4"/>
+  <text x="735" y="188" font-size="12.5" font-weight="700" fill="#1f6b3a" text-anchor="middle">Tilbage, hvor du var</text>
+
+  <!-- pile -->
+  <line class="flow" x1="272" y1="117" x2="312" y2="117"/>
+  <line class="flow" x1="567" y1="117" x2="607" y2="117"/>
+
+  <!-- forklaringer -->
+  <circle class="num" cx="32" cy="238" r="8"/>
+  <text class="num-t" x="32" y="242">1</text>
+  <text class="cap" x="46" y="243">apiFetch kaster en redirect</text>
+  <rect class="chip" x="20" y="252" width="250" height="24" rx="6"/>
+  <text class="code" x="30" y="268">throw redirect("/login?…")</text>
+
+  <circle class="num" cx="327" cy="238" r="8"/>
+  <text class="num-t" x="327" y="242">2</text>
+  <text class="cap" x="341" y="243">Login læser URL'en</text>
+  <rect class="chip" x="315" y="252" width="250" height="24" rx="6"/>
+  <text class="code" x="325" y="268">searchParams.has("redirect")</text>
+
+  <circle class="num" cx="622" cy="238" r="8"/>
+  <text class="num-t" x="622" y="242">3</text>
+  <text class="cap" x="636" y="243">clientAction sender tilbage</text>
+  <rect class="chip" x="610" y="252" width="250" height="24" rx="6"/>
+  <text class="code" x="620" y="268">redirect(redirectTo)</text>
+
+  <text class="note" x="440" y="308">400, 404 og 500 går videre til routen som før. Kun 401 sender til login.</text>
+</svg>

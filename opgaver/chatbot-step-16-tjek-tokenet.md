@@ -434,4 +434,4 @@ Dit API afviser nu alle, der ikke har et gyldigt token. Men der mangler stadig n
 - `POST /api/threads` giver stadig hver ny tråd `TEST_USER_ID` som ejer
 - Går du til `/chat/new` uden at være logget ind, får du en fejlside. Hvad burde der ske i stedet?
 
-Backenden kender brugerens id i `req.userId`. I step 17 bruger du det i SQL'en, så hver bruger kun ser og ændrer sine egne tråde. Tutorialen laver step 18 før step 17. Den sender dig til `/login`, når API'et svarer `401`.
+Backenden kender brugerens id i `req.userId`. I [step 17](chatbot-step-17-kun-egne-traade.md) bruger du det i SQL'en, så hver bruger kun ser og ændrer sine egne tråde. Tutorialen laver [step 18](chatbot-step-18-send-til-login.md) før step 17. Den sender dig til `/login`, når API'et svarer `401`.
