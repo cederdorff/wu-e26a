@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" width="880" height="440" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Chatbotten efter step 16: requestet med Authorization-headeren rammer requireAuth før routen. requireAuth tjekker tokenet hos Supabase Auth med getUser(token). Er det gyldigt, sætter den req.userId og kalder next(). Routen henter trådene og svarer 200. Mangler tokenet, eller er det forkert, svarer requireAuth 401, og routen kører aldrig</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b91c1c"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; }
+      .new { fill: #fffbeb; stroke: #f59e0b; stroke-width: 2; }
+      .route { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; font-weight: 700; fill: #0d0d0d; text-anchor: middle; }
+      .file { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #4b5563; text-anchor: middle; }
+      .sub { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #4b5563; }
+      .desc { font-size: 13px; fill: #4b5563; text-anchor: middle; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #0d0d0d; }
+      .flow { stroke: #6b7280; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .deny { stroke: #b91c1c; stroke-width: 2; fill: none; stroke-dasharray: 6 4; marker-end: url(#arrow-red); }
+      .pill { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+      .num { fill: #0d0d0d; }
+      .num-t { font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="440" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+  <g transform="translate(0 20)">
+
+  <!-- Browseren -->
+  <rect x="20" y="20" width="220" height="380" rx="14" fill="#eef7f0" stroke="#a7d7b4" stroke-width="1.5"/>
+  <text x="40" y="50" font-size="16" font-weight="700" fill="#1f6b3a">Browseren</text>
+  <text class="sub" x="40" y="70">localhost:5173</text>
+
+  <rect class="card" x="40" y="110" width="180" height="60" rx="10"/>
+  <text class="route" x="130" y="135">layout.jsx m.fl.</text>
+  <text class="desc" x="130" y="156">loaders og actions</text>
+
+  <rect class="card" x="40" y="214" width="180" height="60" rx="10"/>
+  <text class="route" x="130" y="239">apiFetch()</text>
+  <text class="file" x="130" y="260">fra step 15</text>
+
+  <line class="flow" x1="130" y1="172" x2="130" y2="211"/>
+
+  <!-- Supabase Auth -->
+  <rect x="482" y="20" width="160" height="70" rx="14" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="562" y="50" font-size="16" font-weight="700" fill="#3730a3" text-anchor="middle">Supabase Auth</text>
+  <text class="desc" x="562" y="72">tjekker signaturen</text>
+
+  <!-- Express API -->
+  <rect x="480" y="110" width="380" height="290" rx="14" fill="#fdf1e7" stroke="#f2bf94" stroke-width="1.5"/>
+  <text x="720" y="140" font-size="16" font-weight="700" fill="#9a3412" text-anchor="middle">Express API</text>
+  <text class="sub" x="720" y="160" text-anchor="middle">localhost:3000</text>
+
+  <rect class="new" x="496" y="214" width="132" height="60" rx="10"/>
+  <text class="route" x="562" y="239">requireAuth</text>
+  <text class="file" x="562" y="260">auth.js</text>
+  <rect x="596" y="205" width="40" height="18" rx="9" fill="#f59e0b"/>
+  <text x="616" y="218" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">ny</text>
+
+  <rect class="card" x="708" y="214" width="136" height="60" rx="10"/>
+  <text class="route" x="776" y="239">/api/threads</text>
+  <text class="file" x="776" y="260">req.userId</text>
+
+  <rect class="card" x="708" y="316" width="136" height="56" rx="10"/>
+  <text class="route" x="776" y="340">Postgres</text>
+  <text class="desc" x="776" y="360">tråde</text>
+
+  <line class="flow" x1="776" y1="277" x2="776" y2="313" marker-start="url(#arrow)"/>
+
+  <!-- 1: requestet med token -->
+  <line class="flow" x1="222" y1="244" x2="259" y2="244"/>
+  <rect x="262" y="196" width="196" height="96" rx="10" fill="#fafafa" stroke="#9ca3af" stroke-width="1.5"/>
+  <text class="code" x="276" y="220" font-weight="700">GET /api/threads</text>
+  <rect x="270" y="230" width="180" height="46" rx="5" fill="#fef3c7"/>
+  <text class="code" x="276" y="246">Authorization:</text>
+  <text class="code" x="276" y="268">Bearer eyJ…</text>
+  <line class="flow" x1="460" y1="244" x2="493" y2="244"/>
+  <circle class="num" cx="276" cy="182" r="8"/>
+  <text class="num-t" x="276" y="186">1</text>
+  <text x="290" y="186" font-size="12.5" fill="#4b5563">request med token</text>
+
+  <!-- 2: getUser(token) -->
+  <line class="flow" x1="562" y1="211" x2="562" y2="93" marker-start="url(#arrow)"/>
+  <rect class="pill" x="496" y="168" width="132" height="20" rx="10"/>
+  <circle class="num" cx="508" cy="178" r="8"/>
+  <text class="num-t" x="508" y="182">2</text>
+  <text class="code" x="522" y="182" font-size="12">getUser(token)</text>
+
+  <!-- 3: next() -->
+  <line class="flow" x1="630" y1="250" x2="705" y2="250"/>
+  <circle class="num" cx="642" cy="232" r="8"/>
+  <text class="num-t" x="642" y="236">3</text>
+  <text class="code" x="654" y="236" font-size="12">next()</text>
+
+  <!-- 401 -->
+  <path class="deny" d="M562 277 V384 H130 V277"/>
+  <rect x="268" y="373" width="216" height="22" rx="11" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="376" y="388" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="middle">401: intet eller falsk token</text>
+
+  <!-- 4: svaret -->
+  <path class="flow" d="M820 211 V2 H200 V107"/>
+  <rect class="pill" x="300" y="-8" width="140" height="20" rx="10"/>
+  <circle class="num" cx="312" cy="2" r="8"/>
+  <text class="num-t" x="312" y="6">4</text>
+  <text x="326" y="6" font-size="12.5" fill="#4b5563">200 + tråde</text>
+  </g>
+</svg>

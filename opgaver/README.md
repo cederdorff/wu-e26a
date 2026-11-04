@@ -51,6 +51,8 @@ I chatbot-forløbet følger du [chatbot-tutorialen](https://github.com/bewilderg
    Samme projekt. Du sender selv tokenet til Supabase i en `Authorization`-header og samler det i én funktion, `apiFetch`.
 3. [Chatbot step 15: Send tokenet med til dit API](chatbot-step-15-send-tokenet.md) — step 15 på dansk\
    Step 15 i mindre trin, direkte i chatbotten. Du laver `apiFetch`, bruger den i alle routes og tilføjer log ud i sidebaren.
+4. [Chatbot step 16: Backenden tjekker tokenet](chatbot-step-16-tjek-tokenet.md) — step 16 på dansk\
+   Step 16 i mindre trin. Du laver middlewaren `requireAuth`, som tjekker tokenet hos Supabase og svarer `401`, og sætter den på alle routes.
 
 ## Kom i gang med Node og Express
 

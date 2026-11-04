@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" width="880" height="340" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>requireAuth er tre tjek i træk. 1: er der en Authorization-header? 2: står der et token efter Bearer? 3: godkender Supabase tokenet med getUser(token)? Svaret nej giver 401 og stopper requestet. Svaret ja tre gange sætter req.userId og kalder next(), så routen kører</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b91c1c"/>
+    </marker>
+    <style>
+      .card { fill: #fffbeb; stroke: #f59e0b; stroke-width: 1.5; }
+      .q { font-size: 13.5px; font-weight: 700; fill: #0d0d0d; }
+      .chip { fill: #ffffff; stroke: #e5e7eb; stroke-width: 1; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; fill: #0d0d0d; text-anchor: middle; }
+      .tag { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+      .tag-t { font-size: 12px; fill: #4b5563; text-anchor: middle; }
+      .flow { stroke: #6b7280; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .deny { stroke: #b91c1c; stroke-width: 2; fill: none; stroke-dasharray: 6 4; marker-end: url(#arrow-red); }
+      .ja { font-size: 12px; fill: #4b5563; text-anchor: middle; }
+      .nej { font-size: 12px; font-weight: 700; fill: #b91c1c; }
+      .stop { fill: #fef2f2; stroke: #fca5a5; stroke-width: 1.5; }
+      .stop-n { font-size: 15px; font-weight: 700; fill: #b91c1c; text-anchor: middle; }
+      .stop-m { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; fill: #7f1d1d; text-anchor: middle; }
+      .ex-h { font-size: 12px; fill: #6b7280; text-anchor: middle; }
+      .ex { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; fill: #374151; text-anchor: middle; }
+      .ex-d { font-size: 12.5px; fill: #374151; text-anchor: middle; }
+      .num { fill: #0d0d0d; }
+      .num-t { font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="340" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+
+  <!-- Start -->
+  <rect x="20" y="80" width="80" height="60" rx="10" fill="#fafafa" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="60" y="115" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700" fill="#0d0d0d" text-anchor="middle">request</text>
+  <line class="flow" x1="102" y1="110" x2="117" y2="110"/>
+
+  <!-- Tjek 1 -->
+  <rect class="tag" x="140" y="26" width="140" height="22" rx="11"/>
+  <text class="tag-t" x="210" y="41">Øvelse 3, trin 1</text>
+  <rect class="card" x="120" y="60" width="180" height="100" rx="10"/>
+  <circle class="num" cx="138" cy="82" r="8"/>
+  <text class="num-t" x="138" y="86">1</text>
+  <text class="q" x="152" y="87">Er der en</text>
+  <text class="q" x="152" y="105">Authorization-header?</text>
+  <rect class="chip" x="134" y="122" width="152" height="24" rx="6"/>
+  <text class="code" x="210" y="138">authHeader</text>
+
+  <!-- Tjek 2 -->
+  <rect class="tag" x="350" y="26" width="140" height="22" rx="11"/>
+  <text class="tag-t" x="420" y="41">Øvelse 3, trin 2</text>
+  <rect class="card" x="330" y="60" width="180" height="100" rx="10"/>
+  <circle class="num" cx="348" cy="82" r="8"/>
+  <text class="num-t" x="348" y="86">2</text>
+  <text class="q" x="362" y="87">Står der et token</text>
+  <text class="q" x="362" y="105">efter Bearer?</text>
+  <rect class="chip" x="344" y="122" width="152" height="24" rx="6"/>
+  <text class="code" x="420" y="138">split(" ")[1]</text>
+
+  <!-- Tjek 3 -->
+  <rect class="tag" x="560" y="26" width="140" height="22" rx="11"/>
+  <text class="tag-t" x="630" y="41">Øvelse 4, trin 2</text>
+  <rect class="card" x="540" y="60" width="180" height="100" rx="10"/>
+  <circle class="num" cx="558" cy="82" r="8"/>
+  <text class="num-t" x="558" y="86">3</text>
+  <text class="q" x="572" y="87">Godkender</text>
+  <text class="q" x="572" y="105">Supabase tokenet?</text>
+  <rect class="chip" x="554" y="122" width="152" height="24" rx="6"/>
+  <text class="code" x="630" y="138">getUser(token)</text>
+
+  <!-- ja-pile -->
+  <line class="flow" x1="302" y1="110" x2="327" y2="110"/>
+  <text class="ja" x="314" y="100">ja</text>
+  <line class="flow" x1="512" y1="110" x2="537" y2="110"/>
+  <text class="ja" x="524" y="100">ja</text>
+  <line class="flow" x1="722" y1="110" x2="749" y2="110"/>
+  <text class="ja" x="735" y="100">ja</text>
+
+  <!-- Igennem -->
+  <rect x="752" y="60" width="108" height="100" rx="10" fill="#eef7f0" stroke="#a7d7b4" stroke-width="1.5"/>
+  <text x="806" y="94" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" font-weight="700" fill="#1f6b3a" text-anchor="middle">next()</text>
+  <text x="806" y="116" font-size="13" fill="#4b5563" text-anchor="middle">routen kører</text>
+  <text x="806" y="140" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#0d0d0d" text-anchor="middle">req.userId</text>
+
+  <!-- nej -> 401 -->
+  <line class="deny" x1="210" y1="162" x2="210" y2="203"/>
+  <text class="nej" x="218" y="187">nej</text>
+  <rect class="stop" x="120" y="206" width="180" height="56" rx="10"/>
+  <text class="stop-n" x="210" y="228">401</text>
+  <text class="stop-m" x="210" y="250">Authentication required</text>
+
+  <line class="deny" x1="420" y1="162" x2="420" y2="203"/>
+  <text class="nej" x="428" y="187">nej</text>
+  <rect class="stop" x="330" y="206" width="180" height="56" rx="10"/>
+  <text class="stop-n" x="420" y="228">401</text>
+  <text class="stop-m" x="420" y="250">Expected: Bearer &lt;token&gt;</text>
+
+  <line class="deny" x1="630" y1="162" x2="630" y2="203"/>
+  <text class="nej" x="638" y="187">nej</text>
+  <rect class="stop" x="540" y="206" width="180" height="56" rx="10"/>
+  <text class="stop-n" x="630" y="228">401</text>
+  <text class="stop-m" x="630" y="250">Invalid or expired token</text>
+
+  <!-- Eksempler -->
+  <text class="ex-h" x="210" y="286">stopper fx</text>
+  <text class="ex-d" x="210" y="306">ingen header</text>
+
+  <text class="ex-h" x="420" y="286">stopper fx</text>
+  <text class="ex" x="420" y="306">Authorization: hej</text>
+
+  <text class="ex-h" x="630" y="286">stopper fx</text>
+  <text class="ex" x="630" y="306">Bearer hej</text>
+  <text class="ex-d" x="630" y="324">ét ændret bogstav</text>
+
+  <text class="ex-h" x="806" y="286">kommer igennem</text>
+  <text class="ex" x="806" y="306">Bearer eyJ…</text>
+  <text class="ex-d" x="806" y="324">ægte token</text>
+</svg>
