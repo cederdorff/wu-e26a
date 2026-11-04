@@ -8,7 +8,7 @@ I går fik backenden `requireAuth`. Nu svarer API'et `401` uden et gyldigt token
 
 I dag sender `apiFetch` brugeren til login ved `401` og bagefter tilbage, hvor de var. Koden er kort, så vi bruger tiden på, hvorfor den står, hvor den står.
 
-I arbejder i [Chatbot step 18](../opgaver/chatbot-step-18-send-til-login.md), som er [step 18](https://github.com/bewildergeist/chatbot-react-postgres/pull/18) på dansk og i mindre trin. Målet er, at I bliver færdige i dag.
+I arbejder i opgaven [Chatbot step 18](../opgaver/chatbot-step-18-send-til-login.md). Den følger [step 18](https://github.com/bewildergeist/chatbot-react-postgres/pull/18) i tutorialen, bare på dansk og i mindre trin. Målet er, at I bliver færdige i dag.
 
 ---
 
@@ -76,12 +76,12 @@ I arbejder i [Chatbot step 18](../opgaver/chatbot-step-18-send-til-login.md), so
 
 ## Materialer
 
-- Opgaver:
+- **Opgaver:**
   - [Chatbot step 18: Send brugeren til login ved 401](../opgaver/chatbot-step-18-send-til-login.md): step 18 på dansk og i mindre trin
   - [Chatbot step 16: Backenden tjekker tokenet](../opgaver/chatbot-step-16-tjek-tokenet.md): hvis du mangler noget af step 16
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
     - [Chatbot-tutorial, step 18: Redirect to login on auth errors](https://github.com/bewildergeist/chatbot-react-postgres/pull/18)
-- Links:
+- **Links:**
   - ["redirect"](https://reactrouter.com/api/utils/redirect) i React Routers dokumentation
   - ["401 Unauthorized"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401) på MDN
   - ["encodeURIComponent()"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) på MDN
