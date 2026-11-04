@@ -136,7 +136,7 @@ export async function apiFetch(path, options = {}) {
 }
 ```
 
-> **`getSession()`:** svarer med `{ data: { session } }`. Du kan hente `session` direkte ud med `const { data: { session } } = ...`. Er du ikke logget ind, er `session` `null`. Derfor skriver du `session?.access_token`. `getSession()` læser tokenet fra localStorage. Den spørger ikke Supabase.
+> **`getSession()`:** svarer med `{ data: { session } }`. Hent `data` ud med `const { data } = ...`. Tokenet ligger i `data.session.access_token`. Er du ikke logget ind, er `data.session` `null`. Derfor skriver du `data.session?.access_token`. `getSession()` læser tokenet fra localStorage. Den spørger ikke Supabase.
 
 <details>
 <summary>Hint</summary>
@@ -167,11 +167,9 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 // Ligesom fetch(), men med API-URL og token sat på
 export async function apiFetch(path, options = {}) {
-  // getSession() læser tokenet fra localStorage. Er du logget ud, er session null
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const token = session?.access_token;
+  // getSession() læser tokenet fra localStorage. Er du logget ud, er data.session null
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
 
   // Behold de headers, der blev sendt med
   const headers = {
@@ -398,7 +396,7 @@ Vis din email i stedet for "Batman".
 I `SidebarFooter`:
 
 - Gem emailen i state. Den starter som `null`
-- I en `useEffect`: hent `session` med `getSession()`, og gem `session?.user.email` i state
+- I en `useEffect`: hent sessionen med `getSession()`, og gem `data.session?.user.email` i state
 - Vis emailen i stedet for "Batman". Er den `null`, så vis "Loading..."
 - Brug emailen i avatar-URL'en i stedet for `Batman`
 
@@ -440,10 +438,8 @@ function SidebarFooter() {
   // Kører én gang, når sidebaren bliver vist
   React.useEffect(() => {
     async function loadSession() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setUserEmail(session?.user.email);
+      const { data } = await supabase.auth.getSession();
+      setUserEmail(data.session?.user.email);
     }
     loadSession();
   }, []);

@@ -863,32 +863,30 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
 
         <section class="fill destr-slide" data-accent="purple">
           <span class="eyebrow">Øvelse 10 · trin 1 · getSession()</span>
-          <h2>Samme token, to måder at skrive det</h2>
+          <h2>Tokenet ligger i data.session</h2>
           <div class="stage">
             <div class="destr-res">
               <span><code>getSession()</code> svarer med</span>
               <pre class="viz-code">{ <span class="d1">data</span>: { <span class="d2">session</span>: { access_token: <span class="s">"eyJhbGci…"</span>, user: {…} } }, error: <span class="k">null</span> }</pre>
             </div>
             <div class="dry2 big">
-              <article style="--c: var(--orange)">
-                <span>Tutorialen · to lag på én gang</span>
-                <pre class="viz-code"><span class="k">const</span> {
-  <span class="d1">data</span>: { <span class="d2">session</span> },
-} = <span class="k">await</span> supabase.auth.getSession();
-
-<span class="k">const</span> token = <span class="d2">session</span>?.access_token;</pre>
-                <small>Tag <b>data</b> ud af svaret, og tag <b>session</b> ud af data. Prettier deler det over tre linjer.</small>
-              </article>
               <article style="--c: var(--green)">
-                <span>Det samme · ét lag ad gangen</span>
+                <span>apiFetch og forsiden · først data</span>
                 <pre class="viz-code"><span class="k">const</span> { <span class="d1">data</span> } = <span class="k">await</span> supabase.auth.getSession();
 
 <span class="k">const</span> token = <span class="d1">data</span>.<span class="d2">session</span>?.access_token;</pre>
-                <small>Samme mønster som med <code>getUser()</code> sidst: først <b>data</b>, så <code>data.user</code>.</small>
+                <small>Samme mønster som med <code>getUser()</code>: først <b>data</b>, så <code>data.user</code>.</small>
+              </article>
+              <article style="--c: var(--orange)">
+                <span>Øvelse 10 · getUser() hedder allerede data</span>
+                <pre class="viz-code"><span class="k">const</span> <span class="d1">result</span> = <span class="k">await</span> supabase.auth.getSession();
+
+<span class="k">const</span> token = <span class="d1">result</span>.<span class="d1">data</span>.<span class="d2">session</span>?.access_token;</pre>
+                <small>Samme svar med et andet navn. To variabler i samme funktion kan ikke begge hedde <b>data</b>.</small>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Begge giver det samme token. Skriv den, I forstår. I tutorialen og opgaven står den til venstre.</p>
+          <p class="bottom-line">I Supabase' docs står der tit <code>const { data: { session } } = …</code>. Det er det samme, bare to lag på én gang.</p>
         </section>
 
         <section id="ex-10"class="activity-slide handson" data-accent="purple">
@@ -1047,9 +1045,8 @@ FROM threads</pre><small>Ingen <code>WHERE user_id</code>.</small></div>
           <div class="stage">
             <div class="anat tight">
               <pre class="viz-code"><span class="k">export async function</span> apiFetch(path, options = {}) {
-  <span class="k">const</span> { data: { session } } =
-    <span class="k">await</span> supabase.auth.getSession();<span class="no">1</span>
-  <span class="k">const</span> token = session?.access_token;
+  <span class="k">const</span> { data } = <span class="k">await</span> supabase.auth.getSession();
+  <span class="k">const</span> token = data.session?.access_token;<span class="no">1</span>
 
   <span class="k">const</span> headers = {
     ...options.headers,

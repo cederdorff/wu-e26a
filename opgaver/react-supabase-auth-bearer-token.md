@@ -59,24 +59,23 @@ Du bygger det i tre trin og tester efter hvert trin. Al koden står i `clientLoa
 
 ```js
 export async function clientLoader() {
-  // TODO: Hent session med supabase.auth.getSession().
-  // TODO: Log session?.access_token.
+  // TODO: Hent sessionen med supabase.auth.getSession(), og gem svaret i result.
+  // TODO: Gem access_token i en variabel, token, og log den.
 
   // getUser() og resten som før
 }
 ```
 
-> **`getSession()`:** svarer med `{ data: { session } }`. Du kan hente `session` direkte ud med `const { data: { session } } = ...`. Det er samme destructuring som `const { error } = ...` i øvelse 4, bare et lag dybere. Er du ikke logget ind, er `session` `null`. Derfor står der `?.`.
+> **`getSession()`:** svarer med `{ data: { session } }`. Tokenet ligger altså i `result.data.session.access_token`. Er du ikke logget ind, er `session` `null`. Derfor står der `?.`. Du kan ikke skrive `const { data } = ...` her, fordi `getUser()` længere nede allerede bruger navnet `data`.
 
 <details>
 <summary>Se løsningsforslag</summary>
 
 ```js
 export async function clientLoader() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  console.log(session?.access_token);
+  const result = await supabase.auth.getSession();
+  const token = result.data.session?.access_token;
+  console.log(token);
 
   // getUser() sender tokenet til Supabase, som tjekker signaturen
   const { data, error } = await supabase.auth.getUser();
@@ -110,7 +109,7 @@ Du tilføjer én header ad gangen og genindlæser `/profile` efter hver.
 
 1. Uden headers: læs status og besked i Console. Supabase ved ikke, hvilket projekt requestet hører til.
 2. Tilføj `apikey` som andet argument til `fetch`: `{ headers: { apikey: import.meta.env.VITE_SUPABASE_ANON_KEY } }`. Hvad siger beskeden nu? Supabase kender projektet, men ikke brugeren.
-3. Tilføj `Authorization` i samme objekt: `` Authorization: `Bearer ${session?.access_token}` ``. Nu skal du få status 200 og din bruger. Står din email der?
+3. Tilføj `Authorization` i samme objekt: `` Authorization: `Bearer ${token}` ``. Nu skal du få status 200 og din bruger. Står din email der?
 4. Find de to requests til `user` i Network-fanen. Det ene er dit, det andet er fra `getUser()`. Kig under Request Headers. Sender `getUser()` også `apikey` og `Authorization`?
 5. Ret ét bogstav midt i `access_token` i Local Storage, og genindlæs. Hvad er status nu? Log ind igen bagefter.
 
@@ -174,16 +173,15 @@ const user = await response.json()
 ```js
 export async function clientLoader() {
   // getSession() læser tokenet fra localStorage. Den spørger ikke Supabase
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const result = await supabase.auth.getSession();
+  const token = result.data.session?.access_token;
 
   // Samme request, som getUser() sender
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
   const response = await fetch(`${supabaseUrl}/auth/v1/user`, {
     headers: {
       apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${session?.access_token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -268,11 +266,9 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Ligesom fetch(), men med URL, apikey og token sat på
 export async function apiFetch(path, options = {}) {
-  // getSession() læser tokenet fra localStorage. Er du logget ud, er session null
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const token = session?.access_token;
+  // getSession() læser tokenet fra localStorage. Er du logget ud, er data.session null
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
 
   // Behold de headers, der blev sendt med, og tilføj apikey
   const headers = {
@@ -329,7 +325,7 @@ Forsiden viser altid "Create Account" og "Log In", også når du er logget ind. 
 Brug `useState` og `useEffect` i `app/routes/home.jsx`:
 
 - Gem emailen i state. Den starter som `null`
-- I en `useEffect`: hent `session` med `getSession()`, og gem `session?.user.email` i state
+- I en `useEffect`: hent sessionen med `getSession()`, og gem `data.session?.user.email` i state
 - Er der en email: vis den og et link til `/profile`. Ellers: vis de to links som nu
 
 ```jsx
@@ -374,10 +370,8 @@ export default function Home() {
   // Kører én gang, når forsiden bliver vist
   useEffect(() => {
     async function loadSession() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setEmail(session?.user.email);
+      const { data } = await supabase.auth.getSession();
+      setEmail(data.session?.user.email);
     }
     loadSession();
   }, []);
