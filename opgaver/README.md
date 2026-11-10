@@ -53,10 +53,10 @@ I chatbot-forløbet følger du [chatbot-tutorialen](https://github.com/bewilderg
    Step 15 i mindre trin, direkte i chatbotten. Du laver `apiFetch`, bruger den i alle routes og tilføjer log ud i sidebaren.
 4. [Chatbot step 16: Backenden tjekker tokenet](chatbot-step-16-tjek-tokenet.md) — step 16 på dansk\
    Step 16 i mindre trin. Du laver middlewaren `requireAuth`, som tjekker tokenet hos Supabase og svarer `401`, og sætter den på alle routes.
-5. [Chatbot step 18: Send brugeren til login ved 401](chatbot-step-18-send-til-login.md) — step 18 på dansk, før step 17\
-   `apiFetch` sender brugeren til `/login`, når API'et svarer `401`, og login sender brugeren tilbage til den side, de var på.
-6. [Chatbot step 17: Kun dine egne tråde](chatbot-step-17-kun-egne-traade.md) — step 17 på dansk\
+5. [Chatbot step 17: Kun dine egne tråde](chatbot-step-17-kun-egne-traade.md) — step 17 på dansk\
    Du bruger `req.userId` i hver SQL-query, så hver bruger kun kan se, rette og slette sine egne tråde.
+6. [Chatbot step 18: Send brugeren til login ved 401](chatbot-step-18-send-til-login.md) — step 18 på dansk\
+   `apiFetch` sender brugeren til `/login`, når API'et svarer `401`, og login sender brugeren tilbage til den side, de var på.
 
 ## Kom i gang med Node og Express
 
