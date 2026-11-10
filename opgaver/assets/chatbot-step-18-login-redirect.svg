@@ -65,21 +65,21 @@
   <line class="flow" x1="567" y1="117" x2="607" y2="117"/>
 
   <!-- forklaringer -->
-  <circle class="num" cx="32" cy="238" r="8"/>
-  <text class="num-t" x="32" y="242">1</text>
-  <text class="cap" x="46" y="243">apiFetch kaster en redirect</text>
+  <rect class="num" x="20" y="229" width="50" height="19" rx="9.5"/>
+  <text class="num-t" x="45" y="242">Trin 1</text>
+  <text class="cap" x="78" y="243">apiFetch husker siden</text>
   <rect class="chip" x="20" y="252" width="250" height="24" rx="6"/>
   <text class="code" x="30" y="268">throw redirect("/login?…")</text>
 
-  <circle class="num" cx="327" cy="238" r="8"/>
-  <text class="num-t" x="327" y="242">2</text>
-  <text class="cap" x="341" y="243">Login læser URL'en</text>
+  <rect class="num" x="315" y="229" width="50" height="19" rx="9.5"/>
+  <text class="num-t" x="340" y="242">Trin 3</text>
+  <text class="cap" x="373" y="243">Login fortæller hvorfor</text>
   <rect class="chip" x="315" y="252" width="250" height="24" rx="6"/>
   <text class="code" x="325" y="268">searchParams.has("redirect")</text>
 
-  <circle class="num" cx="622" cy="238" r="8"/>
-  <text class="num-t" x="622" y="242">3</text>
-  <text class="cap" x="636" y="243">clientAction sender tilbage</text>
+  <rect class="num" x="610" y="229" width="50" height="19" rx="9.5"/>
+  <text class="num-t" x="635" y="242">Trin 2</text>
+  <text class="cap" x="668" y="243">clientAction sender tilbage</text>
   <rect class="chip" x="610" y="252" width="250" height="24" rx="6"/>
   <text class="code" x="620" y="268">redirect(redirectTo)</text>
 
