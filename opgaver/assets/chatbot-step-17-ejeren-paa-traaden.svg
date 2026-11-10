@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" width="880" height="300" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Step 17: messages har ingen user_id. En besked peger på sin tråd med thread_id, og tråden peger på sin ejer med user_id. Derfor tjekker du tråden først med WHERE id = threadId AND user_id = req.userId. Én række betyder, at tråden er din. Nul rækker betyder, at den ikke er</title>
+  <defs>
+    <marker id="arrow17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <style>
+      .tbl { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; }
+      .head { fill: #f3f4f6; }
+      .tname { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; font-weight: 700; fill: #0d0d0d; }
+      .col { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #374151; }
+      .key { font-weight: 700; fill: #0d0d0d; }
+      .miss { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #b91c1c; text-decoration: line-through; }
+      .hl { fill: #fff7e6; stroke: #f5c26b; stroke-width: 1; }
+      .flow { stroke: #6b7280; stroke-width: 2; fill: none; marker-end: url(#arrow17); }
+      .lbl { font-size: 12px; fill: #6b7280; text-anchor: middle; }
+      .chip { fill: #fafafa; stroke: #e5e7eb; stroke-width: 1; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #0d0d0d; }
+      .cap { font-size: 13px; font-weight: 700; fill: #0d0d0d; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="300" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+
+  <!-- messages -->
+  <rect class="tbl" x="24" y="24" width="220" height="150" rx="10"/>
+  <path class="head" d="M34 25 H233 A9 9 0 0 1 243 34 V54 H25 V34 A9 9 0 0 1 34 25 Z"/>
+  <text class="tname" x="40" y="45">messages</text>
+  <text class="col" x="40" y="78">id</text>
+  <rect class="hl" x="32" y="86" width="204" height="22" rx="5"/>
+  <text class="col key" x="40" y="102">thread_id</text>
+  <text class="col" x="40" y="128">type, content</text>
+  <text class="miss" x="40" y="156">user_id</text>
+  <text x="104" y="156" font-size="12" fill="#b91c1c">findes ikke</text>
+
+  <!-- threads -->
+  <rect class="tbl" x="330" y="24" width="220" height="150" rx="10"/>
+  <path class="head" d="M340 25 H539 A9 9 0 0 1 549 34 V54 H331 V34 A9 9 0 0 1 340 25 Z"/>
+  <text class="tname" x="346" y="45">threads</text>
+  <rect class="hl" x="338" y="62" width="204" height="22" rx="5"/>
+  <text class="col key" x="346" y="78">id</text>
+  <text class="col" x="346" y="102">title</text>
+  <rect class="hl" x="338" y="112" width="204" height="22" rx="5"/>
+  <text class="col key" x="346" y="128">user_id</text>
+  <text class="col" x="346" y="156">created_at</text>
+
+  <!-- auth.users -->
+  <rect class="tbl" x="636" y="24" width="220" height="150" rx="10"/>
+  <path class="head" d="M646 25 H845 A9 9 0 0 1 855 34 V54 H637 V34 A9 9 0 0 1 646 25 Z"/>
+  <text class="tname" x="652" y="45">auth.users</text>
+  <rect class="hl" x="644" y="62" width="204" height="22" rx="5"/>
+  <text class="col key" x="652" y="78">id</text>
+  <text class="col" x="652" y="102">email</text>
+  <rect x="652" y="134" width="188" height="26" rx="13" fill="#eef4ff" stroke="#c7d7fe"/>
+  <text x="746" y="151" font-size="12.5" font-weight="700" fill="#1d4ed8" text-anchor="middle">= req.userId fra tokenet</text>
+
+  <!-- foreign keys -->
+  <path class="flow" d="M236 97 C 290 97, 290 73, 336 73"/>
+  <text class="lbl" x="286" y="64">hvilken tråd?</text>
+  <path class="flow" d="M542 123 C 596 123, 596 73, 642 73"/>
+  <text class="lbl" x="594" y="146">hvis tråd?</text>
+
+  <!-- the check -->
+  <text class="cap" x="24" y="208">Derfor tjekker du tråden først</text>
+  <rect class="chip" x="24" y="218" width="470" height="28" rx="6"/>
+  <text class="code" x="36" y="236">WHERE id = ${threadId} AND user_id = ${req.userId}</text>
+
+  <rect x="516" y="194" width="340" height="24" rx="12" fill="#eef7f0" stroke="#a7d7b4"/>
+  <text x="686" y="210" font-size="12.5" font-weight="700" fill="#1f6b3a" text-anchor="middle">1 række: tråden er din. Fortsæt som før</text>
+  <rect x="516" y="226" width="340" height="24" rx="12" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="686" y="242" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="middle">0 rækker: ikke din. Svar [] eller 404</text>
+
+  <text x="440" y="282" font-size="12.5" fill="#6b7280" text-anchor="middle">Brugere og tråde ligger i hver sin tabel. Ejeren står ét sted: på tråden.</text>
+</svg>
