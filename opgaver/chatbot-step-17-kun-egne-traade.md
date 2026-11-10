@@ -6,7 +6,7 @@ Efter step 16 ved backenden, hvem der spørger. Id'et står i `req.userId`. Men 
 
 I denne opgave laver du [step 17](https://github.com/bewildergeist/chatbot-react-postgres/pull/17) i chatbot-tutorialen, bare på dansk og i mindre trin. Du bruger `req.userId` i hver SQL-query, så hver bruger kun kan se og ændre sine egne tråde.
 
-Tutorialen laver step 18 før step 17. Lav [Chatbot step 18](chatbot-step-18-send-til-login.md) først.
+Tutorialen laver step 18 før step 17. Du laver dem i rækkefølge, så step 17 kommer først. Bagefter laver du [Chatbot step 18](chatbot-step-18-send-til-login.md).
 
 Delopgave 1 og 2 i tutorialen tilføjer kolonnen `user_id` til `threads`. Den har du allerede i kursets database. Du kigger på den i øvelse 1 og springer resten over.
 
@@ -41,10 +41,10 @@ Ny tråd:    INSERT ... VALUES (${trimmedTitle}, ${req.userId})
 
 Start backend og frontend, som du plejer. Log ind på `/login` med din egen bruger.
 
-Er du ikke færdig med step 18, så hent startpunktet i roden af chatbot-repoet, og commit det, før du ændrer noget:
+Er du ikke færdig med step 16, så hent startpunktet i roden af chatbot-repoet, og commit det, før du ændrer noget:
 
 ```bash
-npx degit --force bewildergeist/chatbot-react-postgres#pr-17-start-after-18
+npx degit --force bewildergeist/chatbot-react-postgres#pr-17-start
 ```
 
 Startpunktet opretter tråde uden `user_id`. Sæt `TEST_USER_ID` ind i `backend/server.js` igen. Kodestykket står i [React Supabase Auth: Login før chatbotten](react-supabase-auth.md#fra-øvelserne-til-step-14). Du fjerner den igen i øvelse 2.
@@ -370,3 +370,5 @@ Commits har mange flere kommentarer end løsningsforslagene her, men SQL'en er d
 Nu kan hver bruger kun se og ændre sine egne tråde. Men sikkerheden afhænger af, at hver query husker `user_id`. Laver du en ny route og glemmer det, er hullet åbent igen.
 
 Supabase kan også tjekke ejeren i selve databasen med Row Level Security. Den bruger vi ikke i chatbotten, fordi din backend forbinder direkte til Postgres og selv står for tjekket.
+
+I frontenden mangler der også noget. Ret ét bogstav i `access_token` i Local Storage, og genindlæs. Brugeren ser en fejlside med `401` og får ikke at vide, at de skal logge ind. Det retter du i [step 18](chatbot-step-18-send-til-login.md).

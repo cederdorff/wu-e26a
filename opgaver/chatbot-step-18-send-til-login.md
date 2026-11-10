@@ -6,7 +6,7 @@ Efter step 16 svarer dit API `401`, når tokenet mangler eller er forkert. Men f
 
 I denne opgave laver du [step 18](https://github.com/bewildergeist/chatbot-react-postgres/pull/18) i chatbot-tutorialen, bare på dansk og i mindre trin. `apiFetch` sender brugeren til `/login`, når API'et svarer `401`. Login sender brugeren tilbage til den side, de kom fra.
 
-Tutorialen laver step 18 før step 17. Det gør du også.
+Tutorialen laver step 18 før step 17. Du har lavet [step 17](chatbot-step-17-kun-egne-traade.md) først.
 
 Har du lavet [React Supabase Auth: Send tokenet med](react-supabase-auth-bearer-token.md), har du set det før. I øvelse 10 sendte `/profile` dig til `/login`, når Supabase afviste tokenet. Nu gør `apiFetch` det samme for alle sider i chatbotten.
 
@@ -41,13 +41,11 @@ Ellers:     400, 404 og 500 går videre til routen som før
 
 Start backend og frontend, som du plejer. Log ind på `/login`.
 
-Er du ikke færdig med step 16, så hent startpunktet i roden af chatbot-repoet, og commit det, før du ændrer noget:
+Er du ikke færdig med step 17, så hent startpunktet i roden af chatbot-repoet, og commit det, før du ændrer noget:
 
 ```bash
-npx degit --force bewildergeist/chatbot-react-postgres#pr-17-start
+npx degit --force bewildergeist/chatbot-react-postgres#pr-18-start
 ```
-
-Startpunktet hedder `pr-17-start`, fordi tutorialen laver step 18 før step 17. Det opretter tråde uden `user_id`. Sæt `TEST_USER_ID` ind i `backend/server.js` igen. Kodestykket står i [React Supabase Auth: Login før chatbotten](react-supabase-auth.md#fra-øvelserne-til-step-14).
 
 ---
 
@@ -55,7 +53,7 @@ Startpunktet hedder `pr-17-start`, fordi tutorialen laver step 18 før step 17. 
 
 Her skal du ikke skrive kode. Du lader som om, tokenet er udløbet, og ser, hvad brugeren oplever.
 
-> **Udløbet token:** et access token lever en time. Supabase henter normalt et nyt i baggrunden. Men lukker du låget på din computer i et par timer, eller logger du ud i en anden fane, kan tokenet i localStorage være ugyldigt. Så svarer dit API `401`. Når du retter ét bogstav i tokenet, får du det samme svar.
+> **Ugyldigt token:** et access token lever en time. Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Men kan der ikke komme et nyt, fx fordi brugeren er slettet i Supabase, er tokenet i localStorage ugyldigt. Så svarer dit API `401`. Når du retter ét bogstav i tokenet, får du det samme svar.
 
 1. Log ind, og åbn en tråd. Kopiér URL'en.
 2. Åbn DevTools → Application → Local Storage. Klik på nøglen, der slutter med `-auth-token`. Ret ét bogstav midt i `access_token`.
@@ -140,7 +138,7 @@ export async function apiFetch(path, options = {}) {
 1. Ret ét bogstav i `access_token` igen, og genindlæs. Ender du på `/login`? Kig i Network-fanen. Kom der stadig et `401` først?
 2. Log ind. Hvor lander du?
 3. Log ud, og gå direkte til `localhost:5173/chat/new`. Ender du på `/login`?
-4. Gå til `localhost:5173/chat/00000000-0000-0000-0000-000000000000`, mens du er logget ind. Den tråd findes ikke. Ser du stadig "Thread not found"? Hvad er status på requestet i Network-fanen?
+4. Gå til `localhost:5173/chat/<bobs id>` fra step 17, mens du er logget ind. Ser du stadig "Thread not found"? Hvad er status på requestet i Network-fanen? Hvorfor sender `apiFetch` dig ikke til login?
 5. Skift `throw` ud med `return`, og gentag test 1. Hvad står der på fejlsiden nu? Sæt `throw` ind igen.
 
 <details>
@@ -313,8 +311,6 @@ Commit 2 tilføjer ikke CSS til `.info-message`, så beskeden står uden farve i
 
 ## Hvad mangler?
 
-Nu bliver brugeren sendt til login, når tokenet ikke virker. Men når de er logget ind, ser de stadig alle brugeres tråde. Nye tråde får stadig `TEST_USER_ID` som ejer.
+Nu bliver brugeren sendt til login, når tokenet ikke virker, og tilbage bagefter. Hver bruger ser kun sine egne tråde fra step 17.
 
-Det retter du i step 17. Backenden kender allerede brugerens id i `req.userId` fra step 16. Nu skal SQL'en bruge det.
-
-Du så også i test 5, at login sender dig videre til en hvilken som helst adresse. Det kaldes en open redirect. Tutorialen retter det ikke.
+Men du så i test 5, at login sender dig videre til en hvilken som helst adresse. Det kaldes en open redirect. Tutorialen retter det ikke.
