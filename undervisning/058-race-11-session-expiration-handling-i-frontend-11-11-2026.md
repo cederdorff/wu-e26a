@@ -30,11 +30,9 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 <summary><strong>2. Authentication og authorization (step 17)</strong></summary>
 
 - **Authentication og authorization:** "hvem er du?" tjekker `requireAuth`. "Hvad må du?" er step 17. Øvelse 1: ret bobs tråd fra Thunder Client med dit eget token
-- Kør queryen fra i går, der tæller tråde pr. bruger. Opret en tråd i chatbotten, og kør den igen. Hvem fik en tråd mere?
 - Ejeren kommer fra `req.userId`, ikke fra body'en. Tokenet kan ingen ændre uden at ødelægge signaturen
 - **SoC:** backenden afgør, hvem der må hvad, ikke frontenden. Og filtreringen hører hjemme i SQL med `WHERE`, ikke i `.filter()` i JavaScript. Så forlader andres tråde aldrig databasen
 - **404 og ikke 403:** MAGL spurgte i går, hvad API'et skal svare, når bob beder om alices tråd. Med `404` ved bob ikke, om tråden findes
-- Tjekket af tråden står to steder i `/messages`. Hvordan kunne det samles ét sted? Det er DRY igen
 </details>
 <details>
 <summary><strong>3. Session expiration (step 18, øvelse 1)</strong></summary>
@@ -50,7 +48,8 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - Routes håndterer allerede deres egne fejl: `400` i formularen og `404` fra step 17 som "Thread not found". `401` kan ingen route gøre noget ved
 - **DRY:** tjekket står ét sted, i `apiFetch`, og ikke i alle loaders og actions. Ligesom `requireAuth` i går: én middleware i stedet for et tjek i hver route
 - **SoC og SRP:** `apiFetch` har ét ansvar: at tale med API'et som den bruger, der er logget ind. Hvad skulle der ske med `apiFetch`, hvis den også håndterede `404`?
-- **Wrapper-funktion:** før lagde `apiFetch` noget til requestet. Nu kigger den også på svaret. Idéen kaldes også Decorator pattern. `apiFetch` er ikke en loader, så den kaster redirecten: `throw redirect("/login")`. I kender `return redirect()` fra `/profile`
+- **Wrapper-funktion:** før lagde `apiFetch` noget til requestet. Nu kigger den også på svaret. Idéen kaldes også Decorator pattern
+- `throw redirect("/login")`: I kender `return redirect()` fra `/profile`. `apiFetch` er ikke en loader, så den kaster redirecten
 - **Guard clause:** et `if`, der fanger `401` og stopper. `requireAuth` er bygget på samme måde, bare i backenden
 </details>
 <details>
@@ -58,11 +57,11 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 
 - `apiFetch` skriver siden ind i URL'en til login: `/login?redirect=/chat/abc`. I kender query parameters fra `?registered=true` på login
 - **Encapsulation:** login ved ikke, hvorfor brugeren kom. Den læser bare `redirect`. Routes ved ikke, at `apiFetch` kan sende til login
-- Hvorfor står siden i URL'en og ikke i localStorage? Hvad sker der, hvis brugeren genindlæser login, eller to faner udløber på samme tid?
+- Hvorfor står siden i URL'en og ikke i localStorage?
 - **Open redirect:** gå til `/login?redirect=https://example.com`, og log ind. Hvor ender I? Samme lektie som XSS i AMAbotten: stol ikke på input
 </details>
 <details>
-<summary><strong>6. Afrunding: 401, 403 og 404</strong></summary>
+<summary><strong>6. Afrunding: begreberne i koden</strong></summary>
 
 - Vi åbner step 17 og 18 sammen og sætter øvelsesnumre på commits. Tabellerne står sidst i opgaverne
 - Peg på ét sted i jeres kode for DRY, SoC, SRP og Encapsulation
