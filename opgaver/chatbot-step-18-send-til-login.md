@@ -49,10 +49,10 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-18-start
 
 Tutorialen skriver `pr-17-start`, fordi den laver step 18 før step 17. Brug `pr-18-start`, ellers mister du step 17.
 
-Bruger du startpunktet, skal du gøre to ting bagefter:
+Bruger du startpunktet, så husk:
 
 - Kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`, hvis du ikke har lavet step 16. Uden dem starter backenden ikke
-- Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde
+- Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her, og `auth.js` har længere fejlbeskeder end i step 16. Begge virker på samme måde
 
 ---
 
@@ -60,7 +60,7 @@ Bruger du startpunktet, skal du gøre to ting bagefter:
 
 Her skal du ikke skrive kode. Du ødelægger tokenet og ser, hvad brugeren oplever.
 
-> **Ugyldigt token:** et access token lever en time. Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Men kan der ikke komme et nyt, fx fordi brugeren er slettet i Supabase, er tokenet i localStorage ugyldigt. Så svarer dit API `401`. Når du retter ét bogstav i tokenet, får du det samme svar.
+> **Ugyldigt token:** et access token lever en time. Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Så udløb alene giver sjældent `401`. Men slettes brugeren i Supabase, afviser `getUser()` tokenet med det samme, selv om det ikke er udløbet. Så svarer dit API `401`. Når du retter ét bogstav i tokenet, får du det samme svar.
 
 #### Test øvelse 1
 
@@ -322,4 +322,4 @@ Commit 2 tilføjer ikke CSS til `.info-message`, så beskeden står uden farve i
 
 Nu bliver brugeren sendt til login, når tokenet ikke virker, og tilbage bagefter. Hver bruger ser kun sine egne tråde fra step 17.
 
-Men du så i test 5, at login sender dig videre til en hvilken som helst adresse. Det kaldes en open redirect. Tutorialen retter det ikke.
+Men du så i trin 3, test 5, at login sender dig videre til en hvilken som helst adresse. Det kaldes en open redirect. Tutorialen retter det ikke.

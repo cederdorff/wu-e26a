@@ -49,11 +49,11 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-17-start
 
 Tutorialen skriver `pr-17-start-after-18`, fordi den laver step 18 først. Brug `pr-17-start`.
 
-Bruger du startpunktet, skal du gøre tre ting bagefter:
+Bruger du startpunktet, så husk:
 
 - Sæt `TEST_USER_ID` ind i `backend/server.js` igen. Startpunktet opretter tråde uden `user_id`. Kodestykket står i [React Supabase Auth: Login før chatbotten](react-supabase-auth.md#fra-øvelserne-til-step-14). Du fjerner den igen i øvelse 2
 - Kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`. Startpunktet har step 16 med. Uden dem starter backenden ikke
-- Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde
+- Startpunktets `auth.js` har længere fejlbeskeder end i step 16 her, fx `"Authentication required. Please provide a valid token."`. Den virker på samme måde
 
 ---
 

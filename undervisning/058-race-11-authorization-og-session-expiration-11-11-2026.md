@@ -39,7 +39,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 
 - I kender `exp` fra tokenets payload. Hos Supabase udløber et access token efter en time. Så virker et stjålet token ikke for evigt
 - Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Brugeren mærker ingenting
-- `401` kommer, når der ikke kan komme et nyt token, fx fordi brugeren er slettet, eller tokenet er ødelagt. Så er sessionen slut, og kun login hjælper
+- `401` kommer, når tokenet bliver afvist: brugeren er logget ud, tokenet er ødelagt, eller brugeren er slettet. Så er sessionen slut, og kun login hjælper
 - Øvelse 1: ret ét bogstav i `access_token`, og se, hvad brugeren oplever. Vi sletter også en testbruger i Supabase live, mens den er logget ind
 </details>
 <details>
