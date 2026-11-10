@@ -84,6 +84,8 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 
 ## Materialer
 
+- **Slides:**
+  - [RACE 11 · Session expiration handling i frontend](https://cederdorff.com/wu-e26a/session-expiration/)
 - **Opgaver:**
   - [Chatbot step 17: Kun dine egne tråde](../opgaver/chatbot-step-17-kun-egne-traade.md): dagens første step
   - [Chatbot step 18: Send brugeren til login ved 401](../opgaver/chatbot-step-18-send-til-login.md): dagens andet step

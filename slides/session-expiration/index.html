@@ -66,18 +66,9 @@
           <span class="eyebrow">Opsamling · requestets vej gennem koden</span>
           <h2><code>req.userId</code> når frem. SQL'en bruger det ikke</h2>
           <div class="stage">
-            <div class="gapv">
-              <div class="nd" style="--c: var(--green)"><span>Requestet</span><strong>GET /api/threads</strong><pre class="viz-code">Authorization:
-Bearer eyJhbGci…</pre><small>Sat på af <code>apiFetch</code> fra step 15.</small></div>
-              <div class="ar">→</div>
-              <div class="nd" style="--c: var(--cyan)"><span>Express · requireAuth</span><strong>Hvem er du?</strong><pre class="viz-code">getUser(token)</pre><small>Ingen eller forkert token: <b>401</b>. Ellers <code>req.userId = user.id</code>.</small></div>
-              <div class="ar">→</div>
-              <div class="nd" style="--c: var(--orange)"><span>Route handleren</span><strong>Kender dit id</strong><pre class="viz-code">req.userId
-// "8f3c2a71-…"</pre><small>Du så det i terminalen i opgave 7.</small></div>
-              <div class="ar">→</div>
-              <div class="nd gap" style="--c: var(--red)"><span>SQL</span><strong>Henter alt</strong><pre class="viz-code">SELECT …
-FROM threads
-ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tråde</div></div>
+            <div class="seq roomy" style="--n: 3">
+              <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Browser</strong><small>React · apiFetch</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--orange)"><span>Database</span><strong>Postgres</strong><small>Supabase</small></div></div>
+              <div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>GET /api/threads</code> · <code>Authorization: Bearer eyJ…</code></div></div><div class="row"><div class="note cyan" style="--a: 2"><b>requireAuth</b>: <code>getUser(token)</code> ✓<br /><code>req.userId</code> = dit id</div></div><div class="row"><div class="msg bad" style="--a: 2; --k: 2"><code>SELECT … FROM threads</code> · <b>ingen WHERE</b></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2">alle rækker</div></div><div class="row"><div class="msg bad back" style="--a: 1; --k: 2"><b>200</b> · alle brugeres tråde</div></div></div>
             </div>
           </div>
           <p class="bottom-line">Backenden ved, hvem du er. Den tjekker bare ikke, hvad du må.</p>
@@ -92,10 +83,10 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
                 <span>Opgave 5.4 · logget ind</span>
                 <strong>Du får alles tråde</strong>
                 <div class="mini-list">
-                  <div class="mine">Pizza-planer<em>dig</em></div>
-                  <div class="other">Weekend<em>bob</em></div>
-                  <div class="other">Programmering<em>alice</em></div>
-                  <div class="other">Hvem ejer mig?<em>alice</em></div>
+                  <div class="other">alices tråde fra seed<em>alice</em></div>
+                  <div class="other">bobs tråde fra seed<em>bob</em></div>
+                  <div class="other">Den tråd, du lige oprettede<em>alice ✗</em></div>
+                  <div class="mine">Dine egne tråde<em>0</em></div>
                 </div>
                 <div class="next"><span>Authorization: hvad må du?</span><b>Step 17</b></div>
               </article>
@@ -167,6 +158,18 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
         </section>
 
         <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Step 17 · klient og server</span>
+          <h2>Samme request. Hver sit svar</h2>
+          <div class="stage">
+            <div class="seq" style="--n: 4">
+              <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Dig</strong><small>browser</small></div><div class="actor" style="--c: var(--yellow)"><span>Klient</span><strong>Bob</strong><small>browser</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--orange)"><span>Database</span><strong>Postgres</strong><small>Supabase</small></div></div>
+              <div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 3"><code>GET /api/threads</code> · dit token</div></div><div class="row"><div class="msg ok" style="--a: 3; --k: 2"><code>WHERE user_id</code> = dit id</div></div><div class="row"><div class="msg ok back" style="--a: 1; --k: 3"><b>200</b> · kun dine tråde</div></div><div class="row"><div class="sep"></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET /api/threads</code> · bobs token</div></div><div class="row"><div class="msg ok" style="--a: 3; --k: 2"><code>WHERE user_id</code> = bobs id</div></div><div class="row"><div class="msg ok back" style="--a: 2; --k: 2"><b>200</b> · kun bobs tråde</div></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Koden er den samme for alle. Det er tokenet, der afgør <code>req.userId</code>, og <code>req.userId</code>, der afgør rækkerne.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
           <span class="eyebrow">Øvelse 1 · test 5 · Thunder Client</span>
           <h2>Logget ind som dig. Og du kan rette bobs tråd</h2>
           <div class="stage">
@@ -179,11 +182,11 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
                 <pre>{ <span class="k">"title"</span>: <span class="s">"Rettet af en anden"</span> }</pre>
               </div>
               <div>
-                <div class="tabs"><span class="status">Status: 200 OK</span><span>Size: 112 B</span></div>
+                <div class="tabs"><span class="status">Status: 200 OK</span></div>
                 <pre>{
   <span class="k">"id"</span>: <span class="s">"bobs-id"</span>,
   <span class="k">"title"</span>: <span class="s">"Rettet af en anden"</span>,
-  <span class="k">"created_at"</span>: <span class="s">"2026-10-…"</span>
+  …
 }</pre>
               </div>
             </div>
@@ -240,20 +243,20 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
             <div class="pipe2">
               <div class="row bad">
                 <div class="tag" style="--c: var(--red)">✗ I JavaScript<small>hent alt, sortér bagefter</small></div>
-                <div class="st"><span>Postgres</span><pre class="viz-code">SELECT … FROM threads</pre><div class="n bad">12 tråde</div></div>
+                <div class="st"><span>Postgres</span><pre class="viz-code">SELECT … FROM threads</pre><div class="n bad">alle tråde</div></div>
                 <div class="ar">→</div>
                 <div class="st leak"><span>Express</span><pre class="viz-code">threads.filter(t =&gt;
-  t.user_id === req.userId)</pre><div class="n bad">12 tråde i hukommelsen</div></div>
+  t.user_id === req.userId)</pre><div class="n bad">alle tråde i hukommelsen</div></div>
                 <div class="ar">→</div>
-                <div class="st"><span>Browseren</span><div class="n">3 tråde</div><small class="c-muted">hvis filteret er rigtigt</small></div>
+                <div class="st"><span>Browseren</span><div class="n">dine tråde</div><small class="c-muted">hvis filteret er rigtigt</small></div>
               </div>
               <div class="row good">
                 <div class="tag" style="--c: var(--green)">✓ I SQL<small>spørg kun efter dine</small></div>
-                <div class="st win"><span>Postgres</span><pre class="viz-code">… WHERE user_id = ${req.userId}</pre><div class="n good">3 tråde</div></div>
+                <div class="st win"><span>Postgres</span><pre class="viz-code">… WHERE user_id = ${req.userId}</pre><div class="n good">dine tråde</div></div>
                 <div class="ar">→</div>
-                <div class="st"><span>Express</span><pre class="viz-code">res.json(threads)</pre><div class="n good">3 tråde</div></div>
+                <div class="st"><span>Express</span><pre class="viz-code">res.json(threads)</pre><div class="n good">dine tråde</div></div>
                 <div class="ar">→</div>
-                <div class="st"><span>Browseren</span><div class="n">3 tråde</div></div>
+                <div class="st"><span>Browseren</span><div class="n">dine tråde</div></div>
               </div>
             </div>
             <p class="soc-def"><b>SoC:</b> hver del har sin opgave. Databasen filtrerer data. Backenden afgør, hvem der må hvad. Frontenden viser bare det, den får.</p>
@@ -287,6 +290,18 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
             </div>
           </div>
           <p class="bottom-line"><code>WHERE id = ${threadId} AND user_id = ${req.userId}</code> giver 0 rækker. Så svarer routen allerede 404.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Øvelse 4 · klient og server</span>
+          <h2>Sådan svarer step 17 bob med 404</h2>
+          <div class="stage">
+            <div class="seq roomy" style="--n: 3">
+              <div class="actors"><div class="actor" style="--c: var(--yellow)"><span>Klient</span><strong>Bob</strong><small>browser</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--orange)"><span>Database</span><strong>Postgres</strong><small>Supabase</small></div></div>
+              <div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>GET /api/threads/alices-id</code> · bobs token</div></div><div class="row"><div class="note ok" style="--a: 2"><b>Authentication</b> ✓ <code>requireAuth</code><br /><code>req.userId</code> = bobs id</div></div><div class="row"><div class="msg warn" style="--a: 2; --k: 2"><code>WHERE id = alices-id AND user_id = bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2">0 rækker</div></div><div class="row"><div class="note orange" style="--a: 2"><b>Authorization</b> ✗ ingen række, der er hans</div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><b>404</b> · Thread not found</div></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Routen skal ikke ændres. Den svarede allerede 404, når SQL'en ikke fandt noget. Nu gælder det også for andres tråde.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -383,6 +398,18 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
         </section>
 
         <section class="fill" data-accent="purple">
+          <span class="eyebrow">Øvelse 1 · klient og server</span>
+          <h2>401 kommer fra serveren. Login sker i klienten</h2>
+          <div class="stage">
+            <div class="seq roomy" style="--n: 3">
+              <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Browser</strong><small>React · apiFetch</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Supabase Auth</strong><small>tjekker tokens</small></div></div>
+              <div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="note " style="--a: 1"><code>getSession()</code>: tokenet fra Local Storage<br />ét bogstav er rettet</div></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>GET /api/threads</code> · <code>Bearer eyJh<b>X</b>…</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>getUser(token)</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2">✗ signaturen passer ikke</div></div><div class="row"><div class="msg bad back" style="--a: 1; --k: 2"><b>401</b> · Invalid or expired token</div></div><div class="row"><div class="note purple" style="--a: 1">I dag: fejlside<br /><b>Step 18:</b> <code>/login?redirect=…</code></div></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Serveren kan kun sige nej. Det er klienten, der skal sende brugeren til login. Derfor sker step 18 i frontenden.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
           <span class="eyebrow">Øvelse 1 · før step 18</span>
           <h2>Det ser brugeren i dag</h2>
           <div class="stage">
@@ -432,13 +459,22 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
           <div class="stage">
             <div class="gt" style="--cols: 120px 1fr 1fr 220px">
               <div class="r h"><span>Status</span><span>Hvad gik galt?</span><span>Det ser brugeren</span><span>Hvem håndterer</span></div>
-              <div class="r" style="--c: var(--orange)"><span class="sc sc-4">400</span><span>Beskeden er tom</span><span>Fejlen under feltet i formularen</span><span class="own">Routens action</span></div>
+              <div class="r" style="--c: var(--orange)"><span class="sc sc-4">400</span><span>Ugyldige data i body'en</span><span>Fejlen i formularen</span><span class="own">Routens action</span></div>
               <div class="r" style="--c: var(--orange)"><span class="sc sc-4">404</span><span>Tråden findes ikke, eller den er bobs<small>Nyt fra step 17</small></span><span>"Thread Not Found"</span><span class="own">Routens ErrorBoundary</span></div>
               <div class="r" style="--c: var(--red)"><span class="sc sc-5">500</span><span>Databasen fejlede</span><span>"Something Went Wrong"</span><span class="own">Routens ErrorBoundary</span></div>
               <div class="r hi" style="--c: var(--purple)"><span class="sc sc-1">401</span><span>Sessionen er slut</span><span>Login, og så tilbage</span><span class="own"><code>apiFetch</code></span></div>
             </div>
           </div>
           <p class="bottom-line">400, 404 og 500 afhænger af routen. 401 er det samme overalt. Brugeren skal logge ind.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Øvelse 2 · klient og server</span>
+          <h2>404 går igennem apiFetch. 401 stopper der</h2>
+          <div class="stage">
+            <div class="seq2"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>return response</code></div></div><div class="row"><div class="note orange" style="--a: 1"><code>throw</code> → <b>"Thread Not Found"</b></div></div></div></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 2"><b>guard clause</b><br /><code>throw redirect(…)</code></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 2">flyver forbi loaderen → <b>/login</b></div></div></div></div></div></div>
+          </div>
+          <p class="bottom-line">Loaderen ser aldrig et 401. Den ser stadig 400, 404 og 500 og håndterer dem som før.</p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -517,7 +553,7 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
               </ol>
             </div>
           </div>
-          <p class="bottom-line">Fire nye linjer. Routes og loaders skal ikke ændres.</p>
+          <p class="bottom-line">Få nye linjer i én fil. Routes og loaders skal ikke ændres.</p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -701,7 +737,7 @@ ORDER BY …</pre><div class="miss">Ingen <code>WHERE</code>. Alle får alles tr
             <div class="gt" style="--cols: 190px 1fr 1fr 1fr">
               <div class="r h"><span>Status</span><span>Betyder</span><span>Backenden</span><span>Frontenden</span></div>
               <div class="r" style="--c: var(--purple)"><span class="sc sc-1">401</span><span>Vi ved ikke, hvem du er</span><span><code>requireAuth</code> · step 16</span><span class="fragment"><code>apiFetch</code> → <code>/login?redirect=…</code></span></div>
-              <div class="r dim" style="--c: var(--orange)"><span class="sc sc-4">403</span><span>Vi ved, hvem du er. Du må ikke</span><span>Bruger vi ikke</span><span class="fragment">Den afslører, at tråden findes</span></div>
+              <div class="r dim" style="--c: var(--orange)"><span class="sc sc-4">403</span><span>Vi ved, hvem du er. Du må ikke</span><span>Bruger vi ikke. Den afslører, at tråden findes</span><span class="fragment">—</span></div>
               <div class="r" style="--c: var(--orange)"><span class="sc sc-4">404</span><span>Den findes ikke for dig</span><span><code>WHERE … AND user_id</code> · step 17</span><span class="fragment">Routens ErrorBoundary: "Thread Not Found"</span></div>
             </div>
           </div>
