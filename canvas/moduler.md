@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-11-10T14:23:26.858Z
+Senest hentet: 2026-11-10T15:22:27.054Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -622,11 +622,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 - [Code-along-guide: Normal Former: Reloaded](https://eaaa.instructure.com/courses/32059/modules/items/1077298)
 - [Lektionsplan: Normal Former: Reloaded](https://eaaa.instructure.com/courses/32059/modules/items/1080918)
 
-## 058 · RACE 11 - Session expiration handling i Frontend - 11-11-2026
+## 058 · RACE 11 - Authorization og session expiration - 11-11-2026
 
-[Lokal fil](../undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) · publiceret
+[Lokal fil](../undervisning/058-race-11-authorization-og-session-expiration-11-11-2026.md) · publiceret
 
-- [Plan for RACE 11 - Session expiration handling i Frontend](../undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md)
+- [Plan for RACE 11 - Authorization og session expiration](../undervisning/058-race-11-authorization-og-session-expiration-11-11-2026.md)
 
 ### Præsentationer
 

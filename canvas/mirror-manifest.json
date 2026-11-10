@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-11-10T14:23:26.858Z",
+  "pulled_at": "2026-11-10T15:22:27.054Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "d4757cfbbf057b4e4dac48920ce816076b8df196b2f4a461dd540a532ffb9270",
@@ -230,9 +230,9 @@
       "local_hash": "daf881f539d5e05e9693b9c6f0f2f45190e42ff0ea7bc16929c98223ec70cdc5",
       "canvas_hash": "daf881f539d5e05e9693b9c6f0f2f45190e42ff0ea7bc16929c98223ec70cdc5"
     },
-    "undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md": {
-      "local_hash": "175dc3bb2fb09cb42b14b25ace0e5455202c0becff61bba6223cab2327f35d45",
-      "canvas_hash": "175dc3bb2fb09cb42b14b25ace0e5455202c0becff61bba6223cab2327f35d45"
+    "undervisning/058-race-11-authorization-og-session-expiration-11-11-2026.md": {
+      "local_hash": "02faa70b5a9aaf9977525021b9607893615e4d37054090a601308fe910ded4bb",
+      "canvas_hash": "02faa70b5a9aaf9977525021b9607893615e4d37054090a601308fe910ded4bb"
     },
     "undervisning/059-magl-6-capture-the-flag-12-11-2026.md": {
       "local_hash": "36ae869538995ee3e11240d5ffb18db1ff1221e02d52cc1af69e90fb77ace37e",

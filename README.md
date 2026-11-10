@@ -33,7 +33,7 @@ Underviserne står med initialer i titlerne: RACE, DOB, MAGL, HEOE, NKKR og NYCH
 | 8 | 06-10 | Thinking in React | [plan](./undervisning/032-race-8-thinking-in-react-06-10-2026.md) | [slides](https://cederdorff.com/wu-e26a/react-intro/) | [1-11](https://cederdorff.com/wu-e26a/react-intro/#/ovelser), [løsning](https://github.com/cederdorff/my-first-react-app) |
 | 9 | 28-10 | User authentication og login | [plan](./undervisning/048-race-9-user-authentication-og-login-28-10-2026.md) | [slides](https://cederdorff.com/wu-e26a/supabase-auth/) | [React Supabase Auth](./opgaver/react-supabase-auth.md), [løsning](https://github.com/cederdorff/react-supabase-auth) |
 | 10 | 03-11 | JWT tokens fra frontend | [plan](./undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md) | [slides](https://cederdorff.com/wu-e26a/bearer-token/) | [Send tokenet med](./opgaver/react-supabase-auth-bearer-token.md), [løsning](https://github.com/cederdorff/react-supabase-auth), [Chatbot step 15](./opgaver/chatbot-step-15-send-tokenet.md) |
-| 11 | 11-11 | Session expiration handling i frontend | [plan](./undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) | [slides](https://cederdorff.com/wu-e26a/session-expiration/) | [Chatbot step 17](./opgaver/chatbot-step-17-kun-egne-traade.md), [Chatbot step 18](./opgaver/chatbot-step-18-send-til-login.md) |
+| 11 | 11-11 | Authorization og session expiration | [plan](./undervisning/058-race-11-authorization-og-session-expiration-11-11-2026.md) | [slides](https://cederdorff.com/wu-e26a/session-expiration/) | [Chatbot step 17](./opgaver/chatbot-step-17-kun-egne-traade.md), [Chatbot step 18](./opgaver/chatbot-step-18-send-til-login.md) |
 
 Tal i øvelseskolonnen er AMAbot-øvelsens nummer. Lektioner fra og med 06-10 er stadig kladder i Canvas.
 
@@ -109,7 +109,7 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [055 · Forberedelse - Gruppearbejde - 06-11-2026](./undervisning/055-forberedelse-gruppearbejde-06-11-2026.md)
 - [056 · Forberedelse - Selvstudium - 09-11-2026](./undervisning/056-forberedelse-selvstudium-09-11-2026.md)
 - [057 · MAGL 5 - Backend auth enforcement - 10-11-2026](./undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md)
-- [058 · RACE 11 - Session expiration handling i Frontend - 11-11-2026](./undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md)
+- [058 · RACE 11 - Authorization og session expiration - 11-11-2026](./undervisning/058-race-11-authorization-og-session-expiration-11-11-2026.md)
 - [059 · MAGL 6 - CAPTURE THE FLAG - 12-11-2026](./undervisning/059-magl-6-capture-the-flag-12-11-2026.md)
 - [060 · DOB + MAGL + RACE - Projekt kickoff - 13-11-2026](./undervisning/060-dob-magl-race-projekt-kickoff-13-11-2026.md)
 

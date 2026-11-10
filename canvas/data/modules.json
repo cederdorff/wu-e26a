@@ -4636,7 +4636,7 @@
   {
     "id": 178081,
     "position": 58,
-    "name": "RACE 11 - Session expiration handling i Frontend - 11-11-2026",
+    "name": "RACE 11 - Authorization og session expiration - 11-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
@@ -4649,15 +4649,15 @@
       {
         "id": 1018778,
         "position": 1,
-        "title": "Plan for RACE 11 - Session expiration handling i Frontend",
+        "title": "Plan for RACE 11 - Authorization og session expiration",
         "indent": 0,
         "quiz_lti": false,
         "type": "Page",
         "module_id": 178081,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018778",
-        "page_url": "plan-for-race-11-session-expiration-handling-i-frontend",
+        "page_url": "plan-for-race-11-authorization-og-session-expiration",
         "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-11-session-expiration-handling-i-frontend",
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-11-authorization-og-session-expiration",
         "published": true,
         "unpublishable": true,
         "content_details": {
