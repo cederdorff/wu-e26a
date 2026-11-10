@@ -1,0 +1,1045 @@
+@import "../bearer-token/theme.css";
+
+/* RACE 11 deck additions: step 17 (authorization in the backend) and
+   step 18 (401 -> login and back in the frontend). Reuses the RACE 9/10
+   components (gapv, holes, tline, anat, dry2, qa3, tc, bw, ac) and adds a
+   generic grid table (.gt), three-column cards (.col3) and a few mocks */
+
+/* ===================================================================
+   Generic pieces
+   =================================================================== */
+
+/* Grid table: every row is its own card, columns set per table with --cols */
+.gt {
+  display: grid;
+  gap: 12px;
+}
+.gt > .r {
+  display: grid;
+  grid-template-columns: var(--cols);
+  align-items: center;
+  gap: 22px;
+  padding: 18px 26px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--c, var(--line));
+  border-radius: 12px;
+  background: var(--soft);
+  font-size: 23px;
+  line-height: 1.35;
+}
+.gt > .r.h {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: transparent;
+  background: none;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.gt > .r.hi {
+  border-color: color-mix(in srgb, var(--c) 60%, transparent);
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+.gt > .r.dim {
+  opacity: 0.55;
+}
+.gt > .r strong {
+  font-size: 25px;
+}
+.gt > .r small {
+  display: block;
+  color: var(--muted);
+  font-size: 19px;
+}
+.gt > .r .mono {
+  font-size: 21px;
+}
+.gt .sc {
+  justify-self: start;
+  font-size: 22px;
+}
+.gt .own {
+  color: var(--c);
+  font-weight: 800;
+}
+
+/* Three cards side by side */
+.col3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.col3.c2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.col3 article {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 16px;
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.col3 article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.col3 article > strong {
+  font-size: 32px;
+  line-height: 1.2;
+}
+.col3 article > p,
+.col3 article > small {
+  margin: 0;
+  color: var(--muted);
+  font-size: 22px !important;
+  line-height: 1.4 !important;
+}
+.col3 article > p b,
+.col3 article > small b {
+  color: var(--ink);
+}
+.col3 article > .foot {
+  align-self: end;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  font-size: 21px;
+  line-height: 1.35;
+}
+.col3 article > .foot b {
+  color: var(--c);
+}
+.col3 .viz-code {
+  font-size: 18px;
+}
+.col3 article.bad {
+  --c: var(--red);
+}
+.col3 article.good {
+  --c: var(--green);
+}
+
+/* Small question card with an answer revealed as a fragment */
+.ask {
+  display: grid;
+  gap: 14px;
+  padding: 24px 28px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 60%, transparent);
+  border-radius: var(--radius);
+}
+.ask > strong {
+  font-size: 27px;
+  line-height: 1.3;
+}
+.ask > strong::before {
+  margin-right: 10px;
+  color: var(--accent);
+  content: "?";
+  font-weight: 900;
+}
+.ask > .ans {
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+/* Tag on hands-on slides that points to a live demo */
+.demo-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--yellow) 20%, transparent);
+  color: var(--yellow);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ===================================================================
+   Title: three answers from the API, three reactions
+   =================================================================== */
+.codes3 {
+  display: grid;
+  gap: 18px;
+}
+.codes3 > div {
+  display: grid;
+  grid-template-columns: 110px 40px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--c);
+  border-radius: 16px;
+  background: var(--soft);
+  box-shadow: 0 24px 50px rgb(0 0 0 / 30%);
+}
+.codes3 .sc {
+  font-size: 30px;
+  text-align: center;
+}
+.codes3 b {
+  color: var(--muted);
+  font-size: 30px;
+  text-align: center;
+}
+.codes3 span {
+  display: grid;
+  gap: 4px;
+}
+.codes3 strong {
+  font-size: 26px;
+}
+.codes3 small {
+  color: var(--muted);
+  font-size: 19px;
+}
+.sc-1 {
+  background: color-mix(in srgb, var(--purple) 20%, transparent);
+  color: var(--purple);
+}
+
+/* ===================================================================
+   01 Opsamling
+   =================================================================== */
+
+/* Logged-out error page from the root ErrorBoundary */
+.errpage {
+  padding: 30px 34px 34px;
+  background: #fff;
+  color: #111;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  text-align: left;
+}
+.errpage h3 {
+  margin: 0 0 8px !important;
+  color: #111 !important;
+  font-size: 34px !important;
+  font-weight: 700;
+  text-transform: none !important;
+}
+.errpage p {
+  margin: 0 0 16px !important;
+  font-size: 19px !important;
+}
+.errpage pre {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  color: #6b7280;
+  font: 500 13px/1.45 var(--mono);
+  white-space: pre;
+  box-shadow: none;
+}
+
+/* Two problems, one per step */
+.need2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+.need2 article {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 18px;
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.need2 article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.need2 article > strong {
+  font-size: 32px;
+  line-height: 1.2;
+}
+.need2 .next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  font-size: 22px;
+}
+.need2 .next b {
+  color: var(--c);
+}
+.need2 .mini-list {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+}
+.need2 .mini-list div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #090d0d;
+  font: 600 19px/1.3 var(--mono);
+}
+.need2 .mini-list div em {
+  color: var(--muted);
+  font-style: normal;
+}
+.need2 .mini-list div.mine {
+  color: var(--green);
+}
+.need2 .mini-list div.other {
+  color: var(--red);
+}
+
+/* Request path: last node marks the gap */
+.gapv .nd.gap {
+  border-color: color-mix(in srgb, var(--red) 55%, transparent);
+  border-top-color: var(--red);
+  background: color-mix(in srgb, var(--red) 8%, transparent);
+}
+.gapv .nd .miss {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--red) 16%, transparent);
+  color: var(--red);
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+.gapv.short .nd {
+  min-height: 0;
+}
+
+/* ===================================================================
+   02 Authentication og authorization
+   =================================================================== */
+.holes li > em.done {
+  background: color-mix(in srgb, var(--green) 16%, transparent);
+  color: var(--green);
+}
+.holes li > em.today {
+  background: color-mix(in srgb, var(--orange) 18%, transparent);
+  color: var(--orange);
+}
+.holes li.closed > span {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent);
+}
+.holes li.closed > i {
+  color: var(--green);
+}
+
+/* Authentication vs authorization: question, festival, chatbot, answer */
+.def2 {
+  display: grid;
+  grid-template-columns: 200px repeat(2, minmax(0, 1fr));
+  gap: 14px 22px;
+  align-items: stretch;
+}
+.def2 > .lbl {
+  display: grid;
+  align-content: center;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.def2 > .hd {
+  display: grid;
+  gap: 4px;
+  padding: 20px 26px;
+  border-top: 5px solid var(--c);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+.def2 > .hd strong {
+  color: var(--c);
+  font-size: 34px;
+}
+.def2 > .hd small {
+  font-size: 25px;
+  font-weight: 700;
+}
+.def2 > .cell {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 18px 26px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--soft);
+  font-size: 23px;
+  line-height: 1.35;
+}
+.def2 > .cell small {
+  color: var(--muted);
+  font-size: 19px;
+}
+.def2 > .cell .sc {
+  justify-self: start;
+  font-size: 24px;
+}
+
+/* Filter in SQL or in JavaScript: two pipelines */
+.pipe2 {
+  display: grid;
+  gap: 26px;
+}
+.pipe2 .row {
+  display: grid;
+  grid-template-columns: 170px repeat(2, minmax(0, 1fr) 50px) minmax(0, 0.7fr);
+  align-items: stretch;
+  gap: 12px;
+}
+.pipe2 .tag {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  color: var(--c);
+  font-size: 24px;
+  font-weight: 850;
+}
+.pipe2 .tag small {
+  color: var(--muted);
+  font-size: 17px;
+  font-weight: 600;
+}
+.pipe2 .st {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--soft);
+}
+.pipe2 .st > span {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pipe2 .st .viz-code {
+  padding: 10px 14px;
+  font-size: 17px;
+}
+.pipe2 .st .n {
+  font-size: 22px;
+  font-weight: 750;
+}
+.pipe2 .st .n.bad {
+  color: var(--red);
+}
+.pipe2 .st .n.good {
+  color: var(--green);
+}
+.pipe2 .ar {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 34px;
+}
+.pipe2 .row.bad .st.leak {
+  border-color: color-mix(in srgb, var(--red) 55%, transparent);
+  background: color-mix(in srgb, var(--red) 9%, transparent);
+}
+.pipe2 .row.good .st.win {
+  border-color: color-mix(in srgb, var(--green) 55%, transparent);
+  background: color-mix(in srgb, var(--green) 9%, transparent);
+}
+.soc-def {
+  margin-top: 30px !important;
+  padding: 18px 26px;
+  border-left: 5px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  background: var(--soft);
+  font-size: 25px !important;
+  line-height: 1.4 !important;
+}
+.soc-def b {
+  color: var(--accent);
+}
+
+/* ===================================================================
+   03 Session expiration
+   =================================================================== */
+.tline .refresh div.fail b {
+  color: var(--red);
+}
+.ways3 article .viz-code {
+  padding: 12px 16px;
+  font-size: 17px;
+  white-space: pre-wrap;
+}
+.ways3 article .foot .sc {
+  margin-right: 10px;
+}
+
+/* Browser on the left, what goes wrong on the right */
+.before2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 40px;
+}
+.before2 .probs {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.before2 .probs li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--soft);
+  font-size: 24px;
+  line-height: 1.35;
+}
+.before2 .probs li > i {
+  color: var(--red);
+  font: 850 28px/1 var(--font);
+  font-style: normal;
+}
+.net-strip {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 18px;
+  padding: 10px 16px;
+  border-top: 1px solid #3c3d40;
+  background: #1f2023;
+  color: #e3e3e3;
+  font: 600 15px/1.3 var(--mono);
+}
+.net-strip .bad {
+  color: #f28b82;
+}
+
+/* ===================================================================
+   04 DRY, SoC og SRP
+   =================================================================== */
+
+/* One check in front of many callers, backend and frontend */
+.mirror2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+.mirror2 article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 50px minmax(0, 0.9fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 16px 12px;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.mirror2 article > span {
+  grid-column: 1 / -1;
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.mirror2 .callers {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+}
+.mirror2 .callers code {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #090d0d;
+  font-size: 17px;
+}
+.mirror2 .ar {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 34px;
+}
+.mirror2 .one {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 2px solid var(--c);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+.mirror2 .one strong {
+  font: 800 26px/1.2 var(--mono);
+  color: var(--c);
+}
+.mirror2 .one small {
+  font-size: 19px;
+  line-height: 1.35;
+}
+.mirror2 article > p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 21px !important;
+  line-height: 1.4 !important;
+}
+
+/* apiFetch has one job: in scope / out of scope */
+.srp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 26px;
+}
+.srp .core {
+  display: grid;
+  gap: 14px;
+  padding: 30px 30px;
+  border: 2px solid var(--accent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  text-align: center;
+}
+.srp .core code {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--accent);
+}
+.srp .core strong {
+  font-size: 27px;
+  line-height: 1.3;
+}
+.srp .side {
+  display: grid;
+  gap: 12px;
+}
+.srp .side > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.srp .side div {
+  display: grid;
+  gap: 4px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--c);
+  border-radius: 10px;
+  background: var(--soft);
+  font-size: 22px;
+  line-height: 1.3;
+}
+.srp .side div small {
+  color: var(--muted);
+  font-size: 18px;
+}
+.srp-q {
+  margin-top: 28px;
+}
+
+/* apiFetch anatomy, step 18 version */
+.anat.a18 {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+}
+.anat.a18 .viz-code {
+  font-size: 18px;
+  line-height: 1.5;
+}
+.anat.a18 .viz-code .new {
+  display: inline-block;
+  margin: 0 -8px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.anat.a18 ol li {
+  font-size: 21px;
+}
+.anat.a18 ol li b {
+  color: var(--accent);
+}
+.anat.a18 ol li small {
+  display: block;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* return vs throw: who gets the redirect? */
+.stack2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+.stack2 article {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.stack2 article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.stack2 .lvl {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #090d0d;
+  font-size: 20px;
+  line-height: 1.35;
+}
+.stack2 .lvl > b {
+  color: var(--muted);
+  font: 700 17px/1.3 var(--mono);
+}
+.stack2 .lvl code {
+  font-size: 18px;
+}
+.stack2 .up {
+  padding-left: 226px;
+  color: var(--c);
+  font-size: 19px;
+  font-weight: 750;
+}
+.stack2 .end {
+  margin-top: 6px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  font-size: 22px;
+}
+.stack2 .end b {
+  color: var(--c);
+}
+
+/* ===================================================================
+   05 Query parameters og open redirect
+   =================================================================== */
+
+/* The URL taken apart */
+.url-anat {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font: 700 46px/1 var(--mono);
+}
+.url-anat > span {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+.url-anat > span > b {
+  padding: 14px 10px;
+  border-bottom: 5px solid var(--c, var(--line));
+  color: var(--c, var(--ink));
+}
+.url-anat > span > small {
+  max-width: 260px;
+  color: var(--muted);
+  font: 650 18px/1.3 var(--font);
+  text-align: center;
+}
+.enc-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 44px;
+}
+.enc-row article {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.enc-row article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.enc-row .viz-code {
+  padding: 12px 16px;
+  font-size: 19px;
+  white-space: pre-wrap;
+}
+.enc-row small {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.4;
+}
+.enc-row small b {
+  color: var(--ink);
+}
+.enc-map {
+  display: flex;
+  gap: 12px;
+}
+.enc-map span {
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #090d0d;
+  font: 700 21px/1.2 var(--mono);
+}
+.enc-map span em {
+  color: var(--green);
+  font-style: normal;
+}
+
+/* Encapsulation: who knows what */
+.enc3 article > .knows {
+  display: grid;
+  gap: 10px;
+}
+.enc3 article > .knows div {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  font-size: 21px;
+  line-height: 1.35;
+}
+.enc3 article > .knows div > b {
+  font-size: 22px;
+}
+.enc3 article > .knows div.y > b {
+  color: var(--green);
+}
+.enc3 article > .knows div.n > b {
+  color: var(--red);
+}
+.enc3 article > .knows div.n {
+  color: var(--muted);
+}
+
+/* Login card: the blue session-expired message */
+.ac .info {
+  display: block;
+  margin-bottom: 14px;
+  padding: 9px 11px;
+  border: 1px solid #c7d7fe;
+  border-radius: 6px;
+  background: #eef4ff;
+  color: #1d4ed8;
+  font-size: 13px;
+}
+
+/* Open redirect: link, real login, fake login */
+.phish3 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46px minmax(0, 1fr) 46px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+.phish3 > b {
+  color: var(--muted);
+  font-size: 34px;
+  text-align: center;
+}
+.phish3 .step {
+  display: grid;
+  gap: 12px;
+}
+.phish3 .step > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.phish3 .bw-url {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.phish3 .bw-body {
+  padding: 18px;
+}
+.phish3 .ac {
+  width: 100%;
+}
+.phish3 .mail {
+  padding: 20px 22px;
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  text-align: left;
+}
+.phish3 .mail .from {
+  display: block;
+  margin-bottom: 10px;
+  color: #6b7280;
+  font-size: 13px;
+}
+.phish3 .mail a {
+  color: #1d4ed8;
+  text-decoration: underline;
+  word-break: break-all;
+}
+.phish3 .bw.evil .bw-bar {
+  background: #3a1f22;
+}
+.phish3 .bw.evil .bw-url b {
+  color: var(--red);
+}
+
+/* ===================================================================
+   06 Afrunding
+   =================================================================== */
+.qa3.qa4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.qa3.qa4 article > strong {
+  font-size: 26px;
+}
+.qa3.qa4 .ans {
+  font-size: 20px;
+}
+
+.commits2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+.commits2 article {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.commits2 article > span {
+  margin-bottom: 4px;
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.commits2 .cm {
+  display: grid;
+  grid-template-columns: 120px 1fr 96px;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #090d0d;
+  font-size: 19px;
+  line-height: 1.3;
+}
+.commits2 .cm > b {
+  color: var(--c);
+  font-size: 18px;
+}
+.commits2 .cm > code {
+  color: var(--muted);
+  font-size: 16px;
+}
+.commits2 .cm.skip {
+  opacity: 0.5;
+}
+
+/* Code chips in grid tables keep their natural width */
+.gt > .r > code {
+  justify-self: start;
+}
+
+.gt.tight {
+  gap: 8px;
+}
+.gt.tight > .r {
+  padding: 11px 22px;
+  font-size: 21px;
+}
+.gt.tight > .r.h {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.gt.tight > .r code {
+  font-size: 18px;
+}
+.def2 .cell > code {
+  justify-self: start;
+}
+
+/* Four-step loop: nodes may shrink, login card fits its node */
+.gapv.loop .nd {
+  min-width: 0;
+  min-height: 400px;
+}
+.gapv.loop .viz-code {
+  font-size: 17px;
+}
+.gapv.loop .ac {
+  width: 100%;
+  padding: 18px 16px 14px;
+}
+.gapv.loop .ac .h {
+  font-size: 20px;
+}
+
+/* URL anatomy: a bit bigger, "=" without an underline */
+.url-anat {
+  font-size: 56px;
+}
+.url-anat > .eq > b {
+  border-bottom-color: transparent;
+  color: var(--muted);
+}
+.enc-row {
+  margin-top: 56px;
+}
+.gapv.loop .nd {
+  flex: 1 1 0;
+}
+.gapv.loop .viz-code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

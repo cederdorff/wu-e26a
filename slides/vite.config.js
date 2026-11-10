@@ -19,7 +19,8 @@ export default defineConfig({
         fejlhaandteringSikkerhed: resolve("slides/fejlhaandtering-sikkerhed/index.html"),
         reactIntro: resolve("slides/react-intro/index.html"),
         supabaseAuth: resolve("slides/supabase-auth/index.html"),
-        bearerToken: resolve("slides/bearer-token/index.html")
+        bearerToken: resolve("slides/bearer-token/index.html"),
+        sessionExpiration: resolve("slides/session-expiration/index.html")
       }
     }
   }
