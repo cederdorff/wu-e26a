@@ -49,9 +49,10 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-18-start
 
 Tutorialen skriver `pr-17-start`, fordi den laver step 18 før step 17. Brug `pr-18-start`, ellers mister du step 17.
 
-Startpunktet har step 16 med. Har du ikke lavet det, så kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`. Ellers starter backenden ikke.
+Bruger du startpunktet, skal du gøre to ting bagefter:
 
-Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde.
+- Kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`, hvis du ikke har lavet step 16. Uden dem starter backenden ikke
+- Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde
 
 ---
 
@@ -60,6 +61,8 @@ Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den
 Her skal du ikke skrive kode. Du ødelægger tokenet og ser, hvad brugeren oplever.
 
 > **Ugyldigt token:** et access token lever en time. Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Men kan der ikke komme et nyt, fx fordi brugeren er slettet i Supabase, er tokenet i localStorage ugyldigt. Så svarer dit API `401`. Når du retter ét bogstav i tokenet, får du det samme svar.
+
+#### Test øvelse 1
 
 1. Log ind, og åbn en tråd. Kopiér URL'en.
 2. Åbn DevTools → Application → Local Storage. Klik på nøglen, der slutter med `-auth-token`. Ret ét bogstav midt i `access_token`.

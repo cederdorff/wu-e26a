@@ -11,7 +11,7 @@ I dag retter I begge dele, i rækkefølge:
 - [Chatbot step 17](../opgaver/chatbot-step-17-kun-egne-traade.md): hver bruger ser og ændrer kun sine egne tråde. MAGL talte om det i går
 - [Chatbot step 18](../opgaver/chatbot-step-18-send-til-login.md): `apiFetch` sender brugeren til login ved `401` og bagefter tilbage, hvor de var
 
-Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort, så vi bruger tiden på, hvorfor den står, hvor den står. Målet er, at I bliver færdige med begge i dag.
+Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort, så vi bruger tiden på, hvorfor den står, hvor den står. Målet er, at I kommer godt i gang med begge. Det, I ikke når, samler MAGL op på.
 
 ---
 

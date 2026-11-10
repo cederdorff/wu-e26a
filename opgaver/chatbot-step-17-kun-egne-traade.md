@@ -49,11 +49,11 @@ npx degit --force bewildergeist/chatbot-react-postgres#pr-17-start
 
 Tutorialen skriver `pr-17-start-after-18`, fordi den laver step 18 først. Brug `pr-17-start`.
 
-Startpunktet opretter tråde uden `user_id`. Sæt `TEST_USER_ID` ind i `backend/server.js` igen. Kodestykket står i [React Supabase Auth: Login før chatbotten](react-supabase-auth.md#fra-øvelserne-til-step-14). Du fjerner den igen i øvelse 2.
+Bruger du startpunktet, skal du gøre tre ting bagefter:
 
-Startpunktet har step 16 med. Har du ikke lavet det, så kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`. Ellers starter backenden ikke.
-
-Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde.
+- Sæt `TEST_USER_ID` ind i `backend/server.js` igen. Startpunktet opretter tråde uden `user_id`. Kodestykket står i [React Supabase Auth: Login før chatbotten](react-supabase-auth.md#fra-øvelserne-til-step-14). Du fjerner den igen i øvelse 2
+- Kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`. Startpunktet har step 16 med. Uden dem starter backenden ikke
+- Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde
 
 ---
 
@@ -62,6 +62,8 @@ Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den
 Her skal du ikke skrive kode. Du finder ud af, hvem der ejer trådene, og hvad du kan gøre ved andres tråde.
 
 > **Authentication og authorization:** to ord, der ligner hinanden. Authentication er "hvem er du?". Det tjekker `requireAuth` fra step 16. Svaret nej giver `401`. Authorization er "hvad må du?". Det er dette step. Du er logget ind, men det betyder ikke, at du må se bobs tråde.
+
+#### Test øvelse 1
 
 1. Åbn SQL Editor i Supabase. Kør denne query. Du har skrevet en lignende med MAGL:
 
@@ -98,7 +100,7 @@ Du skal have fundet tre ting:
 - Du kan rette en tråd, du ikke ejer. Det samme gælder for at læse, sende beskeder og slette
 - Nye tråde bliver ejet af alice, uanset hvem der opretter dem
 
-Kolonnen `user_id`, dens foreign key til `auth.users` og et index på den findes allerede. Det er delopgave 1 og 2 i tutorialen. Det, der mangler, er, at backenden bruger den.
+Kolonnen `user_id`, dens foreign key til `auth.users` og et index på den findes allerede. Det, der mangler, er, at backenden bruger den.
 
 ---
 
@@ -369,7 +371,7 @@ if (threads.length === 0) {
 | Øvelse 4 | Delopgave 5: Authorize thread read operations | [`3700652`](https://github.com/bewildergeist/chatbot-react-postgres/pull/17/commits/37006526d813841a5e6d1d4c35a7d14a425d2e37) |
 | Øvelse 5 | Delopgave 6: Authorize thread write operations | [`4553a13`](https://github.com/bewildergeist/chatbot-react-postgres/pull/17/commits/4553a139fa4b78a170ffa6a0bf136582bd571d94) |
 
-Delopgave 1 og 2 skal du ikke lave. Kolonnen findes allerede i kursets database. Kør ikke migrationen fra commit 2. Den prøver at tilføje en kolonne, der allerede findes, og fejler.
+Kør ikke migrationen fra commit 2. Den prøver at tilføje kolonnen `user_id`, som allerede findes, og fejler.
 
 Commits har mange flere kommentarer end løsningsforslagene her, men SQL'en er den samme.
 
