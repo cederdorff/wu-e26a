@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-11-02T11:25:24.971Z
+Senest hentet: 2026-11-10T14:23:26.858Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -582,26 +582,30 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Præsentationer
 
+- [DOB 12 - Test, kvalitetssikring og deployment - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1079815)
+
 ### Opgaver
+
+- Ønsker til grupper til semesterprojektet — Assignment
 
 ## 055 · Forberedelse - Gruppearbejde - 06-11-2026
 
-[Lokal fil](../undervisning/055-forberedelse-gruppearbejde-06-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/055-forberedelse-gruppearbejde-06-11-2026.md) · publiceret
 
 - [Bordgrupper uge 45.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076779)
+- Gruppearbejde uge 45 — Assignment
 
 ## 056 · Forberedelse - Selvstudium - 09-11-2026
 
-[Lokal fil](../undervisning/056-forberedelse-selvstudium-09-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/056-forberedelse-selvstudium-09-11-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- Ønsker til grupper til semesterprojektet — Assignment
 
 ## 057 · MAGL 5 - Backend auth enforcement - 10-11-2026
 
 [Lokal fil](../undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md) · publiceret
 
 - [Plan: Normal Former: Reloaded](../undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md)
-- [Plan for MAGL 5 - Backend auth enforcement](../undervisning/099-plan-for-magl-5-backend-auth-enforcement.md)
 
 ### Præsentationer
 
@@ -610,16 +614,17 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 ### Opgaver
 
 - Forberedelse 5: Normalformer — Assignment
-- Quiz 5: Normalforms — Assignment
 - [Arbejdsark: Normal Former: Reloaded](../undervisning/091-arbejdsark-normal-former-reloaded.md)
+- Quiz 5: Normalformer, aggregering og middleware — Assignment
 
 ### Teacher-only
 
 - [Code-along-guide: Normal Former: Reloaded](https://eaaa.instructure.com/courses/32059/modules/items/1077298)
+- [Lektionsplan: Normal Former: Reloaded](https://eaaa.instructure.com/courses/32059/modules/items/1080918)
 
 ## 058 · RACE 11 - Session expiration handling i Frontend - 11-11-2026
 
-[Lokal fil](../undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) · publiceret
 
 - [Plan for RACE 11 - Session expiration handling i Frontend](../undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md)
 
@@ -627,21 +632,25 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 ### Opgaver
 
-## 059 · MAGL 6 - Data isolation for bruger data - 12-11-2026
+## 059 · MAGL 6 - CAPTURE THE FLAG - 12-11-2026
 
-[Lokal fil](../undervisning/059-magl-6-data-isolation-for-bruger-data-12-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/059-magl-6-capture-the-flag-12-11-2026.md) · publiceret
 
-- [Plan for MAGL 6 - Data isolation for bruger data](../undervisning/059-magl-6-data-isolation-for-bruger-data-12-11-2026.md)
+- [Plan for MAGL 6 - Data isolation for bruger data](../undervisning/059-magl-6-capture-the-flag-12-11-2026.md)
 
 ### Præsentationer
 
 ### Opgaver
 
-## 060 · Forberedelse - Gruppearbejde - 13-11-2026
+## 060 · DOB + MAGL + RACE - Projekt kickoff - 13-11-2026
 
-[Lokal fil](../undervisning/060-forberedelse-gruppearbejde-13-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/060-dob-magl-race-projekt-kickoff-13-11-2026.md) · publiceret
 
-- [Bordgrupper uge 46.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076780)
+- [Plan for DOB + MAGL + RACE - Projekt kickoff](../undervisning/060-dob-magl-race-projekt-kickoff-13-11-2026.md)
+
+### Præsentationer
+
+### Opgaver
 
 ## 061 · ➡️ Semesterprojekt (Uge 47-51)
 
@@ -649,21 +658,17 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 062 · Forberedelse - Selvstudium - 16-11-2026
+## 062 · Grupper - Projektarbejde - 16-11-2026
 
-[Lokal fil](../undervisning/062-forberedelse-selvstudium-16-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/062-grupper-projektarbejde-16-11-2026.md) · upubliceret
 
 *Ingen Canvas-elementer.*
 
-## 063 · DOB + MAGL + RACE - Projekt kickoff - 17-11-2026
+## 063 · DOB + MAGL + RACE - Vejledning - 17-11-2026
 
-[Lokal fil](../undervisning/063-dob-magl-race-projekt-kickoff-17-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/063-dob-magl-race-vejledning-17-11-2026.md) · upubliceret
 
-- [Plan for DOB + MAGL + RACE - Projekt kickoff](../undervisning/063-dob-magl-race-projekt-kickoff-17-11-2026.md)
-
-### Præsentationer
-
-### Opgaver
+*Ingen Canvas-elementer.*
 
 ## 064 · Grupper - Projektarbejde - 18-11-2026
 

@@ -4265,7 +4265,7 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 5,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178076/items",
     "items": [
       {
@@ -4294,23 +4294,61 @@
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178076,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
         }
       },
       {
-        "id": 1018771,
+        "id": 1079815,
         "position": 3,
+        "title": "DOB 12 - Test, kvalitetssikring og deployment - slides.pdf",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178076,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1079815",
+        "content_id": 1734774,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1734774",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "display_name": "DOB 12 - Test, kvalitetssikring og deployment - slides.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1018771,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
         "type": "SubHeader",
         "module_id": 178076,
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1079816,
+        "position": 5,
+        "title": "Ønsker til grupper til semesterprojektet",
+        "indent": 0,
+        "quiz_lti": true,
+        "type": "Assignment",
+        "module_id": 178076,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1079816",
+        "content_id": 60444,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60444",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "due_at": "2026-11-09T14:00:00Z",
+          "points_possible": 0,
           "locked_for_user": false
         }
       }
@@ -4325,8 +4363,8 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 1,
+    "published": true,
+    "items_count": 2,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178077/items",
     "items": [
       {
@@ -4347,6 +4385,24 @@
           "thumbnail_url": null,
           "locked_for_user": false
         }
+      },
+      {
+        "id": 1079832,
+        "position": 2,
+        "title": "Gruppearbejde uge 45",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Assignment",
+        "module_id": 178077,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1079832",
+        "content_id": 60447,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60447",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "points_possible": 0,
+          "locked_for_user": false
+        }
       }
     ]
   },
@@ -4359,10 +4415,30 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178079/items",
-    "items": []
+    "items": [
+      {
+        "id": 1079818,
+        "position": 1,
+        "title": "Ønsker til grupper til semesterprojektet",
+        "indent": 0,
+        "quiz_lti": true,
+        "type": "Assignment",
+        "module_id": 178079,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1079818",
+        "content_id": 60444,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60444",
+        "published": true,
+        "unpublishable": false,
+        "content_details": {
+          "due_at": "2026-11-09T14:00:00Z",
+          "points_possible": 0,
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178080,
@@ -4396,26 +4472,8 @@
         }
       },
       {
-        "id": 1018775,
-        "position": 2,
-        "title": "Plan for MAGL 5 - Backend auth enforcement",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "Page",
-        "module_id": 178080,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018775",
-        "page_url": "plan-for-magl-5-backend-auth-enforcement",
-        "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-magl-5-backend-auth-enforcement",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
         "id": 1018776,
-        "position": 3,
+        "position": 2,
         "title": "Præsentationer",
         "indent": 0,
         "quiz_lti": false,
@@ -4429,15 +4487,15 @@
       },
       {
         "id": 1077295,
-        "position": 4,
+        "position": 3,
         "title": "Slides: Normal Former: Reloaded",
         "indent": 1,
         "quiz_lti": false,
         "type": "File",
         "module_id": 178080,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1077295",
-        "content_id": 1731960,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1731960",
+        "content_id": 1736613,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1736613",
         "published": true,
         "unpublishable": false,
         "content_details": {
@@ -4449,7 +4507,7 @@
       },
       {
         "id": 1018777,
-        "position": 5,
+        "position": 4,
         "title": "Opgaver",
         "indent": 0,
         "quiz_lti": false,
@@ -4463,7 +4521,7 @@
       },
       {
         "id": 1077288,
-        "position": 6,
+        "position": 5,
         "title": "Forberedelse 5: Normalformer",
         "indent": 1,
         "quiz_lti": false,
@@ -4473,7 +4531,7 @@
         "content_id": 60412,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60412",
         "published": true,
-        "unpublishable": true,
+        "unpublishable": false,
         "content_details": {
           "due_at": "2026-11-09T22:59:00Z",
           "unlock_at": "2026-10-29T23:00:00Z",
@@ -4482,9 +4540,27 @@
         }
       },
       {
+        "id": 1077296,
+        "position": 6,
+        "title": "Arbejdsark: Normal Former: Reloaded",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178080,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1077296",
+        "page_url": "arbejdsark-normal-former-reloaded",
+        "publish_at": "2026-11-10T07:30:00+01:00",
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/arbejdsark-normal-former-reloaded",
+        "published": true,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      },
+      {
         "id": 1077290,
         "position": 7,
-        "title": "Quiz 5: Normalforms",
+        "title": "Quiz 5: Normalformer, aggregering og middleware",
         "indent": 1,
         "quiz_lti": true,
         "type": "Assignment",
@@ -4495,33 +4571,15 @@
         "published": true,
         "unpublishable": true,
         "content_details": {
-          "due_at": "2026-11-11T22:59:00Z",
-          "unlock_at": "2026-11-10T10:15:00Z",
+          "due_at": "2026-11-10T22:59:00Z",
+          "unlock_at": "2026-11-10T10:35:00Z",
           "points_possible": 10,
           "locked_for_user": false
         }
       },
       {
-        "id": 1077296,
-        "position": 8,
-        "title": "Arbejdsark: Normal Former: Reloaded",
-        "indent": 1,
-        "quiz_lti": false,
-        "type": "Page",
-        "module_id": 178080,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1077296",
-        "page_url": "arbejdsark-normal-former-reloaded",
-        "publish_at": "2026-11-10T07:30:00+01:00",
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/arbejdsark-normal-former-reloaded",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
-      {
         "id": 1077297,
-        "position": 9,
+        "position": 8,
         "title": "Teacher-only",
         "indent": 0,
         "quiz_lti": false,
@@ -4535,20 +4593,40 @@
       },
       {
         "id": 1077298,
-        "position": 10,
+        "position": 9,
         "title": "Code-along-guide: Normal Former: Reloaded",
         "indent": 1,
         "quiz_lti": false,
         "type": "File",
         "module_id": 178080,
         "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1077298",
-        "content_id": 1731962,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1731962",
+        "content_id": 1736615,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1736615",
         "published": false,
         "unpublishable": false,
         "content_details": {
           "locked": true,
           "display_name": "WEB-E26-session5-teacher-code-along.pdf",
+          "thumbnail_url": null,
+          "locked_for_user": false
+        }
+      },
+      {
+        "id": 1080918,
+        "position": 10,
+        "title": "Lektionsplan: Normal Former: Reloaded",
+        "indent": 1,
+        "quiz_lti": false,
+        "type": "File",
+        "module_id": 178080,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1080918",
+        "content_id": 1736616,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1736616",
+        "published": false,
+        "unpublishable": false,
+        "content_details": {
+          "locked": true,
+          "display_name": "WEB-E26-session5-teacher-lektionsplan.pdf",
           "thumbnail_url": null,
           "locked_for_user": false
         }
@@ -4564,7 +4642,7 @@
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178081/items",
     "items": [
@@ -4580,7 +4658,7 @@
         "page_url": "plan-for-race-11-session-expiration-handling-i-frontend",
         "publish_at": null,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-race-11-session-expiration-handling-i-frontend",
-        "published": false,
+        "published": true,
         "unpublishable": true,
         "content_details": {
           "locked_for_user": false
@@ -4619,13 +4697,13 @@
   {
     "id": 178083,
     "position": 59,
-    "name": "MAGL 6 - Data isolation for bruger data - 12-11-2026",
+    "name": "MAGL 6 - CAPTURE THE FLAG - 12-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
+    "published": true,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178083/items",
     "items": [
@@ -4678,77 +4756,15 @@
     ]
   },
   {
-    "id": 178082,
+    "id": 178086,
     "position": 60,
-    "name": "Forberedelse - Gruppearbejde - 13-11-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 1,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178082/items",
-    "items": [
-      {
-        "id": 1076780,
-        "position": 1,
-        "title": "Bordgrupper uge 46.pdf",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "File",
-        "module_id": 178082,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1076780",
-        "content_id": 1713899,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/files/1713899",
-        "published": true,
-        "unpublishable": true,
-        "content_details": {
-          "display_name": "Bordgrupper uge 46.pdf",
-          "thumbnail_url": null,
-          "locked_for_user": false
-        }
-      }
-    ]
-  },
-  {
-    "id": 178084,
-    "position": 61,
-    "name": "➡️ Semesterprojekt (Uge 47-51)",
+    "name": "DOB + MAGL + RACE - Projekt kickoff - 13-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 0,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178084/items",
-    "items": []
-  },
-  {
-    "id": 178085,
-    "position": 62,
-    "name": "Forberedelse - Selvstudium - 16-11-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
-    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178085/items",
-    "items": []
-  },
-  {
-    "id": 178086,
-    "position": 63,
-    "name": "DOB + MAGL + RACE - Projekt kickoff - 17-11-2026",
-    "unlock_at": null,
-    "require_sequential_progress": false,
-    "requirement_type": "all",
-    "publish_final_grade": false,
-    "prerequisite_module_ids": [],
-    "published": false,
     "items_count": 3,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178086/items",
     "items": [
@@ -4799,6 +4815,48 @@
         }
       }
     ]
+  },
+  {
+    "id": 178084,
+    "position": 61,
+    "name": "➡️ Semesterprojekt (Uge 47-51)",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": true,
+    "items_count": 0,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178084/items",
+    "items": []
+  },
+  {
+    "id": 178085,
+    "position": 62,
+    "name": "Grupper - Projektarbejde - 16-11-2026",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": false,
+    "items_count": 0,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178085/items",
+    "items": []
+  },
+  {
+    "id": 178082,
+    "position": 63,
+    "name": "DOB + MAGL + RACE - Vejledning - 17-11-2026",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+    "prerequisite_module_ids": [],
+    "published": false,
+    "items_count": 0,
+    "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178082/items",
+    "items": []
   },
   {
     "id": 178087,

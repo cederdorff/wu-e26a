@@ -1,4 +1,4 @@
-# DOB + MAGL + RACE - Projekt kickoff - 17-11-2026
+# DOB + MAGL + RACE - Projekt kickoff - 13-11-2026
 
 <link rel="stylesheet" href="https://instructure-uploads-eu.s3.eu-west-1.amazonaws.com/account_109130000000000001/attachments/668126/Loree-2.0-canvas%20%25281%2529.css">
 
@@ -32,8 +32,8 @@ TBA
 ```yaml
 canvas_course_id: 32059
 canvas_module_id: 178086
-canvas_module_position: 63
-canvas_module_published: false
+canvas_module_position: 60
+canvas_module_published: true
 canvas_module_item_id: 1018784
 canvas_module_item_position: 1
 canvas_page_id: 200741

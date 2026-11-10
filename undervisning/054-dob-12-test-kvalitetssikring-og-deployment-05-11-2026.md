@@ -52,7 +52,11 @@ Til sidst kigger vi på fredagens gruppearbejde, hvor I deployer chatbotten til 
 
 ### Præsentationer
 
+- [DOB 12 - Test, kvalitetssikring og deployment - slides.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1079815)
+
 ### Opgaver
+
+- Ønsker til grupper til semesterprojektet — Assignment
 
 ---
 

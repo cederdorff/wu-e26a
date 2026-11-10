@@ -3,6 +3,7 @@
 ## Materialer
 
 - [Bordgrupper uge 45.pdf](https://eaaa.instructure.com/courses/32059/modules/items/1076779)
+- Gruppearbejde uge 45 — Assignment
 
 ---
 
@@ -13,7 +14,7 @@
 canvas_course_id: 32059
 canvas_module_id: 178077
 canvas_module_position: 55
-canvas_module_published: false
+canvas_module_published: true
 canvas_module_item_id: null
 canvas_module_item_position: null
 canvas_page_id: null

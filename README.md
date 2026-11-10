@@ -106,18 +106,18 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [052 · RACE 10 - JWT tokens fra frontend - 03-11-2026](./undervisning/052-race-10-jwt-tokens-fra-frontend-03-11-2026.md)
 - [053 · Forberedelse - Selvstudium - 04-11-2026](./undervisning/053-forberedelse-selvstudium-04-11-2026.md)
 - [054 · DOB 12 - Test, kvalitetssikring og deployment - 05-11-2026](./undervisning/054-dob-12-test-kvalitetssikring-og-deployment-05-11-2026.md)
-- [055 · Forberedelse - Gruppearbejde - 06-11-2026](./undervisning/055-forberedelse-gruppearbejde-06-11-2026.md) — *kladde i Canvas*
-- [056 · Forberedelse - Selvstudium - 09-11-2026](./undervisning/056-forberedelse-selvstudium-09-11-2026.md) — *kladde i Canvas*
+- [055 · Forberedelse - Gruppearbejde - 06-11-2026](./undervisning/055-forberedelse-gruppearbejde-06-11-2026.md)
+- [056 · Forberedelse - Selvstudium - 09-11-2026](./undervisning/056-forberedelse-selvstudium-09-11-2026.md)
 - [057 · MAGL 5 - Backend auth enforcement - 10-11-2026](./undervisning/057-magl-5-backend-auth-enforcement-10-11-2026.md)
-- [058 · RACE 11 - Session expiration handling i Frontend - 11-11-2026](./undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md) — *kladde i Canvas*
-- [059 · MAGL 6 - Data isolation for bruger data - 12-11-2026](./undervisning/059-magl-6-data-isolation-for-bruger-data-12-11-2026.md) — *kladde i Canvas*
-- [060 · Forberedelse - Gruppearbejde - 13-11-2026](./undervisning/060-forberedelse-gruppearbejde-13-11-2026.md) — *kladde i Canvas*
+- [058 · RACE 11 - Session expiration handling i Frontend - 11-11-2026](./undervisning/058-race-11-session-expiration-handling-i-frontend-11-11-2026.md)
+- [059 · MAGL 6 - CAPTURE THE FLAG - 12-11-2026](./undervisning/059-magl-6-capture-the-flag-12-11-2026.md)
+- [060 · DOB + MAGL + RACE - Projekt kickoff - 13-11-2026](./undervisning/060-dob-magl-race-projekt-kickoff-13-11-2026.md)
 
 ### Semesterprojekt (Uge 47-51)
 
 - [061 · Forløbsoversigt og fælles materialer](./undervisning/061-semesterprojekt-uge-47-51.md)
-- [062 · Forberedelse - Selvstudium - 16-11-2026](./undervisning/062-forberedelse-selvstudium-16-11-2026.md) — *kladde i Canvas*
-- [063 · DOB + MAGL + RACE - Projekt kickoff - 17-11-2026](./undervisning/063-dob-magl-race-projekt-kickoff-17-11-2026.md) — *kladde i Canvas*
+- [062 · Grupper - Projektarbejde - 16-11-2026](./undervisning/062-grupper-projektarbejde-16-11-2026.md) — *kladde i Canvas*
+- [063 · DOB + MAGL + RACE - Vejledning - 17-11-2026](./undervisning/063-dob-magl-race-vejledning-17-11-2026.md) — *kladde i Canvas*
 - [064 · Grupper - Projektarbejde - 18-11-2026](./undervisning/064-grupper-projektarbejde-18-11-2026.md) — *kladde i Canvas*
 - [065 · Grupper - Projektarbejde - 19-11-2026](./undervisning/065-grupper-projektarbejde-19-11-2026.md) — *kladde i Canvas*
 - [066 · DOB + NYCH - Vejledning: Nedbrydning fra Figma til GitHub issues - 20-11-2026](./undervisning/066-dob-nych-vejledning-nedbrydning-fra-figma-til-github-issues-20-11-2026.md) — *kladde i Canvas*
@@ -148,7 +148,7 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [088 · Arbejdsark: CRUD og SQL fra en backend](./undervisning/088-arbejdsark-crud-og-sql-fra-en-backend.md)
 - [089 · Arbejdsark: Fra CRUD til login](./undervisning/089-arbejdsark-fra-crud-til-login.md)
 - [090 · Arbejdsark: Introduktion til kurset, databasemodellering og SQL](./undervisning/090-arbejdsark-introduktion-til-kurset-databasemodellering-og-sql.md)
-- [091 · Arbejdsark: Normal Former: Reloaded](./undervisning/091-arbejdsark-normal-former-reloaded.md) — *kladde i Canvas*
+- [091 · Arbejdsark: Normal Former: Reloaded](./undervisning/091-arbejdsark-normal-former-reloaded.md)
 - [092 · Bordgrupper uge 41 og 42](./undervisning/092-bordgrupper-uge-41-og-42.md)
 - [093 · Forberedelse til MAGL 2](./undervisning/093-forberedelse-til-magl-2.md) — *kladde i Canvas*
 - [094 · Opsamling: Byg videre på AMAbotten (øvelse 3 og 4)](./undervisning/094-opsamling-byg-videre-pa-amabotten-oevelse-3-og-4.md)
