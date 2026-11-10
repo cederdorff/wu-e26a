@@ -1233,3 +1233,179 @@
 .seq.roomy .note {
   font-size: 19px;
 }
+
+/* Ownership chain: messages -> threads -> auth.users */
+.own3 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr) 120px minmax(0, 1fr);
+  align-items: center;
+}
+.otbl {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: 14px;
+  background: var(--soft);
+  font: 600 22px/1.2 var(--mono);
+}
+.otbl > div {
+  padding: 12px 20px;
+  border-top: 1px solid var(--line);
+}
+.otbl > .oh {
+  border-top: 0;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  color: var(--c);
+  font-weight: 800;
+}
+.otbl > .k {
+  background: color-mix(in srgb, var(--yellow) 14%, transparent);
+  color: var(--yellow);
+}
+.otbl > .miss {
+  color: var(--red);
+  text-decoration: line-through;
+}
+.otbl > .miss small {
+  display: inline-block;
+  margin-left: 8px;
+  font: 600 16px/1 var(--font);
+  text-decoration: none;
+}
+.otbl > .me {
+  color: var(--green);
+  font: 700 19px/1.3 var(--font);
+}
+.oar {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  color: var(--muted);
+}
+.oar small {
+  font-size: 16px;
+}
+.oar b {
+  font-size: 40px;
+  line-height: 1;
+}
+.own-check {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 30px;
+  margin-top: 40px;
+}
+.own-check span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.own-check .viz-code {
+  font-size: 20px;
+}
+.own-check .outs {
+  display: grid;
+  gap: 12px;
+}
+.own-check .outs div {
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.own-check .outs .ok {
+  background: color-mix(in srgb, var(--green) 14%, transparent);
+  color: var(--green);
+}
+.own-check .outs .no {
+  background: color-mix(in srgb, var(--red) 14%, transparent);
+  color: var(--red);
+}
+
+/* Encapsulation: three parts that only meet through an interface */
+.encflow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px minmax(0, 1fr) 210px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+.encflow article {
+  display: grid;
+  gap: 12px;
+  padding: 24px 24px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.encflow article > span {
+  color: var(--c);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.encflow article > strong {
+  font-size: 28px;
+}
+.encflow .kn {
+  font-size: 20px;
+  line-height: 1.35;
+}
+.encflow .kn.y {
+  color: var(--ink);
+}
+.encflow .kn.n {
+  color: var(--muted);
+}
+.encflow .iface {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.encflow .iface code {
+  font-size: 16px;
+}
+.encflow .iface small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.encflow .iface i {
+  position: relative;
+  width: 86%;
+  height: 0;
+  border-top: 3px solid var(--muted);
+}
+.encflow .iface i.r::after,
+.encflow .iface i.l::after {
+  position: absolute;
+  top: -9.5px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  content: "";
+}
+.encflow .iface i.r::after {
+  right: -3px;
+  border-left: 14px solid var(--muted);
+}
+.encflow .iface i.l::after {
+  left: -3px;
+  border-right: 14px solid var(--muted);
+}
+.encflow .iface.url i {
+  border-top-color: var(--green);
+}
+.encflow .iface.url i.r::after {
+  border-left-color: var(--green);
+}
+.encflow .iface.url code {
+  color: var(--green);
+}

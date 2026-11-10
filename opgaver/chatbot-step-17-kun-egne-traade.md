@@ -217,6 +217,8 @@ Test 4 viser, at du stadig kan læse bobs beskeder fra Thunder Client. Chatbotte
 
 `messages` har ingen `user_id`. Ejeren står på tråden. Derfor tjekker du tråden først i `GET /api/threads/:id/messages`:
 
+![messages peger på sin tråd med thread_id, og tråden peger på sin ejer med user_id. Derfor tjekker du tråden med WHERE id = threadId AND user_id = req.userId. Én række: tråden er din. Nul rækker: den er ikke din](assets/chatbot-step-17-ejeren-paa-traaden.svg)
+
 - Før du henter beskederne: hent tråden med `WHERE id = ${threadId} AND user_id = ${req.userId}`
 - Får du ingen rækker: svar med en tom liste, `res.json([])`
 - Ellers: hent beskederne som før

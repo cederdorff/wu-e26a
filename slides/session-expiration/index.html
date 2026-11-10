@@ -54,8 +54,8 @@
           <div class="stage">
             <div class="gt" style="--cols: 300px 1fr 110px 1fr">
               <div class="r h"><span>Kaldet</span><span>Authorization</span><span>Status</span><span>Svaret</span></div>
-              <div class="r" style="--c: var(--red)"><strong>Uden token</strong><code>ingen header</code><span class="sc sc-4 fragment">401</span><span class="fragment">"Authentication required. Please provide a valid token."</span></div>
-              <div class="r" style="--c: var(--red)"><strong>Med et forkert token</strong><code>Bearer abc123</code><span class="sc sc-4 fragment">401</span><span class="fragment">"Invalid or expired token. Please log in again."</span></div>
+              <div class="r" style="--c: var(--red)"><strong>Uden token</strong><code>ingen header</code><span class="sc sc-4 fragment">401</span><span class="fragment"><code>"Authentication required"</code></span></div>
+              <div class="r" style="--c: var(--red)"><strong>Med et forkert token</strong><code>Bearer abc123</code><span class="sc sc-4 fragment">401</span><span class="fragment"><code>"Invalid or expired token"</code></span></div>
               <div class="r hi" style="--c: var(--yellow)"><strong>Med dit eget token</strong><code>Bearer eyJhbGci…</code><span class="sc sc-2 fragment">200</span><span class="fragment"><b>Alle brugeres tråde</b>, også bobs og alices</span></div>
             </div>
           </div>
@@ -123,13 +123,13 @@
             </div>
             <ul class="holes">
               <li class="closed"><i>✓</i><span>Chatbotten ved ikke, hvem der bruger den</span><em class="done">Lukket · step 14</em></li>
+              <li><i>2</i><span>Alle nye tråde får alices id</span><em class="today">Step 17 · øvelse 2</em></li>
               <li class="closed"><i>✓</i><span>Thunder Client får alle tråde uden at logge ind</span><em class="done">Lukket · step 16</em></li>
-              <li><i>3</i><span>Alle nye tråde får alices id</span><em class="today">Step 17 · øvelse 2</em></li>
               <li><i>4</i><span>Alle ser alles tråde</span><em class="today">Step 17 · øvelse 3-4</em></li>
               <li><i>5</i><span>Alle kan omdøbe og slette alles tråde</span><em class="today">Step 17 · øvelse 5</em></li>
             </ul>
           </div>
-          <p class="bottom-line">Authorization kræver authentication. Først når <code>requireAuth</code> kender dig, kan SQL'en spørge efter dine tråde.</p>
+          <p class="bottom-line">Hul 2 var authentication: API'et vidste ikke, hvem du var. Nu ved <code>requireAuth</code> det, og step 17 bruger det.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -306,6 +306,20 @@
         </section>
 
         <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Øvelse 4-5 · trin 2 · I kender tabellerne fra normalformerne</span>
+          <h2>Ejeren står på tråden, ikke på beskeden</h2>
+          <div class="stage">
+            <div class="own3"><div class="otbl" style="--c: var(--muted)"><div class="oh">messages</div><div class="">id</div><div class="k">thread_id</div><div class="">type, content</div><div class="miss">user_id <small>findes ikke</small></div></div><div class="oar"><small>hvilken tråd?</small><b>→</b></div><div class="otbl" style="--c: var(--cyan)"><div class="oh">threads</div><div class="k">id</div><div class="">title</div><div class="k">user_id</div><div class="">created_at</div></div><div class="oar"><small>hvis tråd?</small><b>→</b></div><div class="otbl" style="--c: var(--green)"><div class="oh">auth.users</div><div class="k">id</div><div class="">email</div><div class="me">= <code>req.userId</code> fra tokenet</div></div></div>
+            <div class="own-check">
+              <div><span>Derfor tjekker I tråden først</span><pre class="viz-code">SELECT id FROM threads
+WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
+              <div class="outs"><div class="ok">1 række · tråden er din. Fortsæt som før</div><div class="no">0 rækker · ikke din. <code>[]</code> eller <code>404</code></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Brugere og tråde ligger i hver sin tabel, så ejeren står ét sted. Det tjek står i både <code>GET</code> og <code>POST</code> på <code>/messages</code>.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
           <span class="eyebrow">Øvelse 2-5 · overblik</span>
           <h2>Syv routes. <code>req.userId</code> i dem alle</h2>
           <div class="stage">
@@ -376,21 +390,21 @@
                 <span>Intet token</span>
                 <strong>Logget ud</strong>
                 <p>Ingen session i Local Storage, så <code>apiFetch</code> sender ingen header.</p>
-                <pre class="viz-code">"Authentication required."</pre>
+                <pre class="viz-code">"Authentication required"</pre>
                 <div class="foot"><span class="sc sc-1">401</span>Opgave 5.3 i går</div>
               </article>
               <article style="--c: var(--purple)">
                 <span>Ødelagt token</span>
                 <strong>Ét bogstav rettet</strong>
                 <p>Signaturen passer ikke længere. Supabase afviser det.</p>
-                <pre class="viz-code">"Invalid or expired token."</pre>
+                <pre class="viz-code">"Invalid or expired token"</pre>
                 <div class="foot"><span class="sc sc-1">401</span>Øvelse 1 i dag</div>
               </article>
               <article style="--c: var(--purple)">
                 <span>Brugeren findes ikke</span>
                 <strong>Slettet i Supabase</strong>
                 <p>Tokenet er gyldigt nok, men <code>getUser()</code> finder ingen bruger.</p>
-                <pre class="viz-code">"Invalid or expired token."</pre>
+                <pre class="viz-code">"Invalid or expired token"</pre>
                 <div class="foot"><span class="sc sc-1">401</span><span class="demo-tag">Vi prøver det live</span></div>
               </article>
             </div>
@@ -404,14 +418,29 @@
           <div class="stage">
             <div class="seq roomy" style="--n: 3">
               <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Browser</strong><small>React · apiFetch</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Supabase Auth</strong><small>tjekker tokens</small></div></div>
-              <div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="note " style="--a: 1"><code>getSession()</code>: tokenet fra Local Storage<br />ét bogstav er rettet</div></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>GET /api/threads</code> · <code>Bearer eyJh<b>X</b>…</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>getUser(token)</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2">✗ signaturen passer ikke</div></div><div class="row"><div class="msg bad back" style="--a: 1; --k: 2"><b>401</b> · Invalid or expired token</div></div><div class="row"><div class="note purple" style="--a: 1">I dag: fejlside<br /><b>Step 18:</b> <code>/login?redirect=…</code></div></div></div>
+              <div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="note " style="--a: 1"><code>getSession()</code>: tokenet fra Local Storage<br />ét bogstav er rettet</div></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>GET /api/threads</code> · <code>Bearer eyJh<b>X</b>…</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>getUser(token)</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2">✗ signaturen passer ikke</div></div><div class="row"><div class="msg bad back" style="--a: 1; --k: 2"><b>401</b> · <code>"Invalid or expired token"</code></div></div><div class="row"><div class="note purple" style="--a: 1">I dag: fejlside<br /><b>Step 18:</b> <code>/login?redirect=…</code></div></div></div>
             </div>
           </div>
           <p class="bottom-line">Serveren kan kun sige nej. Det er klienten, der skal sende brugeren til login. Derfor sker step 18 i frontenden.</p>
         </section>
 
+        
+        <section id="ex-18-1" class="activity-slide handson" data-accent="purple">
+          <span class="ho-num"><small>Step 18</small>1</span>
+          <span class="eyebrow">Hands-on · step 18 · øvelse 1</span>
+          <h2>Hvad ser brugeren ved 401?</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md#øvelse-1-hvad-ser-brugeren-ved-401" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Åbn en tråd, og kopiér URL'en</li>
+            <li>DevTools → Application → Local Storage. Ret ét bogstav midt i <code>access_token</code></li>
+            <li>Genindlæs. Hvad ser du? Hvad er status på <code>threads</code> i Network-fanen?</li>
+            <li>Log ind igen. Lander du i tråden?</li>
+          </ul>
+          <p class="bottom-line">Ingen kode. Find tre ting, der er dårlige for brugeren.</p>
+        </section>
+
         <section class="fill" data-accent="purple">
-          <span class="eyebrow">Øvelse 1 · før step 18</span>
+          <span class="eyebrow">Efter øvelse 1 · det fandt I</span>
           <h2>Det ser brugeren i dag</h2>
           <div class="stage">
             <div class="before2">
@@ -429,20 +458,6 @@
             </div>
           </div>
           <p class="bottom-line">Øvelse 2 retter 2. Øvelse 3 retter 1 og 3.</p>
-        </section>
-
-        <section id="ex-18-1" class="activity-slide handson" data-accent="purple">
-          <span class="ho-num"><small>Step 18</small>1</span>
-          <span class="eyebrow">Hands-on · step 18 · øvelse 1</span>
-          <h2>Hvad ser brugeren ved 401?</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md#øvelse-1-hvad-ser-brugeren-ved-401" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
-          <ul class="checklist">
-            <li>Åbn en tråd, og kopiér URL'en</li>
-            <li>DevTools → Application → Local Storage. Ret ét bogstav midt i <code>access_token</code></li>
-            <li>Genindlæs. Hvad ser du? Hvad er status på <code>threads</code> i Network-fanen?</li>
-            <li>Log ind igen. Lander du i tråden?</li>
-          </ul>
-          <p class="bottom-line">Ingen kode. Du skal finde de tre problemer på forrige slide.</p>
         </section>
 
         <!-- ============ 04 DRY, SOC OG SRP ============ -->
@@ -508,7 +523,7 @@
           <div class="stage">
             <div class="srp">
               <div class="side" style="--c: var(--green)">
-                <span>✓ apiFetch' ansvar</span>
+                <span>✓ apiFetchs ansvar</span>
                 <div>Sætter tokenet på requestet<small>Step 15</small></div>
                 <div>Sender til login ved 401<small>Step 18, i dag</small></div>
               </div>
@@ -550,7 +565,7 @@
                 <li><span><b>Før requestet:</b> tokenet på, som i step 15<small>Wrapper-funktion. Idéen kaldes også Decorator pattern</small></span></li>
                 <li><span><b>Gem svaret</b> i stedet for at returnere det med det samme</span></li>
                 <li><span><b>Guard clause:</b> fang 401, og stop<small>Bygget som <code>requireAuth</code>: tjek først, stop tidligt</small></span></li>
-                <li><span><b>Den lykkelige vej:</b> alt andet går videre til routen</span></li>
+                <li><span><b>Ellers:</b> alt andet går videre til routen</span></li>
               </ol>
             </div>
           </div>
@@ -596,7 +611,7 @@
             <li>Test: ødelagt token, logget ud og bobs tråd fra step 17. Hvorfor sender bobs tråd dig ikke til login?</li>
             <li>Skift <code>throw</code> ud med <code>return</code>. Hvad står der på fejlsiden?</li>
           </ul>
-          <p class="bottom-line">Kom der stadig et 401 i Network-fanen? Ja. apiFetch ændrer ikke svaret, kun hvad der sker bagefter.</p>
+          <p class="bottom-line">Kom der stadig et 401 i Network-fanen? <span class="fragment">Ja. <code>apiFetch</code> ændrer ikke svaret, kun hvad der sker bagefter.</span></p>
         </section>
 
         <!-- ============ 05 QUERY PARAMETERS OG OPEN REDIRECT ============ -->
@@ -662,22 +677,12 @@
           <span class="eyebrow">Encapsulation</span>
           <h2>Hver del kender kun sin egen del</h2>
           <div class="stage">
-            <div class="col3 enc3">
-              <article style="--c: var(--cyan)">
-                <span>Routes</span>
-                <strong>Loaders og actions</strong>
-                <div class="knows"><div class="y"><b>✓</b><span>Deres egne fejl: 400 og 404</span></div><div class="n"><b>✗</b><span>At <code>apiFetch</code> kan sende til login</span></div></div>
-              </article>
-              <article style="--c: var(--orange)">
-                <span>apiFetch</span>
-                <strong>Talen med API'et</strong>
-                <div class="knows"><div class="y"><b>✓</b><span>401 → <code>/login?redirect=…</code></span></div><div class="n"><b>✗</b><span>Hvordan login virker</span></div></div>
-              </article>
-              <article style="--c: var(--purple)">
-                <span>login.jsx</span>
-                <strong>Login-siden</strong>
-                <div class="knows"><div class="y"><b>✓</b><span>Læser <code>redirect</code>, hvis den står der</span></div><div class="n"><b>✗</b><span>Hvorfor brugeren kom</span></div></div>
-              </article>
+            <div class="encflow">
+              <article style="--c: var(--cyan)"><span>Routes</span><strong>Loaders og actions</strong><div class="kn y">✓ deres egne fejl: 400 og 404</div><div class="kn n">✗ at <code>apiFetch</code> kan sende til login</div></article>
+              <div class="iface"><code>apiFetch(path)</code><i class="r"></i><i class="l"></i><code>response</code><small>det eneste, routen ser</small></div>
+              <article style="--c: var(--orange)"><span>apiFetch</span><strong>Kaldet til API'et</strong><div class="kn y">✓ 401 → login med siden i URL'en</div><div class="kn n">✗ hvordan login virker</div></article>
+              <div class="iface url"><code>/login?redirect=</code><i class="r"></i><code>%2Fchat%2Fabc</code><small>det eneste, login ser</small></div>
+              <article style="--c: var(--purple)"><span>login.jsx</span><strong>Login-siden</strong><div class="kn y">✓ læser <code>redirect</code>, hvis den står der</div><div class="kn n">✗ hvorfor brugeren kom</div></article>
             </div>
             <div class="ask srp-q">
               <strong>Hvorfor står siden i URL'en og ikke i localStorage?</strong>
@@ -752,7 +757,7 @@
             <div class="qa3 qa4">
               <article style="--c: var(--orange)"><span>DRY</span><strong>Hvor står et tjek kun ét sted?</strong><div class="ans fragment">401 i <b>apiFetch</b>. Tokenet i <b>requireAuth</b>.</div></article>
               <article style="--c: var(--cyan)"><span>SoC</span><strong>Hvem afgør, hvad du må se?</strong><div class="ans fragment"><b>WHERE</b> i SQL'en, ikke frontenden. Routes ejer 400 og 404.</div></article>
-              <article style="--c: var(--purple)"><span>SRP</span><strong>Hvad er apiFetch' ene ansvar?</strong><div class="ans fragment">Tale med API'et som <b>den bruger, der er logget ind</b>.</div></article>
+              <article style="--c: var(--purple)"><span>SRP</span><strong>Hvad er apiFetchs ene ansvar?</strong><div class="ans fragment">Tale med API'et som <b>den bruger, der er logget ind</b>.</div></article>
               <article style="--c: var(--green)"><span>Encapsulation</span><strong>Hvad ved login om, hvorfor du kom?</strong><div class="ans fragment">Intet. Den læser bare <b>?redirect</b>.</div></article>
             </div>
           </div>

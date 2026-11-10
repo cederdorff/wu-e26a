@@ -57,7 +57,7 @@ Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den
 
 ## Øvelse 1: Hvad ser brugeren ved 401?
 
-Her skal du ikke skrive kode. Du lader som om, tokenet er udløbet, og ser, hvad brugeren oplever.
+Her skal du ikke skrive kode. Du ødelægger tokenet og ser, hvad brugeren oplever.
 
 > **Ugyldigt token:** et access token lever en time. Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Men kan der ikke komme et nyt, fx fordi brugeren er slettet i Supabase, er tokenet i localStorage ugyldigt. Så svarer dit API `401`. Når du retter ét bogstav i tokenet, får du det samme svar.
 
@@ -127,7 +127,7 @@ export async function apiFetch(path, options = {}) {
 
   const response = await fetch(`${apiUrl}${path}`, { ...options, headers });
 
-  // Tokenet mangler eller er udløbet. Kun login hjælper
+  // Tokenet mangler eller virker ikke. Kun login hjælper
   if (response.status === 401) {
     throw redirect("/login");
   }
@@ -175,7 +175,7 @@ Ret `throw redirect("/login")` i `apiFetch`, så siden kommer med:
 <summary>Se løsningsforslag</summary>
 
 ```js
-// Tokenet mangler eller er udløbet. Kun login hjælper
+// Tokenet mangler eller virker ikke. Kun login hjælper
 if (response.status === 401) {
   // Husk siden, så login kan sende brugeren tilbage
   const currentPath = window.location.pathname + window.location.search;

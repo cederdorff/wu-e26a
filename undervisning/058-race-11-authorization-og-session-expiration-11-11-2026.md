@@ -78,7 +78,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - Skim "Overview" i [step 17](https://github.com/bewildergeist/chatbot-react-postgres/pull/17) og [step 18](https://github.com/bewildergeist/chatbot-react-postgres/pull/18)
 - Genopfrisk de fire begreber og guard clause i [slides om sikkerhed og error handling](https://cederdorff.com/wu-e26a/fejlhaandtering-sikkerhed/)
 - Supplerende, hvis du har tid:
-  - ["User sessions"](https://supabase.com/docs/guides/auth/sessions) i Supabase' dokumentation, om access token og refresh token
+  - ["User sessions"](https://supabase.com/docs/guides/auth/sessions) i Supabases dokumentation, om access token og refresh token
 
 ---
 
