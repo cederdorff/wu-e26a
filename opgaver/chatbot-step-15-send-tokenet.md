@@ -136,7 +136,7 @@ export async function apiFetch(path, options = {}) {
 }
 ```
 
-> **`getSession()`:** svarer med `{ data: { session } }`. Hent `data` ud med `const { data } = ...`. Tokenet ligger i `data.session.access_token`. Er du ikke logget ind, er `data.session` `null`. Derfor skriver du `data.session?.access_token`. `getSession()` læser tokenet fra localStorage. Den spørger ikke Supabase.
+> **`getSession()`:** svarer med `{ data: { session } }`. Hent `data` ud med `const { data } = ...`. Tokenet ligger i `data.session.access_token`. Er du ikke logget ind, er `data.session` `null`. Derfor skriver du `data.session?.access_token`. `getSession()` læser tokenet fra localStorage. Den spørger ikke Supabase, medmindre tokenet er udløbet. Så henter den først et nyt med refresh tokenet.
 
 <details>
 <summary>Hint</summary>

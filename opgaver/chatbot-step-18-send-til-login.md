@@ -47,6 +47,12 @@ Er du ikke færdig med step 17, så hent startpunktet i roden af chatbot-repoet,
 npx degit --force bewildergeist/chatbot-react-postgres#pr-18-start
 ```
 
+Tutorialen skriver `pr-17-start`, fordi den laver step 18 før step 17. Brug `pr-18-start`, ellers mister du step 17.
+
+Startpunktet har step 16 med. Har du ikke lavet det, så kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`. Ellers starter backenden ikke.
+
+Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde.
+
 ---
 
 ## Øvelse 1: Hvad ser brugeren ved 401?
@@ -71,7 +77,7 @@ Du skal have fundet tre ting:
 
 ## Øvelse 2: Send brugeren til login
 
-> **Hvorfor kun 401?** Routes håndterer allerede deres egne fejl. Mangler en titel, svarer API'et `400`, og formularen viser fejlen. Findes tråden ikke, svarer det `404`, og `chat-thread.jsx` viser "Thread not found". Men `401` kan routen ikke gøre noget ved. Kun login hjælper. Derfor hører den hjemme ét sted, i `apiFetch`, og ikke i hver route.
+> **Hvorfor kun 401?** Routes håndterer allerede deres egne fejl. Mangler en titel, svarer API'et `400`, og formularen viser fejlen. Findes tråden ikke, svarer det `404`, og `chat-thread.jsx` viser "Thread Not Found". Men `401` kan routen ikke gøre noget ved. Kun login hjælper. Derfor hører den hjemme ét sted, i `apiFetch`, og ikke i hver route.
 
 > **`throw redirect()`:** I øvelse 10 skrev du `return redirect("/login")` i `clientLoader` på `/profile`. Det virker, fordi det er loaderen selv, der returnerer. `apiFetch` er ikke en loader. Den bliver kaldt af en. Kaster `apiFetch` en redirect, flyver den op gennem loaderen til React Router, som skifter side. Det er det samme, som når `throw new Error()` ender i en `ErrorBoundary`.
 
@@ -138,7 +144,7 @@ export async function apiFetch(path, options = {}) {
 1. Ret ét bogstav i `access_token` igen, og genindlæs. Ender du på `/login`? Kig i Network-fanen. Kom der stadig et `401` først?
 2. Log ind. Hvor lander du?
 3. Log ud, og gå direkte til `localhost:5173/chat/new`. Ender du på `/login`?
-4. Gå til `localhost:5173/chat/<bobs id>` fra step 17, mens du er logget ind. Ser du stadig "Thread not found"? Hvad er status på requestet i Network-fanen? Hvorfor sender `apiFetch` dig ikke til login?
+4. Gå til `localhost:5173/chat/<bobs id>` fra step 17, mens du er logget ind. Ser du stadig "Thread Not Found"? Hvad er status på requestet i Network-fanen? Hvorfor sender `apiFetch` dig ikke til login?
 5. Skift `throw` ud med `return`, og gentag test 1. Hvad står der på fejlsiden nu? Sæt `throw` ind igen.
 
 <details>

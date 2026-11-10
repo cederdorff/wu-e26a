@@ -47,7 +47,13 @@ Er du ikke færdig med step 16, så hent startpunktet i roden af chatbot-repoet,
 npx degit --force bewildergeist/chatbot-react-postgres#pr-17-start
 ```
 
+Tutorialen skriver `pr-17-start-after-18`, fordi den laver step 18 først. Brug `pr-17-start`.
+
 Startpunktet opretter tråde uden `user_id`. Sæt `TEST_USER_ID` ind i `backend/server.js` igen. Kodestykket står i [React Supabase Auth: Login før chatbotten](react-supabase-auth.md#fra-øvelserne-til-step-14). Du fjerner den igen i øvelse 2.
+
+Startpunktet har step 16 med. Har du ikke lavet det, så kør `npm install` i `backend`, og skriv `SUPABASE_URL` og `SUPABASE_ANON_KEY` i `backend/.env`. Ellers starter backenden ikke.
+
+Startpunktets `apiFetch` ser lidt anderledes ud end løsningsforslagene her. Den virker på samme måde.
 
 ---
 
@@ -261,7 +267,7 @@ app.get("/api/threads/:id/messages", requireAuth, async (req, res) => {
 
 1. Gentag test 4 fra trin 1. Hvad får du nu?
 2. Åbn en af dine egne tråde. Står beskederne der stadig?
-3. Tutorialen svarer `[]` her og ikke `404`. Kan du se forskel på svaret for bobs tråd og en tråd uden beskeder? Hvad ville du selv vælge?
+3. Tutorialen svarer `[]` her og ikke `404`. Kan du se forskel på svaret for bobs tråd og et id, der ikke findes, fx `00000000-0000-0000-0000-000000000000`? Hvad ville du selv vælge?
 
 ---
 
