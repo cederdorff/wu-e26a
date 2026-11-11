@@ -57,6 +57,8 @@ I chatbot-forløbet følger du [chatbot-tutorialen](https://github.com/bewilderg
    Du bruger `req.userId` i hver SQL-query, så hver bruger kun kan se, rette og slette sine egne tråde.
 6. [Chatbot step 18: Send brugeren til login ved 401](chatbot-step-18-send-til-login.md) — step 18 på dansk\
    `apiFetch` sender brugeren til `/login`, når API'et svarer `401`, og login sender brugeren tilbage til den side, de var på.
+7. [Chatbot: UI-forbedringer](chatbot-ui-forbedringer.md) — efter step 18\
+   Enter sender, feltet tømmes, siden ruller ned til svaret, × spørger før sletning, og fanen viser trådens titel. Kun frontend.
 
 ## Kom i gang med Node og Express
 
