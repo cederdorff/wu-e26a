@@ -6,6 +6,8 @@
 
 Frivillig vejledning og projektarbejde. Brug dagen på at komme godt i gang med semesterprojektet. Kom forbi, sid og arbejd, og få hjælp, når I sidder fast.
 
+---
+
 ## Tid og sted
 
 - **Hvornår:** kl. 09.00-11.30
@@ -13,6 +15,8 @@ Frivillig vejledning og projektarbejde. Brug dagen på at komme godt i gang med 
 - **Hvem:** RACE er i lokalet hele tiden. Der kan også sidde IxD MDU'er i lokalet.
 
 Det er frivilligt. I kan komme og gå, som det passer jer.
+
+---
 
 ## Hvad kan I få hjælp til?
 
