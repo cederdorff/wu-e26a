@@ -391,11 +391,11 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
                 <div class="bar off" style="--c: var(--purple)"><strong>access_token #3</strong><small>… og sådan fortsætter det</small></div>
               </div>
               <div class="ticks"><span>10.12 · iat</span><span>11.12 · exp</span><span>12.12</span></div>
-              <div class="refresh"><div><b>↻</b><span>Lige før <code>exp</code> henter supabase-js et nyt</span></div><div><b>↻</b><span>Er det udløbet, gør <code>getSession()</code> i <code>apiFetch</code> det samme</span></div><div class="fail"><b>✕</b><span>Kan der ikke komme et nyt: <b>401</b></span></div></div>
+              <div class="refresh"><div><b>↻</b><span>Lige før <code>exp</code> henter supabase-js et nyt</span></div><div><b>↻</b><span>Er det udløbet, gør <code>getSession()</code> i <code>apiFetch</code> det samme</span></div><div class="fail"><b>✕</b><span>Bliver tokenet afvist: <b>401</b></span></div></div>
             </div>
             <div class="tline-cards">
               <div style="--c: var(--purple)"><b>Token expiration</b><span>Ét access token udløber efter en time. Brugeren mærker ingenting, for der kommer et nyt.</span></div>
-              <div style="--c: var(--red)"><b>Session expiration</b><span>Der kan ikke komme et nyt token. Så er sessionen slut, og kun login hjælper.</span></div>
+              <div style="--c: var(--red)"><b>Session expiration</b><span>Tokenet bliver afvist, og der kommer ikke et nyt. Så er sessionen slut, og kun login hjælper.</span></div>
             </div>
           </div>
           <p class="bottom-line">Et stjålet access token virker kun til <code>exp</code>. Derfor er levetiden kort.</p>
@@ -432,19 +432,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <p class="bottom-line">Ingen route kan rette nogen af dem. Brugeren skal logge ind igen.</p>
         </section>
 
-        <section class="fill" data-accent="purple">
-          <span class="eyebrow">Step 18 · øvelse 1 · klient og server</span>
-          <h2>401 kommer fra serveren. Login sker i klienten</h2>
-          <div class="stage">
-            <div class="seq roomy" style="--n: 3">
-              <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Browser</strong><small>React · apiFetch</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Supabase Auth</strong><small>tjekker tokens</small></div></div>
-              <div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="note " style="--a: 1"><code>getSession()</code>: tokenet fra Local Storage<br />ét bogstav er rettet</div></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>GET /api/threads</code> · <code>Bearer eyJh<b>X</b>…</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>getUser(token)</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2">✗ signaturen passer ikke</div></div><div class="row"><div class="msg bad back" style="--a: 1; --k: 2"><b>401</b> · <code>"Invalid or expired token"</code></div></div><div class="row"><div class="note purple" style="--a: 1">I dag: fejlside<br /><b>Step 18:</b> <code>/login?redirect=…</code></div></div></div>
-            </div>
-          </div>
-          <p class="bottom-line">Serveren kan kun sige nej. Det er klienten, der skal sende brugeren til login. Derfor sker step 18 i frontenden.</p>
-        </section>
-
-        
         <section id="ex-18-1" class="activity-slide handson" data-accent="purple">
           <span class="ho-num"><small>Step 18</small>1</span>
           <span class="eyebrow">Hands-on · step 18 · øvelse 1</span>
@@ -478,6 +465,18 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
             </div>
           </div>
           <p class="bottom-line">Step 18, øvelse 2 retter problem 2. Øvelse 3 retter 1 og 3.</p>
+        </section>
+
+        <section class="fill" data-accent="purple">
+          <span class="eyebrow">Step 18 · efter øvelse 1 · klient og server · hvorfor</span>
+          <h2>401 kommer fra serveren. Login sker i klienten</h2>
+          <div class="stage">
+            <div class="seq roomy" style="--n: 3">
+              <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Browser</strong><small>React · apiFetch</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Supabase Auth</strong><small>tjekker tokens</small></div></div>
+              <div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="note " style="--a: 1"><code>getSession()</code>: tokenet fra Local Storage<br />ét bogstav er rettet</div></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>GET /api/threads</code> · <code>Bearer eyJh<b>X</b>…</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>getUser(token)</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2">✗ signaturen passer ikke</div></div><div class="row"><div class="msg bad back" style="--a: 1; --k: 2"><b>401</b> · <code>"Invalid or expired token"</code></div></div><div class="row"><div class="note purple" style="--a: 1">I dag: fejlside<br /><b>Step 18:</b> <code>/login?redirect=…</code></div></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Serveren kan kun sige nej. Det er klienten, der skal sende brugeren til login. Derfor sker step 18 i frontenden.</p>
         </section>
 
         <!-- ============ 04 DRY, SOC OG SRP ============ -->
