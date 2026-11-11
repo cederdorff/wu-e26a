@@ -377,7 +377,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <span class="chapter-number">03</span>
           <span class="eyebrow">Session expiration · step 18</span>
           <h2>Hvornår er<br />sessionen slut?</h2>
-          <p>Når API'et svarer 401, ser brugeren en fejlside. Men hvornår sker det overhovedet?</p>
+          <p>Backenden svarer 401. Frontenden skal gøre noget ved det. Men hvornår sker det overhovedet?</p>
         </section>
 
         <section class="fill" data-accent="purple">
@@ -504,15 +504,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Step 18 · øvelse 2 · klient og server</span>
-          <h2>404 går igennem apiFetch. 401 stopper der</h2>
-          <div class="stage">
-            <div class="seq2"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>return response</code></div></div><div class="row"><div class="note orange" style="--a: 1"><code>throw</code> → <b>"Thread Not Found"</b></div></div></div></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 2"><b>guard clause</b><br /><code>throw redirect(…)</code></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 2">flyver forbi loaderen → <b>/login</b></div></div></div></div></div></div>
-          </div>
-          <p class="bottom-line">Loaderen ser aldrig et 401. Den ser stadig 400, 404 og 500 og håndterer dem som før.</p>
-        </section>
-
-        <section class="fill" data-accent="orange">
           <span class="eyebrow">DRY · Don't Repeat Yourself</span>
           <h2>Ét tjek foran alle kald. Ligesom requireAuth</h2>
           <div class="stage">
@@ -562,8 +553,22 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <p class="bottom-line"><b>SRP:</b> én grund til at ændre sig. <code>apiFetch</code> ændrer sig kun, hvis måden at tale med API'et på ændrer sig.</p>
         </section>
 
+        <section id="ex-18-2" class="activity-slide handson" data-accent="orange">
+          <span class="ho-num"><small>Step 18</small>2</span>
+          <span class="eyebrow">Hands-on · step 18 · øvelse 2</span>
+          <h2>Send brugeren til login</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md#øvelse-2-send-brugeren-til-login" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Importér <code>redirect</code> fra <code>react-router</code> i <code>apiFetch.js</code></li>
+            <li>Gem svaret i <code>response</code>. Ved 401: <code>throw redirect("/login")</code></li>
+            <li>Test: ødelagt token, logget ud og bobs tråd fra step 17. Hvorfor sender bobs tråd dig ikke til login?</li>
+            <li>Skift <code>throw</code> ud med <code>return</code>. Hvad står der på fejlsiden?</li>
+          </ul>
+          <p class="bottom-line">Kom der stadig et 401 i Network-fanen? <span class="fragment">Ja. <code>apiFetch</code> ændrer ikke svaret, kun hvad der sker bagefter.</span></p>
+        </section>
+
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Step 18 · øvelse 2 · wrapper-funktion og guard clause</span>
+          <span class="eyebrow">Step 18 · efter øvelse 2 · wrapper-funktion og guard clause</span>
           <h2><code>apiFetch</code> kigger nu også på svaret</h2>
           <div class="stage">
             <div class="anat a18">
@@ -592,7 +597,16 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Step 18 · øvelse 2, test 5 · I kender return redirect() fra /profile</span>
+          <span class="eyebrow">Step 18 · efter øvelse 2, test 4 · klient og server</span>
+          <h2>404 går igennem apiFetch. 401 stopper der</h2>
+          <div class="stage">
+            <div class="seq2"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>return response</code></div></div><div class="row"><div class="note orange" style="--a: 1"><code>throw</code> → <b>"Thread Not Found"</b></div></div></div></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 2"><b>guard clause</b><br /><code>throw redirect(…)</code></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 2">flyver forbi loaderen → <b>/login</b></div></div></div></div></div></div>
+          </div>
+          <p class="bottom-line">Loaderen ser aldrig et 401. Den ser stadig 400, 404 og 500 og håndterer dem som før.</p>
+        </section>
+
+        <section class="fill" data-accent="orange">
+          <span class="eyebrow">Step 18 · efter øvelse 2, test 5 · I kender return redirect() fra /profile</span>
           <h2><code>return</code> i loaderen. <code>throw</code> i apiFetch</h2>
           <div class="stage">
             <div class="stack2">
@@ -617,20 +631,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
             </div>
           </div>
           <p class="bottom-line">På <code>/profile</code> var det loaderen selv, der returnerede. <code>apiFetch</code> bliver kaldt af en loader, så den skal kaste.</p>
-        </section>
-
-        <section id="ex-18-2" class="activity-slide handson" data-accent="orange">
-          <span class="ho-num"><small>Step 18</small>2</span>
-          <span class="eyebrow">Hands-on · step 18 · øvelse 2</span>
-          <h2>Send brugeren til login</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md#øvelse-2-send-brugeren-til-login" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
-          <ul class="checklist">
-            <li>Importér <code>redirect</code> fra <code>react-router</code> i <code>apiFetch.js</code></li>
-            <li>Gem svaret i <code>response</code>. Ved 401: <code>throw redirect("/login")</code></li>
-            <li>Test: ødelagt token, logget ud og bobs tråd fra step 17. Hvorfor sender bobs tråd dig ikke til login?</li>
-            <li>Skift <code>throw</code> ud med <code>return</code>. Hvad står der på fejlsiden?</li>
-          </ul>
-          <p class="bottom-line">Kom der stadig et 401 i Network-fanen? <span class="fragment">Ja. <code>apiFetch</code> ændrer ikke svaret, kun hvad der sker bagefter.</span></p>
         </section>
 
         <!-- ============ 05 QUERY PARAMETERS OG OPEN REDIRECT ============ -->
