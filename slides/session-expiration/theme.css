@@ -2453,3 +2453,21 @@
   white-space: nowrap;
   color: var(--c);
 }
+
+/* Færdig med step 18: UI-forbedringer */
+.ui-next {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+.ui-next img {
+  max-width: 100%;
+  max-height: 560px;
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 35%);
+}
+.bottom-line a.ui-link {
+  color: var(--accent);
+  font-weight: 700;
+  margin-left: 10px;
+}
