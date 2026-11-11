@@ -505,52 +505,47 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
 
         <section class="fill" data-accent="orange">
           <span class="eyebrow">DRY · Don't Repeat Yourself</span>
-          <h2>Ét tjek foran alle kald. Ligesom requireAuth</h2>
+          <h2>Ét tjek i stedet for syv</h2>
           <div class="stage">
-            <div class="mirror2">
-              <article style="--c: var(--cyan)">
-                <span>Backenden · i går</span>
-                <div class="callers"><code>GET /api/threads</code><code>POST /api/threads</code><code>PATCH /api/threads/:id</code><code>… syv routes</code></div>
-                <div class="ar">←</div>
-                <div class="one"><strong>requireAuth</strong><small>Svarer 401, før routen kører</small></div>
-                <p>Én middleware i stedet for et token-tjek i hver route.</p>
+            <div class="dry7">
+              <article class="bad">
+                <span>✗ Uden DRY · tjekket i hvert kald</span>
+                <div class="files"><div class="f"><code>layout.jsx</code><span><i class="chk">if 401</i><i class="chk">if 401</i></span></div><div class="f"><code>chat-new.jsx</code><span><i class="chk">if 401</i></span></div><div class="f"><code>chat-thread.jsx</code><span><i class="chk">if 401</i><i class="chk">if 401</i><i class="chk">if 401</i></span></div><div class="f"><code>chat-thread-edit.jsx</code><span><i class="chk">if 401</i></span></div></div>
+                <p>7 kald i 4 filer. Glemmer du ét, ser brugeren fejlsiden igen.</p>
               </article>
-              <article style="--c: var(--orange)">
-                <span>Frontenden · i dag</span>
-                <div class="callers"><code>layout.jsx</code><code>chat-new.jsx</code><code>chat-thread.jsx</code><code>chat-thread-edit.jsx</code></div>
-                <div class="ar">→</div>
-                <div class="one"><strong>apiFetch</strong><small>Sender til login ved 401</small></div>
-                <p>Ét <code>if</code> i stedet for et 401-tjek i hver loader og action.</p>
+              <article class="good">
+                <span>✓ Med DRY · ét sted</span>
+                <div class="funnel"><div class="files"><div class="f"><code>layout.jsx</code><span><i>apiFetch()</i><i>apiFetch()</i></span></div><div class="f"><code>chat-new.jsx</code><span><i>apiFetch()</i></span></div><div class="f"><code>chat-thread.jsx</code><span><i>apiFetch()</i><i>apiFetch()</i><i>apiFetch()</i></span></div><div class="f"><code>chat-thread-edit.jsx</code><span><i>apiFetch()</i></span></div></div><b class="ar">→</b><div class="one"><strong>apiFetch</strong><code>if (response.status === 401)</code></div></div>
+                <p>Ét <code>if</code>. En ny route er dækket af sig selv.</p>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Kommer der en ny route i morgen, er den dækket. Ingen kan glemme tjekket.</p>
+          <p class="bottom-line">Kender I fra backenden: <code>requireAuth</code> står foran syv routes i stedet for et token-tjek i hver route.</p>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">SoC og SRP · Single Responsibility Principle</span>
-          <h2><code>apiFetch</code> gør én ting</h2>
+          <span class="eyebrow">SoC og SRP · separation of concerns · single responsibility</span>
+          <h2><code>apiFetch</code> og routen har hver sit ansvar</h2>
           <div class="stage">
-            <div class="srp">
-              <div class="side" style="--c: var(--green)">
-                <span>✓ apiFetchs ansvar</span>
-                <div>Sætter tokenet på requestet<small>Step 15</small></div>
-                <div>Sender til login ved 401<small>Step 18, i dag</small></div>
-              </div>
-              <div class="core"><code>apiFetch</code><strong>Tal med API'et som den bruger, der er logget ind</strong></div>
-              <div class="side" style="--c: var(--orange)">
-                <span>✗ Routens ansvar</span>
-                <div>400: vis fejlen i formularen<small><code>chat-thread.jsx</code></small></div>
-                <div>404: vis "Thread Not Found"<small><code>chat-thread.jsx</code></small></div>
-                <div>Læs JSON, tjek <code>response.ok</code><small>Hver loader og action</small></div>
-              </div>
+            <div class="soc2">
+              <article style="--c: var(--orange)">
+                <code class="who">apiFetch</code>
+                <strong>Taler med API'et som den bruger, der er logget ind</strong>
+                <ul><li>Tokenet på requestet <small>step 15</small></li><li>401 → login <small>step 18, i dag</small></li></ul>
+              </article>
+              <div class="div"><i></i><b>SoC</b><i></i></div>
+              <article style="--c: var(--cyan)">
+                <code class="who">loader og action</code>
+                <strong>Ved, hvad netop denne side skal vise</strong>
+                <ul><li>400 → fejlen i formularen</li><li>404 → "Thread Not Found"</li><li>Læs JSON, tjek <code>response.ok</code></li></ul>
+              </article>
             </div>
             <div class="ask srp-q">
               <strong>Hvad skulle <code>apiFetch</code> vide, hvis den også håndterede 404?</strong>
               <div class="ans fragment">Hvilken route der kaldte den. En manglende tråd, en slettet tråd og en forkert URL kræver hver sit svar. Så vokser én funktion til at kende hele appen.</div>
             </div>
           </div>
-          <p class="bottom-line"><b>SRP:</b> én grund til at ændre sig. <code>apiFetch</code> ændrer sig kun, hvis måden at tale med API'et på ændrer sig.</p>
+          <p class="bottom-line"><b>SoC:</b> to dele, hvert sit ansvar. <b>SRP:</b> <code>apiFetch</code> har kun én grund til at ændre sig: måden at tale med API'et på.</p>
         </section>
 
         <section id="ex-18-2" class="activity-slide handson" data-accent="orange">
