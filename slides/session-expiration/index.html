@@ -273,7 +273,7 @@
           <p class="bottom-line">Samme lektie som validering: stol ikke på det, klienten sender. <code>TEST_USER_ID</code> forsvinder i samme øvelse.</p>
         </section>
 
-        <section class="fill" data-accent="cyan">
+        <section id="soc" class="fill" data-accent="cyan">
           <span class="eyebrow">Step 17 · øvelse 3 · SoC · separation of concerns</span>
           <h2>Andres tråde forlader aldrig databasen</h2>
           <div class="stage">
@@ -503,7 +503,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <p class="bottom-line">400, 404 og 500 afhænger af routen. 401 er det samme overalt. Brugeren skal logge ind.</p>
         </section>
 
-        <section class="fill" data-accent="orange">
+        <section id="dry" class="fill" data-accent="orange">
           <span class="eyebrow">DRY · Don't Repeat Yourself</span>
           <h2>Ét tjek i stedet for syv</h2>
           <div class="stage">
@@ -523,7 +523,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <p class="bottom-line">Kender I fra backenden: <code>requireAuth</code> står foran syv routes i stedet for et token-tjek i hver route.</p>
         </section>
 
-        <section class="fill" data-accent="orange">
+        <section id="srp" class="fill" data-accent="orange">
           <span class="eyebrow">SoC og SRP · separation of concerns · single responsibility</span>
           <h2><code>apiFetch</code> og routen har hver sit ansvar</h2>
           <div class="stage">
@@ -562,7 +562,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <p class="bottom-line">Kom der stadig et 401 i Network-fanen? <span class="fragment">Ja. <code>apiFetch</code> ændrer ikke svaret, kun hvad der sker bagefter.</span></p>
         </section>
 
-        <section class="fill" data-accent="orange">
+        <section id="apifetch" class="fill" data-accent="orange">
           <span class="eyebrow">Step 18 · efter øvelse 2 · wrapper-funktion og guard clause</span>
           <h2><code>apiFetch</code> kigger nu også på svaret</h2>
           <div class="stage">
@@ -707,7 +707,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <p class="bottom-line">Commit, når step 18 virker, og push.</p>
         </section>
 
-        <section class="fill" data-accent="green">
+        <section id="encapsulation" class="fill" data-accent="green">
           <span class="eyebrow">Step 18 · efter øvelse 3 · encapsulation · kender I fra loadStudents()</span>
           <h2>Skjul hvordan. Vis kun hvad</h2>
           <div class="stage">
@@ -763,17 +763,43 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         <!-- ============ 06 AFRUNDING ============ -->
 
         <section id="afrunding" class="fill" data-accent="purple">
-          <span class="eyebrow">Afrunding · begreberne i koden</span>
+          <span class="eyebrow">Afrunding · seks mønstre fra i dag</span>
           <h2>Peg på ét sted i jeres kode</h2>
           <div class="stage">
-            <div class="qa3 qa4">
-              <article style="--c: var(--orange)"><span><a href="../fejlhaandtering-sikkerhed/#/dry" target="_blank" rel="noreferrer">DRY ↗</a></span><strong>Hvor står et tjek kun ét sted?</strong><div class="ans fragment">401 i <b>apiFetch</b>. Tokenet i <b>requireAuth</b>.</div></article>
-              <article style="--c: var(--cyan)"><span><a href="../fejlhaandtering-sikkerhed/#/soc" target="_blank" rel="noreferrer">SoC ↗</a></span><strong>Hvem afgør, hvad du må se?</strong><div class="ans fragment"><b>WHERE</b> i SQL'en, ikke frontenden. Routes ejer 400 og 404.</div></article>
-              <article style="--c: var(--purple)"><span><a href="../fejlhaandtering-sikkerhed/#/srp" target="_blank" rel="noreferrer">SRP ↗</a></span><strong>Hvad er apiFetchs ene ansvar?</strong><div class="ans fragment">Tale med API'et som <b>den bruger, der er logget ind</b>.</div></article>
-              <article style="--c: var(--green)"><span><a href="../fejlhaandtering-sikkerhed/#/encapsulation" target="_blank" rel="noreferrer">Encapsulation ↗</a></span><strong>Hvad ved login om, hvorfor du kom?</strong><div class="ans fragment">Intet. Den læser bare <b>?redirect</b>.</div></article>
+            <div class="pat6">
+              <article style="--c: var(--orange)">
+                <header><a href="#/dry">DRY →</a><small>Don't Repeat Yourself</small></header>
+                <strong>Det, der gentages, står ét sted</strong>
+                <div class="pat-code fragment"><div><i class="fe">frontend</i><code>apiFetch</code><span>401-tjekket for alle kald</span></div><div><i class="be">backend</i><code>requireAuth</code><span>tokenet for alle routes</span></div></div>
+              </article>
+              <article style="--c: var(--cyan)">
+                <header><a href="#/soc">SoC →</a><small>Separation of Concerns</small></header>
+                <strong>Hver del har én slags arbejde</strong>
+                <div class="pat-code fragment"><div><i class="be">backend</i><code>WHERE user_id</code><span>databasen afgør, hvad du må se</span></div><div><i class="fe">frontend</i><code>loader</code><span>viser 400 og 404. Ikke 401</span></div></div>
+              </article>
+              <article style="--c: var(--purple)">
+                <header><a href="#/srp">SRP →</a><small>Single Responsibility</small></header>
+                <strong>Én grund til at ændre sig</strong>
+                <div class="pat-code fragment"><div><i class="fe">frontend</i><code>apiFetch</code><span>taler med API'et med dit token</span></div><div><i class="be">backend</i><code>requireAuth</code><span>svarer kun på: hvem er du?</span></div></div>
+              </article>
+              <article style="--c: var(--green)">
+                <header><a href="#/encapsulation">Encapsulation →</a><small>Indkapsling</small></header>
+                <strong>Skjul hvordan. Vis kun hvad</strong>
+                <div class="pat-code fragment"><div><i class="fe">frontend</i><code>login.jsx</code><span>ved ikke, hvorfor du kom. Læser bare <b>?redirect</b></span></div><div><i class="fe">frontend</i><code>loader</code><span>ser kun svaret. Ved intet om login</span></div></div>
+              </article>
+              <article style="--c: var(--red)">
+                <header><a href="#/apifetch">Guard clause →</a><small>Tjek. Svar. Stop.</small></header>
+                <strong>Et <code>if</code> øverst stopper fejlen tidligt</strong>
+                <div class="pat-code fragment"><div><i class="fe">frontend</i><code>status === 401</code><span><b>throw</b> redirect til login</span></div><div><i class="be">backend</i><code>if (!authHeader)</code><span><b>return</b> 401</span></div></div>
+              </article>
+              <article style="--c: var(--yellow)">
+                <header><a href="#/apifetch">Wrapper →</a><small>Decorator pattern</small></header>
+                <strong>Pak en funktion ind. Læg noget til</strong>
+                <div class="pat-code fragment"><div><i class="fe">frontend</i><code>apiFetch</code><span><b>før:</b> tokenet på requestet</span></div><div><i class="fe">frontend</i><code>apiFetch</code><span><b>efter:</b> 401 sender til login</span></div></div>
+              </article>
             </div>
           </div>
-          <p class="bottom-line">Og <a class="concept-link" href="../fejlhaandtering-sikkerhed/#/guard-clause" target="_blank" rel="noreferrer"><b>guard clause ↗</b></a>: <code>if (response.status === 401)</code> og hvert tjek i <code>requireAuth</code>.</p>
+          <p class="bottom-line">Klik på navnet for at hoppe til den slide, hvor vi brugte mønstret i dag.</p>
         </section>
 
         <section class="materials-slide" data-accent="purple">
