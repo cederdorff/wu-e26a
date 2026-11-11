@@ -1998,3 +1998,147 @@
   padding: 12px 16px;
   font-size: 20px;
 }
+
+/* 404 vs 401 with React Router as fourth actor, and the end result */
+.seq2-end > div {
+  grid-template-rows: auto auto 1fr auto;
+}
+.seq2-end .seq .actor {
+  min-width: 88%;
+  padding: 8px 6px;
+}
+.seq2-end .seq .actor > strong {
+  font-size: 18px;
+}
+.seq2-end .seq .actor > small {
+  font-size: 13px;
+}
+.seq2-end .seq .actor > span {
+  font-size: 12px;
+}
+.seq2-end .seq .msg {
+  font-size: 16px;
+}
+.seq2-end .seq .msg code {
+  font-size: 14px;
+}
+.seq2-end .end {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  font-size: 20px;
+}
+.seq2-end .end b {
+  color: var(--c);
+}
+
+/* return vs throw as two call stacks, read from the bottom up */
+.stk2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px;
+}
+.stk2 article {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.stk2 article.bad { --c: var(--red); }
+.stk2 article.good { --c: var(--green); }
+.stk2 article > span {
+  margin-bottom: 8px;
+  color: var(--c);
+  font-size: 18px;
+  font-weight: 850;
+}
+.stk2 article > span code {
+  color: var(--c);
+  font-size: 18px;
+}
+.stk2 .lvl {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #090d0d;
+}
+.stk2 .lvl > b {
+  color: var(--muted);
+  font: 700 16px/1.3 var(--mono);
+}
+.stk2 .lvl > p {
+  margin: 0;
+  font-size: 19px !important;
+  line-height: 1.35 !important;
+}
+.stk2 .lvl code {
+  font-size: 16px;
+}
+.stk2 .lvl em {
+  color: var(--c);
+  font-style: normal;
+  font-weight: 750;
+}
+.stk2 .lvl.top {
+  border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+.stk2 .lvl.off {
+  opacity: 0.45;
+  border: 1px dashed var(--line);
+}
+.stk2 .up {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  color: var(--c);
+  font-size: 17px;
+}
+.stk2 .up i {
+  justify-self: center;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+}
+.stk2 .up code {
+  font-size: 15px;
+}
+.stk2 .up.skip i {
+  border-left: 2px dashed var(--c);
+  color: transparent;
+}
+.stk2 article > span {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.stk2 article > span small {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.stk2 .lvl.off p {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--muted) 70%, transparent);
+}
+.stk2 article > span {
+  justify-content: flex-start;
+}
+.stk2 article > span small {
+  margin-left: auto;
+}
+.stk2 .lvl.off p {
+  text-decoration: none;
+}

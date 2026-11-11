@@ -595,33 +595,31 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <span class="eyebrow">Step 18 · efter øvelse 2, test 4 · klient og server</span>
           <h2>404 går igennem apiFetch. 401 stopper der</h2>
           <div class="stage">
-            <div class="seq2"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>return response</code></div></div><div class="row"><div class="note orange" style="--a: 1"><code>throw</code> → <b>"Thread Not Found"</b></div></div></div></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 2"><b>guard clause</b><br /><code>throw redirect(…)</code></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 2">flyver forbi loaderen → <b>/login</b></div></div></div></div></div></div>
+            <div class="seq2 seq2-end"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 4"><div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>React Router</strong><small>skifter side</small></div><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 3; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 3; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><code>return response</code></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>throw</code> 404</div></div></div></div><div class="end">Routens ErrorBoundary viser <b>"Thread Not Found"</b></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 4"><div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>React Router</strong><small>skifter side</small></div><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 3; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 3; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 3"><b>guard clause</b></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 3"><code>throw redirect(…)</code> · forbi loaderen</div></div></div></div><div class="end">React Router skifter til <b>/login?redirect=…</b></div></div></div>
           </div>
           <p class="bottom-line">Loaderen ser aldrig et 401. Den ser stadig 400, 404 og 500 og håndterer dem som før.</p>
         </section>
 
         <section class="fill" data-accent="orange">
           <span class="eyebrow">Step 18 · efter øvelse 2, test 5 · I kender return redirect() fra /profile</span>
-          <h2><code>return</code> i loaderen. <code>throw</code> i apiFetch</h2>
+          <h2><code>return</code> eller <code>throw</code> i apiFetch?</h2>
           <div class="stage">
-            <div class="stack2">
-              <article style="--c: var(--red)">
-                <span>✗ return redirect("/login") i apiFetch</span>
-                <div class="lvl"><b>apiFetch</b><span>returnerer et svar med status <code>302</code></span></div>
-                <div class="up">↑ loaderen får det, som om API'et svarede</div>
-                <div class="lvl"><b>layout.jsx · loader</b><span><code>!response.ok</code> → <code>throw new Error(…)</code></span></div>
-                <div class="up">↑</div>
-                <div class="lvl"><b>React Router</b><span>viser fejlsiden</span></div>
-                <div class="end">"Failed to fetch threads: <b>302</b>"</div>
+            <div class="stk2">
+              <article class="bad">
+                <span>✗ <code>return redirect("/login")</code><small>læs nedefra og op</small></span>
+                <div class="lvl top"><b>React Router</b><p>viser fejlsiden: <em>"Failed to fetch threads: 302"</em></p></div>
+                <div class="up"><i>↑</i><span><code>throw new Error(…)</code></span></div>
+                <div class="lvl"><b>layout.jsx · loader</b><p>får et svar med status <code>302</code>. <code>!response.ok</code> er sand</p></div>
+                <div class="up"><i>↑</i><span><code>return</code>: et almindeligt svar</span></div>
+                <div class="lvl"><b>apiFetch</b><p><code>return redirect("/login")</code></p></div>
               </article>
-              <article style="--c: var(--green)">
-                <span>✓ throw redirect("/login") i apiFetch</span>
-                <div class="lvl"><b>apiFetch</b><span>kaster en redirect</span></div>
-                <div class="up">↑ flyver forbi loaderen. Resten kører aldrig</div>
-                <div class="lvl"><b>layout.jsx · loader</b><span>stopper midt i <code>await apiFetch(…)</code></span></div>
-                <div class="up">↑</div>
-                <div class="lvl"><b>React Router</b><span>fanger den og skifter side</span></div>
-                <div class="end">Brugeren står på <b>/login</b></div>
+              <article class="good">
+                <span>✓ <code>throw redirect("/login")</code><small>læs nedefra og op</small></span>
+                <div class="lvl top"><b>React Router</b><p>fanger redirecten og skifter til <em>/login</em></p></div>
+                <div class="up"><i>↑</i><span><code>throw</code>: flyver forbi loaderen</span></div>
+                <div class="lvl off"><b>layout.jsx · loader</b><p>stopper ved <code>await apiFetch(…)</code>. Resten kører aldrig</p></div>
+                <div class="up"><i>↑</i><span><code>throw</code>: ikke et svar, men en undtagelse</span></div>
+                <div class="lvl"><b>apiFetch</b><p><code>throw redirect("/login")</code></p></div>
               </article>
             </div>
           </div>
