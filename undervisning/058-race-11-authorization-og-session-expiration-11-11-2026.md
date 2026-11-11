@@ -13,6 +13,8 @@ I dag retter I begge dele, i rækkefølge:
 
 Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort, så vi bruger tiden på, hvorfor den står, hvor den står. Målet er, at I kommer godt i gang med begge. Det, I ikke når, samler MAGL op på.
 
+Er du færdig med begge, så fortsæt med [Chatbot: UI-forbedringer](../opgaver/chatbot-ui-forbedringer.md). Enter sender, feltet tømmes, og × spørger, før en tråd slettes. Kun frontend.
+
 ---
 
 ## Agenda
@@ -83,6 +85,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - **Opgaver:**
   - [Chatbot step 17: Kun dine egne tråde](../opgaver/chatbot-step-17-kun-egne-traade.md): dagens første step
   - [Chatbot step 18: Send brugeren til login ved 401](../opgaver/chatbot-step-18-send-til-login.md): dagens andet step
+  - [Chatbot: UI-forbedringer](../opgaver/chatbot-ui-forbedringer.md): når du er færdig med step 18
   - [Chatbot step 16: Backenden tjekker tokenet](../opgaver/chatbot-step-16-tjek-tokenet.md): hvis du mangler noget af step 16
   - [Chatbot React Postgres](https://github.com/bewildergeist/chatbot-react-postgres)
     - [Chatbot-tutorial, step 17: API authorization and data isolation](https://github.com/bewildergeist/chatbot-react-postgres/pull/17)
