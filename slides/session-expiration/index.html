@@ -98,32 +98,28 @@
           <span class="eyebrow">Opsamling · de sidste spørgsmål i curl-testen</span>
           <h2>To ting mangler. Dem retter I i dag</h2>
           <div class="stage">
-            <div class="need2">
+            <div class="two2">
               <article style="--c: var(--cyan)">
-                <span>Med dit eget token · logget ind</span>
-                <strong>Du får alles tråde</strong>
-                <div class="mini-list">
-                  <div class="other">alices tråde fra seed<em>alice</em></div>
-                  <div class="other">bobs tråde fra seed<em>bob</em></div>
-                  <div class="other">Den tråd, du lige oprettede<em>alice ✗</em></div>
-                  <div class="mine">Dine egne tråde<em>0</em></div>
+                <span class="ctx">Logget ind · med dit eget token</span>
+                <div class="hd"><span class="sc sc-2">200</span><strong>Du får alles tråde</strong></div>
+                <div class="pic mini-list">
+                  <div class="other">alices tråde<em>alice</em></div>
+                  <div class="other">bobs tråde<em>bob</em></div>
+                  <div class="other">din nye tråd<em>alice ✗</em></div>
                 </div>
-                <div class="why"><span class="sc sc-2">200</span><div><b>API'et siger ja for meget</b><small><code>requireAuth</code> kender dig ✓ · men SQL'en har ingen <code>WHERE</code></small></div></div>
-                <div class="next"><span><b class="where">Backend</b> Authorization: hvad må du?</span><b>Step 17</b></div>
+                <p class="say">API'et siger <b>ja for meget</b></p>
+                <div class="tag"><b>Backend</b><span>Step 17 · authorization</span></div>
               </article>
               <article style="--c: var(--purple)">
-                <span>Log ud · gå til forsiden</span>
-                <strong>Du får en fejlside</strong>
-                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">localhost:5173<b>/</b></span></div>
-                  <div class="errpage"><h3>Oops!</h3><p>Failed to fetch threads: 401</p><pre>Error: Failed to fetch threads: 401
-    at clientLoader (layout.jsx)</pre></div>
-                </div>
-                <div class="why"><span class="sc sc-1">401</span><div><b>Klienten forstår ikke nej</b><small><code>requireAuth</code> siger nej ✓ · loaderen kaster bare en fejl</small></div></div>
-                <div class="next"><span><b class="where">Frontend</b> Session expiration: hvad nu?</span><b>Step 18</b></div>
+                <span class="ctx">Logget ud · gå til forsiden</span>
+                <div class="hd"><span class="sc sc-1">401</span><strong>Du får en fejlside</strong></div>
+                <div class="pic bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">localhost:5173<b>/</b></span></div><div class="errpage"><h3>Oops!</h3><p>Failed to fetch threads: 401</p></div></div>
+                <p class="say">API'et siger nej. <b>Klienten ved ikke, hvad nu</b></p>
+                <div class="tag"><b>Frontend</b><span>Step 18 · session expiration</span></div>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Den ene er et sikkerhedshul: API'et siger ja for meget. Den anden er brugeroplevelse: API'et siger nej, men klienten ved ikke, hvad nu.</p>
+          <p class="bottom-line">Det ene er et sikkerhedshul. Det andet er brugeroplevelse. Vi lukker hullet først.</p>
         </section>
 
         <!-- ============ 02 AUTHENTICATION OG AUTHORIZATION ============ -->
