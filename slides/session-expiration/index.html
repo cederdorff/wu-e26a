@@ -108,7 +108,8 @@
                   <div class="other">Den tråd, du lige oprettede<em>alice ✗</em></div>
                   <div class="mine">Dine egne tråde<em>0</em></div>
                 </div>
-                <div class="next"><span>Authorization: hvad må du?</span><b>Step 17</b></div>
+                <div class="why"><span class="sc sc-2">200</span><div><b>API'et siger ja for meget</b><small><code>requireAuth</code> kender dig ✓ · men SQL'en har ingen <code>WHERE</code></small></div></div>
+                <div class="next"><span><b class="where">Backend</b> Authorization: hvad må du?</span><b>Step 17</b></div>
               </article>
               <article style="--c: var(--purple)">
                 <span>Log ud · gå til forsiden</span>
@@ -117,11 +118,12 @@
                   <div class="errpage"><h3>Oops!</h3><p>Failed to fetch threads: 401</p><pre>Error: Failed to fetch threads: 401
     at clientLoader (layout.jsx)</pre></div>
                 </div>
-                <div class="next"><span>Session expiration: hvad nu?</span><b>Step 18</b></div>
+                <div class="why"><span class="sc sc-1">401</span><div><b>Klienten forstår ikke nej</b><small><code>requireAuth</code> siger nej ✓ · loaderen kaster bare en fejl</small></div></div>
+                <div class="next"><span><b class="where">Frontend</b> Session expiration: hvad nu?</span><b>Step 18</b></div>
               </article>
             </div>
           </div>
-          <p class="bottom-line">Tutorialen laver step 18 før 17. I laver dem i rækkefølge: backenden først, så frontenden.</p>
+          <p class="bottom-line">Den ene er et sikkerhedshul: API'et siger ja for meget. Den anden er brugeroplevelse: API'et siger nej, men klienten ved ikke, hvad nu.</p>
         </section>
 
         <!-- ============ 02 AUTHENTICATION OG AUTHORIZATION ============ -->
