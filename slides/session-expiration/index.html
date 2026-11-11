@@ -636,29 +636,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Step 18 · øvelse 3 · hele vejen rundt</span>
-          <h2>Fra tråden til login og tilbage igen</h2>
-          <div class="stage">
-            <div class="gapv loop">
-              <div class="nd" style="--c: var(--red)"><span>/chat/abc · loader</span><strong>API'et svarer 401</strong><pre class="viz-code">await apiFetch(…)</pre><small>Tokenet virker ikke længere.</small></div>
-              <div class="ar">→</div>
-              <div class="nd" style="--c: var(--orange)"><span>apiFetch · trin 1</span><strong>Husk siden</strong><pre class="viz-code">throw redirect(
- `/login?redirect=${
-  encodeURIComponent(
-   currentPath)}`)</pre></div>
-              <div class="ar">→</div>
-              <div class="nd" style="--c: var(--purple)"><span>/login · trin 3</span><strong>Fortæl hvorfor</strong><div class="ac"><span class="h">Welcome Back</span><span class="info">Your session has expired. Please log in again.</span><span class="btn">Log In</span></div></div>
-              <div class="ar">→</div>
-              <div class="nd" style="--c: var(--green)"><span>clientAction · trin 2</span><strong>Send tilbage</strong><pre class="viz-code">redirect(
-  url.searchParams
-   .get("redirect")
-  || "/")</pre><small>Brugeren står i <code>/chat/abc</code> igen.</small></div>
-            </div>
-          </div>
-          <p class="bottom-line">Siden rejser med i URL'en: <code>/login?redirect=%2Fchat%2Fabc</code></p>
-        </section>
-
-        <section class="fill" data-accent="green">
           <span class="eyebrow">Query parameters · I kender ?registered=true</span>
           <h2>Siden står i URL'en til login</h2>
           <div class="stage">
@@ -686,7 +663,48 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Encapsulation</span>
+          <span class="eyebrow">Step 18 · øvelse 3 · det bygger I · se URL'en</span>
+          <h2>Fra tråden til login og tilbage igen</h2>
+          <div class="stage">
+            <div class="trip3">
+              <div class="win">
+                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/chat/abc</b></span></div>
+                  <div class="pg"><strong>Din tråd</strong><span class="b me"></span><span class="b"></span><em class="bad">API'et svarer 401</em></div></div>
+                <small>Tokenet virker ikke længere</small>
+              </div>
+              <div class="hop"><span>Trin 1 · apiFetch</span><b>→</b><em>husker siden i URL'en</em></div>
+              <div class="win">
+                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/login?redirect=%2Fchat%2Fabc</b></span></div>
+                  <div class="pg"><div class="ac"><span class="h">Welcome Back</span><span class="info">Your session has expired. Please log in again.</span><span class="btn">Log In</span></div></div></div>
+                <small><b>Trin 3:</b> login fortæller hvorfor</small>
+              </div>
+              <div class="hop"><span>Trin 2 · clientAction</span><b>→</b><em>læser <code>redirect</code> og sender tilbage</em></div>
+              <div class="win">
+                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/chat/abc</b></span></div>
+                  <div class="pg"><strong>Din tråd</strong><span class="b me"></span><span class="b"></span><em class="good">Tilbage, hvor du var</em></div></div>
+                <small>Logget ind igen</small>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Siden rejser med i URL'en. Det er det eneste, <code>apiFetch</code> og login deler.</p>
+        </section>
+
+        <section id="ex-18-3" class="activity-slide handson" data-accent="green">
+          <span class="ho-num"><small>Step 18</small>3</span>
+          <span class="eyebrow">Hands-on · step 18 · øvelse 3</span>
+          <h2>Tilbage, hvor du var</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md#øvelse-3-tilbage-hvor-du-var" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Trin 1:</b> <code>apiFetch</code> sender til <code>/login?redirect=</code> med siden, kodet</li>
+            <li><b>Trin 2:</b> <code>clientAction</code> i login sender tilbage til <code>redirect</code> eller <code>/</code></li>
+            <li><b>Trin 3:</b> vis "Your session has expired", når der står <code>redirect</code> i URL'en</li>
+            <li>Test 5: gå til <code>/login?redirect=https://example.com</code>, og log ind. Hvor ender du?</li>
+          </ul>
+          <p class="bottom-line">Commit, når step 18 virker, og push.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
+          <span class="eyebrow">Step 18 · efter øvelse 3 · encapsulation</span>
           <h2>Hver del kender kun sin egen del</h2>
           <div class="stage">
             <div class="encflow">
@@ -705,10 +723,10 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="red">
-          <span class="eyebrow">Open redirect · step 18 · øvelse 3, trin 3, test 5</span>
-          <h2>Et link til jeres login kan sende brugeren hvor som helst</h2>
+          <span class="eyebrow">Open redirect · step 18 · efter øvelse 3, trin 3, test 5</span>
+          <h2>Et link til jeres login kan sende hvor som helst hen</h2>
           <div class="stage">
-            <div class="phish3">
+            <div class="phish3 big">
               <div class="step" style="--c: var(--yellow)">
                 <span>1 · en mail</span>
                 <div class="mail"><span class="from">Fra: support@din-chatbot.dk</span>Din session er udløbet. Log ind her:<br /><a>din-chatbot.dk/login?redirect=https://din-chatbot.evil</a></div>
@@ -728,22 +746,12 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
                 </div>
               </div>
             </div>
+            <div class="ask srp-q">
+              <strong>Hvordan kunne login sikre sig?</strong>
+              <div class="ans fragment">Brug kun <code>redirect</code>, hvis den starter med én <code>/</code> og ikke <code>//</code>. Ellers send til <code>/</code>. Stol ikke på input, samme lektie som XSS i AMAbotten.</div>
+            </div>
           </div>
-          <p class="bottom-line">Domænet var ægte, så brugeren stoler på det. Stol ikke på input, samme lektie som XSS i AMAbotten. Tutorialen retter det ikke.</p>
-        </section>
-
-        <section id="ex-18-3" class="activity-slide handson" data-accent="green">
-          <span class="ho-num"><small>Step 18</small>3</span>
-          <span class="eyebrow">Hands-on · step 18 · øvelse 3</span>
-          <h2>Tilbage, hvor du var</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md#øvelse-3-tilbage-hvor-du-var" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
-          <ul class="checklist">
-            <li><b>Trin 1:</b> <code>apiFetch</code> sender til <code>/login?redirect=</code> med siden, kodet</li>
-            <li><b>Trin 2:</b> <code>clientAction</code> i login sender tilbage til <code>redirect</code> eller <code>/</code></li>
-            <li><b>Trin 3:</b> vis "Your session has expired", når der står <code>redirect</code> i URL'en</li>
-            <li>Test 5: gå til <code>/login?redirect=https://example.com</code>, og log ind. Hvor ender du?</li>
-          </ul>
-          <p class="bottom-line">Commit, når step 18 virker, og push.</p>
+          <p class="bottom-line">Domænet var ægte, så brugeren stoler på det. Tutorialen retter det ikke.</p>
         </section>
 
         <!-- ============ 06 AFRUNDING ============ -->
