@@ -175,20 +175,22 @@
           <p class="bottom-line">Navnet <b>401 Unauthorized</b> er misvisende. Det betyder "ikke authenticated", altså: vi ved ikke, hvem du er.</p>
         </section>
 
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Step 17 · klient og server</span>
-          <h2>Samme request. Hver sit svar</h2>
-          <div class="stage">
-            <div class="seq" style="--n: 4">
-              <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Dig</strong><small>browser</small></div><div class="actor" style="--c: var(--yellow)"><span>Klient</span><strong>Bob</strong><small>browser</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--orange)"><span>Database</span><strong>Postgres</strong><small>Supabase</small></div></div>
-              <div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 3"><code>GET /api/threads</code> · dit token</div></div><div class="row"><div class="msg ok" style="--a: 3; --k: 2"><code>WHERE user_id</code> = dit id</div></div><div class="row"><div class="msg ok back" style="--a: 1; --k: 3"><b>200</b> · kun dine tråde</div></div><div class="row"><div class="sep"></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET /api/threads</code> · bobs token</div></div><div class="row"><div class="msg ok" style="--a: 3; --k: 2"><code>WHERE user_id</code> = bobs id</div></div><div class="row"><div class="msg ok back" style="--a: 2; --k: 2"><b>200</b> · kun bobs tråde</div></div></div>
-            </div>
-          </div>
-          <p class="bottom-line">Koden er den samme for alle. Det er tokenet, der afgør <code>req.userId</code>, og <code>req.userId</code>, der afgør rækkerne.</p>
+        <section id="ex-17-1" class="activity-slide handson" data-accent="cyan">
+          <span class="ho-num"><small>Step 17</small>1</span>
+          <span class="eyebrow">Hands-on · step 17 · øvelse 1</span>
+          <h2>Hvem ejer hvad?</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-17-kun-egne-traade.md#øvelse-1-hvem-ejer-hvad" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
+          <ul class="checklist">
+            <li>Kør queryen, der tæller tråde pr. bruger. Den ligner den fra i går</li>
+            <li>Passer sidebaren med din egen bruger? Opret en tråd. Hvem ejer den?</li>
+            <li>Find bobs tråde i SQL, og ret hans titel fra Thunder Client med dit eget token</li>
+            <li>Ingen kode. Du skal bare finde de tre huller</li>
+          </ul>
+          <p class="bottom-line">Mangler du step 16? Brug <code>pr-17-start</code> under "Kom i gang", og commit, før du ændrer noget.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 1 · test 5 · Thunder Client</span>
+          <span class="eyebrow">Efter øvelse 1 · test 5 · det fandt I</span>
           <h2>Logget ind som dig. Og du kan rette bobs tråd</h2>
           <div class="stage">
             <div class="tc tc-req">
@@ -212,18 +214,34 @@
           <p class="bottom-line"><code>requireAuth</code> lader dig komme forbi, fordi du er logget ind. Ingen tjekker, om tråden er din.</p>
         </section>
 
-        <section id="ex-17-1" class="activity-slide handson" data-accent="cyan">
-          <span class="ho-num"><small>Step 17</small>1</span>
-          <span class="eyebrow">Hands-on · step 17 · øvelse 1</span>
-          <h2>Hvem ejer hvad?</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-17-kun-egne-traade.md#øvelse-1-hvem-ejer-hvad" target="_blank" rel="noreferrer">Åbn øvelsen på GitHub ↗</a>
-          <ul class="checklist">
-            <li>Kør queryen, der tæller tråde pr. bruger. Den ligner den fra i går</li>
-            <li>Passer sidebaren med din egen bruger? Opret en tråd. Hvem ejer den?</li>
-            <li>Find bobs tråde i SQL, og ret hans titel fra Thunder Client med dit eget token</li>
-            <li>Ingen kode. Du skal bare finde de tre huller</li>
-          </ul>
-          <p class="bottom-line">Mangler du step 16? Brug <code>pr-17-start</code> under "Kom i gang", og commit, før du ændrer noget.</p>
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Step 17 · klient og server · det bygger I nu</span>
+          <h2>Samme request. Hver sit svar</h2>
+          <div class="stage">
+            <div class="seq" style="--n: 4">
+              <div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>Dig</strong><small>browser</small></div><div class="actor" style="--c: var(--yellow)"><span>Klient</span><strong>Bob</strong><small>browser</small></div><div class="actor" style="--c: var(--cyan)"><span>Server</span><strong>Express</strong><small>requireAuth · routes</small></div><div class="actor" style="--c: var(--orange)"><span>Database</span><strong>Postgres</strong><small>Supabase</small></div></div>
+              <div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 3"><code>GET /api/threads</code> · dit token</div></div><div class="row"><div class="msg ok" style="--a: 3; --k: 2"><code>WHERE user_id</code> = dit id</div></div><div class="row"><div class="msg ok back" style="--a: 1; --k: 3"><b>200</b> · kun dine tråde</div></div><div class="row"><div class="sep"></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET /api/threads</code> · bobs token</div></div><div class="row"><div class="msg ok" style="--a: 3; --k: 2"><code>WHERE user_id</code> = bobs id</div></div><div class="row"><div class="msg ok back" style="--a: 2; --k: 2"><b>200</b> · kun bobs tråde</div></div></div>
+            </div>
+          </div>
+          <p class="bottom-line">Koden er den samme for alle. Det er tokenet, der afgør <code>req.userId</code>, og <code>req.userId</code>, der afgør rækkerne.</p>
+        </section>
+
+        <section class="fill" data-accent="cyan">
+          <span class="eyebrow">Step 17 · kortet over øvelse 2-5</span>
+          <h2>Syv routes. <code>req.userId</code> i dem alle</h2>
+          <div class="stage">
+            <div class="gt tight" style="--cols: 330px 1fr 160px">
+              <div class="r h"><span>Route</span><span>Det retter I</span><span>Øvelse</span></div>
+              <div class="r" style="--c: var(--green)"><code>POST /api/threads</code><span><code>${req.userId}</code> i <code>INSERT</code> i stedet for <code>TEST_USER_ID</code></span><span class="own">2</span></div>
+              <div class="r" style="--c: var(--cyan)"><code>GET /api/threads</code><span><code>WHERE user_id = ${req.userId}</code></span><span class="own">3</span></div>
+              <div class="r" style="--c: var(--orange)"><code>GET /api/threads/:id</code><span><code>AND user_id = ${req.userId}</code> · 404, hvis den ikke er din</span><span class="own">4 · trin 1</span></div>
+              <div class="r hi" style="--c: var(--orange)"><code>GET …/:id/messages</code><span>Tjek tråden først. Ikke din: <code>res.json([])</code></span><span class="own">4 · trin 2</span></div>
+              <div class="r" style="--c: var(--red)"><code>PATCH /api/threads/:id</code><span><code>AND user_id = ${req.userId}</code> i <code>UPDATE</code></span><span class="own">5 · trin 1</span></div>
+              <div class="r" style="--c: var(--red)"><code>DELETE /api/threads/:id</code><span><code>AND user_id = ${req.userId}</code> i <code>DELETE</code></span><span class="own">5 · trin 1</span></div>
+              <div class="r hi" style="--c: var(--red)"><code>POST …/:id/messages</code><span>Tjek tråden først. Ikke din: <code>404</code></span><span class="own">5 · trin 2</span></div>
+            </div>
+          </div>
+          <p class="bottom-line"><code>messages</code> har ingen <code>user_id</code>. Ejeren står på tråden. Derfor tjekker I tråden først i de to markerede routes, i øvelse 4 og 5.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
@@ -283,29 +301,31 @@
           <p class="bottom-line">Skjuler frontenden andres tråde, kan Thunder Client stadig hente dem. Adgang afgøres i backenden.</p>
         </section>
 
+        <section id="ex-17-2" class="activity-slide handson" data-accent="cyan">
+          <span class="ho-num"><small>Step 17</small>2-3</span>
+          <span class="eyebrow">Hands-on · step 17 · øvelse 2-3</span>
+          <h2>Den rigtige ejer, og kun dine i listen</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-17-kun-egne-traade.md#øvelse-2-nye-tråde-får-den-rigtige-ejer" target="_blank" rel="noreferrer">Åbn øvelserne på GitHub ↗</a>
+          <ul class="checklist">
+            <li><b>Øvelse 2:</b> nye tråde får <code>req.userId</code> som ejer. Fjern <code>TEST_USER_ID</code></li>
+            <li>Test: send <code>user_id</code> med i body'en fra Thunder Client. Hvem ejer tråden?</li>
+            <li><b>Øvelse 3:</b> <code>WHERE user_id = ${req.userId}</code> i listen</li>
+            <li>Test: log ind med en ny bruger fra <code>/register</code>. Hvor mange tråde står der?</li>
+          </ul>
+          <p class="bottom-line">Listen er lukket. Men kender du bobs id, kan du stadig åbne hans tråd. Det er øvelse 4.</p>
+        </section>
+
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 4 · MAGL spurgte i går: 401 eller 403?</span>
+          <span class="eyebrow">Øvelse 4 · MAGL's curl-test spurgte: 401 eller 403?</span>
           <h2>Bob beder om alices tråd. Hvad skal han få?</h2>
           <div class="stage">
-            <div class="col3">
-              <article style="--c: var(--purple)">
-                <span>401 Unauthorized</span>
-                <strong>"Hvem er du?"</strong>
-                <p>Forkert. Bob er logget ind, og <code>requireAuth</code> ved, hvem han er.</p>
-                <div class="foot">Kun til <b>authentication</b></div>
-              </article>
-              <article style="--c: var(--orange)">
-                <span>403 Forbidden</span>
-                <strong>"Den findes, men du må ikke"</strong>
-                <p>Rigtigt i princippet. Men så får bob bekræftet, at id'et findes.</p>
-                <div class="foot">Afslører, at <b>tråden findes</b></div>
-              </article>
-              <article style="--c: var(--green)">
-                <span>404 Not Found</span>
-                <strong>"Den findes ikke for dig"</strong>
-                <p>Bob kan ikke se forskel på en andens tråd og et id, der ikke findes.</p>
-                <div class="foot">Det svarer <b>step 17</b></div>
-              </article>
+            <div class="ask3">
+              <div class="req"><span>Bob spørger</span><code>GET /api/threads/<b>alices-id</b></code><small>med sit eget, gyldige token</small></div>
+              <div class="opts">
+                <article style="--c: var(--purple)"><div class="st"><span class="sc sc-1">401</span><b>Unauthorized</b></div><p>"Vi ved ikke, hvem du er"</p><div class="learn bad fragment"><b>✗ Forkert</b><span><code>requireAuth</code> ved godt, hvem bob er</span></div></article>
+                <article style="--c: var(--orange)"><div class="st"><span class="sc sc-4">403</span><b>Forbidden</b></div><p>"Den findes, men den er ikke din"</p><div class="learn meh fragment"><b>~ Afslører noget</b><span>Bob får bekræftet, at id'et findes</span></div></article>
+                <article style="--c: var(--green)"><div class="st"><span class="sc sc-2">404</span><b>Not Found</b></div><p>"Den findes ikke for dig"</p><div class="learn good fragment"><b>✓ Bob lærer intet</b><span>Det svarer step 17</span></div></article>
+              </div>
             </div>
           </div>
           <p class="bottom-line"><code>WHERE id = ${threadId} AND user_id = ${req.userId}</code> giver 0 rækker. Så svarer routen allerede 404.</p>
@@ -337,36 +357,18 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <p class="bottom-line">Brugere og tråde ligger i hver sin tabel, så ejeren står ét sted. Det tjek står i både <code>GET</code> og <code>POST</code> på <code>/messages</code>.</p>
         </section>
 
-        <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 2-5 · overblik</span>
-          <h2>Syv routes. <code>req.userId</code> i dem alle</h2>
-          <div class="stage">
-            <div class="gt tight" style="--cols: 330px 1fr 160px">
-              <div class="r h"><span>Route</span><span>Det retter I</span><span>Øvelse</span></div>
-              <div class="r" style="--c: var(--green)"><code>POST /api/threads</code><span><code>${req.userId}</code> i <code>INSERT</code> i stedet for <code>TEST_USER_ID</code></span><span class="own">2</span></div>
-              <div class="r" style="--c: var(--cyan)"><code>GET /api/threads</code><span><code>WHERE user_id = ${req.userId}</code></span><span class="own">3</span></div>
-              <div class="r" style="--c: var(--orange)"><code>GET /api/threads/:id</code><span><code>AND user_id = ${req.userId}</code> · 404, hvis den ikke er din</span><span class="own">4 · trin 1</span></div>
-              <div class="r hi" style="--c: var(--orange)"><code>GET …/:id/messages</code><span>Tjek tråden først. Ikke din: <code>res.json([])</code></span><span class="own">4 · trin 2</span></div>
-              <div class="r" style="--c: var(--red)"><code>PATCH /api/threads/:id</code><span><code>AND user_id = ${req.userId}</code> i <code>UPDATE</code></span><span class="own">5 · trin 1</span></div>
-              <div class="r" style="--c: var(--red)"><code>DELETE /api/threads/:id</code><span><code>AND user_id = ${req.userId}</code> i <code>DELETE</code></span><span class="own">5 · trin 1</span></div>
-              <div class="r hi" style="--c: var(--red)"><code>POST …/:id/messages</code><span>Tjek tråden først. Ikke din: <code>404</code></span><span class="own">5 · trin 2</span></div>
-            </div>
-          </div>
-          <p class="bottom-line"><code>messages</code> har ingen <code>user_id</code>. Ejeren står på tråden. Derfor tjekker I tråden først i de to markerede routes.</p>
-        </section>
-
-        <section id="ex-17-2" class="activity-slide handson" data-accent="cyan">
-          <span class="ho-num"><small>Step 17</small>2-5</span>
-          <span class="eyebrow">Hands-on · step 17 · øvelse 2-5</span>
-          <h2>Kun dine egne tråde</h2>
-          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-17-kun-egne-traade.md#øvelse-2-nye-tråde-får-den-rigtige-ejer" target="_blank" rel="noreferrer">Åbn øvelserne på GitHub ↗</a>
+        <section id="ex-17-4" class="activity-slide handson" data-accent="cyan">
+          <span class="ho-num"><small>Step 17</small>4-5</span>
+          <span class="eyebrow">Hands-on · step 17 · øvelse 4-5</span>
+          <h2>Læs, ret og slet kun dine egne</h2>
+          <a class="exercise-link" href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-17-kun-egne-traade.md#øvelse-4-læs-kun-dine-egne-tråde" target="_blank" rel="noreferrer">Åbn øvelserne på GitHub ↗</a>
           <ul class="checklist">
-            <li><b>Øvelse 2:</b> nye tråde får <code>req.userId</code> som ejer. Fjern <code>TEST_USER_ID</code></li>
-            <li><b>Øvelse 3:</b> listen viser kun dine tråde. Test med en ny bruger fra <code>/register</code></li>
-            <li><b>Øvelse 4:</b> du kan ikke læse bobs tråd eller hans beskeder</li>
-            <li><b>Øvelse 5:</b> du kan ikke rette, slette eller skrive i bobs tråd</li>
+            <li><b>Øvelse 4:</b> <code>AND user_id</code> på én tråd. Tjek tråden først i <code>GET …/messages</code></li>
+            <li><b>Øvelse 5:</b> <code>AND user_id</code> i <code>PATCH</code> og <code>DELETE</code>. Tjek tråden først i <code>POST …/messages</code></li>
+            <li>Test fra Thunder Client med dit eget token og bobs id. Alt skal give <code>404</code> eller <code>[]</code></li>
+            <li>Søg efter <code>req.userId</code> i <code>server.js</code>. Står den i alle syv routes?</li>
           </ul>
-          <p class="bottom-line">Test fra Thunder Client med dit eget token og bobs id. Commit, når step 17 virker.</p>
+          <p class="bottom-line">Commit, når step 17 virker. Så går vi til frontenden.</p>
         </section>
 
         <!-- ============ 03 SESSION EXPIRATION ============ -->
