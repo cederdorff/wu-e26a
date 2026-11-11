@@ -13,14 +13,15 @@
         <section class="title-slide" data-accent="purple">
           <div class="title-copy">
             <span class="eyebrow">WU-E26A · RACE 11 · 11. november 2026</span>
-            <h1>Hvem må<br /><span>hvad?</span></h1>
+            <h1 class="t11">Authorization<br /><span>og session expiration</span></h1>
+            <p class="ask-big">Hvem må hvad?</p>
             <p class="lead">Kun dine egne tråde. Og login, når tokenet ikke virker.</p>
           </div>
           <div class="title-art" aria-hidden="true">
-            <div class="codes3">
-              <div style="--c: var(--green)"><span class="sc sc-2">200</span><b>→</b><span><strong>Kun dine tråde</strong><small>step 17 · <code>WHERE user_id</code></small></span></div>
-              <div style="--c: var(--orange)"><span class="sc sc-4">404</span><b>→</b><span><strong>Thread not found</strong><small>step 17 · bobs tråd er ikke din</small></span></div>
-              <div style="--c: var(--purple)"><span class="sc sc-1">401</span><b>→</b><span><strong>/login og tilbage igen</strong><small>step 18 · <code>apiFetch</code></small></span></div>
+            <div class="codes3 t-codes">
+              <div style="--c: var(--green)"><span class="sc sc-2">200</span><b>→</b><span><strong>Kun dine tråde</strong><small>Authorization · step 17</small></span></div>
+              <div style="--c: var(--orange)"><span class="sc sc-4">404</span><b>→</b><span><strong>Thread Not Found</strong><small>Bobs tråd er ikke din · step 17</small></span></div>
+              <div style="--c: var(--purple)"><span class="sc sc-1">401</span><b>→</b><span><strong>/login og tilbage igen</strong><small>Session expiration · step 18</small></span></div>
             </div>
           </div>
         </section>

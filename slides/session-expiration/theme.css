@@ -2334,3 +2334,30 @@
   font-style: normal;
   font-weight: 700;
 }
+
+/* Title: today's name as heading, "Hvem må hvad?" as the hook */
+.title-slide h1.t11 {
+  font-size: 92px;
+  line-height: 1;
+}
+.title-slide h1.t11 span {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.72em;
+}
+.title-copy .ask-big {
+  display: inline-block;
+  margin-top: 30px !important;
+  padding: 10px 22px;
+  border-left: 6px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--ink);
+  font-size: 40px !important;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.title-copy .ask-big + .lead {
+  margin-top: 22px !important;
+  font-size: 30px !important;
+}
