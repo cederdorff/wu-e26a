@@ -2,7 +2,7 @@
 
 ## Kort fortalt
 
-Chatbotten virker. Du kan logge ind, se dine egne tråde og få svar fra AI'en. Men den føles ikke færdig. Teksten bliver stående, når du har sendt. Enter giver en ny linje i stedet for at sende. Et klik på × sletter en tråd uden at spørge.
+Chatbotten virker. Du kan logge ind, se dine egne tråde og sende beskeder. Men den føles ikke færdig. Teksten bliver stående, når du har sendt. Enter giver en ny linje i stedet for at sende. Et klik på × sletter en tråd uden at spørge.
 
 I denne opgave retter du de små ting, der gør en stor forskel for brugeren. Det er ikke et step i tutorialen. Løsningsforslagene står her i opgaven.
 
@@ -22,25 +22,15 @@ Spring aldrig en test over, heller ikke når den virker oplagt.
 
 ## Det bygger du
 
-![Chatbotten efter opgaven. Øvelse 2: Enter sender, feltet tømmes, og knappen viser Sending, mens AI'en tænker. Øvelse 3: siden ruller ned til det nyeste, og feltet vokser med teksten. Øvelse 4: et klik på × spørger, før tråden slettes. Øvelse 5: fanen viser trådens titel, og en tom søgning siger det](assets/chatbot-ui-forbedringer.svg)
-
-| Problem | Øvelse | Fil |
-| --- | --- | --- |
-| Enter sender ikke | Øvelse 2, trin 1 | `components/Chat.jsx` |
-| Teksten bliver stående efter afsendelse | Øvelse 2, trin 2 | `components/Chat.jsx` |
-| Du kan sende igen, mens AI'en tænker | Øvelse 2, trin 3 | `components/Chat.jsx` |
-| Teksten følger med, når du skifter tråd | Øvelse 2, trin 4 | `routes/chat-thread.jsx` |
-| Du skal selv scrolle ned til svaret | Øvelse 3, trin 1 | `components/Chat.jsx` |
-| Tekstfeltet er altid én linje højt | Øvelse 3, trin 2 | `app.css` |
-| × sletter uden at spørge | Øvelse 4 | `components/Sidebar.jsx` |
-| Fanen hedder altid "Chatbot" | Øvelse 5, trin 1 | `root.jsx`, `routes/chat-thread.jsx` |
-| En tom søgning viser ingenting | Øvelse 5, trin 2 | `components/Sidebar.jsx` |
+![Chatbotten efter opgaven. Øvelse 2: Enter sender, feltet tømmes, og knappen viser Sending, mens beskeden bliver sendt. Øvelse 3: siden ruller ned til det nyeste, og feltet vokser med teksten. Øvelse 4: et klik på × spørger, før tråden slettes. Øvelse 5: fanen viser trådens titel, og en tom søgning siger det](assets/chatbot-ui-forbedringer.svg)
 
 Alle filer ligger i `frontend/app`.
 
 ## Kom i gang
 
-Du skal have lavet [step 18](chatbot-step-18-send-til-login.md) og AI-svarene fra [PR 19](https://github.com/bewildergeist/chatbot-react-postgres/pull/19). Start backend og frontend, som du plejer. Log ind på `/login`.
+Du skal have lavet [step 18](chatbot-step-18-send-til-login.md). Start backend og frontend, som du plejer. Log ind på `/login`.
+
+Har du lavet AI-svarene fra [PR 19](https://github.com/bewildergeist/chatbot-react-postgres/pull/19), ser du "AI is thinking...", mens AI'en svarer. Ellers gemmer backenden bare beskeden, og det går så hurtigt, at du ikke når at se, hvad der sker imens. Så sæt Network-fanen i DevTools til **3G**, når en test handler om tiden, mens en besked bliver sendt.
 
 Commit, før du går i gang. Commit igen, hver gang en øvelse virker.
 
@@ -54,9 +44,9 @@ Her skal du ikke skrive kode. Du bruger chatbotten som en bruger og noterer, hva
 
 1. Åbn en tråd. Skriv en besked, og klik **Send**. Hvad står der i tekstfeltet bagefter?
 2. Skriv en besked, og tryk Enter. Hvad sker der?
-3. Send en besked. Mens der står "AI is thinking...", skriver du en ny besked og klikker **Send** igen. Hvad sker der med den første besked på skærmen?
+3. Skriv en besked, og klik **Send** to gange hurtigt efter hinanden. Hvor mange gange står beskeden i tråden?
 4. Skriv noget i tekstfeltet uden at sende. Klik på en anden tråd i sidebaren. Hvad står der i tekstfeltet?
-5. Send beskeder, til tråden er længere end skærmen. Kan du se AI'ens svar uden at scrolle?
+5. Send beskeder, til tråden er længere end skærmen. Kan du se den nyeste besked uden at scrolle?
 6. Skriv en besked på fem linjer. Hvor mange linjer kan du se ad gangen?
 7. Klik på × ved en tråd, du ikke har brug for. Fik du lov at fortryde?
 8. Kig på fanen i browseren. Hvad står der, når du skifter mellem tråde?
@@ -74,7 +64,7 @@ Alle fire trin ændrer `ChatInput` i `components/Chat.jsx`. Både `/chat/new` og
 
 Brugeren forventer, at Enter sender og Shift+Enter giver en ny linje.
 
-> **`requestSubmit()`:** sender formularen, præcis som når du klikker på knappen. Browseren tjekker `required`, og React Routers `<Form>` får besked og kalder `clientAction`. Der findes også `submit()`. Den springer begge dele over, så siden genindlæses med et almindeligt POST. Brug derfor `requestSubmit()`.
+> **`requestSubmit()`:** sender formularen, præcis som når du klikker på knappen. Browseren tjekker `required`, og React Routers `<Form>` kalder `clientAction`. Brug ikke `submit()`. Den springer begge dele over og genindlæser hele siden.
 
 Tilføj en funktion, `handleKeyDown`, i `ChatInput`, og sæt den på `textarea` med `onKeyDown`:
 
@@ -140,9 +130,9 @@ function ChatInput() {
 
 ### Trin 2: Tøm feltet
 
-En `<Form>` fra React Router tømmer ikke sig selv. Det skal du gøre. Du tømmer feltet, så snart beskeden er sendt. Beskeden står jo allerede i tråden takket være optimistic UI fra PR 19. Fejler afsendelsen, er teksten væk. Det er prisen for at tømme med det samme.
+En `<Form>` fra React Router tømmer ikke sig selv. Det skal du gøre. Du tømmer feltet, så snart beskeden er sendt, og venter ikke på svaret. Fejler afsendelsen, er teksten væk. Det er prisen for at tømme med det samme.
 
-> **`useNavigation()`:** fortæller, hvad React Router er i gang med. Mens en formular bliver sendt, ligger dens data i `navigation.formData`. Det er den samme hook, som viser "AI is thinking..." i `chat-thread.jsx`.
+> **`useNavigation()`:** fortæller, hvad React Router er i gang med. Mens en formular bliver sendt, ligger dens data i `navigation.formData`. Du kender hooken fra `routes/login.jsx`, hvor knappen viser "Logging in...".
 
 > **`useRef()`:** giver dig fat i et element i DOM'en. Du laver en ref med `useRef(null)` og sætter den på elementet med `ref={formRef}`. Bagefter er `formRef.current` selve `<form>`-elementet. Så kan du kalde `formRef.current.reset()`, som tømmer alle felter i formularen.
 
@@ -229,7 +219,7 @@ function ChatInput() {
 
 #### Test trin 2
 
-1. Send en besked i en tråd. Er feltet tomt, mens der står "AI is thinking..."?
+1. Send en besked i en tråd. Er feltet tomt, mens beskeden bliver sendt?
 2. Send en besked på `/chat/new`. Er feltet tomt, før du lander i den nye tråd?
 3. Klik på **Edit**, og gem en ny titel. Bliver feltet tømt? Hvorfor ikke?
 
@@ -242,7 +232,7 @@ Edit-formularen sender feltet `title`, ikke `message`. Så er `isSending` falsk.
 
 ### Trin 3: Vent på svaret
 
-Du så i øvelse 1, test 3, at en ny besked kan afbryde den første, mens AI'en tænker. Nu venter knappen og Enter på svaret.
+Du så i øvelse 1, test 3, at den samme besked kan blive sendt to gange. Nu venter knappen og Enter på svaret. `routes/login.jsx` gør det samme med "Logging in...".
 
 Udvid `ChatInput`:
 
@@ -250,7 +240,7 @@ Udvid `ChatInput`:
 - Skriv `Sending...` på knappen, mens `isSending` er sand. Ellers `Send`
 - I `handleKeyDown`: send ikke, hvis `isSending` er sand. Det skal stadig ikke give en ny linje
 
-Tekstfeltet skal ikke være `disabled`. Så kan brugeren skrive den næste besked, mens AI'en tænker.
+Tekstfeltet skal ikke være `disabled`. Så kan brugeren skrive den næste besked imens.
 
 <details>
 <summary>Hint</summary>
@@ -294,9 +284,10 @@ send formularen
 
 #### Test trin 3
 
-1. Send en besked. Er knappen grå med `Sending...`, til AI'ens svar står i tråden?
-2. Skriv en ny besked, mens AI'en tænker, og tryk Enter. Bliver den sendt? Står teksten stadig i feltet?
-3. Tryk Enter igen, når svaret er kommet. Bliver beskeden sendt nu?
+1. Send en besked. Er knappen grå med `Sending...`, til svaret står i tråden?
+2. Skriv en ny besked, mens knappen viser `Sending...`, og tryk Enter. Bliver den sendt? Står teksten stadig i feltet?
+3. Tryk Enter igen, når knappen viser `Send`. Bliver beskeden sendt nu?
+4. Klik **Send** to gange hurtigt, ligesom i øvelse 1. Hvor mange gange står beskeden i tråden nu?
 
 ### Trin 4: Klar til at skrive
 
@@ -327,7 +318,6 @@ Når du skifter tråd, genbruger React den samme `ChatThread` og den samme `Chat
 `routes/chat-thread.jsx`:
 
 ```jsx
-      <ChatMessages messages={displayMessages} />
       <ChatInput key={thread.id} />
 ```
 
@@ -385,7 +375,7 @@ function ChatMessages({ messages = [] }) {
 #### Test trin 1
 
 1. Åbn en lang tråd. Ruller siden ned til den sidste besked?
-2. Send en besked. Kan du se "AI is thinking..." uden at scrolle? Og svaret, når det kommer?
+2. Send en besked. Ruller siden med ned, når beskeden står i tråden?
 3. Skift til en anden lang tråd. Ruller den også ned?
 
 ### Trin 2: Et tekstfelt, der vokser
