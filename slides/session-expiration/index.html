@@ -657,6 +657,10 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
                 <small>Logget ind igen</small>
               </div>
             </div>
+            <div class="ask srp-q trip-q">
+              <strong>Hvorfor står siden i URL'en og ikke i localStorage?</strong>
+              <div class="ans fragment">URL'en hører til netop den fane og forsvinder af sig selv. En værdi i localStorage bliver liggende, og alle faner deler den.</div>
+            </div>
           </div>
           <p class="bottom-line">Siden rejser med i URL'en. Det er det eneste, <code>apiFetch</code> og login deler.</p>
         </section>
@@ -703,8 +707,8 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Step 18 · efter øvelse 3 · encapsulation</span>
-          <h2>Hver del kender kun sin egen del</h2>
+          <span class="eyebrow">Step 18 · efter øvelse 3 · encapsulation · kender I fra loadStudents()</span>
+          <h2>Skjul hvordan. Vis kun hvad</h2>
           <div class="stage">
             <div class="encflow">
               <article style="--c: var(--cyan)"><span>Routes</span><strong>Loaders og actions</strong><div class="kn y">✓ deres egne fejl: 400 og 404</div><div class="kn n">✗ at <code>apiFetch</code> kan sende til login</div></article>
@@ -713,12 +717,14 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
               <div class="iface url"><code>/login?redirect=</code><i class="r"></i><code>%2Fchat%2Fabc</code><small>det eneste, login ser</small></div>
               <article style="--c: var(--purple)"><span>login.jsx</span><strong>Login-siden</strong><div class="kn y">✓ læser <code>redirect</code>, hvis den står der</div><div class="kn n">✗ hvorfor brugeren kom</div></article>
             </div>
-            <div class="ask srp-q">
-              <strong>Hvorfor står siden i URL'en og ikke i localStorage?</strong>
-              <div class="ans fragment">URL'en hører til netop den fane og forsvinder af sig selv. En værdi i localStorage bliver liggende, og alle faner deler den.</div>
+            <div class="whatif">
+              <span>Hvad skal ændres, hvis …</span>
+              <div><b>login får et nyt design?</b><em class="fragment">Kun <code>login.jsx</code></em></div>
+              <div><b>I laver en ny side, <code>/settings</code>?</b><em class="fragment">Intet. <code>apiFetch</code> dækker den</em></div>
+              <div><b>API'et svarer 401 et nyt sted?</b><em class="fragment">Intet. Routen ser aldrig 401</em></div>
             </div>
           </div>
-          <p class="bottom-line">Det eneste, de deler, er URL'en. Så kan I ændre den ene del uden at røre de andre.</p>
+          <p class="bottom-line">Hver del kender kun den lille grænseflade til den næste. Så kan I ændre én del uden at røre de andre.</p>
         </section>
 
         <section class="fill" data-accent="red">
