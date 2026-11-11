@@ -762,20 +762,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         <!-- ============ 06 AFRUNDING ============ -->
 
         <section id="afrunding" class="fill" data-accent="purple">
-          <span class="eyebrow">Afrunding · 401, 403 eller 404?</span>
-          <h2>Hvem svarer hvad, og hvem i frontenden tager imod?</h2>
-          <div class="stage">
-            <div class="gt" style="--cols: 190px 1fr 1fr 1fr">
-              <div class="r h"><span>Status</span><span>Betyder</span><span>Backenden</span><span>Frontenden</span></div>
-              <div class="r" style="--c: var(--purple)"><span class="sc sc-1">401</span><span>Vi ved ikke, hvem du er</span><span><code>requireAuth</code> · step 16</span><span class="fragment"><code>apiFetch</code> → <code>/login?redirect=…</code></span></div>
-              <div class="r dim" style="--c: var(--orange)"><span class="sc sc-4">403</span><span>Vi ved, hvem du er. Du må ikke</span><span>Bruger vi ikke. Den afslører, at tråden findes</span><span class="fragment">—</span></div>
-              <div class="r" style="--c: var(--orange)"><span class="sc sc-4">404</span><span>Den findes ikke for dig</span><span><code>WHERE … AND user_id</code> · step 17</span><span class="fragment">Routens ErrorBoundary: "Thread Not Found"</span></div>
-            </div>
-          </div>
-          <p class="bottom-line">Authentication giver 401 og hører til <code>apiFetch</code>. Authorization giver 404 og hører til routen.</p>
-        </section>
-
-        <section class="fill" data-accent="purple">
           <span class="eyebrow">Afrunding · begreberne i koden</span>
           <h2>Peg på ét sted i jeres kode</h2>
           <div class="stage">
@@ -787,19 +773,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
             </div>
           </div>
           <p class="bottom-line">Og <b>guard clause</b>: <code>if (response.status === 401)</code> og hvert tjek i <code>requireAuth</code>.</p>
-        </section>
-
-        <section class="activity-slide" data-accent="purple">
-          <span class="eyebrow">Opsamling</span>
-          <h2>Det kan I nu</h2>
-          <ul class="checklist">
-            <li>Forklare forskellen på authentication og authorization, og hvilken status hver giver</li>
-            <li>Bruge <code>req.userId</code> i SQL, så hver bruger kun ser og ændrer sit eget</li>
-            <li>Forklare, hvorfor API'et svarer 404 og ikke 403 på en andens tråd</li>
-            <li>Forklare forskellen på token expiration og session expiration</li>
-            <li>Håndtere 401 ét sted med en guard clause i <code>apiFetch</code></li>
-            <li>Sende data mellem sider med query parameters, og se faren ved en open redirect</li>
-          </ul>
         </section>
 
         <section class="materials-slide" data-accent="purple">
