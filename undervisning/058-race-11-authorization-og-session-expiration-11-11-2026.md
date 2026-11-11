@@ -18,7 +18,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 ## Agenda
 
 <details>
-<summary><strong>1. Opsamling: requireAuth og 401</strong></summary>
+<summary><strong>1. Opsamling: hvor nåede I til?</strong></summary>
 
 - Rundt om bordet: hvor nåede I til i går, og hvad fik I implementeret?
 - Hvad gør `requireAuth`? Hvad svarede API'et i curl-testen i MAGL's arbejdsark i går, uden token og med `Bearer abc123`?
@@ -28,7 +28,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - Har I deployet backenden på Render, skal den nu også have `SUPABASE_URL` og `SUPABASE_ANON_KEY`
 </details>
 <details>
-<summary><strong>2. Authentication og authorization (step 17)</strong></summary>
+<summary><strong>2. Kun dine egne tråde: authentication vs. authorization (step 17, øvelse 1-5)</strong></summary>
 
 - **Authentication og authorization:** "hvem er du?" tjekker `requireAuth`. "Hvad må du?" er step 17. Step 17, øvelse 1: ret bobs tråd fra Thunder Client med dit eget token
 - Ejeren kommer fra `req.userId`, ikke fra body'en. Tokenet kan ingen ændre uden at ødelægge signaturen
@@ -36,7 +36,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - **404 og ikke 403:** MAGL spurgte i går, hvad API'et skal svare, når bob beder om alices tråd. Med `404` ved bob ikke, om tråden findes
 </details>
 <details>
-<summary><strong>3. Session expiration (step 18, øvelse 1)</strong></summary>
+<summary><strong>3. Hvornår er sessionen slut? Token og session expiration (step 18, øvelse 1)</strong></summary>
 
 - I kender `exp` fra tokenets payload. Hos Supabase udløber et access token efter en time. Så virker et stjålet token ikke for evigt
 - Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Brugeren mærker ingenting
@@ -44,7 +44,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - Step 18, øvelse 1: ret ét bogstav i `access_token`, og se, hvad brugeren oplever. Vi sletter også en testbruger i Supabase live, mens den er logget ind
 </details>
 <details>
-<summary><strong>4. DRY, SoC og SRP (step 18, øvelse 2)</strong></summary>
+<summary><strong>4. Send til login ved 401: DRY, SoC og SRP (step 18, øvelse 2)</strong></summary>
 
 - Routes håndterer allerede deres egne fejl: `400` i formularen og `404` fra step 17 som "Thread Not Found". `401` kan ingen route gøre noget ved
 - **DRY:** tjekket står ét sted, i `apiFetch`, og ikke i alle loaders og actions. Ligesom `requireAuth` i går: én middleware i stedet for et tjek i hver route
@@ -54,7 +54,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - **Guard clause:** et `if`, der fanger `401` og stopper. `requireAuth` er bygget på samme måde, bare i backenden
 </details>
 <details>
-<summary><strong>5. Query parameters og open redirect (step 18, øvelse 3)</strong></summary>
+<summary><strong>5. Tilbage, hvor du var: query parameters og open redirect (step 18, øvelse 3)</strong></summary>
 
 - `apiFetch` skriver siden ind i URL'en til login: `/login?redirect=%2Fchat%2Fabc`. I kender query parameters fra `?registered=true` på login
 - **Encapsulation:** login ved ikke, hvorfor brugeren kom. Den læser bare `redirect`. Routes ved ikke, at `apiFetch` kan sende til login

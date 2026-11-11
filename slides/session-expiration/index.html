@@ -30,11 +30,11 @@
           <span class="eyebrow">Agenda</span>
           <h2>Step 17 og step 18, i rækkefølge</h2>
           <ol class="agenda-grid">
-            <li><a href="#/opsamling"><b>Opsamling: requireAuth og 401</b><small>runden ved bordet, tre kald og to ting, der mangler</small></a></li>
-            <li><a href="#/authz"><b>Authentication og authorization</b><small>step 17 · øvelse 1-5</small></a></li>
-            <li><a href="#/session"><b>Session expiration</b><small>step 18 · øvelse 1</small></a></li>
-            <li><a href="#/fejl"><b>DRY, SoC og SRP</b><small>step 18 · øvelse 2</small></a></li>
-            <li><a href="#/redirect"><b>Query parameters og open redirect</b><small>step 18 · øvelse 3</small></a></li>
+            <li><a href="#/opsamling"><b>Opsamling: hvor nåede I til?</b><small>runden ved bordet, curl-testen og to ting, der mangler</small></a></li>
+            <li><a href="#/authz"><b>Kun dine egne tråde</b><small>authentication vs. authorization · step 17 · øvelse 1-5</small></a></li>
+            <li><a href="#/session"><b>Hvornår er sessionen slut?</b><small>token og session expiration · step 18 · øvelse 1</small></a></li>
+            <li><a href="#/fejl"><b>Send til login ved 401</b><small>DRY, SoC, SRP og guard clause · step 18 · øvelse 2</small></a></li>
+            <li><a href="#/redirect"><b>Tilbage, hvor du var</b><small>query parameters, encapsulation og open redirect · step 18 · øvelse 3</small></a></li>
           </ol>
           <p class="bottom-line">Opgaverne: <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-17-kun-egne-traade.md" target="_blank" rel="noreferrer"><b>Chatbot step 17 ↗</b></a> og <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md" target="_blank" rel="noreferrer"><b>Chatbot step 18 ↗</b></a></p>
         </section>
@@ -126,7 +126,7 @@
 
         <section id="authz" class="chapter" data-accent="cyan">
           <span class="chapter-number">02</span>
-          <span class="eyebrow">Authentication og authorization · step 17</span>
+          <span class="eyebrow">Kun dine egne tråde · step 17 · øvelse 1-5</span>
           <h2>Hvem må<br />hvad?</h2>
           <p>Backenden ved, hvem du er. Nu skal den også tjekke, hvad du må. MAGL talte om det i går. I dag skriver I koden.</p>
         </section>
@@ -375,7 +375,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
 
         <section id="session" class="chapter" data-accent="purple">
           <span class="chapter-number">03</span>
-          <span class="eyebrow">Session expiration · step 18</span>
+          <span class="eyebrow">Token og session expiration · step 18 · øvelse 1</span>
           <h2>Hvornår er<br />sessionen slut?</h2>
           <p>Backenden svarer 401. Frontenden skal gøre noget ved det. Men hvornår sker det overhovedet?</p>
         </section>
@@ -483,7 +483,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
 
         <section id="fejl" class="chapter" data-accent="orange">
           <span class="chapter-number">04</span>
-          <span class="eyebrow">DRY, SoC og SRP · step 18 · øvelse 2</span>
+          <span class="eyebrow">Send til login ved 401 · step 18 · øvelse 2</span>
           <h2>Hvor skal 401<br />håndteres?</h2>
           <p>400 og 404 håndterer routen selv. 401 er ens overalt, så den hører til ét sted. Ligesom <code>requireAuth</code> i backenden.</p>
         </section>
