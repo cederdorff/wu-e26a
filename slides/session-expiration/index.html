@@ -767,13 +767,13 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <h2>Peg på ét sted i jeres kode</h2>
           <div class="stage">
             <div class="qa3 qa4">
-              <article style="--c: var(--orange)"><span>DRY</span><strong>Hvor står et tjek kun ét sted?</strong><div class="ans fragment">401 i <b>apiFetch</b>. Tokenet i <b>requireAuth</b>.</div></article>
-              <article style="--c: var(--cyan)"><span>SoC</span><strong>Hvem afgør, hvad du må se?</strong><div class="ans fragment"><b>WHERE</b> i SQL'en, ikke frontenden. Routes ejer 400 og 404.</div></article>
-              <article style="--c: var(--purple)"><span>SRP</span><strong>Hvad er apiFetchs ene ansvar?</strong><div class="ans fragment">Tale med API'et som <b>den bruger, der er logget ind</b>.</div></article>
-              <article style="--c: var(--green)"><span>Encapsulation</span><strong>Hvad ved login om, hvorfor du kom?</strong><div class="ans fragment">Intet. Den læser bare <b>?redirect</b>.</div></article>
+              <article style="--c: var(--orange)"><span><a href="../fejlhaandtering-sikkerhed/#/dry" target="_blank" rel="noreferrer">DRY ↗</a></span><strong>Hvor står et tjek kun ét sted?</strong><div class="ans fragment">401 i <b>apiFetch</b>. Tokenet i <b>requireAuth</b>.</div></article>
+              <article style="--c: var(--cyan)"><span><a href="../fejlhaandtering-sikkerhed/#/soc" target="_blank" rel="noreferrer">SoC ↗</a></span><strong>Hvem afgør, hvad du må se?</strong><div class="ans fragment"><b>WHERE</b> i SQL'en, ikke frontenden. Routes ejer 400 og 404.</div></article>
+              <article style="--c: var(--purple)"><span><a href="../fejlhaandtering-sikkerhed/#/srp" target="_blank" rel="noreferrer">SRP ↗</a></span><strong>Hvad er apiFetchs ene ansvar?</strong><div class="ans fragment">Tale med API'et som <b>den bruger, der er logget ind</b>.</div></article>
+              <article style="--c: var(--green)"><span><a href="../fejlhaandtering-sikkerhed/#/encapsulation" target="_blank" rel="noreferrer">Encapsulation ↗</a></span><strong>Hvad ved login om, hvorfor du kom?</strong><div class="ans fragment">Intet. Den læser bare <b>?redirect</b>.</div></article>
             </div>
           </div>
-          <p class="bottom-line">Og <b>guard clause</b>: <code>if (response.status === 401)</code> og hvert tjek i <code>requireAuth</code>.</p>
+          <p class="bottom-line">Og <a class="concept-link" href="../fejlhaandtering-sikkerhed/#/guard-clause" target="_blank" rel="noreferrer"><b>guard clause ↗</b></a>: <code>if (response.status === 401)</code> og hvert tjek i <code>requireAuth</code>.</p>
         </section>
 
         <section class="materials-slide" data-accent="purple">
