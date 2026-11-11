@@ -1,5 +1,19 @@
 [
   {
+    "id": 1737991,
+    "folder_id": 402024,
+    "display_name": "billede.png",
+    "filename": "billede.png",
+    "content_type": "image/png",
+    "size": 73141,
+    "created_at": "2026-11-11T11:21:05Z",
+    "updated_at": "2026-11-11T11:21:05Z",
+    "locked": false,
+    "hidden": true,
+    "canvas_url": "https://eaaa.instructure.com/courses/32059/files/1737991",
+    "local_path": null
+  },
+  {
     "id": 1677508,
     "folder_id": 417312,
     "display_name": "Bordgrupper uge 35-36.pdf",

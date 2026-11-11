@@ -1,6 +1,6 @@
 # Canvas-moduler · WU-E26A
 
-Senest hentet: 2026-11-10T15:22:27.054Z
+Senest hentet: 2026-11-11T11:34:49.822Z
 
 Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
@@ -636,8 +636,6 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 [Lokal fil](../undervisning/059-magl-6-capture-the-flag-12-11-2026.md) · publiceret
 
-- [Plan for MAGL 6 - Data isolation for bruger data](../undervisning/059-magl-6-capture-the-flag-12-11-2026.md)
-
 ### Præsentationer
 
 ### Opgaver
@@ -658,11 +656,11 @@ Kursus: [WU-E26A](https://eaaa.instructure.com/courses/32059)
 
 *Ingen Canvas-elementer.*
 
-## 062 · Grupper - Projektarbejde - 16-11-2026
+## 062 · RACE - Vejledning & Projektarbejde - 16-11-2026
 
-[Lokal fil](../undervisning/062-grupper-projektarbejde-16-11-2026.md) · upubliceret
+[Lokal fil](../undervisning/062-race-vejledning-projektarbejde-16-11-2026.md) · publiceret
 
-*Ingen Canvas-elementer.*
+- [RACE - Vejledning & Projektarbejde - 16-11-2026](../undervisning/062-race-vejledning-projektarbejde-16-11-2026.md)
 
 ## 063 · DOB + MAGL + RACE - Vejledning - 17-11-2026
 

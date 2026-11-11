@@ -4569,7 +4569,7 @@
         "content_id": 60413,
         "url": "https://eaaa.instructure.com/api/v1/courses/32059/assignments/60413",
         "published": true,
-        "unpublishable": true,
+        "unpublishable": false,
         "content_details": {
           "due_at": "2026-11-10T22:59:00Z",
           "unlock_at": "2026-11-10T10:35:00Z",
@@ -4704,27 +4704,9 @@
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
     "published": true,
-    "items_count": 3,
+    "items_count": 2,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178083/items",
     "items": [
-      {
-        "id": 1018781,
-        "position": 1,
-        "title": "Plan for MAGL 6 - Data isolation for bruger data",
-        "indent": 0,
-        "quiz_lti": false,
-        "type": "Page",
-        "module_id": 178083,
-        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1018781",
-        "page_url": "plan-for-magl-6-data-isolation-for-bruger-data",
-        "publish_at": null,
-        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/plan-for-magl-6-data-isolation-for-bruger-data",
-        "published": false,
-        "unpublishable": true,
-        "content_details": {
-          "locked_for_user": false
-        }
-      },
       {
         "id": 1018782,
         "position": 2,
@@ -4833,16 +4815,35 @@
   {
     "id": 178085,
     "position": 62,
-    "name": "Grupper - Projektarbejde - 16-11-2026",
+    "name": "RACE - Vejledning & Projektarbejde - 16-11-2026",
     "unlock_at": null,
     "require_sequential_progress": false,
     "requirement_type": "all",
     "publish_final_grade": false,
     "prerequisite_module_ids": [],
-    "published": false,
-    "items_count": 0,
+    "published": true,
+    "items_count": 1,
     "items_url": "https://eaaa.instructure.com/api/v1/courses/32059/modules/178085/items",
-    "items": []
+    "items": [
+      {
+        "id": 1081836,
+        "position": 2,
+        "title": "RACE - Vejledning & Projektarbejde - 16-11-2026",
+        "indent": 0,
+        "quiz_lti": false,
+        "type": "Page",
+        "module_id": 178085,
+        "html_url": "https://eaaa.instructure.com/courses/32059/modules/items/1081836",
+        "page_url": "race-vejledning-and-projektarbejde-16-11-2026",
+        "publish_at": null,
+        "url": "https://eaaa.instructure.com/api/v1/courses/32059/pages/race-vejledning-and-projektarbejde-16-11-2026",
+        "published": false,
+        "unpublishable": true,
+        "content_details": {
+          "locked_for_user": false
+        }
+      }
+    ]
   },
   {
     "id": 178082,

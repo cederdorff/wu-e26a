@@ -1,6 +1,6 @@
 {
   "course_id": 32059,
-  "pulled_at": "2026-11-10T15:22:27.054Z",
+  "pulled_at": "2026-11-11T11:34:49.822Z",
   "files": {
     "undervisning/001-1-semester-webudvikling.md": {
       "local_hash": "d4757cfbbf057b4e4dac48920ce816076b8df196b2f4a461dd540a532ffb9270",
@@ -235,8 +235,8 @@
       "canvas_hash": "02faa70b5a9aaf9977525021b9607893615e4d37054090a601308fe910ded4bb"
     },
     "undervisning/059-magl-6-capture-the-flag-12-11-2026.md": {
-      "local_hash": "36ae869538995ee3e11240d5ffb18db1ff1221e02d52cc1af69e90fb77ace37e",
-      "canvas_hash": "36ae869538995ee3e11240d5ffb18db1ff1221e02d52cc1af69e90fb77ace37e"
+      "local_hash": "7b850d4cd5548db134451fade71f670924e313179824949ae3621fb4ec568ea4",
+      "canvas_hash": "7b850d4cd5548db134451fade71f670924e313179824949ae3621fb4ec568ea4"
     },
     "undervisning/060-dob-magl-race-projekt-kickoff-13-11-2026.md": {
       "local_hash": "4f2b87c84a90ae72f419cf47d591a4b3980b0f2549019e674e64586ec74c8ea2",
@@ -246,9 +246,9 @@
       "local_hash": "1130fb32ed251d394cda43c041040e47ae060981c0e80ef4089f50dd94c7abeb",
       "canvas_hash": "1130fb32ed251d394cda43c041040e47ae060981c0e80ef4089f50dd94c7abeb"
     },
-    "undervisning/062-grupper-projektarbejde-16-11-2026.md": {
-      "local_hash": "2ced7c5e78e3e0eee01793580368db795ffa0276bcf3341bba3680d67170778e",
-      "canvas_hash": "2ced7c5e78e3e0eee01793580368db795ffa0276bcf3341bba3680d67170778e"
+    "undervisning/062-race-vejledning-projektarbejde-16-11-2026.md": {
+      "local_hash": "48fcbe6a5f3eb3de7c4aec618c420729f068086627a37b04d89501307de67c89",
+      "canvas_hash": "48fcbe6a5f3eb3de7c4aec618c420729f068086627a37b04d89501307de67c89"
     },
     "undervisning/063-dob-magl-race-vejledning-17-11-2026.md": {
       "local_hash": "51a78c5ba237a2b750cb06e554f8c8d10ad0462d63761ffa4493118624d7e829",
@@ -398,19 +398,23 @@
       "local_hash": "da8dd11839392eb365ac6059778d6f8203b24f02005317f54132fb785754364f",
       "canvas_hash": "da8dd11839392eb365ac6059778d6f8203b24f02005317f54132fb785754364f"
     },
-    "undervisning/100-sadan-bruger-du-dette-canvas-rum.md": {
+    "undervisning/100-plan-for-magl-6-data-isolation-for-bruger-data.md": {
+      "local_hash": "48b091f4939a51998cdafbf00a74023c8e5972d25ee6f1dc391a830419e41cfc",
+      "canvas_hash": "48b091f4939a51998cdafbf00a74023c8e5972d25ee6f1dc391a830419e41cfc"
+    },
+    "undervisning/101-sadan-bruger-du-dette-canvas-rum.md": {
       "local_hash": "4655fe403a201d96cdba47f4ba75dbb1f4e6392fcf80afa9321c276ab7cf8c5b",
       "canvas_hash": "4655fe403a201d96cdba47f4ba75dbb1f4e6392fcf80afa9321c276ab7cf8c5b"
     },
-    "undervisning/101-sadan-bruger-du-dette-canvas-rum.md": {
+    "undervisning/102-sadan-bruger-du-dette-canvas-rum.md": {
       "local_hash": "671bba3a0b1dfa97880c360a1524c190ab2f3adedcdabb9253a1f10e21827ff6",
       "canvas_hash": "671bba3a0b1dfa97880c360a1524c190ab2f3adedcdabb9253a1f10e21827ff6"
     },
-    "undervisning/102-test-element.md": {
+    "undervisning/103-test-element.md": {
       "local_hash": "641eee9f52e8fc395147c8e68e92facb4d8a39ed99c4fec7ee0e767fa273231e",
       "canvas_hash": "641eee9f52e8fc395147c8e68e92facb4d8a39ed99c4fec7ee0e767fa273231e"
     },
-    "undervisning/103-test-element.md": {
+    "undervisning/104-test-element.md": {
       "local_hash": "b190b7028d67892cf374c528a7a8797e2c0bcc4f4cb22bfa07bc9682cd12d960",
       "canvas_hash": "b190b7028d67892cf374c528a7a8797e2c0bcc4f4cb22bfa07bc9682cd12d960"
     }

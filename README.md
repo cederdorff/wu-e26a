@@ -116,7 +116,7 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 ### Semesterprojekt (Uge 47-51)
 
 - [061 · Forløbsoversigt og fælles materialer](./undervisning/061-semesterprojekt-uge-47-51.md)
-- [062 · Grupper - Projektarbejde - 16-11-2026](./undervisning/062-grupper-projektarbejde-16-11-2026.md) — *kladde i Canvas*
+- [062 · RACE - Vejledning & Projektarbejde - 16-11-2026](./undervisning/062-race-vejledning-projektarbejde-16-11-2026.md)
 - [063 · DOB + MAGL + RACE - Vejledning - 17-11-2026](./undervisning/063-dob-magl-race-vejledning-17-11-2026.md) — *kladde i Canvas*
 - [064 · Grupper - Projektarbejde - 18-11-2026](./undervisning/064-grupper-projektarbejde-18-11-2026.md) — *kladde i Canvas*
 - [065 · Grupper - Projektarbejde - 19-11-2026](./undervisning/065-grupper-projektarbejde-19-11-2026.md) — *kladde i Canvas*
@@ -157,10 +157,11 @@ Moduler markeret med *kladde i Canvas* er endnu ikke publiceret til de studerend
 - [097 · Plan for MAGL 3 - Læs og skriv beskeder via SQL](./undervisning/097-plan-for-magl-3-laes-og-skriv-beskeder-via-sql.md) — *kladde i Canvas*
 - [098 · Plan for MAGL 4 - Slette oprette og redigere tråde](./undervisning/098-plan-for-magl-4-slette-oprette-og-redigere-trade.md) — *kladde i Canvas*
 - [099 · Plan for MAGL 5 - Backend auth enforcement](./undervisning/099-plan-for-magl-5-backend-auth-enforcement.md) — *kladde i Canvas*
-- [100 · Sådan bruger du dette Canvas-rum](./undervisning/100-sadan-bruger-du-dette-canvas-rum.md)
+- [100 · Plan for MAGL 6 - Data isolation for bruger data](./undervisning/100-plan-for-magl-6-data-isolation-for-bruger-data.md) — *kladde i Canvas*
 - [101 · Sådan bruger du dette Canvas-rum](./undervisning/101-sadan-bruger-du-dette-canvas-rum.md)
-- [102 · Test element](./undervisning/102-test-element.md) — *kladde i Canvas*
+- [102 · Sådan bruger du dette Canvas-rum](./undervisning/102-sadan-bruger-du-dette-canvas-rum.md)
 - [103 · Test element](./undervisning/103-test-element.md) — *kladde i Canvas*
+- [104 · Test element](./undervisning/104-test-element.md) — *kladde i Canvas*
 <!-- CANVAS_OVERSIGT_SLUT -->
 
 ## Repoets indhold

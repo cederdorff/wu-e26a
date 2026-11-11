@@ -1266,11 +1266,11 @@
     "submission_types": [
       "external_tool"
     ],
-    "has_submitted_submissions": false,
+    "has_submitted_submissions": true,
     "due_date_required": false,
     "max_name_length": 255,
     "in_closed_grading_period": false,
-    "graded_submissions_exist": false,
+    "graded_submissions_exist": true,
     "is_quiz_assignment": false,
     "can_duplicate": true,
     "original_course_id": null,
@@ -1305,7 +1305,7 @@
     "integration_id": null,
     "integration_data": {},
     "published": true,
-    "unpublishable": true,
+    "unpublishable": false,
     "only_visible_to_overrides": false,
     "visible_to_everyone": true,
     "locked_for_user": false,
