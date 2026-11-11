@@ -483,7 +483,7 @@ function ChatThreadItem({ thread }) {
 
 Har du mange faner åbne, kan du ikke se, hvilken der er chatbotten, og hvilken tråd den viser.
 
-> **`meta`:** en route kan eksportere en funktion, `meta`, som returnerer titlen på siden. React Router sætter den i `<head>` med `<Meta />` i `root.jsx`. Den dybeste route med en `meta` vinder. Har en route ingen `meta`, arver den fra sin forælder. `meta` får loaderens data som `data`.
+> **`meta`:** en route kan eksportere en funktion, `meta`, som returnerer titlen på siden. React Router sætter den i `<head>` med `<Meta />` i `root.jsx`. Den dybeste route med en `meta` vinder. Har en route ingen `meta`, arver den fra sin forælder. `meta` får loaderens data som `loaderData`, ligesom `useLoaderData()`.
 
 I `root.jsx`:
 
@@ -493,14 +493,14 @@ I `root.jsx`:
 I `routes/chat-thread.jsx`:
 
 - Eksportér en `meta`, der returnerer trådens titel efterfulgt af ` · Chatbot`
-- Findes tråden ikke, kaster loaderen en fejl, og så er der ingen `data`. Returnér `Thread Not Found · Chatbot` i stedet
+- Findes tråden ikke, kaster loaderen en fejl, og så er der ingen `loaderData`. Returnér `Thread Not Found · Chatbot` i stedet
 
 <details>
 <summary>Hint</summary>
 
 ```text
-export function meta({ data }) {
-  if (ingen data) {
+export function meta({ loaderData }) {
+  if (ingen loaderData) {
     return [{ title: "Thread Not Found · Chatbot" }]
   }
 
@@ -508,7 +508,7 @@ export function meta({ data }) {
 }
 ```
 
-`data` er det, `clientLoader` returnerer: `{ thread, messages }`.
+`loaderData` er det, `clientLoader` returnerer: `{ thread, messages }`.
 
 </details>
 
@@ -541,13 +541,13 @@ export function Layout({ children }) {
 
 ```jsx
 // Trådens titel i browserens fane
-export function meta({ data }) {
+export function meta({ loaderData }) {
   // Loaderen kastede en fejl, fx 404
-  if (!data) {
+  if (!loaderData) {
     return [{ title: "Thread Not Found · Chatbot" }];
   }
 
-  return [{ title: `${data.thread.title} · Chatbot` }];
+  return [{ title: `${loaderData.thread.title} · Chatbot` }];
 }
 ```
 
@@ -617,5 +617,5 @@ Du har brugt de samme mønstre som i step 17 og 18:
 | Mønster | Hvor |
 | --- | --- |
 | DRY | Du rettede `ChatInput` ét sted, og både `/chat/new` og tråden blev bedre |
-| Guard clause | `if (isSending) return` i `handleKeyDown`, `if (!data)` i `meta` |
+| Guard clause | `if (isSending) return` i `handleKeyDown`, `if (!loaderData)` i `meta` |
 | Encapsulation | `ChatInput` holder `useNavigation`, ref og Enter for sig selv. Routes skriver bare `<ChatInput />` |
