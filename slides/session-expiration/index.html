@@ -184,7 +184,7 @@
             <li>Kør queryen, der tæller tråde pr. bruger. Den ligner den fra i går</li>
             <li>Passer sidebaren med din egen bruger? Opret en tråd. Hvem ejer den?</li>
             <li>Find bobs tråde i SQL, og ret hans titel fra Thunder Client med dit eget token</li>
-            <li>Ingen kode. Du skal bare finde de tre huller</li>
+            <li>Ingen kode. Bevis de tre huller i din egen app</li>
           </ul>
           <p class="bottom-line">Mangler du step 16? Brug <code>pr-17-start</code> under "Kom i gang", og commit, før du ændrer noget.</p>
         </section>
@@ -458,7 +458,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
                 <div class="net-strip"><span>threads</span><span class="bad">401</span><span>fetch</span></div>
               </div>
               <ul class="probs">
-                <li><i>1</i><span>Fejlsiden siger ikke, at brugeren skal logge ind</span></li>
+                <li><i>1</i><span>Brugeren får ikke at vide, hvorfor</span></li>
                 <li><i>2</i><span>Brugeren skal selv finde <code>/login</code></span></li>
                 <li><i>3</i><span>Efter login lander brugeren på forsiden, ikke i tråden</span></li>
               </ul>
@@ -485,7 +485,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <span class="chapter-number">04</span>
           <span class="eyebrow">DRY, SoC og SRP · step 18 · øvelse 2</span>
           <h2>Hvor skal 401<br />håndteres?</h2>
-          <p>400 og 404 håndterer routen selv. 401 er ens overalt, så den hører til ét sted. Ligesom jeres fælles fejl-middleware i Express.</p>
+          <p>400 og 404 håndterer routen selv. 401 er ens overalt, så den hører til ét sted. Ligesom <code>requireAuth</code> i backenden.</p>
         </section>
 
         <section class="fill" data-accent="orange">
@@ -595,9 +595,9 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
           <span class="eyebrow">Step 18 · efter øvelse 2, test 4 · klient og server</span>
           <h2>404 går igennem apiFetch. 401 stopper der</h2>
           <div class="stage">
-            <div class="seq2 seq2-end"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 4"><div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>React Router</strong><small>skifter side</small></div><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 3; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 3; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><code>return response</code></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>throw</code> 404</div></div></div></div><div class="end">Routens ErrorBoundary viser <b>"Thread Not Found"</b></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 4"><div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>React Router</strong><small>skifter side</small></div><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 3; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 3; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 3"><b>guard clause</b></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 3"><code>throw redirect(…)</code> · forbi loaderen</div></div></div></div><div class="end">React Router skifter til <b>/login?redirect=…</b></div></div></div>
+            <div class="seq2 seq2-end"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 4"><div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>React Router</strong><small>skifter side</small></div><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 3; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 3; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><code>return response</code></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>throw</code> 404</div></div></div></div><div class="end">Routens ErrorBoundary viser <b>"Thread Not Found"</b></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 4"><div class="actors"><div class="actor" style="--c: var(--green)"><span>Klient</span><strong>React Router</strong><small>skifter side</small></div><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 3; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 3; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 3"><b>guard clause</b></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 3"><code>throw redirect(…)</code> · forbi loaderen</div></div></div></div><div class="end">React Router skifter til <b>/login</b></div></div></div>
           </div>
-          <p class="bottom-line">Loaderen ser aldrig et 401. Den ser stadig 400, 404 og 500 og håndterer dem som før.</p>
+          <p class="bottom-line">Loaders og actions ser aldrig et 401. De ser stadig 400, 404 og 500 og håndterer dem som før.</p>
         </section>
 
         <section class="fill" data-accent="orange">

@@ -82,7 +82,7 @@ Du skal have fundet tre ting:
 
 > **Hvorfor kun 401?** Routes håndterer allerede deres egne fejl. Mangler en titel, svarer API'et `400`, og formularen viser fejlen. Findes tråden ikke, svarer det `404`, og `chat-thread.jsx` viser "Thread Not Found". Men `401` kan routen ikke gøre noget ved. Kun login hjælper. Derfor hører den hjemme ét sted, i `apiFetch`, og ikke i hver route.
 
-> **`throw redirect()`:** I øvelse 10 skrev du `return redirect("/login")` i `clientLoader` på `/profile`. Det virker, fordi det er loaderen selv, der returnerer. `apiFetch` er ikke en loader. Den bliver kaldt af en. Kaster `apiFetch` en redirect, flyver den op gennem loaderen til React Router, som skifter side. Det er det samme, som når `throw new Error()` ender i en `ErrorBoundary`.
+> **`throw redirect()`:** I React Supabase Auth, øvelse 10, skrev du `return redirect("/login")` i `clientLoader` på `/profile`. Det virker, fordi det er loaderen selv, der returnerer. `apiFetch` er ikke en loader. Den bliver kaldt af en. Kaster `apiFetch` en redirect, flyver den op gennem loaderen til React Router, som skifter side. Det er det samme, som når `throw new Error()` ender i en `ErrorBoundary`.
 
 Udvid `apiFetch` i `frontend/app/lib/apiFetch.js`:
 
