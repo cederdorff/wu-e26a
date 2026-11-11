@@ -1508,3 +1508,10 @@
 .reveal .round3 {
   margin-top: 40px !important;
 }
+
+/* The curl command from yesterday above the three calls */
+.curl-line {
+  align-self: flex-start;
+  margin-bottom: 26px !important;
+  font-size: 20px;
+}

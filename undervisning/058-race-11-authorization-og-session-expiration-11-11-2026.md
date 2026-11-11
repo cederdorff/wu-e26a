@@ -20,9 +20,9 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 <details>
 <summary><strong>1. Opsamling: requireAuth og 401</strong></summary>
 
-- Hvad gør `requireAuth`? Hvad svarede API'et i opgave 5 i går, uden token og med `Bearer abc123`?
-- Opgave 5.4: hvilke tråde fik I med jeres eget token? Det er step 17
-- Opgave 5.3: log ud, og gå til forsiden. Hvad sker der? Det er step 18
+- Hvad gør `requireAuth`? Hvad svarede API'et i curl-testen i MAGL's arbejdsark i går, uden token og med `Bearer abc123`?
+- Med jeres eget token: hvilke tråde fik I? Det er step 17
+- Log ud, og gå til forsiden. Hvad sker der? Det er step 18
 - Nåede I ikke step 16 i går, så brug startpunktet i step 17-opgaven
 - Har I deployet backenden på Render, skal den nu også have `SUPABASE_URL` og `SUPABASE_ANON_KEY`
 </details>

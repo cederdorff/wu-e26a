@@ -68,9 +68,10 @@
         </section>
 
         <section class="fill" data-accent="yellow">
-          <span class="eyebrow">Opsamling · opgave 5 i går</span>
+          <span class="eyebrow">Opsamling · curl-testen fra MAGL's arbejdsark i går</span>
           <h2>Tre kald til det samme API. Hvad svarede det?</h2>
           <div class="stage">
+            <pre class="viz-code curl-line">curl -i -H "Authorization: Bearer …" http://localhost:3000/api/threads</pre>
             <div class="gt" style="--cols: 300px 1fr 110px 1fr">
               <div class="r h"><span>Kaldet</span><span>Authorization</span><span>Status</span><span>Svaret</span></div>
               <div class="r" style="--c: var(--red)"><strong>Uden token</strong><code>ingen header</code><span class="sc sc-4 fragment">401</span><span class="fragment"><code>"Authentication required"</code></span></div>
@@ -78,7 +79,7 @@
               <div class="r hi" style="--c: var(--yellow)"><strong>Med dit eget token</strong><code>Bearer eyJhbGci…</code><span class="sc sc-2 fragment">200</span><span class="fragment"><b>Alle brugeres tråde</b>, også bobs og alices</span></div>
             </div>
           </div>
-          <p class="bottom-line">De to første er authentication, og den virker. Det tredje svar er dagens første problem.</p>
+          <p class="bottom-line">Nåede I det ikke i går? Så kører vi de tre kald sammen nu. Det tredje svar er dagens første problem.</p>
         </section>
 
         <section class="fill" data-accent="yellow">
@@ -94,12 +95,12 @@
         </section>
 
         <section class="fill" data-accent="yellow">
-          <span class="eyebrow">Opsamling · opgave 5.3 og 5.4</span>
+          <span class="eyebrow">Opsamling · de sidste spørgsmål i curl-testen</span>
           <h2>To ting mangler. Dem retter I i dag</h2>
           <div class="stage">
             <div class="need2">
               <article style="--c: var(--cyan)">
-                <span>Opgave 5.4 · logget ind</span>
+                <span>Med dit eget token · logget ind</span>
                 <strong>Du får alles tråde</strong>
                 <div class="mini-list">
                   <div class="other">alices tråde fra seed<em>alice</em></div>
@@ -110,7 +111,7 @@
                 <div class="next"><span>Authorization: hvad må du?</span><b>Step 17</b></div>
               </article>
               <article style="--c: var(--purple)">
-                <span>Opgave 5.3 · logget ud</span>
+                <span>Log ud · gå til forsiden</span>
                 <strong>Du får en fejlside</strong>
                 <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url">localhost:5173<b>/</b></span></div>
                   <div class="errpage"><h3>Oops!</h3><p>Failed to fetch threads: 401</p><pre>Error: Failed to fetch threads: 401
@@ -410,7 +411,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
                 <strong>Logget ud</strong>
                 <p>Ingen session i Local Storage, så <code>apiFetch</code> sender ingen header.</p>
                 <pre class="viz-code">"Authentication required"</pre>
-                <div class="foot"><span class="sc sc-1">401</span>Opgave 5.3 i går</div>
+                <div class="foot"><span class="sc sc-1">401</span>Det så I i går</div>
               </article>
               <article style="--c: var(--purple)">
                 <span>Ødelagt token</span>
