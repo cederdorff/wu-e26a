@@ -20,6 +20,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 <details>
 <summary><strong>1. Opsamling: requireAuth og 401</strong></summary>
 
+- Rundt om bordet: hvor nåede I til i går, og hvad fik I implementeret?
 - Hvad gør `requireAuth`? Hvad svarede API'et i curl-testen i MAGL's arbejdsark i går, uden token og med `Bearer abc123`?
 - Med jeres eget token: hvilke tråde fik I? Det er step 17
 - Log ud, og gå til forsiden. Hvad sker der? Det er step 18
