@@ -45,7 +45,26 @@
           <span class="chapter-number">01</span>
           <span class="eyebrow">Opsamling</span>
           <h2>Hvor slap<br />vi?</h2>
-          <p>I går fik backenden <code>requireAuth</code>. Nu ved den, hvem der spørger. Men to ting mangler stadig.</p>
+          <p>Rundt om bordet først: hvor nåede I til i går, og hvad fik I implementeret? Bagefter ser vi, hvad der stadig mangler.</p>
+        </section>
+
+        <section class="fill" data-accent="yellow">
+          <span class="eyebrow">Opsamling · rundt om bordet · 5 minutter</span>
+          <h2>Hvor nåede du til i går?</h2>
+          <div class="stage">
+            <div class="track4">
+              <article style="--c: var(--cyan)"><span>Step 14</span><strong>Login</strong><small>Det virker, når</small><p>du kan logge ind, og der ligger et token i Local Storage</p></article>
+              <article style="--c: var(--purple)"><span>Step 15</span><strong>Tokenet med</strong><small>Det virker, når</small><p><code>Authorization: Bearer …</code> står i Network-fanen</p></article>
+              <article class="now" style="--c: var(--yellow)"><span>Step 16 · i går</span><strong>requireAuth</strong><small>Det virker, når</small><p><code>curl</code> uden token giver <b>401</b>, og <code>req.userId</code> står i terminalen</p></article>
+              <article class="next" style="--c: var(--green)"><span>Step 17-18 · i dag</span><strong>Kun dine tråde. Login ved 401</strong><small>Det bygger vi i dag</small><p>Ingen grund til at være nået hertil</p></article>
+            </div>
+            <ol class="round3">
+              <li><b>1</b><span>Hvor på linjen er du? Vis det på din egen skærm</span></li>
+              <li><b>2</b><span>Hvad fik du implementeret, og hvad driller?</span></li>
+              <li><b>3</b><span>Hjælp den, der er længst bagud, i gang</span></li>
+            </ol>
+          </div>
+          <p class="bottom-line">Mangler du step 16? Startpunktet står under "Kom i gang" i step 17-opgaven.</p>
         </section>
 
         <section class="fill" data-accent="yellow">

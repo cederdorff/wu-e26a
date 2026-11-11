@@ -1409,3 +1409,102 @@
 .encflow .iface.url code {
   color: var(--green);
 }
+
+/* Opsamling: where did you get to? Four steps on a line + three questions */
+.track4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.track4 article {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 8px;
+  padding: 24px 24px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.track4 article:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -17px;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 26px;
+  content: "→";
+  transform: translateY(-50%);
+}
+.track4 article > span {
+  color: var(--c);
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.track4 article > strong {
+  font-size: 28px;
+  line-height: 1.15;
+}
+.track4 article > small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.track4 article > p {
+  margin: 0;
+  font-size: 21px !important;
+  line-height: 1.4 !important;
+}
+.track4 article > p b {
+  color: var(--c);
+}
+.track4 article.now {
+  border-color: color-mix(in srgb, var(--c) 55%, transparent);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+}
+.track4 article.next {
+  border-style: dashed;
+  border-top-style: solid;
+  background: none;
+}
+.track4 article.next > p {
+  color: var(--muted);
+}
+.round3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.round3 li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-size: 23px;
+  line-height: 1.3;
+}
+.round3 li > b {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #111;
+  font-size: 20px;
+}
+.reveal .round3 {
+  margin-top: 40px !important;
+}
