@@ -190,7 +190,7 @@
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Efter øvelse 1 · test 5 · det fandt I</span>
+          <span class="eyebrow">Step 17 · efter øvelse 1, test 5 · det fandt I</span>
           <h2>Logget ind som dig. Og du kan rette bobs tråd</h2>
           <div class="stage">
             <div class="tc tc-req">
@@ -245,7 +245,7 @@
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 2 · nye tråde får den rigtige ejer</span>
+          <span class="eyebrow">Step 17 · øvelse 2 · nye tråde får den rigtige ejer</span>
           <h2>Ejeren kommer fra tokenet, ikke fra body'en</h2>
           <div class="stage">
             <div class="col3 c2">
@@ -274,7 +274,7 @@
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 3 · SoC · separation of concerns</span>
+          <span class="eyebrow">Step 17 · øvelse 3 · SoC · separation of concerns</span>
           <h2>Andres tråde forlader aldrig databasen</h2>
           <div class="stage">
             <div class="pipe2">
@@ -312,11 +312,11 @@
             <li><b>Øvelse 3:</b> <code>WHERE user_id = ${req.userId}</code> i listen</li>
             <li>Test: log ind med en ny bruger fra <code>/register</code>. Hvor mange tråde står der?</li>
           </ul>
-          <p class="bottom-line">Listen er lukket. Men kender du bobs id, kan du stadig åbne hans tråd. Det er øvelse 4.</p>
+          <p class="bottom-line">Listen er lukket. Men kender du bobs id, kan du stadig åbne hans tråd. Det er step 17, øvelse 4.</p>
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 4 · MAGL's curl-test spurgte: 401 eller 403?</span>
+          <span class="eyebrow">Step 17 · øvelse 4 · MAGL's curl-test spurgte: 401 eller 403?</span>
           <h2>Bob beder om alices tråd. Hvad skal han få?</h2>
           <div class="stage">
             <div class="ask3">
@@ -332,7 +332,7 @@
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 4 · klient og server</span>
+          <span class="eyebrow">Step 17 · øvelse 4 · klient og server</span>
           <h2>Sådan svarer step 17 bob med 404</h2>
           <div class="stage">
             <div class="seq roomy" style="--n: 3">
@@ -344,7 +344,7 @@
         </section>
 
         <section class="fill" data-accent="cyan">
-          <span class="eyebrow">Øvelse 4-5 · trin 2 · I kender tabellerne fra normalformerne</span>
+          <span class="eyebrow">Step 17 · øvelse 4-5, trin 2 · I kender tabellerne fra normalformerne</span>
           <h2>Ejeren står på tråden, ikke på beskeden</h2>
           <div class="stage">
             <div class="own3"><div class="otbl" style="--c: var(--muted)"><div class="oh">messages</div><div class="">id</div><div class="k">thread_id</div><div class="">type, content</div><div class="miss">user_id <small>findes ikke</small></div></div><div class="oar"><small>hvilken tråd?</small><b>→</b></div><div class="otbl" style="--c: var(--cyan)"><div class="oh">threads</div><div class="k">id</div><div class="">title</div><div class="k">user_id</div><div class="">created_at</div></div><div class="oar"><small>hvis tråd?</small><b>→</b></div><div class="otbl" style="--c: var(--green)"><div class="oh">auth.users</div><div class="k">id</div><div class="">email</div><div class="me">= <code>req.userId</code> fra tokenet</div></div></div>
@@ -418,7 +418,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
                 <strong>Ét bogstav rettet</strong>
                 <p>Signaturen passer ikke længere. Supabase afviser det.</p>
                 <pre class="viz-code">"Invalid or expired token"</pre>
-                <div class="foot"><span class="sc sc-1">401</span>Øvelse 1 i dag</div>
+                <div class="foot"><span class="sc sc-1">401</span>Step 18, øvelse 1</div>
               </article>
               <article style="--c: var(--purple)">
                 <span>Brugeren findes ikke</span>
@@ -433,7 +433,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="purple">
-          <span class="eyebrow">Øvelse 1 · klient og server</span>
+          <span class="eyebrow">Step 18 · øvelse 1 · klient og server</span>
           <h2>401 kommer fra serveren. Login sker i klienten</h2>
           <div class="stage">
             <div class="seq roomy" style="--n: 3">
@@ -460,7 +460,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="purple">
-          <span class="eyebrow">Efter øvelse 1 · det fandt I</span>
+          <span class="eyebrow">Step 18 · efter øvelse 1 · det fandt I</span>
           <h2>Det ser brugeren i dag</h2>
           <div class="stage">
             <div class="before2">
@@ -477,7 +477,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
               </ul>
             </div>
           </div>
-          <p class="bottom-line">Øvelse 2 retter 2. Øvelse 3 retter 1 og 3.</p>
+          <p class="bottom-line">Step 18, øvelse 2 retter problem 2. Øvelse 3 retter 1 og 3.</p>
         </section>
 
         <!-- ============ 04 DRY, SOC OG SRP ============ -->
@@ -505,7 +505,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Øvelse 2 · klient og server</span>
+          <span class="eyebrow">Step 18 · øvelse 2 · klient og server</span>
           <h2>404 går igennem apiFetch. 401 stopper der</h2>
           <div class="stage">
             <div class="seq2"><div style="--c: var(--orange)"><span>404 · bobs tråd</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/bobs-id</code></div></div><div class="row"><div class="msg warn back" style="--a: 2; --k: 2"><b>404</b></div></div><div class="row"><div class="msg warn back" style="--a: 1; --k: 2"><code>return response</code></div></div><div class="row"><div class="note orange" style="--a: 1"><code>throw</code> → <b>"Thread Not Found"</b></div></div></div></div></div><div style="--c: var(--purple)"><span>401 · sessionen er slut</span><div class="seq" style="--n: 3"><div class="actors"><div class="actor" style="--c: var(--cyan)"><span>Klient</span><strong>Loader</strong><small>routen</small></div><div class="actor" style="--c: var(--orange)"><span>Klient</span><strong>apiFetch</strong><small>lib/apiFetch.js</small></div><div class="actor" style="--c: var(--purple)"><span>Server</span><strong>Express</strong><small>API</small></div></div><div class="body"><div class="lanes"><i></i><i></i><i></i></div><div class="row"><div class="msg req" style="--a: 1; --k: 2"><code>apiFetch(…)</code></div></div><div class="row"><div class="msg req" style="--a: 2; --k: 2"><code>GET …/abc</code></div></div><div class="row"><div class="msg bad back" style="--a: 2; --k: 2"><b>401</b></div></div><div class="row"><div class="note purple" style="--a: 2"><b>guard clause</b><br /><code>throw redirect(…)</code></div></div><div class="row"><div class="msg purple dash back" style="--a: 1; --k: 2">flyver forbi loaderen → <b>/login</b></div></div></div></div></div></div>
@@ -564,7 +564,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Øvelse 2 · wrapper-funktion og guard clause</span>
+          <span class="eyebrow">Step 18 · øvelse 2 · wrapper-funktion og guard clause</span>
           <h2><code>apiFetch</code> kigger nu også på svaret</h2>
           <div class="stage">
             <div class="anat a18">
@@ -593,7 +593,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="orange">
-          <span class="eyebrow">Øvelse 2 · test 5 · I kender return redirect() fra /profile</span>
+          <span class="eyebrow">Step 18 · øvelse 2, test 5 · I kender return redirect() fra /profile</span>
           <h2><code>return</code> i loaderen. <code>throw</code> i apiFetch</h2>
           <div class="stage">
             <div class="stack2">
@@ -644,7 +644,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="green">
-          <span class="eyebrow">Øvelse 3 · hele vejen rundt</span>
+          <span class="eyebrow">Step 18 · øvelse 3 · hele vejen rundt</span>
           <h2>Fra tråden til login og tilbage igen</h2>
           <div class="stage">
             <div class="gapv loop">
@@ -713,7 +713,7 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="red">
-          <span class="eyebrow">Open redirect · trin 3 · test 5</span>
+          <span class="eyebrow">Open redirect · step 18 · øvelse 3, trin 3, test 5</span>
           <h2>Et link til jeres login kan sende brugeren hvor som helst</h2>
           <div class="stage">
             <div class="phish3">

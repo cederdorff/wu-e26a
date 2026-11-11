@@ -30,7 +30,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 <details>
 <summary><strong>2. Authentication og authorization (step 17)</strong></summary>
 
-- **Authentication og authorization:** "hvem er du?" tjekker `requireAuth`. "Hvad må du?" er step 17. Øvelse 1: ret bobs tråd fra Thunder Client med dit eget token
+- **Authentication og authorization:** "hvem er du?" tjekker `requireAuth`. "Hvad må du?" er step 17. Step 17, øvelse 1: ret bobs tråd fra Thunder Client med dit eget token
 - Ejeren kommer fra `req.userId`, ikke fra body'en. Tokenet kan ingen ændre uden at ødelægge signaturen
 - **SoC:** backenden afgør, hvem der må hvad, ikke frontenden. Og filtreringen hører hjemme i SQL med `WHERE`, ikke i `.filter()` i JavaScript. Så forlader andres tråde aldrig databasen
 - **404 og ikke 403:** MAGL spurgte i går, hvad API'et skal svare, når bob beder om alices tråd. Med `404` ved bob ikke, om tråden findes
@@ -41,7 +41,7 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - I kender `exp` fra tokenets payload. Hos Supabase udløber et access token efter en time. Så virker et stjålet token ikke for evigt
 - Før det udløber, henter Supabase et nyt med refresh tokenet. Det gør `getSession()` i `apiFetch` også. Brugeren mærker ingenting
 - `401` kommer, når tokenet bliver afvist: brugeren er logget ud, tokenet er ødelagt, eller brugeren er slettet. Så er sessionen slut, og kun login hjælper
-- Øvelse 1: ret ét bogstav i `access_token`, og se, hvad brugeren oplever. Vi sletter også en testbruger i Supabase live, mens den er logget ind
+- Step 18, øvelse 1: ret ét bogstav i `access_token`, og se, hvad brugeren oplever. Vi sletter også en testbruger i Supabase live, mens den er logget ind
 </details>
 <details>
 <summary><strong>4. DRY, SoC og SRP (step 18, øvelse 2)</strong></summary>
