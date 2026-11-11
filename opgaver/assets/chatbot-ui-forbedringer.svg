@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" width="880" height="440" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Chatbotten efter UI-forbedringerne. Øvelse 2: Enter sender, feltet tømmes, og knappen viser Sending, mens AI'en tænker. Øvelse 3: siden ruller ned til det nyeste, og tekstfeltet vokser med teksten. Øvelse 4: et klik på kryds spørger, før tråden slettes. Øvelse 5: fanen viser trådens titel, og en tom søgning siger det</title>
+  <defs>
+    <style>
+      .frame { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; }
+      .tabbar { fill: #f3f4f6; }
+      .tab { fill: #ffffff; stroke: #e5e7eb; stroke-width: 1; }
+      .side { fill: #f9fafb; }
+      .line { stroke: #e5e7eb; stroke-width: 1; }
+      .t { font-size: 12px; fill: #374151; }
+      .tb { font-size: 13px; font-weight: 700; fill: #0d0d0d; }
+      .muted { font-size: 11.5px; fill: #9ca3af; }
+      .item { fill: #ffffff; stroke: #e5e7eb; stroke-width: 1; }
+      .item-on { fill: #eef2ff; stroke: #c7d2fe; stroke-width: 1; }
+      .me { fill: #0d0d0d; }
+      .me-t { font-size: 12px; fill: #ffffff; }
+      .bot { fill: #f3f4f6; }
+      .field { fill: #ffffff; stroke: #9ca3af; stroke-width: 1.5; }
+      .btn-off { fill: #d1d5db; }
+      .dlg { fill: #ffffff; stroke: #9ca3af; stroke-width: 1.2; }
+      .ok { fill: #0d0d0d; }
+      .key { fill: #ffffff; stroke: #9ca3af; stroke-width: 1; }
+      .key-t { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; fill: #374151; text-anchor: middle; }
+      .n-t { font-size: 12px; font-weight: 800; fill: #ffffff; text-anchor: middle; }
+      .lg-h { font-size: 13.5px; font-weight: 700; fill: #0d0d0d; }
+      .lg { font-size: 12.5px; fill: #374151; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="440" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+
+  <!-- Browservindue -->
+  <rect class="frame" x="20" y="20" width="560" height="400" rx="12"/>
+  <path class="tabbar" d="M32 21 H568 A11 11 0 0 1 579 32 V54 H21 V32 A11 11 0 0 1 32 21 Z"/>
+  <path class="tab" d="M36 54 V36 A6 6 0 0 1 42 30 H222 A6 6 0 0 1 228 36 V54"/>
+  <text class="t" x="50" y="47" font-weight="600">Min tråd · Chatbot</text>
+  <circle cx="246" cy="42" r="11" fill="#16a34a"/><text class="n-t" x="246" y="46">5</text>
+
+  <!-- Sidebar -->
+  <rect class="side" x="21" y="55" width="160" height="364"/>
+  <line class="line" x1="181" y1="55" x2="181" y2="419"/>
+  <text class="tb" x="34" y="80">Chatbot</text>
+  <rect x="34" y="92" width="134" height="24" rx="6" fill="#ffffff" stroke="#d1d5db"/>
+  <text class="muted" x="44" y="108">Search conversations...</text>
+  <rect class="item-on" x="30" y="126" width="142" height="28" rx="6"/>
+  <text class="t" x="40" y="144" font-weight="600">Min tråd</text>
+  <rect class="item" x="30" y="160" width="142" height="28" rx="6"/>
+  <text class="t" x="40" y="178">Opskrifter</text>
+  <text x="158" y="179" font-size="14" fill="#dc2626" font-weight="700" text-anchor="middle">×</text>
+  <rect class="item" x="30" y="194" width="142" height="28" rx="6"/>
+  <text class="t" x="40" y="212">Eksamen</text>
+
+  <!-- confirm() -->
+  <path d="M158 188 C 158 204, 150 212, 142 220" stroke="#dc2626" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>
+  <rect class="dlg" x="40" y="222" width="196" height="70" rx="10"/>
+  <text class="t" x="54" y="244" font-weight="600">Delete "Opskrifter"?</text>
+  <rect x="88" y="256" width="70" height="24" rx="6" fill="#ffffff" stroke="#d1d5db"/>
+  <text class="t" x="123" y="272" text-anchor="middle">Annuller</text>
+  <rect class="ok" x="166" y="256" width="56" height="24" rx="6"/>
+  <text class="me-t" x="194" y="272" text-anchor="middle">OK</text>
+  <circle cx="236" cy="222" r="11" fill="#dc2626"/><text class="n-t" x="236" y="226">4</text>
+
+  <!-- Tråden -->
+  <text class="tb" x="320" y="80">Min tråd</text>
+  <line class="line" x1="182" y1="92" x2="579" y2="92"/>
+  <rect class="me" x="420" y="104" width="140" height="28" rx="14"/>
+  <text class="me-t" x="434" y="122">Hvad er JSX?</text>
+  <rect class="bot" x="314" y="140" width="210" height="44" rx="14"/>
+  <text class="t" x="328" y="158">JSX ligner HTML, men står</text>
+  <text class="t" x="328" y="174">inde i din JavaScript.</text>
+  <rect class="me" x="456" y="194" width="104" height="28" rx="14"/>
+  <text class="me-t" x="470" y="212">Og props?</text>
+  <rect class="bot" x="314" y="230" width="134" height="28" rx="14"/>
+  <text class="t" x="328" y="248" font-style="italic" fill="#6b7280">AI is thinking...</text>
+  <path d="M568 112 V246" stroke="#2563eb" stroke-width="2" stroke-dasharray="3 4"/>
+  <path d="M562 240 L568 252 L574 240" stroke="#2563eb" stroke-width="2" fill="none"/>
+  <circle cx="548" cy="270" r="11" fill="#2563eb"/><text class="n-t" x="548" y="274">3</text>
+
+  <!-- Input -->
+  <line class="line" x1="182" y1="300" x2="579" y2="300"/>
+  <rect class="field" x="196" y="314" width="282" height="58" rx="10"/>
+  <text class="t" x="210" y="336">Kan du vise et eksempel</text>
+  <text class="t" x="210" y="354">med en knap?</text>
+  <path d="M286 343 V359" stroke="#0d0d0d" stroke-width="1.4"/>
+  <rect class="btn-off" x="486" y="314" width="80" height="58" rx="10"/>
+  <text class="t" x="526" y="347" text-anchor="middle" fill="#ffffff" font-weight="600">Sending...</text>
+  <circle cx="566" cy="314" r="11" fill="#ea580c"/><text class="n-t" x="566" y="318">2</text>
+  <circle cx="196" cy="314" r="11" fill="#2563eb"/><text class="n-t" x="196" y="318">3</text>
+
+  <rect class="key" x="196" y="384" width="54" height="22" rx="5"/><text class="key-t" x="223" y="399">Enter</text>
+  <text class="t" x="258" y="399">sender</text>
+  <rect class="key" x="310" y="384" width="104" height="22" rx="5"/><text class="key-t" x="362" y="399">Shift+Enter</text>
+  <text class="t" x="422" y="399">ny linje</text>
+  <circle cx="490" cy="395" r="11" fill="#ea580c"/><text class="n-t" x="490" y="399">2</text>
+
+  <!-- Forklaring -->
+  <circle cx="616" cy="44" r="11" fill="#ea580c"/><text class="n-t" x="616" y="48">2</text>
+  <text class="lg-h" x="636" y="48">Øvelse 2 · send-flowet</text>
+  <text class="lg" x="636" y="70">Enter sender. Shift+Enter giver</text>
+  <text class="lg" x="636" y="88">en ny linje. Feltet tømmes, og</text>
+  <text class="lg" x="636" y="106">knappen venter på svaret</text>
+
+  <circle cx="616" cy="142" r="11" fill="#2563eb"/><text class="n-t" x="616" y="146">3</text>
+  <text class="lg-h" x="636" y="146">Øvelse 3 · scroll og tekstfelt</text>
+  <text class="lg" x="636" y="168">Siden ruller ned til det nyeste.</text>
+  <text class="lg" x="636" y="186">Feltet vokser med teksten</text>
+
+  <circle cx="616" cy="222" r="11" fill="#dc2626"/><text class="n-t" x="616" y="226">4</text>
+  <text class="lg-h" x="636" y="226">Øvelse 4 · spørg før sletning</text>
+  <text class="lg" x="636" y="248">× viser confirm(). Annuller</text>
+  <text class="lg" x="636" y="266">sender ingenting</text>
+
+  <circle cx="616" cy="302" r="11" fill="#16a34a"/><text class="n-t" x="616" y="306">5</text>
+  <text class="lg-h" x="636" y="306">Øvelse 5 · titel og tom søgning</text>
+  <text class="lg" x="636" y="328">Fanen viser trådens titel.</text>
+  <text class="lg" x="636" y="346">En tom søgning siger det:</text>
+  <text class="lg" x="636" y="364" font-style="italic" fill="#6b7280">No conversations match "xyz"</text>
+
+  <text class="lg" x="616" y="404" fill="#6b7280">Øvelse 1: find problemerne først</text>
+</svg>

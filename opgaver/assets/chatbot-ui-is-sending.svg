@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 330" width="880" height="330" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>isSending over tid. Du trykker Enter. navigation.state går fra idle til submitting, mens clientAction venter på AI'en, og til loading, mens loaderen henter beskederne. Imens har navigation.formData feltet message, så isSending er sand. Feltet tømmes, så snart isSending bliver sand. Knappen viser Sending og er deaktiveret, og Enter sender ikke, til svaret står i tråden. Så er state idle igen</title>
+  <defs>
+    <marker id="arrowSend" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <style>
+      .lbl { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; fill: #0d0d0d; font-weight: 700; }
+      .lbl2 { font-size: 12.5px; fill: #0d0d0d; font-weight: 700; }
+      .cell { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; text-anchor: middle; }
+      .ui { font-size: 12.5px; text-anchor: middle; }
+      .idle { fill: #f3f4f6; }
+      .on { fill: #fff1e6; stroke: #fdba74; stroke-width: 1; }
+      .off-t { fill: #6b7280; }
+      .on-t { fill: #9a3412; font-weight: 700; }
+      .tick { stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 3 4; }
+      .ev { font-size: 12px; fill: #374151; text-anchor: middle; }
+      .flow { stroke: #6b7280; stroke-width: 1.6; fill: none; marker-end: url(#arrowSend); }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="330" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+
+  <!-- tidslinjer: kolonner 200-330 idle, 330-560 submitting, 560-730 loading, 730-860 idle -->
+  <line class="tick" x1="330" y1="40" x2="330" y2="170"/>
+  <line class="tick" x1="560" y1="40" x2="560" y2="170"/>
+  <line class="tick" x1="730" y1="40" x2="730" y2="170"/>
+
+  <text class="ev" x="330" y="30">Du trykker Enter</text>
+  <text class="ev" x="560" y="30">clientAction er færdig</text>
+  <text class="ev" x="730" y="30">svaret står i tråden</text>
+
+  <!-- navigation.state -->
+  <text class="lbl" x="24" y="66">navigation.state</text>
+  <rect class="idle" x="204" y="48" width="122" height="28" rx="6"/><text class="cell off-t" x="265" y="67">"idle"</text>
+  <rect class="idle" x="334" y="48" width="222" height="28" rx="6"/><text class="cell" x="445" y="67" fill="#0d0d0d">"submitting"</text>
+  <rect class="idle" x="564" y="48" width="162" height="28" rx="6"/><text class="cell" x="645" y="67" fill="#0d0d0d">"loading"</text>
+  <rect class="idle" x="734" y="48" width="122" height="28" rx="6"/><text class="cell off-t" x="795" y="67">"idle"</text>
+
+  <!-- formData -->
+  <text class="lbl" x="24" y="110">navigation.formData</text>
+  <rect class="idle" x="204" y="92" width="122" height="28" rx="6"/><text class="cell off-t" x="265" y="111">undefined</text>
+  <rect class="on" x="334" y="92" width="392" height="28" rx="6"/><text class="cell on-t" x="530" y="111">har "message"</text>
+  <rect class="idle" x="734" y="92" width="122" height="28" rx="6"/><text class="cell off-t" x="795" y="111">undefined</text>
+
+  <!-- isSending -->
+  <text class="lbl" x="24" y="154">isSending</text>
+  <rect class="idle" x="204" y="136" width="122" height="28" rx="6"/><text class="cell off-t" x="265" y="155">falsk</text>
+  <rect class="on" x="334" y="136" width="392" height="28" rx="6"/><text class="cell on-t" x="530" y="155">sand</text>
+  <rect class="idle" x="734" y="136" width="122" height="28" rx="6"/><text class="cell off-t" x="795" y="155">falsk</text>
+
+  <!-- UI -->
+  <text class="lbl2" x="24" y="200">Tekstfeltet</text>
+  <text class="ui" x="265" y="200" fill="#374151">din besked</text>
+  <rect x="334" y="184" width="104" height="26" rx="13" fill="#0d0d0d"/>
+  <text class="ui" x="386" y="202" fill="#ffffff" font-weight="700">reset()</text>
+  <text class="ui" x="452" y="202" fill="#374151" style="text-anchor: start">tomt. Du kan skrive den næste besked</text>
+
+  <text class="lbl2" x="24" y="244">Send-knappen</text>
+  <rect x="226" y="228" width="78" height="26" rx="8" fill="#0d0d0d"/><text class="ui" x="265" y="246" fill="#ffffff">Send</text>
+  <rect x="334" y="228" width="120" height="26" rx="8" fill="#d1d5db"/><text class="ui" x="394" y="246" fill="#4b5563" font-weight="600">Sending...</text>
+  <text class="ui" x="466" y="246" fill="#374151" style="text-anchor: start">deaktiveret. Enter sender heller ikke</text>
+  <rect x="756" y="228" width="78" height="26" rx="8" fill="#0d0d0d"/><text class="ui" x="795" y="246" fill="#ffffff">Send</text>
+
+  <path class="flow" d="M386 180 V168"/>
+
+  <text x="440" y="300" font-size="12.5" fill="#6b7280" text-anchor="middle">Edit-formularen og log ud sender ikke "message". Så forbliver isSending falsk, og feltet bliver ikke tømt.</text>
+</svg>

@@ -22,6 +22,8 @@ Spring aldrig en test over, heller ikke når den virker oplagt.
 
 ## Det bygger du
 
+![Chatbotten efter opgaven. Øvelse 2: Enter sender, feltet tømmes, og knappen viser Sending, mens AI'en tænker. Øvelse 3: siden ruller ned til det nyeste, og feltet vokser med teksten. Øvelse 4: et klik på × spørger, før tråden slettes. Øvelse 5: fanen viser trådens titel, og en tom søgning siger det](assets/chatbot-ui-forbedringer.svg)
+
 | Problem | Øvelse | Fil |
 | --- | --- | --- |
 | Enter sender ikke | Øvelse 2, trin 1 | `components/Chat.jsx` |
@@ -138,11 +140,13 @@ function ChatInput() {
 
 ### Trin 2: Tøm feltet
 
-En `<Form>` fra React Router tømmer ikke sig selv. Det skal du gøre. Du tømmer feltet, så snart beskeden er sendt. Beskeden står jo allerede i tråden takket være optimistic UI fra PR 19.
+En `<Form>` fra React Router tømmer ikke sig selv. Det skal du gøre. Du tømmer feltet, så snart beskeden er sendt. Beskeden står jo allerede i tråden takket være optimistic UI fra PR 19. Fejler afsendelsen, er teksten væk. Det er prisen for at tømme med det samme.
 
 > **`useNavigation()`:** fortæller, hvad React Router er i gang med. Mens en formular bliver sendt, ligger dens data i `navigation.formData`. Det er den samme hook, som viser "AI is thinking..." i `chat-thread.jsx`.
 
 > **`useRef()`:** giver dig fat i et element i DOM'en. Du laver en ref med `useRef(null)` og sætter den på elementet med `ref={formRef}`. Bagefter er `formRef.current` selve `<form>`-elementet. Så kan du kalde `formRef.current.reset()`, som tømmer alle felter i formularen.
+
+![isSending over tid. Du trykker Enter. Mens navigation.state er submitting og loading, har navigation.formData feltet message, så isSending er sand. Feltet tømmes med reset(), så snart isSending bliver sand. Knappen viser Sending, til svaret står i tråden](assets/chatbot-ui-is-sending.svg)
 
 Udvid `ChatInput`:
 
