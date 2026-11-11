@@ -60,13 +60,6 @@ Begge opgaver følger tutorialen, bare på dansk og i mindre trin. Koden er kort
 - **Encapsulation:** login ved ikke, hvorfor brugeren kom. Den læser bare `redirect`. Routes ved ikke, at `apiFetch` kan sende til login
 - Hvorfor står siden i URL'en og ikke i localStorage?
 - **Open redirect:** gå til `/login?redirect=https://example.com`, og log ind. Hvor ender I? Samme lektie som XSS i AMAbotten: stol ikke på input
-</details>
-<details>
-<summary><strong>6. Afrunding: begreberne i koden</strong></summary>
-
-- Vi åbner step 17 og 18 sammen og sætter øvelsesnumre på commits. Tabellerne står sidst i opgaverne
-- Peg på ét sted i jeres kode for DRY, SoC, SRP og Encapsulation
-- `401`, `403` eller `404`: hvem svarer hvad, og hvem i frontenden håndterer det?
 - Commit efter hvert step, og push, når I er færdige
 </details>
 

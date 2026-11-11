@@ -34,7 +34,6 @@
             <li><a href="#/session"><b>Session expiration</b><small>step 18 · øvelse 1</small></a></li>
             <li><a href="#/fejl"><b>DRY, SoC og SRP</b><small>step 18 · øvelse 2</small></a></li>
             <li><a href="#/redirect"><b>Query parameters og open redirect</b><small>step 18 · øvelse 3</small></a></li>
-            <li><a href="#/afrunding"><b>Afrunding: begreberne i koden</b><small>401, 403 og 404 · commits</small></a></li>
           </ol>
           <p class="bottom-line">Opgaverne: <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-17-kun-egne-traade.md" target="_blank" rel="noreferrer"><b>Chatbot step 17 ↗</b></a> og <a href="https://github.com/cederdorff/wu-e26a/blob/main/opgaver/chatbot-step-18-send-til-login.md" target="_blank" rel="noreferrer"><b>Chatbot step 18 ↗</b></a></p>
         </section>
@@ -636,6 +635,33 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
         </section>
 
         <section class="fill" data-accent="green">
+          <span class="eyebrow">Step 18 · øvelse 3 · det bygger I</span>
+          <h2>Fra tråden til login og tilbage igen</h2>
+          <div class="stage">
+            <div class="trip3">
+              <div class="win">
+                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/chat/abc</b></span></div>
+                  <div class="pg"><strong>Din tråd</strong><span class="b me"></span><span class="b"></span><em class="bad">API'et svarer 401</em></div></div>
+                <small>Tokenet virker ikke længere</small>
+              </div>
+              <div class="hop"><span>Trin 1 · apiFetch</span><b>→</b><em>husker siden i URL'en</em></div>
+              <div class="win">
+                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/login?redirect=%2Fchat%2Fabc</b></span></div>
+                  <div class="pg"><div class="ac"><span class="h">Welcome Back</span><span class="info">Your session has expired. Please log in again.</span><span class="btn">Log In</span></div></div></div>
+                <small><b>Trin 3:</b> login fortæller hvorfor</small>
+              </div>
+              <div class="hop"><span>Trin 2 · clientAction</span><b>→</b><em>læser <code>redirect</code> og sender tilbage</em></div>
+              <div class="win">
+                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/chat/abc</b></span></div>
+                  <div class="pg"><strong>Din tråd</strong><span class="b me"></span><span class="b"></span><em class="good">Tilbage, hvor du var</em></div></div>
+                <small>Logget ind igen</small>
+              </div>
+            </div>
+          </div>
+          <p class="bottom-line">Siden rejser med i URL'en. Det er det eneste, <code>apiFetch</code> og login deler.</p>
+        </section>
+
+        <section class="fill" data-accent="green">
           <span class="eyebrow">Query parameters · I kender ?registered=true</span>
           <h2>Siden står i URL'en til login</h2>
           <div class="stage">
@@ -660,33 +686,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
             </div>
           </div>
           <p class="bottom-line">Prøv selv i Console: <code>encodeURIComponent("/chat/abc?a=1&amp;b=2")</code></p>
-        </section>
-
-        <section class="fill" data-accent="green">
-          <span class="eyebrow">Step 18 · øvelse 3 · det bygger I · se URL'en</span>
-          <h2>Fra tråden til login og tilbage igen</h2>
-          <div class="stage">
-            <div class="trip3">
-              <div class="win">
-                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/chat/abc</b></span></div>
-                  <div class="pg"><strong>Din tråd</strong><span class="b me"></span><span class="b"></span><em class="bad">API'et svarer 401</em></div></div>
-                <small>Tokenet virker ikke længere</small>
-              </div>
-              <div class="hop"><span>Trin 1 · apiFetch</span><b>→</b><em>husker siden i URL'en</em></div>
-              <div class="win">
-                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/login?redirect=%2Fchat%2Fabc</b></span></div>
-                  <div class="pg"><div class="ac"><span class="h">Welcome Back</span><span class="info">Your session has expired. Please log in again.</span><span class="btn">Log In</span></div></div></div>
-                <small><b>Trin 3:</b> login fortæller hvorfor</small>
-              </div>
-              <div class="hop"><span>Trin 2 · clientAction</span><b>→</b><em>læser <code>redirect</code> og sender tilbage</em></div>
-              <div class="win">
-                <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span class="bw-url"><b>/chat/abc</b></span></div>
-                  <div class="pg"><strong>Din tråd</strong><span class="b me"></span><span class="b"></span><em class="good">Tilbage, hvor du var</em></div></div>
-                <small>Logget ind igen</small>
-              </div>
-            </div>
-          </div>
-          <p class="bottom-line">Siden rejser med i URL'en. Det er det eneste, <code>apiFetch</code> og login deler.</p>
         </section>
 
         <section id="ex-18-3" class="activity-slide handson" data-accent="green">
@@ -782,30 +781,6 @@ WHERE id = ${threadId} AND user_id = ${req.userId}</pre></div>
             </div>
           </div>
           <p class="bottom-line">Og <b>guard clause</b>: <code>if (response.status === 401)</code> og hvert tjek i <code>requireAuth</code>.</p>
-        </section>
-
-        <section class="fill" data-accent="purple">
-          <span class="eyebrow">Fra øvelserne til tutorialen</span>
-          <h2>Jeres øvelser er de samme commits</h2>
-          <div class="stage">
-            <div class="commits2">
-              <article style="--c: var(--cyan)">
-                <span>Step 17 · API authorization and data isolation</span>
-                <div class="cm skip"><b>Øvelse 1</b><span>user_id-kolonne og migration</span><code>findes</code></div>
-                <div class="cm"><b>Øvelse 2</b><span>Set user_id when creating threads</span><code>fd713f9</code></div>
-                <div class="cm"><b>Øvelse 3</b><span>Filter threads list by user</span><code>1f52782</code></div>
-                <div class="cm"><b>Øvelse 4</b><span>Authorize thread read operations</span><code>3700652</code></div>
-                <div class="cm"><b>Øvelse 5</b><span>Authorize thread write operations</span><code>4553a13</code></div>
-              </article>
-              <article style="--c: var(--purple)">
-                <span>Step 18 · Redirect to login on auth errors</span>
-                <div class="cm skip"><b>Øvelse 1</b><span>Ingen kode. I finder problemet</span><code>—</code></div>
-                <div class="cm"><b>Øvelse 2</b><span>Redirect to login on 401 responses</span><code>c6e8e9f</code></div>
-                <div class="cm"><b>Øvelse 3</b><span>URL preservation for post-login redirect</span><code>46f9211</code></div>
-              </article>
-            </div>
-          </div>
-          <p class="bottom-line">Tabellerne står sidst i begge opgaver, med links til hvert commit.</p>
         </section>
 
         <section class="activity-slide" data-accent="purple">
